@@ -1,0 +1,70 @@
+ELCLASS
+NaN
+NAME
+NaN
+DESCRIPTION
+NaN
+TEMPLATE
+NaN
+Cross Validation ID
+1
+Cross Validation LABEL
+2
+Cross Validation NOTES
+20
+TOSTRING
+NaN
+WAITBAR
+NaN
+KFOLDS
+NaN
+SPLIT
+NaN
+D
+NaN
+Template for Neural Network Regressor
+9
+Template for Neural Network Evaluator
+10
+DSP
+NaN
+DCO
+NaN
+Dataset List
+11
+D_LIST_IT
+NaN
+Neural Network Regressor List
+12
+NN_LIST_IT
+NaN
+Neural Network Evaluator List
+13
+EVALUATOR_LIST_IT
+NaN
+Training EPOCHS
+5
+Training BATCH
+6
+Training SHUFFLE
+7
+Training SOLVER
+8
+VERBOSE ON/OFF
+3
+PLOT TRAINING PROGRESS
+4
+TRAIN
+NaN
+Average of Correlation Coefficient
+15
+Average of Coefficient of Determination
+16
+Average of Mean Absolute Error
+17
+Average of Mean Squared Error
+18
+Average of Root Mean Squared Error
+19
+Scatter Plot
+14

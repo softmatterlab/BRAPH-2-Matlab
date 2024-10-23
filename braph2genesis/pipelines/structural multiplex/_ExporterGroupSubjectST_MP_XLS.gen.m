@@ -1,19 +1,64 @@
 %% ¡header!
-ExporterGroupSubjectST_MP_XLS < Exporter (ex, exporter of ST MP subject group in XLS/XLSX) exports a group of subjects with structural multiplex data to an XLSX file.
+ExporterGroupSubjectST_MP_XLS < Exporter (ex, exporter of ST MP subject group in XLSX) exports a group of subjects with structural multiplex data to an XLSX file.
 
 %%% ¡description!
-ExporterGroupSubjectST_MP_XLS exports a group of subjects with structural multiplex data  and their covariates (if existing) to an XLSX file.
-The files from the same group containing the data from L layers are saved in the same folder.
-Each XLS/XLSX file consists of the following columns: 
-Subject ID (column 1), Subject LABEL (column 2), Subject NOTES (column 3) and
-BrainRegions of that layer (column 4-end; one brainregion value per column).
-The first row contains the headers and each subsequent row the values for each subject.
-The XLS/XLSX file containing the covariates consists of the following columns:
-Subject ID (column 1), Subject AGE (column 2), and, Subject SEX (column 3).
-The first row contains the headers and each subsequent row the values for each subject.
+ExporterGroupSubjectST_MP_XLS exports a group of subjects with structural 
+ multiplex data to a series of XLSX files contained in a folder named 
+ "GROUP_ID". Each file corresponds to a layer of the multiplex and is 
+ labeled with the layer number indicated as, e.g., "GROUP_ID.1.xlsx" and 
+ "GROUP_ID.2.xlsx". 
+ Each file contains the following columns: Subject ID (column 1), Subject 
+ LABEL (column 2), Subject NOTES (column 3) and BrainRegions 
+ (columns 4-end; one brain region value per column). The first row contains 
+ the headers and each subsequent row the values for each subject.
+The variables of interest are from another XLSX file named "GROUP_ID.vois.xlsx" 
+ (if exisitng) consisting of the following columns: 
+ Subject ID (column 1), covariates (subsequent columns). 
+ The 1st row contains the headers, the 2nd row a string with the categorical
+ variables of interest, and each subsequent row the values for each subject.
 
 %%% ¡seealso!
-Element, Exporter, ImporterGroupSubjectST_MP_XLS
+Group, SubjectST_MP, ImporterGroupSubjectST_MP_XLS
+
+%%% ¡build!
+1
+
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the ST MP subject group exporter in XLSX.
+%%%% ¡default!
+'ExporterGroupSubjectST_MP_XLS'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the ST MP subject group exporter in XLSX.
+%%%% ¡default!
+'Multiplex Structural Subject Group XLS Exporter'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the ST MP subject group exporter in XLSX.
+%%%% ¡default!
+'ExporterGroupSubjectST_MP_XLS exports a group of subjects with structural multiplex data  and their covariates (if existing) to an XLSX file.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the ST MP subject group exporter in XLSX.
+%%%% ¡settings!
+'ExporterGroupSubjectST_MP_XLS'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the ST MP subject group exporter in XLSX.
+%%%% ¡default!
+'ExporterGroupSubjectST_MP_XLS ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the ST MP subject group exporter in XLSX.
+%%%% ¡default!
+'ExporterGroupSubjectST_MP_XLS label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the ST MP subject group exporter in XLSX.
+%%%% ¡default!
+'ExporterGroupSubjectST_MP_XLS notes'
 
 %% ¡props!
 
@@ -29,10 +74,21 @@ Group('SUB_CLASS', 'SubjectST_MP', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'Su
 %%% ¡prop!
 DIRECTORY (data, string) is the directory name where to save the group of subjects with structural multiplex data.
 %%%% ¡default!
-fileparts(which('test_braph2'))
+[fileparts(which('test_braph2')) filesep 'default_group_subjects_ST_MP_most_likely_to_be_erased']
 
 %%% ¡prop!
-SAVE (result, empty) saves the group of subjects with structural multiplex data in XLS/XLSX files in the selected directory.
+PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with structural multiplex data.
+%%%% ¡settings!
+'ExporterGroupSubjectST_MP_XLS'
+%%%% ¡calculate!
+directory = uigetdir('Select directory');
+if ischar(directory) && isfolder(directory)
+    ex.set('DIRECTORY', directory);
+end
+value = ex;
+
+%%% ¡prop!
+SAVE (result, empty) saves the group of subjects with structural multiplex data in XLSX files in the selected directory.
 %%%% ¡calculate!
 directory = ex.get('DIRECTORY');
 
@@ -46,95 +102,111 @@ if isfolder(directory)
         mkdir(gr_directory)
     end
 
-    sub_dict = gr.get('SUB_DICT');
-    sub_number = sub_dict.length();
-
     braph2waitbar(wb, .15, 'Organizing info ...')
 
-    if sub_number ~= 0
-        sub = sub_dict.getItem(1);
-        ba = sub.get('BA');
-        br_list = cellfun(@(i) ba.get('BR_DICT').getItem(i), ...
-            num2cell([1:1:ba.get('BR_DICT').length()]), 'UniformOutput', false);
-        br_labels = cellfun(@(br) br.get('ID'), br_list, 'UniformOutput', false);
-        layers_number = sub_dict.getItem(1).get('L');
-        br_number = length(br_labels);
-        all_data = cell(layers_number, sub_number, br_number);
-        subjects_info = cell(sub_number, 3);
-        age = cell(sub_number, 1);
-        sex = cell(sub_number, 1);
+    sub_dict = gr.get('SUB_DICT');
+    sub_number = sub_dict.get('LENGTH');
+
+	L = sub_dict.get('IT', 1).get('L');
+    for l = 1:1:L
+        braph2waitbar(wb, .25 + .75 * l / L, ['Saving layer ' num2str(l) ' of ' num2str(L) ' ...'])
         
+        if sub_number == 0
+            tab = {'ID', 'Label', 'Notes'};
+        else
+            sub = sub_dict.get('IT', 1);
+            ba = sub.get('BA');
+            br_list = cellfun(@(i) ba.get('BR_DICT').get('IT', i), ...
+                num2cell([1:1:ba.get('BR_DICT').get('LENGTH')]), 'UniformOutput', false);
+            br_labels = cellfun(@(br) br.get('ID'), br_list, 'UniformOutput', false);
+
+            tab = cell(1 + sub_number, 3 + numel(br_labels));
+            tab{1, 1} = 'ID';
+            tab{1, 2} = 'Label';
+            tab{1, 3} = 'Notes';
+            for j = 1:1:length(br_labels)
+                tab{1, 3 + j} = br_labels{j};
+            end
+
+            for i = 1:1:sub_number
+                sub = sub_dict.get('IT', i);
+
+                tab{1 + i, 1} = sub.get('ID');
+                tab{1 + i, 2} = sub.get('LABEL');
+                tab{1 + i, 3} = sub.get('NOTES');
+
+                sub_ST_MP = sub.get('ST_MP');
+                sub_ST = sub_ST_MP{l};
+                for j = 1:1:length(sub_ST)
+                    tab{1 + i, 3 + j} = sub_ST(j);
+                end
+            end
+        end
+        
+        layer_file = [gr_directory filesep() gr.get('ID') '.' int2str(l) '.xlsx'];
+
+        writetable(table(tab), layer_file, 'WriteVariableNames', false);        
+    end
+    
+    % variables of interest
+    voi_ids = {};
+    for i = 1:1:sub_number
+        sub = sub_dict.get('IT', i);
+        voi_ids = unique([voi_ids, sub.get('VOI_DICT').get('KEYS')]);
+    end
+    if ~isempty(voi_ids)
+        vois = cell(2 + sub_number, 1 + length(voi_ids));
+        vois{1, 1} = 'Subject ID';
+        vois(1, 2:end) = voi_ids;
         for i = 1:1:sub_number
-            sub = sub_dict.getItem(i);
-            subjects_info{i, 1} = sub.get('ID');
-            subjects_info{i, 2} = sub.get('LABEL');
-            subjects_info{i, 3} = sub.get('NOTES');
-            age{i} =  sub.get('AGE');
-            sex{i} =  sub.get('SEX');
+            sub = sub_dict.get('IT', i);
+            vois{2 + i, 1} = sub.get('ID');
             
-            for k = 1:1:layers_number
-                data_val = sub.get('ST_MP');
-                all_data(k, i, :) = num2cell(data_val{k}');
-            end             
+            voi_dict = sub.get('VOI_DICT');
+            for v = 1:1:voi_dict.get('LENGTH')
+                voi = voi_dict.get('IT', v);
+                voi_id = voi.get('ID');
+                if isa(voi, 'VOINumeric') % Numeric
+                    vois{2 + i, 1 + find(strcmp(voi_id, voi_ids))} = voi.get('V');
+                elseif isa(voi, 'VOICategoric') % Categoric
+                    categories = voi.get('CATEGORIES');
+                    vois{2, 1 + find(strcmp(voi_id, voi_ids))} = cell2str(categories);
+                    vois{2 + i, 1 + find(strcmp(voi_id, voi_ids))} = categories{voi.get('V')};
+                end
+            end
         end
-
-        braph2waitbar(wb, .55, 'Saving info ...')
-
-        for j = 1:1:layers_number
-            gr_id = gr.get('ID');
-            % save id label notes
-            tab_id = cell2table(subjects_info);
-            tab_id.Properties.VariableNames = {'ID', 'Label', 'Notes'};
-            writetable(tab_id, [gr_directory filesep() gr_id  '_' num2str(j) '.xlsx'], 'Sheet', 1, 'WriteVariableNames', 1, 'Range', 'A1');
-            
-            % save data
-            tab_data =  cell2table(reshape(all_data(j, :, :), [sub_number, br_number]));
-            tab_data.Properties.VariableNames = br_labels;
-            writetable(tab_data, [gr_directory filesep() gr_id  '_' num2str(j) '.xlsx'], 'Sheet', 1, 'WriteVariableNames', 1, 'Range', 'D1');
-        end
+        writetable(table(vois), [gr_directory '.vois.xlsx'], 'WriteVariableNames', false)
     end
     
-    % if covariates save them in another file
-    if sub_number ~= 0 && ~isequal(sex{:}, 'unassigned')  && ~isequal(age{:},  0) 
-        tab2 = cell(1 + sub_number, 3);
-        tab2{1, 1} = 'ID';
-        tab2{1, 2} = 'Age';
-        tab2{1, 3} = 'Sex';
-        tab2(2:end, 1) = tab_id{:, 1};
-        tab2(2:end, 2) = age;
-        tab2(2:end, 3) = sex;
-        tab2 = table(tab2);
-        
-        % save
-        warning_query = warning( 'query', 'MATLAB:xlswrite:AddSheet');
-        warning('off', 'MATLAB:xlswrite:AddSheet')
-        writetable(tab2, [gr_directory filesep() gr_id  '_1.xlsx'], 'Sheet', 2, 'WriteVariableNames', 0);
-        warning(warning_query.state, 'MATLAB:xlswrite:AddSheet')
-    end
-    
-    % sets value to empty
-    value = [];
-
     braph2waitbar(wb, 'close')
-else
-    value = ex.getr('SAVE');    
 end
 
-%% ¡methods!
-function uigetdir(ex)
-    % UIGETDIR opens a dialog box to set the directory where to save the group of subjects with structural multiplex data.
-
-    directory = uigetdir('Select directory');
-    if ischar(directory) && isfolder(directory)
-        ex.set('DIRECTORY', directory);
-    end
-end
+% sets value to empty
+value = [];
 
 %% ¡tests!
+
+%%% ¡excluded_props!
+[ExporterGroupSubjectST_MP_XLS.PUT_DIR]
+
+%%% ¡test!
+%%%% ¡name!
+Delete directory TBE
+%%%% ¡probability!
+1
+%%%% ¡code!
+warning('off', 'MATLAB:DELETE:FileNotFound')
+dir_to_be_erased = ExporterGroupSubjectST_MP_XLS.getPropDefault('DIRECTORY');
+if isfolder(dir_to_be_erased)
+    rmdir(dir_to_be_erased, 's')
+end
+warning('on', 'MATLAB:DELETE:FileNotFound')
 
 %%% ¡test!
 %%%% ¡name!
 Export and import
+%%%% ¡probability!
+.01
 %%%% ¡code!
 br1 = BrainRegion( ...
     'ID', 'ISF', ...
@@ -181,7 +253,7 @@ ba = BrainAtlas( ...
     'ID', 'TestToSaveCoolID', ...
     'LABEL', 'Brain Atlas', ...
     'NOTES', 'Brain atlas notes', ...
-    'BR_DICT', IndexedDictionary('IT_CLASS', 'BrainRegion', 'IT_KEY', 1, 'IT_LIST', {br1, br2, br3, br4, br5}) ...
+    'BR_DICT', IndexedDictionary('IT_CLASS', 'BrainRegion', 'IT_LIST', {br1, br2, br3, br4, br5}) ...
     );
 
 sub1 = SubjectST_MP( ...
@@ -189,38 +261,40 @@ sub1 = SubjectST_MP( ...
     'LABEL', 'Subejct ST 1', ...
     'NOTES', 'Notes on subject ST 1', ...
     'BA', ba, ...
-    'age', 30, ...
-    'sex', 'female', ...
     'L', 2, ...
-    'ST_MP', {rand(ba.get('BR_DICT').length(), 1), rand(ba.get('BR_DICT').length(), 1)} ...
+    'ST_MP', {rand(ba.get('BR_DICT').get('LENGTH'), 1), rand(ba.get('BR_DICT').get('LENGTH'), 1)} ...
     );
+sub1.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 75))
+sub1.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', find(strcmp('Female', {'Female', 'Male'}))))
+
 sub2 = SubjectST_MP( ...
     'ID', 'SUB ST 2', ...
     'LABEL', 'Subejct ST 2', ...
     'NOTES', 'Notes on subject ST 2', ...
     'BA', ba, ...
-    'age', 40, ...
-    'sex', 'male', ...
     'L', 2, ...
-    'ST_MP', {rand(ba.get('BR_DICT').length(), 1), rand(ba.get('BR_DICT').length(), 1)} ...
+    'ST_MP', {rand(ba.get('BR_DICT').get('LENGTH'), 1), rand(ba.get('BR_DICT').get('LENGTH'), 1)} ...
     );
+sub2.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 70))
+sub2.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', find(strcmp('Male', {'Female', 'Male'}))))
+
 sub3 = SubjectST_MP( ...
     'ID', 'SUB ST 3', ...
     'LABEL', 'Subejct ST 3', ...
     'NOTES', 'Notes on subject ST 3', ...
     'BA', ba, ...
-    'age', 50, ...
-    'sex', 'female', ...
     'L', 2, ...
-    'ST_MP', {rand(ba.get('BR_DICT').length(), 1), rand(ba.get('BR_DICT').length(), 1)} ...
+    'ST_MP', {rand(ba.get('BR_DICT').get('LENGTH'), 1), rand(ba.get('BR_DICT').get('LENGTH'), 1)} ...
     );
+sub3.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 50))
+sub3.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', find(strcmp('Female', {'Female', 'Male'}))))
 
 gr = Group( ...
     'ID', 'GR ST MP', ...
     'LABEL', 'Group label', ...
     'NOTES', 'Group notes', ...
     'SUB_CLASS', 'SubjectST_MP', ...
-    'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectST_MP', 'IT_KEY', 1, 'IT_LIST', {sub1, sub2, sub3}) ...
+    'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectST_MP', 'IT_LIST', {sub1, sub2, sub3}) ...
     );
 
 directory = [fileparts(which('test_braph2')) filesep 'trial_group_subjects_ST_MP_to_be_erased'];
@@ -241,22 +315,22 @@ im1 = ImporterGroupSubjectST_MP_XLS( ...
     );
 gr_loaded1 = im1.get('GR');
 
-assert(gr.get('SUB_DICT').length() == gr_loaded1.get('SUB_DICT').length(), ...
-	[BRAPH2.STR ':ExporterGroupSubjectST_MP_XLS:' BRAPH2.BUG_IO], ...
+assert(gr.get('SUB_DICT').get('LENGTH') == gr_loaded1.get('SUB_DICT').get('LENGTH'), ...
+	[BRAPH2.STR ':ExporterGroupSubjectST_MP_XLS:' BRAPH2.FAIL_TEST], ...
     'Problems saving or loading a group.')
-for i = 1:1:max(gr.get('SUB_DICT').length(), gr_loaded1.get('SUB_DICT').length())
-    sub = gr.get('SUB_DICT').getItem(i);
-    sub_loaded = gr_loaded1.get('SUB_DICT').getItem(i);    
+for i = 1:1:max(gr.get('SUB_DICT').get('LENGTH'), gr_loaded1.get('SUB_DICT').get('LENGTH'))
+    sub = gr.get('SUB_DICT').get('IT', i);
+    sub_loaded = gr_loaded1.get('SUB_DICT').get('IT', i);    
     assert( ...
         isequal(sub.get('ID'), sub_loaded.get('ID')) & ...
         isequal(sub.get('LABEL'), sub_loaded.get('LABEL')) & ...
         isequal(sub.get('NOTES'), sub_loaded.get('NOTES')) & ...
         isequal(sub.get('BA'), sub_loaded.get('BA')) & ...
-        isequal(sub.get('AGE'), sub_loaded.get('AGE')) & ...
-        isequal(sub.get('SEX'), sub_loaded.get('SEX')) & ...
+        isequal(sub.get('VOI_DICT').get('IT', 'Age').get('V'), sub_loaded.get('VOI_DICT').get('IT', 'Age').get('V')) & ... 
+        isequal(sub.get('VOI_DICT').get('IT', 'Sex').get('V'), sub_loaded.get('VOI_DICT').get('IT', 'Sex').get('V')) & ...        
         isequal(sub.get('L'), sub_loaded.get('L')) & ...
         isequal(sub.get('ST_MP'), sub_loaded.get('ST_MP')), ...
-        [BRAPH2.STR ':ExporterGroupSubjectST_MP_XLS:' BRAPH2.BUG_IO], ...
+        [BRAPH2.STR ':ExporterGroupSubjectST_MP_XLS:' BRAPH2.FAIL_TEST], ...
         'Problems saving or loading a group.')    
 end
 
@@ -266,22 +340,22 @@ im2 = ImporterGroupSubjectST_MP_XLS( ...
     );
 gr_loaded2 = im2.get('GR');
 
-assert(gr.get('SUB_DICT').length() == gr_loaded2.get('SUB_DICT').length(), ...
-	[BRAPH2.STR ':ExporterGroupSubjectST_MP_XLS:' BRAPH2.BUG_IO], ...
+assert(gr.get('SUB_DICT').get('LENGTH') == gr_loaded2.get('SUB_DICT').get('LENGTH'), ...
+	[BRAPH2.STR ':ExporterGroupSubjectST_MP_XLS:' BRAPH2.FAIL_TEST], ...
     'Problems saving or loading a group.')
-for i = 1:1:max(gr.get('SUB_DICT').length(), gr_loaded2.get('SUB_DICT').length())
-    sub = gr.get('SUB_DICT').getItem(i);
-    sub_loaded = gr_loaded2.get('SUB_DICT').getItem(i);    
+for i = 1:1:max(gr.get('SUB_DICT').get('LENGTH'), gr_loaded2.get('SUB_DICT').get('LENGTH'))
+    sub = gr.get('SUB_DICT').get('IT', i);
+    sub_loaded = gr_loaded2.get('SUB_DICT').get('IT', i);    
     assert( ...
         isequal(sub.get('ID'), sub_loaded.get('ID')) & ...
         isequal(sub.get('LABEL'), sub_loaded.get('LABEL')) & ...
         isequal(sub.get('NOTES'), sub_loaded.get('NOTES')) & ...
         ~isequal(sub.get('BA').get('ID'), sub_loaded.get('BA').get('ID')) & ...
-        isequal(sub.get('AGE'), sub_loaded.get('AGE')) & ...
-        isequal(sub.get('SEX'), sub_loaded.get('SEX')) & ...
+        isequal(sub.get('VOI_DICT').get('IT', 'Age').get('V'), sub_loaded.get('VOI_DICT').get('IT', 'Age').get('V')) & ... 
+        isequal(sub.get('VOI_DICT').get('IT', 'Sex').get('V'), sub_loaded.get('VOI_DICT').get('IT', 'Sex').get('V')) & ...
         isequal(sub.get('L'), sub_loaded.get('L')) & ...
         isequal(sub.get('ST_MP'), sub_loaded.get('ST_MP')), ...
-        [BRAPH2.STR ':ExporterGroupSubjectST_MP_XLS:' BRAPH2.BUG_IO], ...
+        [BRAPH2.STR ':ExporterGroupSubjectST_MP_XLS:' BRAPH2.FAIL_TEST], ...
         'Problems saving or loading a group.')    
 end
 

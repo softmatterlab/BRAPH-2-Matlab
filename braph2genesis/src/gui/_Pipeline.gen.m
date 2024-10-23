@@ -1,44 +1,36 @@
 %% ¡header!
-Pipeline < Element (pip, analysis pipeline) is an analysis pipeline.
+Pipeline < ConcreteElement (pip, analysis pipeline) is an analysis pipeline.
 
 %%% ¡description!
-Pipeline is an analysis pipeline.
+A Pipeline is an analysis pipeline.
 
 %%% ¡seealso!
-PipelineGUI, PipelineSection, PipelineCode
+PipelinePP_PSDict, PipelineSection, PipelineCode
 
-%%% ¡gui!
+%%% ¡build!
+1
 
-%%%% ¡menu_importer!
+%% ¡gui!
+
+%%% ¡menu_import!
 uimenu(menu_import, ...
+    'Tag', 'MENU.Import.BRAPH2', ...
     'Label', 'Import BRAPH2 ...', ...
     'Callback', {@cb_importer_BRAPH2});
 function cb_importer_BRAPH2(~, ~)
-    im = ImporterPipelineBRAPH2( ...
-        'ID', 'Import BRAPH2 Pipeline', ...
-        'WAITBAR', true ...
-        );
-    im.uigetfile();
     try
-        if isfile(im.get('FILE'))
-            pip = pe.get('EL');
-            
-            assert( ...
-                all(cellfun(@(prop) ~pip.isLocked(prop), num2cell(pip.getProps()))), ...
-                [BRAPH2.STR ':Pipeline:' BRAPH2.BUG_FUNC], ...
-                'To import an element, all its properties must be unlocked.' ...
-                )
-            
-            pip_new = im.get('PIP');
-            for prop = 1:1:pip.getPropNumber()
-                if pip.getPropCategory(prop) ~= Category.RESULT
-                    pip.set(prop, pip_new.get(prop))
-                end
-            end
-            
-            pe.reinit(pip_new)
+        im = ImporterPipelineBRAPH2( ...
+            'ID', 'Import BRAPH2 Pipeline', ...
+            'WAITBAR', true ...
+            ).get('GET_FILE');
+        if ~isa(im.getr('FILE'), 'NoValue')
+            pip = im.get('PIP');
+            gui = GUIElement('PE', pip);
+            gui.get('DRAW')
+            gui.get('SHOW')
         end
     catch e
+        %TODO implement and use braph2msgbox instead of warndlg
         warndlg(['Please, select a valid input Pipeline in BRAPH2 format. ' newline() ...
             newline() ...
             'Error message:' newline() ...
@@ -47,39 +39,93 @@ function cb_importer_BRAPH2(~, ~)
     end
 end
 
-%%%% ¡menu_exporter!
+%%% ¡menu_export!
 uimenu(menu_export, ...
+    'Tag', 'MENU.Export.BRAPH2', ...
     'Label', 'Export BRAPH2 ...', ...
     'Callback', {@cb_exporter_BRAPH2});
 function cb_exporter_BRAPH2(~, ~)
     ex = ExporterPipelineBRAPH2( ...
         'ID', 'Export BRAPH2 Pipeline', ...
-        'PIP', el.copy(), ...
+        'PIP', el, ...
         'WAITBAR', true ...
-        );
-    ex.uiputfile()
-    if ~strcmp(ex.get('FILE'), ExporterPipelineBRAPH2.getPropDefault('FILE'))
+        ).get('PUT_FILE');
+    if ~isa(ex.getr('FILE'), 'NoValue')
         ex.get('SAVE');
     end
 end
 
-%% ¡props!
+%% ¡layout!
 
 %%% ¡prop!
-ID (data, string) is a code for the pipeline (typically its file name).
+%%%% ¡id!
+Pipeline.LABEL
+%%%% ¡title!
+PIPELINE NAME
+
+%%% ¡prop!
+%%%% ¡id!
+Pipeline.NOTES
+%%%% ¡title!
+PIPELINE DESCRIPTION
+
+%%% ¡prop!
+%%%% ¡id!
+Pipeline.PS_DICT
+%%%% ¡title!
+PIPELINE WORKFLOW
+
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the pipeline.
+%%%% ¡default!
+'Pipeline'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the pipeline.
+%%%% ¡default!
+'Pipeline'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the pipeline.
+%%%% ¡default!
+'A Pipeline is an analysis pipeline.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the pipeline.
+%%%% ¡settings!
+'Pipeline'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the pipeline.
+%%%% ¡default!
+'Pipeline ID'
 
 %%% ¡prop!
 LABEL (metadata, string) is an extended label of the pipeline.
+%%%% ¡default!
+'Pipeline label'
 
 %%% ¡prop!
 NOTES (metadata, string) are some specific notes about the pipeline.
+%%%% ¡default!
+'Pipeline notes'
 %%%% ¡gui!
-pr = PlotPropString('EL', pip, 'PROP', Pipeline.NOTES, 'LINES', 'multi', 'EDITHEIGHT', 8.5, varargin{:});
+pr = PipelinePP_Notes('EL', pip, 'PROP', Pipeline.NOTES, varargin{:});
+
+%% ¡props!
+
+%%% ¡prop!
+README (metadata, string) is the web tutorial address (/tutorials/pipelines/tut/readme.md).
+
+%%% ¡prop!
+PDF (metadata, string) is the PDF tutorial file (/tutorials/pipelines/tut/tut.pdf).
 
 %%% ¡prop!
 PS_DICT (data, idict) is an indexed dictionary with the code sections.
 %%%% ¡settings!
 'PipelineSection'
 %%%% ¡gui!
-pr = PPPipeline_PSDict('EL', pip, 'PROP', Pipeline.PS_DICT, varargin{:});
+pr = PipelinePP_PSDict('EL', pip, 'PROP', Pipeline.PS_DICT, varargin{:});
 

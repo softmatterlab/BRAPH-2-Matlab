@@ -1,3 +1,13 @@
-*.asv
 .DS_Store
-braph2/
+
+*.asv
+
+*.synctex*
+*.log
+*.aux
+*.out
+*.toc
+
+braph2/pipelines/*/Example *
+
+*_with_rollcall/

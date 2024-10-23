@@ -1,682 +1,451 @@
 %% ¡header!
-GUI < Element (gui, graphical user interface) is a GUI for an element.
+GUI < ConcreteElement (gui, graphical user interface) renders a GUI figure.
 
 %%% ¡description!
-GUI plots an element in a figure.
+A GUI renders a figure with its basic functionalities.
 
-CONSTRUCTOR - To construct a GUI use the constructor:
+CONSTRUCTOR - To construct a GUI use, e.g.:
 
-    gui = GUI(''PE'', <element>)
+    gui = GUI('<strong>TITLE</strong>', 'Figure Title', '<strong>POSITION</strong>', [x0 y0 w h], '<strong>BKGCOLOR</strong>', [r g b]);
     
-DRAW - To create the element figure, call gui.draw():
+DRAW - To create and show the figure, use:
 
-    f = gui.<strong>draw</strong>();
+    gui.get('<strong>DRAW</strong>')
+    gui.get('<strong>SHOW</strong>')
+    f = gui.get('<strong>H</strong>'); % f is the figure handle.
+
+ The query gui.get('<strong>DRAWN</strong>') returns whether the GUI has 
+  been drawn and therefore can be shown.
  
- Here, f is the figure.
- It is also possible to use pr.draw() to get the figure handle and to set its properties.
-  
-CALLBACK - This is a callback function:
+CALLBACK - These are the public callbacks:
 
-    gui.<strong>cb_bring_to_front</strong>() - brings to the front the figure and its dependent figures
-    gui.<strong>cb_hide</strong>() - hides the figure and its dependent figures
-    gui.<strong>cb_close</strong>() - closes the figure and its dependent figures
+    gui.get('<strong>RESIZE</strong>') - updates POSITION when figure size is changed
+    gui.get('<strong>SHOW</strong>') - brings to the front the figure and its dependent figures
+    gui.get('<strong>HIDE</strong>') - hides the figure and its dependent figures
+    gui.get('<strong>DELETE</strong>') - resets the handles (automatically called when the figure is deleted)
+    gui.get('<strong>CLOSE</strong>') - closes the figure and its dependent figures
 
 %%% ¡seealso!
-Element, PlotElement
+uifigure, GUIElement, GUIFig
+
+%%% ¡build!
+1
+
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the graphical user interface.
+%%%% ¡default!
+'GUI'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the graphical user interface.
+%%%% ¡default!
+'GUI'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the graphical user interface.
+%%%% ¡default!
+'A GUI renders a figure with its basic functionalities.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the graphical user interface.
+%%%% ¡settings!
+'GUI'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the graphical user interface.
+%%%% ¡default!
+'GUI ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the graphical user interface.
+%%%% ¡default!
+'GUI label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the graphical user interface.
+%%%% ¡default!
+'GUI notes'
 
 %% ¡props!
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the GUI.
+WAITBAR (gui, logical) detemines whether to show the waitbar.
 
 %%% ¡prop!
-PE (metadata, item) is the plot element.
-%%%% ¡settings!
-'PlotElement'
-%%%% ¡conditioning!
-if ~isa(value, 'PlotElement')
-    value = PlotElement('EL', value, 'ID', ['Plot of ' value.tostring()]);
+DRAW (query, logical) draws the contents of a GUI before showing it.
+%%%% ¡calculate!
+if check_graphics(gui.memorize('H'), 'figure')
+
+    if gui.get('MENUBAR')
+        gui.memorize('H_MENUBAR')
+    end
+
+    if gui.get('TOOLBAR')
+        % gui.memorize('H_TOOLBAR') % performed automatically by gui.memorize('H_TOOLS')
+        gui.memorize('H_TOOLS')
+    end
+    
+    drawnow()
+    
+    value = true;
+else
+    warning( ...
+        [BRAPH2.STR ':' class(gui)], ...
+        [BRAPH2.STR ':' class(gui) '\\n' ...
+        'The call gui.get(''DRAW'') did not work.\\n' ...
+        'This shouldn''t happen with well-written code!'] ...
+        )
+    value = false;
 end
 
 %%% ¡prop!
-FILE (data, string) is the B2 file where the element is saved.
+DRAWN (query, logical) returns whether the GUI has been drawn.
+%%%% ¡calculate!
+value = check_graphics(gui.getr('H'), 'figure');
 
 %%% ¡prop!
-MENUBAR (metadata, logical) determines whether to show the menubar.
+TITLE (gui, string) is the name of the GUI.
 %%%% ¡default!
-true
+BRAPH2.STR
+%%%% ¡postset!
+if gui.get('DRAWN')
+    set(gui.get('H'), 'Name', gui.get('TITLE'))
+end
 
 %%% ¡prop!
-MENU_FILE (metadata, logical) determines whether to show the menu file.
+POSITION (gui, rvector) is the normalized position of the GUI on the screen.
 %%%% ¡default!
-true
+[.00 .00 (PanelElement.getPropDefault('MIN_WIDTH')+20)/w(0, 'pixels') 1.00]
+%%%% ¡check_prop!
+check = (length(value) == 4) && all(value(3:4) >= 0);
+%%%% ¡postset!
+if gui.get('DRAWN')
+    set(gui.get('H'), 'Position', gui.get('POSITION'))
+end
 
 %%% ¡prop!
-MENU_IMPORT (metadata, logical) determines whether to show the menu import.
+BKGCOLOR (gui, color) is the GUI background color.
 %%%% ¡default!
-true
+BRAPH2.COL_BKG
+%%%% ¡postset!
+if gui.get('DRAWN')
+    set(gui.get('H'), 'Color', gui.get('BKGCOLOR'))
+end
 
 %%% ¡prop!
-MENU_EXPORT (metadata, logical) determines whether to show the menu export.
-%%%% ¡default!
-true
+H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.
+%%%% ¡calculate!
+value = {};
+if gui.get('MENU_ABOUT')
+    value = [value, gui.memorize('H_MENU_ABOUT')];
+end
 
 %%% ¡prop!
-MENU_PERSONALIZE (metadata, logical) determines whether to show the menu personalize.
-%%%% ¡default!
-true
-
-%%% ¡prop!
-MENU_ABOUT (metadata, logical) determines whether to show the menu about.
-%%%% ¡default!
-true
-
-%%% ¡prop!
-TOOLBAR (metadata, logical) determines whether to show the toolbar.
-%%%% ¡default!
-true
-
-%%% ¡prop!
-TOOL_FIG (metadata, logical) determines whether to show the toolbar figure buttons.
+MENUBAR (gui, logical) determines whether to show the menubar [set before DRAW].
 %%%% ¡default!
 false
 
 %%% ¡prop!
-TOOL_FILE (metadata, logical) determines whether to show the toolbar file buttons.
-%%%% ¡default!
-true
+H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.
+%%%% ¡calculate!
+menu_about = uimenu(gui.get('H'), ... % f for figure
+    'Tag', 'MENU.About', ...
+    'Label', 'About' ...
+    );
+
+uimenu(menu_about, ...
+    'Tag', 'MENU.About.Web', ...
+    'Label', 'BRAPH.org ...', ...
+    'Callback', 'BRAPH2.web()')
+uimenu(menu_about, ...
+    'Tag', 'MENU.About.Forum', ...
+    'Label', 'Forums ...', ...
+    'Callback', 'BRAPH2.forum()')
+uimenu(menu_about, ...
+    'Tag', 'MENU.About.Twitter', ...
+    'Label', 'Twitter ...', ...
+    'Callback', 'BRAPH2.twitter()')
+uimenu(menu_about, ...
+    'Tag', 'MENU.About.License', ...
+    'Label', 'License ...', ...
+    'Callback', 'BRAPH2.license()')
+uimenu(menu_about, ...
+    'Tag', 'MENU.About.Credits', ...
+    'Label', 'Credits ...', ...
+    'Callback', 'BRAPH2.credits()')
+
+value = menu_about;
 
 %%% ¡prop!
-TOOL_ABOUT (metadata, logical) determines whether to show the toolbar about buttons.
+MENU_ABOUT (gui, logical) determines whether to show the menu about [set before DRAW].
 %%%% ¡default!
-true
+false
 
 %%% ¡prop!
-NAME (metadata, string) is the name of the GUI.
+H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.
+%%%% ¡calculate!
+value = uitoolbar(gui.memorize('H'), 'Tag', 'TOOLBAR');
 
 %%% ¡prop!
-POSITION (metadata, rvector) is the normalized position of the GUI on the screen.
-%%%% ¡check_prop!
-check = (length(value) == 4) && all(value(3:4) >= 0);
-%%%% ¡default!
-[.00 .00 .20 1.00]
+H_TOOLS (evanescent, handlelist) is the handle list of the tools from the first.
+%%%% ¡calculate!
+toolbar = gui.memorize('H_TOOLBAR');
 
-%%% ¡prop!
-CLOSEREQ (metadata, logical) determines whether to confirm close.
-%%%% ¡default!
-true
+value = {};
 
-%% ¡properties!
-f % handle for figure 
-pp % handle for parent panel of the element panel
-text_filename % handle for text field filename
+if gui.get('TOOL_ABOUT')
+    tool_spacer_1 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
 
-toolbar
-menu_file
-menu_import
-menu_export
-menu_personalize
-menu_about
+    % Website
+    tool_about_web = uipushtool(toolbar, ...
+        'Tag', 'BRAPH2.Web', ...                
+        'Separator', 'on', ...
+        'Tooltip', 'Link to braph.org', ...
+        'CData', imread('icon_web.png'), ...
+        'ClickedCallback', 'BRAPH2.web()');
 
-f_layout % handle to figure with panel to manage layout
+    % Forum
+    tool_about_forum = uipushtool(toolbar, ...
+        'Tag', 'BRAPH2.Forum', ...                
+        'Separator', 'off', ...
+        'Tooltip', 'Link to the BRAPH 2.0 forums', ...
+        'CData', imread('icon_forum.png'), ...
+        'ClickedCallback', 'BRAPH2.forum()');
 
-%% ¡methods!
-function f_out = draw(gui, varargin)
-    %GUI creates and displays the GUI figure for an element.
-    %
-    % GUI() creates and displays the GUI figure for an element.
-    %
-    % F = DRAW(GUI) returns a handle to the GUI figure.
-    %
-    % DRAW(GUI, 'Property', VALUE, ...) sets the properties of the parent
-    %  panel with custom Name-Value pairs.
-    %  All standard plot properties of figure can be used.
-    %
-    % It is possible to access the properties of the various graphical
-    %  objects from the handle F of the GUI figure.
-    %
-    % The GUI, PlotElement and Element can be retrieved as 
-    %  GUI = get(F, 'UserData')
-    %  PE = GUI.get('PE')
-    %  EL = PE.get('EL')
-    %
-    % See also cb_bring_to_front, figure.
+    % Twitter
+    tool_about_twitter = uipushtool(toolbar, ...
+        'Tag', 'BRAPH2.Twitter', ...                
+        'Separator', 'off', ...
+        'Tooltip', 'Link to the BRAPH 2.0 Twitter', ...
+        'CData', imread('icon_twitter.png'), ...
+        'ClickedCallback', 'BRAPH2.twitter()');
 
-    pe = gui.get('pe');
-    el = pe.get('el');
+    tool_spacer_2 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
 
-    %% Figure
-    % draw figure
-    if ~check_graphics(gui.f, 'figure')
-        gui.f = figure( ...
-            'Visible', 'off', ...
-            'NumberTitle', 'off', ...
-            'MenuBar', 'none', ...
-            'DockControls', 'off', ...
-            'SizeChangedFcn', {@cb_resize}, ...
-            'CloseRequestFcn', {@cb_close} ...
-            );
-        set_braph2icon(gui.f)
-    end
-    if ~isempty(varargin)
-        set(gui.f, varargin{:})
-    end
+    % License
+    tool_about_license = uipushtool(toolbar, ...
+        'Tag', 'BRAPH2.License', ...                
+        'Separator', 'on', ...
+        'Tooltip', 'BRAPH 2.0 License', ...
+        'CData', imread('icon_license.png'), ...
+        'ClickedCallback', 'BRAPH2.license()');
+
+    % Credits
+    tool_about_credits = uipushtool(toolbar, ...
+        'Tag', 'BRAPH2.Credits', ...                
+        'Separator', 'off', ...
+        'Tooltip', 'Informtion about BRAPH 2.0 and credits', ...
+        'CData', imread('icon_about.png'), ...
+        'ClickedCallback', 'BRAPH2.credits()');
     
-    % update figure
-    name = gui.get('NAME');
-    if isempty(name)
-        if el.existsTag('ID')
-            name = el.get('ID');
-        else
-            name = el.tostring();
-        end
-    end
-    set(gui.f, ...
-        'UserData', gui, ... % handle to retrieve gui, pe and el from figure
-        'Name', [el.getClass() ' - ' name ' - ' BRAPH2.STR], ...
-        'Units', 'normalized', ...
-        'Position', gui.get('POSITION'), ...
-        'Color', pe.get('BKGCOLOR') ...
+    value = {value{:}, tool_spacer_1, tool_about_web, tool_about_forum, tool_about_twitter, tool_spacer_2, tool_about_license, tool_about_credits};
+end
+
+%%% ¡prop!
+TOOLBAR (gui, logical) determines whether to show the toolbar [set before DRAW].
+%%%% ¡default!
+false
+
+%%% ¡prop!
+TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons [set before DRAW].
+%%%% ¡default!
+false
+
+%%% ¡prop!
+CLOSEREQ (gui, logical) determines whether to confirm close.
+%%%% ¡default!
+true
+
+%%% ¡prop!
+H (evanescent, handle) is the figure handle.
+%%%% ¡calculate!
+f = uifigure( ...
+    'Visible', 'off', ...
+    'Tag', 'H', ...
+    'UserData', gui, ... % handle to retrieve gui
+    'Name', gui.get('TITLE'), ...
+    'Units', 'normalized', ...
+    'Position', gui.get('POSITION'), ...
+    'Color', gui.get('BKGCOLOR'), ...
+    'Icon', 'braph2icon.png', ...
+    'AutoResizeChildren', false, ...
+    'SizeChangedFcn', {@cb_get, 'RESIZE'}, ...
+    'DeleteFcn', {@cb_get, 'DELETE'}, ...
+    'CloseRequestFcn', {@cb_get, 'CLOSE'} ...
+    );
+value = f;
+
+%%% ¡prop!
+RESIZE (query, logical) updates POSITION when figure size is changed.
+%%%% ¡calculate!
+if gui.get('DRAWN')
+    gui.set('POSITION', gui.get('H').get('Position'))
+    
+    value = true;
+else
+    warning( ...
+        [BRAPH2.STR ':' class(gui)], ...
+        [BRAPH2.STR ':' class(gui) '\\n' ...
+        'The call gui.get(''RESIZE'') has NOT been executed.\\n' ...
+        'First, the gui ' gui.get('ID') ' should be drawn calling gui.get(''DRAW'').\\n' ...
+        'Probably, not a big deal, but this shouldn''t happen with well-written code!'] ...
         )
-    
-    % callback on close request
-    function cb_close(~, ~)
-% % %         if gui.get('CLOSEREQ')
-% % %             selection = questdlg(['Do you want to close ' name '?'], ...
-% % %                 ['Close ' name], ...
-% % %                 'Yes', 'No', 'Yes');
-% % %         else
-% % %             selection = 'Yes';
-% % %         end
-% % %         switch selection
-% % %             case 'Yes'
-% % %                 delete(gui.f)
-% % %                 if check_graphics(gui.f_layout, 'figure')
-% % %                     close(gui.f_layout)
-% % %                 end
-% % %             case 'No'
-% % %                 return
-% % %         end
-        gui.cb_close()
-    end
-
-    % callback on resize
-    function cb_resize(~, ~)
-        set(gui.pp, ...
-            'Units', 'characters', ...
-            'Position', [0 1 Plot.w(gui.f, 'characters') Plot.h(gui.f, 'characters')-1] ...
-            );
-        set(gui.text_filename, ...
-            'Position', [0 0 Plot.w(gui.f, 'characters') 1] ...
-            )
-    end
-
-    %% FILENAME
-    % draw text filename
-    if ~check_graphics(gui.text_filename, 'text')
-        gui.text_filename = uicontrol( ...
-            'Parent', gui.f, ...
-            'Tag', 'text_filename', ...
-            'Style','text', ...
-            'Units', 'character', ...
-            'HorizontalAlignment', 'left', ...
-            'String', gui.get('FILE') ...
-            );
-    end
-% FIXME: check whether to bring out the update filename    
-    function update_filename()
-        set(gui.text_filename, 'String', gui.get('FILE'))
-    end
-
-    %% ELEMENT PANEL
-    % draw element parent panel
-    if ~check_graphics(gui.pp, 'uipanel')
-        gui.pp = uipanel( ...
-            'Parent', gui.f, ...
-            'Tag', 'pp', ...
-            'BorderType', 'none' ...
-            );
-    end
-    pe.draw('Parent', gui.pp)
-    
-    %% Menu
-    if gui.get('MENUBAR') && gui.get('MENU_FILE') && ~check_graphics(gui.menu_file, 'uimenu')
-        gui.menu_file = uimenu(gui.f, 'Label', 'File');
-        uimenu(gui.menu_file, ...
-            'Label', 'Open ...', ...
-            'Accelerator', 'O', ...
-            'Callback', {@cb_open})
-        uimenu(gui.menu_file, ...
-            'Label', 'Save', ...
-            'Accelerator', 'S', ...
-            'Callback', {@cb_save})
-        uimenu(gui.menu_file, ...
-            'Label', 'Save as ...', ...
-            'Accelerator', 'A', ...
-            'Callback', {@cb_saveas})
-        uimenu(gui.menu_file, ...
-            'Separator', 'on', ...
-            'Label', 'Close', ...
-            'Accelerator', 'C', ...
-            'Callback', {@cb_close})
-    end
-    function cb_open(~, ~)
-        % select file
-        [file, path, filterindex] = uigetfile(BRAPH2.EXT_ELEMENT, ['Select the ' el.getName() ' file.']);
-        if filterindex
-            filename = fullfile(path, file);
-% % %             tmp = load(filename, '-mat', 'el');
-tmp_el = BRAPH2.load(filename);
-            if strcmp(tmp_el.getClass(), el.getClass())
-                pe.reinit(tmp_el)
-                el = tmp_el; % update local variable 'el' to synchronize it with pe 'el'  
-                gui.draw()
-            else
-                GUI('PE', tmp.el, 'FILE', filename).draw()
-            end
-        end
-    end
-    function cb_save(~, ~)
-        filename = gui.get('FILE');
-        if isfile(filename)
-% % %             build = BRAPH2.BUILD;
-% % %             save(filename, 'el', 'build');
-BRAPH2.save(el, filename)
-        else
-            cb_saveas();
-        end
-    end
-    function cb_saveas(~, ~)
-        % select file
-        [file, path, filterindex] = uiputfile(BRAPH2.EXT_ELEMENT, ['Select the ' el.getName() ' file.']);
-        % save file
-        if filterindex
-            filename = fullfile(path, file);
-% % %             build = BRAPH2.BUILD;
-% % %             save(filename, 'el', 'build');
-BRAPH2.save(el, filename)
-            gui.set('FILE', filename)
-            update_filename();
-        end
-    end
-    
-    if gui.get('MENUBAR') && gui.get('MENU_IMPORT') && ~check_graphics(gui.menu_import, 'uimenu') 
-        gui.menu_import = uimenu(gui.f, ...
-            'Label', 'Import', ...
-            'Callback', {@cb_refresh_import_menu});
-    end
-    function cb_refresh_import_menu(~,~)
-        im_menus = get(gui.menu_import, 'Children');
-        for i = 1:1:length(im_menus)
-            delete(im_menus(i));
-        end
-        eval([el.getClass() '.getGUIMenuImport(el, gui.menu_import, pe)']);
-        el = pe.get('el');
-    end    
-
-    if gui.get('MENUBAR') && gui.get('MENU_EXPORT') && ~check_graphics(gui.menu_export, 'uimenu') 
-        gui.menu_export = uimenu(gui.f, ...
-            'Label', 'Export', ...
-            'Callback', {@cb_refresh_export_menu});
-    end
-    function cb_refresh_export_menu(~,~)
-        el = pe.get('el');
-        ex_menus = get(gui.menu_export, 'Children');
-        for i = 1:length(ex_menus)
-            delete(ex_menus(i));
-        end
-        eval([el.getClass() '.getGUIMenuExport(el, gui.menu_export, pe)']);
-    end
-
-    if gui.get('MENUBAR') && gui.get('MENU_PERSONALIZE') && ~check_graphics(gui.menu_personalize, 'uimenu') 
-        gui.menu_personalize = uimenu(gui.f, 'Label', 'Personalize');
-        uimenu(gui.menu_personalize, ...
-            'Label', 'Layout ...', ...
-            'Callback', {@cb_layout});
-    end
-    function cb_layout(~, ~)
-        if isgraphics(gui.f_layout, 'figure')
-            delete(gui.f_layout)
-        end
-        
-        gui.f_layout = figure( ...
-            'Visible', 'off', ...
-            'NumberTitle', 'off', ...
-            'Name', ['Layout ' el.getClass() ' - ' BRAPH2.STR], ...
-            'Units', get(gui.f, 'Units'), ...
-            'Position', [Plot.x0(gui.f)+Plot.w(gui.f) Plot.y0(gui.f)+Plot.h(gui.f)*2/3 Plot.w(gui.f) Plot.h(gui.f)/3], ...
-            'Units', 'character', ...
-            'MenuBar', 'none', ...
-            'DockControls', 'off', ...
-            'Color', pe.get('BKGCOLOR') ...
-            );
-        set_braph2icon(gui.f_layout);
-
-        edit_table = uitable('Parent', gui.f_layout, ...
-            'Units', 'normalized', ...
-            'Position', [.02 .2 .9 .7], ...
-            'ColumnName', {'Show', 'Order', 'Title', 'Property', 'Category', 'Format'}, ...
-            'ColumnFormat', {'logical', 'char', 'char', 'char', 'char', 'char'}, ...
-            'ColumnEditable', [true true true false false false], ...
-            'CellEditCallback', {@cb_edit_tb} ...
-            );
-        save_edit_btn = uicontrol('Parent', gui.f_layout, ...
-            'Units', 'normalized', ...
-            'Position', [.49 .02 .24 .1], ...
-            'String', 'Save', ...
-            'Callback', {@cb_save_edit} ...
-            );
-        cancel_edit_btn =  uicontrol('Parent', gui.f_layout, ...
-            'Units', 'normalized', ...
-            'Position', [.74 .02 .24 .1], ...
-            'String', 'Cancel', ...
-            'Callback', {@cb_cancel_edit} ...
-            );
-
-        [order, title, visible] = load_layout(el);
-        VISIBLE = 1;
-        ORDER = 2;
-        TITLE = 3;
-        TAG = 4;
-        CATEGORY = 5;
-        FORMAT = 6;
-        data = cell(el.getPropNumber(), 6);
-        for prop = 1:1:el.getPropNumber()
-            data{prop, VISIBLE} = visible(prop);
-            data{prop, ORDER} = order(prop);
-            data{prop, TITLE} = title{prop};
-            data{prop, TAG} = upper(el.getPropTag(prop));
-            data{prop, CATEGORY} = el.getPropCategory(prop);
-            data{prop, FORMAT} = el.getPropFormat(prop);
-        end        
-        set(edit_table, 'Data', data);
-
-        set(gui.f_layout, 'Visible', 'on');
-        
-        function cb_edit_tb(~, event)
-            prop = event.Indices(1);
-            col = event.Indices(2);
-            newdata = event.NewData;
-            data = get(edit_table, 'Data');
-
-            if col == VISIBLE
-                if newdata == true
-                    if any(~isnan(cell2mat(data(:, ORDER))))
-                        data{prop, ORDER} = max(cell2mat(data(:, ORDER))) + 1;
-                    else % all NaN (edge case)
-                        data{prop, ORDER} = 1;
-                    end
-                else % newdata == false
-                    for i = data{prop, ORDER} + 1:1:max(cell2mat(data(:, ORDER)))
-                        data{cell2mat(data(:, ORDER)) == i, ORDER} = i - 1;
-                    end
-                    data{prop, ORDER} = NaN;
-                end
-            end
-
-            if col == ORDER
-                if isnan(newdata)
-                    data{prop, VISIBLE} = false;
-                else
-                    data{prop, VISIBLE} = true;
-                end
-                
-                order = cell2mat(data(:, ORDER)) + .00301040106;
-                order(prop) = newdata;
-                for i = 1:1:numel(order) - sum(isnan(order))
-                    min_order_index = find(order == min(order));
-                    data{min_order_index, ORDER} = i;
-                    order(min_order_index) = NaN;
-                end
-            end
-
-            set(edit_table, 'Data', data);
-        end
-        function cb_save_edit(~, ~)
-            data = get(edit_table, 'Data');
-            order = cell2mat(data(:, 2))';
-            title = data(:, 3); title = title';
-            save_layout(el, order, title)
-
-            pe.reinit(el);
-            gui.draw()
-        end
-        function cb_cancel_edit(~, ~)
-            close(gui.f_layout)
-        end
-    end
-
-    if gui.get('MENUBAR') && gui.get('MENU_ABOUT') && ~check_graphics(gui.menu_about, 'uimenu') 
-% % %         gui.menu_about = uimenu(gui.f, 'Label', 'About');
-% % %         uimenu(gui.menu_about, ...
-% % %             'Label', 'BRAPH.org ...', ...
-% % %             'Callback', {@cb_web})
-% % %         uimenu(gui.menu_about, ...
-% % %             'Label', 'Forum...', ...
-% % %             'Callback', {@cb_forum})
-% % %         uimenu(gui.menu_about, ...
-% % %             'Label', 'Twitter ...', ...
-% % %             'Callback', {@cb_twitter})
-% % %         uimenu(gui.menu_about, ...
-% % %             'Label', 'License ...', ...
-% % %             'Callback', {@cb_license})
-% % %         uimenu(gui.menu_about, ...
-% % %             'Label', 'Credits ...', ...
-% % %             'Callback', {@cb_credits})
-        gui.menu_about = BRAPH2.add_menu_about(gui.f);
-    end
-% % %     function cb_web(~, ~)
-% % %         BRAPH2.web()
-% % %     end
-% % %     function cb_forum(~, ~)
-% % %         BRAPH2.forum()
-% % %     end
-% % %     function cb_twitter(~, ~)
-% % %         BRAPH2.twitter()
-% % %     end
-% % %     function cb_license(~, ~)
-% % %         BRAPH2.license()
-% % %     end
-% % %     function cb_credits(~, ~)
-% % %         BRAPH2.credits()
-% % %     end
-
-    %% Toolbar
-    if gui.get('TOOLBAR') && ~check_graphics(gui.toolbar, 'uitoolbar')
-        set(gui.f, 'Toolbar', 'figure')
-
-        gui.toolbar = findall(gui.f, 'Tag', 'FigureToolBar');
-
-        delete(findall(gui.toolbar, 'Tag', 'Standard.NewFigure'))
-        
-        if ~gui.get('TOOL_FIG')
-            delete(findall(gui.toolbar, 'Tag', 'Standard.PrintFigure'))
-            delete(findall(gui.toolbar, 'Tag', 'Standard.EditPlot'))
-            delete(findall(gui.toolbar, 'Tag', 'Standard.OpenInspector'))
-            delete(findall(gui.toolbar, 'Tag', 'Exploration.Brushing'))
-            delete(findall(gui.toolbar, 'Tag', 'DataManager.Linking'))
-            delete(findall(gui.toolbar, 'Tag', 'Annotation.InsertColorbar'))
-            delete(findall(gui.toolbar, 'Tag', 'Annotation.InsertLegend'))
-            delete(findall(gui.toolbar, 'Tag', 'Plottools.PlottoolsOff'))
-            delete(findall(gui.toolbar, 'Tag', 'Plottools.PlottoolsOn'))
-        else
-            toolbar_print = findall(gui.toolbar, 'Tag', 'Standard.PrintFigure');
-            set(toolbar_print, ...
-                'Separator', 'on' ...
-                )
-        end
-
-        if gui.get('TOOL_FILE')
-            % Open
-            toolbar_open = findall(gui.toolbar, 'Tag', 'Standard.FileOpen');
-            set(toolbar_open, ...
-                'Tag', 'BRAPH2.FileOpen', ...
-                'TooltipString', ['Open ' el.getName()], ...
-                'ClickedCallback', {@cb_open})
-            % Save
-            toolbar_save = findall(gui.toolbar, 'Tag', 'Standard.SaveFigure');
-            set(toolbar_save, ...
-                'Tag', 'BRAPH2.SaveFigure', ...
-                'TooltipString', ['Save ' el.getName()], ...
-                'ClickedCallback', {@cb_save})
-        else
-            toolbar_open = findall(gui.toolbar, 'Tag', 'Standard.FileOpen');
-            delete(findall(gui.toolbar, 'Tag', 'Standard.SaveFigure'))
-        end
-        
-        if gui.get('TOOL_ABOUT')
-% % %             uipushtool(gui.toolbar, 'Separator', 'on', 'Visible', 'off')
-% % %             uipushtool(gui.toolbar, 'Separator', 'on', 'Visible', 'off')
-% % % 
-% % %             % Website
-% % %             toolbar_web = uipushtool(gui.toolbar, ...
-% % %                 'Separator', 'on', ...
-% % %                 'TooltipString', 'Link to braph.org', ...
-% % %                 'CData', imresize(imread('icon_web.png'), [24 24]), ...
-% % %                 'ClickedCallback', {@cb_web});
-% % % 
-% % %             % Forum
-% % %             toolbar_web = uipushtool(gui.toolbar, ...
-% % %                 'Separator', 'off', ...
-% % %                 'TooltipString', 'Link to the BRAPH 2.0 forum', ...
-% % %                 'CData', imresize(imread('icon_forum.png'), [24 24]), ...
-% % %                 'ClickedCallback', {@cb_forum});
-% % % 
-% % %             % Twitter
-% % %             toolbar_web = uipushtool(gui.toolbar, ...
-% % %                 'Separator', 'off', ...
-% % %                 'TooltipString', 'Link to the BRAPH 2.0 Twitter', ...
-% % %                 'CData', imresize(imread('icon_twitter.png'), [24 24]), ...
-% % %                 'ClickedCallback', {@cb_twitter});
-% % % 
-% % %             uipushtool(gui.toolbar, 'Separator', 'on', 'Visible', 'off')
-% % %             uipushtool(gui.toolbar, 'Separator', 'on', 'Visible', 'off')
-% % % 
-% % %             % License
-% % %             toolbar_web = uipushtool(gui.toolbar, ...
-% % %                 'Separator', 'on', ...
-% % %                 'TooltipString', 'BRAPH 2.0 License', ...
-% % %                 'CData', imresize(imread('icon_license.png'), [24 24]), ...
-% % %                 'ClickedCallback', {@cb_license});
-% % % 
-% % %             % About
-% % %             toolbar_web = uipushtool(gui.toolbar, ...
-% % %                 'Separator', 'off', ...
-% % %                 'TooltipString', 'Informtion about BRAPH 2.0 and credits', ...
-% % %                 'CData', imresize(imread('icon_about.png'), [24 24]), ...
-% % %                 'ClickedCallback', {@cb_about});
-            BRAPH2.add_tool_about(gui.toolbar)
-        end
-    end
-
-    %% SHOW and OUTPUT
-    % show figure
-    set(gui.f, 'Visible', 'on')
-    
-    % output
-    if nargout > 0
-        f_out = gui.f;
-    end
+    value = false;
 end
-function cb_bring_to_front(gui)
-    %CB_BRING_TO_FRONT brings to front the figure and its dependent figures.
-    %
-    % CB_BRING_TO_FRONT(GUI) brings to front the figure and its dependent figures 
-    %  by calling the methods cb_bring_to_front() for all the PlotProp
-    %  panels of the PlotElement. 
-    %  
-    % Note that it will draw anew the figure if it has been closed.
-    %
-    % See also cb_hide, cb_close.
 
-    % brings to front the main GUI
-    if check_graphics(gui.f, 'figure')
-        figure(gui.f) 
-        set(gui.f, ...
-            'Visible', 'on', ...
-            'WindowState', 'normal' ...
-            )
-    end
-    
-    % brings to front the other panels
-    pe = gui.get('PE');
-    pr_dict = pe.get('PR_DICT');
-    for prop = 1:1:pr_dict.length()
-        pr = pr_dict.getItem(prop);
-        pr.cb_bring_to_front()
-    end
+%%% ¡prop!
+SHOW (query, logical) shows the figure and its dependent figures.
+%%%% ¡calculate!
+if gui.get('DRAWN')
+    figure(gui.get('H')) 
+    set(gui.get('H'), ...
+        'Visible', 'on', ...
+        'WindowState', 'normal' ...
+        )
+
+    value = true;
+else
+    warning( ...
+        [BRAPH2.STR ':' class(gui)], ...
+        [BRAPH2.STR ':' class(gui) '\\n' ...
+        'The call gui.get(''SHOW'') has NOT been executed.\\n' ...
+        'First, the gui ' gui.get('ID') ' should be drawn calling gui.get(''DRAW'').\\n' ...
+        'Probably, not a big deal, but this shouldn''t happen with well-written code!'] ...
+        )
+    value = false;
 end
-function cb_hide(gui)
-    %CB_HIDE hides the figure and its dependent figures.
-    %
-    % CB_HIDE(GUI) hides the figure and its dependent figures 
-    %  by calling the methods cb_hide() for all the PlotProp
-    %  panels of the PlotElement. 
-    %
-    % See also cb_bring_to_front, cb_close.
 
-    % hides the main GUI
-    if check_graphics(gui.f, 'figure')
-        figure(gui.f)
-    end
-    
-    % hides the other panels
-    pe = gui.get('PE');
-    pr_dict = pe.get('PR_DICT');
-    for prop = 1:1:pr_dict.length()
-        pr = pr_dict.getItem(prop);
-        pr.cb_hide()
-    end
+%%% ¡prop!
+HIDE (query, logical) hides the figure and its dependent figures.
+%%%% ¡calculate!
+if gui.get('DRAWN')
+    set(gui.get('H'), 'Visible', 'off')
+
+    value = true;
+else
+    warning( ...
+        [BRAPH2.STR ':' class(gui)], ...
+        [BRAPH2.STR ':' class(gui) '\\n' ...
+        'The call gui.get(''HIDE'') has NOT been executed.\\n' ...
+        'First, the gui ' gui.get('ID') ' should be drawn calling gui.get(''DRAW'').\\n' ...
+        'Probably, not a big deal, but this shouldn''t happen with well-written code!'] ...
+        )
+    value = false;
 end
-function cb_close(gui)
-    %CB_CLOSE closes the figure and its dependent figures.
-    %
-    % CB_CLOSE(GUI) closes the figure and its dependent figures 
-    %  by calling the methods cb_close() for all the PlotProp
-    %  panels of the PlotElement. 
-    %  
-    % See also cb_bring_to_front, cb_hide.
 
-    % determines GUI name
-    name = gui.get('NAME');
-    if isempty(name)
-        pe = gui.get('pe');
-        el = pe.get('el');
-        if el.existsTag('ID')
-            name = el.get('ID');
-        else
-            name = el.tostring();
-        end
-    end
+%%% ¡prop!
+DELETE (query, logical) resets the handles when the figure is deleted.
+%%%% ¡calculate!
+if gui.get('DRAWN')
+    gui.set('POSITION', gui.get('H').get('Position'))
+
+    gui.set('H', Element.getNoValue())
+
+    gui.set('H_MENUBAR', Element.getNoValue())
+    gui.set('H_MENU_ABOUT', Element.getNoValue())
+
+    gui.set('H_TOOLBAR', Element.getNoValue())
+    gui.set('H_TOOLS', Element.getNoValue())
     
-    % closes the main GUI
-    if check_graphics(gui.f, 'figure')
-        if gui.get('CLOSEREQ')
-            DefaultUicontrolBackgroundColor_BAK = get(0, 'DefaultUicontrolBackgroundColor');
-            set(0, 'DefaultUicontrolBackgroundColor', BRAPH2.COL_FIG)
-            selection = questdlg(['Do you want to close ' name '?'], ...
-                ['Close ' name], ...
-                'Yes', 'No', 'Yes');
-            set(0, 'DefaultUicontrolBackgroundColor', DefaultUicontrolBackgroundColor_BAK)
-        else
-            selection = 'Yes';
-        end
-        switch selection
-            case 'Yes'
-                delete(gui.f)
-                if check_graphics(gui.f_layout, 'figure')
-                    close(gui.f_layout)
-                end
-            case 'No'
-                return
-        end
+    value = true;
+else
+    warning( ...
+        [BRAPH2.STR ':' class(gui)], ...
+        [BRAPH2.STR ':' class(gui) '\\n' ...
+        'The call gui.get(''DELETE'') has NOT been executed.\\n' ...
+        'First, the gui ' gui.get('ID') ' should be drawn calling gui.get(''DRAW'').\\n' ...
+        'Probably, not a big deal, but this shouldn''t happen with well-written code!'] ...
+        )
+    value = false;
+end
+
+%%% ¡prop!
+CLOSE (query, logical) closes the figure and its dependent figures.
+%%%% ¡calculate!
+if gui.get('DRAWN')
+
+    title = gui.get('TITLE');
+
+    if gui.get('CLOSEREQ')
+        %TODO implement and use braph2msgbox instead of uiconfirm
+        selection = uiconfirm(gui.get('H'), ...
+            ['Do you want to close ' title '?'], ...
+            ['Close ' title], ...
+            'Options', {'Yes', 'No'}, ...
+            'DefaultOption', 2 ...
+            );
+    else
+        selection = 'Yes';
     end
-    
-    % closes the other panels
-    pe = gui.get('PE');
-    pr_dict = pe.get('PR_DICT');
-    for prop = 1:1:pr_dict.length()
-        pr = pr_dict.getItem(prop);
-        pr.cb_close()
+
+    if strcmp(selection, 'Yes')
+        delete(gui.get('H'))
     end
+
+    value = true;
+else
+    warning( ...
+        [BRAPH2.STR ':' class(gui)], ...
+        [BRAPH2.STR ':' class(gui) '\\n' ...
+        'The call gui.get(''CLOSE'') has NOT been executed.\\n' ...
+        'First, the gui ' gui.get('ID') ' should be drawn calling gui.get(''DRAW'').\\n' ...
+        'Probably, not a big deal, but this shouldn''t happen with well-written code!'] ...
+        )
+    value = false;
+end
+
+%% ¡tests!
+
+%%% ¡excluded_props!
+[GUI.H]
+
+%%% ¡warning_off!
+true
+
+%%% ¡test!
+%%%% ¡name!
+Remove Figures
+%%%% ¡code!
+warning('off', [BRAPH2.STR ':GUI'])
+assert(length(findall(0, 'type', 'figure')) == 2)
+delete(findall(0, 'type', 'figure'))
+warning('on', [BRAPH2.STR ':GUI'])
+
+%%% ¡test!
+%%%% ¡name!
+Basics
+%%%% ¡probability!
+.01
+%%%% ¡code!
+gui = GUI( ...
+    'POSITION', [w(0, 'normalized')/4 h(0, 'normalized')/4 w(0, 'normalized')/2 h(0, 'normalized')/2], ...
+    'MENUBAR', true, ...
+    'MENU_ABOUT', true, ...
+    'TOOLBAR', true, ...
+    'TOOL_ABOUT', true, ...
+    'CLOSEREQ', false ...
+    );
+assert(~gui.get('DRAWN'))
+
+for i = 1:2
+    gui.get('DRAW')
+    assert(gui.get('DRAWN'))
+    f = gui.get('H');
+    assert(check_graphics(f, 'figure'))
+
+    gui.get('SHOW')
+    assert(gui.get('DRAWN'))
+
+    gui.get('HIDE')
+    assert(gui.get('DRAWN'))
+
+    gui.get('SHOW')
+    assert(gui.get('DRAWN'))
+
+    gui.get('CLOSE')
+    assert(~gui.get('DRAWN'))
+    assert(~check_graphics(f, 'figure'))
+    assert(isa(gui.getr('H'), 'NoValue'))
 end

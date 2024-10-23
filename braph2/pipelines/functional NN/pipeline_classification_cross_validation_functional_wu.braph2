@@ -1,0 +1,27 @@
+%% Pipeline Classification Cross-Validation Functional WU 
+
+% This is the pipeline script to execute cross-validation with multi-layer perceptron classifier using the adjacency matrix of weighted undirected graph obtained from functional data.
+% The functional data can be derived from imaging modalities like functional MRI (fMRI), electroencephalography (EEG) or magnetoencephalography (MEG).
+% 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
+% 2. It loads data for three groups of subjects from the directories (e.g., FUN_Group_1_XLS, FUN_Group_2_XLS, and FUN_Group_3_XLS) FUNtaining XLS files for each subject.
+% 3. It analyzes these groups using functional analyses (FUN) based on weighted undirected graphs (WU).
+% 4. It executes the cross-validation process.
+
+% PDF: /tutorials/pipelines/tut_nn_clss_xval_fun_wu/tut_nn_clss_xval_fun_wu.pdf
+% README: /tutorials/pipelines/tut_nn_clss_xval_fun_wu/readme.md
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Groups
+gr1 = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN 1 from XLS % Group FUN 1
+gr2 = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN 2 from XLS % Group FUN 2
+gr3 = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN 3 from XLS % Group FUN 3
+
+%% Analysis
+a_WU1 = AnalyzeEnsemble_FUN_WU('GR', gr1); % Analyze Group 1 % Group 1 Analysis
+a_WU2 = AnalyzeEnsemble_FUN_WU('GR', gr2, 'TEMPLATE', a_WU1); % Analyze Group 2 % Group 2 Analysis
+a_WU3 = AnalyzeEnsemble_FUN_WU('GR', gr3, 'TEMPLATE', a_WU1); % Analyze Group 3 % Group 3 Analysis
+
+%% Cross-Validation
+nncv = NNClassifierMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_CLASS', {gr1.get('ID')}), a_WU1.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_CLASS', {gr2.get('ID')}), a_WU2.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_CLASS', {gr3.get('ID')}), a_WU3.get('G_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process

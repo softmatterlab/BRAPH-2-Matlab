@@ -1,57 +1,132 @@
 %% ¡header!
-KCore < Measure (m, k-core) is the graph k-core.
+KCore < Measure (m, kcore) is the graph K-Core.
 
 %%% ¡description!
-The k-core of a graph is the largest subnetwork comprising nodes of degree k or higher. 
-k is set by the user; the default value is equal to 1.
+The K-Core (KCore) of a graph is the largest subnetwork comprising nodes of degree k or higher. 
+  k is set by the user; the default value is equal to 1.
 
-%%% ¡shape!
-shape = Measure.BINODAL;
-
-%%% ¡scope!
-scope = Measure.UNILAYER;
-
-%%% ¡parametricity!
-parametricity = Measure.NONPARAMETRIC;
-
-%%% ¡compatible_graphs!
-GraphBD
-GraphBU
-MultigraphBUD
-MultigraphBUT
-GraphWD
-GraphWU
-MultiplexBD
-MultiplexBU
-MultiplexBUD
-MultiplexBUT
-MultiplexWD
-MultiplexWU
-
-%% ¡props!
-%%% ¡prop! 
-KCoreThreshold (parameter, SCALAR) is the k-core threshold
-%%%% ¡default!
+%%% ¡build!
 1
+
+%% ¡layout!
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.ID
+%%%% ¡title!
+Measure ID
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.KCORETHRESHOLD
+%%%% ¡title!
+K-core threshold
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.M
+%%%% ¡title!
+K-Core
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+KCore.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
 
 %% ¡props_update!
 
 %%% ¡prop!
-M (result, cell) is the k-core.
+ELCLASS (constant, string) is the class of the K-Core.
+%%%% ¡default!
+'KCore'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the K-Core.
+%%%% ¡default!
+'K-Core'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the K-Core.
+%%%% ¡default!
+'The K-Core (KCore) of a graph is the largest subnetwork comprising nodes of degree k or higher. k is set by the user; the default value is equal to 1.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the K-Core.
+%%%% ¡settings!
+'KCore'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code of the K-Core.
+%%%% ¡default!
+'KCore ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the K-Core.
+%%%% ¡default!
+'K-Core label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the K-Core.
+%%%% ¡default!
+'K-Core notes'
+
+%%% ¡prop!
+SHAPE (constant, scalar) is the measure shape __Measure.BINODAL__.
+%%%% ¡default!
+Measure.BINODAL
+
+%%% ¡prop!
+SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
+%%%% ¡default!
+Measure.UNILAYER
+
+%%% ¡prop!
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+%%%% ¡default!
+Measure.NONPARAMETRIC
+
+%%% ¡prop!
+COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+%%%% ¡default!
+{'GraphBD' 'GraphBU' 'GraphWD' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerBD' 'OrdMlWD'};
+
+%%% ¡prop!
+M (result, cell) is the K-Core.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-L = g.layernumber();
+L = g.get('LAYERNUMBER');
 
-kcore_threshold = m.get('KCoreThreshold');
-assert(mod(kcore_threshold, 1) == 0, ...
-    [BRAPH2.STR ':KCore:' BRAPH2.WRONG_INPUT], ...
-    ['KCore threshold must be an integer value ' ...
-    'while it is ' tostring(kcore_threshold)])
+kcore_threshold = m.get('KCORETHRESHOLD');
 
 k_core = cell(L, 1);
-directionality_type =  g.getDirectionalityType(L);
-for li = 1:1:L    
+directionality_type =  g.get('DIRECTIONALITY_TYPE', L);
+parfor li = 1:1:L    
     Aii = A{li, li};
     directionality_layer = directionality_type(li, li);   
     
@@ -81,13 +156,24 @@ end
 
 value = k_core;
 
+%% ¡props!
+%%% ¡prop! 
+KCORETHRESHOLD (parameter, scalar) is the k-core threshold
+%%%% ¡default!
+1
+
 %% ¡tests!
+
+%%% ¡excluded_props!
+[KCore.PFM]
 
 %%% ¡test!
 %%%% ¡name!
 GraphBU
+%%%% ¡probability!
+.01
 %%%% ¡code!
-A = [
+B = [
     0  1  1  0; 
     1  0  1  1; 
     1  1  0  0;
@@ -101,19 +187,27 @@ known_kcore = {[
                 0  0  0  0
                 ]};
 
-g = GraphBU('B', A);
-kcore = KCore('G', g, 'KCoreThreshold', 2).get('M');
+g = GraphBU('B', B);
 
-assert(isequal(kcore, known_kcore), ...
-    [BRAPH2.STR ':KCore:' BRAPH2.BUG_ERR], ...
-    'KCore is not being calculated correctly for GraphBU.')
+m_outside_g = KCore('G', g, 'KCORETHRESHOLD', 2);
+assert(isequal(m_outside_g.get('M'), known_kcore), ...
+    [BRAPH2.STR ':KCore:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'KCore');
+m_inside_g.set('KCORETHRESHOLD', 2);
+assert(isequal(m_inside_g.get('M'), known_kcore), ...
+    [BRAPH2.STR ':KCore:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
 GraphBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
-A = [
-    0  1  1  1; 
+B = [
+    0  1  1  0; 
     1  0  1  1; 
     1  1  0  0;
     0  1  0  0
@@ -126,16 +220,24 @@ known_kcore = {[
                 0  0  0  0
                 ]};
 
-g = GraphBD('B', A);
-kcore = KCore('G', g, 'KCoreThreshold', 4).get('M');
+g = GraphBD('B', B);
 
-assert(isequal(kcore, known_kcore), ...
-    [BRAPH2.STR ':KCore:' BRAPH2.BUG_ERR], ...
-    'KCore is not being calculated correctly for GraphBD.')
+m_outside_g = KCore('G', g, 'KCORETHRESHOLD', 4);
+assert(isequal(m_outside_g.get('M'), known_kcore), ...
+    [BRAPH2.STR ':KCore:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'KCore');
+m_inside_g.set('KCORETHRESHOLD', 4);
+assert(isequal(m_inside_g.get('M'), known_kcore), ...
+    [BRAPH2.STR ':KCore:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
 MultiplexWU
+%%%% ¡probability!
+.01
 %%%% ¡code!
 A11 = [
     0   .1  1  0; 
@@ -163,18 +265,27 @@ known_kcore(2, 1) = {[
                 1  0  1  1;
                 1  1  0  0;
                 1  1  0  0
-                ]};            
+                ]};   
 
 g = MultiplexWU('B', A);
-kcore = KCore('G', g, 'KCoreThreshold', 2).get('M');
 
-assert(isequal(kcore, known_kcore), ...
-    [BRAPH2.STR ':KCore:' BRAPH2.BUG_ERR], ...
-    'KCore is not being calculated correctly for MultiplexGraphWU.')
+m_outside_g = KCore('G', g, 'KCORETHRESHOLD', 2);
+assert(isequal(m_outside_g.get('M'), known_kcore), ...
+    [BRAPH2.STR ':KCore:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'KCore');
+m_inside_g.set('KCORETHRESHOLD', 2);
+assert(isequal(m_inside_g.get('M'), known_kcore), ...
+    [BRAPH2.STR ':KCore:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
 
 %%% ¡test!
 %%%% ¡name!
 MultiplexWD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 A11 = [
     0   1   1  .1; 
@@ -190,6 +301,7 @@ A22 = [
     0   .3  .7  0
     ];
 A = {A11 A22};
+             
 
 known_kcore(1) = {[
                 0  1  1  0;
@@ -202,11 +314,19 @@ known_kcore(2, 1) = {[
                 1  0  1  1;
                 1  1  0  0;
                 0  1  1  0
-                ]};            
+                ]};   
 
 g = MultiplexWD('B', A);
-kcore = KCore('G', g, 'KCoreThreshold', 4).get('M');
 
-assert(isequal(kcore, known_kcore), ...
-    [BRAPH2.STR ':KCore:' BRAPH2.BUG_ERR], ...
-    'KCore is not being calculated correctly for MultiplexGraphWD.')
+m_outside_g = KCore('G', g, 'KCORETHRESHOLD', 4);
+assert(isequal(m_outside_g.get('M'), known_kcore), ...
+    [BRAPH2.STR ':KCore:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'KCore');
+m_inside_g.set('KCORETHRESHOLD', 4);
+assert(isequal(m_inside_g.get('M'), known_kcore), ...
+    [BRAPH2.STR ':KCore:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+

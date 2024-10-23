@@ -1,506 +1,605 @@
 %% ¡header!
-IndexedDictionary < Element (idict, indexed dictionary) is an indexed dictionary.
+IndexedDictionary < ConcreteElement (idict, indexed dictionary) is an indexed dictionary.
 
 %%% ¡description!
-IndexedDictionary provides the methods necessary to handle data in an indexed dictionary. 
-It contains and manages an ordered list of couples {KEY, ITEM}, 
-where KEY is a unique alphanumeric key (a string) provided by a property of category PARAMETER or DATA and 
-ITEM is an element of a class defined in the constructor using the property IT_CLASS.
+An Indexed Dictionary (IndexedDictionary) provides the methods necessary 
+ to handle data in an indexed dictionary. It contains and manages an 
+ ordered list of couples {KEY, IT}, where KEY is a unique alphanumeric key 
+ (a string) provided by a property of format STRING or CLASS and of 
+ category PARAMETER or DATA, and IT is an element of a class defined in the 
+ constructor using the property IT_CLASS.
 
-%%% ¡seealso!
-Element
+%%% ¡build!
+1
 
-%% ¡props!
+%% ¡props_update!
 
 %%% ¡prop!
-ID (data, string) is a few-letter code.
-
-%%% ¡prop!
-IT_CLASS (parameter, class) is the class of the item elements.
+ELCLASS (constant, string) is the class of the indexed dictionary (IndexedDictionary).
 %%%% ¡default!
 'IndexedDictionary'
 
 %%% ¡prop!
-IT_KEY (parameter, scalar) is the property of the elements to be used as key (its category must be parameter or data, and its format must be string).
+NAME (constant, string) is the name of the indexed dictionary.
 %%%% ¡default!
-1
-%%%% ¡check_value!
+'Indexed Dictionary'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the indexed dictionary.
+%%%% ¡default!
+'An Indexed Dictionary (IndexedDictionary) provides the methods necessary to handle data in an indexed dictionary. It contains and manages an ordered list of couples {KEY, IT}, where KEY is a unique alphanumeric key (a string) provided by a property of format STRING or CLASS and of category PARAMETER or DATA, and IT is an element of a class defined in the constructor using the property IT_CLASS.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the indexed dictionary.
+%%%% ¡settings!
+'IndexedDictionary'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the indexed dictionary.
+%%%% ¡default!
+'IndexedDictionary ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the indexed dictionary.
+%%%% ¡default!
+'IndexedDictionary label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the indexed dictionary.
+%%%% ¡default!
+'IndexedDictionary notes'
+
+%% ¡props!
+
+%%% ¡prop!
+IT_CLASS (parameter, class) is the class of the item elements.
+
+%%% ¡prop!
+IT_KEY (parameter, scalar) is the property of the elements to be used as key (its category must be parameter or data, and its format must be string or class).
+%%%% ¡default!
+ConcreteElement.ID
+%%%% ¡preset!
 it_class = idict.get('IT_CLASS');
 category = Element.getPropCategory(it_class, value);
 format = Element.getPropFormat(it_class, value);
-check = isequal(format, Format.STRING) && any(strcmp(category, {Category.PARAMETER, Category.DATA}));
-if check 
-    msg = 'All ok!';
-else
-    msg = [ ...
-        'The format of property ''IT_KEY'' must be ''' Format.STRING ''' (it is ''' format '''). ' ...
-        'Its category must be ''' Category.PARAMETER ''' or ''' Category.DATA ''' (it is ''' category ''').' ...
-        ];
+if ~(any(format == [Format.STRING Format.CLASS]) && any(category == [Category.CONSTANT Category.PARAMETER Category.DATA]))
+    error( ...
+        [BRAPH2.STR ':IndexedDictionary:' BRAPH2.WRONG_INPUT], ...
+        [BRAPH2.STR ':IndexedDictionary:' BRAPH2.WRONG_INPUT '\\n' ...
+        'The format of property ''IT_KEY'' must be ''' int2str(Format.STRING) ''' or ''' int2str(Format.CLASS) ''' (it is ''' int2str(format) ''').\\n' ...
+        'Its category must be ''' int2str(Category.CONSTANT) ''', ''' int2str(Category.PARAMETER) ''' or ''' int2str(Category.DATA) ''' (it is ''' int2str(category) ''').'] ...
+        )
 end
 
 %%% ¡prop!
 IT_LIST (data, itemlist) is the list containing the items.
-%%%% ¡check_value!
-check = all(cellfun(@(x) isa(x, idict.get('IT_CLASS')), idict.get('IT_LIST')));
-if check 
-    msg = 'All ok!';
-else
-    msg = ['All items of ''IT_LIST'' must be ' idict.get('IT_CLASS') '.'];
-end
-
-%% ¡methods!
-function str = tostring(idict, varargin)
-    %TOSTRING string with information about the indexed dictionary.
-    %
-    % STR = TOSTRING(IDICT) returns a string with information about the
-    %  indexed dictionary. 
-    %
-    % STR = TOSTRING(IDICT, N) trims the string to the first N characters.
-    %
-    % STR = TOSTRING(IDICT, N, ENDING) ends the string with ENDING if it has
-    %  been trimmed.
-    %
-    % See also disp, tree.
-
-	str = [class(idict) ' with ' int2str(idict.length()) ' ' idict.get('IT_CLASS') '.'];
-end
-% inspection
-function it_class = getItemClass(idict)
-    %GETITEMCLASS returns the item class of the indexed dictionary.
-    %
-    % ITEM_CLASS = GETITEMCLASS(IDICT) returns the item class of the indexed dictionary.
-
-    it_class = idict.get('IT_CLASS');
-end
-function n = length(idict)
-    %LENGTH returns the number of items in the indexed dictionary.
-    %
-    % N = LENGTH(IDICT) returns the number of items in the indexed dictionary.
-
-    n = length(idict.get('IT_LIST'));
-end
-function bool = contains(idict, pointer)
-    %CONTAINS checks if an item exists in an indexed dictionary.
-    %
-    % BOOL = CONTAINS(IDICT, POINTER) returns true if POINTER (index, key or
-    %  item) exists in the indexed dictionary DICT.
-    %
-    % See also containsIndex, containsKey, containsItem.
-
-    if isa(pointer, 'numeric')  % pointer is index
-        bool = idict.containsIndex(pointer);
-    elseif isa(pointer, 'char')  % pointer is key
-        bool = idict.containsKey(pointer);
-    elseif isa(pointer, idict.get('IT_CLASS'))  % pointer is item - not necessarily unique
-        bool = idict.containsItem(pointer);
-    else
-        bool = false;
-    end
-end
-function bool = containsIndex(idict, index)
-    %CONTAINSINDEX checks if an index exists in an indexed dictionary.
-    %
-    % BOOL = CONTAINS(IDICT, INDEX) returns true if the INDEX exists in the
-    %  indexed dictionary IDICT.
-    %
-    % See also contains, containsKey, containsItem.
-
-    if index > 0 && index <= idict.length() && index == round(index)
-        bool = true;
-    else
-        bool = false;
-    end
-end
-function bool = containsKey(idict, key)
-    %CONTAINSKEY checks if a key exists in an indexed dictionary.
-    %
-    % BOOL = CONTAINS(IDICT, KEY) returns true if the KEY exists in the indexed
-    %  dictionary DICT.
-    %
-    % See also contains, containsIndex, containsItem.
-
-    bool = false;
-    for i = 1:1:idict.length()
-        if isequal(idict.getKey(i), key)
-            bool = true;
-            break;
-        end
-    end
-end
-function bool = containsItem(idict, item)
-    %CONTAINSITEM checks if an item exists in an indexed dictionary
-    %
-    % BOOL = CONTAINSITEM(IDICT, ITEM) returns true if ITEM exists in the
-    %  indexed dictionary DICT.
-    %
-    % See also contains, containsIndex, containsKey.
-
-    bool = false;
-    for i = 1:1:idict.length()
-        if isequal(idict.getItem(i), item)
-            bool = true;
-            break;
-        end
-    end
-end
-function index = getIndex(idict, pointer) 
-    %GETINDEX returns the index of a key or item.
-    %
-    % INDEX = GETINDEX(IDICT, POINTER) returns the index of a POINTER (a key or
-    %  item).
-    %
-    % See also getIndexFromItem, getIndexFromKey.
-
-   if isa(pointer, 'char')  % pointer is key
-        index = idict.getIndexFromKey(pointer);
-    elseif isa(pointer, idict.get('IT_CLASS'))  % pointer is item - not necessarily unique
-        index = idict.getIndexFromItem(pointer);
-    end
-end
-function index = getIndexFromKey(idict, key)
-    %GETINDEXFROMKEY returns the index of a key.
-    %
-    % INDEX = GETINDEXFROMKEY(IDICT, KEY) returns the index of KEY.
-    %
-    % See also getIndex, getIndexFromItem.
-
-    for i = 1:1:idict.length()
-        if isequal(idict.getKey(i), key)
-            index = i;
-            break;
-        end
-    end
-end
-function index = getIndexFromItem(idict, item)
-    %GETINDEXFROMITEM returns the index of a item.
-    %
-    % INDEX = GETINDEXFROMITEM(IDICT, ITEM) returns the index of the first
-    %  occurrence of ITEM.
-    %
-    % See also getIndex, getIndexFromKey.
-
-    for i = 1:1:idict.length()
-        if isequal(idict.getItem(i), item)
-            index = i;  % return the first occurrence
-            break;
-        end
-    end
-end
-function keys = getKeys(idict)
-    %GETKEYS returns all the keys in the indexed dictionary.
-    %
-    % KEYS = GETKEYS(IDICT) returns all the keys in the indexed dictionary.
-    %
-    % See also getItems.
-
-    keys = cellfun(@(x) x.get(idict.get('IT_KEY')), idict.get('IT_LIST'), 'UniformOutput', false);
-end
-function key = getKey(idict, pointer)
-    %GETKEY returns the key of an index or item.
-    %
-    % KEY = GETKEY(IDICT, POINTER) returns the key of POINTER (a index or
-    %  item). If the POINTER is a item, it returns the first occurrence.
-    %
-    % See also getKeyFromIndex, getKeyFromItem.
-
-    if isa(pointer, idict.get('IT_CLASS'))  % pointer is item - not necessarily unique
-       key = idict.getKeyFromItem(pointer);  % first occurrence
-    else  % pointer is an index
-        it_list = idict.get('IT_LIST');
-        key = it_list{pointer}.get(idict.get('IT_KEY'));
-    end
-end
-function key = getKeyFromIndex(idict, index)
-    %GETKEYFROMINDEX returns the key of an index
-    %
-    % KEY = GETKEYFROMINDEX(IDICT, INDEX) returns the key of INDEX.
-    %
-    % See also getKey, getKeyFromItem.
-
-    it_list = idict.get('IT_LIST');
-    key = it_list{index}.get(idict.get('IT_KEY'));
-end
-function key = getKeyFromItem(idict, item)
-    %GETKEYFROMITEM returns the key of a item.
-    %
-    % KEY = GETKEYFROMITEM(IDICT, ITEM) returns the key of the first occurrence
-    %  of ITEM.
-    %
-    % See also getKey, getKeyFromIndex.
-
-    it_list = idict.get('IT_LIST');
-    index = idict.getIndexFromItem(item);
-    key = it_list{index}.get(idict.get('IT_KEY'));
-end
-function items = getItems(idict)
-    %GETITEMS returns all the items in the indexed dictionary
-    %
-    % ITEMS = GETITEMS(IDICT) returns all the items in the indexed dictionary.
-    %
-    % See also getKeys.
-
-    items = idict.get('IT_LIST');
-end
-function item = getItem(idict, pointer)
-    %GETITEM returns the item of an index or key.
-    %
-    % ITEM = GETITEM(IDICT, POINTER) returns the item of POINTER (an index or key).
-    %
-    % See also getItemFromIndex, getItemFromKey.
-
-    if isa(pointer, 'char')  % pointer is a key
-        item = idict.getItemFromKey(pointer);
-    else  % pointer is an index
-        item = idict.getItemFromIndex(pointer);
-    end            
-end 
-function item = getItemFromIndex(idict, index)    
-    %GETITEMFROMINDEX returns the item of an index.
-    %
-    % ITEM = GETITEMFROMINDEX(IDICT, INDEX) returns the item of INDEX.
-    %
-    % See also getItem, getItemFromKey.
-
-    it_list = idict.get('IT_LIST');
-    item = it_list{index};
-end
-function item = getItemFromKey(idict, key)
-    %GETITEMFROMKEY returns the item of a key.
-    %
-    % ITEM = GETITEMFROMKEY(IDICT, KEY) returns the item of KEY.
-    %
-    % See also getItem, getItemFromIndex.
-
-    index = idict.getIndexFromKey(key);
-    item  = idict.getItemFromIndex(index);
-end
-% editing
-function add(idict, item, index)
-    %ADD adds an item and key to an indexed dictionary
-    %
-    % ADD(IDICT, ITEM, INDEX) adds an item and key to the indexed dictionary in
-    %  position INDEX. If INDEX is empty, it adds it to the end of IDICT.
-    %
-    % See also remove, replace.
-
-    if nargin < 3 || index <= 0 || index > idict.length()
-        index = idict.length() + 1;
-    end
-    
-    assert(isa(item, idict.get('IT_CLASS')), ...
-        [BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_INPUT], ...
-        ['Item must be an object of class ' idict.get('IT_CLASS') ',' ...
-        ' while it is of class ' class(item) '.'])
-    
-    key = item.get(idict.get('IT_KEY'));
-    assert(~any(strcmp(key, idict.getKeys())), ...
-        [BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_INPUT], ...
-        ['Key ''' key ''' is already contained in the indexed dictionary.'])
-
-    it_list = idict.get('IT_LIST');
-    if index <= idict.length()  
-        % create space for {key, item}
-        it_list(index + 1:end + 1) = it_list(index:end);
-        it_list{index} = item;
-    else
-        it_list{end + 1} = item;
-    end
-    idict.set('IT_LIST', it_list)
-end
-function remove(idict, pointer)            
-    %REMOVE removes a key and item from an indexed dictionary.
-    %
-    % REMOVE(IDICT, POINTER) removes the key and item of POINTER (an index, key
-    %  or item) from the indexed dictionary IDICT.
-    %
-    % See also add, replace.
-
-    if isa(pointer, 'char')  % pointer is a key
-        index = idict.getKeyIndex(pointer);
-    elseif isa(pointer, 'numeric')  % pointer is an index
-        index = pointer;
-    elseif isa(pointer, idict.get('IT_CLASS'))  % pointer is a item
-        index = idict.getIndex(pointer);
-    end
-
-    if index > 0 && index <= idict.length() && index == round(index)
-        it_list = idict.get('IT_LIST');
-        it_list(index) = [];
-        idict.set('IT_LIST', it_list);
-    end
-end
-function replace(idict, new_item, index)
-    %REPLACE replaces an item and key in an indexed dictionary.
-    %
-    % REPLACE(IDICT, NEW_ITEM, INDEX) replaces the item and key of INDEX in the
-    %  indexed dictionary IDICT with NEW_ITEM.
-    %
-    % See also add, remove, replaceKey, replaceItem.
-
-    assert(isequal(idict.get('IT_CLASS'), class(new_item)), ...
+%%%% ¡preset!
+if ~all(cellfun(@(x) isa(x, idict.get('IT_CLASS')), idict.get('IT_LIST')))
+    error( ...
         [BRAPH2.STR ':IndexedDictionary:' BRAPH2.WRONG_INPUT], ...
-        'The item is not of the correct class.')
-
-    if idict.contains(index)
-        idict.remove(index)
-        idict.add(new_item, index)
-    end
+        [BRAPH2.STR ':IndexedDictionary:' BRAPH2.WRONG_INPUT '\\n' ...
+        'All items of ''IT_LIST'' must be ' idict.get('IT_CLASS') '.'] ...
+        )
 end
-function replaceKey(idict, old_key, new_key)
-    %REPLACEKEY replaces key in indexed dictionary.
-    %
-    % REPLACEKEY(IDICT, OLD_KEY, NEW_KEY) replaces OLD_KEY in the indexed
-    %  dictionary IDICT with NEW_KEY.
-    %
-    % See also replace, replaceItem.
 
-    item = idict.getItemFromKey(old_key);
+%%% ¡prop!
+LENGTH (query, scalar) returns the number of items in the indexed dictionary.
+%%%% ¡calculate!
+value = length(idict.get('IT_LIST')); 
+% length = value
+
+%%% ¡prop!
+CONTAINS (query, logical) checks whether an item exists in an indexed dictionary.
+%%%% ¡calculate!
+% BOOL = idict.get('CONTAINS', POINTER) returns true if POINTER (index, key
+%  or item) exists in the indexed dictionary.
+if isempty(varargin)
+    value = false;
+    return
+end    
+pointer = varargin{1};
+
+if isa(pointer, 'numeric')  % pointer is index
+    value = idict.get('CONTAINS_INDEX', pointer);
+elseif isa(pointer, 'char')  % pointer is key
+    value = idict.get('CONTAINS_KEY', pointer);
+elseif isa(pointer, idict.get('IT_CLASS'))  % pointer is item - not necessarily unique
+    value = idict.get('CONTAINS_IT', pointer);
+else
+    value = false;
+end
+% bool = value
+
+%%% ¡prop!
+CONTAINS_INDEX (query, logical) checks whether an index exists in an indexed dictionary.
+%%%% ¡calculate!
+% BOOL = idict.get('CONTAINS_INDEX', INDEX) returns true if the INDEX exists in
+%  the indexed dictionary.
+if isempty(varargin)
+    value = false;
+    return
+end
+index = varargin{1};
+
+value = index >= 1 && index <= idict.get('LENGTH') && round(index) == index;
+% bool = value
+
+%%% ¡prop!
+CONTAINS_KEY (query, logical) checks whether a key exists in an indexed dictionary.
+%%%% ¡calculate!
+% BOOL = idict.get('CONTAINS_KEY', KEY) returns true if the KEY exists in
+%  the indexed dictionary.
+if isempty(varargin)
+    value = false;
+    return
+end
+key = varargin{1};
+
+it_key = idict.get('IT_KEY');
+value = any(cellfun(@(it) strcmp(it.get(it_key), key), idict.get('IT_LIST')));
+% bool = value
+
+%%% ¡prop!
+CONTAINS_IT (query, logical) checks whether an item exists in an indexed dictionary
+%%%% ¡calculate!
+% BOOL = idict.get('CONTAINS_IT', IT) returns true if IT exists in
+%  the indexed dictionary.
+if isempty(varargin)
+    value = false;
+    return
+end
+item = varargin{1};
+
+value = any(cellfun(@(it) it == item, idict.get('IT_LIST')));
+% bool = value
+
+%%% ¡prop!
+INDEX (query, scalar) returns the index of a key or item.
+%%%% ¡calculate!
+% INDEX = idict.get('INDEX', POINTER) returns the index of a POINTER (a key
+%  or item).
+if isempty(varargin)
+    value = -1;
+    return
+end
+pointer = varargin{1};
+
+if isa(pointer, 'numeric')  % pointer is index
+    value = pointer;
+elseif isa(pointer, 'char')  % pointer is key
+    value = idict.get('INDEX_FROM_KEY', pointer);
+elseif isa(pointer, idict.get('IT_CLASS'))  % pointer is item - not necessarily unique
+    value = idict.get('INDEX_FROM_IT', pointer);
+end
+% index = value
+
+%%% ¡prop! 
+INDEX_FROM_KEY (query, scalar) returns the index of a key.
+%%%% ¡calculate!
+% INDEX = idict.get('INDEX_FROM_KEY', KEY) returns the index of KEY.
+if isempty(varargin)
+    value = -1;
+    return
+end
+key = varargin{1};
+
+value = find(strcmp(key, idict.get('KEYS')));
+% index = value 
+% error if idict does not contain the key
+
+%%% ¡prop! 
+INDEX_FROM_IT (query, scalar) returns the index of an item.
+%%%% ¡calculate!
+% INDEX = idict.get('INDEX_FROM_IT', IT) returns the index of the first
+% occurrence of item IT.
+if isempty(varargin)
+    value = -1;
+    return
+end
+item = varargin{1};
+
+value = find(cellfun(@(it) it == item, idict.get('IT_LIST'))); % return the first occurrence
+% index = value 
+% error if idict does not contain the item
+
+%%% ¡prop! 
+KEYS (query, stringlist) returns all the keys in the indexed dictionary.
+%%%% ¡calculate!
+it_key = idict.get('IT_KEY');
+value = cellfun(@(it) it.get(it_key), idict.get('IT_LIST'), 'UniformOutput', false);
+% keys = value
+
+%%% ¡prop!
+KEY (query, string) returns the key of an index or item.
+%%%% ¡calculate!
+% KEY = idict.get('KEY', POINTER) returns the key of POINTER (an index or
+%  item). If the POINTER is an item, it returns the first occurrence.
+if isempty(varargin)
+    value = '';
+    return
+end
+pointer = varargin{1};
+
+if isa(pointer, idict.get('IT_CLASS'))  % pointer is item - not necessarily unique
+   value = idict.get('KEY_FROM_IT', pointer);  % first occurrence
+else  % pointer is an index
+    it_list = idict.get('IT_LIST');
+    value = it_list{pointer}.get(idict.get('IT_KEY'));
+end
+% key = value
+
+%%% ¡prop!
+KEY_FROM_INDEX (query, string) returns the key of an index
+%%%% ¡calculate!
+% KEY = idict.get('KEY_FROM_INDEX', INDEX) returns the key of INDEX.
+if isempty(varargin)
+    value = '';
+    return
+end
+index = varargin{1};
+
+it_list = idict.get('IT_LIST');
+value = it_list{index}.get(idict.get('IT_KEY'));
+% key = value % error if index does not exist
+
+%%% ¡prop!
+KEY_FROM_IT (query, string) returns the key of an item.
+%%%% ¡calculate!
+% KEY = get('KEY_FROM_IT', IT) returns the key of the first occurrence
+%  of item IT.
+if isempty(varargin)
+    value = '';
+    return
+end
+item = varargin{1};
+
+it_list = idict.get('IT_LIST');
+value = it_list{idict.get('INDEX_FROM_IT', item)}.get(idict.get('IT_KEY'));
+% key = value % error if idict does not contain the item
+
+%%% ¡prop!
+IT (query, item) returns the item of an index or key.
+%%%% ¡calculate!
+% IT = idict.get('IT', POINTER) returns the item of POINTER (an index or key).
+if isempty(varargin)
+    value = ConcreteElement();
+    return
+end
+pointer = varargin{1};
+
+if isa(pointer, 'char')  % pointer is a key
+    value = idict.get('IT_FROM_KEY', pointer);
+else  % pointer is an index
+    value = idict.get('IT_FROM_INDEX', pointer);
+end
+% item = value
+
+%%% ¡prop!
+IT_FROM_INDEX (query, item) returns the item of an index.
+%%%% ¡calculate!
+% IT = idict.get('IT_FROM_INDEX', INDEX) returns the item of INDEX.
+if isempty(varargin)
+    value = ConcreteElement();
+    return
+end
+index = varargin{1};
+
+it_list = idict.get('IT_LIST');
+value = it_list{index};
+% item = value % error if the index does not exist
+
+%%% ¡prop!
+IT_FROM_KEY (query, item) returns the item of a key.
+%%%% ¡calculate!
+% IT = idict.get('IT_FROM_KEY', KEY) returns the item of KEY.
+if isempty(varargin)
+    value = ConcreteElement();
+    return
+end
+key = varargin{1};
+
+it_list = idict.get('IT_LIST');
+value = it_list{idict.get('INDEX_FROM_KEY', key)};
+% item = value % error if idict does not contain the key
+
+%%% ¡prop!
+ADD (query, empty) adds an item and key to an indexed dictionary
+%%%% ¡calculate!
+% idict.get('ADD', IT, INDEX) adds an item and key to the indexed
+%  dictionary in position INDEX. If INDEX is empty, it adds it to the end
+%  of IDICT.
+if isempty(varargin)
+    value = [];
+    return
+end
+item = varargin{1};
+if length(varargin) == 2
+    index = varargin{2};
+else
+    index = idict.get('LENGTH') + 1;
+end
+
+if index <= 0 || index > idict.get('LENGTH')
+    index = idict.get('LENGTH') + 1;
+end
+
+if ~isa(item, idict.get('IT_CLASS'))
+    error(...
+        [BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_INPUT], ...
+        [BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_INPUT '\\n' ...
+        'Item must be an object of class ' idict.get('IT_CLASS') ',' ...
+        ' while it is of class ' class(item) '.'] ...
+        )
+end
+if idict.get('CONTAINS_KEY', item.get(idict.get('IT_KEY'))) % key = item.get(idict.get('IT_KEY'))
+    error( ...
+        [BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_INPUT], ...
+        [BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_INPUT '\\n' ...
+        'Key ''' item.get(idict.get('IT_KEY')) ''' is already contained in the indexed dictionary.'] ... % key = item.get(idict.get('IT_KEY'))
+        )
+end
+
+it_list = idict.get('IT_LIST');
+if index <= idict.get('LENGTH')  
+    % create space for {key, item}
+    it_list(index + 1:end + 1) = it_list(index:end);
+    it_list{index} = item;
+else
+    it_list{end + 1} = item;
+end
+idict.set('IT_LIST', it_list)
+
+value = [];
+
+%%% ¡prop!
+REMOVE (query, empty) removes a key and item from an indexed dictionary.
+%%%% ¡calculate!
+% idict.get('REMOVE', POINTER) removes the key and item of POINTER (an
+%  index, key or item) from the indexed dictionary IDICT.
+if isempty(varargin)
+    value = [];
+    return
+end
+pointer = varargin{1};
+
+index = idict.get('INDEX', pointer);
+
+it_list = idict.get('IT_LIST');
+it_list(index) = [];
+idict.set('IT_LIST', it_list);
+
+value = [];
+
+%%% ¡prop!
+REPLACE (query, empty) replaces an item and key in an indexed dictionary.
+%%%% ¡calculate!
+% idict.get('REPLACE', NEW_IT, INDEX) replaces the item and key of INDEX
+%  in the indexed dictionary IDICT with item NEW_IT.
+if isempty(varargin)
+    value = [];
+    return
+end
+new_item = varargin{1};
+index = varargin{2};
+
+if ~isa(new_item, idict.get('IT_CLASS'))
+    error( ...
+        [BRAPH2.STR ':IndexedDictionary:' BRAPH2.WRONG_INPUT], ...
+        ['The item class must be ' idict.get('IT_CLASS') '.'] ...
+        )
+end
+
+if idict.get('CONTAINS', index)
+    idict.get('REMOVE', index)
+    idict.get('ADD', new_item, index)
+end
+
+value = [];
+
+%%% ¡prop!
+REPLACE_KEY (query, empty) replaces key in indexed dictionary.
+%%%% ¡calculate!
+% idict.get('REPLACE_KEY', OLD_KEY, NEW_KEY) replaces OLD_KEY in the
+%  indexed dictionary IDICT with NEW_KEY.
+if isempty(varargin)
+    value = [];
+    return
+end
+old_key = varargin{1};
+new_key = varargin{2};
+
+if ~idict.get('CONTAINS', new_key)
+    item = idict.get('IT_FROM_KEY', old_key);
     item.set(idict.get('IT_KEY'), new_key)
 end
-function replaceItem(idict, old_item, new_item)
-    %REPLACEITEM replaces item in indexed dictionary.
-    %
-    % REPLACEITEM(IDICT, OLD_ITEM, NEW_ITEM) replaces OLD_ITEM with NEW_ITEM in
-    %  the indexed dictionary IDICT. It replaces only the first occurrence of
-    %  OLD_ITEM.
-    %
-    % See also replace, replaceKey.
 
-    index = idict.getIndexFromItem(old_item);
-    idict.replace(new_item, index);
+value = [];
+
+%%% ¡prop!
+REPLACE_IT (query, empty) replaces item in indexed dictionary.
+%%%% ¡calculate!
+% idict.get('REPLACE_IT', OLD_IT, NEW_IT) replaces OLD_IT with
+%  NEW_IT in the indexed dictionary IDICT. It replaces only the first
+%  occurrence of OLD_IT.
+if isempty(varargin)
+    value = [];
+    return
 end
-function invert(idict, i, j)
-    %INVERT inverts position of two items in indexed dictionary.
-    %
-    % INVERT(IDICT, INDEXI, INDEXJ) inverts the positions of the items at
-    %  INDEX_I and INDEX_J in the indexed dictionary IDICT.
-    %
-    % See also move_to.
+old_it = varargin{1};
+new_it = varargin{2};
 
-    if i > j
-        if i > 0 && i <= idict.length() && j > 0 && j <= idict.length() && i ~= j
-            item_i = idict.getItem(i);
-            item_j = idict.getItem(j);
+index = idict.get('INDEX_FROM_IT', old_it);
+idict.get('REPLACE', new_it, index);
 
-            idict.remove(i)
-            idict.remove(j)
+value = [];
 
-            idict.add(item_i, j);
-            idict.add(item_j, i);
-        end
-    else
-        idict.invert(j, i);
+%%% ¡prop!
+INVERT (query, empty) inverts position of two items in indexed dictionary.
+%%%% ¡calculate!
+% idict.get('INVERT', INDEXI, INDEXJ) inverts the positions of the items at
+%  INDEX_I and INDEX_J in the indexed dictionary IDICT.
+if isempty(varargin)
+    value = [];
+    return
+end
+i = varargin{1};
+j = varargin{2};
+
+if i > j
+    if i > 0 && i <= idict.get('LENGTH') && j > 0 && j <= idict.get('LENGTH') && i ~= j
+        item_i = idict.get('IT', i);
+        item_j = idict.get('IT', j);
+
+        idict.get('REMOVE', i)
+        idict.get('REMOVE', j)
+
+        idict.get('ADD', item_i, j);
+        idict.get('ADD', item_j, i);
+    end
+elseif i ~= j
+    idict.get('INVERT', j, i);
+end
+
+value = [];
+
+%%% ¡prop!
+MOVE_TO (query, empty) moves an item of an indexed dictionary to another position.
+%%%% ¡calculate!
+% idict.get('MOVE_TO', OLD_INDEX, NEW_INDEX) moves an item from position
+%  OLD_INDEX to position NEW_INDEX in the indexed dictionary IDICT.
+if isempty(varargin)
+    value = [];
+    return
+end
+i = varargin{1};
+j = varargin{2};
+
+if i > 0 && i <= idict.get('LENGTH') && j > 0 && j <= idict.get('LENGTH') && i ~= j
+    item = idict.get('IT', i);
+    idict.get('REMOVE', i)
+    idict.get('ADD', item, j)
+end
+
+value = [];
+
+%%% ¡prop!
+REMOVE_ALL (query, rvector) removes selected items.
+%%%% ¡calculate!
+% SELECTED = idict.get('REMOVE_ALL', SELECTED) removes all items whose
+%  positions in the indexed dictionary DICT are included in the array
+%  SELECTED. It returns an empty array.
+if isempty(varargin)
+    value = [];
+    return
+end
+selected = varargin{1};
+
+for i = length(selected):-1:1
+    idict.get('REMOVE', selected(i))
+end
+value = []; % selected = value;
+
+%%% ¡prop!
+MOVE_UP (query, rvector) moves up selected items.
+%%%% ¡calculate!
+% SELECTED = idict.get('MOVE_UP', SELECTED) moves up by one position all
+%  items whose positions in the indexed dictionary DICT are included in the
+%  SELECTED array and returns their final positions.
+if isempty(varargin)
+    value = [];
+    return
+end
+selected = varargin{1};
+
+if ~isempty(selected)
+    first_index_to_process = 1;
+    unprocessable_length = 1;
+    while first_index_to_process <= idict.get('LENGTH') ...
+            && first_index_to_process <= numel(selected) ...
+            && selected(first_index_to_process) == unprocessable_length
+        first_index_to_process = first_index_to_process + 1;
+        unprocessable_length = unprocessable_length + 1;
+    end
+
+    for i = first_index_to_process:1:numel(selected)
+        idict.get('INVERT', selected(i), selected(i)-1);
+        selected(i) = selected(i) - 1;
     end
 end
-function move_to(idict, i, j)
-    %MOVE_TO moves an item of an indexed dictionary to another position.
-    %
-    % MOVE_TO(IDICT, OLD_INDEX, NEW_INDEX) moves an item from position
-    %  OLD_INDEX to position NEW_INDEX in the indexed dictionary IDICT.
-    %
-    % See also invert.
 
-    if i > 0 && i <= idict.length() && j > 0 && j <= idict.length() && i ~= j
-        item = idict.getItem(i);
-        idict.remove(i)
-        idict.add(item, j)
+value = selected;
+
+%%% ¡prop!
+MOVE_DOWN (query, rvector) moves down selected items.
+%%%% ¡calculate!
+% SELECTED = idict.get('MOVE_DOWN', SELECTED) moves down by one position
+%  all items whose positions in the indexed dictionary DICT are included in
+%  the SELECTED array and returns their final positions.  
+if isempty(varargin)
+    value = [];
+    return
+end
+selected = varargin{1};
+
+if ~isempty(selected)
+    last_index_to_process = numel(selected);
+    unprocessable_length = idict.get('LENGTH');
+    while last_index_to_process > 0 ...
+            && selected(last_index_to_process) == unprocessable_length
+        last_index_to_process = last_index_to_process - 1;
+        unprocessable_length = unprocessable_length - 1;
+    end
+
+    for i = last_index_to_process:-1:1
+        idict.get('INVERT', selected(i), selected(i) + 1);
+        selected(i) = selected(i) + 1;
     end
 end
-function selected = remove_all(idict, selected)
-    %REMOVE_ALL removes selected items.
-    %
-    % SELECTED = REMOVE_ALL(IDICT, SELECTED) removes all items whose positions
-    %  in the indexed dictionary DICT are included in the array SELECTED. It
-    %  returns an empty array.
-    %
-    % See also move_up, move_down, move_to_top, move_to_bottom.
 
-    for i = length(selected):-1:1
-        idict.remove(selected(i))
-    end
-    selected = [];
+value = selected;
+
+%%% ¡prop!
+MOVE_TO_TOP (query, empty) moves selected items to top.
+%%%% ¡calculate!
+% SELECTED = idict.get('MOVE_TO_TOP', SELECTED) moves to top all items
+%  whose positions in the indexed dictionary DICT are included in the
+%  SELECTED array and returns their final positions.
+if isempty(varargin)
+    value = [];
+    return
 end
-function selected =  move_up(idict, selected)
-    %MOVE_UP moves up selected items.
-    %
-    % SELECTED = MOVE_UP(IDICT, SELECTED) moves up by one position all items
-    %  whose positions in the indexed dictionary DICT are included in the
-    %  SELECTED array and returns their final positions.
-    %
-    % See also remove_all, move_down, move_to_top, move_to_bottom.
+selected = varargin{1};
 
-    if ~isempty(selected)
-        first_index_to_process = 1;
-        unprocessable_length = 1;
-        while first_index_to_process <= idict.length() ...
-                && first_index_to_process <= numel(selected) ...
-                && selected(first_index_to_process) == unprocessable_length
-            first_index_to_process = first_index_to_process + 1;
-            unprocessable_length = unprocessable_length + 1;
-        end
-
-        for i = first_index_to_process:1:numel(selected)
-            idict.invert(selected(i), selected(i)-1);
-            selected(i) = selected(i) - 1;
-        end
+if ~isempty(selected)
+    for i = 1:1:numel(selected)
+        idict.get('MOVE_TO', selected(i), i);
     end
+    selected = reshape(1:1:numel(selected), size(selected));
 end
-function selected = move_down(idict, selected)
-    %MOVE_DOWN moves down selected items.
-    %
-    % SELECTED = MOVE_DOWN(IDICT, SELECTED) moves down by one position all
-    %  items whose positions in the indexed dictionary DICT are included in the
-    %  SELECTED array and returns their final positions.  
-    %
-    % See also remove_all, move_up, move_to_top, move_to_bottom.
 
-    if ~isempty(selected)
-        last_index_to_process = numel(selected);
-        unprocessable_length = idict.length();
-        while last_index_to_process > 0 ...
-                && selected(last_index_to_process) == unprocessable_length
-            last_index_to_process = last_index_to_process - 1;
-            unprocessable_length = unprocessable_length - 1;
-        end
+value = selected;
 
-        for i = last_index_to_process:-1:1
-            idict.invert(selected(i), selected(i) + 1);
-            selected(i) = selected(i) + 1;
-        end
+%%% ¡prop!
+MOVE_TO_BOTTOM (query, rvector) moves selected items to bottom.
+%%%% ¡calculate!
+% SELECTED = idict.get('MOVE_TO_BOTTOM', SELECTED) moves to bottom all
+%  items whose positions in the indexed dictionary DICT dictionary are
+%  included in the SELECTED array and returns their final positions.
+if isempty(varargin)
+    value = [];
+    return
+end
+selected = varargin{1};
+
+idict_length = idict.get('LENGTH');
+if ~isempty(selected)
+    for i = numel(selected):-1:1
+        idict.get('MOVE_TO', selected(i), idict_length - (numel(selected)-i));
     end
+    selected = reshape(idict_length - numel(selected)+1:1:idict_length, size(selected));
 end
-function selected = move_to_top(idict, selected)
-    %MOVE_TO_TOP moves selected items to top.
-    %
-    % SELECTED = MOVE_TO_TOP(IDICT, SELECTED) moves to top all items whose
-    %  positions in the indexed dictionary DICT are included in the SELECTED
-    %  array and returns their final positions.
-    %
-    % See also remove_all, move_up, move_down, move_to_bottom.
 
-    if ~isempty(selected)
-        for i = 1:1:numel(selected)
-            idict.move_to(selected(i), i);
-        end
-        selected = reshape(1:1:numel(selected), size(selected));
-    end
-end
-function selected = move_to_bottom(idict, selected)
-    %MOVE_TO_BOTTOM moves selected items to bottom.
-    %
-    % SELECTED = MOVE_TO_BOTTOM(IDICT, SELECTED) moves to bottom all items
-    %  whose positions in the indexed dictionary DICT dictionary are included in
-    %  the SELECTED array and returns their final positions.
-    %
-    % See also remove_all, move_up, move_down, move_to_top.
-
-    if ~isempty(selected)
-        for i = numel(selected):-1:1
-            idict.move_to(selected(i), idict.length() - (numel(selected)-i));
-        end
-        selected = reshape(idict.length() - numel(selected)+1:1:idict.length(), size(selected));
-    end
-end
+value = selected;
 
 %% ¡tests!
 
@@ -510,32 +609,31 @@ Instantiation with items
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'item_1');
-it2 = ETA('PROP_STRING_P', 'item_2');
-it3 = ETA('PROP_STRING_P', 'item_3');
-it4 = ETA('PROP_STRING_P', 'item_4');
-it5 = ETA('PROP_STRING_P', 'item_5');
-it6 = ETA('PROP_STRING_P', 'item_6');
+it1 = IndexedDictionary('ID', 'item_1');
+it2 = IndexedDictionary('ID', 'item_2');
+it3 = IndexedDictionary('ID', 'item_3');
+it4 = IndexedDictionary('ID', 'item_4');
+it5 = IndexedDictionary('ID', 'item_5');
+it6 = IndexedDictionary('ID', 'item_6');
 
 items = {it1, it2, it3, it4, it5, it6};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 assert_with_error( ...
     ['idict = IndexedDictionary(' ...
-    '''id'', ''idict'', ' ...
-    '''it_class'', ''ETA'', '...
-    '''it_key'', 2, '...
-    '''it_list'', {varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5}, NoValue()}' ...
+    '''ID'', ''Trial Indexed Dictionary'', ' ...
+    '''IT_CLASS'', ''IndexedDictionary'', ' ...
+    '''IT_KEY'', IndexedDictionary.getPropProp(''ID''), ' ...
+    '''IT_LIST'', {varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5}, Element.getNoValue()}' ...
     ');'], ...
     [BRAPH2.STR ':IndexedDictionary:' BRAPH2.WRONG_INPUT], ...
     it1, it2, it3, it4, it5 ...
     )
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
 %%% ¡test!
@@ -544,90 +642,128 @@ Inspection
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4, it5, it6};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
+keys = cellfun(@(item) item.get('ID'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-assert(isequal(idict.length(), 6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.length() does not work.')
+assert(isequal(idict.get('LENGTH'), 6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''LENGTH'') does not work.')
 
-assert(isequal(idict.containsIndex(2), true), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.containsIndex() does not work.')
-assert(isequal(idict.contains(2), true), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.contains() does not work.')
-assert(isequal(idict.containsKey('Key 3'), true), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.containsKey() does not work.')
-assert(isequal(idict.contains('Key 3'), 1), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.contains() does not work.')
-assert(isequal(idict.containsItem(it4), true), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.containsItem() does not work.')
-assert(isequal(idict.contains(it4), 1), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.contains() does not work.')
+assert(isequal(idict.get('CONTAINS_INDEX', 2), true), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_INDEX'', index) does not work.')
+assert(isequal(idict.get('CONTAINS', 2), true), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', index) does not work.')
+assert(isequal(idict.get('CONTAINS_INDEX', -1), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_INDEX'', index) does not work.')
+assert(isequal(idict.get('CONTAINS', -1), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', index) does not work.')
+assert(isequal(idict.get('CONTAINS_INDEX', 7), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_INDEX'', index) does not work.')
+assert(isequal(idict.get('CONTAINS', 7), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', index) does not work.')
 
-assert(isequal(idict.getIndexFromKey('Key 1'), 1), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getIndexFromKey() does not work.')
-assert(isequal(idict.getIndex('Key 1'), 1), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getIndex() does not work.')
-assert(isequal(idict.getIndexFromItem(it4), 4), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getIndexFromItem() does not work.')
-assert(isequal(idict.getIndex(it4), 4), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getIndex() does not work.')
+assert(isequal(idict.get('CONTAINS_KEY', 'Key 3'), true), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_KEY'', key) does not work.')
+assert(isequal(idict.get('CONTAINS', 'Key 3'), true), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', key) does not work.')
+assert(isequal(idict.get('CONTAINS_KEY', 'Key -1'), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_KEY'', key) does not work.')
+assert(isequal(idict.get('CONTAINS', 'Key -1'), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', key) does not work.')
+assert(isequal(idict.get('CONTAINS_KEY', 'Key 7'), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_KEY'', key) does not work.')
+assert(isequal(idict.get('CONTAINS', 'Key 7'), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', key) does not work.')
 
-assert(isequal(idict.getKeys(), keys), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getKeys() does not work.')
-assert(isequal(idict.getKeyFromIndex(2), 'Key 2'), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getKeyFromIndex() does not work.')
-assert(isequal(idict.getKey(2), 'Key 2'), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getKey() does not work.')
-assert(isequal(idict.getKeyFromItem(it2), 'Key 2'), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getKeyFromItem() does not work.')
-assert(isequal(idict.getKey(it2), 'Key 2'), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getKey() does not work.')
+assert(isequal(idict.get('CONTAINS_IT', it4), true), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_IT'', item) does not work.')
+assert(isequal(idict.get('CONTAINS', it4), true), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', item) does not work.')
+assert(isequal(idict.get('CONTAINS_IT', IndexedDictionary()), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_IT'', item) does not work.')
+assert(isequal(idict.get('CONTAINS', IndexedDictionary()), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', item) does not work.')
+assert(isequal(idict.get('CONTAINS_IT', ConcreteElement()), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS_IT'', item) does not work.')
+assert(isequal(idict.get('CONTAINS', ConcreteElement()), false), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''CONTAINS'', item) does not work.')
 
-assert(isequal(idict.getItems(), items), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getItems() does not work.')
-assert(isequal(idict.getItemFromIndex(3), it3), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getItemFromIndex() does not work.')
-assert(isequal(idict.getItem(3), it3), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getItemFromIndex() does not work.')
-assert(isequal(idict.getItemFromKey('Key 3'), it3), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getItemFromKey() does not work.')
-assert(isequal(idict.getItem('Key 3'), it3), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.WRONG_OUTPUT], ...
-    'IndexedDictionary.getItem() does not work.')
+assert(isequal(idict.get('INDEX_FROM_KEY', 'Key 1'), 1), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''INDEX_FROM_KEY'', key) does not work.')
+assert(isequal(idict.get('INDEX', 'Key 1'), 1), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''INDEX'', key) does not work.')
+assert(isequal(idict.get('INDEX_FROM_IT', it4), 4), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''INDEX_FROM_IT'', item) does not work.')
+assert(isequal(idict.get('INDEX', it4), 4), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''INDEX'', item) does not work.')
+
+assert(isequal(idict.get('KEYS'), keys), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''KEYS'') does not work.')
+assert(isequal(idict.get('KEY_FROM_INDEX', 2), 'Key 2'), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''KEY_FROM_INDEX'', index) does not work.')
+assert(isequal(idict.get('KEY', 2), 'Key 2'), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''KEY'', index) does not work.')
+assert(isequal(idict.get('KEY_FROM_IT', it2), 'Key 2'), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''KEY_FROM_IT'', item) does not work.')
+assert(isequal(idict.get('KEY', it2), 'Key 2'), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''KEY'', item) does not work.')
+
+assert(isequal(idict.get('IT_LIST'), items), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''IT_LIST'') does not work.')
+assert(isequal(idict.get('IT_FROM_INDEX', 3), it3), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''IT_FROM_INDEX'', index) does not work.')
+assert(isequal(idict.get('IT', 3), it3), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''IT'', index) does not work.')
+assert(isequal(idict.get('IT_FROM_KEY', 'Key 3'), it3), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''IT_FROM_KEY'', key) does not work.')
+assert(isequal(idict.get('IT', 'Key 3'), it3), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''IT'', key) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -635,38 +771,37 @@ Add
 %%%% ¡probability!
 .01
 %%%% ¡code!    
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-idict.add(it6)
-assert(isequal(idict.length(), 5), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.add() does not work.')
-assert(isequal(idict.getItem(5), it6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.add() does not work.')
+idict.get('ADD', it6)
+assert(isequal(idict.get('LENGTH'), 5), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''ADD'', item) does not work.')
+assert(isequal(idict.get('IT', 5), it6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''ADD'', item) does not work.')
 
-idict.add(it5, 5)
-assert(isequal(idict.length(), 6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.add() does not work.')
-assert(isequal(idict.getItem(5), it5) && isequal(idict.getItem(6), it6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.add() does not work.')
+idict.get('ADD', it5, 5)
+assert(isequal(idict.get('LENGTH'), 6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''ADD'', item, index) does not work.')
+assert(isequal(idict.get('IT', 5), it5) && isequal(idict.get('IT', 6), it6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''ADD'', item, index) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -674,36 +809,35 @@ Remove
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4, it5, it6};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-idict.remove(4)
-assert(isequal(idict.length(), 5), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.remove() does not work.')
-assert(isequal(idict.getItem(idict.length()), it6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.remove() does not work.')
+idict.get('REMOVE', 4)
+assert(isequal(idict.get('LENGTH'), 5), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REMOVE'', index) does not work.')
+assert(isequal(idict.get('IT', idict.get('LENGTH')), it6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REMOVE'', index) does not work.')
 
-idict.remove(5)
-idict.remove(1)
-assert(isequal(idict.getItems(), {it2, it3, it5}), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.remove() does not work.')
+idict.get('REMOVE', 5)
+idict.get('REMOVE', 1)
+assert(isequal(idict.get('IT_LIST'), {it2, it3, it5}), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REMOVE'', index) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -711,48 +845,45 @@ Replace
 %%%% ¡probability!
 .01
 %%%% ¡code!    
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-idict.replace(it5, 4)
+idict.get('REPLACE', it5, 4)
+assert(isequal(idict.get('LENGTH'), 4), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REPLACE'', item, index) does not work.')
+assert(isequal(idict.get('KEY', 4), 'Key 5') && isequal(idict.get('IT', 4), it5), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REPLACE'', item, index) does not work.')
 
-idict.replace(it5, 4)
-assert(isequal(idict.length(), 4), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.replace() does not work.')
-assert(isequal(idict.getKey(4), 'Key 5') && isequal(idict.getItem(4), it5), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.replace() does not work.')
+idict.get('REPLACE_KEY', 'Key 5', 'Key 4')
+assert(isequal(idict.get('LENGTH'), 4), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REPLACE_KEY'', key, item) does not work.')
+assert(isequal(idict.get('KEY', 4), 'Key 4') && isequal(idict.get('IT', 4), it5), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REPLACE_KEY'', key, item) does not work.')
 
-idict.replaceKey('Key 5', 'Key 4')
-assert(isequal(idict.length(), 4), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.replaceKey() does not work.')
-assert(isequal(idict.getKey(4), 'Key 4') && isequal(idict.getItem(4), it5), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.replaceKey() does not work.')
-
-idict.replaceItem(it5, it4)
-assert(isequal(idict.length(), 4), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.replaceItem() does not work.')
-assert(isequal(idict.getKey(4), 'Key 4') && isequal(idict.getItem(4), it4), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.replaceItem() does not work.')
+idict.get('REPLACE_IT', it5, it4)
+assert(isequal(idict.get('LENGTH'), 4), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REPLACE_IT'', item1, item2) does not work.')
+assert(isequal(idict.get('KEY', 4), 'Key 4') && isequal(idict.get('IT', 4), it4), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REPLACE_IT'', item1, item2) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -760,31 +891,30 @@ Invert
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-idict.invert(1, 4)
-idict.invert(3, 2)
-assert(isequal(idict.length(), 4), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.invert() does not work.')
-assert(isequal(idict.getKeys(), {'Key 4', 'Key 3', 'Key 2', 'Key 1'}), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.invert() does not work.')
+idict.get('INVERT', 1, 4)
+idict.get('INVERT', 3, 2)
+assert(isequal(idict.get('LENGTH'), 4), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''INVERT'', index1, index2) does not work.')
+assert(isequal(idict.get('KEYS'), {'Key 4', 'Key 3', 'Key 2', 'Key 1'}), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''INVERT'', index1, index2) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -792,33 +922,31 @@ Move_to
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-idict.move_to(1, 4);
-idict.move_to(1, 3);
-idict.move_to(1, 2);
-assert(isequal(idict.length(), 4), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_to() does not work.')
-assert(isequal(idict.getKeys(), {'Key 4', 'Key 3', 'Key 2', 'Key 1'}), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_to() does not work.')
-
+idict.get('MOVE_TO', 1, 4);
+idict.get('MOVE_TO', 1, 3);
+idict.get('MOVE_TO', 1, 2);
+assert(isequal(idict.get('LENGTH'), 4), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_TO'', index1, index2) does not work.')
+assert(isequal(idict.get('KEYS'), {'Key 4', 'Key 3', 'Key 2', 'Key 1'}), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_TO'', index1, index2) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -826,33 +954,32 @@ Remove all
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4, it5, it6};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-selected = idict.remove_all([1 3 6]);
-assert(isequal(idict.length(), 3), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.remove_all() does not work.')
-assert(isequal(idict.getKeys(), {'Key 2', 'Key 4', 'Key 5'}), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.remove_all() does not work.')
+selected = idict.get('REMOVE_ALL', [1 3 6]);
+assert(isequal(idict.get('LENGTH'), 3), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REMOVE_ALL'', indices) does not work.')
+assert(isequal(idict.get('KEYS'), {'Key 2', 'Key 4', 'Key 5'}), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REMOVE_ALL'', indices) does not work.')
 assert(isequal(selected, []), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.remove_all() does not work.')
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''REMOVE_ALL'', indices) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -860,33 +987,32 @@ Move up
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4, it5, it6};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-selected = idict.move_up([1 2 4 6]);
-assert(isequal(idict.length(), 6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_up() does not work.')
-assert(isequal(idict.getKeys(), {'Key 1', 'Key 2', 'Key 4', 'Key 3', 'Key 6', 'Key 5'}), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_up() does not work.')
+selected = idict.get('MOVE_UP', [1 2 4 6]);
+assert(isequal(idict.get('LENGTH'), 6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_UP'', indices) does not work.')
+assert(isequal(idict.get('KEYS'), {'Key 1', 'Key 2', 'Key 4', 'Key 3', 'Key 6', 'Key 5'}), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_UP'', indices) does not work.')
 assert(isequal(selected, [1 2 3 5]), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_up() does not work.')
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_UP'', indices) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -894,33 +1020,32 @@ Move down
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4, it5, it6};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-selected = idict.move_down([1 3 5 6]);
-assert(isequal(idict.length(), 6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_down() does not work.')
-assert(isequal(idict.getKeys(), {'Key 2', 'Key 1', 'Key 4', 'Key 3', 'Key 5', 'Key 6'}), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_down() does not work.')
+selected = idict.get('MOVE_DOWN', [1 3 5 6]);
+assert(isequal(idict.get('LENGTH'), 6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_DOWN'', indices) does not work.')
+assert(isequal(idict.get('KEYS'), {'Key 2', 'Key 1', 'Key 4', 'Key 3', 'Key 5', 'Key 6'}), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_DOWN'', indices) does not work.')
 assert(isequal(selected, [2 4 5 6]), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_down() does not work.')
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_DOWN'', indices) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -928,33 +1053,32 @@ Move to top
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4, it5, it6};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-selected = idict.move_to_top([1 3 5 6]);
-assert(isequal(idict.length(), 6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_to_top() does not work.')
-assert(isequal(idict.getKeys(), {'Key 1', 'Key 3', 'Key 5', 'Key 6', 'Key 2', 'Key 4'}), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_to_top() does not work.')
+selected = idict.get('MOVE_TO_TOP', [1 3 5 6]);
+assert(isequal(idict.get('LENGTH'), 6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_TO_TOP'', indices) does not work.')
+assert(isequal(idict.get('KEYS'), {'Key 1', 'Key 3', 'Key 5', 'Key 6', 'Key 2', 'Key 4'}), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_TO_TOP'', indices) does not work.')
 assert(isequal(selected, [1 2 3 4]), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_to_top() does not work.')
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_TO_TOP'', indices) does not work.')
 
 %%% ¡test!
 %%%% ¡name!
@@ -962,30 +1086,29 @@ Move to bottom
 %%%% ¡probability!
 .01
 %%%% ¡code!
-it1 = ETA('PROP_STRING_P', 'Key 1');
-it2 = ETA('PROP_STRING_P', 'Key 2');
-it3 = ETA('PROP_STRING_P', 'Key 3');
-it4 = ETA('PROP_STRING_P', 'Key 4');
-it5 = ETA('PROP_STRING_P', 'Key 5');
-it6 = ETA('PROP_STRING_P', 'Key 6');
+it1 = IndexedDictionary('ID', 'Key 1');
+it2 = IndexedDictionary('ID', 'Key 2');
+it3 = IndexedDictionary('ID', 'Key 3');
+it4 = IndexedDictionary('ID', 'Key 4');
+it5 = IndexedDictionary('ID', 'Key 5');
+it6 = IndexedDictionary('ID', 'Key 6');
 
 items = {it1, it2, it3, it4, it5, it6};
-keys = cellfun(@(x) x.get('PROP_STRING_P'), items, 'UniformOutput', false);
 
 idict = IndexedDictionary( ...
-    'id', 'idict', ...
-    'it_class', 'ETA', ...
-    'it_key', ETA.getPropProp('PROP_STRING_P'), ...
-    'it_list', items ...
+    'ID', 'Trial Indexed Dictionary', ...
+    'IT_CLASS', 'IndexedDictionary', ...
+    'IT_KEY', IndexedDictionary.getPropProp('ID'), ...
+    'IT_LIST', items ...
     );
 
-selected = idict.move_to_bottom([1 3 5 6]);
-assert(isequal(idict.length(), 6), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_to_top() does not work.')
-assert(isequal(idict.getKeys(), {'Key 2', 'Key 4', 'Key 1', 'Key 3', 'Key 5', 'Key 6'}), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_to_top() does not work.')
+selected = idict.get('MOVE_TO_BOTTOM', [1 3 5 6]);
+assert(isequal(idict.get('LENGTH'), 6), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_TO_BOTTOM'', indices) does not work.')
+assert(isequal(idict.get('KEYS'), {'Key 2', 'Key 4', 'Key 1', 'Key 3', 'Key 5', 'Key 6'}), ...
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_TO_BOTTOM'', indices) does not work.')
 assert(isequal(selected, [3 4 5 6]), ...
-	[BRAPH2.STR ':' class(idict) ':' BRAPH2.BUG_FUNC], ...
-    'IndexedDictionary.move_to_top() does not work.')
+	[BRAPH2.STR ':' class(idict) ':' BRAPH2.FAIL_TEST], ...
+    'IndexedDictionary.get(''MOVE_TO_BOTTOM'', indices) does not work.')

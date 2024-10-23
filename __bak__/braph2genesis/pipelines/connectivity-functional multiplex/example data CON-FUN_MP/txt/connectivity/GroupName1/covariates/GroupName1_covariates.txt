@@ -1,6 +1,0 @@
-ID	Age	Sex
-SubjectID1	60	male
-SubjectID2	68	female
-SubjectID3	57	male
-SubjectID4	78	female
-SubjectID5	86	female

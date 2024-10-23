@@ -1,0 +1,30 @@
+ELCLASS
+NaN
+NAME
+NaN
+DESCRIPTION
+NaN
+TEMPLATE
+NaN
+Cross Validation ID
+1
+Cross Validation LABEL
+2
+NOTES
+NaN
+TOSTRING
+NaN
+NN
+NaN
+D
+NaN
+GROUND_TRUTH
+NaN
+Area Under Receiver Operating Characteristic Curve
+3
+Plot Receiver Operating Characteristic Curve
+4
+Macro Area Under Receiver Operating Characteristic Curve
+5
+Confusion Matrix
+6

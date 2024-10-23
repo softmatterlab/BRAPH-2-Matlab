@@ -1,0 +1,23 @@
+%% Pipeline Graph Theory
+
+% This is the pipeline script to test the graphs and measures.
+% 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
+% 2. It generates the available graphs initialized with some random matrices.
+
+%% Brain Atlas XLS
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas % Brain Atlas
+
+%% Graphs
+g_BD = GraphBD('NODELABELS', ba, 'B', randn(ba.get('BR_DICT').get('LENGTH'))); % Create GraphBD % GraphBD
+g_BU = GraphBU('NODELABELS', ba, 'B', randn(ba.get('BR_DICT').get('LENGTH'))); % Create GraphBU % GraphBU
+g_WD = GraphWD('NODELABELS', ba, 'B', randn(ba.get('BR_DICT').get('LENGTH'))); % Create GraphWD % GraphWD
+g_WU = GraphWU('NODELABELS', ba, 'B', randn(ba.get('BR_DICT').get('LENGTH'))); % Create GraphWU % GraphWU
+mg_BUD = MultigraphBUD('NODELABELS', ba, 'B', randn(ba.get('BR_DICT').get('LENGTH'))); % Create MultigraphBUD % MultigraphBUD
+mg_BUT = MultigraphBUT('NODELABELS', ba, 'B', randn(ba.get('BR_DICT').get('LENGTH'))); % Create MultigraphBUT % MultigraphBUT
+mp_BD = MultiplexBD('NODELABELS', ba, 'B', {randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH'))}); % Create MultiplexBD % MultiplexBD
+mp_BU = MultiplexBU('NODELABELS', ba, 'B', {randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH'))}); % Create MultiplexBU % MultiplexBU
+mp_WD = MultiplexWD('NODELABELS', ba, 'B', {randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH'))}); % Create MultiplexWD % MultiplexWD
+mp_WU = MultiplexWU('NODELABELS', ba, 'B', {randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH'))}); % Create MultiplexWU % MultiplexWU
+omp_WU = OrdMultiWU('NODELABELS', ba, 'B', {randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH'))}); % Create OrdMultiWU % OrdMultiWU
+mp_BUD = MultiplexBUD('NODELABELS', ba, 'B', {randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH'))}); % Create MultiplexBUD % MultiplexBUD
+mp_BUT = MultiplexBUT('NODELABELS', ba, 'B', {randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH')) randn(ba.get('BR_DICT').get('LENGTH'))}); % Create MultiplexBUT % MultiplexBUT

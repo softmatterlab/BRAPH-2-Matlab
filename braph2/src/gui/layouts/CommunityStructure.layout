@@ -1,0 +1,42 @@
+ELCLASS
+NaN
+NAME
+NaN
+DESCRIPTION
+NaN
+TEMPLATE
+NaN
+Measure ID
+1
+Measure NAME
+2
+Measure NOTES
+11
+TOSTRING
+NaN
+SHAPE
+NaN
+SCOPE
+NaN
+PARAMETRICITY
+NaN
+Compatible Graphs
+12
+Graph
+8
+CommunityStructure
+9
+Measure Plot
+10
+Community Structure algorithm (louvain, newman, fixed)
+3
+Gamma (resolution) parameter
+4
+Initial community affiliation vector (optional).
+5
+Custom objective matrix (Louvain, optional)
+6
+The objective-function type algorithm (Louvain)
+7
+QUALITY_FUNCTION
+NaN

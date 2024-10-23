@@ -1,0 +1,66 @@
+ELCLASS
+NaN
+NAME
+NaN
+DESCRIPTION
+NaN
+TEMPLATE
+NaN
+Cross Validation ID
+1
+Cross Validation LABEL
+2
+NOTES
+NaN
+TOSTRING
+NaN
+WAITBAR
+NaN
+K FOLDS
+5
+SPLIT
+NaN
+D
+NaN
+Template for Neural Network Classifier
+6
+Template for Neural Network Evaluator
+7
+DSP
+NaN
+DCO
+NaN
+Dataset List
+8
+D_LIST_IT
+NaN
+Neural Network Classifier List
+9
+NN_LIST_IT
+NaN
+Neural Network Evaluator List
+10
+EVALUATOR_LIST_IT
+NaN
+EPOCHS
+NaN
+BATCH
+NaN
+SHUFFLE
+NaN
+SOLVER
+NaN
+VERBOSE ON/OFF
+3
+PLOT TRAINING PROGRESS
+4
+Train All Neural Network Classifiers
+11
+Average of Area Under ROC Curve
+13
+Plot ROC Curve
+15
+Average of Macro Area Under ROC Curve
+14
+Confusion Matrix
+12

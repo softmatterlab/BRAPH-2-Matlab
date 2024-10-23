@@ -1,0 +1,28 @@
+%% Pipeline Regression Training-test Split Structural Data
+
+% This is the pipeline script to train a multi-layer perceptron regressor using structural data.
+% The structural data can be derived from imaging modalities like T1 weighted MRI (T1-W), static positron emission tomography (PET), or arterial spin labeling (ASL).
+% 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
+% 2. It loads data for a group of subjects from the directory (e.g., ST_Group_XLS) containing XLS files for each subject.
+% 3. It splits the dataset into a training dataset and a test dataset.
+% 4. It trains the regressor using the training dataset.
+% 5. It evaluates the performance of the trained regressor using both the training dataset and test dataset.
+
+% PDF: /tutorials/pipelines/tut_nn_reg_st/tut_nn_reg_st.pdf
+% README: /tutorials/pipelines/tut_nn_reg_st/readme.md
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Group
+gr = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_FILE').get('GR'); % Load Group ST from XLS % Group ST
+
+%% Training-Test Split
+d_split = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_ST_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', x.get('VOI_DICT').get('KEYS')), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset % Dataset Splitter
+
+%% Neural Network
+nn = NNRegressorMLP('D', d_split.get('D_LIST_IT', 1), 'LAYERS', [20 20]); % Train Neural Network % Trained Neural Network
+
+%% Evaluation
+nne_training = NNRegressorMLP_Evaluator('D', d_split.get('D_LIST_IT', 1), 'NN', nn); % Evaluate on Training Dataset % Training Dataset Evaluation
+nne_test = NNRegressorMLP_Evaluator('D', d_split.get('D_LIST_IT', 2), 'NN', nn); % Evaluate on Test Dataset % Test Dataset Evaluation

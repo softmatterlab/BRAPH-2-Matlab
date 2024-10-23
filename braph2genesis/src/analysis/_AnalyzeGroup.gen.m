@@ -1,31 +1,68 @@
 %% ¡header!
-AnalyzeGroup < Element (a, group-based graph analysis) is a group-based graph analysis.
+AnalyzeGroup < ConcreteElement (a, group-based graph analysis) is a group-based graph analysis.
 
 %%% ¡description!
 AnalyzeGroup provides the methods necessary for all group-based analysis subclasses.
-Instances of this class should not be created. 
-Use one of its subclasses instead.
+Instances of this class should not be created; Use one of its subclasses instead.
 
 %%% ¡seealso!
 CompareGroup
 
+%%% ¡build!
+1
+
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the % % % .
+%%%% ¡default!
+'AnalyzeGroup'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the group-based graph analysis.
+%%%% ¡default!
+'AnalyzeGroup'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the group-based graph analysis.
+%%%% ¡default!
+'AnalyzeGroup provides the methods necessary for all group-based analysis subclasses. Instances of this class should not be created; Use one of its subclasses instead.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the group-based graph analysis.
+%%%% ¡settings!
+'AnalyzeGroup'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the group-based graph analysis.
+%%%% ¡default!
+'AnalyzeGroup ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the group-based graph analysis.
+%%%% ¡default!
+'AnalyzeGroup label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the group-based graph analysis.
+%%%% ¡default!
+'AnalyzeGroup notes'
+
 %% ¡props!
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the graph analysis.
-
-%%% ¡prop!
-LABEL (metadata, string) is an extended label of the graph analysis.
-
-%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the graph analysis.
-%%%% ¡gui!
-pr = PlotPropString('EL', a, 'PROP', AnalyzeGroup.NOTES, 'LINES', 'multi', 'EDITHEIGHT', 4.5, varargin{:});
+WAITBAR (gui, logical) detemines whether to show the waitbar.
+%%%% ¡default!
+true
 
 %%% ¡prop!
 GR (data, item) is the subject group, which also defines the subject class.
 %%%% ¡settings!
 'Group'
+%%%% ¡gui!
+pr = PanelPropItem('EL', a, 'PROP', AnalyzeGroup.GR, ...
+    'BUTTON_TEXT', a.get('GR').get('ID'), ...
+    varargin{:});
 
 %%% ¡prop!
 G (result, item) is the graph obtained from this analysis.
@@ -34,16 +71,10 @@ G (result, item) is the graph obtained from this analysis.
 %%%% ¡calculate!
 value = Graph();
 %%%% ¡gui!
-pr = PPAnalyzeGroup_G('EL', a, 'PROP', AnalyzeGroup.G, 'WAITBAR', true, varargin{:});
-
-%% ¡methods!
-function pr = getPPCompareGroup_CPDict(a, varargin) 
-    %GEPPPCOMPAREGROUP_CPDICT returns the comparison plot panel compatible with the analysis.
-    %
-    % PR = GEPPPCOMPAREGROUP_CPDICT(A) returns the comparison plot panel
-    %  that is compatible with the analyze group.
-    %
-    % See also CompareGroup.
-    
-    pr = PropPlotIDict(varargin{:});
-end
+% pr = PanelPropItem('EL', a, 'PROP', AnalyzeGroup.G, ...
+%     'GUICLASS', 'GUIElement', ...
+%     'BUTTON_TEXT', 'Graph & Measures', ...
+%     varargin{:});
+pr = AnalyzeGroupPP_G('EL', a, 'PROP', AnalyzeGroup.G, ...
+    'WAITBAR', a.getCallback('WAITBAR'), ...
+    varargin{:});

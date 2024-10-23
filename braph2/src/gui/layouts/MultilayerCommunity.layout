@@ -1,0 +1,46 @@
+ELCLASS
+NaN
+NAME
+NaN
+DESCRIPTION
+NaN
+TEMPLATE
+NaN
+Measure ID
+1
+Measure NAME
+2
+Measure NOTES
+11
+TOSTRING
+NaN
+SHAPE
+NaN
+SCOPE
+NaN
+PARAMETRICITY
+NaN
+Compatible Graphs
+12
+Graph
+8
+MultilayerCommunity
+9
+Measure Plot
+10
+Maximum size of multilayer modularity matrix.
+7
+RANDORD
+NaN
+RANDMOVE
+NaN
+Gamma (resolution) parameter
+3
+Omega (inter-layer coupling) parameter
+4
+Initial partition for the multilayer modularity matrix (optional).
+5
+Multilayer modularity matrix (optional).
+6
+QUALITY_FUNCTION
+NaN

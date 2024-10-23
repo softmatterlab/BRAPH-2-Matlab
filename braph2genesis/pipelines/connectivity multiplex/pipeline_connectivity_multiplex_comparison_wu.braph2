@@ -1,0 +1,28 @@
+%% Pipeline Connectivity Multiplex Comparison WU
+
+% This is the pipeline script to compare two groups of subjects using connectivity multiplex data and weighted graphs.
+% The connectivity data can be derived from imaging modalities like diffusion weighted imaging (DWI).
+% 1. It loads a brain atlas from an XLS file (e.g., aal90_atlas.xlsx).
+% 2. It loads the connectivity data of two groups of subjects from two directories (e.g., CON_MP_Group_1 and CON_MP_Group_2) containing XLS files of each subject.
+% 3. It analyzes the first group using connectivity multiplex analyses (CON_MP) based on weighted graphs (WU).
+% 4. It analyzes the second group using the same parameters selected for the first group.
+% 5. It compares the results of the two analyses.
+
+% PDF: /tutorials/pipelines/tut_a_mp_con_wu/tut_a_mp_con_wu.pdf
+% README: /tutorials/pipelines/tut_a_mp_con_wu/readme.md
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Groups
+gr1 = ImporterGroupSubjectCON_MP_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON_MP 1 from XLS % Group CON_MP 1
+gr2 = ImporterGroupSubjectCON_MP_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON_MP 2 from XLS % Group CON_MP 2
+
+%% Analysis 1
+a_WU1 = AnalyzeEnsemble_CON_MP_WU('GR', gr1); % Analyze Group 1 % Group 1 Analysis
+
+%% Analysis 2
+a_WU2 = AnalyzeEnsemble_CON_MP_WU('GR', gr2, 'TEMPLATE', a_WU1); % Analyze Group 2 % Group 2 Analysis
+
+%% Comparison
+c_WU = CompareEnsemble('P', 1000, 'A1', a_WU1, 'A2', a_WU2, 'MEMORIZE', true); % Compare Groups % Group Comparison

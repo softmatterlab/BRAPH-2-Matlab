@@ -1,0 +1,23 @@
+%% Pipeline Regression Cross-Validation Functional BUT
+
+% This is the pipeline script to execute cross-validation with multi-layer perceptron regressor using the adjacency matrix with binary undirected graph at fix thresholds obtained from functional data.
+% The functional data can be derived from imaging modalities like functional MRI (fMRI), electroencephalography (EEG) or magnetoencephalography (MEG).
+% 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
+% 2. It loads data for a group of subjects from the directory (e.g., FUN_Group_XLS) FUNtaining XLS files for each subject.
+% 3. It analyzes the group using functional analyses (FUN) binary undirected graphs at fixed densities (BUT).
+% 4. It executes the cross-validation process.
+
+% PDF: 
+% README: 
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Group
+gr = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN from XLS % Group FUN
+
+%% Analysis
+a_BUD = AnalyzeEnsemble_FUN_BUD('GR', gr, 'DENSITIES', 1:1:2); % Analyze Group % Group Analysis
+
+%% Cross-Validation
+nncv = NNRegressorMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_Graph_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_REG', 'IT_LIST', cellfun(@(g, sub) NNDataPoint_Graph_REG('ID', g.get('ID'), 'SUB', sub, 'TARGET_IDS', sub.get('VOI_DICT').get('KEYS')), a_BUD.get('G_DICT').get('IT_LIST'), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process

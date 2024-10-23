@@ -1,3 +1,0 @@
-ID	Age	Sex
-SubjectID4	89.2625229762932	Female
-SubjectID5	67.1718258113465	Male

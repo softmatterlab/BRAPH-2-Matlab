@@ -1,62 +1,141 @@
 %% ¡header!
-BetweennessCentrality < Measure (m, betweenness centrality) is the graph betweenness centrality.
+BetweennessCentrality < Measure (m, betweenness centrality) is the Betweenness Centrality.
 
 %%% ¡description!
-The betweenness centrality of a graph is the fraction of all shortest paths in the 
-graph that pass through a given node. Nodes with high values of betweenness
+The Betweenness Centrality (BetweennessCentrality) of a graph is the fraction of all shortest paths in the 
+graph that pass through a given node. Nodes with high values of betweenness 
 centrality participate in a large number of shortest paths.
 
-%%% ¡shape!
-shape = Measure.NODAL;
+%%% ¡build!
+1
 
-%%% ¡scope!
-scope = Measure.UNILAYER;
+%% ¡layout!
 
-%%% ¡parametricity!
-parametricity = Measure.NONPARAMETRIC;
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.ID
+%%%% ¡title!
+Measure ID
 
-%%% ¡compatible_graphs!
-GraphWU
-GraphWD
-GraphBU
-MultigraphBUD
-MultigraphBUT
-GraphBD
-MultiplexBD
-MultiplexBU
-MultiplexBUD
-MultiplexBUT
-MultiplexWD
-MultiplexWU
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.LABEL
+%%%% ¡title!
+Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.M
+%%%% ¡title!
+Betweenness Centrality
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+BetweennessCentrality.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
 
 %% ¡props_update!
 
 %%% ¡prop!
-M (result, cell) is the betweenness centrality.
+ELCLASS (constant, string) is the class of the Betweenness Centrality.
+%%%% ¡default!
+'BetweennessCentrality'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the Betweenness Centrality.
+%%%% ¡default!
+'Betweenness Centrality'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the Betweenness Centrality.
+%%%% ¡default!
+'The Betweenness Centrality (BetweennessCentrality) of a graph is the fraction of all shortest paths in the graph that pass through a given node. Nodes with high values of betweenness centrality participate in a large number of shortest paths.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the Betweenness Centrality.
+%%%% ¡settings!
+'BetweennessCentrality'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code of the Betweenness Centrality.
+%%%% ¡default!
+'BetweennessCentrality ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the Betweenness Centrality.
+%%%% ¡default!
+'Betweenness Centrality label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the Betweenness Centrality.
+%%%% ¡default!
+'Betweenness Centrality notes'
+
+%%% ¡prop!
+SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
+%%%% ¡default!
+Measure.NODAL
+
+%%% ¡prop!
+SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
+%%%% ¡default!
+Measure.UNILAYER
+
+%%% ¡prop!
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+%%%% ¡default!
+Measure.NONPARAMETRIC
+
+%%% ¡prop!
+COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+%%%% ¡default!
+{'GraphBD' 'GraphBU' 'GraphWD' 'GraphWU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexBD' 'MultiplexBU' 'MultiplexWD' 'MultiplexWU' 'MultiplexBUD' 'MultiplexBUT' 'MultilayerWU' 'OrdMlWU'}
+
+%%% ¡prop!
+M (result, cell) is the cell containing Betweenness Centrality.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
 A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
-N = g.nodenumber(); 
+L = g.get('LAYERNUMBER');
+NN = g.get('NODENUMBER');
 
-betweenness_centrality = cell(g.layernumber(), 1);
-connectivity_layer =  g.getConnectivityType(g.layernumber());
+betweenness_centrality = cell(L, 1);
+connectivity_layer =  g.get('CONNECTIVITY_TYPE', g.get('LAYERNUMBER'));
 
-for li = 1:1:g.layernumber()
+for li = 1:1:L
     Aii = A{li, li};
 
     if connectivity_layer == Graph.WEIGHTED  % weighted graphs
-        betweenness_centrality_layer = m.getWeightedCalculation(Aii)/((N(li)-1)*(N(li)-2));  % Normalized betweenness centrality
+        betweenness_centrality_layer = getWeightedCalculation(Aii)/((NN(li)-1)*(NN(li)-2));  % Normalized betweenness centrality
         betweenness_centrality(li) = {betweenness_centrality_layer};
     else  % binary graphs
-        betweenness_centrality_layer = m.getBinaryCalculation(Aii)/((N(li)-1)*(N(li)-2));  % Normalized betweenness centrality
+        betweenness_centrality_layer = getBinaryCalculation(Aii)/((NN(li)-1)*(NN(li)-2));  % Normalized betweenness centrality
         betweenness_centrality(li) = {betweenness_centrality_layer};
     end
 end
 
 value = betweenness_centrality;
-
-%% ¡methods!
-function weighted_betweenness_centrality = getWeightedCalculation(m, A)
+%%%% ¡calculate_callbacks!
+function weighted_betweenness_centrality = getWeightedCalculation(A)
     %GETWEIGHTEDCALCULATION calculates the distance value of a weighted adjacency matrix.
     %
     % WEIGHTED_DISTANCE = GETWEIGHTEDCALCULATION(M, A) returns the value of the
@@ -90,17 +169,17 @@ function weighted_betweenness_centrality = getWeightedCalculation(m, A)
             for v = V
                 Q(q) = v;
                 q = q-1;
-                neighbours = find(G(v,:));  % neighbours of v
-                for neighbour = neighbours
-                    Duw = D(v) + G(v, neighbour);  % Duw path length to be tested
-                    if Duw<D(neighbour)  % if new u->w shorter than old
-                        D(neighbour) = Duw;
-                        NP(neighbour) = NP(v);  % NP(u->w) = NP of new path
-                        P(neighbour,:) = 0;
-                        P(neighbour, v) = 1;  % v is the only predecessor
-                    elseif Duw==D(neighbour)  % if new u->w equal to old
-                        NP(neighbour) = NP(neighbour)+NP(v);  % NP(u->w) sum of old and new
-                        P(neighbour, v) = 1;  % v is also a predecessor
+                neighbors = find(G(v,:));  % neighbors of v
+                for neighbor = neighbors
+                    Duw = D(v) + G(v, neighbor);  % Duw path length to be tested
+                    if Duw<D(neighbor)  % if new u->w shorter than old
+                        D(neighbor) = Duw;
+                        NP(neighbor) = NP(v);  % NP(u->w) = NP of new path
+                        P(neighbor,:) = 0;
+                        P(neighbor, v) = 1;  % v is the only predecessor
+                    elseif Duw==D(neighbor)  % if new u->w equal to old
+                        NP(neighbor) = NP(neighbor)+NP(v);  % NP(u->w) sum of old and new
+                        P(neighbor, v) = 1;  % v is also a predecessor
                     end
                 end
             end
@@ -122,7 +201,7 @@ function weighted_betweenness_centrality = getWeightedCalculation(m, A)
         end
     end
 end
-function binary_betweenness_centrality = getBinaryCalculation(m, A)
+function binary_betweenness_centrality = getBinaryCalculation(A)
     %GETBINARYCALCULATION calculates the distance value of a binary adjacency matrix.
     %
     % BINARY_DISTANCE = GETBINARYCALCULATION(A) returns the value of the
@@ -160,13 +239,18 @@ function binary_betweenness_centrality = getBinaryCalculation(m, A)
     end
     binary_betweenness_centrality = sum(DP, 1);  % compute betweenness
     binary_betweenness_centrality = binary_betweenness_centrality';
-end     
+end         
 
 %% ¡tests!
 
+%%% ¡excluded_props!
+[BetweennessCentrality.PFM]
+
 %%% ¡test!
 %%%% ¡name!
-GraphBU
+GraphBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B_BU = [
     0 1 1;
@@ -174,19 +258,49 @@ B_BU = [
     1 0 0
     ];
 
-bc_BU = [1, 0, 0]';
+bc_BU = {[1, 0, 0]'};
 
-g = GraphBU('B', B_BU);
+g = GraphBD('B', B_BU);
+m_outside_g = BetweennessCentrality('G', g);
+assert(isequal(m_outside_g.get('M'), bc_BU), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-bc_1 = BetweennessCentrality('G', g).get('M');
-
-assert(isequal(bc_1{1}, bc_BU), ...
-    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.BUG_ERR], ...
-    'Betweenness Centrality is not being calculated correctly for GraphBU')
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), bc_BU), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
-GraphWU
+GraphBU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B_BU = [
+    0 1 1;
+    1 0 0;
+    1 0 0
+    ];
+
+bc_BU = {[1, 0, 0]'};
+
+g = GraphBU('B', B_BU);
+m_outside_g = BetweennessCentrality('G', g);
+assert(isequal(m_outside_g.get('M'), bc_BU), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), bc_BU), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+GraphWD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B_WU = [
     0 1 4; 
@@ -194,18 +308,109 @@ B_WU = [
     4 0 0 
     ];
 
-bc_WU = [1, 0, 0]'; 
+bc_WU = {[1, 0, 0]'};
+
+g = GraphWD('B', B_WU);
+
+m_outside_g = BetweennessCentrality('G', g);
+
+assert(isequal(m_outside_g.get('M'), bc_WU), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), bc_WU), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+GraphWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B_WU = [
+    0 1 4; 
+    1 0 0; 
+    4 0 0 
+    ];
+
+bc_WU = {[1, 0, 0]'}; 
 
 g = GraphWU('B', B_WU);
 
-bc_1 = BetweennessCentrality('G', g).get('M');
-assert(isequal(bc_1{1}, bc_WU), ...
-    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.BUG_ERR], ...
-    'Betweenness Centrality is not being calculated correctly for GraphWU')
+m_outside_g = BetweennessCentrality('G', g);
+
+assert(isequal(m_outside_g.get('M'), bc_WU), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), bc_WU), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultigraphBUD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B_WU = [
+    0 1 4; 
+    1 0 0; 
+    4 0 0 
+    ];
+ 
+densities = [0 50 90];
+g = MultigraphBUD('B', B_WU, 'DENSITIES', densities);
+
+known_bc = {[0, 0, 0]'; [0, 0, 0]'; [1, 0, 0]'};
+
+m_outside_g = BetweennessCentrality('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_bc), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), known_bc), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultigraphBUT
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B_WU = [
+    0 1 4; 
+    1 0 0; 
+    4 0 0 
+    ];
+ 
+thresholds = [0 1];
+g = MultigraphBUT('B', B_WU, 'THRESHOLDS', thresholds);
+
+known_bc = {[1, 0, 0]';  [0, 0, 0]'};
+
+m_outside_g = BetweennessCentrality('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_bc), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), known_bc), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
 MultiplexBD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B11 = [
     0   1   0
@@ -225,16 +430,58 @@ known_betweenness_centrality = {
     };
 
 g = MultiplexBD('B', B);
-betweenness_centrality = BetweennessCentrality('G', g);
 
-assert(isequal(betweenness_centrality.get('M'), known_betweenness_centrality), ...
-    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.BUG_ERR], ...
-    'BetweennessCentrality is not being calculated correctly for MultiplexBD.')
+m_outside_g = BetweennessCentrality('G', g);
+assert(isequal(m_outside_g.get('M'), known_betweenness_centrality), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), known_betweenness_centrality), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   1   0
+    1   0   0
+    1   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   0
+    0   1   0
+    ];
+B = {B11 B22};
+
+known_betweenness_centrality = {
+    [1 0   0]'
+    [0   1 0]'
+    };
+
+g = MultiplexBU('B', B);
+
+m_outside_g = BetweennessCentrality('G', g);
+assert(isequal(m_outside_g.get('M'), known_betweenness_centrality), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), known_betweenness_centrality), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 
 %%% ¡test!
 %%%% ¡name!
 MultiplexWD
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B11 = [
     0   1   0
@@ -255,7 +502,115 @@ known_betweenness_centrality = {
 
 g = MultiplexWD('B', B);
 betweenness_centrality = BetweennessCentrality('G', g);
+m_outside_g = BetweennessCentrality('G', g);
+assert(isequal(m_outside_g.get('M'), known_betweenness_centrality), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-assert(isequal(betweenness_centrality.get('M'), known_betweenness_centrality), ...
-    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.BUG_ERR], ...
-    'BetweennessCentrality is not being calculated correctly for MultiplexWD.')
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), known_betweenness_centrality), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B11 = [
+    0   1   0
+    1   0   0
+    4   0   0
+    ];
+B22 = [
+    0   1   0
+    1   0   0
+    0   4   0
+    ];
+B = {B11 B22};
+
+known_betweenness_centrality = {
+    [1 0   0]'
+    [0   1 0]'
+    };
+
+g = MultiplexWU('B', B);
+betweenness_centrality = BetweennessCentrality('G', g);
+m_outside_g = BetweennessCentrality('G', g);
+assert(isequal(m_outside_g.get('M'), known_betweenness_centrality), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), known_betweenness_centrality), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBUD
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B_WU1 = [
+    0 1 4; 
+    1 0 0; 
+    4 0 0 
+    ];
+B_WU2 = [
+    0 1 4; 
+    1 0 0; 
+    4 0 0 
+    ];
+B = {B_WU1 B_WU2};
+ 
+densities = [0 50 90];
+g = MultiplexBUD('B', B, 'DENSITIES', densities);
+
+known_bc = {[0, 0, 0]'; [0, 0, 0]'; [0, 0, 0]'; [0, 0, 0]'; [1, 0, 0]'; [1, 0, 0]'};
+
+m_outside_g = BetweennessCentrality('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_bc), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), known_bc), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+%%% ¡test!
+%%%% ¡name!
+MultiplexBUT
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B_WU1 = [
+    0 1 4; 
+    1 0 0; 
+    4 0 0 
+    ];
+B_WU2 = [
+    0 1 4; 
+    1 0 0; 
+    4 0 0 
+    ];
+B = {B_WU1 B_WU2};
+ 
+thresholds = [0 1];
+g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
+
+known_bc = {[1, 0, 0]'; [1, 0, 0]'; [0, 0, 0]'; [0, 0, 0]'};
+
+m_outside_g = BetweennessCentrality('G', g);
+
+assert(isequal(m_outside_g.get('M'), known_bc), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'BetweennessCentrality');
+assert(isequal(m_inside_g.get('M'), known_bc), ...
+    [BRAPH2.STR ':BetweennessCentrality:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

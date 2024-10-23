@@ -1,0 +1,345 @@
+\documentclass[justified]{tufte-handout}
+\usepackage{../braph2_tut}
+%\geometry{showframe} % display margins for debugging page layout
+
+\title[Neural Networks Classification of Connectivity Data using BUD]{Pipeline for Neural Network Classification of Connectivity Data using Binary Undirected Graphs at Fixed Densities}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+This tutorial shows how to perform a neural network analysis using \emph{connectivity data} (see tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_con_nn/tut_gr_con_nn.pdf}{Group of Subjects with Connectivity Data for NN Classification}), where one connectivity matrix per subject is available, as in diffusion weighted imaging or pre-calculated matrices obtained from functional MRI, MEG, or EEG. Step by step, this pipeline leads you to classify the data from two groups of subjects at fixed thresholds, which correspond, for example, to fixed levels of white matter integrity or of correlation between activation signals of pairs of brain areas.  With this tutorial, you will be able to differentiate subjects with neural network classification techniques. You will also be able to generate publication-quality figures.
+\end{abstract}
+
+%\fig{marginfigure}
+	%{fig:01}
+	{
+	%\includegraphics{fig01_01.jpg}
+	%\includegraphics{fig01_02.jpg}
+	%\includegraphics{fig01_03.jpg}
+	%}
+	%{Figure examples}
+	%{
+	%Examples of displays of \fn{Community Structure} with connectivity data binarized at fixed thresholds obtained using BRAPH 2.
+	%}
+	
+\tableofcontents
+
+\clearpage
+\section{Generate Example Data}
+
+You can generate the example data by typing in the command line the instruction in \Coderef{cd:generate}.
+%
+\begin{lstlisting}[
+	label=cd:generate,
+	caption={
+		{\bf Command to generate example data.}
+		Command to generate the example data for connectivity analyses. They will be placed in the folder \fn{./braph2/pipelines/connectivity NN/Example data NN CLA CON XLS}, and include the brain atlas \fn{atlas.xlsx}, three folders with the subject files \fn{CON\_Group\_1\_XLS}, \fn{CON\_Group\_2\_XLS}, and \fn{CON\_Group\_3\_XLS}, as well as the associated covariates files \fn{CON\_Group\_1\_XLS.vois}, \fn{CON\_Group\_2\_XLS.vois}, and \fn{CON\_Group\_3\_XLS.vois}. The details about the format of these files can be found in the tutorials \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba}{Brain Atlas} and \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_con_nn/tut_gr_con_nn.pdf}{Group of Subjects with Connectivity Data for NN Classification}.
+	}
+]
+test_NNDataPoint_CON_CLA
+\end{lstlisting}
+
+\section{Open the GUI}
+
+The general GUI of BRAPH 2.0 can be opened by typing \code{braph2} in MatLab's terminal. This GUI allows you to select a pipeline, in this case, \emph{Pipeline Classification Cross-Validation Connectivity BUD}, as shown in \Figref{fig:02}.
+
+%! FIG1 !%
+
+\fig{figure}
+	{fig:02}
+	{
+	\includegraphics{fig02.jpg}
+	}
+	{BRAPH 2 main GUI}
+	{
+	BRAPH 2 main GUI with the pipeline \emph{Pipeline Classification Cross-Validation Connectivity BUD} selected.
+	}
+
+\begin{tcolorbox}[
+	title=Pipeline launch from command line
+]
+To open the GUI and upload the connectivity comparison pipeline, you can also do it from the command line by typing the commands in \Coderef{cd:launch}.
+%
+\begin{lstlisting}[
+	label=cd:launch,
+	caption={
+		{\bf Code to launch the GUI to upload a pipeline file to classify two groups of subjects.}
+		This code can be used in the MatLab command line to launch the GUI to upload a pipeline file.
+	}
+]
+im = ImporterPipelineBRAPH2( ...
+	'FILE', which('pipeline_classification_cross_validation_connectivity_bud.braph2') ...
+	);
+pip = im.get('PIP');
+
+gui = GUIElement('PE', pip, 'WAITBAR', true); gui.get('DRAW')
+gui.get('SHOW')
+\end{lstlisting}
+\end{tcolorbox}
+
+Once the pipeline is uploaded, you can see a GUI that contains different steps to: upload a brain atlas, upload the connectivity data of three groups, analyze them, and finally, classify them with cross-validation (\Figref{fig:03}). 
+
+\fig{marginfigure}
+	{fig:03}
+	{
+	\includegraphics{fig03.jpg}
+	}
+	{Pipeline steps}
+	{
+	These are the steps of the pipeline. Only the first step is active when the pipeline is first opened. Subsequent steps will become active sequentially.
+	}
+
+\clearpage
+\section{Step 1: Load the Brain Atlas}
+
+\Figref{fig:04} shows how to upload and plot the brain atlas that you used to extract the \emph{connectivity data} for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba}{Brain Atlas}.
+
+%! FIG2 !%
+
+\fig{figure*}
+	{fig:04}
+	{
+	\includegraphics{fig04.jpg}
+	}
+	{Uploading the Brain Atlas}
+	{
+	Steps to upload the brain atlas:
+	{\bf a} Click on \fn{Load Atlas} from the pipeline GUI.
+	{\bf b} Navigate to the BRAPH~2.0 folder \fn{atlases} and select one of the atlas files, in this example the \fn{atlas.xlsx}. 
+	{\bf c} You can visualize the brain atlas by pressing \fn{Plot Brain Atlas}. 
+	}
+ 
+\clearpage
+\section{Step 2: Load the Connectivity Group Data}
+
+After you loaded the brain atlas, you can upload the \emph{connectivity data} for each group as shown in \Figref{fig:05}. A new interface will be shown containing the data for the group you just selected. You can open each subject’s connectivity matrices by selecting the subject, right click, and select “Open selection” (for more information check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_con_nn/tut_gr_con_nn.pdf}{Group of Subjects with Connectivity Data for NN Classification}).
+
+%! FIG3 !%
+
+\fig{figure*}
+	{fig:05}
+	{
+	\includegraphics{fig05.jpg}
+	}
+	{Loading and visualizing the group data}
+	{
+	{\bf a} From the pipeline GUI, click on \fn{Load Group CON 1 from XLS} to load the data of group 1.
+	{\bf b} Once the data is uploaded, you can select a subject, right click and select \code{Open selection}.
+	{\bf c} This will open the connectivity matrix of the subject in addition to the age and sex of that subject (which are the variables of interest available for the example data).
+	You can then repeat the same procedure for group 2 and group 3.
+	}
+
+\clearpage
+\section{Step 3: Analyzing the Data of Group 1}
+
+Once you have loaded the data for three groups, you can begin analyzing the data for the first group by clicking on \fn{Analyze Group 1} (\Figref{fig:05}a). 
+This action will open a new interface called \fn{Analyze Ensemble}, which allows you to calculate and visualize graph adjacency matrices for the first group. 
+Before these adjacency matrices are calculated, it is important to ensure the following: 
+\begin{enumerate}
+	\item The analysis parameters are set correctly (e.g., the densities).
+	\item The graph parameters are set correctly.
+\end{enumerate}
+
+Importantly, the parameters you select at the beginning will remain fixed for the rest of pipeline (including the analysis of the second and third group and the neural network classification). We will now guide you through the process of preparing these parameters for graphs. It is important to keep in mind that the default parameters are typically suitable for most cases.
+
+\subsection{Setting Analysis Parameters}
+
+In the \fn{Analyze Ensemble} interface (\Figref{fig:06}), you can configure the analysis parameters.
+In the \code{DENSITIES} section, you can define the densities by entering values like \code{1:1:2} (you can also use any other valid mathematical expression, such as \code{1 2}, or \code{1:1:2}).
+
+%! FIG4 !%
+
+\fig{figure}
+	{fig:06}
+	{
+	\includegraphics{fig06.jpg}
+	}
+	{Configuring analysis parameters}
+	{
+	{\bf a} To initiate the analysis of data for group 1, click on \fn{Analyze Group 1}.
+	{\bf b} You define the densities in the \code{DENSITIES} section.
+	}
+
+\subsection{Setting Graph Parameters}
+
+To configure the graph parameters, you click on the section \code{GRAPH \& MEASURE PARAMETERS} (\Figref{fig:07}). This will open a new interface for graph template settings. 
+In brain connectivity analysis, densities values dictate the required connection density between different brain regions for them to be considered “connected” in a binary undirected graph. 
+Adjusting these densities allows you to explore varying levels of brain connectivity, providing insights into how regions communicate at different density settings.
+
+%! FIG5 !%
+
+\fig{figure*}
+	{fig:07}
+	{
+	\includegraphics{fig07.jpg}
+	}
+	{Configuring Graph Parameters}
+	{
+	{\bf a} By clicking on the section \code{GRAPH \& MEASURE PARAMETERS}, you open {\bf b} a new interface that permits you to configure the graph parameters.
+	{\bf c} The available parameters shall be set at this point.
+	}
+
+The available parameters are:
+\begin{itemize}
+	\item \code{SYMMETRIZATION RULE} determines how to symmetrize the matrix.
+	\item \code{NEGATIVE EDGE RULE} determines how to remove the negative edges.
+	\item \code{NORMALIZATION RULE} determines how to normalize the weights between 0 and 1.
+	\item \code{DENSITIES} determines the densities. \emph{This cannot be set here. It is set in the previous step.}
+	\item \code{RANDOMIZE ON/OFF} determines whether to randomize the graph. \emph{Typically not used.}
+	\item \code{RANDOM SEED} is the randomization seed. \emph{Typically not used.}
+	\item \code{RANDOMIZATION ATTEMPTS PER EDGE} is the attempts to rewire each edge. \emph{Typically not used.}
+\end{itemize}
+
+Since this pipeline uses the graph adjacency matrices as the input to train the neural network classifiers, setting and calculating measures are not necessary.
+
+\subsection{Calculate Graphs}
+ 
+After configuring the parameters, you can proceed to calculate specific graph adjacency matricees (\Figref{fig:08}). To do this, return to the \fn{Analyze Ensemble} interface (\Figref{fig:08}a) and scroll down to locate the \fn{Individual GRAPHS} panel. By clicking the 'C' button, you will see a table displaying all subjects.
+
+%! FIG6 !%
+
+\fig{figure*}
+	{fig:08}
+	{
+	\includegraphics{fig08.jpg}
+	}
+	{Analyzing the Group Data}
+	{
+	{\bf a} Locate the \code{Individual GRAPHS} panel and click the \code{C} button to see all available individual subjects. Choose the subjects you would like to see their graph data.
+	{\bf b} To visualize the results, right-click on the top of the table and choose \code{Plot Selected Adjacency Matrices} in the Analyze Ensemble interface. This action opens a figure panel with the \code{Adjacency Matrix} plotted for those selected subjects.
+	{\bf c} Adjust visualization settings by clicking on the \code{Settings Panel Figure} button in the figure toolbar.
+	{\bf d} Adjust visualization settings by clicking on the \code{Show axis} button in the same toolbar.
+	{\bf e} Customize and save plot visualizations within the settings menu. Here, we turned on the option to show the axis to be tight.
+	}
+
+As an example, let us select the first subject, for which we previously set the graph parameters to construct the subject's graph accordingly. 
+Right-click on the top of the table and select \code{Plot Selected Adjacency Matrices} within the Analyze Ensemble interface (\Figref{fig:08}b). This will open a figure panel with the \fn{Adjacency Matrix} plotted on it.
+
+Within the toolbar of the adjacency matrix plot, you can explore various views.
+For instance, by clicking on the \code{Show axis} button (\Figref{fig:08}d), you will get the same axis as shown in \Figref{fig:08}. Additionally, clicking on the \code{Settings Panel Figure} button (\Figref{fig:08}c) in the same toolbar allows you to adjust different visualization settings.
+
+For instance, within the settings menu (\Figref{fig:08}e), you can turn on \code{tight}, resulting in the same kind of figure as shown in \Figref{fig:08}. Within the settings menu, you can customize the visualization of the plots and save them for reference.
+
+Finally, when you right-click in the \code{Individual GRAPHS} panel, you will find other options to explore, such as \code{Plot Selected Histograms} (which generates histogram plots for the adjacnecy matrices at different densities and/or different nodes) and \code{Data Selected Graph ...} (providing the calculated values of individual graphs). These options can also be saved for further analyses outside BRAPH 2.0.
+
+\section{Step 4: Analyzing the Data of Group 2 and Group 3}
+
+After completing the analysis of the first group, you can analyze the second and third group by simply clicking on \code{Analyze Group 2} and \code{Analyze Group 3} (\Figref{fig:09}a). You will notice that in the new GUI (\Figref{fig:09}b-c), the parameters you previously selected for the first group are already preselected and fixed for this analysis. 
+
+%! FIG7 !%
+
+\fig{figure}
+	{fig:09}
+	{
+	\includegraphics{fig09.jpg}
+	}
+	{Parameters blocked in the Analysis of Group 2 and Group 3}
+	{
+	{\bf a} Click on \fn{Analysis 2} in the pipeline's GUI.
+	{\bf b} In this new window, you can see that the measure parameters, such as the {\bf b} \fn{GRAPH TEMPLATE} and graph property {\bf c} \fn{DENSITIES}, are blocked since they should be the same as the ones set in the analysis of group 1. You can reset the analysis parameters for Group 1 by clicking on the checkbox marked with a 'C' next to the settings of Group 1 {\bf d}.
+	}
+	
+If you want to change some of the parameters you previously selected, you can reset the analysis parameters by clicking on the cancel button marked with a \code{C} (\Figref{fig:09}d) near the analysis of the first group.
+ 
+\clearpage
+\section{Step 5: Cross-Validation}
+
+Once you have analyzed the data for three groups, you can begin training the neural networks by clicking on \fn{Cross-Validation} (\Figref{fig:10}a). 
+This action will open a new interface called \fn{Cross Validation}, which allows you to train the neural networks in a cross-validation manner.
+Before these neural networks are trained, it is important to ensure the following: 
+\begin{enumerate}
+	\item The neural networks parameters are set correctly (e.g., epochs, shuffle rule).
+	\item The evaluator parameters are set correctly (e.g, permutation times).
+\end{enumerate}
+
+%! FIG8 !%
+
+\fig{figure}
+	{fig:10}
+	{
+	\includegraphics{fig10a.jpg}
+	\includegraphics{fig10b.jpg}
+	}
+	{Setting Training Parameters}
+	{
+	{\bf a} Click on \code{Cross-Validation} in the pipeline's GUI.
+	{\bf b} In this new window, you can select to turn ON/OFF the verbose functions, you can determine whether to show the training progress, and you can change the number of folds.
+ 	We set the number of k folds to 2 for this tutoria
+	{\bf c} By clicking on the section \code{Template for Neural Network Classifier}, you open {\bf d} a new interface that permits you to configure the neural network classifier parameters.
+	{\bf d} The available parameters shall be set at this point.
+	{\bf e} By clicking on the section \code{Template for Neural Network Evaluator}, you open {\bf f} a new interface that permits you to configure the neural network evaluator parameters.
+	}
+
+Importantly, the parameters you select at the beginning will remain fixed for all folds. We will now guide you through the process of preparing these parameters for neural networks and evaluators. It is important to keep in mind that the default parameters are typically suitable for most cases.
+
+\subsection{Setting Training Parameters}
+
+In the \fn{Cross-Validation} interface (\Figref{fig:10}b), you can configure the analysis parameters.
+
+In the new window, you have several options to configure the cross-validation analysis. First, you can choose whether to enable the verbose functions and training-progress plots (\Figref{fig:10}b) while the analysis is running, which can help you monitor the progress of the analysis. 
+In the \code{K FOLDS} section, you can define the densities by entering values of folds.
+
+To configure the training parameters, you click on the section \code{Template for Neural Network Classifier} (\Figref{fig:10}c). This will open a new interface for neural networks template settings (\Figref{fig:10}d). 
+
+The available parameters are:
+\begin{itemize}
+	\item \code{TRAINING EPOCHS} determines the number of epochs.
+	\item \code{TRAINING BATCH} determines the size of the mini-batch used for each training iteration.
+	\item \code{TRAINING SHUFFLE} determines the option for data shuffling.
+	\item \code{TRAINING SOLVER} determines the solver for training neural network.
+\end{itemize}
+
+To configure the evaluator parameters, you click on the section \code{Template for Neural Network Evaluator} (\Figref{fig:10}e). This will open a new interface for neural networks evaluator template settings. 
+The available parameter is the permutation times for permuting feature importance (\Figref{fig:10}f).
+
+%! FIG9 !%
+
+\fig{figure}
+	{fig:11}
+	{
+	\includegraphics{fig11.jpg}
+	}
+	{Train Neural Networks}
+	{
+	{\bf a} Locate the \code{Dataset List}, \code{Neural Network Classifier List}, and \code{Neural Network Evaluator List} panel and click those panels' \code{C} button to see all divided datasets, classifiers, and evaluators at all folds.
+	{\bf b} Locate the \code{Train All Neural Network Classifiers} panel and click the \code{C} button to train.  
+	}
+
+\subsection{Train Neural Networks}
+
+After setting all the parameters, now it is time to traing the neural networks at all folds. 
+We start the training processing by calculating the corresponding dataset, the neural network classifier, and the neural network evaluator at each fold.
+Locate the \code{Dataset List}, \code{Neural Network Classifier List}, and \code{Neural Network Evaluator List} panel and click those panels' \code{C} button to see all divided datasets, classifiers, and evaluators at all folds (\Figref{fig:11}a).
+Next, to train the classifiers at all folds (\Figref{fig:11}b), locate the \code{Train All Neural Network Classifiers} panel and click the \code{C} button to train. 
+
+After the training process is done, locate the \code{Confusion Matrix} panel and click the \code{C} button (\Figref{fig:12}a) to see how well the models are performing in terms of making correct and incorrect classification.
+It is also possible to check the model performance with the Receiver Operating Characteristic (ROC) curve.
+In multiclass classification, the concept of ROC curve can be extended to evaluate the model's ability to discriminate between multiple classes by treating each class as the positive class and the rest as the negative class, resulting in a set of ROC curves, one for each class.
+To see the results of area under ROC curves for each class, locate the \code{Average of Area Under ROC Curve} and \code{Average of Macro Area Under ROC Curve} panel and click the \code{C} button (\Figref{fig:12}b).
+To plot the ROC curves, click the \code{ROC Plot} button. This action will open a panel figure plotting all ROC curves from all folds (\Figref{fig:12}c).
+Note that, by clicking on the Settings Panel Figure button in the toolbar of the ROC figure, you can adjust different visualization settings.
+
+%! FIG10 !%
+
+\fig{figure*}
+	{fig:12}
+	{
+	\includegraphics{fig12.jpg}
+	}
+	{Cross-Validation Analysis}
+	{
+	{\bf c} To see the results of classification, locate the \code{Confusion Matrix} panel and click the \code{C} button. 
+	{\bf d} To see the results of area under ROC curves, locate the \code{Average of Area Under ROC Curve} and \code{Average of Macro Area Under ROC Curve} panel and click the \code{C} button.
+	{\bf e} To plot the ROC curves, click the \code{ROC Plot} button. This action will open a panel figure plotting all ROC curves from all folds.
+	{\bf f} To see the feature importance, locate the \code{Average of Feature Importance} panel and click the \code{C} button. 
+	}
+
+Finally, To see the feature importance, locate the \code{Average of Feature Importance} panel and click the \code{C} button (\Figref{fig:12}d).
+Permutation feature importance involves randomly shuffling individual input features to measure their impact on the model's predictive performance, helping to identify which features are the most influential in making classification decisions.
+In \Figref{fig:12}d, you can see the score of the feature importance. The values greater than 1 typically indicate that the feature contributes more to the model's predictive performance than an average feature, while values less than 1 suggest it has less impact.
+
+
+\end{document}

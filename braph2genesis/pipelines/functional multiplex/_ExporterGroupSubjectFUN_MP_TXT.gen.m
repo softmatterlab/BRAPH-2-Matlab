@@ -2,15 +2,60 @@
 ExporterGroupSubjectFUN_MP_TXT < Exporter (ex, exporter of FUN MP subject group in TXT) exports a group of subjects with functional multiplex data to a series of TXT file.
 
 %%% ¡description!
-ExporterGroupSubjectFUN_MP_TXT exports a group of subjects with functional multiplex data to a series of TXT file and their covariates age and sex (if existing) to another TXT file.
-All these files are saved in the same folder.
-Each file contains a table with each row correspoding to a time serie and each column to a brain region.
-The TXT file containing the covariates consists of the following columns:
-Subject ID (column 1), Subject AGE (column 2), and, Subject SEX (column 3).
-The first row contains the headers and each subsequent row the values for each subject.
+ExporterGroupSubjectFUN_MP_TXT exports a group of subjects with functional
+ multiplex data to a series of tab-separated TXT files contained in a folder 
+ named "GROUP_ID". All these files are saved in the same folder. Each file 
+ contains a table with each row correspoding to a time serie and 
+ each column to a brain region. Files should be labeled with the layer 
+ number indicated as, e.g., "SUBJECT_ID.1.txt" and "SUBJECT_ID.2.txt".
+The variables of interest (if existing) are saved in another tab-separated 
+ TXT file named "GROUP_ID.vois.txt" consisting of the following columns: 
+ Subject ID (column 1), covariates (subsequent columns). 
+ The 1st row contains the headers, the 2nd row a string with the categorical
+ variables of interest, and each subsequent row the values for each subject.
 
 %%% ¡seealso!
-Element, Exporter, ImporterGroupSubjectFUN_MP_TXT
+Group, SubjectFUN_MP, ImporterGroupSubjectFUN_MP_TXT
+
+%%% ¡build!
+1
+
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the FUN subject group exporter in TXT.
+%%%% ¡default!
+'ExporterGroupSubjectFUN_MP_TXT'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the FUN subject group exporter in TXT.
+%%%% ¡default!
+'Multiplex Functional Subject Group TXT Exporter'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the FUN subject group exporter in TXT.
+%%%% ¡default!
+'ExporterGroupSubjectFUN_MP_TXT exports a group of subjects with functional multiplex data to a series of TXT file and their covariates age and sex (if existing) to another TXT file.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the FUN subject group exporter in TXT.
+%%%% ¡settings!
+'ExporterGroupSubjectFUN_MP_TXT'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the FUN subject group exporter in TXT.
+%%%% ¡default!
+'ExporterGroupSubjectFUN_MP_TXT ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the FUN subject group exporter in TXT.
+%%%% ¡default!
+'ExporterGroupSubjectFUN_MP_TXT label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the FUN subject group exporter in TXT.
+%%%% ¡default!
+'ExporterGroupSubjectFUN_MP_TXT notes'
 
 %% ¡props!
 
@@ -26,7 +71,18 @@ Group('SUB_CLASS', 'SubjectFUN_MP', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'S
 %%% ¡prop!
 DIRECTORY (data, string) is the directory name where to save the group of subjects with functional multiplex data.
 %%%% ¡default!
-fileparts(which('test_braph2'))
+[fileparts(which('test_braph2')) filesep 'default_group_subjects_FUN_most_likely_to_be_erased']
+
+%%% ¡prop!
+PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with functional multiplex data.
+%%%% ¡settings!
+'ExporterGroupSubjectFUN_MP_TXT'
+%%%% ¡calculate!
+directory = uigetdir('Select directory');
+if ischar(directory) && isfolder(directory)
+    ex.set('DIRECTORY', directory);
+end
+value = ex;
 
 %%% ¡prop!
 SAVE (result, empty) saves the group of subjects with functional multiplex data in TXT files in the selected directory.
@@ -43,78 +99,89 @@ if isfolder(directory)
         mkdir(gr_directory)
     end
     
-    sub_dict = gr.get('SUB_DICT');
-    sub_number = sub_dict.length();
-    sub_id = cell(sub_number, 1);
-    age = cell(sub_number, 1);
-    sex = cell(sub_number, 1);
-
     braph2waitbar(wb, .15, 'Organizing info ...')
+
+    sub_dict = gr.get('SUB_DICT');
+    sub_number = sub_dict.get('LENGTH');
     
     for i = 1:1:sub_number
-        braph2waitbar(wb, .30 + .70 * i / sub_number, ['Saving subject ' num2str(i) ' of ' num2str(sub_number) ' ...'])
+        braph2waitbar(wb, .15 + .85 * i / sub_number, ['Saving subject ' num2str(i) ' of ' num2str(sub_number) ' ...'])
 
-        layers_number = sub_dict.getItem(1).get('L');
-        sub = sub_dict.getItem(i);
+        L = sub_dict.get('IT', 1).get('L');
         
-        sub_directory = [gr_directory filesep() sub.get('ID')];
-        if ~exist(sub_directory, 'dir')
-            mkdir(sub_directory)
-        end
-
-        sub_id(i) = {sub.get('ID')};
+        sub = sub_dict.get('IT', i);
+        sub_id = sub.get('ID');
         sub_FUN_MP = sub.get('FUN_MP');
-        age{i} =  sub.get('AGE');
-        sex{i} =  sub.get('SEX');
         
-        for j=1:1:layers_number
-            tab = table(sub_FUN_MP{j});
+        for l = 1:1:L
+            tab = table(sub_FUN_MP{l});
             
-            sub_file = [sub_directory filesep() sub_id{i} '_' int2str(j) '.txt'];
+            sub_file = [gr_directory filesep() sub_id '.' int2str(l) '.txt'];
             
             % save file
-            writetable(tab, sub_file, 'Delimiter', '\t', 'WriteVariableNames', 0);
+            writetable(tab, sub_file, 'Delimiter', '\t', 'WriteVariableNames', false);
         end
     end
     
-    % if covariates save them in another file
-    if sub_number ~= 0 && ~isequal(sex{:}, 'unassigned')  && ~isequal(age{:},  0) 
-        tab2 = cell(1 + sub_number, 3);
-        tab2{1, 1} = 'ID';
-        tab2{1, 2} = 'Age';
-        tab2{1, 3} = 'Sex';
-        tab2(2:end, 1) = sub_id;
-        tab2(2:end, 2) = age;
-        tab2(2:end, 3) = sex;
-        tab2 = table(tab2);
-        
-        % save
-        writetable(tab2, [gr_directory filesep() gr.get('ID') '_covariates.txt'], 'Delimiter', '\t', 'WriteVariableNames', 0);
+    % variables of interest
+    voi_ids = {};
+    for i = 1:1:sub_number
+        sub = sub_dict.get('IT', i);
+        voi_ids = unique([voi_ids, sub.get('VOI_DICT').get('KEYS')]);
+    end
+    if ~isempty(voi_ids)
+        vois = cell(2 + sub_number, 1 + length(voi_ids));
+        vois{1, 1} = 'Subject ID';
+        vois(1, 2:end) = voi_ids;
+        for i = 1:1:sub_number
+            sub = sub_dict.get('IT', i);
+            vois{2 + i, 1} = sub.get('ID');
+            
+            voi_dict = sub.get('VOI_DICT');
+            for v = 1:1:voi_dict.get('LENGTH')
+                voi = voi_dict.get('IT', v);
+                voi_id = voi.get('ID');
+                if isa(voi, 'VOINumeric') % Numeric
+                    vois{2 + i, 1 + find(strcmp(voi_id, voi_ids))} = voi.get('V');
+                elseif isa(voi, 'VOICategoric') % Categoric
+                    categories = voi.get('CATEGORIES');
+                    vois{2, 1 + find(strcmp(voi_id, voi_ids))} = {['{' sprintf(' ''%s'' ', categories{:}) '}']};
+                    vois{2 + i, 1 + find(strcmp(voi_id, voi_ids))} = categories{voi.get('V')};
+                end
+            end
+        end
+        writetable(table(vois), [gr_directory '.vois.txt'], 'Delimiter', '\t', 'WriteVariableNames', false)
     end
     
-    % sets value to empty
-    value = [];
-
     braph2waitbar(wb, 'close')
-else
-    value = ex.getr('SAVE');    
 end
 
-%% ¡methods!
-function uigetdir(ex)
-    % UIGETDIR opens a dialog box to set the directory where to save the group of subjects with functional multiplex data.
-
-    directory = uigetdir('Select directory');
-    if ischar(directory) && isfolder(directory)
-        ex.set('DIRECTORY', directory);
-    end
-end
+% sets value to empty
+value = [];
 
 %% ¡tests!
 
+%%% ¡excluded_props!
+[ExporterGroupSubjectFUN_MP_TXT.PUT_DIR]
+
 %%% ¡test!
 %%%% ¡name!
-export and import
+Delete directory TBE
+%%%% ¡probability!
+1
+%%%% ¡code!
+warning('off', 'MATLAB:DELETE:FileNotFound')
+dir_to_be_erased = ExporterGroupSubjectFUN_MP_TXT.getPropDefault('DIRECTORY');
+if isfolder(dir_to_be_erased)
+    rmdir(dir_to_be_erased, 's')
+end
+warning('on', 'MATLAB:DELETE:FileNotFound')
+
+%%% ¡test!
+%%%% ¡name!
+Export and import
+%%%% ¡probability!
+.01
 %%%% ¡code!
 br1 = BrainRegion( ...
     'ID', 'ISF', ...
@@ -161,7 +228,7 @@ ba = BrainAtlas( ...
     'ID', 'TestToSaveCoolID', ...
     'LABEL', 'Brain Atlas', ...
     'NOTES', 'Brain atlas notes', ...
-    'BR_DICT', IndexedDictionary('IT_CLASS', 'BrainRegion', 'IT_KEY', 1, 'IT_LIST', {br1, br2, br3, br4, br5}) ...
+    'BR_DICT', IndexedDictionary('IT_CLASS', 'BrainRegion', 'IT_LIST', {br1, br2, br3, br4, br5}) ...
     );
 
 sub1 = SubjectFUN_MP( ...
@@ -169,38 +236,40 @@ sub1 = SubjectFUN_MP( ...
     'LABEL', 'Subejct FUN 1', ...
     'NOTES', 'Notes on subject FUN 1', ...
     'BA', ba, ...
-    'age', 75, ...
-    'sex', 'female', ...
     'L', 2, ...
-    'FUN_MP', {rand(10, ba.get('BR_DICT').length()), rand(10, ba.get('BR_DICT').length())} ...
+    'FUN_MP', {rand(10, ba.get('BR_DICT').get('LENGTH')), rand(10, ba.get('BR_DICT').get('LENGTH'))} ...
     );
+sub1.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 75))
+sub1.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', find(strcmp('Female', {'Female', 'Male'}))))
+
 sub2 = SubjectFUN_MP( ...
     'ID', 'SUB FUN 2', ...
     'LABEL', 'Subejct FUN 2', ...
     'NOTES', 'Notes on subject FUN 2', ...
     'BA', ba, ...
-    'age', 70, ...
-    'sex', 'male', ...
     'L', 2, ...
-    'FUN_MP', {rand(10, ba.get('BR_DICT').length()), rand(10, ba.get('BR_DICT').length())} ...
+    'FUN_MP', {rand(10, ba.get('BR_DICT').get('LENGTH')), rand(10, ba.get('BR_DICT').get('LENGTH'))} ...
     );
+sub2.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 70))
+sub2.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', find(strcmp('Male', {'Female', 'Male'}))))
+
 sub3 = SubjectFUN_MP( ...
     'ID', 'SUB FUN 3', ...
     'LABEL', 'Subejct FUN 3', ...
     'NOTES', 'Notes on subject FUN 3', ...
     'BA', ba, ...
-    'age', 50, ...
-    'sex', 'female', ...
     'L', 2, ...
-    'FUN_MP', {rand(10, ba.get('BR_DICT').length()), rand(10, ba.get('BR_DICT').length())} ...
+    'FUN_MP', {rand(10, ba.get('BR_DICT').get('LENGTH')), rand(10, ba.get('BR_DICT').get('LENGTH'))} ...
     );
+sub3.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 50))
+sub3.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', find(strcmp('Female', {'Female', 'Male'}))))
 
 gr = Group( ...
     'ID', 'GR FUN', ...
     'LABEL', 'Group label', ...
     'NOTES', 'Group notes', ...
     'SUB_CLASS', 'SubjectFUN_MP', ...
-    'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectFUN_MP', 'IT_KEY', 1, 'IT_LIST', {sub1, sub2, sub3}) ...
+    'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectFUN_MP', 'IT_LIST', {sub1, sub2, sub3}) ...
     );
 
 directory = [fileparts(which('test_braph2')) filesep 'trial_group_subjects_FUN_MP_to_be_erased'];
@@ -221,43 +290,43 @@ im1 = ImporterGroupSubjectFUN_MP_TXT( ...
     );
 gr_loaded1 = im1.get('GR');
 
-assert(gr.get('SUB_DICT').length() == gr_loaded1.get('SUB_DICT').length(), ...
-	[BRAPH2.STR ':ExporterGroupSubjectFUN_MP_TXT:' BRAPH2.BUG_IO], ...
+assert(gr.get('SUB_DICT').get('LENGTH') == gr_loaded1.get('SUB_DICT').get('LENGTH'), ...
+	[BRAPH2.STR ':ExporterGroupSubjectFUN_MP_TXT:' BRAPH2.FAIL_TEST], ...
     'Problems saving or loading a group.')
-for i = 1:1:max(gr.get('SUB_DICT').length(), gr_loaded1.get('SUB_DICT').length())
-    sub = gr.get('SUB_DICT').getItem(i);
-    sub_loaded = gr_loaded1.get('SUB_DICT').getItem(i);    
+for i = 1:1:max(gr.get('SUB_DICT').get('LENGTH'), gr_loaded1.get('SUB_DICT').get('LENGTH'))
+    sub = gr.get('SUB_DICT').get('IT', i);
+    sub_loaded = gr_loaded1.get('SUB_DICT').get('IT', i);    
     assert( ...
         isequal(sub.get('ID'), sub_loaded.get('ID')) & ...
         isequal(sub.get('BA'), sub_loaded.get('BA')) & ...
-        isequal(sub.get('AGE'), sub_loaded.get('AGE')) & ...
-        isequal(sub.get('SEX'), sub_loaded.get('SEX')) & ...
+        isequal(sub.get('VOI_DICT').get('IT', 'Age').get('V'), sub_loaded.get('VOI_DICT').get('IT', 'Age').get('V')) & ... 
+        isequal(sub.get('VOI_DICT').get('IT', 'Sex').get('V'), sub_loaded.get('VOI_DICT').get('IT', 'Sex').get('V')) & ...
         isequal(sub.get('L'), sub_loaded.get('L')) & ...
         isequal(cellfun(@(v) round(v, 10), sub.get('FUN_MP'), 'UniformOutput', false), cellfun(@(v) round(v, 10), sub_loaded.get('FUN_MP'), 'UniformOutput', false)), ...
-        [BRAPH2.STR ':ExporterGroupSubjectFUN_MP_TXT:' BRAPH2.BUG_IO], ...
+        [BRAPH2.STR ':ExporterGroupSubjectFUN_MP_TXT:' BRAPH2.FAIL_TEST], ...
         'Problems saving or loading a group.')    
 end
 
 % import with new brain atlas
 im2 = ImporterGroupSubjectFUN_MP_TXT( ...
-    'DIRECTORY', [directory filesep() gr.get(Group.ID)], ...
-    'BA', ba ...
+    'DIRECTORY', [directory filesep() gr.get(Group.ID)] ...
     );
 gr_loaded2 = im2.get('GR');
 
-assert(gr.get('SUB_DICT').length() == gr_loaded2.get('SUB_DICT').length(), ...
-	[BRAPH2.STR ':ExporterGroupSubjectFUN_MP_TXT:' BRAPH2.BUG_IO], ...
+assert(gr.get('SUB_DICT').get('LENGTH') == gr_loaded2.get('SUB_DICT').get('LENGTH'), ...
+	[BRAPH2.STR ':ExporterGroupSubjectFUN_MP_TXT:' BRAPH2.FAIL_TEST], ...
     'Problems saving or loading a group.')
-for i = 1:1:max(gr.get('SUB_DICT').length(), gr_loaded2.get('SUB_DICT').length())
-    sub = gr.get('SUB_DICT').getItem(i);
-    sub_loaded = gr_loaded2.get('SUB_DICT').getItem(i);
+for i = 1:1:max(gr.get('SUB_DICT').get('LENGTH'), gr_loaded2.get('SUB_DICT').get('LENGTH'))
+    sub = gr.get('SUB_DICT').get('IT', i);
+    sub_loaded = gr_loaded2.get('SUB_DICT').get('IT', i);
     assert( ...
-        isequal(sub.get('ID'), sub_loaded.get('ID')) & ...
-        isequal(sub.get('AGE'), sub_loaded.get('AGE')) & ...
-        isequal(sub.get('SEX'), sub_loaded.get('SEX')) & ...
+        isequal(sub.get('ID'), sub_loaded.get('ID')) & ... 
+        ~isequal(sub.get('BA').get('ID'), sub_loaded.get('BA').get('ID')) & ...
+        isequal(sub.get('VOI_DICT').get('IT', 'Age').get('V'), sub_loaded.get('VOI_DICT').get('IT', 'Age').get('V')) & ... 
+        isequal(sub.get('VOI_DICT').get('IT', 'Sex').get('V'), sub_loaded.get('VOI_DICT').get('IT', 'Sex').get('V')) & ...
         isequal(sub.get('L'), sub_loaded.get('L')) & ...
         isequal(cellfun(@(v) round(v, 10), sub.get('FUN_MP'), 'UniformOutput', false), cellfun(@(v) round(v, 10), sub_loaded.get('FUN_MP'), 'UniformOutput', false)), ...
-        [BRAPH2.STR ':ExporterGroupSubjectFUN_MP_TXT:' BRAPH2.BUG_IO], ...
+        [BRAPH2.STR ':ExporterGroupSubjectFUN_MP_TXT:' BRAPH2.FAIL_TEST], ...
         'Problems saving or loading a group.')     
 end
 

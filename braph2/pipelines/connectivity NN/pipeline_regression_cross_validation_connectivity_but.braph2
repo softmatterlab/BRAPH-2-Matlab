@@ -1,0 +1,23 @@
+%% Pipeline Regression Cross-Validation Connectivity BUT
+
+% This is the pipeline script to execute cross-validation with multi-layer perceptron regressor using the adjacency matrix with binary undirected graph at fix thresholds obtained from connectivity data.
+% The connectivity data can be derived from imaging modalities like diffusion weighted imaging (DWI).
+% 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
+% 2. It loads data for a group of subjects from the directory (e.g., CON_Group_XLS) containing XLS files for each subject.
+% 3. It analyzes the group using connectivity analyses (CON) binary undirected graphs at fixed densities (BUT).
+% 4. It executes the cross-validation process.
+
+% PDF: 
+% README: 
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Group
+gr = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON from XLS % Group CON
+
+%% Analysis
+a_BUT = AnalyzeEnsemble_CON_BUT('GR', gr, 'THRESHOLDS', .1:.1:.3); % Analyze Group % Group Analysis
+
+%% Cross-Validation
+nncv = NNRegressorMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_Graph_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_REG', 'IT_LIST', cellfun(@(g, sub) NNDataPoint_Graph_REG('ID', g.get('ID'), 'SUB', sub, 'G', g, 'TARGET_IDS', sub.get('VOI_DICT').get('KEYS')), a_BUT.get('G_DICT').get('IT_LIST'), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process

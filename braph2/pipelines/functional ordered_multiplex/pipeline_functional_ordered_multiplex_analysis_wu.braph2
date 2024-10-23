@@ -1,0 +1,19 @@
+%% Pipeline Functional Ordered-Multiplex Analysis WU
+
+% This is the pipeline script to analyze a group of subjects using functional ordinal multiplex data and a weighted undirected graph.
+% The functional data can be derived from imaging modalities like functional MRI (fMRI), electroencephalography (EEG) or magnetoencephalography (MEG).
+% 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
+% 2. It loads the functional data of one group of subjects from two directories (e.g., GroupName1 and GroupName2) containing XLS files of each subject.
+% 3. It analyzes the data using functional ordered-multiplex analysis (FUN_OMP) based on weighted undirected graphs (WU).
+
+% PDF: 
+% README: 
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas
+
+%% Group
+gr = ImporterGroupSubjectFUN_MP_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN OMP from XLS % Group FUN OMP
+
+%% Analysis
+a_WU = AnalyzeEnsemble_FUN_OMP_WU('GR', gr); % Analyze Group % Group Analysis

@@ -1,0 +1,204 @@
+Craddock200					
+Craddock200 Label					
+Craddock200 Notes					
+					
+1lIOG	Inferior Occipital G	-39.7283	-85.3526	0.26012	none
+2lANG	Angular G	-49.7727	-60.6136	22.2159	none
+3lPRECU	Precuneus	13.148	-64.722	23.5776	none
+4lINS	Insula	-36.9079	-13.4079	-3.5395	none
+5lANT	Anterior cingulate	-6.8959	45.6516	6.5837	none
+6rPRECU	Precuneus	9.0112	-36.0781	46.5502	none
+7rANG	Angular G	55.6107	-47.2992	39.8484	none
+8lPOST	Postcentral G	-40.8289	-21.1184	52.9079	none
+9lCEREB	Cerebellum	-19.3224	-62.0939	-27.3551	none
+10rCEREB	Cerebellum	43.0633	-55.3165	-33.4557	none
+11lMTG	Middle temporal G	-58.5281	-30.2584	-3.7528	none
+12rFP	Frontal pole	27.5455	58.5734	-2.6224	none
+13rMEDFG	Medial Frontal G	2.9492	12.4322	48.6483	none
+14rANG	Angular G	53.7553	-55.3298	22.5638	none
+15rPUT	Putamen	13.3443	12.4262	-7.377	none
+16lIOG	Inferior Occipital G	-48.9844	-65.5781	-6.0586	none
+17rPRECE	Precentral	46.2108	8.8386	30.7399	none
+18rTHA	Thalamus	11.9077	-20.5231	8.1692	none
+19lPRECU	Precuneus	-9.8253	-67.2268	21.4796	none
+20lINS	Insula	-32.7044	19.5074	1.3892	none
+21lPOST	Postcentral G	-9.3255	-37.9104	68.0236	none
+22rANT	Anterior cingulate	6.52	42.2133	4.5867	none
+23lMFG	Middle frontal G	-41.8358	41.7313	12.7612	none
+24lSTG	Superior temporal G	-58.4579	-27.3785	14.4813	none
+25rMFG	Middle frontal G	44.5189	40.8113	13.8821	none
+26rIOG	Inferior Occipital G	43.417	-73.7617	-11.7064	none
+27lPARAH	Parahippocampal G	-30.3273	-5.1818	-33.2727	none
+28rPOST	Postcentral G	29.424	-33.42	62.448	none
+29rCING	CINGULATE G	1.625	-15.9167	33.375	none
+30rBRAINSTEM	Brainstem	2.8586	-27.8325	-36.6126	none
+31rSPG	Superior Parietal Lobule	30.1714	-54.5429	58.6143	none
+32rTP	Temporal pole	43.5608	9.5676	-38.1081	none
+33lSUPRAM	Supramarginal G	-56.8608	-43.3763	25.3763	none
+34lPRECE	Precentral	-45.6	7.8769	30.9077	none
+35rINS	Insula	40.8534	-5.2618	9.6754	none
+36lCEREB	Cerebellum	-40.2834	-52.4599	-34.7487	none
+37lTHA	Thalamus	-13.3562	-31.9589	0.15068	none
+38rMFG	Middle frontal G	42.5455	24.2851	36.6074	none
+39rMTG	Middle temporal G	62.656	-42.8394	-8.9587	none
+40rANT	Anterior cingulate	1.7338	33.3799	23.6006	none
+41rCEREB	Cerebellum	30.4972	-39.4309	-32.3867	none
+42lFP	Frontal pole	-27.8333	48.9444	-14.1111	none
+43lTP	Temporal pole	-39	6.0745	-40.0435	none
+44rOP	Occipital pole	13.583	-94.4043	1.4809	none
+45lTHA	Thalamus	-8.1989	-17.9148	9	none
+46rPCG	Posterior Cingulate	1.894	-38.1843	31.4101	none
+47lCAU	Caudate	-13.795	12.8159	-3.8787	none
+48rPARAH	Parahippocampal G	19.0837	-34.6388	-2.8943	none
+49rMTG	Middle temporal G	61.8086	-20.799	-16.8086	none
+50lSFG	Superior frontal G	-27.9802	-6.5792	56.9554	none
+51lANT	Anterior cingulate	-0.34404	38.8486	-13.7339	none
+52lBRAINSTEM	Brainstem	-6.5068	-45.9932	-40.1554	none
+53rFOG	Frontal Orbital G	44.507	29.5211	-10.9155	none
+54lCUN	Cuneus	-5.3447	-87.3072	24.5631	none
+55lANT	Anterior cingulate	0.5	16.369	31.1548	none
+56lANG	Angular G	-51.8911	-50.2426	40.9455	none
+57lFOG	Frontal Orbital G	-27.3453	31.1439	-16.1223	none
+58rPRECU	Precuneus	1.65	-52.5625	14.3125	none
+59rINS	Insula	36.5865	17.3459	2.5038	none
+60rPOST	Postcentral G	43.3626	-20.1298	52.6031	none
+61lMFG	Middle frontal G	-38.8519	20.4074	41.3889	none
+62rFUS	Fusiform	33.9028	-31.4583	-17.4028	none
+63lFUS	Fusiform	-43.6773	-51.9545	-19.1318	none
+64rMFG	Middle frontal G	28.5421	-0.53271	55.7664	none
+65rSPG	Superior Parietal Lobule	12.381	-45.0833	67	none
+66rSTG	Superior temporal G	61.3333	-17.4583	11.6146	none
+67lPUT	Putamen	-27.9025	1.1822	2.6949	none
+68rMIDB	Midbrain	1.2324	-20.5519	-8.5768	none
+69rMTG	Middle temporal G	59.7253	-44.4725	9.7033	none
+70lLING	Lingual G	-11.3445	-69.7941	5.3445	none
+71rFOG	Frontal Orbital G	29.135	24.8282	-16.0675	none
+72lMTG	Middle temporal G	-56.4952	-15.4615	-16.9038	none
+73lPRECE	Precentral	-43.0669	0.85356	46.7448	none
+74lFOG	Frontal Orbital G	-44.0103	33.2629	-9.3866	none
+75rFP	Frontal pole	31.9891	54.8967	13.5	none
+76lPCG	Posterior Cingulate	-7.709	-33.5164	44.9877	none
+77rCEREB	Cerebellum	17.1743	-80.3257	-29.2294	none
+78lTP	Temporal pole	-40.575	12.7125	-28.6687	none
+79lANT	Anterior cingulate	-0.15126	-0.22689	41.2185	none
+80lCEREB	Cerebellum	-36.5245	-70.9091	-32.958	none
+81rCUN	Cuneus	13.3003	-77.6519	37.9659	none
+82lANG	Angular G	-43.0556	-67.1528	38.875	none
+83rSTG	Superior temporal G	47.6068	7.5874	-10.7184	none
+84lCAU	Caudate	-12.4679	5.4771	12.2752	none
+85rIOG	Inferior Occipital G	46.6901	-73.7606	14.6761	none
+86rBRAINSTEM	Brainstem	8.4	-44.6182	-37.8545	none
+87rFUS	Fusiform	37.7021	-12.7447	-27.0426	none
+88lPOST	Postcentral G	-57.4912	-8.5439	24.8421	none
+89rLING	Lingual G	8.0657	-73.8	5.0314	none
+90lPRECE	Precentral	-17.8884	-16.1302	68.6651	none
+91lMEDFG	Medial Frontal G	0.92537	51.7612	25.597	none
+92lAMY	Amygdala	-18.5455	-7.4727	-16.7455	none
+93rSUPRAM	Supramarginal G	40.9732	-42.9463	47.7785	none
+94rCAU	Caudate	14.5385	-0.49451	17.2747	none
+95lSFG	Superior frontal G	-26.2885	12.0593	55.2569	none
+96lPOST	Postcentral G	-29.1972	-36.0423	61.2113	none
+97lSOG	Superior Occipital G	-33.7949	-81.5	25.141	none
+98rPRECE	Precentral	60.3043	-1.3623	24.7681	none
+99lITG	Inferior Temporal G	-57.9	-48.3	-9.4	none
+100rITG	Inferior Temporal G	48.1579	-52.6692	-17.3459	none
+101lITG	Inferior Temporal G	-51.4756	-4.0244	-29.0305	none
+102rIOG	Inferior Occipital G	35.747	-87.0542	9.0542	none
+103lCEREB	Cerebellum	-29	-40.0357	-31.4107	none
+104lFP	Frontal pole	-9.3018	62.2189	12.6923	none
+105rLING	Lingual G	18.15	-55.6179	2.4321	none
+106rMFG	Middle frontal G	28.4235	34.5459	40.8827	none
+107rMTG	Middle temporal G	55.2267	-28.3846	-1.0081	none
+108lLING	Lingual G	-6.786	-93.3653	0.8524	none
+109rFP	Frontal pole	1.5346	56.0461	-8.5438	none
+110rTP	Temporal pole	31.0571	6.2143	-19.6286	none
+111rPRECE	Precentral	2.0508	-23.6484	66.9609	none
+112lFOG	Frontal Orbital G	-28.7281	12.2627	-17.5576	none
+113rMFG	Middle frontal G	42.9206	49.0476	-6.1587	none
+114lSOG	Superior Occipital G	-25.6678	-73.8102	39.7831	none
+115rPRECE	Precentral	44.305	1.3668	48.7181	none
+116lPOST	Postcentral G	-55.9565	-28.7446	36.4239	none
+117lMTG	Middle temporal G	-56.7422	-48.1523	7.9336	none
+118rCEREB	Cerebellum	21.1004	-58.9182	-26.4535	none
+119rIFG	Inferior Frontal G	55.9154	4.2231	4.8923	none
+120lCEREB	Cerebellum	-17.6786	-81.2619	-31.5833	none
+121lINS	Insula	-39.7018	-13.7339	11.6147	none
+122lPARAH	Parahippocampal G	-27.4397	-38.3276	-12.0517	none
+123lPARAC	Paracentral lobule	0.46084	-15.2169	51.1084	none
+124rFP	Frontal pole	27.8155	44.2136	-15.2039	none
+125lMFG	Middle frontal G	-30.1061	38.0152	32.6515	none
+126rCEREB	Cerebellum	35.4298	-72.781	-31.6116	none
+127rMFG	Middle frontal G	30.7464	17.8995	51.5024	none
+128rIPG	Inferior Parietal G	61.3322	-31.6888	25.4895	none
+129lSTG	Superior temporal G	-44.1696	-0.89732	-15.4955	none
+130lMIDB	Midbrain	0.59694	-3.5204	-9.8724	none
+131lIOG	Inferior Occipital G	-25.4521	-92.7766	11.6489	none
+132rSPG	Superior Parietal G	29.7379	-67.8495	46.3107	none
+133lSFG	Superior frontal G	-9.0558	46.5628	38.9442	none
+134rPRECE	Precentral	24.2368	-13.5	66.9158	none
+135rCAU	Caudate	15.5143	14.1857	6.5357	none
+136lSOG	Superior Occipital G	-14.4	-65.9609	55.0565	none
+137rINS	Insula	40.6017	-10.7415	-5.3771	none
+138rFUS	Fusiform	22.0874	-69.4466	-12.3204	none
+139rFP	Frontal pole	10.4185	62.8533	8.837	none
+140rMTG	Middle temporal G	55.1732	-4.0223	-27.0838	none
+141lIFG	Inferior Frontal G	-49.3417	22.7789	8.6683	none
+142rMOG	Middle Occipital G	18.3708	-89.3933	21.691	none
+143rIOG	Inferior Occipital G	53.2326	-61.5	0.4186	none
+144rIFG	Inferior Frontal G	52.1935	27.5161	3.871	none
+145lPARAH	Parahippocampal G	-31.6047	-21.3663	-18.9419	none
+146lSTG	Superior temporal G	-56.2163	-10.5918	3.5878	none
+147lPRECU	Precuneus	-7.6996	-74.7554	39.8627	none
+148rTHAL	Thalamus	1.5549	-4.3354	4.4634	none
+149lMEDFG	Medial Frontal G	-0.1336	30.9231	44.7935	none
+150lIOG	Inferior Occipital G	-46.5215	-71.555	10.9091	none
+151lMFG	Middle frontal G	-44.3033	26.1754	25.3791	none
+152rCEREB	Cerebellum	1.4477	-56.8713	-13.3834	none
+153rSTG	Superior temporal G	58.4625	-7.625	-9.2	none
+154lPOST	Postcentral G	-51.6283	-14.1518	39.3298	none
+155rPARAH	Parahippocampal G	21.3708	-11.8764	-17.382	none
+156lSPG	Superior Parietal Lobule	-34	-53.8701	49.2857	none
+157rPOST	Postcentral G	54.3982	-12.146	38.1504	none
+158lOP	Occipital pole	-21.0533	-92.16	-13.0533	none
+159lFUS	Fusiform	-36.2174	-77.942	-16.029	none
+160lANT	Anterior cingulate	0.42568	21.2838	-8.5338	none
+161rSFG	Superior frontal G	10.8106	1.5463	65.6828	none
+162lCEREB	Cerebellum	-8.9874	-44.1429	-25.6008	none
+163rPRECU	Precuneus	10.1842	-63.2143	55.2857	none
+164rIFG	Inferior Frontal G	51.9038	20.6109	20.3724	none
+165lPRECE	Precentral	-53.6292	7.3483	16.6348	none
+166rANG	Angular G	45.1786	-65.5	38.3095	none
+167lIFG	Inferior Frontal G	-25.2439	52.1268	22.1122	none
+168rMFG	Middle frontal G	32.5049	44.7524	27.2767	none
+169lIFG	Inferior Frontal G	-40.8649	48.6216	-4.3243	none
+170rSOG	Superior Occipital G	33.1216	-77.9054	29.9189	none
+171lSPG	Superior Parietal Lobule	-42.4104	-37.9953	47.434	none
+172rFUS	Fusiform	27.9958	-49.1975	-13.8151	none
+173lSFG	Superior frontal G	-8.3651	20	58.746	none
+174lPRECU	Precuneus	-0.80508	-55.178	37.7966	none
+175rIOG	Inferior Occipital cortex	31.117	-87.766	-11.2979	none
+176rCEREB	Cerebellum	1.0645	-63.1573	-35.0444	none
+177lLING	Lingual G	-14.1691	-74.2338	-10.9317	none
+178rPUT	Putamen	27.098	0.85714	-0.39184	none
+179lLING	Lingual G	-13.249	-52.9102	-1.2612	none
+180rPOST	Postcentral G	56.0047	-29.3033	43.1517	none
+181rTP	Temporal pole	45.2055	13.2534	-25.3151	none
+182lSUPP	Supplementary motor cortex	-8.4181	0.89224	65.5603	none
+183lFP	Frontal pole	-27.9034	56.8295	3.8864	none
+184lINS	Insula	-46.514	5.1308	1.3738	none
+185rTTG	Transverse Temporal G	44.4464	-24.6567	15.4378	none
+186rSFG	Superior frontal G	12.3034	42.8933	44.6629	none
+187rSFG	Superior frontal G	13.5606	21.9697	58.0303	none
+188lSPG	Superior Parietal Lobule	-18.0798	-52.6277	64.7872	none
+189lFUS	Fusiform	-27.049	-58.0653	-14.4612	none
+190rBRAINS	Brainstem	16.1279	-33.8721	-22.5349	none
+191lSFG	Superior frontal G	-21.5519	29.8868	46.3019	none
+192lCEREB	Cerebellum	-0.54185	-77.6432	-24.1586	none
+193rSFG	Superior frontal G	14.9038	56.4615	28.3269	none
+194rMIDB	Midbrain	1.0263	-31.3263	-18.1737	none
+195rLING	Lingual G	8.2934	-87.0372	-13.4504	none
+196lINS	Insula	-46.4262	14.2295	-12.3934	none
+197lPRECU	Precuneus	-4.1803	-52.377	57.0246	none
+198rFUS	Fusiform	30.9091	-1.5455	-37.3091	none
+199lBRAINS	Brainstem	-15.1885	-30.5026	-19.9476	none
+200lTTG	Transverse Temporal G	-42.1239	-31.5	14.5459	none

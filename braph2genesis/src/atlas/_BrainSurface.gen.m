@@ -1,33 +1,64 @@
 %% ¡header!
-BrainSurface < Element (bs, brain surface) is a brain surface.
+BrainSurface < ConcreteElement (bs, brain surface) is a brain surface.
 
 %%% ¡description!
-BrainSurface contains the information of a brain surface.
-It provides the methods necessary to handle the brain surface data.
-BrainSurface contains and manages the vertex_number, coordinates, triangles_number, and 
-triangles of a brain surface. 
+A Brain Surface (BrainSurface) contains the information of a brain surface.
+ It provides the methods necessary to handle the brain surface data.
+BrainSurface contains and manages the vertex_number, coordinates, 
+ triangles_number, and triangles of a brain surface. 
     
 %%% ¡seealso!
-Element, BrainAtlas, BrainRegion
+BrainAtlas, BrainRegion, BrainSurfacePF
+
+%%% ¡build!
+1
+
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the brain surface.
+%%%% ¡default!
+'BrainSurface'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the brain surface.
+%%%% ¡default!
+'Brain Surface'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the brain surface.
+%%%% ¡default!
+'A Brain Surface (BrainSurface) contains the information of a brain surface. It provides the methods necessary to handle the brain surface data. BrainSurface contains and manages the vertex_number, coordinates, triangles_number, and triangles of a brain surface.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the brain surface.
+%%%% ¡settings!
+'BrainSurface'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the brain surface.
+%%%% ¡default!
+'BrainSurface ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the brain surface.
+%%%% ¡default!
+'BrainSurface label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the brain surface.
+%%%% ¡default!
+'BrainSurface notes'
 
 %% ¡props!
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the brain surface.
-
-%%% ¡prop!
-LABEL (metadata, string) is an extended label of the brain surface.
-
-%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the brain surface.
-
-%%% ¡prop!
-VERTEX_NUMBER (data, scalar) is the number of triangles vertices.
+VERTEX_NUMBER (data, scalar) is the number of triangle vertices of the brain surface.
 %%%% ¡check_prop!
 check = value >= 0;
 
 %%% ¡prop!
-COORDINATES (data, matrix) is the coordinates of the triangles vertices.
+COORDINATES (data, matrix) are the coordinates of the triangle vertices of the brain surface.
 %%%% ¡check_prop!
 check = isempty(value) || size(value, 2) == 3;
 %%%% ¡check_value!
@@ -39,12 +70,12 @@ else
 end
 
 %%% ¡prop!
-TRIANGLES_NUMBER (data, scalar) is the number of triangles.
+TRIANGLES_NUMBER (data, scalar) is the number of triangles of the brain surface.
 %%%% ¡check_prop!
 check = value >= 0;
 
 %%% ¡prop!
-TRIANGLES (data, matrix) is the triad of coordinates identifiers to create a triangle.
+TRIANGLES (data, matrix) are the triads of coordinates of the triangles of the brain surface.
 %%%% ¡check_prop!
 check = isempty(value) || size(value, 2) == 3;
 %%%% ¡check_value!

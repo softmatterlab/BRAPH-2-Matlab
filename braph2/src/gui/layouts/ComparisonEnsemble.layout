@@ -1,0 +1,38 @@
+ELCLASS
+NaN
+NAME
+NaN
+DESCRIPTION
+NaN
+TEMPLATE
+NaN
+Measure Comparison ID
+1
+Measure Comparison NAME
+2
+NOTES
+NaN
+TOSTRING
+NaN
+Measure
+3
+C
+NaN
+DIFFERENCE
+4
+P1
+5
+P2
+6
+Lower value of 95% confidence interval
+7
+Upper value of 95% confidence interval
+8
+QVALUE
+9
+Measure Comparison Plot
+10
+Measure Comparison Brain
+11
+CALCULATE_RESULTS
+NaN

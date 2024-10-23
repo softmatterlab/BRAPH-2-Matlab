@@ -1,0 +1,18 @@
+%% Pipeline Atlas
+
+% This is the pipeline script to load some brain atlases.
+% 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
+% 2. It loads two brain atlases from XLS files (e.g., aal90_atlas.xlsx, bna_atlas.xlsx).
+% 3. It loads three brain atlases from TXT files (e.g., desikan_atlas.txt, aal90_atlas.txt, bna_atlas.txt).
+
+%% Brain Atlas XLS
+ba1_xls = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load 1st Brain Atlas from XLS % 1st Brain Atlas XLS
+
+%% Brain Atlas XLS
+ba2_xls = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load 2nd Brain Atlas from XLS % 2nd Brain Atlas XLS
+ba3_xls = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load 3rd Brain Atlas from XLS % 3rd Brain Atlas XLS
+
+%% Brain Atlas TXT
+ba1_txt = ImporterBrainAtlasTXT('WAITBAR', true).get('GET_FILE').get('BA'); % Load 4th Brain Atlas from TXT % 4th Brain Atlas TXT
+ba2_txt = ImporterBrainAtlasTXT('WAITBAR', true).get('GET_FILE').get('BA'); % Load 5th Brain Atlas from TXT % 5th Brain Atlas TXT
+ba3_txt = ImporterBrainAtlasTXT('WAITBAR', true).get('GET_FILE').get('BA'); % Load 6th Brain Atlas from TXT % 6th Brain Atlas TXT

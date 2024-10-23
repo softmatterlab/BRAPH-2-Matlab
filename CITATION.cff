@@ -1,0 +1,66 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: 'BRAPH 2: Brain Analysis using Graph Theory 2'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Giovanni
+    family-names: Volpe
+    email: giovanni.vole@physics.gu.se
+    affiliation: Gothenburg University
+    orcid: 'https://orcid.org/0000-0001-5057-1846'
+  - given-names: Joana
+    name-particle: B.
+    family-names: Pereira
+    email: joana.pereira@ki.se
+    affiliation: Karolinska Institute
+    orcid: 'https://orcid.org/0000-0002-4604-2711'
+  - given-names: Pablo Emiliano
+    family-names: Gómez Ruiz
+    email: emiliano.gomez@physics.gu.se
+    affiliation: Gothenburg University
+    orcid: 'https://orcid.org/0000-0002-5388-7712'
+  - given-names: Anna
+    family-names: Canal-Garcia
+    email: anna.canal@ki.se
+    affiliation: Karolinska Institute
+    orcid: 'https://orcid.org/0000-0001-7460-741X'
+  - given-names: Yu-Wei
+    family-names: Chang
+    email: yu-wei.chang@physics.gu.se
+    affiliation: Gothenburg University
+    orcid: 'https://orcid.org/0000-0001-9598-2278'
+  - given-names: Mite
+    family-names: Mijalkov
+    email: mite.mijalkov@ki.se
+    affiliation: Karolinksa Institute
+    orcid: 'https://orcid.org/0000-0002-9844-4413'
+  - given-names: Eric
+    family-names: Westman
+    email: eric.westman@ki.se
+    affiliation: Karolinska Institute
+    orcid: 'https://orcid.org/0000-0002-3115-2977'
+  - given-names: Dániel
+    family-names: Véreb
+    email: daniel.vereb@ki.se
+    affiliation: Karolinska Institute
+    orcid: 'https://orcid.org/0000-0003-2077-5252'
+  - given-names: Hang
+    family-names: Zhao
+    email: hang.zhao@physics.gu.se
+    affiliation: Gothenburg University
+    orcid: 'https://orcid.org/0009-0009-3797-1162'
+  - given-names: Blanca
+    family-names: Zufiria Gerbolés
+    email: blanca.zufiria.gerboles@ki.se
+    affiliation: Karolinska Institute
+    orcid: 'https://orcid.org/0000-0001-7756-630X'
+  - given-names: Jiawei
+    family-names: Sun
+    email: jiawei.sun@ki.se
+    affiliation: Karolinska Institute
+    orcid: 'https://orcid.org/0000-0002-2986-2734'

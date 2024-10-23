@@ -1,57 +1,179 @@
 %% ¡header!
-Diameter < Measure (m, diameter) is the graph diameter.
+Diameter < Measure (m, diameter) is the graph Diameter.
 
 %%% ¡description!
-The diameter is the maximum eccentricity among the vertice within a layer.
+The Diameter (Diameter) is the maximum eccentricity among the vertices within a layer.
 
-%%% ¡shape!
-shape = Measure.GLOBAL;
+%%% ¡build!
+1
 
-%%% ¡scope!
-scope = Measure.UNILAYER;
+%% ¡layout!
 
-%%% ¡parametricity!
-parametricity = Measure.NONPARAMETRIC;
+%%% ¡prop!
+%%%% ¡id!
+Diameter.ID
+%%%% ¡title!
+Measure ID
 
-%%% ¡compatible_graphs!
-GraphWU
-GraphBU
-MultigraphBUD
-MultigraphBUT
-MultiplexBU
-MultiplexBUD
-MultiplexBUT
-MultiplexWU
+%%% ¡prop!
+%%%% ¡id!
+Diameter.LABEL
+%%%% ¡title!
+Measure NAME
 
-%% ¡props!
-%%% ¡prop! 
-rule (parameter, OPTION) % calculation in a graph or its subgraph
-%%%% ¡settings!
-{'all', 'subgraphs'}
-%%%% ¡default!
-'all'
+%%% ¡prop!
+%%%% ¡id!
+Diameter.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.M
+%%%% ¡title!
+Diameter
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+Diameter.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
 
 %% ¡props_update!
+
 %%% ¡prop!
-M (result, cell) is the diameter.
+ELCLASS (constant, string) is the class of the Diameter.
+%%%% ¡default!
+'Diameter'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the Diameter.
+%%%% ¡default!
+'Diameter'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the Diameter.
+%%%% ¡default!
+'The Diameter (Diameter) is the maximum eccentricity among the vertices within a layer.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the Diameter.
+%%%% !settings!
+'Diameter'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code of the Diameter.
+%%%% ¡default!
+'Diameter ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the Diameter.
+%%%% ¡default!
+'Diameter label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the Diameter.
+%%%% ¡default!
+'Diameter notes'
+
+%%% ¡prop!
+SHAPE (constant, scalar) is the measure shape __Measure.GLOBAL__.
+%%%% ¡default!
+Measure.GLOBAL
+
+%%% ¡prop!
+SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
+%%%% ¡default!
+Measure.UNILAYER
+
+%%% ¡prop!
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+%%%% ¡default!
+Measure.NONPARAMETRIC
+
+%%% ¡prop!
+COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+%%%% ¡default!
+{'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU'};
+
+%%% ¡prop!
+M (result, cell) is the Diameter.
 %%%% ¡calculate!
 g = m.get('G'); % graph from measure class
-A = g.get('A'); % cell matrix for graph, multigraph, or multiplex, etc
+A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.)
+L = g.get('LAYERNUMBER');
 
-eccentricity = Eccentricity('G', g, 'RULE', m.get('rule')).get('M');
-diameter = cell(g.layernumber(), 1);
+eccentricity = Eccentricity('G', g, 'RULE', m.get('RULE')).get('M'); 
+diameter = cell(L, 1);
 
-for li = 1:1:g.layernumber()
+parfor li = 1:L
     diameter(li) = {max(eccentricity{li})};
 end
 
 value = diameter;
 
+%% ¡props!
+
+%%% ¡prop! 
+RULE (parameter, OPTION)  % calculation in a graph or its subgraph
+%%%% ¡settings!
+{'all', 'subgraphs'}
+%%%% ¡default!
+'all'
+
 %% ¡tests!
+
+%%% ¡excluded_props!
+[Diameter.PFM]
+
+%%% ¡test!
+%%%% ¡name!
+GraphWU
+%%%% ¡probability!
+.01
+%%%% ¡code!
+B = [
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+
+
+known_diameter_subgraphs = {5};
+g = GraphWU('B', B);
+
+m_outside_g = Diameter('G', g);
+m_outside_g.set('RULE', 'subgraphs');
+
+assert(isequal(m_outside_g.get('M'), known_diameter_subgraphs), ...
+    [BRAPH2.STR ':Diameter:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'Diameter');
+m_inside_g.set('RULE', 'subgraphs');
+assert(isequal(m_inside_g.get('M'), known_diameter_subgraphs), ...
+    [BRAPH2.STR ':Diameter:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
 GraphBU
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B = [
     0     .1  .2  .25  0;
@@ -62,177 +184,104 @@ B = [
     ];
 
 known_diameter_subgraphs = {1};
-known_diameter_default = {Inf};
 
 g = GraphBU('B', B);
-m_outside_g = Diameter('G', g, 'rule', 'subgraphs');
+
+m_outside_g = Diameter('G', g);
+m_outside_g.set('RULE', 'subgraphs');
+
+
 assert(isequal(m_outside_g.get('M'), known_diameter_subgraphs), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for GraphBU.')
+    [BRAPH2.STR ':Diameter:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-g = GraphBU('B', B);
-m_inside_g = g.getMeasure('Diameter', 'rule', 'subgraphs');
+m_inside_g = g.get('MEASURE', 'Diameter');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_diameter_subgraphs), ...
-    [BRAPH2.STR ':Diameter' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for GraphBU.')
-
-g = GraphBU('B', B);
-m_outside_g = Diameter('G', g, 'rule', 'all');
-assert(isequal(m_outside_g.get('M'), known_diameter_default), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for GraphBU.')
-
-g = GraphBU('B', B);
-m_inside_g = g.getMeasure('Diameter', 'rule', 'all');
-assert(isequal(m_inside_g.get('M'), known_diameter_default), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for GraphBU.')
+    [BRAPH2.STR ':Diameter:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
-GraphWU
+MultiplexWU
+%%%% ¡probability!
+.01
 %%%% ¡code!
-B = [
+B11 = [
     0     .1  .2  .25  0;
     .125  0   0   0    0;
     .2    .5  0   .25  0;
     .125  10  0   0    0;
     0     0   0   0    0
     ];
+B22 = [
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+B = {B11 B22};
 
-known_diameter_subgraphs = {5};
-known_diameter_default = {Inf};
+known_diameter_subgraphs = {
+    5
+    5
+    };
 
-g = GraphWU('B', B);
-m_outside_g = Diameter('G', g, 'rule', 'subgraphs');
+g = MultiplexWU('B', B);
+
+m_outside_g = Diameter('G', g);
+m_outside_g.set('RULE', 'subgraphs');
+
 assert(isequal(m_outside_g.get('M'), known_diameter_subgraphs), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for GraphWU.')
+    [BRAPH2.STR ':Diameter:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-g = GraphWU('B', B);
-m_inside_g = g.getMeasure('Diameter', 'rule', 'subgraphs');
+m_inside_g = g.get('MEASURE', 'Diameter');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_diameter_subgraphs), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for GraphWU.')
+    [BRAPH2.STR ':Diameter:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-g = GraphWU('B', B);
-m_outside_g = Diameter('G', g, 'rule', 'all');
-assert(isequal(m_outside_g.get('M'), known_diameter_default), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for GraphWU.')
-
-g = GraphWU('B', B);
-m_inside_g = g.getMeasure('Diameter', 'rule', 'all');
-assert(isequal(m_inside_g.get('M'), known_diameter_default), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for GraphWU.')
 
 %%% ¡test!
 %%%% ¡name!
 MultiplexBU
+%%%% ¡probability!
+.01
 %%%% ¡code!
 B11 = [
-      0     .1  .2  .25  0;
-      .125  0   0   0    0;
-      .2    .5  0   .25  0;
-      .125  10  0   0    0;
-      0     0   0   0    0
-      ];
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
 B22 = [
-      0     .1  .2  .25  0;
-      .125  0   0   0    0;
-      .2    .5  0   .25  0;
-      .125  10  0   0    0;
-      0     0   0   0    0
-      ];
-B = {
-    B11 B22
-    };
-
-known_diameter_subgraphs = { 
-                         1
-                         1 
-                         };
-known_diameter_default = {
-                       inf
-                       inf
-                       };
-
-g = MultiplexBU('B', B);
-m_outside_g = Diameter('G', g, 'rule', 'subgraphs');
-assert(isequal(m_outside_g.get('M'), known_diameter_subgraphs), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for MultiplexBU.')
-
-g = MultiplexBU('B', B);
-m_inside_g = g.getMeasure('Diameter', 'rule', 'subgraphs');
-assert(isequal(m_inside_g.get('M'), known_diameter_subgraphs), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for MultiplexBU.')
-
-g = MultiplexBU('B', B);
-m_outside_g = Diameter('G', g, 'rule', 'all');
-assert(isequal(m_outside_g.get('M'), known_diameter_default), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for MultiplexBU.')
-
-g = MultiplexBU('B', B);
-m_inside_g = g.getMeasure('Diameter', 'rule', 'all');
-assert(isequal(m_inside_g.get('M'), known_diameter_default), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for MultiplexBU.')
-
-%%% ¡test!
-%%%% ¡name!
-MultiplexWU
-%%%% ¡code!
-B11 = [
-      0     .1  .2  .25  0;
-      .125  0   0   0    0;
-      .2    .5  0   .25  0;
-      .125  10  0   0    0;
-      0     0   0   0    0
-      ];
-B22 = [
-      0     .1  .2  .25  0;
-      .125  0   0   0    0;
-      .2    .5  0   .25  0;
-      .125  10  0   0    0;
-      0     0   0   0    0
-      ];
-B = {
-    B11 B22
-    };
+    0     .1  .2  .25  0;
+    .125  0   0   0    0;
+    .2    .5  0   .25  0;
+    .125  10  0   0    0;
+    0     0   0   0    0
+    ];
+B = {B11 B22};
 
 known_diameter_subgraphs = {
-                         5
-                         5
-                         };
-known_diameter_default = {
-                       inf
-                       inf
-                       };
-                           
-g = MultiplexWU('B', B);
-m_outside_g = Diameter('G', g, 'rule', 'subgraphs');
+    1
+    1
+    };
+
+g = MultiplexBU('B', B);
+
+m_outside_g = Diameter('G', g);
+m_outside_g.set('RULE', 'subgraphs');
+
 assert(isequal(m_outside_g.get('M'), known_diameter_subgraphs), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for MultiplexWU.')
+    [BRAPH2.STR ':Diameter:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-g = MultiplexWU('B', B);
-m_inside_g = g.getMeasure('Diameter', 'rule', 'subgraphs');
+m_inside_g = g.get('MEASURE', 'Diameter');
+m_inside_g.set('RULE', 'subgraphs');
 assert(isequal(m_inside_g.get('M'), known_diameter_subgraphs), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for MultiplexWU.')
-
-g = MultiplexWU('B', B);
-m_outside_g = Diameter('G', g, 'rule', 'all');
-assert(isequal(m_outside_g.get('M'), known_diameter_default), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for MultiplexWU.')
-
-g = MultiplexWU('B', B);
-m_inside_g = g.getMeasure('Diameter', 'rule', 'all');
-assert(isequal(m_inside_g.get('M'), known_diameter_default), ...
-    [BRAPH2.STR ':Diameter:' BRAPH2.BUG_ERR], ...
-    'Diameter is not being calculated correctly for MultiplexWU.')
+    [BRAPH2.STR ':Diameter:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

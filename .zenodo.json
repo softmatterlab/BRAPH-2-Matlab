@@ -1,0 +1,81 @@
+{
+    "creators": [
+        {
+            "orcid": "0000-0001-5057-1846",
+            "affiliation": "Gothenburg University",
+            "name": "Volpe, Giovanni"
+        },
+        {
+            "orcid": "0000-0002-4604-2711",
+            "affiliation": "Karolinksa Institute",
+            "name": "Pereira, Joana"
+        }, 
+        {
+            "orcid": "0000-0002-5388-7712",
+            "affiliation": "Gothenburg University",
+            "name": "Gómez-Ruiz, Emiliano"
+        }, 
+        {
+            "orcid": "0000-0001-9598-2278",
+            "affiliation": "Gothenburg University",
+            "name": "Chang, Yu-Wei"
+        }, 
+        {
+            "orcid": "0000-0001-7460-741X",
+            "affiliation": "Karolinksa Institute",
+            "name": "Canal-Garcia, Anna"
+        }, 
+        {
+            "orcid": "0000-0002-9844-4413",
+            "affiliation": "Karolinksa Institute",
+            "name": "Mijalkov, Mite"
+        }, 
+        {
+            "orcid": "0000-0003-2077-5252",
+            "affiliation": "Karolinksa Institute",
+            "name": "Véreb, Dániel"
+        },
+        {
+            "orcid": "0000-0002-3115-2977",
+            "affiliation": "Karolinksa Institute",
+            "name": "Westman, Eric"
+        },
+        {
+            "orcid": "0009-0009-3797-1162",
+            "affiliation": "Gothenburg University",
+            "name": "Zhao, Hang"
+        },
+        {
+            "orcid": "0000-0001-7756-630X",
+            "affiliation": "Karolinksa Institute",
+            "name": "Zufiria Gerbolés, Blanca"
+        },
+        {
+            "orcid": "0000-0002-2986-2734",
+            "affiliation": "Karolinksa Institute",
+            "name": "Sun, Jiawei"
+        }
+    ],
+
+    "title": "BRAPH 2: Brain Analysis Using Graph Theory 2",
+
+    "related_identifiers": [
+        {
+            "scheme": "doi",
+            "identifier": "10.1371/journal.pone.0178798",
+            "relation": "isDocumentedBy",
+            "resource_type": "publication-article"
+        }
+    ],
+    
+    "description": "An object-oriented software that provides pipelines for conventional brain connectivity analysis as well as more advanced methods, including multilayer networks and deep learning methods." ,
+
+    "keywords": ["Brain", "Software", "Graph", "Multigraph", "Multiplex Graph", "MATLAB", "Neuroimaging", "Deep Learning"],
+
+    "upload_type": "software",
+
+    "communities": [
+        {"identifier": "www.braph.org"},
+        {"identifier": "https://github.com/softmatterlab/BRAPH-2-Matlab"}
+    ]
+}

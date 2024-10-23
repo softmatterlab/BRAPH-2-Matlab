@@ -1,0 +1,120 @@
+AAL116					
+AAL116 Label					
+AAL116 Notes					
+					
+PreCG.L	Precentral gyrus Left	-38.65	-5.68	50.94	left
+PreCG.R	Precentral gyrus Right	41.37	-8.21	52.09	right
+SFGdor.L	Superior frontal gyrus (dorsolateral) Left	-18.45	34.81	42.2	left
+SFGdor.R	Superior frontal gyrus (dorsolateral) Right	21.9	31.12	43.82	right
+ORBsup.L	Middle frontal gyrus (orbital part) Left	-16.56	47.32	-13.31	left
+ORBsup.R	Middle frontal gyrus (orbital part) Right	18.49	48.1	-14.02	right
+MFG.L	Middle frontal gyrus Left	-33.43	32.73	35.46	left
+MFG.R	Middle frontal gyrus Right	37.59	33.06	34.04	right
+ORBmid.L	Middle frontal gyrus (orbital part) Left	-30.65	50.43	-9.62	left
+ORBmid.R	Middle frontal gyrus (orbital part) Right	33.18	52.59	-10.73	right
+IFGoperc.L	Inferior frontal gyrus (opercular part) Left	-48.43	12.73	19.02	left
+IFGoperc.R	Inferior frontal gyrus (opercular part) Right	50.2	14.98	21.41	right
+IFGtriang.L	Inferior frontal gyrus (triangular part) Left	-45.58	29.91	13.99	left
+IFGtriang.R	Inferior frontal gyrus (triangular part) Right	50.33	30.16	14.17	right
+ORBinf.L	Inferior frontal gyrus (orbital part) Left	-35.98	30.71	-12.11	left
+ORBinf.R	Inferior frontal gyrus (orbital part) Right	41.22	32.23	-11.91	right
+ROL.L	Rolandic operculum Left	-47.16	-8.48	13.95	left
+ROL.R	Rolandic operculum Right	52.65	-6.25	14.63	right
+SMA.L	Supplementary motor area Left	-5.32	4.85	61.38	left
+SMA.R	Supplementary motor area Right	8.62	0.17	61.85	right
+OLF.L	Olfactory cortex Left	-8.06	15.05	-11.46	left
+OLF.R	Olfactory cortex Right	10.43	15.91	-11.26	right
+SFGmed.L	Superior frontal gyrus (medial) Left	-4.8	49.17	30.89	left
+SFGmed.R	Superior frontal gyrus (medial) Right	9.1	50.84	30.22	right
+ORBsupmed.L	Superior frontal gyrus (medial orbital) Left	-5.17	54.06	-7.4	left
+ORBsupmed.R	Superior frontal gyrus (medial orbital) Right	8.16	51.67	-7.13	right
+REC.L	Rectus gyrus Left	-5.08	37.07	-18.14	left
+REC.R	Rectus gyrus Right	8.35	35.64	-18.04	right
+INS.L	Insula Left	-35.13	6.65	3.44	left
+INS.R	Insula Right	39.02	6.25	2.08	right
+ACG.L	Anterior cingulate and paracingulate gyri Left	-4.04	35.4	13.95	left
+ACG.R	Anterior cingulate and paracingulate gyri Right	8.46	37.01	15.84	right
+DCG.L	Median cingulate and paracingulate gyri Left	-5.48	-14.92	41.57	left
+DCG.R	Median cingulate and paracingulate gyri Right	8.02	-8.83	39.79	right
+PCG.L	Posterior cingulate gyrus Left	-4.85	-42.92	24.67	left
+PCG.R	Posterior cingulate gyrus Right	7.44	-41.81	21.87	right
+HIP.L	Hippocampus Left	-25.03	-20.74	-10.13	left
+HIP.R	Hippocampus Right	29.23	-19.78	-10.33	right
+PHG.L	Parahippocampal gyrus Left	-21.17	-15.95	-20.7	left
+PHG.R	Parahippocampal gyrus Right	25.38	-15.15	-20.47	right
+AMYG.L	Amygdala Left	-23.27	-0.67	-17.14	left
+AMYG.R	Amygdala Right	27.32	0.64	-17.5	right
+CAL.L	Calcarine fissure and surrounding cortex Left	-7.14	-78.67	6.44	left
+CAL.R	Calcarine fissure and surrounding cortex Right	15.99	-73.15	9.4	right
+CUN.L	Cuneus Left	-5.93	-80.13	27.22	left
+CUN.R	Cuneus Right	13.51	-79.36	28.23	right
+LING.L	Lingual gyrus Left	-14.62	-67.56	-4.63	left
+LING.R	Lingual gyrus Right	16.29	-66.93	-3.87	right
+SOG.L	Superior occipital gyrus Left	-16.54	-84.26	28.17	left
+SOG.R	Superior occipital gyrus Right	24.29	-80.85	30.59	right
+MOG.L	Middle occipital gyrus Left	-32.39	-80.73	16.11	left
+MOG.R	Middle occipital gyrus Right	37.39	-79.7	19.42	right
+IOG.L	Inferior occipital gyrus Left	-36.36	-78.29	-7.84	left
+IOG.R	Inferior occipital gyrus Right	38.16	-81.99	-7.61	right
+FFG.L	Fusiform gyrus Left	-31.16	-40.3	-20.23	left
+FFG.R	Fusiform gyrus Right	33.97	-39.1	-20.18	right
+PoCG.L	Postcentral gyrus Left	-42.46	-22.63	48.92	left
+PoCG.R	Postcentral gyrus Left	41.43	-25.49	52.55	right
+SPG.L	Superior parietal gyrus Left	-23.45	-59.56	58.96	left
+SPG.R	Superior parietal gyrus Right	26.11	-59.18	62.06	right
+IPL.L	Inferior parietal but supramarginal and angular gyri Left	-42.8	-45.82	46.74	left
+IPL.R	Inferior parietal but supramarginal and angular gyri Right	46.46	-46.29	49.54	right
+SMG.L	Supramarginal gyrus Left	-55.79	-33.64	30.45	left
+SMG.R	Supramarginal gyrus Right	57.61	-31.5	34.48	right
+ANG.L	Angular gyrus Left	-44.14	-60.82	35.59	left
+ANG.R	Angular gyrus Right	45.51	-59.98	38.63	right
+PCUN.L	Precuneus Left	-7.24	-56.07	48.01	left
+PCUN.R	Precuneus Right	9.98	-56.05	43.77	right
+PCL.L	Paracentral lobule Left	-7.63	-25.36	70.07	left
+PCL.R	Paracentral lobule Right	7.48	-31.59	68.09	right
+CAU.L	Caudate nucleus Left	-11.46	11	9.24	left
+CAU.R	Caudate nucleus Right	14.84	12.07	9.42	right
+PUT.L	Lenticular nucleus putamen Left	-23.91	3.86	2.4	left
+PUT.R	Lenticular nucleus putamen Right	27.78	4.91	2.46	right
+PAL.L	Lenticular nucleus pallidum Left	-17.75	-0.03	0.21	left
+PAL.R	Lenticular nucleus pallidum Right	21.2	0.18	0.23	right
+THA.L	Thalamus Left	-10.85	-17.56	7.98	left
+THA.R	Thalamus Right	13	-17.55	8.09	right
+HES.L	Heschl gyrus Left	-41.99	-18.88	9.98	left
+HES.R	Heschl gyrus Right	45.86	-17.15	10.41	right
+STG.L	Superior temporal gyrus Left	-53.16	-20.68	7.13	left
+STG.R	Superior temporal gyrus Right	58.15	-21.78	6.8	right
+TPOsup.L	Temporal pole: superior temporal gyrus Left	-39.88	15.14	-20.18	left
+TPOsup.R	Temporal pole: superior temporal gyrus Right	48.25	14.75	-16.86	right
+MTG.L	Middle temporal gyrus Left	-55.52	-33.8	-2.2	left
+MTG.R	Middle temporal gyrus Right	57.47	-37.23	-1.47	right
+TPOmid.L	Temporal pole: middle temporal gyrus Left	-36.32	14.59	-34.08	left
+TPOmid.R	Temporal pole: middle temporal gyrus Right	44.22	14.55	-32.23	right
+ITG.L	Inferior temporal gyrus Left	-49.77	-28.05	-23.17	left
+ITG.R	Inferior temporal gyrus Right	53.69	-31.07	-22.32	right
+CC1.L	Cerebellum_Crus1_L	-35	-67	-29	left
+CC1.R	Cerebellum_Crus1_R	38	-67	-30	right
+CC2.L	Cerebellum_Crus2_L	-28	-73	-38	left
+CC2.R	Cerebellum_Crus2_R	33	-69	-40	right
+C3.L	Cerebellum_3_L	-8	-37	-19	left
+C3.R	Cerebellum_3_R	13	-34	-19	right
+C45.L	Cerebellum_4_5_L	-14	-43	-17	left
+C45.R	Cerebellum_4_5_R	18	-43	-18	right
+C6.L	Cerebellum_6_L	-22	-59	-22	left
+C6.R	Cerebellum_6_R	26	-58	-24	right
+C7b.L	Cerebellum_7b_L	-31	-60	-45	left
+C7b.R	Cerebellum_7b_R	34	-63	-48	right
+C8.L	Cerebellum_8_L	-25	-55	-48	left
+C8.R	Cerebellum_8_R	26	-56	-49	right
+C9.L	Cerebellum_9_L	-10	-49	-46	left
+C9.R	Cerebellum_9_R	10	-49	-46	right
+C10.L	Cerebellum_10_L	-22	-34	-42	left
+C10.R	Cerebellum_10_R	27	-34	-41	right
+V12	Vermis_1_2	2	-39	-20	left
+V3	Vermis_3	2	-40	-11	right
+V45	Vermis_4_5	2	-52	-6	left
+V6	Vermis_6	2	-67	-15	right
+V7	Vermis_7	2	-72	-25	left
+V8	Vermis_8	2	-64	-34	right
+V9	Vermis_9	2	-55	-35	left
+V10	Vermis_10	1	-46	-32	right

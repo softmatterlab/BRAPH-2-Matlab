@@ -1,0 +1,36 @@
+%% Pipeline Regression Training-test Split Connectivity-Functional Multiplex Data
+
+% This is the pipeline script to train a multi-layer perceptron regressor using connectivity-functional multiplex data.
+% The connectivity data can be derived from imaging modalities like diffusion weighted imaging (DWI). 
+% The functional data can be derived from imaging modalities like functional MRI (fMRI), electroencephalography (EEG) or magnetoencephalography (MEG).
+% 1. It loads a brain atlas from an XLS file (e.g., aal90_atlas.xlsx).
+% 2.1 It loads the connectivity data of a group of subjects from the directory (e.g., CON_Group_XLS) containing XLS files of each subject.
+% 2.2 It loads the functional data of a group of subjects from te directory (e.g., CON_Group_XLS) containing XLS files of each subject.
+% 3. It splits the dataset into a training dataset and a test dataset.
+% 4. It trains the regressor using the training dataset.
+% 5. It evaluates the performance of the trained regressor using both the training dataset and test dataset.
+
+% PDF: 
+% README: 
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Connectivity Group
+gr1_CON = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON from XLS % Group CON 1
+
+%% Functional Group
+gr1_FUN = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN from XLS % Group FUN 1
+
+%% Group Combination
+gr = CombineGroups_CON_FUN_MP('GR_CON', gr1_CON, 'GR_FUN', gr1_FUN, 'WAITBAR', true).get('GR_CON_FUN_MP'); % Combine Groups 1 % Group CON-FUN_MP
+
+%% Training-Test Split
+d_split = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_FUN_MP_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_FUN_MP_REG', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_FUN_MP_REG('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', x.get('VOI_DICT').get('KEYS')), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset % Dataset Splitter
+
+%% Neural Network
+nn = NNRegressorMLP('D', d_split.get('D_LIST_IT', 1), 'LAYERS', [20 20]); % Train Neural Network % Trained Neural Network
+
+%% Evaluation
+nne_training = NNRegressorMLP_Evaluator('D', d_split.get('D_LIST_IT', 1), 'NN', nn); % Evaluate on Training Dataset % Training Dataset Evaluation
+nne_test = NNRegressorMLP_Evaluator('D', d_split.get('D_LIST_IT', 2), 'NN', nn); % Evaluate on Test Dataset % Test Dataset Evaluation

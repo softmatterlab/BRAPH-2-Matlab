@@ -1,11 +1,51 @@
 %% ¡header!
-ImporterBrainSurfaceNV < Importer (im, importer of brain surface from NV) imports a brain surface from a NV file.
+ImporterBrainSurfaceNV < Importer (im, brain surface importer from NV) imports a brain surface from a NV file.
 
 %%% ¡description!
-ImporterBrainSurfaceNV imports a brain surface from a NV file.
+A Brain Surface Importer from NV Files (ImporterBrainSurfaceNV) imports a brain surface from a NV file.
 
 %%% ¡seealso!
-Element, Importer, BrainSurface.
+BrainSurface
+
+%%% ¡build!
+1
+
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the brain surface importer from NV.
+%%%% ¡default!
+'ImporterBrainSurfaceNV'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the brain surface importer from NV.
+%%%% ¡default!
+'Brain Surface Importer from NV Files'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the brain surface importer from NV.
+%%%% ¡default!
+'A Brain Surface Importer from NV Files (ImporterBrainSurfaceNV) imports a brain surface from a NV file.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the importe of the brain surface from NVr.
+%%%% ¡settings!
+'ImporterBrainSurfaceNV'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the brain surface importer from NV.
+%%%% ¡default!
+'ImporterBrainSurfaceNV ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the brain surface importer from NV.
+%%%% ¡default!
+'ImporterBrainSurfaceNV label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the brain surface importer from NV.
+%%%% ¡default!
+'ImporterBrainSurfaceNV notes'
 
 %% ¡props!
 
@@ -13,6 +53,18 @@ Element, Importer, BrainSurface.
 FILE (data, string) is the NV file from where to load the brain atlas.
 %%%% ¡default!
 'human_ICBM152.nv'
+
+%%% ¡prop!
+GET_FILE (query, item) opens a dialog box to set the NV file where to save the brain atlas.
+%%%% ¡settings!
+'ImporterBrainSurfaceNV'
+%%%% ¡calculate!
+[filename, filepath, filterindex] = uigetfile('*.nv', 'Select NV file');
+if filterindex
+    file = [filepath filename];
+    im.set('FILE', file);
+end
+value = im;
 
 %%% ¡prop!
 SURF (result, item) is a brain surface.
@@ -29,7 +81,7 @@ if ~isfile(file)
 end
 
 if isfile(file)
-    wb = braph2waitbar(im.get('WAITBAR'), .15, 'Reading brain surface file ...');
+	wb = braph2waitbar(im.get('WAITBAR'), .15, 'Reading brain surface file ...');
     
     fid = fopen(file);
     vertex_number = fscanf(fid, '%f', 1);
@@ -42,23 +94,22 @@ if isfile(file)
     name = splits{end};
     
     bs.set('ID', name)
-    bs.set('vertex_number', vertex_number);
-    bs.set('coordinates', coord);
-    bs.set('triangles_number', tri_number);
-    bs.set('triangles', tri);
+    bs.set('VERTEX_NUMBER', vertex_number);
+    bs.set('COORDINATES', coord);
+    bs.set('TRIANGLES_NUMBER', tri_number);
+    bs.set('TRIANGLES', tri);
     
-    braph2waitbar(wb, 'close')
+	braph2waitbar(wb, 'close')
+else
+    error([BRAPH2.STR ':ImporterBrainSurfaceNV:' BRAPH2.CANCEL_IO], ...
+        [BRAPH2.STR ':ImporterBrainSurfaceNV:' BRAPH2.CANCEL_IO '\\n' ...
+        'The prop FILE must be an existing file, but it is ''' file '''.'] ...
+        );    
 end
 
 value = bs;
 
-%% ¡methods!
-function uigetfile(im)
-    % UIGETFILE opens a dialog box to set the NV file where to save the brain atlas.
+%% ¡tests!
 
-    [filename, filepath, filterindex] = uigetfile('*.nv', 'Select NV file');
-    if filterindex
-        file = [filepath filename];
-        im.set('FILE', file);
-    end
-end
+%%% ¡excluded_props!
+[ImporterBrainSurfaceNV.GET_FILE]

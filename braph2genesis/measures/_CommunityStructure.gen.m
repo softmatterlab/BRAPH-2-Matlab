@@ -1,85 +1,166 @@
 %% ¡header!
-CommunityStructure < Measure (m, community structure) is the graph community structure.
+CommunityStructure < Measure (m, community structure) is the graph Community Structure.
 
 %%% ¡description!
-The community structure of a graph is a subdivision of the network into
-non-overlapping groups of nodes which maximizes the number of whitin group
+The Community Structure (CommunityStructure) of a graph is a subdivision of the network into 
+non-overlapping groups of nodes which maximizes the number of within group 
 edges, and minimizes the number of between group edges.
 
-%%% ¡seealso!
-Measure
-
-%%% ¡shape!
-shape = Measure.NODAL;
-
-%%% ¡scope!
-scope = Measure.UNILAYER;
-
-%%% ¡parametricity!
-parametricity = Measure.NONPARAMETRIC;
-
-%%% ¡compatible_graphs!
-GraphWU
-GraphWD
-GraphBU
-GraphBD
-MultigraphBUD
-MultigraphBUT
-
-%% ¡props!
-%%% ¡prop! 
-rule (parameter, OPTION) is the community structure algorithm.
-%%%% ¡settings!
-{ 'louvain' 'newman' 'fixed'}
-%%%% ¡default!
-'louvain'
-
-%%% ¡prop! 
-GAMMA (parameter, SCALAR) is the resolution parameter.
-%%%% ¡default!
+%%% ¡build!
 1
 
-%%% ¡prop! 
-M0 (data, rvector) is the initial community affiliation vector.
-%%%% ¡default!
-[]
+%% ¡layout!
 
-%%% ¡prop! 
-Louvain_OM (data, MATRIX) is the custom objective matrix (Louvain).
-%%%% ¡default!
-[]
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.ID
+%%%% ¡title!
+Measure ID
 
-%%% ¡prop! 
-OM_TYPE (data, OPTION) is the objective-function type algorithm (Louvain).
-%%%% ¡settings!
-{'modularity' 'potts' 'negative_sym' 'negative_asym'}
-%%%% ¡default!
-'modularity'
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.LABEL
+%%%% ¡title!
+Measure NAME
 
-%%% ¡prop! 
-QUALITY_FUNCTION (metadata, SCALAR) 
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.RULE
+%%%% ¡title!
+Community Structure algorithm (louvain, newman, fixed)
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.GAMMA
+%%%% ¡title!
+Gamma (resolution) parameter
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.M0
+%%%% ¡title!
+Initial community affiliation vector (optional).
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.LOUVAIN_OM
+%%%% ¡title!
+Custom objective matrix (Louvain, optional)
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.OM_TYPE
+%%%% ¡title!
+The objective-function type algorithm (Louvain)
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.G
+%%%% ¡title!
+Graph
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.M
+%%%% ¡title!
+CommunityStructure
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.PFM
+%%%% ¡title!
+Measure Plot
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.NOTES
+%%%% ¡title!
+Measure NOTES
+
+%%% ¡prop!
+%%%% ¡id!
+CommunityStructure.COMPATIBLE_GRAPHS
+%%%% ¡title!
+Compatible Graphs
 
 %% ¡props_update!
 
 %%% ¡prop!
-M (result, cell) is the triangles.
+ELCLASS (constant, string) is the class of the Community Structure.
+%%%% ¡default!
+'CommunityStructure'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the Community Structure.
+%%%% ¡default!
+'Community Structure'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the Community Structure.
+%%%% ¡default!
+'The Community Structure (CommunityStructure) of a graph is a subdivision of the network into non-overlapping groups of nodes which maximizes the number of within group edges, and minimizes the number of between group edges.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the Community Structure.
+%%%% ¡settings!
+'CommunityStructure'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code of the Community Structure.
+%%%% ¡default!
+'CommunityStructure ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the community structure.
+%%%% ¡default!
+'Community Structure label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the Community Structure.
+%%%% ¡default!
+'Community Structure notes'
+
+%%% ¡prop!
+SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
+%%%% ¡default!
+Measure.NODAL
+
+%%% ¡prop!
+SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
+%%%% ¡default!
+Measure.UNILAYER
+
+%%% ¡prop!
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+%%%% ¡default!
+Measure.NONPARAMETRIC
+
+%%% ¡prop!
+COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
+%%%% ¡default!
+{'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT'} ;
+
+%%% ¡prop!
+M (result, cell) is the Community Structure.
 %%%% ¡calculate!
 g = m.get('G');  % graph from measure class
 A = g.get('A');
-community_structure = cell(g.layernumber(), 1);
-N = g.nodenumber();
-gamma = m.get('gamma');
-community_structure_algorithm = m.get('rule');
+L = g.get('LAYERNUMBER');
+N = g.get('NODENUMBER');
+community_structure = cell(L, 1);
+gamma = m.get('GAMMA');
+community_structure_algorithm = m.get('RULE');
 
-for li = 1:1:g.layernumber()
+q_function = {};
+for li = 1:1:L
     Aii = A{li, li};
-    community_structure(li) =  m.community(Aii, N(li), gamma, community_structure_algorithm);
+    [community_structure(li), q_function{li}] =  community(m, Aii, N(li), gamma, community_structure_algorithm);
 end
-
+m.set('QUALITY_FUNCTION', q_function);
 value = community_structure;
 
-%% ¡methods!
-function comm_str = community(m, A, N, gamma, community_structure_algorithm)
+%%%% ¡calculate_callbacks!
+function [comm_str, quality_function] = community(m, A, N, gamma, community_structure_algorithm)
 A = A;
 N = N;
 gamma = gamma;
@@ -92,9 +173,11 @@ community_structure_algorithm = community_structure_algorithm;
                     ['M0 initial community affiliation vector must have the same length than the number of nodes' ...
                     '(' tostring(size(1:N, 2)) ') while its length is ' tostring(size(M0, 2))])
             community_structure = {M0'};
+            quality_function = 1;
 
         case {'newman'}  % Newman algorithm
-            if g.is_directed(g)  % directed graphs
+            directionality_type = g.get('DIRECTIONALITY_TYPE', g.get('LAYERNUMBER'));
+            if directionality_type(1, 1) == Graph.UNDIRECTED  % directed graphs
                 n_perm = randperm(N);  % randomly permute order of nodes
                 A = A(n_perm, n_perm);  % DB: use permuted matrix for subsequent analysis
                 Ki = sum(A, 1);  % in-degree
@@ -160,10 +243,10 @@ community_structure_algorithm = community_structure_algorithm;
                 Ci_corrected(n_perm) = Ci;  % return order of nodes to the order used at the input stage.
                 Ci = Ci_corrected;  % output corrected community assignments
 
-                m.set('QUALITY_FUNCTION', Q);   % save normalized quality function/modularity
+                quality_function = Q;   % save normalized quality function/modularity
                 community_structure = {Ci};
 
-            else  % directed graphs
+            else  % undirected graphs
                 n_perm = randperm(N);  % randomly permute order of nodes
                 A = A(n_perm, n_perm);  % DB: use permuted matrix for subsequent analysis
                 K = sum(A);  % degree
@@ -228,14 +311,14 @@ community_structure_algorithm = community_structure_algorithm;
                 Ci_corrected(n_perm) = Ci;  % return order of nodes to the order used at the input stage.
                 Ci = Ci_corrected;  % output corrected community assignments
 
-                m.set('QUALITY_FUNCTION', Q); % save normalized quality function/modularity
+                quality_function = Q; % save normalized quality function/modularity
                 community_structure = {Ci};
             end
 
         otherwise  % {'Louvain'}  % Louvain algorithm
 
             M0 = m.get('M0');  % initial community affiliation vector
-            OM = m.get('Louvain_OM');  % custom objective matrix
+            OM = m.get('LOUVAIN_OM');  % custom objective matrix
             type_OM =  m.get('OM_TYPE');  % objective-function type
             W = double(A);  % convert to double format
             s = sum(sum(W));  % get sum of edges
@@ -335,42 +418,102 @@ community_structure_algorithm = community_structure_algorithm;
                 Q0 = Q;
                 Q = trace(OM)/s;  % compute modularity
             end
-            m.set('QUALITY_FUNCTION', Q);  % save normalized quality function/modularity
+            quality_function = Q;  % save normalized quality function/modularity
             community_structure = {M};
     end
     comm_str = community_structure;
 end
 
+
+%% ¡props!
+
+%%% ¡prop! 
+RULE (parameter, option)
+%%%% ¡settings!
+{ 'louvain' 'newman' 'fixed'}
+%%%% ¡default!
+'louvain'
+
+%%% ¡prop! 
+GAMMA (parameter, SCALAR) is the resolution parameter.
+%%%% ¡default!
+1
+
+%%% ¡prop! 
+M0 (data, rvector) is the initial community affiliation vector.
+%%%% ¡default!
+[]
+
+%%% ¡prop! 
+LOUVAIN_OM (data, MATRIX) is the custom objective matrix (Louvain).
+%%%% ¡default!
+[]
+
+%%% ¡prop! 
+OM_TYPE (data, OPTION) is the objective-function type algorithm (Louvain).
+%%%% ¡settings!
+{'modularity' 'potts' 'negative_sym' 'negative_asym'}
+%%%% ¡default!
+'modularity'
+
+%%% ¡prop! 
+QUALITY_FUNCTION (metadata, CELL)
+
 %% ¡tests!
+
+%%% ¡excluded_props!
+[CommunityStructure.PFM]
 
 %%% ¡test!
 %%%% ¡name!
 GraphBU
+%%%% ¡probability!
+.01
 %%%% ¡code!
 
 B = [1 0 1 1
      0 0 0 0
      1 0 1 0
      1 0 0 1];
- 
- g = GraphBU('B', B);
- cs = CommunityStructure('G', g).get('M');
- assert(iscell(cs) && size(cs{1}, 1) == 4,  ... 
-     [BRAPH2.STR ':CommunityStructure:' BRAPH2.BUG_ERR], ...
-    'CommunityStructure is not being calculated correctly for GraphBU.');
+
+g = GraphBU('B', B);
+
+m_outside_g = CommunityStructure('G', g);
+m_outside_g_M = m_outside_g.get('M');
+assert(iscell(m_outside_g_M) && size(m_outside_g_M{1}, 1) == 4, ...
+    [BRAPH2.STR ':CommunityStructure:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CommunityStructure');
+m_inside_g_M = m_inside_g.get('M');
+assert(iscell(m_inside_g_M) && size(m_inside_g_M{1}, 1) == 4, ...
+    [BRAPH2.STR ':CommunityStructure:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 %%% ¡test!
 %%%% ¡name!
 GraphBU fixed input
+%%%% ¡probability!
+.01
 %%%% ¡code!
 
 B = [1 0 1 1
      0 0 0 0
      1 0 1 0
      1 0 0 1];
- 
+
  g = GraphBU('B', B);
- cs = CommunityStructure('G', g, 'rule', 'fixed', 'M0', [1 0 1 1]).get('M');
- assert(iscell(cs) && size(cs{1}, 1) == 4,  ... 
-     [BRAPH2.STR ':CommunityStructure:' BRAPH2.BUG_ERR], ...
-    'CommunityStructure is not being calculated correctly for GraphBU.');
+
+m_outside_g = CommunityStructure('G', g);
+m_outside_g.set('RULE', 'fixed', 'M0', [1 0 1 1]);
+m_outside_g_M = m_outside_g.get('M');
+assert(iscell(m_outside_g_M) && size(m_outside_g_M{1}, 1) == 4, ...
+    [BRAPH2.STR ':CommunityStructure:' BRAPH2.FAIL_TEST], ...
+    [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
+
+m_inside_g = g.get('MEASURE', 'CommunityStructure');
+m_inside_g.set('RULE', 'fixed', 'M0', [1 0 1 1]);
+m_inside_g_M = m_inside_g.get('M');
+assert(iscell(m_inside_g_M) && size(m_inside_g_M{1}, 1) == 4, ...
+    [BRAPH2.STR ':CommunityStructure:' BRAPH2.FAIL_TEST], ...
+    [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])

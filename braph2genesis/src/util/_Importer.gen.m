@@ -1,23 +1,53 @@
 %% ¡header!
-Importer < Element (im, importer from a file) imports an element from a file.
+Importer < ConcreteElement (im, importer from a file) imports an element from a file.
 
 %%% ¡description!
-Importer imports an element from generic file. 
-Importer contains and manages the properties of the element.
+An Importer is the base class for the importer of an element (ConcreteElement) from a file.
 
 %%% ¡seealso!
-Element, Exporter.
+ConcreteElement, Exporter
+
+%%% ¡build!
+1
+
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the importer.
+%%%% ¡default!
+'Importer'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the importer.
+%%%% ¡default!
+'Importer'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the importer.
+%%%% ¡default!
+'Importer is the base class for the importer of an element (ConcreteElement) from a file.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the importer.
+%%%% ¡settings!
+'Importer'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the importer.
+%%%% ¡default!
+'Importer ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the importer.
+%%%% ¡default!
+'Importer label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the importer.
+%%%% ¡default!
+'Importer notes'
 
 %% ¡props!
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the importer.
-
-%%% ¡prop!
-LABEL (metadata, string) is an extended label of the importer.
-
-%%% ¡prop!
-NOTES (metadata, string) are some specific notes about the importer.
-
-%%% ¡prop!
-WAITBAR (metadata, logical) detemines whether to show the waitbar.
+WAITBAR (gui, logical) detemines whether to show the waitbar.

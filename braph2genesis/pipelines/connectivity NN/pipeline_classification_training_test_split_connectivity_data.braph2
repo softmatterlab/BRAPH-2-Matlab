@@ -1,0 +1,32 @@
+%% Pipeline Classification Training-Test Split Connectivity Data
+
+% This is the pipeline script to train a multi-layer perceptron classifier using connectivity data.
+% The connectivity data can be derived from imaging modalities like diffusion weighted imaging (DWI).
+% 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
+% 2. It loads data for three groups of subjects from the directories (e.g., CON_Group_1_XLS, CON_Group_2_XLS, and CON_Group_3_XLS) containing XLS files for each subject.
+% 3. It splits the dataset into training and test datasets for all of the groups, respectively.
+% 4. It trains the classifier using the training dataset.
+% 5. It evaluates the performance of the trained classifier using both the training and test dataset.
+
+% PDF: /tutorials/pipelines/tut_nn_clss_con_wu/tut_nn_clss_con_wu.pdf
+% README: /tutorials/pipelines/tut_nn_clss_con_wu/readme.md
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Groups
+gr1 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 1 from XLS % Group CON 1
+gr2 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 2 from XLS % Group CON 2
+gr3 = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 3 from XLS % Group CON 3
+
+%% Training-Test Split
+d_split1 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr1.get('ID')}), gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 1 % Dataset 1 Splitter
+d_split2 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr2.get('ID')}), gr2.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 2 % Dataset 2 Splitter
+d_split3 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_CON_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_CON_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_CON_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr3.get('ID')}), gr3.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 3 % Dataset 3 Splitter
+
+%% Neural Network
+nn = NNClassifierMLP('D', NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 1), d_split2.get('D_LIST_IT', 1), d_split3.get('D_LIST_IT', 1)}).get('D'), 'LAYERS', [20 20]); % Train Neural Network % Trained Neural Network
+
+%% NN Evaluator
+nne_training = NNClassifierMLP_Evaluator('D', NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 1), d_split2.get('D_LIST_IT', 1), d_split3.get('D_LIST_IT', 1)}).get('D'), 'NN', nn); % Evaluate on Training Dataset % Training Dataset Evaluation
+nne_test = NNClassifierMLP_Evaluator('D', NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 2), d_split2.get('D_LIST_IT', 2), d_split3.get('D_LIST_IT', 2)}).get('D'), 'NN', nn); % Evaluate on Test Dataset % Test Dataset Evaluation

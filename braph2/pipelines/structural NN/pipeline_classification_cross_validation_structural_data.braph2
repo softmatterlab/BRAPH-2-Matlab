@@ -1,0 +1,21 @@
+%% Pipeline Classification Cross-Validation Structural Data 
+
+% This is the pipeline script to execute cross-validation with multi-layer perceptron classifier using structural data.
+% The structural data can be derived from imaging modalities like T1 weighted MRI (T1-W), static positron emission tomography (PET), or arterial spin labeling (ASL).
+% 1. It loads a brain atlas from an XLS file (e.g., destrieux_atlas.xlsx).
+% 2. It loads data for three groups of subjects from the directories (e.g., ST_Group_1_XLS, ST_Group_2_XLS, and ST_Group_3_XLS) containing XLS files for each subject.
+% 3. It executes the cross-validation process.
+
+% PDF: 
+% README: 
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Groups
+gr1 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_FILE').get('GR'); % Load Group ST 1 from XLS % Group ST 1
+gr2 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_FILE').get('GR'); % Load Group ST 2 from XLS % Group ST 2
+gr3 = ImporterGroupSubjectST_XLS('BA', ba, 'WAITBAR', true).get('GET_FILE').get('GR'); % Load Group ST 3 from XLS % Group ST 3
+
+%% Cross-Validation
+nncv = NNClassifierMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_ST_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr1.get('ID')}), gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_ST_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr2.get('ID')}), gr2.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_ST_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr3.get('ID')}), gr3.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Proces

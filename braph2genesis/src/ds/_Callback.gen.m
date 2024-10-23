@@ -2,64 +2,49 @@
 Callback < Element (cb, callback) is a callback for a property of an element.
 
 %%% ¡class_attributes!
-Sealed = true
+Sealed=true
 
 %%% ¡description!
 A callback refers to a property of another element, which are identified 
-by its properties EL and PROP/TAG.
+ by its properties EL and PROP/TAG.
+For computational efficiency, it is best to use only one instance of Callback
+ for each prop of an instance of a concrete element EL, using 
+ EL.getCallback('PROP', <prop number>) or EL.getCallback('TAG', <prop tag>),
+ instead of creating new callback instances using its constructor. 
 No element can be a subclass of Callback.
 
 %%% ¡seealso!
 Element
 
+%%% ¡build!
+1
+
 %% ¡props!
 
 %%% ¡prop!
 EL (data, item) is the callback element.
+%%%% ¡settings!
+'ConcreteElement'
 
 %%% ¡prop!
 PROP (data, scalar) is the callback property number.
-%%%% ¡postprocessing!
+%%%% ¡postset!
 el = cb.get('EL');
-if ~isa(el, 'NoValue')
-    tag = cb.get('TAG');
-    if cb.get('PROP') == 0 && ~isempty(tag)
-        cb.set('PROP', el.getPropProp(tag));
-    end
+prop = cb.get('PROP');
+if ~strcmp(cb.get('TAG'), el.getPropTag(prop))
+    cb.set('TAG', el.getPropTag(prop));
 end
 
 %%% ¡prop!
 TAG (data, string) is the callback property tag.
-%%%% ¡postprocessing!
+%%%% ¡postset!
 el = cb.get('EL');
-if ~isa(el, 'NoValue')
-    prop = cb.get('PROP');
-    if isempty(cb.get('TAG')) && prop ~= 0
-        cb.set('TAG', el.getPropTag(prop));
-    end
+tag = cb.get('TAG');
+if cb.get('PROP') ~= el.getPropProp(tag)
+    cb.set('PROP', el.getPropProp(tag));
 end
 
-%% ¡methods!
-function str = tostring(cb, varargin)
-    %TOSTRING returns a string representing the callback.
-    %
-    % STRING = TOSTRING(CB) returns a string representing the callbck CB.
-    %
-    % STRING = TOSTRING(CB, N) trims the string to the first N characters.
-    %
-    % STRING = TOSTRING(CB, N, ENDING) ends the string with ENDING if it has
-    %  been trimmed.
-    %
-    % See also tostring.
-
-    el = cb.get('EL');
-    prop = cb.get('PROP');
-    tag = cb.get('TAG');
-    if ~isa(el, 'NoValue')
-        str = [class(cb) ' for ' upper(tag) '(' tostring(prop) ') of ' tostring(el)];
-    else
-        str = [class(cb) ' for ' tostring(el)];
-    end
-    str = tostring(str, varargin{:});
-    str = str(2:1:end-1);
-end
+%%% ¡prop!
+TOSTRING (query, string) returns a string that represents the object.
+%%%% ¡calculate!
+value = cb.tostring();

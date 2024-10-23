@@ -1,0 +1,31 @@
+%% Pipeline Regression Cross-Validation Connectivity-Functional Multiplex WU Measures 
+
+% This is the pipeline script to execute cross-validation with multi-layer perceptron regressor using the graph measures obtained from weighted undirected graph with connectivity-functional multiplex data.
+% The connectivity data can be derived from imaging modalities like diffusion weighted imaging (DWI). 
+% The functional data can be derived from imaging modalities like functional MRI (fMRI), electroencephalography (EEG) or magnetoencephalography (MEG).
+% 1. It loads a brain atlas from an XLS file (e.g., aal90_atlas.xlsx).
+% 2.1 It loads the connectivity data of a group of subjects from the directory (e.g., CON_Group_XLS) containing XLS files of each subject.
+% 2.2 It loads the functional data of a group of subjects from te directory (e.g., CON_Group_XLS) containing XLS files of each subject.
+% 3. It analyzes the group using connectivity-functional analyses (CON-FUN) weighted undirected multiplex (MultiplexWU).
+% 4. It executes the cross-validation process.
+
+% PDF: 
+% README: 
+
+%% Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+
+%% Connectivity Group
+gr1_CON = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON from XLS % Group CON 1
+
+%% Functional Group
+gr1_FUN = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN from XLS % Group FUN 1
+
+%% Group Combination
+gr = CombineGroups_CON_FUN_MP('GR_CON', gr1_CON, 'GR_FUN', gr1_FUN, 'WAITBAR', true).get('GR_CON_FUN_MP'); % Combine Groups 1 % Group CON-FUN_MP
+
+%% Analysis
+a_WU = AnalyzeEnsemble_CON_FUN_MP_WU('GR', gr); % Analyze Group % Group Analysis
+
+%% Cross-Validation
+nncv = NNRegressorMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_Measure_REG', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Measure_REG', 'IT_LIST', cellfun(@(g, sub) NNDataPoint_Measure_REG('ID', g.get('ID'), 'SUB', sub, 'TARGET_IDS', sub.get('VOI_DICT').get('KEYS')), a_WU.get('G_DICT').get('IT_LIST'), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process

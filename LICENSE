@@ -1,0 +1,76 @@
+BRAPH Software License Terms
+
+1	General
+  
+1.1	The Braph software is developed by Prof. Giovanni Volpe (the “Licensor”, “we” or “us”) and related
+contributors as further set forth on the Braph website located at www.braph.org. By installing and 
+using Braph, you and your organisation is granted a license to use Braph subject to these terms. If 
+you do not accept these terms, please do not install and do not use Braph.
+
+1.2	This license pertains solely to use of Braph in combination with Matlab® and requires that that 
+you also have a proper and valid license to use Matlab® in addition to this license.
+
+1.3	Braph is provided together with its source code and intended to be viewed and used as open source.
+The intent is that you shall be able to freely use and develop Braph for your research, development 
+and educational purposes. However, as much as we encourage use and development of Braph, we want to 
+restrict redistribution and commercial sublicensing, which means that there are some restrictions to 
+your use set forth in Section 2.4.
+
+2	Intellectual property rights and license
+
+2.1	Any and all intellectual property rights, including without limitation copyright protected 
+materials, source code, database rights, registered and unregistered trade-marks, registered and 
+unregistered design rights, patents and patentable inventions, know how (regardless if patentable or 
+not) and all other rights in or relating to Braph is the exclusive property of the Licensor, or the 
+property of the Licensor’s contributing licensors as applicable.
+
+2.2	You are granted a non-exclusive, royalty-free right and license to use Braph for your internal 
+research and development, including commercial research and development, as well as for educational 
+and academic purposes. The license furthermore includes the right to access and amend the source code
+of Braph and implement such changes in Braph as you deem fit.
+
+2.3	Any amendments made by you to Braph are your intellectual property that you may use freely as long 
+as such use is not contrary to these terms. We encourage that you share amendments with us, in which 
+case we are given the right (but not the obligation) to include them in future versions of Braph and 
+make them available on these terms or terms materially similar, but you are (i) not required to share 
+such amendments and (ii) your amendments if shared are subject to the same limitations of liability 
+as set forth in clause 3.
+
+2.4	Unless you have our prior written consent (which consent may be subject to further terms), you 
+are expressly not permitted to re-distribute Braph, amended or in its original form, or any part 
+thereof, regardless if such re-distribution is made for free or for a fee. You can however point 
+third parties to download Braph directly from our website www.braph.org or other official sources. 
+Furthermore, you may not integrate Braph or parts thereof into other software regardless if such 
+software is licensed on open source or so called “proprietary” terms. Use contrary to this clause 2.4 
+shall in addition render your license to use Braph null and void.
+
+3	Limitation of liability
+
+3.1	BRAPH IS PROVIDED “AS IS” AND “WHERE IS” WITHOUT ANY WARRANTY OF ANY KIND, INCLUDING WITHOUT 
+LIMITATION ANY IMPLIED, EXPRESS OR STATUTORY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, ANY 
+WARRANTIES OF FUNCTIONALITY, COMPLETENESS OR ACCURACY, FITNESS FOR A PARTICULAR PURPOSE, 
+MERCHANTABILITY, LACK OF VIRUSES OR FREEDOM FROM INFRINGEMENT. FURTHERMORE, YOU ACKNOWLEDGE THAT THE 
+SOFTWARE IS NOT, AND WILL NOT BE, ERROR FREE AND RUN WITHOUT ANY INTERRUPTION.
+
+3.2	We do not accept any liability of any kind, whether direct or indirect, in tort or under any form 
+of contractual liability or other doctrine for any damage or claim that may arise as a result of your 
+use of Braph, regardless if such use is with our version without any amendment to Braph that you may 
+have made.
+
+3.3	Furthermore, if any third party makes a claim against us as a result of your amended or unamended 
+use of Braph, you shall indemnify and hold us harmless from any such claim, including related cost and 
+expense such as legal fees.
+
+4	Attribution
+
+When publishing scientific results or research reports where Braph has been used in such research, we 
+encourage and appreciate that you include references to your use of Braph in such research, as well 
+as the scientific publications cited on www.braph.org.
+
+5	Choice of law, disputes
+
+These terms shall be governed and construed in accordance with the substantive laws of Sweden, without 
+regard to its conflicts of law principles. Any dispute, controversy or claim arising out of or in 
+connection with this Agreement, or the breach, termination or invalidity thereof, shall be settled by 
+the courts of Sweden with the district court of Stockholm as first instance.
+
