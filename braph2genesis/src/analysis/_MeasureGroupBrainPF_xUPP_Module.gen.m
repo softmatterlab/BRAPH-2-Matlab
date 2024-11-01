@@ -1,5 +1,5 @@
 %% ¡header!
-MeasureGroupBrainPF_xUPP_Module < PanelProp (pr, panel property LAYER) plots the panel to select a module for community structure.
+MeasureGroupBrainPF_xUPP_Module < PanelProp (pr, panel property MODULE) plots the panel to select a module for community structure.
 
 %%% ¡description!
 MeasureGroupBrainPF_xUPP_Module plots the panel to select a module from a drop-down list for community structure.
@@ -19,32 +19,32 @@ ELCLASS (constant, string) is the class of the % % % .
 'MeasureGroupBrainPF_xUPP_Module'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the panel property LAYER.
+NAME (constant, string) is the name of the panel property MODULE.
 %%%% ¡default!
 'MeasureGroupBrainPF_xUPP_Module'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the panel property LAYER.
+DESCRIPTION (constant, string) is the description of the panel property MODULE.
 %%%% ¡default!
 'MeasureGroupBrainPF_xUPP_Module plots the panel to select a module from a drop-down list for community structure. It is supposed to be used with the property MODULE of MeasureGroupBrainPF_NU, MeasureGroupBrainPF_BU, or MeasureGroupBrainPF_GU.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the panel property LAYER.
+TEMPLATE (parameter, item) is the template of the panel property MODULE.
 %%%% ¡settings!
 'MeasureGroupBrainPF_xUPP_Module'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the panel property LAYER.
+ID (data, string) is a few-letter code for the panel property MODULE.
 %%%% ¡default!
 'MeasureGroupBrainPF_xUPP_Module ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the panel property LAYER.
+LABEL (metadata, string) is an extended label of the panel property MODULE.
 %%%% ¡default!
 'MeasureGroupBrainPF_xUPP_Module label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the panel property LAYER.
+NOTES (metadata, string) are some specific notes about the panel property MODULE.
 %%%% ¡default!
 'MeasureGroupBrainPF_xUPP_Module notes'
 
@@ -131,7 +131,7 @@ end
 %% ¡props!
 
 %%% ¡prop!
-DROPDOWN (evanescent, handle) is the dropdown for the LAYER.
+DROPDOWN (evanescent, handle) is the dropdown for the MODULE.
 %%%% ¡calculate!
 el = pr.get('EL');
 prop = pr.get('PROP');
