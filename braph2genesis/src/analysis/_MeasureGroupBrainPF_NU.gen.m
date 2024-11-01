@@ -350,7 +350,7 @@ SIZE_DIFF (figure, option) determines whether the difference is shown with size 
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
-'on'
+'off'
 %%%% ¡postset!
 pf.get('SETUP');
 
