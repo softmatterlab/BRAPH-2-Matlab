@@ -339,6 +339,7 @@ MeasureGroupBrainPF_NS,1
 MeasureGroupBrainPF_NU,1
 MeasureGroupBrainPF_xSPP_Layer,1
 MeasureGroupBrainPF_xUPP_Layer,1
+MeasureGroupBrainPF_xUPP_Module,1
 PanelPropCellFDR,1
 BrainAtlas,1
 BrainAtlasPF,1
