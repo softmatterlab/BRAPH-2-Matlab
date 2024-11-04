@@ -55,10 +55,11 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 	%  <strong>45</strong> <strong>LAB_DICT</strong> 	LAB_DICT (figure, idict) contains the labels of the brain regions.
 	%  <strong>46</strong> <strong>M</strong> 	M (metadata, item) is the measure.
 	%  <strong>47</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
-	%  <strong>48</strong> <strong>LAYER</strong> 	LAYER (figure, scalar) is the layer number of the nodal measure.
-	%  <strong>49</strong> <strong>SIZE_DIFF</strong> 	SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.
-	%  <strong>50</strong> <strong>SIZE_SCALE</strong> 	SIZE_SCALE (figure, scalar) determines the scale of size effect.
-	%  <strong>51</strong> <strong>COLOR_DIFF</strong> 	COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.
+	%  <strong>48</strong> <strong>MODULE</strong> 	MODULE (figure, scalar) is the module selection for community structure.
+	%  <strong>49</strong> <strong>LAYER</strong> 	LAYER (figure, scalar) is the layer number of the nodal measure.
+	%  <strong>50</strong> <strong>SIZE_DIFF</strong> 	SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.
+	%  <strong>51</strong> <strong>SIZE_SCALE</strong> 	SIZE_SCALE (figure, scalar) determines the scale of size effect.
+	%  <strong>52</strong> <strong>COLOR_DIFF</strong> 	COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.
 	%
 	% MeasureGroupBrainPF_NU methods (constructor):
 	%  MeasureGroupBrainPF_NU - constructor
@@ -151,22 +152,27 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
-		LAYER = 48; %CET: Computational Efficiency Trick
+		MODULE = 48; %CET: Computational Efficiency Trick
+		MODULE_TAG = 'MODULE';
+		MODULE_CATEGORY = 8;
+		MODULE_FORMAT = 11;
+		
+		LAYER = 49; %CET: Computational Efficiency Trick
 		LAYER_TAG = 'LAYER';
 		LAYER_CATEGORY = 8;
 		LAYER_FORMAT = 11;
 		
-		SIZE_DIFF = 49; %CET: Computational Efficiency Trick
+		SIZE_DIFF = 50; %CET: Computational Efficiency Trick
 		SIZE_DIFF_TAG = 'SIZE_DIFF';
 		SIZE_DIFF_CATEGORY = 8;
 		SIZE_DIFF_FORMAT = 5;
 		
-		SIZE_SCALE = 50; %CET: Computational Efficiency Trick
+		SIZE_SCALE = 51; %CET: Computational Efficiency Trick
 		SIZE_SCALE_TAG = 'SIZE_SCALE';
 		SIZE_SCALE_CATEGORY = 8;
 		SIZE_SCALE_FORMAT = 11;
 		
-		COLOR_DIFF = 51; %CET: Computational Efficiency Trick
+		COLOR_DIFF = 52; %CET: Computational Efficiency Trick
 		COLOR_DIFF_TAG = 'COLOR_DIFF';
 		COLOR_DIFF_CATEGORY = 8;
 		COLOR_DIFF_FORMAT = 5;
@@ -230,10 +236,11 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			%  <strong>45</strong> <strong>LAB_DICT</strong> 	LAB_DICT (figure, idict) contains the labels of the brain regions.
 			%  <strong>46</strong> <strong>M</strong> 	M (metadata, item) is the measure.
 			%  <strong>47</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.
-			%  <strong>48</strong> <strong>LAYER</strong> 	LAYER (figure, scalar) is the layer number of the nodal measure.
-			%  <strong>49</strong> <strong>SIZE_DIFF</strong> 	SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.
-			%  <strong>50</strong> <strong>SIZE_SCALE</strong> 	SIZE_SCALE (figure, scalar) determines the scale of size effect.
-			%  <strong>51</strong> <strong>COLOR_DIFF</strong> 	COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.
+			%  <strong>48</strong> <strong>MODULE</strong> 	MODULE (figure, scalar) is the module selection for community structure.
+			%  <strong>49</strong> <strong>LAYER</strong> 	LAYER (figure, scalar) is the layer number of the nodal measure.
+			%  <strong>50</strong> <strong>SIZE_DIFF</strong> 	SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.
+			%  <strong>51</strong> <strong>SIZE_SCALE</strong> 	SIZE_SCALE (figure, scalar) determines the scale of size effect.
+			%  <strong>52</strong> <strong>COLOR_DIFF</strong> 	COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.
 			%
 			% See also Category, Format.
 			
@@ -310,7 +317,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51];
+				prop_list = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52];
 				return
 			end
 			
@@ -328,7 +335,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 				case 7 % Category.EVANESCENT
 					prop_list = [10 15 21 22 23 26 29 34 37 40 43];
 				case 8 % Category.FIGURE
-					prop_list = [14 20 24 25 27 30 31 32 35 36 38 39 41 42 44 45 48 49 50 51];
+					prop_list = [14 20 24 25 27 30 31 32 35 36 38 39 41 42 44 45 48 49 50 51 52];
 				case 9 % Category.GUI
 					prop_list = [9 13];
 				otherwise
@@ -356,7 +363,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			%CET: Computational Efficiency Trick
 			
 			if nargin == 0
-				prop_number = 51;
+				prop_number = 52;
 				return
 			end
 			
@@ -374,7 +381,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 				case 7 % Category.EVANESCENT
 					prop_number = 11;
 				case 8 % Category.FIGURE
-					prop_number = 20;
+					prop_number = 21;
 				case 9 % Category.GUI
 					prop_number = 2;
 				otherwise
@@ -407,7 +414,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			%
 			% See also getProps, existsTag.
 			
-			check = prop >= 1 && prop <= 51 && round(prop) == prop; %CET: Computational Efficiency Trick
+			check = prop >= 1 && prop <= 52 && round(prop) == prop; %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -445,7 +452,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'M'  'SETUP'  'LAYER'  'SIZE_DIFF'  'SIZE_SCALE'  'COLOR_DIFF' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'M'  'SETUP'  'MODULE'  'LAYER'  'SIZE_DIFF'  'SIZE_SCALE'  'COLOR_DIFF' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -478,7 +485,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'M'  'SETUP'  'LAYER'  'SIZE_DIFF'  'SIZE_SCALE'  'COLOR_DIFF' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'M'  'SETUP'  'MODULE'  'LAYER'  'SIZE_DIFF'  'SIZE_SCALE'  'COLOR_DIFF' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -507,7 +514,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				measuregroupbrainpf_nu_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'M'  'SETUP'  'LAYER'  'SIZE_DIFF'  'SIZE_SCALE'  'COLOR_DIFF' };
+				measuregroupbrainpf_nu_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'WAITBAR'  'H_WAITBAR'  'DRAW'  'DRAWN'  'PARENT'  'BKGCOLOR'  'H'  'SHOW'  'HIDE'  'DELETE'  'CLOSE'  'ST_POSITION'  'H_TOOLBAR'  'H_TOOLS'  'H_AXES'  'VIEW'  'ST_AXIS'  'LISTENER_ST_AXIS'  'SURFFILE'  'SURF'  'H_BRAIN'  'BRAIN'  'ST_SURFACE'  'ST_AMBIENT'  'BA'  'H_SPHS'  'SPHS'  'SPH_DICT'  'H_SYMS'  'SYMS'  'SYM_DICT'  'H_IDS'  'IDS'  'ID_DICT'  'H_LABS'  'LABS'  'LAB_DICT'  'M'  'SETUP'  'MODULE'  'LAYER'  'SIZE_DIFF'  'SIZE_SCALE'  'COLOR_DIFF' };
 				tag = measuregroupbrainpf_nu_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -534,7 +541,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NU.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measuregroupbrainpf_nu_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  8  7  7  7  8  8  7  8  2  7  8  8  8  2  7  8  8  7  8  8  7  8  8  7  8  8  2  6  8  8  8  8 };
+			measuregroupbrainpf_nu_category_list = { 1  1  1  3  4  2  2  6  9  7  6  6  9  8  7  6  6  6  6  8  7  7  7  8  8  7  8  2  7  8  8  8  2  7  8  8  7  8  8  7  8  8  7  8  8  2  6  8  8  8  8  8 };
 			prop_category = measuregroupbrainpf_nu_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -560,7 +567,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NU.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measuregroupbrainpf_nu_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  8  18  19  18  12  8  18  5  8  18  4  8  8  8  19  4  10  19  4  10  19  4  10  19  4  10  8  1  11  5  11  5 };
+			measuregroupbrainpf_nu_format_list = { 2  2  2  8  2  2  2  2  4  18  4  4  8  20  18  4  4  4  4  8  18  19  18  12  8  18  5  8  18  4  8  8  8  19  4  10  19  4  10  19  4  10  19  4  10  8  1  11  11  5  11  5 };
 			prop_format = measuregroupbrainpf_nu_format_list{prop};
 		end
 		function prop_description = getPropDescription(pointer)
@@ -586,7 +593,7 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NU.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measuregroupbrainpf_nu_description_list = { 'ELCLASS (constant, string) is the class of the % % %.'  'NAME (constant, string) is the name of the panel figure for measure group brain.'  'DESCRIPTION (constant, string) is the description of the panel figure for measure group brain.'  'TEMPLATE (parameter, item) is the template of the panel figure for measure group brain.'  'ID (data, string) is a few-letter code for the panel figure for measure group brain.'  'LABEL (metadata, string) is an extended label of the panel figure for measure group brain.'  'NOTES (metadata, string) are some specific notes about the panel figure for measure group brain.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure brain atlas.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the panel figure for brain atlas.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'VIEW (figure, rvector) sets the desired view as the line-of-sight azimuth and elevation angles.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'SURFFILE (figure, option) is the name of the file of the brain surface to be plotted.'  'SURF (metadata, item) is the brain surface to be plotted.'  'H_BRAIN (evanescent, handle) is the handle for brain surface.'  'BRAIN (figure, logical) determines whether the brain surface is shown.'  'ST_SURFACE (figure, item) determines the surface settings.'  'ST_AMBIENT (figure, item) determines the ambient settings.'  'BA (metadata, item) is the brain atlas with the brain regions.'  'H_SPHS (evanescent, handlelist) is the set of handles for the spheres.'  'SPHS (figure, logical) determines whether the spheres are shown.'  'SPH_DICT (figure, idict) contains the spheres of the brain regions.'  'H_SYMS (evanescent, handlelist) is the set of handles for the symbols.'  'SYMS (figure, logical) determines whether the symbols are shown.'  'SYM_DICT (figure, idict) contains the symbols of the brain regions.'  'H_IDS (evanescent, handlelist) is the set of handles for the ids.'  'IDS (figure, logical) determines whether the ids are shown.'  'ID_DICT (figure, idict) contains the ids of the brain regions.'  'H_LABS (evanescent, handlelist) is the set of handles for the labels.'  'LABS (figure, logical) determines whether the labels are shown.'  'LAB_DICT (figure, idict) contains the labels of the brain regions.'  'M (metadata, item) is the measure.'  'SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.'  'LAYER (figure, scalar) is the layer number of the nodal measure.'  'SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.'  'SIZE_SCALE (figure, scalar) determines the scale of size effect.'  'COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.' };
+			measuregroupbrainpf_nu_description_list = { 'ELCLASS (constant, string) is the class of the % % %.'  'NAME (constant, string) is the name of the panel figure for measure group brain.'  'DESCRIPTION (constant, string) is the description of the panel figure for measure group brain.'  'TEMPLATE (parameter, item) is the template of the panel figure for measure group brain.'  'ID (data, string) is a few-letter code for the panel figure for measure group brain.'  'LABEL (metadata, string) is an extended label of the panel figure for measure group brain.'  'NOTES (metadata, string) are some specific notes about the panel figure for measure group brain.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure brain atlas.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure brain surface is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the panel figure for brain atlas.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'VIEW (figure, rvector) sets the desired view as the line-of-sight azimuth and elevation angles.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'SURFFILE (figure, option) is the name of the file of the brain surface to be plotted.'  'SURF (metadata, item) is the brain surface to be plotted.'  'H_BRAIN (evanescent, handle) is the handle for brain surface.'  'BRAIN (figure, logical) determines whether the brain surface is shown.'  'ST_SURFACE (figure, item) determines the surface settings.'  'ST_AMBIENT (figure, item) determines the ambient settings.'  'BA (metadata, item) is the brain atlas with the brain regions.'  'H_SPHS (evanescent, handlelist) is the set of handles for the spheres.'  'SPHS (figure, logical) determines whether the spheres are shown.'  'SPH_DICT (figure, idict) contains the spheres of the brain regions.'  'H_SYMS (evanescent, handlelist) is the set of handles for the symbols.'  'SYMS (figure, logical) determines whether the symbols are shown.'  'SYM_DICT (figure, idict) contains the symbols of the brain regions.'  'H_IDS (evanescent, handlelist) is the set of handles for the ids.'  'IDS (figure, logical) determines whether the ids are shown.'  'ID_DICT (figure, idict) contains the ids of the brain regions.'  'H_LABS (evanescent, handlelist) is the set of handles for the labels.'  'LABS (figure, logical) determines whether the labels are shown.'  'LAB_DICT (figure, idict) contains the labels of the brain regions.'  'M (metadata, item) is the measure.'  'SETUP (query, empty) calculates the measure value and stores it to be implemented in the subelements.'  'MODULE (figure, scalar) is the module selection for community structure.'  'LAYER (figure, scalar) is the layer number of the nodal measure.'  'SIZE_DIFF (figure, option) determines whether the difference is shown with size effect.'  'SIZE_SCALE (figure, scalar) determines the scale of size effect.'  'COLOR_DIFF (figure, option) determines whether the difference is shown with color effect.' };
 			prop_description = measuregroupbrainpf_nu_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -612,13 +619,15 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NU.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 48 % MeasureGroupBrainPF_NU.LAYER
+				case 48 % MeasureGroupBrainPF_NU.MODULE
 					prop_settings = Format.getFormatSettings(11);
-				case 49 % MeasureGroupBrainPF_NU.SIZE_DIFF
+				case 49 % MeasureGroupBrainPF_NU.LAYER
+					prop_settings = Format.getFormatSettings(11);
+				case 50 % MeasureGroupBrainPF_NU.SIZE_DIFF
 					prop_settings = {'on' 'off' 'disable'};
-				case 50 % MeasureGroupBrainPF_NU.SIZE_SCALE
+				case 51 % MeasureGroupBrainPF_NU.SIZE_SCALE
 					prop_settings = Format.getFormatSettings(11);
-				case 51 % MeasureGroupBrainPF_NU.COLOR_DIFF
+				case 52 % MeasureGroupBrainPF_NU.COLOR_DIFF
 					prop_settings = {'on' 'off' 'disable'};
 				case 4 % MeasureGroupBrainPF_NU.TEMPLATE
 					prop_settings = 'MeasureGroupBrainPF_NU';
@@ -649,13 +658,15 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NU.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 48 % MeasureGroupBrainPF_NU.LAYER
+				case 48 % MeasureGroupBrainPF_NU.MODULE
 					prop_default = 1;
-				case 49 % MeasureGroupBrainPF_NU.SIZE_DIFF
-					prop_default = 'on';
-				case 50 % MeasureGroupBrainPF_NU.SIZE_SCALE
+				case 49 % MeasureGroupBrainPF_NU.LAYER
+					prop_default = 1;
+				case 50 % MeasureGroupBrainPF_NU.SIZE_DIFF
+					prop_default = 'off';
+				case 51 % MeasureGroupBrainPF_NU.SIZE_SCALE
 					prop_default = 10;
-				case 51 % MeasureGroupBrainPF_NU.COLOR_DIFF
+				case 52 % MeasureGroupBrainPF_NU.COLOR_DIFF
 					prop_default = 'on';
 				case 1 % MeasureGroupBrainPF_NU.ELCLASS
 					prop_default = 'MeasureGroupBrainPF_NU';
@@ -735,13 +746,15 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			prop = MeasureGroupBrainPF_NU.getPropProp(pointer);
 			
 			switch prop
-				case 48 % MeasureGroupBrainPF_NU.LAYER
+				case 48 % MeasureGroupBrainPF_NU.MODULE
 					check = Format.checkFormat(11, value, MeasureGroupBrainPF_NU.getPropSettings(prop));
-				case 49 % MeasureGroupBrainPF_NU.SIZE_DIFF
+				case 49 % MeasureGroupBrainPF_NU.LAYER
+					check = Format.checkFormat(11, value, MeasureGroupBrainPF_NU.getPropSettings(prop));
+				case 50 % MeasureGroupBrainPF_NU.SIZE_DIFF
 					check = Format.checkFormat(5, value, MeasureGroupBrainPF_NU.getPropSettings(prop));
-				case 50 % MeasureGroupBrainPF_NU.SIZE_SCALE
+				case 51 % MeasureGroupBrainPF_NU.SIZE_SCALE
 					check = Format.checkFormat(11, value, MeasureGroupBrainPF_NU.getPropSettings(prop));
-				case 51 % MeasureGroupBrainPF_NU.COLOR_DIFF
+				case 52 % MeasureGroupBrainPF_NU.COLOR_DIFF
 					check = Format.checkFormat(5, value, MeasureGroupBrainPF_NU.getPropSettings(prop));
 				case 4 % MeasureGroupBrainPF_NU.TEMPLATE
 					check = Format.checkFormat(8, value, MeasureGroupBrainPF_NU.getPropSettings(prop));
@@ -776,16 +789,19 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			%  checkValue.
 			
 			switch prop
-				case 48 % MeasureGroupBrainPF_NU.LAYER
+				case 48 % MeasureGroupBrainPF_NU.MODULE
 					pf.get('SETUP');
 					
-				case 49 % MeasureGroupBrainPF_NU.SIZE_DIFF
+				case 49 % MeasureGroupBrainPF_NU.LAYER
 					pf.get('SETUP');
 					
-				case 50 % MeasureGroupBrainPF_NU.SIZE_SCALE
+				case 50 % MeasureGroupBrainPF_NU.SIZE_DIFF
 					pf.get('SETUP');
 					
-				case 51 % MeasureGroupBrainPF_NU.COLOR_DIFF
+				case 51 % MeasureGroupBrainPF_NU.SIZE_SCALE
+					pf.get('SETUP');
+					
+				case 52 % MeasureGroupBrainPF_NU.COLOR_DIFF
 					pf.get('SETUP');
 					
 				otherwise
@@ -908,6 +924,29 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 					    case 'disable'
 					end
 					
+					m_id = m.get('ID');
+					if isequal(m_id, 'CommunityStructure') || isequal(m_id, 'MultilayerCommunity')
+					    [modules, ia, ic] = unique(m_value, 'sorted');
+					    selected_module = pf.get('MODULE');
+					    if any(ismember(m_value, selected_module))
+					        mask = m_value == selected_module;
+					    else
+					        mask = true(size(m_value));
+					    end
+					    for i = 1:1:length(sph_list)
+					        set(sph_list{i}, 'VISIBLE', mask(i));
+					    end
+					    for i = 1:1:length(sym_list)
+					        set(sym_list{i}, 'VISIBLE', mask(i));
+					    end
+					    for i = 1:1:length(id_list)
+					        set(id_list{i}, 'VISIBLE', mask(i));
+					    end
+					    for i = 1:1:length(lab_list)
+					        set(lab_list{i}, 'VISIBLE', mask(i));
+					    end
+					end
+					
 					value = {};
 					
 				otherwise
@@ -937,8 +976,11 @@ classdef MeasureGroupBrainPF_NU < MeasureGroupBrainPF
 			%  PanelPropString, PanelPropStringList.
 			
 			switch prop
-				case 48 % MeasureGroupBrainPF_NU.LAYER
-					pr = MeasureGroupBrainPF_xUPP_Layer('EL', pf, 'PROP', 48);
+				case 48 % MeasureGroupBrainPF_NU.MODULE
+					pr = MeasureGroupBrainPF_xUPP_Module('EL', pf, 'PROP', 48);
+					
+				case 49 % MeasureGroupBrainPF_NU.LAYER
+					pr = MeasureGroupBrainPF_xUPP_Layer('EL', pf, 'PROP', 49);
 					
 				otherwise
 					pr = getPanelProp@MeasureGroupBrainPF(pf, prop, varargin{:});

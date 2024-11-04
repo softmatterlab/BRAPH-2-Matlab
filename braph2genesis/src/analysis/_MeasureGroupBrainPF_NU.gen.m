@@ -23,15 +23,9 @@ Graph LAYER
 
 %%% ¡prop!
 %%%% ¡id!
-MeasureGroupBrainPF_NU.SPHS
+MeasureGroupBrainPF_NU.MODULE
 %%%% ¡title!
-Brain Region SPHERES ON/OFF
-
-%%% ¡prop!
-%%%% ¡id!
-MeasureGroupBrainPF_NU.SPH_DICT
-%%%% ¡title!
-Brain Region SPHERES PROPERTIES
+Communisty Structure MODULE
 
 %%% ¡prop!
 %%%% ¡id!
@@ -122,6 +116,18 @@ BRAIN COLOR
 MeasureGroupBrainPF_NU.ST_AMBIENT
 %%%% ¡title!
 MATERIAL & LIGHTNING
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SPHS
+%%%% ¡title!
+Brain Region SPHERES ON/OFF
+
+%%% ¡prop!
+%%%% ¡id!
+MeasureGroupBrainPF_NU.SPH_DICT
+%%%% ¡title!
+Brain Region SPHERES PROPERTIES
 
 %%% ¡prop!
 %%%% ¡id!
@@ -294,9 +300,41 @@ switch color_diff
     case 'disable'
 end
 
+m_id = m.get('ID');
+if isequal(m_id, 'CommunityStructure') || isequal(m_id, 'MultilayerCommunity')
+    [modules, ia, ic] = unique(m_value, 'sorted');
+    selected_module = pf.get('MODULE');
+    if any(ismember(m_value, selected_module))
+        mask = m_value == selected_module;
+    else
+        mask = true(size(m_value));
+    end
+    for i = 1:1:length(sph_list)
+        set(sph_list{i}, 'VISIBLE', mask(i));
+    end
+    for i = 1:1:length(sym_list)
+        set(sym_list{i}, 'VISIBLE', mask(i));
+    end
+    for i = 1:1:length(id_list)
+        set(id_list{i}, 'VISIBLE', mask(i));
+    end
+    for i = 1:1:length(lab_list)
+        set(lab_list{i}, 'VISIBLE', mask(i));
+    end
+end
+
 value = {};
 
 %% ¡props!
+
+%%% ¡prop!
+MODULE (figure, scalar) is the module selection for community structure.
+%%%% ¡default!
+1
+%%%% ¡postset!
+pf.get('SETUP');
+%%%% ¡gui!
+pr = MeasureGroupBrainPF_xUPP_Module('EL', pf, 'PROP', MeasureGroupBrainPF_NU.MODULE);
 
 %%% ¡prop!
 LAYER (figure, scalar) is the layer number of the nodal measure.
@@ -312,7 +350,7 @@ SIZE_DIFF (figure, option) determines whether the difference is shown with size 
 %%%% ¡settings!
 {'on' 'off' 'disable'}
 %%%% ¡default!
-'on'
+'off'
 %%%% ¡postset!
 pf.get('SETUP');
 
