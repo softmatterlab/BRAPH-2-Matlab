@@ -383,7 +383,7 @@ set(pr.get('TABLE'), 'ContextMenu', contextmenu)
 value = contextmenu;
 %%%% ¡calculate_callbacks!
 function cb_select_all(~, ~) 
-    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP'));
+    g = pr.get('EL').get('GRAPH_TEMPLATE');
     m_list = g.get('COMPATIBLE_MEASURES');
 
     pr.set('SELECTED', [1:1:length(m_list)])
