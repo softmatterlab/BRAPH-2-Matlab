@@ -48,9 +48,10 @@ A &check; indicates that we have unit-tested the current release BRAPH 2 on the 
 | :-------------------: | :-----: | :-----:| :-----: |
 | R2022a                | ?       | ?      | ?       |
 | R2022b                | ?       | ?      | ?       |
-| R2023a                | ?       | ?      | ?       |
+| R2023a                | ?       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2500148139)      | ?       |
 | R2023b                | ?       | ?      | ?       |
 | R2024a                | ?       | ?      | ?       |
+| R2024b                | ?       | ?      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2500148139](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2465324224))       |
 
 ### Use Cases & Analysis Pipelines
 
