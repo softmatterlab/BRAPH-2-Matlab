@@ -401,7 +401,9 @@ pe.get('SHOW')
 assert(isequal(pe.get('H').get('ColumnWidth'), {'1x'}))
 
 pe.get('RESIZEX')
-assert(isequal(pe.get('H').get('ColumnWidth'), {300}))
+if ~isunix % the assert is not performed in linux OS because the window size from the linux container is not fixed.
+    assert(isequal(pe.get('H').get('ColumnWidth'), {300})) 
+end 
 
 pe.get('RESIZEY')
 % cellfun(@(pr) assert(h(pr.get('H')) == pr.get('HEIGHT')), pe.get('PR_DICT').get('IT_LIST'), 'UniformOutput', false)
