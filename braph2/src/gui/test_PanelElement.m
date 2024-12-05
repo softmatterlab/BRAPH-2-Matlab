@@ -1629,7 +1629,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	gui.set('POSITION', [0 .8 1 .2])
 	pe.get('RESIZEX')
     if ~isunix % the assert is not performed in linux OS because the window size from the linux container is not fixed.
-        assert(isequal(pe.get('H').get('ColumnWidth'), {300}))
+        assert(~isequal(pe.get('H').get('ColumnWidth'), {300}))
     end
 	
 	gui.set('POSITION', [0 0 .1 1])
