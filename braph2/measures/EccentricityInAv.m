@@ -673,9 +673,11 @@ classdef EccentricityInAv < EccentricityIn
 					
 					eccentricity_av = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    eccentricity_av(li) = {mean(eccentricity{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = eccentricity_av;
 					

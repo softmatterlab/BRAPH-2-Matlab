@@ -671,6 +671,8 @@ classdef AssortInIn < Measure
 					N = g.get('NODENUMBER');
 					in_in_assortativity = cell(L, 1);
 					connectivity_types = g.get('CONNECTIVITY_TYPE', L);  
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    Aii = A{li, li};
 					    connectivity_type = connectivity_types(li, li);
@@ -696,6 +698,7 @@ classdef AssortInIn < Measure
 					    
 					    in_in_assortativity(li) = {assortativity_layer};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = in_in_assortativity;
 					

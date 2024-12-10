@@ -124,6 +124,8 @@ assert(isnumeric(score_threshold) == 1, ...
 
 s_core = cell(L, 1);
 directionality_type = g.get('DIRECTIONALITY_TYPE', L);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L    
     
     Aii = A{li, li};
@@ -152,6 +154,8 @@ parfor li = 1:1:L
     end
     s_core(li) = {subAii};  % add s-core of layer li
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = s_core;
 
 %% ¡props!

@@ -290,8 +290,12 @@ original_loss = crossentropy(net.predict(inputs), targets);
 wb = braph2waitbar(nn.get('WAITBAR'), 0, ['Feature importance permutation ...']);
 
 start = tic;
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 for i = 1:1:P
     rng(seeds(i), 'twister')
+
+    warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
     parfor j = 1:1:number_features
         scrambled_inputs = inputs;
         permuted_value = squeeze(normrnd(mean(inputs(:, j)), std(inputs(:, j)), squeeze(size(inputs(:, j))))) + squeeze(randn(size(inputs(:, j)))) + mean(inputs(:, j));
@@ -299,6 +303,7 @@ for i = 1:1:P
         scrambled_loss = crossentropy(net.predict(scrambled_inputs), targets);
         feature_importance(j) = scrambled_loss;
     end
+    warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
     feature_importance_all_permutations{i} = feature_importance / original_loss;
 
@@ -310,6 +315,7 @@ for i = 1:1:P
         pause(nn.get('INTERRUPTIBLE'))
     end
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 braph2waitbar(wb, 'close')
 

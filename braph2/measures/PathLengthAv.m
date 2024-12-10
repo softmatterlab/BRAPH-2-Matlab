@@ -671,6 +671,8 @@ classdef PathLengthAv < PathLength
 					L = g.get('LAYERNUMBER');
 					path_length_av = cell(L, 1);
 					path_length_rule = m.get('RULE');
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:length(path_length_av)
 					    switch lower(path_length_rule)
 					        case {'subgraphs'}
@@ -682,6 +684,8 @@ classdef PathLengthAv < PathLength
 					            path_length_av(li) = {harmmean(path_length{li})};
 					    end
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = path_length_av;
 					
 					rng(rng_settings_)
