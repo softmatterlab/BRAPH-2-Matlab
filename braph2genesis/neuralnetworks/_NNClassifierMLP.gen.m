@@ -307,7 +307,6 @@ wb = braph2waitbar(nn.get('WAITBAR'), 0, ['Feature importance permutation ...'])
 
 start = tic;
 
-warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 for i = 1:1:P
     rng(seeds(i), 'twister')
 
@@ -331,7 +330,6 @@ for i = 1:1:P
         pause(nn.get('INTERRUPTIBLE'))
     end
 end
-warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 braph2waitbar(wb, 'close')
 

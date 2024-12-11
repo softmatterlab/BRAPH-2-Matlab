@@ -791,7 +791,6 @@ classdef NNClassifierMLP < NNBase
 					
 					start = tic;
 					
-					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					for i = 1:1:P
 					    rng(seeds(i), 'twister')
 					
@@ -814,8 +813,7 @@ classdef NNClassifierMLP < NNBase
 					    if nn.get('INTERRUPTIBLE')
 					        pause(nn.get('INTERRUPTIBLE'))
 					    end
-					end
-					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+                    end
 					
 					braph2waitbar(wb, 'close')
 					
