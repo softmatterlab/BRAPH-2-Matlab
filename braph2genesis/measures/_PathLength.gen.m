@@ -128,6 +128,7 @@ path_length_rule = m.get('RULE');
 
 distance = Distance('G', g).get('M');
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     node_number_layer = N(li);
     path_length_layer = zeros(node_number_layer, 1);
@@ -152,6 +153,8 @@ parfor li = 1:1:L
     end 
     path_length(li) = {path_length_layer}; % node Inf corresponds to isolated nodes
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = path_length;
 
 %% ¡props!

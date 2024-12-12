@@ -673,6 +673,8 @@ classdef Transitivity < Triangles
 					triangles = calculateValue@Triangles(m, prop);
 					
 					directionality_type =  g.get('DIRECTIONALITY_TYPE', g.get('LAYERNUMBER'));
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L      
 					    Aii = A{li, li};
 					    if directionality_type == 2  % undirected graphs
@@ -692,6 +694,8 @@ classdef Transitivity < Triangles
 					    transitivity_layer(isnan(transitivity_layer)) = 0;  % Should return zeros, not NaN
 					    transitivity(li) = {transitivity_layer};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = transitivity;
 					
 					rng(rng_settings_)

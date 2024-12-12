@@ -682,9 +682,11 @@ classdef Radius < Measure
 					eccentricity = Eccentricity('G', g, 'RULE', m.get('RULE')).get('M');
 					radius = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    radius(li) = {min(eccentricity{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = radius;
 					

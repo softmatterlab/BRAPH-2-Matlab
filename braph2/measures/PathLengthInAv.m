@@ -670,6 +670,8 @@ classdef PathLengthInAv < PathLengthIn
 					in_path_length = calculateValue@PathLengthIn(m, prop);
 					in_path_length_av = cell(L, 1);
 					path_length_rule = m.get('RULE');
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:length(in_path_length_av)
 					    switch lower(path_length_rule)
 					        case {'subgraphs'}
@@ -681,6 +683,8 @@ classdef PathLengthInAv < PathLengthIn
 					            in_path_length_av(li) = {harmmean(in_path_length{li})};
 					    end
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = in_path_length_av;
 					
 					rng(rng_settings_)

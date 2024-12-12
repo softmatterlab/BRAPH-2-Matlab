@@ -689,6 +689,8 @@ classdef SCore < Measure
 					
 					s_core = cell(L, 1);
 					directionality_type = g.get('DIRECTIONALITY_TYPE', L);
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L    
 					    
 					    Aii = A{li, li};
@@ -717,6 +719,8 @@ classdef SCore < Measure
 					    end
 					    s_core(li) = {subAii};  % add s-core of layer li
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = s_core;
 					
 					rng(rng_settings_)

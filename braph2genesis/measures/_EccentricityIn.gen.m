@@ -126,6 +126,7 @@ distance = Distance('G', g).get('M');
 eccentricityIn = cell(L, 1);
 eccentricity_rule = m.get('RULE');
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     switch lower(eccentricity_rule)
         case {'subgraphs'}
@@ -134,6 +135,7 @@ parfor li = 1:1:L
             eccentricityIn(li)  = {max(distance{li}, [], 1)};
     end
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = eccentricityIn;
 

@@ -119,9 +119,11 @@ L = g.get('LAYERNUMBER');
 
 out_strength_av = cell(L, 1);
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     out_strength_av(li) = {mean(out_strength{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = out_strength_av;
 

@@ -117,6 +117,8 @@ A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for m
 L = g.get('LAYERNUMBER');
 N = g.get('NODENUMBER');
 eigenvector_centrality = cell(L, 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     Aii = A{li, li};   
     
@@ -130,6 +132,8 @@ parfor li = 1:L
     ec = abs(V(:, idx));
     eigenvector_centrality(li) = {reshape(ec, length(ec), 1)};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = eigenvector_centrality; 
 
 %% ¡tests!

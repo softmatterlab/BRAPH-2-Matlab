@@ -673,9 +673,11 @@ classdef LocalEfficiencyAv < LocalEfficiency
 					    return;
 					end
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    local_efficiency_av(li) ={mean(local_efficiency{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = local_efficiency_av;
 					

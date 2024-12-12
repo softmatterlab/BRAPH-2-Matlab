@@ -968,6 +968,7 @@ classdef ComparisonEnsemble < ConcreteElement
 					start = tic;
 					seeds = c.memorize('PERM_SEEDS');
 					for p = 1:20:P
+					    warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					    parfor q = p:min(p+20, P)
 					        % [a1_perm, a2_perm] = c.getPerm(i, memorize);
 					        % 
@@ -995,6 +996,7 @@ classdef ComparisonEnsemble < ConcreteElement
 					        m2_perms{1, q} = ms2_av;
 					        diff_perms{1, q} = cellfun(@(x, y) y - x, m1_perms{1, q}, m2_perms{1, q}, 'UniformOutput', false);
 					    end
+					    warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					    braph2waitbar(wb, p / P, ['Comparing group ' cp.get('MEASURE') '. Permutation ' num2str(p) ' of ' num2str(P) ' - ' int2str(toc(start)) '.' int2str(mod(toc(start), 1) * 10) 's ...'])
 					    if c.get('VERBOSE')

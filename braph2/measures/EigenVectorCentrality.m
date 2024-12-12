@@ -668,6 +668,8 @@ classdef EigenVectorCentrality < Measure
 					L = g.get('LAYERNUMBER');
 					N = g.get('NODENUMBER');
 					eigenvector_centrality = cell(L, 1);
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    Aii = A{li, li};   
 					    
@@ -681,6 +683,8 @@ classdef EigenVectorCentrality < Measure
 					    ec = abs(V(:, idx));
 					    eigenvector_centrality(li) = {reshape(ec, length(ec), 1)};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = eigenvector_centrality;
 					
 					rng(rng_settings_)

@@ -122,9 +122,12 @@ g = m.get('G'); % graph from measure class
 clustering  = calculateValue@Clustering(m, prop);
 layerNumber = g.get('LAYERNUMBER');
 clustering_av = cell(layerNumber, 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:length(clustering)
     clustering_av(li) = {mean(clustering{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = clustering_av;
 

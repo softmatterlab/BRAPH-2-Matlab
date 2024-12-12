@@ -669,9 +669,12 @@ classdef StrengthAv < Strength
 					strength = calculateValue@Strength(m, prop);
 					
 					strength_av = cell(L, 1);
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    strength_av(li) = {mean(strength{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = strength_av;
 					

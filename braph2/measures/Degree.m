@@ -668,11 +668,13 @@ classdef Degree < Measure
 					
 					degree = cell(g.get('LAYERNUMBER'), 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:g.get('LAYERNUMBER')
 					    Aii = A{li, li};
 					    Aii = binarize(Aii);  % binarizes the adjacency matrix (removing diagonal)
 					    degree(li) = {sum(Aii, 2)};  % calculates the degree of a node for layer li
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = degree;
 					

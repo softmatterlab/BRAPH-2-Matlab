@@ -669,9 +669,13 @@ classdef GlobalEfficiencyAv < GlobalEfficiency
 					L = g.get('LAYERNUMBER');
 					
 					global_efficiency_av = cell(L, 1);
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    global_efficiency_av(li) = {mean(global_efficiency{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = global_efficiency_av;
 					
 					rng(rng_settings_)
