@@ -780,7 +780,7 @@ classdef NNRegressorMLP < NNBase
 					    if nn.get('INTERRUPTIBLE')
 					        pause(nn.get('INTERRUPTIBLE'))
 					    end
-                    end
+					end
 					
 					braph2waitbar(wb, 'close')
 					
