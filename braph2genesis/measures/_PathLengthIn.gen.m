@@ -127,6 +127,7 @@ path_length_rule = m.get('RULE');
 
 distance = Distance('G', g).get('M');
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     node_number_layer = N(li);
     in_path_length_layer = zeros(node_number_layer, 1);
@@ -152,6 +153,8 @@ parfor li = 1:1:L
     end
     in_path_length(li) = {in_path_length_layer};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = in_path_length;
 
 %% ¡props!

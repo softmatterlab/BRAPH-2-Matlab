@@ -667,9 +667,11 @@ classdef DegreeOutAv < DegreeOut
 					L = g.get('LAYERNUMBER');
 					degree_out_av = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    degree_out_av(li) = {mean(out_degree{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = degree_out_av;
 					

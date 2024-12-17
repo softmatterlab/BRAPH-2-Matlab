@@ -685,6 +685,7 @@ classdef EccentricityIn < Measure
 					eccentricityIn = cell(L, 1);
 					eccentricity_rule = m.get('RULE');
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    switch lower(eccentricity_rule)
 					        case {'subgraphs'}
@@ -693,6 +694,7 @@ classdef EccentricityIn < Measure
 					            eccentricityIn(li)  = {max(distance{li}, [], 1)};
 					    end
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = eccentricityIn;
 					

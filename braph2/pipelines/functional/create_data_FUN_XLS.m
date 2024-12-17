@@ -56,7 +56,7 @@ if ~isfolder(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    for i = 1:1:50 % subject number
+    for i = 1:1:25 % subject number
         sub_id = ['SubjectFUN_' num2str(i)];
 
         % randomize the parameters
@@ -109,7 +109,7 @@ if ~isfolder(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    for i = 51:1:100
+    for i = 26:1:50
         sub_id = ['SubjectFUN_' num2str(i)];
 
         % randomize the parameters

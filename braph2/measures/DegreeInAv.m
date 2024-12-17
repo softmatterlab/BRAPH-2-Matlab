@@ -667,9 +667,11 @@ classdef DegreeInAv < DegreeIn
 					L = g.get('LAYERNUMBER');
 					in_degree_av = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    in_degree_av(li) = {mean(in_degree{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = in_degree_av;
 					

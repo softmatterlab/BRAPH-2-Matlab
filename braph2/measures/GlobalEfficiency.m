@@ -671,12 +671,16 @@ classdef GlobalEfficiency < Distance
 					distance = calculateValue@Distance(m, prop);
 					
 					global_efficiency = cell(L, 1);
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    inverse_distance = distance{li}.^-1;  % inverse distance
 					    inverse_distance(1:N(li)+1:end) = 0;
 					    global_efficiency_layer = (sum(inverse_distance, 2) / (N(li)-1));
 					    global_efficiency(li) = {global_efficiency_layer};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = global_efficiency;
 					
 					rng(rng_settings_)

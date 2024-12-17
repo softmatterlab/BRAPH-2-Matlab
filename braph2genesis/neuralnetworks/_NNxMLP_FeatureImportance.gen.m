@@ -276,10 +276,15 @@ wb = braph2waitbar(nnfi.get('WAITBAR'), 0, ['Feature importance permutation ...'
 
 % % % delete(gcp('nocreate')); parpool('Threads'); % add a property to config Threads or Processes for the profile 
 start = tic;
+
 for j = 1:leap_parallel:p
+    
+    warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
     parfor i = j:min(j+leap_parallel, p)
         perm_shuflled_loss{i} = nnfi.get('SHUFFLED_LOSS', seeds(i));
     end
+    warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+    
     if nnfi.get('VERBOSE')
         disp(['** PERMUTATION FEATURE IMPORTANCE - sampling #' int2str(min(j+leap_parallel-1, p)) '/' int2str(p) ' - ' int2str(toc(start)) '.' int2str(mod(toc(start), 1) * 10) 's'])
     end

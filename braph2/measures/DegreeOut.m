@@ -668,11 +668,13 @@ classdef DegreeOut < Measure
 					L = g.get('LAYERNUMBER');
 					out_degree = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    Aii = A{li, li};
 					    Aii = binarize(Aii);  % binarizes the adjacency matrix
 					    out_degree(li) = {sum(Aii, 2)};  % calculates the out-degree of a node for layer li
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = out_degree;
 					

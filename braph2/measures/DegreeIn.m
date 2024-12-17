@@ -668,11 +668,13 @@ classdef DegreeIn < Measure
 					L = g.get('LAYERNUMBER');
 					in_degree = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    Aii = A{li, li};
 					    Aii = binarize(Aii);  % binarizes the adjacency matrix
 					    in_degree(li) = {sum(Aii, 1)'};  % calculates the in-degree of a node for layer li
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = in_degree;
 					

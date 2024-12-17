@@ -669,10 +669,13 @@ classdef Strength < Measure
 					L = g.get('LAYERNUMBER');
 					strength = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    Aii = A{li, li};
 					    strength(li) = {sum(Aii, 2)};  % calculates the strength of a node for layer li
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = strength;
 					
 					rng(rng_settings_)

@@ -126,6 +126,8 @@ kcore_threshold = m.get('KCORETHRESHOLD');
 
 k_core = cell(L, 1);
 directionality_type =  g.get('DIRECTIONALITY_TYPE', L);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L    
     Aii = A{li, li};
     directionality_layer = directionality_type(li, li);   
@@ -153,6 +155,7 @@ parfor li = 1:1:L
     end
     k_core(li) = {subAii};  % add k-core of layer li
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = k_core;
 

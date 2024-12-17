@@ -677,9 +677,11 @@ classdef Diameter < Measure
 					eccentricity = Eccentricity('G', g, 'RULE', m.get('RULE')).get('M'); 
 					diameter = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    diameter(li) = {max(eccentricity{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = diameter;
 					

@@ -52,7 +52,7 @@ if ~isfolder(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    for i = 1:1:50 % subject number
+    for i = 1:1:25 % subject number
         sub_id = ['SubjectCON_FUN_MP_' num2str(i)];
 
         h1 = WattsStrogatz(N, K1, beta1); % create two WS graph
@@ -87,7 +87,7 @@ if ~isfolder(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} cell2str(sex_options)}
         ];
-    for i = 51:1:100
+    for i = 26:1:50
         sub_id = ['SubjectCON_FUN_MP_' num2str(i)];
 
         h2 = WattsStrogatz(N, K2, beta2);
@@ -120,7 +120,7 @@ if ~isfolder(data_dir)
     indices4 = 55:1:72;
     indices5 = 73:1:90;
     indices = {indices1; indices2; indices3; indices4; indices5};
-    for i = 1:1:50 % subject number
+    for i = 1:1:25 % subject number
         sub_id = ['SubjectCON_FUN_MP_' num2str(i)];
 
         % randomize the parameters
@@ -162,7 +162,7 @@ if ~isfolder(data_dir)
     indices1 = 1:1:45;
     indices2 = 46:1:90;
     indices = {indices1; indices2};
-    for i = 51:1:100
+    for i = 26:1:50
         sub_id = ['SubjectCON_FUN_MP_' num2str(i)];
 
         % randomize the parameters

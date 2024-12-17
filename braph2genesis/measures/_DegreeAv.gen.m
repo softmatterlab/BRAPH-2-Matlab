@@ -118,9 +118,12 @@ degree = calculateValue@Degree(m, prop);
 g = m.get('G');  % graph from measure class
 
 degree_av = cell(g.get('LAYERNUMBER'), 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:g.get('LAYERNUMBER')
     degree_av(li) = {mean(degree{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = degree_av;
 
