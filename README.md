@@ -46,11 +46,12 @@ A &check; indicates that we have unit-tested the current release BRAPH 2 on the 
 
 | Matlab Version        | Mac     | Win    | Linux   |
 | :-------------------: | :-----: | :-----:| :-----: |
-| R2022a                | ?       | ?      | ?       |
-| R2022b                | ?       | ?      | ?       |
-| R2023a                | ?       | ?      | ?       |
-| R2023b                | ?       | ?      | ?       |
-| R2024a                | ?       | ?      | ?       |
+| R2022a                | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2525332540)       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2524660497)      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2538931865)       |
+| R2022b                | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2543458907)       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2506774757)      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2538938388)      |
+| R2023a                | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2543318514)       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2500148139)      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2546621770)       |
+| R2023b                | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2520052354)       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2507237095)      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2547830566)       |
+| R2024a                | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2538706423)       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2521610430)      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2513852545)       |
+| R2024b                | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2523698722)       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2516894348)      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2523698722)       |
 
 ### Use Cases & Analysis Pipelines
 
