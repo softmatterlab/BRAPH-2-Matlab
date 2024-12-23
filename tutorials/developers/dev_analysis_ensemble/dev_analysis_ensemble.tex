@@ -1,8 +1,10 @@
-\documentclass[justified]{tufte-handout}
+\documentclass{tufte-handout}
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Getting Started}
+\title{Implement a new Ensemble Analysis}
+
+\author[The BRAPH~2 Developers]{The BRAPH~2 Developers}
 
 \begin{document}
 
@@ -10,7 +12,126 @@
 
 \begin{abstract}
 \noindent
-This Tutorial is under construction.
+This is the developer tutorial for implementing a new ensemble analysis. 
+In this tutorial, you will learn how to create a \fn{*.gen.m} for a new ensemble analysis, which can then be compiled by \code{braph2genesis}.
+Here, you will use as examples the ensemble analysis \code{AnalyzeEnsemble \\\_CON\_BUD}, an ensemble-based graph analysis (AnalyzeEnsemble) analyzing connectivity data (CON) using binary undirected multigraphs with fixed densities (BUD).
 \end{abstract}
+
+\tableofcontents
+
+\clearpage
+
+\section{Implementatoin of the ensemble analysis}
+
+You will implement in detail \code{AnalyzeEnsemble\_CON\_BUD}, which is a direct extension of \code{AnalyzeEnsemble}.
+%A unilayer graph is constituted by nodes connected by edges, where the can be either 0 (absence of connection) or 1 (existence of connection).
+
+\begin{lstlisting}[
+	label=cd:m:AnalyzeEnsemble_CON_BUD:header,
+	caption={
+		{\bf AnalyzeEnsemble\_CON\_BUD element header.}
+		The \code{header} section of the generator code in \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m} provides the general information about the \code{AnalyzeEnsemble\_CON\_BUD} element.
+		}
+]
+%% ¡header!
+AnalyzeEnsemble_CON_BUD < AnalyzeEnsemble (a, graph analysis with connectivity data of fixed density) is an ensemble-based graph analysis using connectivity data of fixed density. ¥\circled{1}\circlednote{1}{ defines \code{AnalyzeEnsemble\_CON\_BUD} as a subclass of \code{AnalyzeEnsemble}. The moniker will be \code{a}.}¥
+
+%%% ¡description! ¥\circled{2}\circlednote{2}{ provides a description of this ensemble analysis.}¥
+This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes 
+connectivity data using binary undirected multigraphs with fixed densities.
+
+%%% ¡seealso!
+SubjectCON, MultigraphBUD
+
+%%% ¡build! ¥\circled{3}\circlednote{3}{ defines the build number of the ensemble analysis element.}¥
+1
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:AnalyzeEnsemble_CON_BUD:prop_update,
+	caption={
+		{\bf AnalyzeEnsemble\_CON\_BUD element prop update.}
+		The \code{props\_update} section of the generator code in \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m} updates the properties of the \code{AnalyzeEnsemble} element. This defines the core properties of the ensemble analysis.
+	}
+]
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the ensemble-based graph analysis using connectivity data of fixed density.
+%%%% ¡default!
+'AnalyzeEnsemble_CON_BUD'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the ensemble-based graph analysis using connectivity data of fixed density.
+%%%% ¡default!
+'Connectivity Binary Undirected at fixed Density Analyze Ensemble'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis using connectivity data of fixed density.
+%%%% ¡default!
+'This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes connectivity data using binary undirected multigraphs with fixed densities.'
+
+%%% ¡prop!
+TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis using connectivity data of fixed density.
+%%%% ¡settings!
+'AnalyzeEnsemble_CON_BUD'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the ensemble-based graph analysis using connectivity data of fixed density.
+%%%% ¡default!
+'AnalyzeEnsemble_CON_BUD ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the ensemble-based graph analysis using connectivity data of fixed density.
+%%%% ¡default!
+'AnalyzeEnsemble_CON_BUD label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis using connectivity data of fixed density.
+%%%% ¡default!
+'AnalyzeEnsemble_CON_BUD notes'
+
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the \code{GR} which contains the subjects data with \code{SubjectCON} element to be analyzed on.}¥
+GR (data, item) is the subject group, which also defines the subject class SubjectCON.
+%%%% ¡default!
+Group('SUB_CLASS', 'SubjectCON')
+
+%%% ¡prop! ¥\circled{2}\circlednote{2}{ defines \code{GRAPH\_TEMPLATE} the graph template with specified parameters, such as \code{DENSITIES}, \code{SEMIPOSITIVIZE\_RULE}, and \code{STANDARDIZE\_RULE}, which will be used to set up for all graphs in \circled{4}. In this example, the graph element is \code{MultigraphBUD}.}¥
+GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
+%%%% ¡settings!
+'MultigraphBUD'
+
+%%% ¡prop! ¥\circled{3}\circlednote{3}{ creates \code{G\_DICT} a graph dictionary which contains all of \code{MultigraphBUD} derived respectively from \circled{1}.}¥
+G_DICT (result, idict) is the graph (MultigraphBUD) ensemble obtained from this analysis.
+%%%% ¡settings!
+'MultigraphBUD'
+%%%% ¡calculate!
+g_dict = IndexedDictionary('IT_CLASS', 'MultigraphBUD');
+gr = a.get('GR');
+densities = a.get('DENSITIES'); ¥\circled{4}\circlednote{4}{ retrieves the densities for setting up \code{MultigraphBUD}, defined in the new properties below.}¥
+
+for i = 1:1:gr.get('SUB_DICT').get('LENGTH') ¥\circled{5}\circlednote{5}{, \circled{6}, \circled{7}, and \circled{8} create the dictionary of graph. It starts by looping through every subject in \code{GR}, creating \code{MultigraphBUD} based on each subject data. Then it sets up \code{DENSTITIES} the parameter of the \code{MultigraphBUD}, and finally add the \code{MultigraphBUD} into the dictionary.}¥
+	sub = gr.get('SUB_DICT').get('IT', i);
+    g = MultigraphBUD( ...¥\circled{7}¥
+        'ID', ['graph ' sub.get('ID')], ...
+        'B', sub.getCallback('CON'), ...
+        'DENSITIES', densities, ... ¥\circled{8}¥
+        'LAYERLABELS', cellfun(@(x) [num2str(x) '%'], num2cell(densities), 'UniformOutput', false), ...
+        'NODELABELS', a.get('GR').get('SUB_DICT').get('IT', 1).get('BA').get('BR_DICT').get('KEYS') ...
+        );
+    g_dict.get('ADD', g) ¥\circled{9}¥
+end
+
+if ~isa(a.get('GRAPH_TEMPLATE'), 'NoValue')
+    for i = 1:1:g_dict.get('LENGTH')
+        g_dict.get('IT', i).set('TEMPLATE', a.get('GRAPH_TEMPLATE'))  ¥\circled{11}\circlednote{11}{ sets all the \code{MultigraphBUD} in the dictionary with all the specified parameteres definded in \circled{2} if the graph template is given by a user.}¥
+    end
+end
+
+value = g_dict;
+
+%%% ¡prop!
+ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
+\end{lstlisting}
 
 \end{document}
