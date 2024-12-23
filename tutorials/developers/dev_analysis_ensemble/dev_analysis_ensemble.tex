@@ -23,8 +23,8 @@ Here, you will use as examples the ensemble analysis \code{AnalyzeEnsemble \\\_C
 
 \section{Implementatoin of the ensemble analysis}
 
-You will implement in detail \code{AnalyzeEnsemble\_CON\_BUD}, which is a direct extension of \code{AnalyzeEnsemble}.
-%A unilayer graph is constituted by nodes connected by edges, where the can be either 0 (absence of connection) or 1 (existence of connection).
+You will implement in detail \code{AnalyzeEnsemble\_CON\_BUD}, a direct extension of \code{AnalyzeEnsemble}.
+An \code{AnalyzeEnsemble\_CON\_BUD} processes connectivity data to construct binary undirected graphs at fixed densities.
 
 \begin{lstlisting}[
 	label=cd:m:AnalyzeEnsemble_CON_BUD:header,
@@ -91,40 +91,40 @@ NOTES (metadata, string) are some specific notes about the ensemble-based graph 
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUD notes'
 
-%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the \code{GR} which contains the subjects data with \code{SubjectCON} element to be analyzed on.}¥
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the property \code{GR}, which contains the subjects data using \code{SubjectCON} element, which are the subjects to be analyzed.}¥
 GR (data, item) is the subject group, which also defines the subject class SubjectCON.
 %%%% ¡default!
 Group('SUB_CLASS', 'SubjectCON')
 
-%%% ¡prop! ¥\circled{2}\circlednote{2}{ defines \code{GRAPH\_TEMPLATE} the graph template with specified parameters, such as \code{DENSITIES}, \code{SEMIPOSITIVIZE\_RULE}, and \code{STANDARDIZE\_RULE}, which will be used to set up for all graphs in \circled{4}. In this example, the graph element is \code{MultigraphBUD}.}¥
+%%% ¡prop! ¥\circled{2}\circlednote{2}{ Specifies the \code{GRAPH\_TEMPLATE} to define parameters such as \code{DENSITIES}, \code{SEMIPOSITIVIZE\_RULE}, and \code{STANDARDIZE\_RULE}. These settings are applied to all graphs in \circled{4}. Here, the graph element used is \code{MultigraphBUD}.}¥
 GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
 %%%% ¡settings!
 'MultigraphBUD'
 
-%%% ¡prop! ¥\circled{3}\circlednote{3}{ creates \code{G\_DICT} a graph dictionary which contains all of \code{MultigraphBUD} derived respectively from \circled{1}.}¥
+%%% ¡prop! ¥\circled{3}\circlednote{3}{ creates \code{G\_DICT}, a graph dictionary that contains instances of \code{MultigraphBUD}. These instances are derived from the subjects defined in \circled{1}.}¥
 G_DICT (result, idict) is the graph (MultigraphBUD) ensemble obtained from this analysis.
 %%%% ¡settings!
 'MultigraphBUD'
 %%%% ¡calculate!
 g_dict = IndexedDictionary('IT_CLASS', 'MultigraphBUD');
 gr = a.get('GR');
-densities = a.get('DENSITIES'); ¥\circled{4}\circlednote{4}{ retrieves the densities for setting up \code{MultigraphBUD}, defined in the new properties below.}¥
+densities = a.get('DENSITIES'); ¥\circled{4}\circlednote{4}{ retrieves the densities defined in the new properties below, which is used to configure the \code{MultigraphBUD} instances for the analysis.}¥
 
-for i = 1:1:gr.get('SUB_DICT').get('LENGTH') ¥\circled{5}\circlednote{5}{, \circled{6}, \circled{7}, and \circled{8} create the dictionary of graph. It starts by looping through every subject in \code{GR}, creating \code{MultigraphBUD} based on each subject data. Then it sets up \code{DENSTITIES} the parameter of the \code{MultigraphBUD}, and finally add the \code{MultigraphBUD} into the dictionary.}¥
+for i = 1:1:gr.get('SUB_DICT').get('LENGTH') ¥\circled{5}\circlednote{5}{, \circled{6}, \circled{7}, and \circled{8} collectively build the graph dictionary (\code{G\_DICT}). This process begins by iterating over each subject in \code{GR}, constructing an instance of \code{MultigraphBUD} for each subject based on their respective data, applying the specified \code{DENSITIES} parameter, and finally adding the created \code{MultigraphBUD} instances into the dictionary.}¥
 	sub = gr.get('SUB_DICT').get('IT', i);
-    g = MultigraphBUD( ...¥\circled{7}¥
+    g = MultigraphBUD( ...¥\circled{6}¥
         'ID', ['graph ' sub.get('ID')], ...
         'B', sub.getCallback('CON'), ...
-        'DENSITIES', densities, ... ¥\circled{8}¥
+        'DENSITIES', densities, ... ¥\circled{7}¥
         'LAYERLABELS', cellfun(@(x) [num2str(x) '%'], num2cell(densities), 'UniformOutput', false), ...
         'NODELABELS', a.get('GR').get('SUB_DICT').get('IT', 1).get('BA').get('BR_DICT').get('KEYS') ...
         );
-    g_dict.get('ADD', g) ¥\circled{9}¥
+    g_dict.get('ADD', g) ¥\circled{8}¥
 end
 
 if ~isa(a.get('GRAPH_TEMPLATE'), 'NoValue')
     for i = 1:1:g_dict.get('LENGTH')
-        g_dict.get('IT', i).set('TEMPLATE', a.get('GRAPH_TEMPLATE'))  ¥\circled{11}\circlednote{11}{ sets all the \code{MultigraphBUD} in the dictionary with all the specified parameteres definded in \circled{2} if the graph template is given by a user.}¥
+        g_dict.get('IT', i).set('TEMPLATE', a.get('GRAPH_TEMPLATE'))  ¥\circled{9}\circlednote{9}{ ensures that all \code{MultigraphBUD} instances in the dictionary are updated with the pre-defined parameters from the graph template specified in \circled{2}, if explicitly set by the user during initialization of \code{AnalyzeEnsemble\_CON\_BUD}.}¥
     end
 end
 
@@ -133,5 +133,143 @@ value = g_dict;
 %%% ¡prop!
 ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
 \end{lstlisting}
+
+
+
+\begin{lstlisting}[
+label=cd:m:AnalyzeEnsemble_CON_BUD:props,
+caption={
+	{\bf AnalyzeEnsemble\_CON\_BUD element props.}
+	The \code{props} section of the generator code in \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m} defines the properties to be used in \code{AnalyzeEnsemble\_CON\_BUD}.
+}
+]
+%% ¡props!
+
+%%% ¡prop!
+DENSITIES (parameter, rvector) is the vector of densities.
+%%%% ¡default!
+[1:1:10]
+%%%% ¡gui! ¥\circled{1}\circlednote{1}{ \code{PanelPropRVectorSmart} plots the panel for a row vector with an edit field. Smart means that (almost) any MatLab expression leading to a correct row vector can be introduced in the edit field. Also, the value of the vector can be limited between some MIN and MAX.}¥
+pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeEnsemble_CON_BUD.DENSITIES, ...
+    'MIN', 0, 'MAX', 100, ...
+    'DEFAULT', AnalyzeEnsemble_CON_BUD.getPropDefault('DENSITIES'), ...
+    varargin{:});
+%%%% ¡postset!
+a.memorize('GRAPH_TEMPLATE').set('DENSITIES', a.getCallback('DENSITIES'));
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:AnalyzeEnsemble_CON_BUD:tests,
+	caption={
+		{\bf AnalyzeEnsemble\_CON\_BUD element tests.}
+		The \code{tests} section in the element generator \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m}.
+		A general test should be prepared for using the example script where the ensemble analysis is used. The test should also at least verify in some simple cases that the GUI function is working properly.
+	}
+]	
+
+%% ¡tests!
+
+%%% ¡excluded_props!  ¥\circled{1}\circlednote{1}{ List of properties that are excluded from testing.}¥
+[AnalyzeEnsemble_CON_BUD.TEMPLATE AnalyzeEnsemble_CON_BUD.GRAPH_TEMPLATE]
+
+%%% ¡test! ¥\circled{2}\circlednote{2}{ Tests the functionality of \code{AnalyzeEnsemble\_CON\_BUD} using an example script.}¥
+%%%% ¡name!
+Example
+%%%% ¡probability!  ¥\circled{3}\circlednote{3}{ assigns a low test execution probability.}¥
+.01
+.01
+%%%% ¡code!
+create_data_CON_XLS() % only creates files if the example folder doesn't already exist
+
+example_CON_BUD
+
+%%% ¡test! ¥\circled{4}\circlednote{4}{ Tests the GUI functionality of \code{AnalyzeEnsemble\_CON\_BUD}.}¥
+%%%% ¡name!
+GUI - Analysis
+%%%% ¡probability!
+.01
+%%%% ¡code!
+im_ba = ImporterBrainAtlasXLS('FILE', 'desikan_atlas.xlsx');
+ba = im_ba.get('BA'); ¥\circled{5}\circlednote{5}{ and \circled{6} define the necessary objects required to initialize an instance of \code{AnalyzeEnsemble\_CON\_BUD}.}¥
+
+gr = Group('SUB_CLASS', 'SubjectCON', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectCON')); ¥\circled{6}¥
+for i = 1:1:50 
+    sub = SubjectCON( ...
+        'ID', ['SUB CON ' int2str(i)], ...
+        'LABEL', ['Subejct CON ' int2str(i)], ...
+        'NOTES', ['Notes on subject CON ' int2str(i)], ...
+        'BA', ba, ...
+        'CON', rand(ba.get('BR_DICT').get('LENGTH')) ...
+        );
+    sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
+    sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
+    gr.get('SUB_DICT').get('ADD', sub)
+end
+
+a = AnalyzeEnsemble_CON_BUD('GR', gr, 'DENSITIES', 5:5:20); ¥\circled{7}\circlednote{7}{ Initializes an \code{AnalyzeEnsemble\_CON\_BUD} instance using the specified \code{gr} (group) and \code{densities}.}¥
+
+gui = GUIElement('PE', a, 'CLOSEREQ', false);¥\circled{8}\circlednote{8}{, \circled{9}, and \circled{10} test the process of creating a GUI for \code{AnalyzeEnsemble\_CON\_BUD}, drawing it, and showing it on the screen.}¥
+gui.get('DRAW') ¥\circled{9}¥
+gui.get('SHOW') ¥\circled{10}¥
+
+gui.get('CLOSE') ¥\circled{11}\circlednote{11}{ tests the process of closing the shown GUI.}¥
+
+%%% ¡test! ¥\circled{12}\circlednote{12}{ tests the GUI functionality for another use case of \code{AnalyzeEnsemble\_CON\_BUD}.}¥
+%%%% ¡name!
+GUI - Comparison
+%%%% ¡probability!
+.01
+%%%% ¡code!
+im_ba = ImporterBrainAtlasXLS('FILE', 'desikan_atlas.xlsx');
+ba = im_ba.get('BA');
+
+gr1 = Group('SUB_CLASS', 'SubjectCON', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectCON'));
+for i = 1:1:50
+    sub = SubjectCON( ...
+        'ID', ['SUB CON ' int2str(i)], ...
+        'LABEL', ['Subejct CON ' int2str(i)], ...
+        'NOTES', ['Notes on subject CON ' int2str(i)], ...
+        'BA', ba, ...
+        'CON', rand(ba.get('BR_DICT').get('LENGTH')) ...
+        );
+    sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
+    sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
+    gr1.get('SUB_DICT').get('ADD', sub)
+end
+
+gr2 = Group('SUB_CLASS', 'SubjectCON', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectCON'));
+for i = 1:1:50
+    sub = SubjectCON( ...
+        'ID', ['SUB CON ' int2str(i)], ...
+        'LABEL', ['Subejct CON ' int2str(i)], ...
+        'NOTES', ['Notes on subject CON ' int2str(i)], ...
+        'BA', ba, ...
+        'CON', rand(ba.get('BR_DICT').get('LENGTH')) ...
+        );
+    sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
+    sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
+    gr2.get('SUB_DICT').get('ADD', sub)
+end
+
+a1 = AnalyzeEnsemble_CON_BUD('GR', gr1, 'DENSITIES', 5:5:20); ¥\circled{13}\circlednote{13}{ Similar to the previous test, this initializes the first \code{AnalyzeEnsemble\_CON\_BUD} with the specified \code{gr} and densities.}¥
+a2 = AnalyzeEnsemble\_CON\_BUD('GR', gr2, 'TEMPLATE', a1);¥\circled{14}\circlednote{14}{ Initializes the second \code{AnalyzeEnsemble\_CON\_BUD} using the first \code{AnalyzeEnsemble\_CON\_BUD} instance as a template. This setup allows the second instance to have its own \code{gr} data while applying the same parameters, specifically the densities.}¥
+
+c = CompareEnsemble( ...¥\circled{15}\circlednote{15}{ creates a \code{CompareEnsemble} instance with the defined \code{AnalyzeEnsemble\_CON\_BUD} instances.}¥
+    'P', 10, ...
+    'A1', a1, ...
+    'A2', a2, ...
+    'WAITBAR', true, ...
+    'VERBOSE', false, ...
+    'MEMORIZE', true ...
+    );
+
+gui = GUIElement('PE', c, 'CLOSEREQ', false);  ¥\circled{16}\circlednote{16}{, \circled{17}, \circled{18}, and \circled{19} test creating, drawing, showing, and closing the GUI of the \code{CompareEnsemble}.}¥
+gui.get('DRAW') ¥\circled{17}¥
+gui.get('SHOW') ¥\circled{18}¥
+
+gui.get('CLOSE') ¥\circled{19}¥
+
+\end{lstlisting}
+
 
 \end{document}
