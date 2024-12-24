@@ -4,7 +4,7 @@
 
 This is the developer tutorial for implementing a new ensemble analysis. 
 In this tutorial, you will learn how to create a "*.gen.m" for a new ensemble analysis, which can then be compiled by `braph2genesis`.
-Here, you will use as examples the ensemble analysis `AnalyzeEnsemble \\_CON_BUD`, an ensemble-based graph analysis (AnalyzeEnsemble) analyzing connectivity data (CON) using binary undirected multigraphs with fixed densities (BUD).
+Here, you will use as examples the ensemble analysis `AnalyzeEnsemble_CON_BUD`, an ensemble-based graph analysis (AnalyzeEnsemble) analyzing connectivity data (CON) using binary undirected multigraphs with fixed densities (BUD).
 
 
 ## Table of Contents
