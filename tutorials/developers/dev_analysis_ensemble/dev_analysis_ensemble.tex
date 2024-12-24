@@ -14,17 +14,20 @@
 \noindent
 This is the developer tutorial for implementing a new ensemble analysis. 
 In this tutorial, you will learn how to create a \fn{*.gen.m} for a new ensemble analysis, which can then be compiled by \code{braph2genesis}.
-Here, you will use as examples the ensemble analysis \code{AnalyzeEnsemble\_CON\_BUD}, an ensemble-based graph analysis (AnalyzeEnsemble) analyzing connectivity data (CON) using binary undirected multigraphs with fixed densities (BUD).
+Here, you will use as examples the ensemble analysis \code{AnalyzeEnsemble\_CON\_BUD}, an ensemble-based graph analysis (AnalyzeEnsemble) analyzing connectivity data (CON) using binary undirected multigraphs at fixed densities (BUD).
 \end{abstract}
 
 \tableofcontents
 
 \clearpage
 
-\section{Implementatoin of the ensemble analysis}
+\section{Implementation of the ensemble analysis}
 
 You will implement in detail \code{AnalyzeEnsemble\_CON\_BUD}, a direct extension of \code{AnalyzeEnsemble}.
 An \code{AnalyzeEnsemble\_CON\_BUD} processes connectivity data to construct binary undirected graphs at fixed densities.
+
+\subsection{Basic properties}
+This section focuses on implementing the basic properties required to define \code{AnalyzeEnsemble\_CON\_BUD}, including its class, name, and associated metadata.
 
 \begin{lstlisting}[
 	label=cd:m:AnalyzeEnsemble_CON_BUD:header,
@@ -38,7 +41,7 @@ AnalyzeEnsemble_CON_BUD < AnalyzeEnsemble (a, graph analysis with connectivity d
 
 %%% ¡description! ¥\circled{2}\circlednote{2}{ provides a description of this ensemble analysis.}¥
 This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes 
-connectivity data using binary undirected multigraphs with fixed densities.
+connectivity data using binary undirected multigraphs at fixed densities.
 
 %%% ¡seealso!
 SubjectCON, MultigraphBUD
@@ -48,10 +51,10 @@ SubjectCON, MultigraphBUD
 \end{lstlisting}
 
 \begin{lstlisting}[
-	label=cd:m:AnalyzeEnsemble_CON_BUD:prop_update,
+	label=cd:m:AnalyzeEnsemble_CON_BUD:basic_props,
 	caption={
-		{\bf AnalyzeEnsemble\_CON\_BUD element prop update.}
-		The \code{props\_update} section of the generator code in \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m} updates the properties of the \code{AnalyzeEnsemble} element. This defines the core properties of the ensemble analysis.
+		{\bf Basic properties of AnalyzeEnsemble\_CON\_BUD.}
+		This section of the generator code in \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m} updates the basic properties required to describe the \code{AnalyzeEnsemble\_CON\_BUD} element, including its class, name, description, and other metadata.
 	}
 ]
 %% ¡props_update!
@@ -69,7 +72,7 @@ NAME (constant, string) is the name of the ensemble-based graph analysis using c
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis using connectivity data of fixed density.
 %%%% ¡default!
-'This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes connectivity data using binary undirected multigraphs with fixed densities.'
+'This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes connectivity data using binary undirected multigraphs at fixed densities.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis using connectivity data of fixed density.
@@ -91,12 +94,26 @@ NOTES (metadata, string) are some specific notes about the ensemble-based graph 
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUD notes'
 
-%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the property \code{GR}, which contains the subjects data using \code{SubjectCON} element, which are the subjects to be analyzed.}¥
+\end{lstlisting}
+
+\subsection{Functionality-focused properties}
+
+This section details the implementation of functionality-focused properties that enable \code{AnalyzeEnsemble\_CON\_BUD} to perform graph analysis directly.
+
+\begin{lstlisting}[
+	label=cd:m:AnalyzeEnsemble_CON_BUD:implementation_props,
+	caption={
+		{\bf Implementation properties of AnalyzeEnsemble\_CON\_BUD.}
+		This section of the generator code in \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m} updates the properties to be used, including \code{GR} for defining subjects' data, \code{GRAPH\_TEMPLATE} for specifying graph type and parameters, and \code{G\_DICT} for managing graph instances across subjects.
+	}
+]
+
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the property \code{GR}, which stores the subjects using \code{SubjectCON} element, containing the subjects' data to be analyzed.}¥
 GR (data, item) is the subject group, which also defines the subject class SubjectCON.
 %%%% ¡default!
 Group('SUB_CLASS', 'SubjectCON')
 
-%%% ¡prop! ¥\circled{2}\circlednote{2}{ Specifies the \code{GRAPH\_TEMPLATE} to define parameters such as \code{DENSITIES}, \code{SEMIPOSITIVIZE\_RULE}, and \code{STANDARDIZE\_RULE}. These settings are applied to all graphs in \circled{4}. Here, the graph element used is \code{MultigraphBUD}.}¥
+%%% ¡prop! ¥\circled{2}\circlednote{2}{ Specifies the \code{GRAPH\_TEMPLATE} to define parameters such as \code{DENSITIES}, \code{SEMIPOSITIVIZE\_RULE}, and \code{STANDARDIZE\_RULE}. These settings are applied to all graphs in \circled{3}. Here, the graph element used is \code{MultigraphBUD}.}¥
 GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
 %%%% ¡settings!
 'MultigraphBUD'
@@ -134,8 +151,6 @@ value = g_dict;
 ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
 \end{lstlisting}
 
-
-
 \begin{lstlisting}[
 label=cd:m:AnalyzeEnsemble_CON_BUD:props,
 caption={
@@ -145,25 +160,27 @@ caption={
 ]
 %% ¡props!
 
-%%% ¡prop!
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the densities for binarizing the connectivity matrix in a binary undirected multigraph, used in \circled{7} of \Coderef{cd:m:AnalyzeEnsemble_CON_BUD:implementation_props}}¥
 DENSITIES (parameter, rvector) is the vector of densities.
 %%%% ¡default!
 [1:1:10]
-%%%% ¡gui! ¥\circled{1}\circlednote{1}{ \code{PanelPropRVectorSmart} plots the panel for a row vector with an edit field. Smart means that (almost) any MatLab expression leading to a correct row vector can be introduced in the edit field. Also, the value of the vector can be limited between some MIN and MAX.}¥
+%%%% ¡gui! ¥\circled{2}\circlednote{2}{ \code{PanelPropRVectorSmart} plots a GUI row vector panel for defining densities, supporting MATLAB expressions and limiting values between MIN and MAX.}¥
 pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeEnsemble_CON_BUD.DENSITIES, ...
     'MIN', 0, 'MAX', 100, ...
     'DEFAULT', AnalyzeEnsemble_CON_BUD.getPropDefault('DENSITIES'), ...
     varargin{:});
-%%%% ¡postset!
+%%%% ¡postset! ¥\circled{3}\circlednote{3}{ handles postprocessing after \code{DENSITIES} is set, memorizing a \code{GRAPH\_TEMPLATE} with the defined \code{DENSITIES}, applied later in \circled{9} of \Coderef{cd:m:AnalyzeEnsemble_CON_BUD:implementation_props}.}¥
 a.memorize('GRAPH_TEMPLATE').set('DENSITIES', a.getCallback('DENSITIES'));
 \end{lstlisting}
+
+\subsection{Verification through testing}
+This section validates \code{AnalyzeEnsemble\_CON\_BUD} by implementing tests to confirm its functionality via example scripts and ensure GUI integration.
 
 \begin{lstlisting}[
 	label=cd:m:AnalyzeEnsemble_CON_BUD:tests,
 	caption={
 		{\bf AnalyzeEnsemble\_CON\_BUD element tests.}
-		The \code{tests} section in the element generator \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m}.
-		A general test should be prepared for using the example script where the ensemble analysis is used. The test should also at least verify in some simple cases that the GUI function is working properly.
+		The \code{tests} section in the element generator \fn{\_AnalyzeEnsemble\_CON\_BUD.gen.m} includes logic tests, which verify correct functionality using example scripts and simulated datasets, and integration tests, which ensure the instance operation of the direct GUI and associated GUIs.
 	}
 ]	
 
@@ -183,7 +200,7 @@ create_data_CON_XLS() % only creates files if the example folder doesn't already
 
 example_CON_BUD
 
-%%% ¡test! ¥\circled{4}\circlednote{4}{ Tests the GUI functionality of \code{AnalyzeEnsemble\_CON\_BUD}.}¥
+%%% ¡test! ¥\circled{4}\circlednote{4}{ Tests the direct GUI functionality of \code{AnalyzeEnsemble\_CON\_BUD}.}¥
 %%%% ¡name!
 GUI - Analysis
 %%%% ¡probability!
@@ -214,7 +231,7 @@ gui.get('SHOW') ¥\circled{10}¥
 
 gui.get('CLOSE') ¥\circled{11}\circlednote{11}{ tests the process of closing the shown GUI.}¥
 
-%%% ¡test! ¥\circled{12}\circlednote{12}{ tests the GUI functionality for another use case of \code{AnalyzeEnsemble\_CON\_BUD}.}¥
+%%% ¡test! ¥\circled{12}\circlednote{12}{ tests the associated GUI functionality of \code{AnalyzeEnsemble\_CON\_BUD}.}¥
 %%%% ¡name!
 GUI - Comparison
 %%%% ¡probability!
@@ -263,7 +280,7 @@ c = CompareEnsemble( ...¥\circled{15}\circlednote{15}{ creates a \code{CompareE
     'MEMORIZE', true ...
     );
 
-gui = GUIElement('PE', c, 'CLOSEREQ', false);  ¥\circled{16}\circlednote{16}{, \circled{17}, \circled{18}, and \circled{19} test creating, drawing, showing, and closing the GUI of the \code{CompareEnsemble}.}¥
+gui = GUIElement('PE', c, 'CLOSEREQ', false);  ¥\circled{16}\circlednote{16}{, \circled{17}, \circled{18}, and \circled{19} test creating, drawing, showing, and closing the GUI of the \code{CompareEnsemble}, which is an associated GUI of \code{AnalyzeEnsemble\_CON\_BUD}}¥
 gui.get('DRAW') ¥\circled{17}¥
 gui.get('SHOW') ¥\circled{18}¥
 

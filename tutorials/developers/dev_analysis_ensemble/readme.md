@@ -4,20 +4,30 @@
 
 This is the developer tutorial for implementing a new ensemble analysis. 
 In this tutorial, you will learn how to create a "*.gen.m" for a new ensemble analysis, which can then be compiled by `braph2genesis`.
-Here, you will use as examples the ensemble analysis `AnalyzeEnsemble_CON_BUD`, an ensemble-based graph analysis (AnalyzeEnsemble) analyzing connectivity data (CON) using binary undirected multigraphs with fixed densities (BUD).
+Here, you will use as examples the ensemble analysis `AnalyzeEnsemble_CON_BUD`, an ensemble-based graph analysis (AnalyzeEnsemble) analyzing connectivity data (CON) using binary undirected multigraphs at fixed densities (BUD).
 
 
 ## Table of Contents
-> [Implementatoin of the ensemble analysis](#Implementatoin-of-the-ensemble-analysis)
+> [Implementation of the ensemble analysis](#Implementation-of-the-ensemble-analysis)
 >
+>> [Basic properties](#Basic-properties)
+>>
+>> [Functionality-focused properties](#Functionalityfocused-properties)
+>>
+>> [Verification through testing](#Verification-through-testing)
+>>
 
 
 
-<a id="Implementatoin-of-the-ensemble-analysis"></a>
-## Implementatoin of the ensemble analysis  [⬆](#Table-of-Contents)
+<a id="Implementation-of-the-ensemble-analysis"></a>
+## Implementation of the ensemble analysis  [⬆](#Table-of-Contents)
 
 You will implement in detail `AnalyzeEnsemble_CON_BUD`, a direct extension of `AnalyzeEnsemble`.
 An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary undirected graphs at fixed densities.
+
+<a id="Basic-properties"></a>
+### Basic properties  [⬆](#Table-of-Contents)
+This section focuses on implementing the basic properties required to define `AnalyzeEnsemble_CON_BUD`, including its class, name, and associated metadata.
 
 
 > **Code 1.** **AnalyzeEnsemble_CON_BUD element header.**
@@ -28,7 +38,7 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > 
 > %%% ¡description!  ②
 > This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes 
-> connectivity data using binary undirected multigraphs with fixed densities.
+> connectivity data using binary undirected multigraphs at fixed densities.
 > 
 > %%% ¡seealso!
 > SubjectCON, MultigraphBUD
@@ -45,8 +55,8 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > 
 
 
-> **Code 2.** **AnalyzeEnsemble_CON_BUD element prop update.**
-> 		The `props_update` section of the generator code in "_AnalyzeEnsemble_CON_BUD.gen.m" updates the properties of the `AnalyzeEnsemble` element. This defines the core properties of the ensemble analysis.
+> **Code 2.** **Basic properties of AnalyzeEnsemble_CON_BUD.**
+> 		This section of the generator code in "_AnalyzeEnsemble_CON_BUD.gen.m" updates the basic properties required to describe the `AnalyzeEnsemble_CON_BUD` element, including its class, name, description, and other metadata.
 > ````matlab
 > %% ¡props_update!
 > 
@@ -63,7 +73,7 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > %%% ¡prop!
 > DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis using connectivity data of fixed density.
 > %%%% ¡default!
-> 'This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes connectivity data using binary undirected multigraphs with fixed densities.'
+> 'This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes connectivity data using binary undirected multigraphs at fixed densities.'
 > 
 > %%% ¡prop!
 > TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis using connectivity data of fixed density.
@@ -84,7 +94,18 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis using connectivity data of fixed density.
 > %%%% ¡default!
 > 'AnalyzeEnsemble_CON_BUD notes'
+> ````
 > 
+
+<a id="Functionalityfocused-properties"></a>
+### Functionality-focused properties  [⬆](#Table-of-Contents)
+
+This section details the implementation of functionality-focused properties that enable `AnalyzeEnsemble_CON_BUD` to perform graph analysis directly.
+
+
+> **Code 3.** **Implementation properties of AnalyzeEnsemble_CON_BUD.**
+> 		This section of the generator code in "_AnalyzeEnsemble_CON_BUD.gen.m" updates the properties to be used, including `GR` for defining subjects' data, `GRAPH_TEMPLATE` for specifying graph type and parameters, and `G_DICT` for managing graph instances across subjects.
+> ````matlab
 > %%% ¡prop!  ①
 > GR (data, item) is the subject group, which also defines the subject class SubjectCON.
 > %%%% ¡default!
@@ -128,9 +149,9 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > ME_DICT (result, idict) contains the calculated measures of the graph ensemble.
 > ````
 > 
-> ① defines the property `GR`, which contains the subjects data using `SubjectCON` element, which are the subjects to be analyzed.
+> ① defines the property `GR`, which stores the subjects using `SubjectCON` element, containing the subjects' data to be analyzed.
 > 
-> ② Specifies the `GRAPH_TEMPLATE` to define parameters such as `DENSITIES`, `SEMIPOSITIVIZE_RULE`, and `STANDARDIZE_RULE`. These settings are applied to all graphs in ④. Here, the graph element used is `MultigraphBUD`.
+> ② Specifies the `GRAPH_TEMPLATE` to define parameters such as `DENSITIES`, `SEMIPOSITIVIZE_RULE`, and `STANDARDIZE_RULE`. These settings are applied to all graphs in ③. Here, the graph element used is `MultigraphBUD`.
 > 
 > ③ creates `G_DICT`, a graph dictionary that contains instances of `MultigraphBUD`. These instances are derived from the subjects defined in ①.
 > 
@@ -142,33 +163,38 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > 
 
 
-
-
-> **Code 3.** **AnalyzeEnsemble_CON_BUD element props.**
+> **Code 4.** **AnalyzeEnsemble_CON_BUD element props.**
 > 	The `props` section of the generator code in "_AnalyzeEnsemble_CON_BUD.gen.m" defines the properties to be used in `AnalyzeEnsemble_CON_BUD`.
 > ````matlab
 > %% ¡props!
 > 
-> %%% ¡prop!
+> %%% ¡prop!  ①
 > DENSITIES (parameter, rvector) is the vector of densities.
 > %%%% ¡default!
 > [1:1:10]
-> %%%% ¡gui!  ①
+> %%%% ¡gui!  ②
 > pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeEnsemble_CON_BUD.DENSITIES, ...
 >     'MIN', 0, 'MAX', 100, ...
 >     'DEFAULT', AnalyzeEnsemble_CON_BUD.getPropDefault('DENSITIES'), ...
 >     varargin{:});
-> %%%% ¡postset!
+> %%%% ¡postset!  ③
 > a.memorize('GRAPH_TEMPLATE').set('DENSITIES', a.getCallback('DENSITIES'));
 > ````
 > 
-> ① `PanelPropRVectorSmart` plots the panel for a row vector with an edit field. Smart means that (almost) any MatLab expression leading to a correct row vector can be introduced in the edit field. Also, the value of the vector can be limited between some MIN and MAX.
+> ① defines the densities for binarizing the connectivity matrix in a binary undirected multigraph, used in ⑦ of Code 3
+> 
+> ② `PanelPropRVectorSmart` plots a GUI row vector panel for defining densities, supporting MATLAB expressions and limiting values between MIN and MAX.
+> 
+> ③ handles postprocessing after `DENSITIES` is set, memorizing a `GRAPH_TEMPLATE` with the defined `DENSITIES`, applied later in ⑨ of Code 3.
 > 
 
+<a id="Verification-through-testing"></a>
+### Verification through testing  [⬆](#Table-of-Contents)
+This section validates `AnalyzeEnsemble_CON_BUD` by implementing tests to confirm its functionality via example scripts and ensure GUI integration.
 
-> **Code 4.** **AnalyzeEnsemble_CON_BUD element tests.**
-> 		The `tests` section in the element generator "_AnalyzeEnsemble_CON_BUD.gen.m".
-> 		A general test should be prepared for using the example script where the ensemble analysis is used. The test should also at least verify in some simple cases that the GUI function is working properly.
+
+> **Code 5.** **AnalyzeEnsemble_CON_BUD element tests.**
+> 		The `tests` section in the element generator "_AnalyzeEnsemble_CON_BUD.gen.m" includes logic tests, which verify correct functionality using example scripts and simulated datasets, and integration tests, which ensure the instance operation of the direct GUI and associated GUIs.
 > ````matlab
 > %% ¡tests!
 > 
@@ -279,7 +305,7 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > 
 > ③ assigns a low test execution probability.
 > 
-> ④ Tests the GUI functionality of `AnalyzeEnsemble_CON_BUD`.
+> ④ Tests the direct GUI functionality of `AnalyzeEnsemble_CON_BUD`.
 > 
 > ⑤ and ⑥ define the necessary objects required to initialize an instance of `AnalyzeEnsemble_CON_BUD`.
 > 
@@ -289,7 +315,7 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > 
 > ⑪ tests the process of closing the shown GUI.
 > 
-> ⑫ tests the GUI functionality for another use case of `AnalyzeEnsemble_CON_BUD`.
+> ⑫ tests the associated GUI functionality of `AnalyzeEnsemble_CON_BUD`.
 > 
 > ⑬ Similar to the previous test, this initializes the first `AnalyzeEnsemble_CON_BUD` with the specified `gr` and densities.
 > 
@@ -297,5 +323,5 @@ An `AnalyzeEnsemble_CON_BUD` processes connectivity data to construct binary und
 > 
 > ⑮ creates a `CompareEnsemble` instance with the defined `AnalyzeEnsemble_CON_BUD` instances.
 > 
-> ⑯, ⑰, ⑱, and ⑲ test creating, drawing, showing, and closing the GUI of the `CompareEnsemble`.
+> ⑯, ⑰, ⑱, and ⑲ test creating, drawing, showing, and closing the GUI of the `CompareEnsemble`, which is an associated GUI of `AnalyzeEnsemble_CON_BUD`
 >
