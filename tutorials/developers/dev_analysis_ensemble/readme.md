@@ -206,7 +206,6 @@ This section validates `AnalyzeEnsemble_CON_BUD` by implementing tests to confir
 > Example
 > %%%% ¡probability!   ③
 > .01
-> .01
 > %%%% ¡code!
 > create_data_CON_XLS() % only creates files if the example folder doesn't already exist
 > 
