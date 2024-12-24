@@ -222,7 +222,7 @@ for i = 1:1:50
     gr.get('SUB_DICT').get('ADD', sub)
 end
 
-a = AnalyzeEnsemble_CON_BUD('GR', gr, 'DENSITIES', 5:5:20); ¥\circled{7}\circlednote{7}{ Initializes an \code{AnalyzeEnsemble\_CON\_BUD} instance using the specified \code{gr} (group) and \code{densities}.}¥
+a = AnalyzeEnsemble_CON_BUD('GR', gr, 'DENSITIES', 5:5:20); ¥\circled{7}\circlednote{7}{ initializes an \code{AnalyzeEnsemble\_CON\_BUD} instance using the specified \code{gr} (group) and \code{densities}.}¥
 
 gui = GUIElement('PE', a, 'CLOSEREQ', false);¥\circled{8}\circlednote{8}{, \circled{9}, and \circled{10} test the process of creating a GUI for \code{AnalyzeEnsemble\_CON\_BUD}, drawing it, and showing it on the screen.}¥
 gui.get('DRAW') ¥\circled{9}¥
@@ -268,7 +268,7 @@ for i = 1:1:50
 end
 
 a1 = AnalyzeEnsemble_CON_BUD('GR', gr1, 'DENSITIES', 5:5:20); ¥\circled{13}\circlednote{13}{ Similar to the previous test, this initializes the first \code{AnalyzeEnsemble\_CON\_BUD} with the specified \code{gr} and densities.}¥
-a2 = AnalyzeEnsemble\_CON\_BUD('GR', gr2, 'TEMPLATE', a1);¥\circled{14}\circlednote{14}{ Initializes the second \code{AnalyzeEnsemble\_CON\_BUD} using the first \code{AnalyzeEnsemble\_CON\_BUD} instance as a template. This setup allows the second instance to have its own \code{gr} data while applying the same parameters, specifically the densities.}¥
+a2 = AnalyzeEnsemble\_CON\_BUD('GR', gr2, 'TEMPLATE', a1);¥\circled{14}\circlednote{14}{ initializes the second \code{AnalyzeEnsemble\_CON\_BUD} using the first \code{AnalyzeEnsemble\_CON\_BUD} instance as a template. This setup allows the second instance to have its own \code{gr} data while applying the same parameters, specifically the densities.}¥
 
 c = CompareEnsemble( ...¥\circled{15}\circlednote{15}{ creates a \code{CompareEnsemble} instance with the defined \code{AnalyzeEnsemble\_CON\_BUD} instances.}¥
     'P', 10, ...

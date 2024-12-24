@@ -308,7 +308,7 @@ This section validates `AnalyzeEnsemble_CON_BUD` by implementing tests to confir
 > 
 > ⑤ and ⑥ define the necessary objects required to initialize an instance of `AnalyzeEnsemble_CON_BUD`.
 > 
-> ⑦ Initializes an `AnalyzeEnsemble_CON_BUD` instance using the specified `gr` (group) and `densities`.
+> ⑦ initializes an `AnalyzeEnsemble_CON_BUD` instance using the specified `gr` (group) and `densities`.
 > 
 > ⑧, ⑨, and ⑩ test the process of creating a GUI for `AnalyzeEnsemble_CON_BUD`, drawing it, and showing it on the screen.
 > 
@@ -318,7 +318,7 @@ This section validates `AnalyzeEnsemble_CON_BUD` by implementing tests to confir
 > 
 > ⑬ Similar to the previous test, this initializes the first `AnalyzeEnsemble_CON_BUD` with the specified `gr` and densities.
 > 
-> ⑭ Initializes the second `AnalyzeEnsemble_CON_BUD` using the first `AnalyzeEnsemble_CON_BUD` instance as a template. This setup allows the second instance to have its own `gr` data while applying the same parameters, specifically the densities.
+> ⑭ initializes the second `AnalyzeEnsemble_CON_BUD` using the first `AnalyzeEnsemble_CON_BUD` instance as a template. This setup allows the second instance to have its own `gr` data while applying the same parameters, specifically the densities.
 > 
 > ⑮ creates a `CompareEnsemble` instance with the defined `AnalyzeEnsemble_CON_BUD` instances.
 > 
