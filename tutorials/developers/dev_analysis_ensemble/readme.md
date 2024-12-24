@@ -100,7 +100,7 @@ This section focuses on implementing the basic properties required to define `An
 <a id="Functionalityfocused-properties"></a>
 ### Functionality-focused properties  [⬆](#Table-of-Contents)
 
-This section details the implementation of functionality-focused properties that enable `AnalyzeEnsemble_CON_BUD` to perform graph analysis directly.
+This section details the implementation of functionality-focused properties that directly enable `AnalyzeEnsemble_CON_BUD` to perform graph analysis.
 
 
 > **Code 3.** **Implementation properties of AnalyzeEnsemble_CON_BUD.**
