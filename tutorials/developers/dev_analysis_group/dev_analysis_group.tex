@@ -14,7 +14,7 @@
 \noindent
 This is the developer tutorial for implementing a new group analysis. 
 In this tutorial, you will learn how to create a \fn{*.gen.m} for a new group analysis, which can then be compiled by \code{braph2genesis}.
-Here, you will use as examples the group analysis \code{AnalyzeGroup\_ST\_BUD}, an group-based graph analysis (AnalyzeGroup) analyzing structure data (ST) using binary undirected multigraphs at fixed densities (BUD).
+Here, you will use as examples the group analysis \code{AnalyzeGroup\_ST\_BUD}, a group-based graph analysis (AnalyzeGroup) analyzing structural data (ST) using binary undirected multigraphs at fixed densities (BUD).
 \end{abstract}
 
 \tableofcontents
@@ -83,7 +83,7 @@ This section details the implementation of functionality-focused properties that
 	label=cd:m:AnalyzeGroup_ST_BUD:implementation_props,
 	caption={
 		{\bf Implementation properties of AnalyzeGroup\_ST\_BUD.}
-		This section of the generator code in \fn{\_AnalyzeGroup\_ST\_BUD.gen.m} updates the properties to be used, including \code{TEMPLATE} for specifying its \code{G} with graph type and parameters as a graph template, \code{GR} for defining subjects' data, , and \code{G} for managing the graph instance obtained using the subjects' data.
+		This section of the generator code in \fn{\_AnalyzeGroup\_ST\_BUD.gen.m} updates the properties to be used, including \code{TEMPLATE} for specifying its \code{G} with graph type and parameters as a graph template, \code{GR} for defining subjects' data, and \code{G} for managing the graph instance obtained using the subjects' data.
 	}
 ]
 
@@ -212,7 +212,7 @@ GUI - Analysis
 .01
 %%%% ¡code!
 im_ba = ImporterBrainAtlasXLS('FILE', 'destrieux_atlas.xlsx');
-ba = im_ba.get('BA');¥\circled{4}\circlednote{4}{ and \circled{5} define the necessary objects required to initialize an instance of \code{AnalyzeGroup\_ST\_BUD}.}¥
+ba = im_ba.get('BA');¥\circled{4}\circlednote{4}{ and \circled{5} define the necessary objects to initialize an instance of \code{AnalyzeGroup\_ST\_BUD}.}¥
 
 gr = Group('SUB_CLASS', 'SubjectST', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectST')); ¥\circled{5}¥
 for i = 1:1:50
@@ -273,7 +273,7 @@ for i = 1:1:50
     gr2.get('SUB_DICT').get('ADD', sub)
 end
 
-a1 = AnalyzeGroup_ST_BUD('GR', gr1, 'DENSITIES', 5:10:35);¥\circled{12}\circlednote{12}{ Similar to the previous test, this initializes the first \code{AnalyzeGroup\_ST\_BUD} with the specified \code{gr} and densities.}¥
+a1 = AnalyzeGroup_ST_BUD('GR', gr1, 'DENSITIES', 5:10:35);¥\circled{12}\circlednote{12}{ initializes the first \code{AnalyzeGroup\_ST\_BUD} similar to the previous test, using the specified \code{gr} and densities.}¥
 a2 = AnalyzeGroup_ST_BUD('GR', gr2, 'TEMPLATE', a1); ¥\circled{13}\circlednote{13}{ initializes the second \code{AnalyzeGroup\_ST\_BUD} using the first \code{AnalyzeGroup\_ST\_BUD} instance as a template. This setup allows the second instance to have its own \code{gr} data while applying the same parameters, specifically the densities.}¥
 
 c = CompareGroup( ...¥\circled{14}\circlednote{14}{ creates a \code{CompareGroup} instance with the defined \code{AnalyzeGroup\_ST\_BUD} instances.}¥
@@ -285,7 +285,7 @@ c = CompareGroup( ...¥\circled{14}\circlednote{14}{ creates a \code{CompareGrou
     'MEMORIZE', true ...
     );
 
-gui = GUIElement('PE', c, 'CLOSEREQ', false);¥\circled{15}\circlednote{15}{, \circled{16}, \circled{17}, and \circled{18} test creating, drawing, showing, and closing the GUI of the \code{CompareGroup}, which is an associated GUI of \code{AnalyzeGroup\_ST\_BUD}}¥
+gui = GUIElement('PE', c, 'CLOSEREQ', false);¥\circled{15}\circlednote{15}{, \circled{16}, \circled{17}, and \circled{18} test creating, drawing, showing, and closing the GUI of the \code{CompareGroup}, which is the associated GUI of \code{AnalyzeGroup\_ST\_BUD}}¥
 gui.get('DRAW')¥\circled{16}¥
 gui.get('SHOW')¥\circled{17}¥
 

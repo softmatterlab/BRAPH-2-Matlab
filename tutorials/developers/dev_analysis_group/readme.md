@@ -4,7 +4,7 @@
 
 This is the developer tutorial for implementing a new group analysis. 
 In this tutorial, you will learn how to create a "*.gen.m" for a new group analysis, which can then be compiled by `braph2genesis`.
-Here, you will use as examples the group analysis `AnalyzeGroup_ST_BUD`, an group-based graph analysis (AnalyzeGroup) analyzing structure data (ST) using binary undirected multigraphs at fixed densities (BUD).
+Here, you will use as examples the group analysis `AnalyzeGroup_ST_BUD`, a group-based graph analysis (AnalyzeGroup) analyzing structural data (ST) using binary undirected multigraphs at fixed densities (BUD).
 
 
 ## Table of Contents
@@ -83,7 +83,7 @@ This section details the implementation of functionality-focused properties that
 
 
 > **Code 3.** **Implementation properties of AnalyzeGroup_ST_BUD.**
-> 		This section of the generator code in "_AnalyzeGroup_ST_BUD.gen.m" updates the properties to be used, including `TEMPLATE` for specifying its `G` with graph type and parameters as a graph template, `GR` for defining subjects' data, , and `G` for managing the graph instance obtained using the subjects' data.
+> 		This section of the generator code in "_AnalyzeGroup_ST_BUD.gen.m" updates the properties to be used, including `TEMPLATE` for specifying its `G` with graph type and parameters as a graph template, `GR` for defining subjects' data, and `G` for managing the graph instance obtained using the subjects' data.
 > ````matlab
 > %%% ¡prop!  ①
 > TEMPLATE (parameter, item) is the template of the group-based graph analysis with structural data at fixed density.
@@ -316,7 +316,7 @@ This section tests `AnalyzeGroup_ST_BUD` to confirm its functionality via exampl
 > 
 > ③ Tests the direct GUI functionality of `AnalyzeGroup_ST_BUD`.
 > 
-> ④ and ⑤ define the necessary objects required to initialize an instance of `AnalyzeGroup_ST_BUD`.
+> ④ and ⑤ define the necessary objects to initialize an instance of `AnalyzeGroup_ST_BUD`.
 > 
 > ⑥ initializes an `AnalyzeGroup_ST_BUD` instance using the specified `gr` (group) and `densities`.
 > 
@@ -326,11 +326,11 @@ This section tests `AnalyzeGroup_ST_BUD` to confirm its functionality via exampl
 > 
 > ⑪ tests the associated GUI functionality of `AnalyzeGroup_ST_BUD`.
 > 
-> ⑫ Similar to the previous test, this initializes the first `AnalyzeGroup_ST_BUD` with the specified `gr` and densities.
+> ⑫ initializes the first `AnalyzeGroup_ST_BUD` similar to the previous test, using the specified `gr` and densities.
 > 
 > ⑬ initializes the second `AnalyzeGroup_ST_BUD` using the first `AnalyzeGroup_ST_BUD` instance as a template. This setup allows the second instance to have its own `gr` data while applying the same parameters, specifically the densities.
 > 
 > ⑭ creates a `CompareGroup` instance with the defined `AnalyzeGroup_ST_BUD` instances.
 > 
-> ⑮, ⑯, ⑰, and ⑱ test creating, drawing, showing, and closing the GUI of the `CompareGroup`, which is an associated GUI of `AnalyzeGroup_ST_BUD`
+> ⑮, ⑯, ⑰, and ⑱ test creating, drawing, showing, and closing the GUI of the `CompareGroup`, which is the associated GUI of `AnalyzeGroup_ST_BUD`
 >
