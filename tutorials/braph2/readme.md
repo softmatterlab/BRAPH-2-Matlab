@@ -38,9 +38,11 @@ BRAPH-2 is an open-source MATLAB-based toolbox for brain connectivity analysis u
 It extends upon the previous version (BRAPH~1.0) by introducing multilayer graphs, deep learning pipelines, improved performance (including GPU support), and a fully modular, object-oriented software design.
 
 A detailed description of the scientific background and capabilities of BRAPH 2.0 is provided in the article:
-\begin{quote}
-\textit{BRAPH 2.0: Brain Connectivity Analysis with Multilayer Graphs and Deep Learning} by Chang et al.
-\end{quote}
+
+
+*BRAPH 2.0: Brain Connectivity Analysis with Multilayer Graphs and Deep Learning* by Chang et al.
+
+
 Below, we present a concise introductory tutorial that takes you through the essential steps of installing BRAPH-2, loading your data, running standard analyses, and interpreting your results.
 
 <a id="Installation-and-Setup"></a>
@@ -54,7 +56,10 @@ Requirements:
 
 Downloading BRAPH-2:
 
-    - Visit the GitHub repository: [https://github.com/braph-software/BRAPH-2](https://github.com/braph-software/BRAPH-2).
+    - Visit the GitHub repository:
+
+[https://github.com/braph-software/BRAPH-2](https://github.com/braph-software/BRAPH-2)
+
     - Download the ZIP or clone it via Git.
     - Extract (or clone) the files into a folder of your choice.
 
@@ -70,9 +75,9 @@ BRAPH-2 provides an intuitive GUI to perform analyses with minimal or no coding.
 
     - In MATLAB, navigate to the main BRAPH-2 folder.
     - Type:
-\begin{verbatim}
-braph2
-\end{verbatim}
+
+`braph2`
+
     - The main BRAPH-2 window will pop up, displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.).
 
 
