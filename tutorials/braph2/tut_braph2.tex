@@ -34,18 +34,24 @@ Below, we present a concise introductory tutorial that takes you through the ess
 
 Requirements:
 \begin{itemize}
-    \item MATLAB (R2022a or later).
-    \item Git (optional) for cloning the repository.
+
+\item MATLAB (R2022a or later).
+
+\item Git (optional) for cloning the repository.
+
 \end{itemize}
 
 Downloading BRAPH-2:
 \begin{enumerate}
-    \item Visit the GitHub repository:
+
+\item Visit the GitHub repository:
 
 \href{https://github.com/braph-software/BRAPH-2}{https://github.com/braph-software/BRAPH-2}
 
-    \item Download the ZIP or clone it via Git.
-    \item Extract (or clone) the files into a folder of your choice.
+\item Download the ZIP or clone it via Git.
+
+\item Extract (or clone) the files into a folder of your choice.
+
 \end{enumerate}
 
 \section{Using the Graphical User Interface (GUI)}
@@ -55,23 +61,32 @@ BRAPH-2 provides an intuitive GUI to perform analyses with minimal or no coding.
 \subsection{Launching BRAPH-2}
 
 \begin{enumerate}
-    \item In MATLAB, navigate to the main BRAPH-2 folder.
-    \item Type:
+
+\item In MATLAB, navigate to the main BRAPH-2 folder.
+
+\item Type:
 
 \lstinline{braph2}
 
-    \item The main BRAPH-2 window will pop up, displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.).
+\item The main BRAPH-2 window will pop up, displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.).
+
 \end{enumerate}
 
 \subsection{Pipeline Steps}
 
 Each pipeline consists of a series of sequential steps to guide your analysis. For example, a typical graph analysis pipeline might include the following steps:
 \begin{enumerate}
-    \item \textbf{Load Atlas}: Import or select a brain atlas (ROI definitions).
-    \item \textbf{Load Group(s)}: Load subjects' data (structural, functional, or connectivity matrices).
-    \item \textbf{Analyze}: Build graphs (optionally threshold them) and compute graph measures.
-    \item \textbf{Compare (optional)}: If you have multiple groups, run permutation tests or other statistical comparisons.
-    \item \textbf{Visualize and Export}: Review measures, visualize results (e.g., brain views, adjacency matrices), and export them.
+
+\item \textbf{Load Atlas}: Import or select a brain atlas (ROI definitions).
+
+\item \textbf{Load Group(s)}: Load subjects' data (structural, functional, or connectivity matrices).
+
+\item \textbf{Analyze}: Build graphs (optionally threshold them) and compute graph measures.
+
+\item \textbf{Compare (optional)}: If you have multiple groups, run permutation tests or other statistical comparisons.
+
+\item \textbf{Visualize and Export}: Review measures, visualize results (e.g., brain views, adjacency matrices), and export them.
+
 \end{enumerate}
 
 \section{Basic Tutorial Example}
@@ -79,33 +94,40 @@ Each pipeline consists of a series of sequential steps to guide your analysis. F
 \subsection{Single-Layer Connectivity Analysis}
 
 \begin{enumerate}
-    \item \textbf{Run the Connectivity Pipeline}:
-    \begin{itemize}
-        \item In the BRAPH-2 main window, pick a pipeline under the ``Connectivity'' tab (e.g., \textit{Pipeline Comparison Connectivity WU}).
-    \end{itemize}
-    \item \textbf{Load Atlas}:
-    \begin{itemize}
-        \item Choose your brain atlas file (e.g., a \texttt{.xls}, \texttt{.txt}, or provided template).
-    \end{itemize}
-    \item \textbf{Load Groups}:
-    \begin{itemize}
-        \item Import each group of subjects (e.g., controls, patients). Each subject should have a connectivity matrix (WU, BUD, or BUT formats).
-    \end{itemize}
-    \item \textbf{Run the Analysis}:
-    \begin{itemize}
-        \item Select graph measures (e.g., degree, clustering).
-        \item Click \texttt{Analyze} to compute measure values per subject and per group.
-    \end{itemize}
-    \item \textbf{Group Comparison}:
-    \begin{itemize}
-        \item Optionally set up statistical comparisons (e.g., 1000 permutations with FDR correction).
-        \item Click \texttt{Compare} to execute.
-    \end{itemize}
-    \item \textbf{Visualize \& Export}:
-    \begin{itemize}
-        \item Examine adjacency matrices, 3D brain plots, bar charts, etc.
-        \item Save the pipeline (\texttt{*.b2}), results, and figures for reproducibility.
-    \end{itemize}
+
+\item \textbf{Run the Connectivity Pipeline}:
+\begin{itemize}
+\item In the BRAPH-2 main window, pick a pipeline under the ``Connectivity'' tab (e.g., \textit{Pipeline Comparison Connectivity WU}).
+\end{itemize}
+
+\item \textbf{Load Atlas}:
+\begin{itemize}
+\item Choose your brain atlas file (e.g., a \texttt{.xls}, \texttt{.txt}, or provided template).
+\end{itemize}
+
+\item \textbf{Load Groups}:
+\begin{itemize}
+\item Import each group of subjects (e.g., controls, patients). Each subject should have a connectivity matrix (WU, BUD, or BUT formats).
+\end{itemize}
+
+\item \textbf{Run the Analysis}:
+\begin{itemize}
+\item Select graph measures (e.g., degree, clustering).
+\item Click \texttt{Analyze} to compute measure values per subject and per group.
+\end{itemize}
+
+\item \textbf{Group Comparison}:
+\begin{itemize}
+\item Optionally set up statistical comparisons (e.g., 1000 permutations with FDR correction).
+\item Click \texttt{Compare} to execute.
+\end{itemize}
+
+\item \textbf{Visualize \& Export}:
+\begin{itemize}
+\item Examine adjacency matrices, 3D brain plots, bar charts, etc.
+\item Save the pipeline (\texttt{*.b2}), results, and figures for reproducibility.
+\end{itemize}
+
 \end{enumerate}
 
 \subsection{Multilayer and Deep Learning Pipelines}

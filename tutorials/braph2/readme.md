@@ -50,18 +50,24 @@ Below, we present a concise introductory tutorial that takes you through the ess
 
 Requirements:
 
-    - MATLAB (R2022a or later).
-    - Git (optional) for cloning the repository.
+
+- MATLAB (R2022a or later).
+
+- Git (optional) for cloning the repository.
+
 
 
 Downloading BRAPH-2:
 
-    - Visit the GitHub repository:
+
+- Visit the GitHub repository:
 
 [https://github.com/braph-software/BRAPH-2](https://github.com/braph-software/BRAPH-2)
 
-    - Download the ZIP or clone it via Git.
-    - Extract (or clone) the files into a folder of your choice.
+- Download the ZIP or clone it via Git.
+
+- Extract (or clone) the files into a folder of your choice.
+
 
 
 <a id="Using-the-Graphical-User-Interface-GUI"></a>
@@ -73,12 +79,15 @@ BRAPH-2 provides an intuitive GUI to perform analyses with minimal or no coding.
 ### Launching BRAPH-2  [⬆](#Table-of-Contents)
 
 
-    - In MATLAB, navigate to the main BRAPH-2 folder.
-    - Type:
+
+- In MATLAB, navigate to the main BRAPH-2 folder.
+
+- Type:
 
 `braph2`
 
-    - The main BRAPH-2 window will pop up, displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.).
+- The main BRAPH-2 window will pop up, displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.).
+
 
 
 <a id="Pipeline-Steps"></a>
@@ -86,11 +95,17 @@ BRAPH-2 provides an intuitive GUI to perform analyses with minimal or no coding.
 
 Each pipeline consists of a series of sequential steps to guide your analysis. For example, a typical graph analysis pipeline might include the following steps:
 
-    - \textbf{Load Atlas}: Import or select a brain atlas (ROI definitions).
-    - \textbf{Load Group(s)}: Load subjects' data (structural, functional, or connectivity matrices).
-    - \textbf{Analyze}: Build graphs (optionally threshold them) and compute graph measures.
-    - \textbf{Compare (optional)}: If you have multiple groups, run permutation tests or other statistical comparisons.
-    - \textbf{Visualize and Export}: Review measures, visualize results (e.g., brain views, adjacency matrices), and export them.
+
+- \textbf{Load Atlas}: Import or select a brain atlas (ROI definitions).
+
+- \textbf{Load Group(s)}: Load subjects' data (structural, functional, or connectivity matrices).
+
+- \textbf{Analyze}: Build graphs (optionally threshold them) and compute graph measures.
+
+- \textbf{Compare (optional)}: If you have multiple groups, run permutation tests or other statistical comparisons.
+
+- \textbf{Visualize and Export}: Review measures, visualize results (e.g., brain views, adjacency matrices), and export them.
+
 
 
 <a id="Basic-Tutorial-Example"></a>
@@ -100,33 +115,40 @@ Each pipeline consists of a series of sequential steps to guide your analysis. F
 ### Single-Layer Connectivity Analysis  [⬆](#Table-of-Contents)
 
 
-    - \textbf{Run the Connectivity Pipeline}:
-    
-        - In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., \textit{Pipeline Comparison Connectivity WU}).
-    
-    - \textbf{Load Atlas}:
-    
-        - Choose your brain atlas file (e.g., a \texttt{.xls}, \texttt{.txt}, or provided template).
-    
-    - \textbf{Load Groups}:
-    
-        - Import each group of subjects (e.g., controls, patients). Each subject should have a connectivity matrix (WU, BUD, or BUT formats).
-    
-    - \textbf{Run the Analysis}:
-    
-        - Select graph measures (e.g., degree, clustering).
-        - Click \texttt{Analyze} to compute measure values per subject and per group.
-    
-    - \textbf{Group Comparison}:
-    
-        - Optionally set up statistical comparisons (e.g., 1000 permutations with FDR correction).
-        - Click \texttt{Compare} to execute.
-    
-    - \textbf{Visualize & Export}:
-    
-        - Examine adjacency matrices, 3D brain plots, bar charts, etc.
-        - Save the pipeline (\texttt{*.b2}), results, and figures for reproducibility.
-    
+
+- \textbf{Run the Connectivity Pipeline}:
+
+- In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., \textit{Pipeline Comparison Connectivity WU}).
+
+
+- \textbf{Load Atlas}:
+
+- Choose your brain atlas file (e.g., a \texttt{.xls}, \texttt{.txt}, or provided template).
+
+
+- \textbf{Load Groups}:
+
+- Import each group of subjects (e.g., controls, patients). Each subject should have a connectivity matrix (WU, BUD, or BUT formats).
+
+
+- \textbf{Run the Analysis}:
+
+- Select graph measures (e.g., degree, clustering).
+- Click \texttt{Analyze} to compute measure values per subject and per group.
+
+
+- \textbf{Group Comparison}:
+
+- Optionally set up statistical comparisons (e.g., 1000 permutations with FDR correction).
+- Click \texttt{Compare} to execute.
+
+
+- \textbf{Visualize & Export}:
+
+- Examine adjacency matrices, 3D brain plots, bar charts, etc.
+- Save the pipeline (\texttt{*.b2}), results, and figures for reproducibility.
+
+
 
 
 <a id="Multilayer-and-Deep-Learning-Pipelines"></a>
