@@ -37,6 +37,7 @@ document = regexprep(document, '\\url{([^{}]*)}', '[$1]($1)');  % \url{link}
 document = regexprep(document, '\\href{([^{}]*)}{([^{}]*)}', '[$2]($1)');  % \href{link}{text}
 document = regexprep(document, '``([^`'']*)''''', '"$1"');  % ``text''
 document = regexprep(document, '\\emph{([^{}]*)}', '*$1*');  % \emph{...}
+document = regexprep(document, '\\textbf{([^{}]*)}', '**$1**');  % \textbf{...}
 document = regexprep(document, '\\lstinline{([^{}]*)}', '`$1`');  % \lstinline{...}
 document = regexprep(document, '\\&', '&');  % \&
 document = regexprep(document, '\\_', '_');  % \_

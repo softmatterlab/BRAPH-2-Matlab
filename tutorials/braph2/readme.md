@@ -96,15 +96,15 @@ BRAPH-2 provides an intuitive GUI to perform analyses with minimal or no coding.
 Each pipeline consists of a series of sequential steps to guide your analysis. For example, a typical graph analysis pipeline might include the following steps:
 
 
-- \textbf{Load Atlas}: Import or select a brain atlas (ROI definitions).
+- **Load Atlas**: Import or select a brain atlas (ROI definitions).
 
-- \textbf{Load Group(s)}: Load subjects' data (structural, functional, or connectivity matrices).
+- **Load Group(s)**: Load subjects' data (structural, functional, or connectivity matrices).
 
-- \textbf{Analyze}: Build graphs (optionally threshold them) and compute graph measures.
+- **Analyze**: Build graphs (optionally threshold them) and compute graph measures.
 
-- \textbf{Compare (optional)}: If you have multiple groups, run permutation tests or other statistical comparisons.
+- **Compare (optional)**: If you have multiple groups, run permutation tests or other statistical comparisons.
 
-- \textbf{Visualize and Export}: Review measures, visualize results (e.g., brain views, adjacency matrices), and export them.
+- **Visualize and Export**: Review measures, visualize results (e.g., brain views, adjacency matrices), and export them.
 
 
 
@@ -116,34 +116,34 @@ Each pipeline consists of a series of sequential steps to guide your analysis. F
 
 
 
-- \textbf{Run the Connectivity Pipeline}:
+- **Run the Connectivity Pipeline**:
 
 - In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., \textit{Pipeline Comparison Connectivity WU}).
 
 
-- \textbf{Load Atlas}:
+- **Load Atlas**:
 
 - Choose your brain atlas file (e.g., a \texttt{.xls}, \texttt{.txt}, or provided template).
 
 
-- \textbf{Load Groups}:
+- **Load Groups**:
 
 - Import each group of subjects (e.g., controls, patients). Each subject should have a connectivity matrix (WU, BUD, or BUT formats).
 
 
-- \textbf{Run the Analysis}:
+- **Run the Analysis**:
 
 - Select graph measures (e.g., degree, clustering).
 - Click \texttt{Analyze} to compute measure values per subject and per group.
 
 
-- \textbf{Group Comparison}:
+- **Group Comparison**:
 
 - Optionally set up statistical comparisons (e.g., 1000 permutations with FDR correction).
 - Click \texttt{Compare} to execute.
 
 
-- \textbf{Visualize & Export}:
+- **Visualize & Export**:
 
 - Examine adjacency matrices, 3D brain plots, bar charts, etc.
 - Save the pipeline (\texttt{*.b2}), results, and figures for reproducibility.
@@ -156,8 +156,8 @@ Each pipeline consists of a series of sequential steps to guide your analysis. F
 
 BRAPH-2 also offers:
 
-    - \textbf{Multilayer Graph Analysis}: Combine multiple modalities (e.g., structural and functional) into a \textit{multiplex} or \textit{multilayer} graph.
-    - \textbf{Deep Learning Classification/Regression Pipelines}: Use adjacency matrices or graph measures as input to train neural networks and perform classification (e.g., patient vs.\ control) or regression (e.g., predict age).
+    - **Multilayer Graph Analysis**: Combine multiple modalities (e.g., structural and functional) into a \textit{multiplex} or \textit{multilayer} graph.
+    - **Deep Learning Classification/Regression Pipelines**: Use adjacency matrices or graph measures as input to train neural networks and perform classification (e.g., patient vs.\ control) or regression (e.g., predict age).
 
 These pipelines follow similar steps but involve constructing a \textit{supra-adjacency} matrix (multilayer) or generating input features for neural networks.
 
@@ -194,54 +194,54 @@ With a simple GUI for non-programmers and rich scripting/development options for
 For additional learning resources and reference materials, please see the following:
 
 
-    - \textbf{BRAPH-2 GitHub}: [https://github.com/braph-software/BRAPH-2](https://github.com/braph-software/BRAPH-2)
+    - **BRAPH-2 GitHub**: [https://github.com/braph-software/BRAPH-2](https://github.com/braph-software/BRAPH-2)
 
-    - \textbf{User Tutorials for Pipelines}: 
+    - **User Tutorials for Pipelines**: 
     \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/pipelines}{\texttt{tutorials/pipelines}}
     
         - Explore ready-made pipelines for structural, functional, connectivity, and deep learning analyses.
         - Learn how to load brain atlases, import data, compute graph measures, compare groups, and visualize/export your results.
     
 
-    - \textbf{Developer Tutorials for Extending BRAPH-2}: 
+    - **Developer Tutorials for Extending BRAPH-2**: 
     \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers}{\texttt{tutorials/developers}}
     
-        - \textbf{Adapting a Pipeline Script} (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_pipeline}{\texttt{dev_pipeline}}):  
+        - **Adapting a Pipeline Script** (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_pipeline}{\texttt{dev_pipeline}}):  
         Learn how to modify an existing pipeline, customize parameters (e.g., default number of permutations), or add new pipeline steps.
-        - \textbf{Adapt an Example Script} (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_script}{\texttt{dev_script}}):  
+        - **Adapt an Example Script** (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_script}{\texttt{dev_script}}):  
         See how to turn a GUI-based analysis into an automated script for batch processing or cluster/HPC applications.
-        - \textbf{Implement, Import, and Export Groups of Subjects} (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_subject}{\texttt{dev_subject}}):  
+        - **Implement, Import, and Export Groups of Subjects** (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_subject}{\texttt{dev_subject}}):  
         Discover how to introduce new Subject types (e.g., new data modalities), handle group-level imports, and export results.
-        - \textbf{Implement a New Ensemble Analysis} (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_analysis_ensemble}{\texttt{dev_analysis_ensemble}}):  
+        - **Implement a New Ensemble Analysis** (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_analysis_ensemble}{\texttt{dev_analysis_ensemble}}):  
         Create advanced ensemble analyses in which a measure is calculated for each subject, enabling subject-level comparisons.
-        - \textbf{Implement a New Group Analysis} (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_analysis_group}{\texttt{dev_analysis_group}}):  
+        - **Implement a New Group Analysis** (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_analysis_group}{\texttt{dev_analysis_group}}):  
         Create analyses where measures are computed at the group level (useful for structural pipelines and group-average connectivity).
     
 
-    - \textbf{Implementing New Graphs and Measures}: 
+    - **Implementing New Graphs and Measures**: 
     
-        - \textbf{Implement a New Graph} ( \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_graph}{\texttt{dev_graph}}):  
+        - **Implement a New Graph** ( \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_graph}{\texttt{dev_graph}}):  
         Learn the steps to create and register novel graph types (e.g., new adjacency representations, directed/undirected, multiplex).
-        - \textbf{Implement a New Measure} (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_measure}{\texttt{dev_measure}}):
+        - **Implement a New Measure** (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_measure}{\texttt{dev_measure}}):
         Extend BRAPH-2 with original graph-theoretical metrics (e.g., community detection, centrality, resilience) by defining measure properties and calculations.
     
 
-- \textbf{Neural Network Tutorials} (classifiers, regressors, feature importance):
+- **Neural Network Tutorials** (classifiers, regressors, feature importance):
 
-    - \textbf{Implement a New Neural Network Classifier} 
+    - **Implement a New Neural Network Classifier** 
     (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_classifier}{\texttt{dev_nn_classifier}}):  
     Build custom classification architectures, integrating them directly into the BRAPH-2 pipelines.
 
-    - \textbf{Implement a New Neural Network Regressor} 
+    - **Implement a New Neural Network Regressor** 
     (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_regressor}{\texttt{dev_nn_regressor}}):  
     Add regression pipelines for tasks such as age prediction or continuous clinical measures.
 
-    - \textbf{Feature Importance and Advanced Topics} 
+    - **Feature Importance and Advanced Topics** 
     (\href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_feature_importance}{\texttt{dev_nn_feature_importance}}):  
     Explore how to evaluate node- or feature-level contributions to the final predictions (e.g., permutation tests, integrated gradients), enabling an in-depth assessment of model interpretability.
 
 
 
 
-    - \textbf{Discussion Forum}: 
+    - **Discussion Forum**: 
     \href{https://github.com/braph-software/BRAPH-2/discussions}{\texttt{github.com/braph-software/BRAPH-2/discussions}}
