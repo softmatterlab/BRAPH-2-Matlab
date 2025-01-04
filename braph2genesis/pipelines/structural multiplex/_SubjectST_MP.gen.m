@@ -213,7 +213,7 @@ LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.
 if ~isa(sub.getr('L'), 'NoValue') && length(sub.get('LAYERLABELS')) ~= sub.get('L')
     title = ['About Layer Labels'];
     message = {''
-        ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use doubl slashes to avoid genesis problem
+        ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use double slashes to avoid genesis problem
         ['{\\color{gray}version ' BRAPH2.VERSION '}']
         ['{\\color{gray}build ' int2str(BRAPH2.BUILD) '}']
         ''

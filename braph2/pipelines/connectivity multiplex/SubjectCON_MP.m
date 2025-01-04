@@ -725,8 +725,8 @@ classdef SubjectCON_MP < Subject
 					if ~isa(sub.getr('L'), 'NoValue') && length(sub.get('LAYERLABELS')) ~= sub.get('L')
 					    title = ['About Layer Labels'];
 					    message = {''
-					        ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use doubl slashes to avoid genesis problem
-					        ['{\color{gray}version ' '2.0.0.b2' '}']
+					        ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use double slashes to avoid genesis problem
+					        ['{\color{gray}version ' '2.0.0' '}']
 					        ['{\color{gray}build ' int2str(6) '}']
 					        ''
 					        'Please, select a valid number of Layer Labels.'

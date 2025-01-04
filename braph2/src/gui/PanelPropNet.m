@@ -840,8 +840,8 @@ classdef PanelPropNet < PanelProp
 			        title = ['About Network Visualization Windows'];
 			        
 			        message = {''
-			            ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use doubl slashes to avoid genesis problem
-			            ['{\color{gray}version ' '2.0.0.b2' '}']
+			            ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use double slashes to avoid genesis problem
+			            ['{\color{gray}version ' '2.0.0' '}']
 			            ['{\color{gray}build ' int2str(6) '}']
 			            ''
 			            'The network visualization window'

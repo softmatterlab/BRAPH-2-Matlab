@@ -70,9 +70,9 @@ classdef BRAPH2
     properties (Constant) % BRAPH2 ID Card
         NAME = 'BRAPH 2.0' % BRAPH2 full name
         STR = 'BRAPH2' % BRAPH2 short string
-        VERSION = '2.0.0.b2' % BRAPH2 version % % % ON RELEASE: Ensure correct VERSION
+        VERSION = '2.0.0' % BRAPH2 version % % % ON RELEASE: Ensure correct VERSION
         BUILD = 6 % BRAPH2 build number % % % ON RELEASE: Ensure correct BUILD
-        RELEASE = '2023-10-02' % BRAPH2 release date % % % ON RELEASE: Ensure correct RELEASE date
+        RELEASE = '2025-01-12' % BRAPH2 release date % % % ON RELEASE: Ensure correct RELEASE date
         AUTHORS = 'Giovanni Volpe, Emiliano Gomez Ruiz, Anna Canal Garcia, Yu-Wei Chang, Mite Mijalkov, Joana Braga Pereira, Ehsan Kakaei, Eric Westman, et al.'
         COPYRIGHT = ['Copyright 2014-' datestr(now,'yyyy')]
         WEB = 'braph.org' % BRAPH2 website
