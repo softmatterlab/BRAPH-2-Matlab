@@ -1,6 +1,6 @@
 clear all
 
-% generate_readme(['braph2' filesep 'tut_braph2.tex'])
+generate_readme(['braph2' filesep 'tut_braph2.tex'])
 
 generate_readme(['data' filesep 'tut_ba' filesep 'tut_ba.tex'])
 generate_readme(['data' filesep 'tut_gr_con' filesep 'tut_gr_con.tex'])

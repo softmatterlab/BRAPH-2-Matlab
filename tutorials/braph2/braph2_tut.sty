@@ -1,0 +1,139 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{braph2_tut}[2023/07/05 BRAPH 2 user tutorial style]
+
+\author[The BRAPH~2 Team]{The BRAPH~2 Team}
+
+%%
+% new commands
+\newcommand{\code}[1]{{\tt #1}} % inline code
+\newcommand{\fn}[1]{{\tt #1}} % file name
+
+\newcommand{\Coderef}[1]{Code~\ref{#1}}
+\newcommand{\Codesref}[1]{Codes~\ref{#1}}
+
+%%
+%
+\RequirePackage{graphicx}
+%  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+\RequirePackage{bm} % bold math
+\RequirePackage{amsmath}  % extended mathematics
+
+\RequirePackage{hyperref} % add hypertext capabilities
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan}
+
+\usepackage{parskip}
+
+\usepackage{float}
+
+%\usepackage{booktabs} % book-quality tables
+%\usepackage{units}    % non-stacked fractions and better unit spacing
+%\usepackage{multicol} % multiple column layout facilities
+%\usepackage{lipsum}   % filler text
+%\usepackage{fancyvrb} % extended verbatim environments
+%  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+%%
+% colors
+\RequirePackage[usenames,dvipsnames]{xcolor}
+
+\newcommand*\C[1]{\textcolor{green}{#1}} % internal comment
+\newcommand*\E[1]{\textcolor{BurntOrange}{#1}} % exercise
+
+\definecolor{backcolour}{rgb}{1,1,1}
+\definecolor{codedark}{rgb}{.2,.2,1}
+\definecolor{codelight}{rgb}{.7,.7,.7}
+\definecolor{codegreen}{rgb}{0,.6,0}
+\definecolor{codepurple}{rgb}{.58,0,.82}
+\definecolor{highlight}{rgb}{.98,.97,.10}
+
+%%
+% code enviroment and commands
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{listings}
+\lstset{
+    literate={¡}{{\textexclamdown}}1
+}
+\lstdefinestyle{mystyle}{
+    language=Matlab,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codedark},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=t,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    frame=lines, %single,
+    caption=\relax,
+    escapechar=¥,
+    moredelim=[is][\color{lightgray}]{¤}{¤},
+}
+\lstset{style=mystyle}
+\renewcommand{\lstlistingname}{Code}
+\newcommand*\G[1]{\color{codelight}{#1}}
+\newcommand*\expand[1]{\color{codedark}{$\leftarrow$ \Coderef{#1}}}
+\newcommand*\expands[1]{\color{codedark}{$\leftarrow$ \Codesref{#1}}}
+
+%%
+% circled notes
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand*\circlednote[2]{\marginnote{\circled{#1}#2}}
+\newcommand*\twocirclednotes[3]{\marginnote{\circled{#1} and \circled{#2} #3}}
+\newcommand*\threecirclednotes[4]{\marginnote{\circled{#1}, \circled{#2}, and \circled{#3} #4}}
+\newcommand*\fourcirclednotes[5]{\marginnote{\circled{#1}, \circled{#2}, \circled{#3}, and \circled{#4} #5}}
+\newcommand*\rangecirclednotes[3]{\marginnote{\circled{#1}---\circled{#2} #3}}
+
+%%
+% For graphics / images
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+\newcommand{\fig}[5]
+{
+\begin{#1}
+	#3
+	\caption[#4]{{\bf #4.} #5}
+	\label{#2}
+\end{#1}
+}
+
+\newcommand{\Figref}[1]{Figure~\ref{#1}}
+\newcommand{\Figsref}[1]{Figures~\ref{#1}}
+
+\newcommand{\Eqref}[1]{Eq.~\eqref{#1}}
+\newcommand{\Eqsref}[1]{Eqs.~\eqref{#1}}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+%%
+% Prints argument within hanging parentheses (i.e., parentheses that take
+% up no horizontal space).  Useful in tabular environments.
+\newcommand{\hangp}[1]{\makebox[0pt][r]{(}#1\makebox[0pt][l]{)}}
+
+%%
+% Prints an asterisk that takes up no horizontal space.
+% Useful in tabular environments.
+\newcommand{\hangstar}{\makebox[0pt][l]{*}}
+
+%%
+% Prints a trailing space in a smart way.
+\usepackage{xspace}
+
+% Prints the month name (e.g., January) and the year (e.g., 2008)
+\newcommand{\monthyear}{\ifcase\month\or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi\space\number\year}
+
+% Colored boxes
+\usepackage{tcolorbox}

@@ -1,6 +1,6 @@
-# Implement a new Ensemble Analysis
+# Implement a New Ensemble Analysis
 
-[![Tutorial Implement a new Ensemble Analysis](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](dev_analysis_ensemble.pdf)
+[![Tutorial Implement a New Ensemble Analysis](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](dev_analysis_ensemble.pdf)
 
 This is the developer tutorial for implementing a new ensemble analysis. 
 In this tutorial, you will learn how to create a "*.gen.m" for a new ensemble analysis, which can then be compiled by `braph2genesis`.
