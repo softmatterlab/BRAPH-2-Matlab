@@ -149,108 +149,108 @@ classdef GUI < ConcreteElement
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
 		WAITBAR_TAG = 'WAITBAR';
-		WAITBAR_CATEGORY = Category.GUI;
-		WAITBAR_FORMAT = Format.LOGICAL;
+		WAITBAR_CATEGORY = 9;
+		WAITBAR_FORMAT = 4;
 		
 		DRAW = 10; %CET: Computational Efficiency Trick
 		DRAW_TAG = 'DRAW';
-		DRAW_CATEGORY = Category.QUERY;
-		DRAW_FORMAT = Format.LOGICAL;
+		DRAW_CATEGORY = 6;
+		DRAW_FORMAT = 4;
 		
 		DRAWN = 11; %CET: Computational Efficiency Trick
 		DRAWN_TAG = 'DRAWN';
-		DRAWN_CATEGORY = Category.QUERY;
-		DRAWN_FORMAT = Format.LOGICAL;
+		DRAWN_CATEGORY = 6;
+		DRAWN_FORMAT = 4;
 		
 		TITLE = 12; %CET: Computational Efficiency Trick
 		TITLE_TAG = 'TITLE';
-		TITLE_CATEGORY = Category.GUI;
-		TITLE_FORMAT = Format.STRING;
+		TITLE_CATEGORY = 9;
+		TITLE_FORMAT = 2;
 		
 		POSITION = 13; %CET: Computational Efficiency Trick
 		POSITION_TAG = 'POSITION';
-		POSITION_CATEGORY = Category.GUI;
-		POSITION_FORMAT = Format.RVECTOR;
+		POSITION_CATEGORY = 9;
+		POSITION_FORMAT = 12;
 		
 		BKGCOLOR = 14; %CET: Computational Efficiency Trick
 		BKGCOLOR_TAG = 'BKGCOLOR';
-		BKGCOLOR_CATEGORY = Category.GUI;
-		BKGCOLOR_FORMAT = Format.COLOR;
+		BKGCOLOR_CATEGORY = 9;
+		BKGCOLOR_FORMAT = 20;
 		
 		H_MENUBAR = 15; %CET: Computational Efficiency Trick
 		H_MENUBAR_TAG = 'H_MENUBAR';
-		H_MENUBAR_CATEGORY = Category.EVANESCENT;
-		H_MENUBAR_FORMAT = Format.HANDLELIST;
+		H_MENUBAR_CATEGORY = 7;
+		H_MENUBAR_FORMAT = 19;
 		
 		MENUBAR = 16; %CET: Computational Efficiency Trick
 		MENUBAR_TAG = 'MENUBAR';
-		MENUBAR_CATEGORY = Category.GUI;
-		MENUBAR_FORMAT = Format.LOGICAL;
+		MENUBAR_CATEGORY = 9;
+		MENUBAR_FORMAT = 4;
 		
 		H_MENU_ABOUT = 17; %CET: Computational Efficiency Trick
 		H_MENU_ABOUT_TAG = 'H_MENU_ABOUT';
-		H_MENU_ABOUT_CATEGORY = Category.EVANESCENT;
-		H_MENU_ABOUT_FORMAT = Format.HANDLE;
+		H_MENU_ABOUT_CATEGORY = 7;
+		H_MENU_ABOUT_FORMAT = 18;
 		
 		MENU_ABOUT = 18; %CET: Computational Efficiency Trick
 		MENU_ABOUT_TAG = 'MENU_ABOUT';
-		MENU_ABOUT_CATEGORY = Category.GUI;
-		MENU_ABOUT_FORMAT = Format.LOGICAL;
+		MENU_ABOUT_CATEGORY = 9;
+		MENU_ABOUT_FORMAT = 4;
 		
 		H_TOOLBAR = 19; %CET: Computational Efficiency Trick
 		H_TOOLBAR_TAG = 'H_TOOLBAR';
-		H_TOOLBAR_CATEGORY = Category.EVANESCENT;
-		H_TOOLBAR_FORMAT = Format.HANDLE;
+		H_TOOLBAR_CATEGORY = 7;
+		H_TOOLBAR_FORMAT = 18;
 		
 		H_TOOLS = 20; %CET: Computational Efficiency Trick
 		H_TOOLS_TAG = 'H_TOOLS';
-		H_TOOLS_CATEGORY = Category.EVANESCENT;
-		H_TOOLS_FORMAT = Format.HANDLELIST;
+		H_TOOLS_CATEGORY = 7;
+		H_TOOLS_FORMAT = 19;
 		
 		TOOLBAR = 21; %CET: Computational Efficiency Trick
 		TOOLBAR_TAG = 'TOOLBAR';
-		TOOLBAR_CATEGORY = Category.GUI;
-		TOOLBAR_FORMAT = Format.LOGICAL;
+		TOOLBAR_CATEGORY = 9;
+		TOOLBAR_FORMAT = 4;
 		
 		TOOL_ABOUT = 22; %CET: Computational Efficiency Trick
 		TOOL_ABOUT_TAG = 'TOOL_ABOUT';
-		TOOL_ABOUT_CATEGORY = Category.GUI;
-		TOOL_ABOUT_FORMAT = Format.LOGICAL;
+		TOOL_ABOUT_CATEGORY = 9;
+		TOOL_ABOUT_FORMAT = 4;
 		
 		CLOSEREQ = 23; %CET: Computational Efficiency Trick
 		CLOSEREQ_TAG = 'CLOSEREQ';
-		CLOSEREQ_CATEGORY = Category.GUI;
-		CLOSEREQ_FORMAT = Format.LOGICAL;
+		CLOSEREQ_CATEGORY = 9;
+		CLOSEREQ_FORMAT = 4;
 		
 		H = 24; %CET: Computational Efficiency Trick
 		H_TAG = 'H';
-		H_CATEGORY = Category.EVANESCENT;
-		H_FORMAT = Format.HANDLE;
+		H_CATEGORY = 7;
+		H_FORMAT = 18;
 		
 		RESIZE = 25; %CET: Computational Efficiency Trick
 		RESIZE_TAG = 'RESIZE';
-		RESIZE_CATEGORY = Category.QUERY;
-		RESIZE_FORMAT = Format.LOGICAL;
+		RESIZE_CATEGORY = 6;
+		RESIZE_FORMAT = 4;
 		
 		SHOW = 26; %CET: Computational Efficiency Trick
 		SHOW_TAG = 'SHOW';
-		SHOW_CATEGORY = Category.QUERY;
-		SHOW_FORMAT = Format.LOGICAL;
+		SHOW_CATEGORY = 6;
+		SHOW_FORMAT = 4;
 		
 		HIDE = 27; %CET: Computational Efficiency Trick
 		HIDE_TAG = 'HIDE';
-		HIDE_CATEGORY = Category.QUERY;
-		HIDE_FORMAT = Format.LOGICAL;
+		HIDE_CATEGORY = 6;
+		HIDE_FORMAT = 4;
 		
 		DELETE = 28; %CET: Computational Efficiency Trick
 		DELETE_TAG = 'DELETE';
-		DELETE_CATEGORY = Category.QUERY;
-		DELETE_FORMAT = Format.LOGICAL;
+		DELETE_CATEGORY = 6;
+		DELETE_FORMAT = 4;
 		
 		CLOSE = 29; %CET: Computational Efficiency Trick
 		CLOSE_TAG = 'CLOSE';
-		CLOSE_CATEGORY = Category.QUERY;
-		CLOSE_FORMAT = Format.LOGICAL;
+		CLOSE_CATEGORY = 6;
+		CLOSE_FORMAT = 4;
 	end
 	methods % constructor
 		function gui = GUI(varargin)
@@ -374,19 +374,19 @@ classdef GUI < ConcreteElement
 			end
 			
 			switch category
-				case Category.CONSTANT % __Category.CONSTANT__
+				case 1 % Category.CONSTANT
 					prop_list = [1 2 3];
-				case Category.METADATA % __Category.METADATA__
+				case 2 % Category.METADATA
 					prop_list = [6 7];
-				case Category.PARAMETER % __Category.PARAMETER__
+				case 3 % Category.PARAMETER
 					prop_list = 4;
-				case Category.DATA % __Category.DATA__
+				case 4 % Category.DATA
 					prop_list = 5;
-				case Category.QUERY % __Category.QUERY__
+				case 6 % Category.QUERY
 					prop_list = [8 10 11 25 26 27 28 29];
-				case Category.EVANESCENT % __Category.EVANESCENT__
+				case 7 % Category.EVANESCENT
 					prop_list = [15 17 19 20 24];
-				case Category.GUI % __Category.GUI__
+				case 9 % Category.GUI
 					prop_list = [9 12 13 14 16 18 21 22 23];
 				otherwise
 					prop_list = [];
@@ -418,19 +418,19 @@ classdef GUI < ConcreteElement
 			end
 			
 			switch varargin{1} % category = varargin{1}
-				case Category.CONSTANT % __Category.CONSTANT__
+				case 1 % Category.CONSTANT
 					prop_number = 3;
-				case Category.METADATA % __Category.METADATA__
+				case 2 % Category.METADATA
 					prop_number = 2;
-				case Category.PARAMETER % __Category.PARAMETER__
+				case 3 % Category.PARAMETER
 					prop_number = 1;
-				case Category.DATA % __Category.DATA__
+				case 4 % Category.DATA
 					prop_number = 1;
-				case Category.QUERY % __Category.QUERY__
+				case 6 % Category.QUERY
 					prop_number = 8;
-				case Category.EVANESCENT % __Category.EVANESCENT__
+				case 7 % Category.EVANESCENT
 					prop_number = 5;
-				case Category.GUI % __Category.GUI__
+				case 9 % Category.GUI
 					prop_number = 9;
 				otherwise
 					prop_number = 0;
@@ -468,8 +468,8 @@ classdef GUI < ConcreteElement
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GUI:' BRAPH2.WRONG_INPUT], ...
-					['BRAPH2' ':GUI:' BRAPH2.WRONG_INPUT '\n' ...
+					['BRAPH2' ':GUI:' 'WrongInput'], ...
+					['BRAPH2' ':GUI:' 'WrongInput' '\n' ...
 					'The value ' tostring(prop, 100, ' ...') ' is not a valid prop for GUI.'] ...
 					)
 			end
@@ -506,8 +506,8 @@ classdef GUI < ConcreteElement
 				check_out = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GUI:' BRAPH2.WRONG_INPUT], ...
-					['BRAPH2' ':GUI:' BRAPH2.WRONG_INPUT '\n' ...
+					['BRAPH2' ':GUI:' 'WrongInput'], ...
+					['BRAPH2' ':GUI:' 'WrongInput' '\n' ...
 					'The value ' tag ' is not a valid tag for GUI.'] ...
 					)
 			end
@@ -668,47 +668,47 @@ classdef GUI < ConcreteElement
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 9 % GUI.WAITBAR
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 10 % GUI.DRAW
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 11 % GUI.DRAWN
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 12 % GUI.TITLE
-					prop_settings = Format.getFormatSettings(Format.STRING);
+					prop_settings = Format.getFormatSettings(2);
 				case 13 % GUI.POSITION
-					prop_settings = Format.getFormatSettings(Format.RVECTOR);
+					prop_settings = Format.getFormatSettings(12);
 				case 14 % GUI.BKGCOLOR
-					prop_settings = Format.getFormatSettings(Format.COLOR);
+					prop_settings = Format.getFormatSettings(20);
 				case 15 % GUI.H_MENUBAR
-					prop_settings = Format.getFormatSettings(Format.HANDLELIST);
+					prop_settings = Format.getFormatSettings(19);
 				case 16 % GUI.MENUBAR
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 17 % GUI.H_MENU_ABOUT
-					prop_settings = Format.getFormatSettings(Format.HANDLE);
+					prop_settings = Format.getFormatSettings(18);
 				case 18 % GUI.MENU_ABOUT
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 19 % GUI.H_TOOLBAR
-					prop_settings = Format.getFormatSettings(Format.HANDLE);
+					prop_settings = Format.getFormatSettings(18);
 				case 20 % GUI.H_TOOLS
-					prop_settings = Format.getFormatSettings(Format.HANDLELIST);
+					prop_settings = Format.getFormatSettings(19);
 				case 21 % GUI.TOOLBAR
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 22 % GUI.TOOL_ABOUT
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 23 % GUI.CLOSEREQ
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 24 % GUI.H
-					prop_settings = Format.getFormatSettings(Format.HANDLE);
+					prop_settings = Format.getFormatSettings(18);
 				case 25 % GUI.RESIZE
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 26 % GUI.SHOW
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 27 % GUI.HIDE
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 28 % GUI.DELETE
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 29 % GUI.CLOSE
-					prop_settings = Format.getFormatSettings(Format.LOGICAL);
+					prop_settings = Format.getFormatSettings(4);
 				case 4 % GUI.TEMPLATE
 					prop_settings = 'GUI';
 				otherwise
@@ -739,29 +739,29 @@ classdef GUI < ConcreteElement
 			
 			switch prop %CET: Computational Efficiency Trick
 				case 9 % GUI.WAITBAR
-					prop_default = Format.getFormatDefault(Format.LOGICAL, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(4, GUI.getPropSettings(prop));
 				case 10 % GUI.DRAW
-					prop_default = Format.getFormatDefault(Format.LOGICAL, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(4, GUI.getPropSettings(prop));
 				case 11 % GUI.DRAWN
-					prop_default = Format.getFormatDefault(Format.LOGICAL, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(4, GUI.getPropSettings(prop));
 				case 12 % GUI.TITLE
 					prop_default = 'BRAPH2';
 				case 13 % GUI.POSITION
 					prop_default = [.00 .00 (PanelElement.getPropDefault('MIN_WIDTH')+20)/w(0, 'pixels') 1.00];
 				case 14 % GUI.BKGCOLOR
-					prop_default = BRAPH2.COL_BKG;
+					prop_default = [1 0.9725 0.929];
 				case 15 % GUI.H_MENUBAR
-					prop_default = Format.getFormatDefault(Format.HANDLELIST, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(19, GUI.getPropSettings(prop));
 				case 16 % GUI.MENUBAR
 					prop_default = false;
 				case 17 % GUI.H_MENU_ABOUT
-					prop_default = Format.getFormatDefault(Format.HANDLE, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(18, GUI.getPropSettings(prop));
 				case 18 % GUI.MENU_ABOUT
 					prop_default = false;
 				case 19 % GUI.H_TOOLBAR
-					prop_default = Format.getFormatDefault(Format.HANDLE, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(18, GUI.getPropSettings(prop));
 				case 20 % GUI.H_TOOLS
-					prop_default = Format.getFormatDefault(Format.HANDLELIST, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(19, GUI.getPropSettings(prop));
 				case 21 % GUI.TOOLBAR
 					prop_default = false;
 				case 22 % GUI.TOOL_ABOUT
@@ -769,17 +769,17 @@ classdef GUI < ConcreteElement
 				case 23 % GUI.CLOSEREQ
 					prop_default = true;
 				case 24 % GUI.H
-					prop_default = Format.getFormatDefault(Format.HANDLE, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(18, GUI.getPropSettings(prop));
 				case 25 % GUI.RESIZE
-					prop_default = Format.getFormatDefault(Format.LOGICAL, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(4, GUI.getPropSettings(prop));
 				case 26 % GUI.SHOW
-					prop_default = Format.getFormatDefault(Format.LOGICAL, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(4, GUI.getPropSettings(prop));
 				case 27 % GUI.HIDE
-					prop_default = Format.getFormatDefault(Format.LOGICAL, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(4, GUI.getPropSettings(prop));
 				case 28 % GUI.DELETE
-					prop_default = Format.getFormatDefault(Format.LOGICAL, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(4, GUI.getPropSettings(prop));
 				case 29 % GUI.CLOSE
-					prop_default = Format.getFormatDefault(Format.LOGICAL, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(4, GUI.getPropSettings(prop));
 				case 1 % GUI.ELCLASS
 					prop_default = 'GUI';
 				case 2 % GUI.NAME
@@ -787,7 +787,7 @@ classdef GUI < ConcreteElement
 				case 3 % GUI.DESCRIPTION
 					prop_default = 'A GUI renders a figure with its basic functionalities.';
 				case 4 % GUI.TEMPLATE
-					prop_default = Format.getFormatDefault(Format.ITEM, GUI.getPropSettings(prop));
+					prop_default = Format.getFormatDefault(8, GUI.getPropSettings(prop));
 				case 5 % GUI.ID
 					prop_default = 'GUI ID';
 				case 6 % GUI.LABEL
@@ -839,15 +839,15 @@ classdef GUI < ConcreteElement
 			% 
 			% GUI.CHECKPROP(POINTER, VALUE) throws an error if VALUE is
 			%  NOT an acceptable value for the format of the property POINTER.
-			%  Error id: BRAPH2:GUI:€BRAPH2.WRONG_INPUT€
+			%  Error id: BRAPH2:GUI:WrongInput
 			% 
 			% Alternative forms to call this method are (POINTER = PROP or TAG):
 			%  GUI.CHECKPROP(POINTER, VALUE) throws error if VALUE has not a valid format for PROP of GUI.
-			%   Error id: BRAPH2:GUI:€BRAPH2.WRONG_INPUT€
+			%   Error id: BRAPH2:GUI:WrongInput
 			%  Element.CHECKPROP(GUI, PROP, VALUE) throws error if VALUE has not a valid format for PROP of GUI.
-			%   Error id: BRAPH2:GUI:€BRAPH2.WRONG_INPUT€
+			%   Error id: BRAPH2:GUI:WrongInput
 			%  GUI.CHECKPROP(GUI, PROP, VALUE) throws error if VALUE has not a valid format for PROP of GUI.
-			%   Error id: BRAPH2:GUI:€BRAPH2.WRONG_INPUT€]
+			%   Error id: BRAPH2:GUI:WrongInput]
 			% 
 			% Note that the Element.CHECKPROP(GUI) and Element.CHECKPROP('GUI')
 			%  are less computationally efficient.
@@ -859,52 +859,52 @@ classdef GUI < ConcreteElement
 			
 			switch prop
 				case 9 % GUI.WAITBAR
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 10 % GUI.DRAW
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 11 % GUI.DRAWN
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 12 % GUI.TITLE
-					check = Format.checkFormat(Format.STRING, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(2, value, GUI.getPropSettings(prop));
 				case 13 % GUI.POSITION
-					check = Format.checkFormat(Format.RVECTOR, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(12, value, GUI.getPropSettings(prop));
 					if check
 						check = (length(value) == 4) && all(value(3:4) >= 0);
 					end
 				case 14 % GUI.BKGCOLOR
-					check = Format.checkFormat(Format.COLOR, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(20, value, GUI.getPropSettings(prop));
 				case 15 % GUI.H_MENUBAR
-					check = Format.checkFormat(Format.HANDLELIST, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(19, value, GUI.getPropSettings(prop));
 				case 16 % GUI.MENUBAR
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 17 % GUI.H_MENU_ABOUT
-					check = Format.checkFormat(Format.HANDLE, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(18, value, GUI.getPropSettings(prop));
 				case 18 % GUI.MENU_ABOUT
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 19 % GUI.H_TOOLBAR
-					check = Format.checkFormat(Format.HANDLE, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(18, value, GUI.getPropSettings(prop));
 				case 20 % GUI.H_TOOLS
-					check = Format.checkFormat(Format.HANDLELIST, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(19, value, GUI.getPropSettings(prop));
 				case 21 % GUI.TOOLBAR
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 22 % GUI.TOOL_ABOUT
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 23 % GUI.CLOSEREQ
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 24 % GUI.H
-					check = Format.checkFormat(Format.HANDLE, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(18, value, GUI.getPropSettings(prop));
 				case 25 % GUI.RESIZE
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 26 % GUI.SHOW
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 27 % GUI.HIDE
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 28 % GUI.DELETE
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 29 % GUI.CLOSE
-					check = Format.checkFormat(Format.LOGICAL, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(4, value, GUI.getPropSettings(prop));
 				case 4 % GUI.TEMPLATE
-					check = Format.checkFormat(Format.ITEM, value, GUI.getPropSettings(prop));
+					check = Format.checkFormat(8, value, GUI.getPropSettings(prop));
 				otherwise
 					if prop <= 8
 						check = checkProp@ConcreteElement(prop, value);
@@ -915,8 +915,8 @@ classdef GUI < ConcreteElement
 				prop_check = check;
 			elseif ~check
 				error( ...
-					['BRAPH2' ':GUI:' BRAPH2.WRONG_INPUT], ...
-					['BRAPH2' ':GUI:' BRAPH2.WRONG_INPUT '\n' ...
+					['BRAPH2' ':GUI:' 'WrongInput'], ...
+					['BRAPH2' ':GUI:' 'WrongInput' '\n' ...
 					'The value ' tostring(value, 100, ' ...') ' is not a valid property ' GUI.getPropTag(prop) ' (' GUI.getFormatTag(GUI.getPropFormat(prop)) ').'] ...
 					)
 			end
@@ -963,13 +963,13 @@ classdef GUI < ConcreteElement
 			%CALCULATEVALUE calculates the value of a property.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP) calculates the value of the property
-			%  PROP. It works only with properties with Category.RESULT,
-			%  Category.QUERY, and Category.EVANESCENT. By default this function
+			%  PROP. It works only with properties with 5,
+			%  6, and 7. By default this function
 			%  returns the default value for the prop and should be implemented in the
 			%  subclasses of Element when needed.
 			%
 			% VALUE = CALCULATEVALUE(EL, PROP, VARARGIN) works with properties with
-			%  Category.QUERY.
+			%  6.
 			%
 			% See also getPropDefaultConditioned, conditioning, preset, checkProp,
 			%  postset, postprocessing, checkValue.
@@ -1069,8 +1069,8 @@ classdef GUI < ConcreteElement
 					    tool_about_bluesky = uipushtool(toolbar, ...
 					        'Tag', 'BRAPH2.Bluesky', ...                
 					        'Separator', 'off', ...
-					        'Tooltip', 'Link to the BRAPH 2.0 Bluesky', ...
-					        'CData', imread('icon_twitter.png'), ...
+					        'Tooltip', 'Link to the BRAPH 2 Bluesky', ...
+					        'CData', imread('icon_bluesky.png'), ...
 					        'ClickedCallback', 'BRAPH2.bluesky()');
 					
 					    tool_spacer_2 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
