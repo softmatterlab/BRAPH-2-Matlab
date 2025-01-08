@@ -92,9 +92,23 @@ BRAPH-2 provides an intuitive GUI to perform analyses with minimal or no coding.
 
 `braph2`
 
-- The main BRAPH-2 window will pop up, displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.).
+- The main BRAPH-2 window will pop up (Figure 1), displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.). User tutorials for the selected pipeline are accessible via the context menu (Figure 2).
 
 
+
+
+
+<img src="fig01.png" alt="BRAPH 2 main GUI">
+
+> **Figure 1. BRAPH 2 main GUI**
+> The BRAPH 2 main GUI displaying a range of pipeline categories, with _Pipeline Comparison Connectivity BUT_ selected. You can access the user tutorial for the selected pipeline directly via the context menu by right-clicking on the pipeline and selecting either _Web Tutorial_ or _PDF Tutorial_.
+
+
+
+<img src="fig02.png" alt="User tutorial for the pipeline">
+
+> **Figure 2. User tutorial for the pipeline**
+> BRAPH 2 user tutorials accessible either via a browser for its ReadMe version or through a PDF reader for its PDF version. Tutorials for the selected pipeline can be directly accessed from the context menu.
 
 <a id="Pipeline-Steps"></a>
 ### Pipeline Steps  [⬆](#Table-of-Contents)
@@ -124,7 +138,7 @@ Each pipeline consists of a series of sequential steps to guide your analysis. F
 
 - **Run the Connectivity Pipeline**:
 
-In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., \textit{Pipeline Comparison Connectivity WU}).
+In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., _Pipeline Comparison Connectivity BUT_, shown in Figure 3).
 
 - **Load Atlas**:
 
@@ -142,6 +156,12 @@ Select graph measures (e.g., degree, clustering).
 
 Click `Analyze` to compute measure values per subject and per group.
 
+
+
+<img src="fig03.png" alt="Single-layer connectivity analysis">
+
+> **Figure 3. Single-layer connectivity analysis**
+> The _Pipeline Comparison Connectivity BUT_ displaying a series of sequential steps for the analysis. You can access the user tutorial for this pipeline directly via the context menu by right-clicking on the pipeline and selecting either _Web Tutorial_ or _PDF Tutorial_.
 
 - **Group Comparison**:
 
@@ -164,12 +184,12 @@ Save the pipeline (`*.b2`), results, and figures for reproducibility.
 BRAPH-2 also offers:
 
 
-- **Multilayer Graph Analysis**: Combine multiple modalities (e.g., structural and functional) into a \textit{multiplex} or \textit{multilayer} graph.
+- **Multilayer Graph Analysis**: Combine multiple modalities (e.g., structural and functional) into a _multiplex_ or _multilayer_ graph.
 
 - **Deep Learning Classification/Regression Pipelines**: Use adjacency matrices or graph measures as input to train neural networks and perform classification (e.g., patient vs. control) or regression (e.g., predict age).
 
 
-These pipelines follow similar steps but involve constructing a \textit{supra-adjacency} matrix (multilayer) or generating input features for neural networks.
+These pipelines follow similar steps but involve constructing a _supra-adjacency_ matrix (multilayer) or generating input features for neural networks.
 
 <a id="Automating-Analyses-with-Scripts"></a>
 ## Automating Analyses with Scripts  [⬆](#Table-of-Contents)
@@ -261,8 +281,8 @@ Extend BRAPH-2 with original graph-theoretical metrics (e.g., community detectio
 
 Deep learning tutorials:
 
-**Implement a New Neural Network Classifier** [https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_classifier](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_classifier):
+**Implement a New Neural Network Classifier** [https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_nn_clas](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_nn_clas):
 Build custom classification architectures, integrating them directly into the BRAPH-2 pipelines.
 
-**Implement a New Neural Network Regressor** [https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_regressor](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_regressor):  
+**Implement a New Neural Network Regressor** [https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/developers/dev_nn_reg](https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/developers/dev_nn_reg):  
 Add regression pipelines for tasks such as age prediction or continuous clinical measures.

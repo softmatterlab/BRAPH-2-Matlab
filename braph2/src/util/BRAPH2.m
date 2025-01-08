@@ -12,7 +12,7 @@ classdef BRAPH2
     %  COPYRIGHT        - BRAPH2 copyright
     %  WEB              - BRAPH2 website
     %  GITHUB           - BRAPH2 GitHub repository
-    %  TWITTER          - BRAPH2 twitter handle
+    %  BLUESKY          - BRAPH2 bluesky handle
     %  MATLAB_VERSION   - Minimal MatLab version (9.12)
     %  MATLAB_RELEASE   - Minimal MatLab release (2022a)
     %
@@ -59,7 +59,7 @@ classdef BRAPH2
     %  license          - provides information about the license of BRAPH2
     %  web              - opens the BRAPH2 website
     %  forum            - opens the BRAPH2 forum
-    %  twitter          - opens the BRAPH2 Twitter
+    %  bluesky          - opens the BRAPH2 Bluesky
     %  add_menu_about   - adds the about menu to a uifigure
     %  add_tool_about   - adds the about tools to a uitoolbar
     %
@@ -77,7 +77,7 @@ classdef BRAPH2
         COPYRIGHT = ['Copyright 2014-' datestr(now,'yyyy')]
         WEB = 'braph.org' % BRAPH2 website
         GITHUB = 'github.com/braph-software/BRAPH-2' % GitHub repository
-        TWITTER = 'braph2software' % BRAPH2 twitter handle
+        BLUESKY = 'braph2software.bsky.social' % BRAPH2 Bluesky handle
         MATLAB_VERSION = '9.12' % Minimal MatLab version (9.12)
         MATLAB_RELEASE = '(2022a)' % Minimal MatLab release (2022a)
     end
@@ -171,7 +171,7 @@ classdef BRAPH2
         function web()
             %WEB opens the BRAPH2 website.
             %
-            % See also forum, twitter.
+            % See also forum, bluesky.
             
             url = ['http://' BRAPH2.WEB];
             web(url);
@@ -179,17 +179,17 @@ classdef BRAPH2
         function forum()
             %FORUM opens the BRAPH2 forums.
             %
-            % See also web, twitter.
+            % See also web, bluesky.
             
             url = ['http://' BRAPH2.WEB '/forums/'];
             web(url);
         end
-        function twitter()
-            %TWITTER opens the BRAPH2 Twitter Feed.
+        function bluesky()
+            %BLUESKY opens the BRAPH2 Bluesky Feed.
             %
             % See also web, forum.
             
-            url = ['https://twitter.com/' BRAPH2.TWITTER];
+            url = ['https://bsky.app/profile/' BRAPH2.BLUESKY];
             web(url);
         end
     end
