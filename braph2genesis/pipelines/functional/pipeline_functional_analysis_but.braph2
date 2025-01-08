@@ -7,7 +7,7 @@
 % 3. It analyzes these data using a functional analysis (FUN) based on a binary undirected graph at fixed thresholds (BUT).
 
 % PDF: 
-% README: 
+% README: /tutorials/pipelines/tut_a_fun_but/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas
