@@ -8,8 +8,8 @@
 % 4. It analyzes the second group using the same parameters selected for the first group.
 % 5. It compares the results of the two analyses.
 
-% PDF:
-% README: /tutorials/pipelines/tut_a_mp_st_but/readme.md
+% PDF: /tutorials/pipelines/tut_a_mp_st_bud/tut_a_mp_st_bud.pdf
+% README: /tutorials/pipelines/tut_a_mp_st_bud/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
