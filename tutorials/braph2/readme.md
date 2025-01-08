@@ -124,7 +124,7 @@ Each pipeline consists of a series of sequential steps to guide your analysis. F
 
 - **Run the Connectivity Pipeline**:
 
-In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., \textit{Pipeline Comparison Connectivity WU}).
+In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., _Pipeline Comparison Connectivity WU_).
 
 - **Load Atlas**:
 
@@ -164,12 +164,12 @@ Save the pipeline (`*.b2`), results, and figures for reproducibility.
 BRAPH-2 also offers:
 
 
-- **Multilayer Graph Analysis**: Combine multiple modalities (e.g., structural and functional) into a \textit{multiplex} or \textit{multilayer} graph.
+- **Multilayer Graph Analysis**: Combine multiple modalities (e.g., structural and functional) into a _multiplex_ or _multilayer_ graph.
 
 - **Deep Learning Classification/Regression Pipelines**: Use adjacency matrices or graph measures as input to train neural networks and perform classification (e.g., patient vs. control) or regression (e.g., predict age).
 
 
-These pipelines follow similar steps but involve constructing a \textit{supra-adjacency} matrix (multilayer) or generating input features for neural networks.
+These pipelines follow similar steps but involve constructing a _supra-adjacency_ matrix (multilayer) or generating input features for neural networks.
 
 <a id="Automating-Analyses-with-Scripts"></a>
 ## Automating Analyses with Scripts  [⬆](#Table-of-Contents)
