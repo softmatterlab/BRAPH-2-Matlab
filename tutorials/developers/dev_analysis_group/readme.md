@@ -1,6 +1,6 @@
-# Implement a new Group Analysis
+# Implement a New Group Analysis
 
-[![Tutorial Implement a new Group Analysis](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](dev_analysis_group.pdf)
+[![Tutorial Implement a New Group Analysis](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](dev_analysis_group.pdf)
 
 This is the developer tutorial for implementing a new group analysis. 
 In this tutorial, you will learn how to create a "*.gen.m" for a new group analysis, which can then be compiled by `braph2genesis`.
