@@ -9,7 +9,7 @@
 % 5. It compares the results of the two analyses.
 
 % PDF: 
-% README: 
+% README: /tutorials/pipelines/tut_a_con_bud/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas

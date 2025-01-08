@@ -7,7 +7,7 @@
 % 3. It analyzes these data using a connectivity analysis (CON) based on a weighted undirected graph (WU).
 
 % PDF: 
-% README: 
+% README: /tutorials/pipelines/tut_a_con_wu/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas

@@ -7,7 +7,7 @@
 % 3. It executes the cross-validation process.
 
 % PDF: 
-% README: 
+% README: /tutorials/pipelines/tut_nn_reg_st/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas

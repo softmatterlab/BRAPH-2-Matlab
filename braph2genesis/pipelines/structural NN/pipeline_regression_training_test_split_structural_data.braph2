@@ -8,7 +8,7 @@
 % 4. It trains the regressor using the training dataset.
 % 5. It evaluates the performance of the trained regressor using both the training dataset and test dataset.
 
-% PDF: /tutorials/pipelines/tut_nn_reg_st/tut_nn_reg_st.pdf
+% PDF:
 % README: /tutorials/pipelines/tut_nn_reg_st/readme.md
 
 %% Brain Atlas
