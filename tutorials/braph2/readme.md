@@ -281,8 +281,8 @@ Extend BRAPH-2 with original graph-theoretical metrics (e.g., community detectio
 
 Deep learning tutorials:
 
-**Implement a New Neural Network Classifier** [https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_classifier](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_classifier):
+**Implement a New Neural Network Classifier** [https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_nn_clas](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_nn_clas):
 Build custom classification architectures, integrating them directly into the BRAPH-2 pipelines.
 
-**Implement a New Neural Network Regressor** [https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_regressor](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_neural_networks/dev_nn_regressor):  
+**Implement a New Neural Network Regressor** [https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/developers/dev_nn_reg](https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/developers/dev_nn_reg):  
 Add regression pipelines for tasks such as age prediction or continuous clinical measures.
