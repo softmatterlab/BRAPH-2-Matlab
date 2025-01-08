@@ -92,9 +92,30 @@ BRAPH-2 provides an intuitive GUI to perform analyses with minimal or no coding.
 
 `braph2`
 
-- The main BRAPH-2 window will pop up, displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.).
+- The main BRAPH-2 window will pop up (\Figref{fig:01}), displaying different pipeline categories (e.g., structural, functional, connectivity, deep learning, etc.).
 
 
+
+\fig{figure}
+{fig:01}
+{
+	\includegraphics{fig01.png}
+}
+{BRAPH 2 main GUI}
+{
+	The BRAPH 2 main GUI displaying a range of pipeline categories, with _Pipeline Comparison Connectivity BUT_ selected. You can access the user tutorial for the selected pipeline directly via the context menu by right-clicking on the pipeline and selecting either _Web Tutorial_ or _PDF Tutorial_, as shown in \Figref{fig:02}.
+}
+
+\fig{marginfigure}
+{fig:02}
+{
+	\includegraphics{fig02a.png}
+	\includegraphics{fig02b.png}
+}
+{User tutorial for the pipeline}
+{
+	BRAPH 2 user tutorials accessible either via a browser for its ReadMe version or through a PDF reader for its PDF version. Tutorials for the selected pipeline can be directly accessed from the context menu, as shown in \Figref{fig:01} and \Figref{fig:02}.
+}
 
 <a id="Pipeline-Steps"></a>
 ### Pipeline Steps  [⬆](#Table-of-Contents)
@@ -124,7 +145,7 @@ Each pipeline consists of a series of sequential steps to guide your analysis. F
 
 - **Run the Connectivity Pipeline**:
 
-In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., _Pipeline Comparison Connectivity WU_).
+In the BRAPH-2 main window, pick a pipeline under the "Connectivity" tab (e.g., _Pipeline Comparison Connectivity BUT_, shown in \Figref{fig:03}).
 
 - **Load Atlas**:
 
@@ -141,6 +162,16 @@ Import each group of subjects (e.g., controls, patients). Each subject should ha
 Select graph measures (e.g., degree, clustering).
 
 Click `Analyze` to compute measure values per subject and per group.
+
+\fig{marginfigure}
+{fig:03}
+{
+	\includegraphics{fig03.png}
+}
+{Single-layer connectivity analysis}
+{
+	The _Pipeline Comparison Connectivity BUT_ displaying a series of sequential steps for the analysis. You can access the user tutorial for this pipeline directly via the context menu by right-clicking on the pipeline and selecting either _Web Tutorial_ or _PDF Tutorial_, as shown in \Figref{fig:02}.
+}
 
 
 - **Group Comparison**:
