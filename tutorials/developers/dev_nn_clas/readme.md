@@ -1,6 +1,6 @@
-# Implement a new Neural Network Classifier
+# Implement a New Neural Network Classifier
 
-[![Tutorial Implement a new Neural Network Classifier](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](dev_nn_clas.pdf)
+[![Tutorial Implement a New Neural Network Classifier](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](dev_nn_clas.pdf)
 
 This is the developer tutorial for implementing a new neural network classifier. 
 In this tutorial, you will learn how to create the generator file "*.gen.m" for a new neural network classifier, which can then be compiled by `braph2genesis`. All kinds of neural network models are (direct or indirect) extensions of the base element `NNBase`. Here, you will use as example the neural network classifier `NNClassifierMLP` (multi-layer perceptron classifier).
