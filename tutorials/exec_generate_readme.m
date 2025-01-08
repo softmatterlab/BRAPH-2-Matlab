@@ -16,6 +16,7 @@ generate_readme(['pipelines' filesep 'tut_a_fun_bud' filesep 'tut_a_fun_bud.tex'
 generate_readme(['pipelines' filesep 'tut_a_st_wu' filesep 'tut_a_st_wu.tex'])
 generate_readme(['pipelines' filesep 'tut_a_st_bud' filesep 'tut_a_st_bud.tex'])
 generate_readme(['pipelines' filesep 'tut_a_mp_con_fun_wu' filesep 'tut_a_mp_con_fun_wu.tex'])
+generate_readme(['pipelines' filesep 'tut_a_mp_st_bud' filesep 'tut_a_mp_st_bud.tex'])
 % generate_readme(['pipelines' filesep 'tut_nn_reg_st' filesep 'tut_nn_reg_st.tex'])
 generate_readme(['pipelines' filesep 'tut_nn_clas_con_bud_g' filesep 'tut_nn_clas_con_bud_g.tex'])
 % generate_readme(['pipelines' filesep 'tut_nn_clas_con_wu' filesep 'tut_nn_clas_con_wu.tex'])
