@@ -1,6 +1,6 @@
 # Pipeline for Neural Network Classification of Connectivity Data using Binary Undirected Graphs at Fixed Densities
 
-[![Tutorial Pipeline for Neural Network Classification of Connectivity Data using Binary Undirected Graphs at Fixed Densities](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_nn_clas_con_bud_g.pdf)
+[![Tutorial Pipeline for Neural Network Classification of Connectivity Data using Binary Undirected Graphs at Fixed Densities](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_nn_clas_con_bud_xval.pdf)
 
 This tutorial shows how to perform a neural network analysis using *connectivity data* (see tutorial [Group of Subjects with Connectivity Data for NN Classification](https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_con_nn/tut_gr_con_nn.pdf)), where one connectivity matrix per subject is available, as in diffusion weighted imaging or pre-calculated matrices obtained from functional MRI, MEG, or EEG. Step by step, this pipeline leads you to classify the data from two groups of subjects at fixed thresholds, which correspond, for example, to fixed levels of white matter integrity or of correlation between activation signals of pairs of brain areas.  With this tutorial, you will be able to differentiate subjects with neural network classification techniques. You will also be able to generate publication-quality figures.
 
