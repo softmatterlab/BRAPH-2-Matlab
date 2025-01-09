@@ -1,3 +1,5 @@
-# BRAPH 2 — Pipeline for Comparison of Connectivity Data using Binary Undirected Graphs at Fixed Density
+# Pipeline Connectivity Comparison BUD
 
-This tutorial is not ready yet. You can find a similar one in [Connectivity BUT](../tut_a_con_but).
+[![Tutorial Pipeline Connectivity Comparison BUD](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_a_con_bud.pdf)
+
+This tutorial is not ready. You can find a similar one here: [https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/pipelines/tut_a_con_but/tut_a_con_but.pdf](https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/pipelines/tut_a_con_but/tut_a_con_but.pdf).
