@@ -6,7 +6,7 @@
 % 2. It loads the data of one group of subjects from two directories (e.g., CON_Group_1 and CON_Group_2) containing XLS files of each subject.
 % 3. It analyzes these data using a connectivity analysis (CON) based on binary undirected graphs at fixed densities (BUD).
 
-% PDF: 
+% PDF: /tutorials/pipelines/tut_a_con_bud/tut_a_con_bud.pdf
 % README: /tutorials/pipelines/tut_a_con_bud/readme.md
 
 %% Brain Atlas
