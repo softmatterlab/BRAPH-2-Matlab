@@ -47,7 +47,7 @@ generate_readme(['pipelines' filesep 'tut_nn_clas_con_bud_xval' filesep 'tut_nn_
 generate_readme(['pipelines' filesep 'tut_nn_clas_con_but_m_xval' filesep 'tut_nn_clas_con_but_m_xval.tex'])
 generate_readme(['pipelines' filesep 'tut_nn_clas_con_data_split' filesep 'tut_nn_clas_con_data_split.tex'])
 generate_readme(['pipelines' filesep 'tut_nn_clas_con_wu_xval' filesep 'tut_nn_clas_con_wu_xval.tex'])
-generate_readme(['pipelines' filesep 'tut_nn_reg_con_but_m_xval' filesep 'tut_nn_reg_con_but_m_xval.tex'])
+generate_readme(['pipelines' filesep 'tut_nn_reg_con_wu_m_xval' filesep 'tut_nn_reg_con_wu_m_xval.tex'])
 generate_readme(['pipelines' filesep 'tut_nn_reg_con_but_xval' filesep 'tut_nn_reg_con_but_xval.tex'])
 generate_readme(['pipelines' filesep 'tut_nn_reg_con_data_split' filesep 'tut_nn_reg_con_data_split.tex'])
 
