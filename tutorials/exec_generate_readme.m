@@ -12,6 +12,7 @@ generate_readme(['data' filesep 'tut_gr_st_mp' filesep 'tut_gr_st_mp.tex'])
 %generate_readme(['data' filesep 'tut_gr_con_fun_mp' filesep 'tut_gr_con_fun_mp.tex'])
 
 generate_readme(['pipelines' filesep 'tut_a_con_but' filesep 'tut_a_con_but.tex'])
+generate_readme(['pipelines' filesep 'tut_a_con_wd' filesep 'tut_a_con_wd.tex'])
 generate_readme(['pipelines' filesep 'tut_a_fun_bud' filesep 'tut_a_fun_bud.tex'])
 generate_readme(['pipelines' filesep 'tut_a_st_wu' filesep 'tut_a_st_wu.tex'])
 generate_readme(['pipelines' filesep 'tut_a_st_bud' filesep 'tut_a_st_bud.tex'])

@@ -29,6 +29,9 @@ You will adapt in `Pipeline Structural Multiplex Comparison BUD` in the file "pi
 > % 4. It analyzes the second group using the same parameters selected for the first group.
 > % 5. It compares the results of the two analyses.
 > 
+> % PDF: /tutorials/pipelines/tut_a_mp_st_bud/tut_a_mp_st_bud.pdf
+> % README: /tutorials/pipelines/tut_a_mp_st_bud/readme.md
+> 
 > %% Brain Atlas
 > ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA');  ③
 > 
