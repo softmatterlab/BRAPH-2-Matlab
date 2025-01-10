@@ -1,10 +1,10 @@
-%% Pipeline Regression Cross-Validation Functional BUT
+%% Pipeline Regression Cross-Validation Functional BUD
 
-% This is the pipeline script to execute cross-validation with multi-layer perceptron regressor using the adjacency matrix with binary undirected graph at fix thresholds obtained from functional data.
+% This is the pipeline script to execute cross-validation with multi-layer perceptron regressor using the adjacency matrix with binary undirected graph at fix densities obtained from functional data.
 % The functional data can be derived from imaging modalities like functional MRI (fMRI), electroencephalography (EEG) or magnetoencephalography (MEG).
 % 1. It loads a brain atlas from an XLS file (e.g., desikan_atlas.xlsx).
 % 2. It loads data for a group of subjects from the directory (e.g., FUN_Group_XLS) FUNtaining XLS files for each subject.
-% 3. It analyzes the group using functional analyses (FUN) binary undirected graphs at fixed densities (BUT).
+% 3. It analyzes the group using functional analyses (FUN) binary undirected graphs at fixed densities (BUD).
 % 4. It executes the cross-validation process.
 
 % PDF: /tutorials/pipelines/tut_nn_reg_fun_bud_xval/tut_nn_reg_fun_bud_xval.pdf
