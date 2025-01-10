@@ -9,8 +9,8 @@
 % 3. It analyzes these groups using connectivity-functional analyses (CON-FUN) based on weighted undirected multiplex (MultiplexWU).
 % 4. It executes the cross-validation process.
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_nn_clas_con_fun_mp_wu_xval/tut_nn_clas_con_fun_mp_wu_xval.pdf
+% README: /tutorials/pipelines/tut_nn_clas_con_fun_mp_wu_xval/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
