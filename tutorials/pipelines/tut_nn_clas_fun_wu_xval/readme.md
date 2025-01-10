@@ -1,3 +1,5 @@
-# BRAPH 2.0 — Pipeline Neural Networks Classification Cross Validation Functional WU
+# Pipeline Neural Networks Classification Cross Validation Functional WU
 
-This Page is not ready. You can find a similar one in [Neural Network Classification Connectivity BUD Graphs](../tut_nn_clas_con_bud_g).
+[![Tutorial Pipeline Neural Networks Classification Cross Validation Functional WU](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_nn_clas_fun_wu_xval.pdf)
+
+This tutorial is not ready.
