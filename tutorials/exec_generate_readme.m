@@ -23,6 +23,8 @@ generate_readme(['pipelines' filesep 'tut_a_mp_con_fun_wu' filesep 'tut_a_mp_con
 generate_readme(['pipelines' filesep 'tut_a_mp_con_fun_bud' filesep 'tut_a_mp_con_fun_bud.tex'])
 generate_readme(['pipelines' filesep 'tut_a_mp_con_fun_but' filesep 'tut_a_mp_con_fun_but.tex'])
 generate_readme(['pipelines' filesep 'tut_a_mp_con_wu' filesep 'tut_a_mp_con_wu.tex'])
+generate_readme(['pipelines' filesep 'tut_a_omp_con_wu' filesep 'tut_a_omp_con_wu.tex'])
+generate_readme(['pipelines' filesep 'tut_a_omp_ga_con_wu' filesep 'tut_a_omp_ga_con_wu.tex'])
 generate_readme(['pipelines' filesep 'tut_a_mp_con_bud' filesep 'tut_a_mp_con_bud.tex'])
 generate_readme(['pipelines' filesep 'tut_a_mp_con_but' filesep 'tut_a_mp_con_but.tex'])
 generate_readme(['pipelines' filesep 'tut_a_mp_ga_con_wu' filesep 'tut_a_mp_ga_con_wu.tex'])
