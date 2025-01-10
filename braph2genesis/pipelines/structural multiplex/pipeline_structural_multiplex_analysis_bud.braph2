@@ -6,7 +6,7 @@
 % 2. It loads the data of a group of subjects from a directory containing XLS files (e.g., ST_MP_Group_1_XLS.xlsx and ST_MP_Group_2_XLS.xlsx).
 % 3. It analyzes the data using structural multiplex analysis (ST_MP) based on a binary undirected graph using densities.
 
-% PDF: 
+% PDF: /tutorials/pipelines/tut_a_mp_st_bud/tut_a_mp_st_bud.pdf
 % README: /tutorials/pipelines/tut_a_mp_st_bud/readme.md
 
 %% Brain Atlas
