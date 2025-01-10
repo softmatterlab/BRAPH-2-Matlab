@@ -15,6 +15,7 @@ generate_readme(['pipelines' filesep 'tut_a_con_but' filesep 'tut_a_con_but.tex'
 generate_readme(['pipelines' filesep 'tut_a_con_bud' filesep 'tut_a_con_bud.tex'])
 generate_readme(['pipelines' filesep 'tut_a_con_wu' filesep 'tut_a_con_wu.tex'])
 generate_readme(['pipelines' filesep 'tut_a_con_ga_wu' filesep 'tut_a_con_ga_wu.tex'])
+generate_readme(['pipelines' filesep 'tut_a_fun_ga_wu' filesep 'tut_a_fun_ga_wu.tex'])
 generate_readme(['pipelines' filesep 'tut_a_con_wd' filesep 'tut_a_con_wd.tex'])
 generate_readme(['pipelines' filesep 'tut_a_fun_bud' filesep 'tut_a_fun_bud.tex'])
 generate_readme(['pipelines' filesep 'tut_a_fun_but' filesep 'tut_a_fun_but.tex'])
