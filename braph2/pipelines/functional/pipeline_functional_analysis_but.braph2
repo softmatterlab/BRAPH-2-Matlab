@@ -6,8 +6,8 @@
 % 2. It loads the data of one group of subjects from two directories (e.g., FUN_Group_1 and FUN_Group_2) containing XLS files of each subject.
 % 3. It analyzes these data using a functional analysis (FUN) based on a binary undirected graph at fixed thresholds (BUT).
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_a_fun_but/tut_a_fun_but.pdf
+% README: /tutorials/pipelines/tut_a_fun_but/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas

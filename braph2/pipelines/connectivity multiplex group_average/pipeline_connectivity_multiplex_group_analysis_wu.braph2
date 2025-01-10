@@ -5,8 +5,8 @@
 % 2. It loads the connectivity data of one group of subjects from two directories (e.g., GroupName1 and GroupName2) containing XLS files of each subject.
 % 3. It analyzes the data using connectivity multiplex analysis (CON_MP) based on weighted undirected graphs (WU) averaged by group (GA).
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_a_mp_ga_con_wu/tut_a_mp_ga_con_wu.pdf
+% README: /tutorials/pipelines/tut_a_mp_ga_con_wu/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas XLS % Brain Atlas

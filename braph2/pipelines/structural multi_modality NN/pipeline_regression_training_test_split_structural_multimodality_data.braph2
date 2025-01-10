@@ -8,8 +8,8 @@
 % 4. It trains the regressor using the training dataset.
 % 5. It evaluates the performance of the trained regressor using both the training dataset and test dataset.
 
-% PDF: 
-% README:
+% PDF: /tutorials/pipelines/tut_nn_reg_st_mm_data_split/tut_nn_reg_st_mm_data_split.pdf
+% README: /tutorials/pipelines/tut_nn_reg_st_mm_data_split/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas

@@ -10,8 +10,8 @@
 % 4. It trains the classifier using the training dataset.
 % 5. It evaluates the performance of the trained classifier using both the training and test dataset.
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_nn_clas_con_fun_mp_data_xval/tut_nn_clas_con_fun_mp_data_xval.pdf
+% README: /tutorials/pipelines/tut_nn_clas_con_fun_mp_data_xval/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas

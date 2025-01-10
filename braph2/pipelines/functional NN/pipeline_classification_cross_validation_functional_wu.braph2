@@ -7,8 +7,8 @@
 % 3. It analyzes these groups using functional analyses (FUN) based on weighted undirected graphs (WU).
 % 4. It executes the cross-validation process.
 
-% PDF: /tutorials/pipelines/tut_nn_clss_xval_fun_wu/tut_nn_clss_xval_fun_wu.pdf
-% README: /tutorials/pipelines/tut_nn_clss_xval_fun_wu/readme.md
+% PDF: /tutorials/pipelines/tut_nn_clas_fun_wu_xval/tut_nn_clas_fun_wu_xval.pdf
+% README: /tutorials/pipelines/tut_nn_clas_fun_wu_xval/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
