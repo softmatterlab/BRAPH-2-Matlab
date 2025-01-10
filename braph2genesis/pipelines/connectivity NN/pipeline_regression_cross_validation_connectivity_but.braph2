@@ -7,8 +7,8 @@
 % 3. It analyzes the group using connectivity analyses (CON) binary undirected graphs at fixed densities (BUT).
 % 4. It executes the cross-validation process.
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_nn_reg_con_but_xval/tut_nn_reg_con_but_xval.pdf
+% README: /tutorials/pipelines/tut_nn_reg_con_but_xval/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas

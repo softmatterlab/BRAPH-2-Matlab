@@ -9,8 +9,8 @@
 % 3. It analyzes the group using connectivity analyses (CON) binary undirected multiplex at fixed densities (BUD).
 % 4. It executes the cross-validation process.
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_nn_reg_con_fun_mp_bud_xval/tut_nn_reg_con_fun_mp_bud_xval.pdf
+% README: /tutorials/pipelines/tut_nn_reg_con_fun_mp_bud_xval/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
