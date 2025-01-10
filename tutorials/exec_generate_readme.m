@@ -78,6 +78,10 @@ generate_readme(['pipelines' filesep 'tut_nn_reg_st_mm_data_split' filesep 'tut_
 generate_readme(['pipelines' filesep 'tut_nn_clas_st_mm_data_split' filesep 'tut_nn_clas_st_mm_data_split.tex'])
 generate_readme(['pipelines' filesep 'tut_nn_reg_st_mm_data_xval' filesep 'tut_nn_reg_st_mm_data_xval.tex'])
 generate_readme(['pipelines' filesep 'tut_nn_clas_st_mm_data_xval' filesep 'tut_nn_clas_st_mm_data_xval.tex'])
+generate_readme(['pipelines' filesep 'tut_nn_reg_st_data_split' filesep 'tut_nn_reg_st_data_split.tex'])
+generate_readme(['pipelines' filesep 'tut_nn_clas_st_data_split' filesep 'tut_nn_clas_st_data_split.tex'])
+generate_readme(['pipelines' filesep 'tut_nn_reg_st_data_xval' filesep 'tut_nn_reg_st_data_xval.tex'])
+generate_readme(['pipelines' filesep 'tut_nn_clas_st_data_xval' filesep 'tut_nn_clas_st_data_xval.tex'])
 
 
 generate_readme(['developers' filesep 'dev_pipeline' filesep 'dev_pipeline.tex'])
