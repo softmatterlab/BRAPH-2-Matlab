@@ -6,7 +6,7 @@
 % 2. It loads the data of a group of subjects from an XLS file (e.g., ST_group1.xlsx).
 % 3. It analyzes these data using a structural analysis (ST) based on a binary undirected graph using thresholds (BUT).
 
-% PDF: 
+% PDF: /tutorials/pipelines/tut_a_st_but/tut_a_st_but.pdf
 % README: /tutorials/pipelines/tut_a_st_but/readme.md
 
 %% Brain Atlas
