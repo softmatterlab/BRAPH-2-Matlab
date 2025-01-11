@@ -1,4 +1,4 @@
-%% Pipeline Classification Cross-Validation Functionaltivity BUT Measure  
+%% Pipeline Classification Cross-Validation Functional BUT Measure  
 
 % This is the pipeline script to execute cross-validation with multi-layer perceptron classifier using the graph measures with binary undirected graph at fix thresholds obtained from functionaltivity data.
 % The functional data can be derived from imaging modalities like functional MRI (fMRI), electroencephalography (EEG) or magnetoencephalography (MEG).
