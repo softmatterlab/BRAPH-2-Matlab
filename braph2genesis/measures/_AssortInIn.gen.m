@@ -3,9 +3,12 @@ AssortInIn < Measure (m, in-in-assortativity) is the graph In-In-Assortativity.
 
 %%% ¡description!
 The In-In-Assortativity coefficient (AssortInIn) of a graph is the correlation coefficient between 
-  the degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
+  the inward degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
 The corresponding coefficient for directed and weighted networks is calculated by 
   using the weighted and directed variants of in-degree/in-strength.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -66,7 +69,7 @@ NAME (constant, string) is the name of the In-In-Assortativity.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the In-In-Assortativity.
 %%%% ¡default!
-'The In-In-Assortativity coefficient (AssortInIn) of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-degree/in-strength.'
+'The In-In-Assortativity coefficient (AssortInIn) of a graph is the correlation coefficient between the inward degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-degree/in-strength.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the In-In-Assortativity.
@@ -117,6 +120,8 @@ L = g.get('LAYERNUMBER');
 N = g.get('NODENUMBER');
 in_in_assortativity = cell(L, 1);
 connectivity_types = g.get('CONNECTIVITY_TYPE', L);  
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     Aii = A{li, li};
     connectivity_type = connectivity_types(li, li);
@@ -142,6 +147,7 @@ parfor li = 1:L
     
     in_in_assortativity(li) = {assortativity_layer};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = in_in_assortativity;
 

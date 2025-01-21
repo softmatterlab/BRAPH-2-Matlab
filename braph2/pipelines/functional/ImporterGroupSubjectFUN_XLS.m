@@ -14,14 +14,14 @@ classdef ImporterGroupSubjectFUN_XLS < Importer
 	%  variables of interest, and each subsequent row the values for each subject.
 	%
 	% The list of ImporterGroupSubjectFUN_XLS properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the FUN subject group importer from XLS/XLSX.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the FUN subject group importer from XLS/XLSX.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the FUN subject group importer from XLS/XLSX.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the FUN subject group importer from XLS/XLSX.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the FUN subject group importer from XLS/XLSX.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the FUN subject group importer from XLS/XLSX.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the FUN subject group importer from XLS/XLSX.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory containing the FUN subject group files from which to load the subject group.
 	%  <strong>11</strong> <strong>GET_DIR</strong> 	GET_DIR (query, item) opens a dialog box to set the directory from where to load the XLS/XLSX files of the FUN subject group.
@@ -115,6 +115,8 @@ classdef ImporterGroupSubjectFUN_XLS < Importer
 	%
 	%
 	% See also Group, SubjectFUN, ExporterGroupSubjectFUN_XLS.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		DIRECTORY = 10; %CET: Computational Efficiency Trick
@@ -149,14 +151,14 @@ classdef ImporterGroupSubjectFUN_XLS < Importer
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of ImporterGroupSubjectFUN_XLS properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the FUN subject group importer from XLS/XLSX.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the FUN subject group importer from XLS/XLSX.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the FUN subject group importer from XLS/XLSX.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the FUN subject group importer from XLS/XLSX.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the FUN subject group importer from XLS/XLSX.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the FUN subject group importer from XLS/XLSX.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the FUN subject group importer from XLS/XLSX.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory containing the FUN subject group files from which to load the subject group.
 			%  <strong>11</strong> <strong>GET_DIR</strong> 	GET_DIR (query, item) opens a dialog box to set the directory from where to load the XLS/XLSX files of the FUN subject group.
@@ -169,6 +171,21 @@ classdef ImporterGroupSubjectFUN_XLS < Importer
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the importer of FUN subject group from XLS/XLSX.
+			%
+			% BUILD = ImporterGroupSubjectFUN_XLS.GETBUILD() returns the build of 'ImporterGroupSubjectFUN_XLS'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = IM.GETBUILD() returns the build of the importer of FUN subject group from XLS/XLSX IM.
+			%  BUILD = Element.GETBUILD(IM) returns the build of 'IM'.
+			%  BUILD = Element.GETBUILD('ImporterGroupSubjectFUN_XLS') returns the build of 'ImporterGroupSubjectFUN_XLS'.
+			%
+			% Note that the Element.GETBUILD(IM) and Element.GETBUILD('ImporterGroupSubjectFUN_XLS')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function im_class = getClass()
 			%GETCLASS returns the class of the importer of FUN subject group from XLS/XLSX.
 			%
@@ -495,7 +512,7 @@ classdef ImporterGroupSubjectFUN_XLS < Importer
 			prop = ImporterGroupSubjectFUN_XLS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			importergroupsubjectfun_xls_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the FUN subject group importer from XLS/XLSX.'  'DESCRIPTION (constant, string) is the description of the FUN subject group importer from XLS/XLSX.'  'TEMPLATE (parameter, item) is the template of the FUN subject group importer from XLS/XLSX.'  'ID (data, string) is a few-letter code for the FUN subject group importer from XLS/XLSX.'  'LABEL (metadata, string) is an extended label of the FUN subject group importer from XLS/XLSX.'  'NOTES (metadata, string) are some specific notes about the FUN subject group importer from XLS/XLSX.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DIRECTORY (data, string) is the directory containing the FUN subject group files from which to load the subject group.'  'GET_DIR (query, item) opens a dialog box to set the directory from where to load the XLS/XLSX files of the FUN subject group.'  'BA (data, item) is a brain atlas.'  'GR (result, item) is a group of subjects with functional data.' };
+			importergroupsubjectfun_xls_description_list = { 'ELCLASS (constant, string) is the class of the FUN subject group importer from XLS/XLSX.'  'NAME (constant, string) is the name of the FUN subject group importer from XLS/XLSX.'  'DESCRIPTION (constant, string) is the description of the FUN subject group importer from XLS/XLSX.'  'TEMPLATE (parameter, item) is the template of the FUN subject group importer from XLS/XLSX.'  'ID (data, string) is a few-letter code for the FUN subject group importer from XLS/XLSX.'  'LABEL (metadata, string) is an extended label of the FUN subject group importer from XLS/XLSX.'  'NOTES (metadata, string) are some specific notes about the FUN subject group importer from XLS/XLSX.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DIRECTORY (data, string) is the directory containing the FUN subject group files from which to load the subject group.'  'GET_DIR (query, item) opens a dialog box to set the directory from where to load the XLS/XLSX files of the FUN subject group.'  'BA (data, item) is a brain atlas.'  'GR (result, item) is a group of subjects with functional data.' };
 			prop_description = importergroupsubjectfun_xls_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -567,7 +584,7 @@ classdef ImporterGroupSubjectFUN_XLS < Importer
 				case 1 % ImporterGroupSubjectFUN_XLS.ELCLASS
 					prop_default = 'ImporterGroupSubjectFUN_XLS';
 				case 2 % ImporterGroupSubjectFUN_XLS.NAME
-					prop_default = 'ImporterGroupSubjectFUN_XLS';
+					prop_default = 'Functional Subject Group XLS Importer';
 				case 3 % ImporterGroupSubjectFUN_XLS.DESCRIPTION
 					prop_default = 'ImporterGroupSubjectFUN_XLS imports a group of subjects with functional data from a series of XLS/XLSX file and their covariates (optional) from another XLS/XLSX file.';
 				case 5 % ImporterGroupSubjectFUN_XLS.ID

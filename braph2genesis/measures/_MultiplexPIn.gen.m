@@ -4,7 +4,10 @@ MultiplexPIn < Measure (m, multiplex in-participation) is the graph Multiplex In
 %%% ¡description!
 The Multiplex In-Participation (MultiplexPIn) is the homogeneity of the number of inward 
 neighbors of a node across the layers.
- 
+
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

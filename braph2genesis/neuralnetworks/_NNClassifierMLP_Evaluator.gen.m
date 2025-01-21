@@ -1,12 +1,15 @@
 %% ¡header!
-NNClassifierMLP_Evaluator < NNEvaluator (nne, neural network evaluator for classification) evaluates the performance of a multi-layer perceptron classifier with a given dataset.
+NNClassifierMLP_Evaluator < NNEvaluator (nne, neural network evaluator for multi-layer perceptron classifier) evaluates the performance of a multi-layer perceptron classifier with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for multi-layer perceptron classifier (NNClassifierMLP_Evaluator) evaluates the performance of a multi-layer perceptron classifier with a given dataset.
+A neural network evaluator for a multi-layer perceptron classifier (NNClassifierMLP_Evaluator) evaluates the performance of a multi-layer perceptron classifier with a given dataset.
 NNClassifierMLP_Evaluator evaluates the performance of the trained classifier with a given dataset in terms of various classification metrics (e.g., confusion matrix, area under the receiver operating characteristic curve).
 
 %%% ¡seealso!
 NNDataPoint_CON_CLA, NNClassifierMLP
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -46,57 +49,45 @@ NNClassifierMLP_Evaluator.C_MATRIX
 %%%% ¡title!
 Confusion Matrix
 
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP_Evaluator.P
-%%%% ¡title!
-Permutation Times for Feature Importance
-
-%%% ¡prop!
-%%%% ¡id!
-NNClassifierMLP_Evaluator.FEATURE_IMPORTANCE
-%%%% ¡title!
-Feature Importance
-
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the neural network evaluator for a multi-layer perceptron classifier.
 %%%% ¡default!
 'NNClassifierMLP_Evaluator'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the neural network evaluator for the classification task.
+NAME (constant, string) is the name of the neural network evaluator for a multi-layer perceptron classifier.
 %%%% ¡default!
-'NNClassifierMLP_Evaluator'
+'Neural Network Evaluator for a Multi-layer Perceptron Classifier'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the neural network evaluator for the classification task.
+DESCRIPTION (constant, string) is the description of the neural network evaluator for a multi-layer perceptron classifier.
 %%%% ¡default!
-'A neural network evaluator for multi-layer perceptron classifier (NNClassifierMLP_Evaluator) evaluates the performance of a multi-layer perceptron classifier with a given dataset. NNClassifierMLP_Evaluator evaluates the performance of the trained classifier with a given dataset in terms of various classification metrics (e.g., confusion matrix, area under the receiver operating characteristic curve).'
+'A neural network evaluator for a multi-layer perceptron classifier (NNClassifierMLP_Evaluator) evaluates the performance of a multi-layer perceptron classifier with a given dataset. NNClassifierMLP_Evaluator evaluates the performance of the trained classifier with a given dataset in terms of various classification metrics (e.g., confusion matrix, area under the receiver operating characteristic curve).'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the neural network evaluator for the classification task.
+TEMPLATE (parameter, item) is the template of the neural network evaluator for a multi-layer perceptron classifier.
 %%%% ¡settings!
 'NNClassifierMLP_Evaluator'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the neural network evaluator for the classification task.
+ID (data, string) is a few-letter code for the neural network evaluator for a multi-layer perceptron classifier.
 %%%% ¡default!
 'NNClassifierMLP_Evaluator ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the neural network evaluator for the classification task.
+LABEL (metadata, string) is an extended label of the neural network evaluator for a multi-layer perceptron classifier.
 %%%% ¡default!
 'NNClassifierMLP_Evaluator label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the neural network evaluator for the classification task.
+NOTES (metadata, string) are some specific notes about the neural network evaluator for a multi-layer perceptron classifier.
 %%%% ¡default!
 'NNClassifierMLP_Evaluator notes'
     
 %%% ¡prop!
-NN (data, item) contains a trained neural network classifier.
+NN (data, item) contains a trained neural network multi-layer perceptron classifier.
 %%%% ¡settings!
 'NNClassifierMLP'
 
@@ -105,13 +96,11 @@ NN (data, item) contains a trained neural network classifier.
 %%% ¡prop!
 GROUND_TRUTH (query, stringlist) returns the matrix of ground truth derived from the targets.
 %%%% ¡calculate!
-targets = nne.get('D').get('TARGETS');
+targets = nne.get('NN').get('TARGET_CLASSES', nne.get('D'));
 if isempty(targets)
     value = {''};
 else
-    for i = 1:length(targets)
-        value(i, :) = targets{i};
-    end
+    value = targets;
 end
 
 %%% ¡prop!
@@ -168,47 +157,6 @@ else
     value = confusionmat(classified, ground_truth);
 end
 
-%%% ¡prop!
-P (parameter, scalar) is the permutation number.
-%%%% ¡default!
-1e+2
-%%%% ¡check_prop!
-check = value > 0 && value == round(value);
-
-%%% ¡prop!
-PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.
-%%%% ¡calculate!
-value = randi(intmax('uint32'), 1, nne.get('P'));
-
-%%% ¡prop!
-FEATURE_IMPORTANCE (result, cell) quantifies the average significance and impact of individual input features within neural network models. Various techniques, such as permutation feature importance for MLPs and gradient-based analysis for CNNs, can be applied to quantify this aspect.
-%%%% ¡calculate!
-all_fi = nne.get('NN').get('FEATURE_IMPORTANCE', nne.get('D'), nne.get('P'), nne.get('PERM_SEEDS'));
-if isempty(cell2mat(all_fi))
-    value = {};
-else
-    average_fi = zeros(size(all_fi{1}));
-    for i = 1:numel(all_fi)
-        % Add the current cell contents to the averageCell
-        average_fi = average_fi + all_fi{i};
-    end
-    average_fi = average_fi / numel(all_fi);
-    value = {average_fi};
-end
-%%%% ¡gui!
-input_dataset = nne.get('D');
-dp_class = input_dataset.get('DP_CLASS');
-graph_dp_classes = {NNDataPoint_Graph_CLA().get('NAME'), NNDataPoint_Graph_REG().get('NAME')};
-measure_dp_classes = {NNDataPoint_Measure_CLA().get('NAME'), NNDataPoint_Measure_REG().get('NAME')};
-
-if any(strcmp(dp_class, graph_dp_classes)) % GRAPH input
-    pr = NNxMLP_xPP_FI_Graph('EL', nne, 'D', input_dataset, 'PROP', NNClassifierMLP_Evaluator.FEATURE_IMPORTANCE, varargin{:});
-elseif any(strcmp(dp_class, measure_dp_classes))% MEASURE input
-    pr = NNxMLP_xPP_FI_Measure('EL', nne, 'D', input_dataset, 'PROP', NNClassifierMLP_Evaluator.FEATURE_IMPORTANCE, varargin{:});
-else % DATA input
-    pr = NNxMLP_xPP_FI_Data('EL', nne, 'D', input_dataset, 'PROP', NNClassifierMLP_Evaluator.FEATURE_IMPORTANCE, varargin{:});
-end
-
 %% ¡tests!
 
 %%% ¡excluded_props!
@@ -221,7 +169,7 @@ Evaluate a classifier with the example data
 
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_CLA % create example files
+    create_data_NN_CLA_CON_XLS() % create example files
 end
 
 % Load BrainAtlas
@@ -254,7 +202,7 @@ gr2 = im_gr2.get('GR');
 it_list1 = cellfun(@(x) NNDataPoint_CON_CLA( ...
     'ID', x.get('ID'), ...
     'SUB', x, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     gr1.get('SUB_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -262,7 +210,7 @@ it_list1 = cellfun(@(x) NNDataPoint_CON_CLA( ...
 it_list2 = cellfun(@(x) NNDataPoint_CON_CLA( ...
     'ID', x.get('ID'), ...
     'SUB', x, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     gr2.get('SUB_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -297,10 +245,10 @@ nne = NNClassifierMLP_Evaluator('NN', nn, 'D', d);
 
 % Check whether the ground truth are derived as expected
 ground_truth = nne.get('GROUND_TRUTH');
-targets = d.get('TARGETS');
+targets = nne.get('NN').get('TARGET_CLASSES', d);
 
 for i = 1:size(ground_truth, 1)
-    check(i) = isequal(targets{i}, ground_truth(i, :));
+    check(i) = isequal(targets{i}, ground_truth{i});
 end
 assert(all(check), ...
     [BRAPH2.STR ':NNEvaluator_CLA:' BRAPH2.FAIL_TEST], ...

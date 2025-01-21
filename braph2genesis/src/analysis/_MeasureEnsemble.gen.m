@@ -7,6 +7,9 @@ MeasureEnsemble provides the methods necessary for a graph ensemble measure.
 %%% ¡seealso!
 AnalyzeEnsemble, CompareEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

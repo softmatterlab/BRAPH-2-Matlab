@@ -1,11 +1,14 @@
 %% ¡header!
-AnalyzeEnsemble_CON_WU < AnalyzeEnsemble (a, graph analysis with connectivity data) is a ensenmble-based graph analysis using connectivity data.
+AnalyzeEnsemble_CON_WU < AnalyzeEnsemble (a, graph analysis with connectivity data) is a ensemble-based graph analysis using connectivity data.
 
 %%% ¡description!
 This ensemble-based graph analysis (AnalyzeEnsemble_CON_WU) analyzes connectivity data using weighted undirected graphs.
 
 %%% ¡seealso!
 SubjectCON, GraphWU
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -60,37 +63,37 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ensemble-based graph analysis using connectivity data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_WU'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the ensenmble-based graph analysis using connectivity data.
+NAME (constant, string) is the name of the ensemble-based graph analysis using connectivity data.
 %%%% ¡default!
-'AnalyzeEnsemble_CON_WU'
+'Connectivity Weigthed Undirected Analyze Ensemble'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the ensenmble-based graph analysis using connectivity data.
+DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis using connectivity data.
 %%%% ¡default!
 'This ensemble-based graph analysis (AnalyzeEnsemble_CON_WU) analyzes connectivity data using weighted undirected graphs.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the ensenmble-based graph analysis using connectivity data.
+TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis using connectivity data.
 %%%% ¡settings!
 'AnalyzeEnsemble_CON_WU'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the ensenmble-based graph analysis using connectivity data.
+ID (data, string) is a few-letter code for the ensemble-based graph analysis using connectivity data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_WU ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the ensenmble-based graph analysis using connectivity data.
+LABEL (metadata, string) is an extended label of the ensemble-based graph analysis using connectivity data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_WU label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the ensenmble-based graph analysis using connectivity data.
+NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis using connectivity data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_WU notes'
 

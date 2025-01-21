@@ -7,6 +7,9 @@ A Pipeline Code Line (PipelineCode) represents a line of executable code in a pi
 %%% ¡seealso!
 PipelinePP_PSDict, Pipeline, PipelineSection
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

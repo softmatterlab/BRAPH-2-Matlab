@@ -11,7 +11,7 @@ Measure ID
 Measure NAME
 2
 Measure NOTES
-6
+7
 TOSTRING
 NaN
 SHAPE
@@ -21,12 +21,12 @@ NaN
 PARAMETRICITY
 NaN
 Compatible Graphs
-7
+8
 Graph
-3
-Weighted Rich-Club
 4
-Measure Plot
+Weighted Rich-Club
 5
-WRC_PARAMETER
-NaN
+Measure Plot
+6
+Weighted Rich-Club parameter (strength level)
+3

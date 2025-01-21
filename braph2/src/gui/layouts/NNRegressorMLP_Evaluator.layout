@@ -11,7 +11,7 @@ Cross Validation ID
 Cross Validation LABEL
 2
 Evaluator NOTES
-11
+9
 TOSTRING
 NaN
 NN
@@ -30,11 +30,5 @@ Mean Squared Error
 7
 Root Mean Squared Error
 8
-Permutation Times for Feature Importance
-9
-PERM_SEEDS
-NaN
-Feature Importance
-10
 Scatter Plot
 3

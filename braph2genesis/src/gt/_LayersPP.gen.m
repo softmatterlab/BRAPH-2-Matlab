@@ -6,7 +6,10 @@ A Layers Prop Panel (LayersPP) plots the panel to select the layers of an adjace
 It works for all categories.
 
 %%% ¡seealso!
-uitable, GraphHistPF, GraphAdjPF.
+uitable, GraphHistPF, GraphAdjPF
+
+%%% ¡build!
+1
 
 %% ¡props_update!
 

@@ -1,3 +1,5 @@
-# BRAPH 2.0 — Pipeline for Comparison of Connectivity Multiplex Data using Binary Weighted Undirected graphs
+# Pipeline for Comparison of Connectivity Multiplex Data using Weighted Undirected Graphs
 
-This Page is not ready. You can find a similar one in [Connectivity BUT](../tut_a_con_but)
+[![Tutorial Pipeline for Comparison of Connectivity Multiplex Data using Weighted Undirected Graphs](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_a_mp_con_wu.pdf)
+
+This tutorial is not ready. You can find a similar one here: [https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/pipelines/tut_a_mp_con_fun_wu/tut_a_mp_con_fun_wu.pdf](https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/pipelines/tut_a_mp_con_fun_wu/tut_a_mp_con_fun_wu.pdf).

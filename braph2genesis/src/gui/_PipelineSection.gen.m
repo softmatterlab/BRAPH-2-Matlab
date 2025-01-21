@@ -7,6 +7,9 @@ A Pipeline Section (PipelineSection) represents a section of executable code in 
 %%% ¡seealso!
 PipelinePP_PSDict, Pipeline, PipelineSection
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

@@ -5,6 +5,9 @@ OverlappingDeg < Degree (m, ovrlapdeg) is the graph Overlapping Degree.
 The Overlapping Degree (OverlappingDeg) of a graph is the sum of the 
  degrees of a node in all layers.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

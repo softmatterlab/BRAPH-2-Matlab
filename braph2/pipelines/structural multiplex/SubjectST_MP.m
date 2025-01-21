@@ -5,14 +5,14 @@ classdef SubjectST_MP < Subject
 	% Subject with data for each brain region correspponding to L structural layers (e.g. cortical thickness obtained from structural MRI).
 	%
 	% The list of SubjectST_MP properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the subject.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
 	%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 	%  <strong>11</strong> <strong>L</strong> 	L (data, scalar) is the number of layers of subject data.
@@ -107,6 +107,8 @@ classdef SubjectST_MP < Subject
 	%
 	%
 	% See also ImporterGroupSubjectST_MP_TXT, ExporterGroupSubjectST_MP_TXT, ImporterGroupSubjectST_MP_XLS, ExporterGroupSubjectST_MP_XLS.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		BA = 10; %CET: Computational Efficiency Trick
@@ -146,14 +148,14 @@ classdef SubjectST_MP < Subject
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SubjectST_MP properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the subject.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
 			%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 			%  <strong>11</strong> <strong>L</strong> 	L (data, scalar) is the number of layers of subject data.
@@ -167,6 +169,21 @@ classdef SubjectST_MP < Subject
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the subject with structural multiplex data.
+			%
+			% BUILD = SubjectST_MP.GETBUILD() returns the build of 'SubjectST_MP'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = SUB.GETBUILD() returns the build of the subject with structural multiplex data SUB.
+			%  BUILD = Element.GETBUILD(SUB) returns the build of 'SUB'.
+			%  BUILD = Element.GETBUILD('SubjectST_MP') returns the build of 'SubjectST_MP'.
+			%
+			% Note that the Element.GETBUILD(SUB) and Element.GETBUILD('SubjectST_MP')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function sub_class = getClass()
 			%GETCLASS returns the class of the subject with structural multiplex data.
 			%
@@ -485,7 +502,7 @@ classdef SubjectST_MP < Subject
 			prop = SubjectST_MP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			subjectst_mp_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'TOSTRING (query, string) returns a string that represents the object.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'L (data, scalar) is the number of layers of subject data.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the processed layer labels.'  'ST_MP (data, cell) is a cell containing L vectors, each with data for each brain region.' };
+			subjectst_mp_description_list = { 'ELCLASS (constant, string) is the class of the subject.'  'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'L (data, scalar) is the number of layers of subject data.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the processed layer labels.'  'ST_MP (data, cell) is a cell containing L vectors, each with data for each brain region.' };
 			prop_description = subjectst_mp_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -551,7 +568,7 @@ classdef SubjectST_MP < Subject
 				case 10 % SubjectST_MP.BA
 					prop_default = Format.getFormatDefault(8, SubjectST_MP.getPropSettings(prop));
 				case 11 % SubjectST_MP.L
-					prop_default = 2;
+					prop_default = Format.getFormatDefault(11, SubjectST_MP.getPropSettings(prop));
 				case 12 % SubjectST_MP.LAYERLABELS
 					prop_default = Format.getFormatDefault(3, SubjectST_MP.getPropSettings(prop));
 				case 13 % SubjectST_MP.ALAYERLABELS
@@ -561,7 +578,7 @@ classdef SubjectST_MP < Subject
 				case 1 % SubjectST_MP.ELCLASS
 					prop_default = 'SubjectST_MP';
 				case 2 % SubjectST_MP.NAME
-					prop_default = 'SubjectST_MP';
+					prop_default = 'Multiplex Structural Subject';
 				case 3 % SubjectST_MP.DESCRIPTION
 					prop_default = 'Subject with data for each brain region correspponding to L structural layers (e.g. cortical thickness obtained from structural MRI).';
 				case 5 % SubjectST_MP.ID
@@ -705,18 +722,18 @@ classdef SubjectST_MP < Subject
 					end
 					
 				case 12 % SubjectST_MP.LAYERLABELS
-					if ~isa(sub.getr('L'), 'NoValue') && length(sub.get('LAYERLABELS')) == sub.get('L')
+					if ~isa(sub.getr('L'), 'NoValue') && length(sub.get('LAYERLABELS')) ~= sub.get('L')
 					    title = ['About Layer Labels'];
-					    
 					    message = {''
-					        ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use doubl slashes to avoid genesis problem
-					        ['{\color{gray}version ' '2.0.0.b2' '}']
+					        ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use double slashes to avoid genesis problem
+					        ['{\color{gray}version ' '2.0.0' '}']
 					        ['{\color{gray}build ' int2str(6) '}']
 					        ''
 					        'Please, select a valid number of Layer Labels.'
 					        ''
 					        ''};
 					    braph2msgbox(title, message)
+					    
 					    sub.set('LAYERLABELS', cat(1, strsplit(num2str(1:1:length(sub.get('ST_MP'))))))
 					end
 					

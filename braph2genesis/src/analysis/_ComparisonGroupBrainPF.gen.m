@@ -7,6 +7,9 @@ ComparisonGroupBrainPF manages the basic functionalities to plot of a group comp
 %%% ¡seealso!
 ComparisonGroup, BrainAtlasPF
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

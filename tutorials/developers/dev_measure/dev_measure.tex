@@ -2,7 +2,7 @@
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Implement a new Measure}
+\title{Implement a New Measure}
 
 \begin{document}
 
@@ -11,39 +11,41 @@
 \begin{abstract}
 \noindent
 This is the developer tutorial for implementing a new measure. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new measure, which can the be compiled by \code{braph2genesis}. All measures are (direct or indirect) extensions of the element \code{Measure}. Here, we will use as examples the measures \code{Degree}, \code{DegreeAv}, \code{Distance}, and \code{Triangles}.
+In this tutorial, you will learn how to create the generator file \fn{*.gen.m} for a new measure, which can the be compiled by \code{braph2genesis}. All measures are (direct or indirect) extensions of the element \code{Measure}. Here, you will use as examples the measures \code{Degree}, \code{DegreeAv}, \code{Distance}, and \code{Triangles}.
 \end{abstract}
 
 \tableofcontents
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of Unilayer Measures}
+\section{Implementation of unilayer measures}
 
-\subsection{Nodal Unilayer Measure (Degree)}
+\subsection{Nodal unilayer measure (\code{Degree})}
 
-We will start by implementing in detail the measure \code{Degree}, which applies to most graphs and is a direct extension of the element \code{Measure}.
+You will start by implementing in detail the measure \code{Degree}, which applies to most graphs and is a direct extension of the element \code{Measure}.
 
 \begin{lstlisting}[
 	label=cd:m:degree:header,
 	caption={
 		{\bf Degree element header.}
-		The \code{header} section of the generator code for \fn{\_Degree.gen.m} provides the general information about the \code{Degree} element.
+		The \code{header} section of the generator code in \fn{\_Degree.gen.m} provides the general information about the \code{Degree} element.
 	}
 ]
 %% ¡header!
-Degree < Measure (m, degree) is the graph degree. ¥\circled{1}\circlednote{1}{The element \code{Degree} is defined as a subclass of \code{Measure}. The moniker will be \code{m}.}¥
+Degree < Measure (m, degree) is the graph degree. ¥\circled{1}\circlednote{1}{ The element \code{Degree} is defined as a subclass of \code{Measure}. The moniker will be \code{m}.}¥
 
 %%% ¡description!
 The degree of a node is the number of edges connected to the node within a layer. 
 Connection weights are ignored in calculations.
+
+%%% ¡build!
+1
 \end{lstlisting}
 
 \begin{lstlisting}[
 	label=cd:m:degree:prop_update,
 	caption={
 		{\bf Degree element prop update.}
-		The \code{props\_update} section of the generator code for \fn{\_Degree.gen.m} updates the properties of the \code{Measure} element. This defines the core properties of the measure.
+		The \code{props\_update} section of the generator code in \fn{\_Degree.gen.m} updates the properties of the \code{Measure} element. This defines the core properties of the measure.
 	}
 ]
 %% ¡props_update!
@@ -78,44 +80,41 @@ NOTES (metadata, string) are some specific notes about the degree.
 %%%% ¡default!
 'Degree notes'
 
-%%% ¡prop! ¥\circled{1}\circlednote{1}{Measures have a \emph{shape}: \code{Measure.GLOBAL} (a value for the whole brain graph, e.g., average degree), \code{Measure.NODAL} (a value for each brain region, e.g., degree, or \code{Measure.BINODAL} (a value for each couple of brain regions, e.g., distance between couples of nodes).}
-\circlednote{2}{Measures have a \emph{scope}: \code{Measure.SUPERGLOBAL} (a result for the whole multi-layer graph, e.g., overlapping strength), \code{Measure.UNILAYER} (a result for each layer, e.g., average strength), or \code{Measure.BILAYER} (a result for each couple of layers).}
-\circlednote{3}{Measures are either \code{Measure.NONPARAMETRIC} (the usual case) or \code{Measure.PARAMETRIC} (depending on some parameter).}
-\circlednote{4}{Each measure has a list of compatible graphs for which the measure can be used.}¥
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ Measures have a \emph{shape}: \code{Measure.GLOBAL} (a value for the whole brain graph, e.g., average degree), \code{Measure.NODAL} (a value for each brain region, e.g., degree), or \code{Measure.BINODAL} (a value for each couple of brain regions, e.g., distance between couples of nodes).}¥
 SHAPE (constant, scalar) is the measure shape __Measure.NODAL__.
 %%%% ¡default!
 Measure.NODAL
 
-%%% ¡prop! ¥\circled{2}¥
+%%% ¡prop! ¥\circled{2}\circlednote{2}{ Measures have a \emph{scope}: \code{Measure.SUPERGLOBAL} (a result for the whole multi-layer graph, e.g., overlapping strength), \code{Measure.UNILAYER} (a result for each layer, e.g., average strength), or \code{Measure.BILAYER} (a result for each couple of layers).}¥
 SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
 %%%% ¡default!
 Measure.UNILAYER
 
-%%% ¡prop! ¥\circled{3}¥
+%%% ¡prop! ¥\circled{3}\circlednote{3}{ Measures are either \code{Measure.NONPARAMETRIC} (the usual case) or \code{Measure.PARAMETRIC} (depending on some parameter).}¥
 PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
 %%%% ¡default!
 Measure.NONPARAMETRIC
 
-%%% ¡prop! ¥\circled{4}¥
+%%% ¡prop! ¥\circled{4}\circlednote{4}{ Each measure has a list of compatible graphs for which the measure can be used.}¥
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
 {'GraphWU' 'GraphBU' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexBU' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU' 'OrdMxBU'}
 
-%%% ¡prop! ¥\circled{5}\circlednote{5}{The property \code{M} contains the code to be executed to calculate the measure. Here is where most of the action happens.}¥
+%%% ¡prop! ¥\circled{5}\circlednote{5}{ The property \code{M} contains the code to be executed to calculate the measure. Here is where most of the action happens.}¥
 M (result, cell) is the degree.
 %%%% ¡calculate!
-g = m.get('G'); ¥\circled{6}\circlednote{6}{retrieves the graph from the property \code{G} of the measure \code{m}.}¥
-A = g.get('A'); ¥\circled{7}\circlednote{7}{retrieves the cell with the adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.).}¥
+g = m.get('G'); ¥\circled{6}\circlednote{6}{ retrieves the graph from the property \code{G} of the measure \code{m}.}¥
+A = g.get('A'); ¥\circled{7}\circlednote{7}{ retrieves the cell with the adjacency matrix (for graph) or 2D-cell array (for multigraph, multiplex, etc.).}¥
 
-degree = cell(g.get('LAYERNUMBER'), 1); ¥\circled{8}\circlednote{8}{preallocates the variable to contain the result of the measure calculation.}¥
+degree = cell(g.get('LAYERNUMBER'), 1); ¥\circled{8}\circlednote{8}{ preallocates the variable to contain the result of the measure calculation.}¥
 
 parfor li = 1:1:g.get('LAYERNUMBER')
     Aii = A{li, li};
-    Aii = binarize(Aii); ¥\circled{9}\circlednote{9}{binarizes the adjacency matrix (removing diagonal).}¥
-    degree(li) = {sum(Aii, 2)}; ¥\circled{10}\circlednote{10}{calculates the degree of the node for layer \code{li}.}¥
+    Aii = binarize(Aii); ¥\circled{9}\circlednote{9}{ binarizes the adjacency matrix (removing diagonal).}¥
+    degree(li) = {sum(Aii, 2)}; ¥\circled{10}\circlednote{10}{ calculates the degree of the node for layer \code{li}.}¥
 end
 
-value = degree; ¥\circled{11}\circlednote{11}{returns the calcualted value of the measure \code{degree} assigning it to the output variable \code{value}.}¥
+value = degree; ¥\circled{11}\circlednote{11}{ returns the calculated value of the measure \code{degree} assigning it to the output variable \code{value}.}¥
 \end{lstlisting}
 
 \begin{lstlisting}[
@@ -128,13 +127,13 @@ value = degree; ¥\circled{11}\circlednote{11}{returns the calcualted value of t
 ]
 %% ¡tests!
 
-%%% ¡excluded_props! ¥\circled{1}\circlednote{1}{List of properties that are excluded from testing.}¥
+%%% ¡excluded_props! ¥\circled{1}\circlednote{1}{ List of properties that are excluded from testing.}¥
 [Degree.PFM] 
 
-%%% ¡test! ¥\circled{2}\circlednote{2}{Test for \code{GraphWU}. Similar tests should be implemented for each graph compatible with the measure.}¥
+%%% ¡test! ¥\circled{2}\circlednote{2}{ Test for \code{GraphWU}. Similar tests should be implemented for each graph compatible with the measure.}¥
 %%%% ¡name!
 GraphWU
-%%%% ¡probability! ¥\circled{3}\circlednote{3}{assings a low test execution probability.}¥
+%%%% ¡probability! ¥\circled{3}\circlednote{3}{ assigns a low test execution probability.}¥
 .01
 %%%% ¡code!
 B = [
@@ -143,51 +142,56 @@ B = [
     1   0   0
     ];
 
-known_degree = {[2 1 1]'}; ¥\circled{4}\circlednote{4}{is the expected value of the measure calculated by external means.}¥
+known_degree = {[2 1 1]'}; ¥\circled{4}\circlednote{4}{ is the expected value of the measure calculated by external means.}¥
 
-g = GraphWU('B', B); ¥\circled{5}\circlednote{5}{creates the graph.}¥
+g = GraphWU('B', B); ¥\circled{5}\circlednote{5}{ creates the graph.}¥
 
-m_outside_g = Degree('G', g); ¥\circled{6}\circlednote{6}{creates the measure.}¥
-assert(isequal(m_outside_g.get('M'), known_degree), ... ¥\circled{7}\circlednote{7}{tests that the value of the measure coicides with its expected value.}¥ 
+m_outside_g = Degree('G', g); ¥\circled{6}\circlednote{6}{ creates the measure.}¥
+assert(isequal(m_outside_g.get('M'), known_degree), ... ¥\circled{7}\circlednote{7}{ tests that the value of the measure coicides with its expected value.}¥ 
     [BRAPH2.STR ':Degree:' BRAPH2.FAIL_TEST], ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
-m_inside_g = g.get('MEASURE', 'Degree'); ¥\circled{8}\circlednote{8}{extracts the measure from the graph.}¥
-assert(isequal(m_inside_g.get('M'), known_degree), ... ¥\circled{8}\circlednote{8}{tests that the value of the measure extracted from the graph coicides with its expected value.}¥
+m_inside_g = g.get('MEASURE', 'Degree'); ¥\circled{8}\circlednote{8}{ extracts the measure from the graph.}¥
+assert(isequal(m_inside_g.get('M'), known_degree), ... ¥\circled{8}\circlednote{8}{ tests that the value of the measure extracted from the graph coicides with its expected value.}¥
     [BRAPH2.STR ':Degree:' BRAPH2.FAIL_TEST], ...
     [class(m_inside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 ¤...¤
 \end{lstlisting}
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{Global Unilayer Measure (DegreeAv)}
 
-We can now use \code{Degree} as the basis to implement the global measure \code{DegreeAv}.
+\subsection{Global unilayer measure (\code{DegreeAv})}
+
+You can now use \code{Degree} as the basis to implement the global measure \code{DegreeAv}.
+{%TEX
 The parts of the code that are modified are highlighted.
+}%TEX
 
 \begin{lstlisting}[
 	label=cd:m:degreeav:header,
 	caption={
 		{\bf DegreeAv element header.}
-		The \code{header} section of the generator code for \fn{\_DegreeAv.gen.m} provides the general information about the \code{DegreeAv} element.
+		The \code{header} section of the generator code in \fn{\_DegreeAv.gen.m} provides the general information about the \code{DegreeAv} element.
 		\expand{cd:m:degree:header}
 	}
 ]
 ¤%% ¡header!¤
-DegreeAv ¤<¤ Degree ¤(m, ¤average degree¤)¤ is the graph average degree. ¥\circled{1}\circlednote{1}{\code{DegreeAv} is a child of \code{Degree}.}¥
+DegreeAv ¤<¤ Degree ¤(m, ¤average degree¤)¤ is the graph average degree. ¥\circled{1}\circlednote{1}{ \code{DegreeAv} is a child of \code{Degree}.}¥
 
 ¤%%% ¡description!¤
 The average degree of a graph is the average of all number of edges connected to a node within a layer. 
 Connection weights are ignored in calculations.
+
+¤%%% ¡build!¤
+1
 \end{lstlisting}
 
 \begin{lstlisting}[
 	label=cd:m:degreeav:prop_update,
 	caption={
 		{\bf DegreeAv element prop update.}
-		The \code{props\_update} section of the generator code for \fn{\_DegreeAv.gen.m} updates the properties of the \code{Degree} element.
+		The \code{props\_update} section of the generator code in \fn{\_DegreeAv.gen.m} updates the properties of the \code{Degree} element.
 		\expand{cd:m:degree:prop_update}
 	}
 ]
@@ -246,7 +250,7 @@ COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 ¤%%% ¡prop!
 M (result, cell) is the ¤average degree¤.
 %%%% ¡calculate!¤
-degree = calculateValue@Degree(m, prop); ¥\circled{1}\circlednote{1}{calculates the value of the degree calling its parent \code{Degree}.}¥
+degree = calculateValue@Degree(m, prop); ¥\circled{1}\circlednote{1}{ calculates the value of the degree calling its parent \code{Degree}.}¥
 
 g = m.get('G');
 
@@ -300,17 +304,20 @@ assert(isequal(m_inside_g.get('M'), ¤known_degree_av¤), ...
 ...¤
 \end{lstlisting}
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\subsection{Binodal Unilayer Measure (Distance)}
 
-Now we implement the binodal measure \code{Distance}, again highlighting the differences.
+\subsection{Binodal unilayer measure (\code{Distance})}
+
+Now you will implement the binodal measure \code{Distance}. 
+{%TEX
+Again the differences in the code will be highlighted.
+}%TEX
 
 \begin{lstlisting}[
 	label=cd:m:distance:header,
 	caption={
 		{\bf Distance element header.}
-		The \code{header} section of the generator code for \fn{\_Distance.gen.m} provides the general information about the \code{Distance} element.
+		The \code{header} section of the generator code in \fn{\_Distance.gen.m} provides the general information about the \code{Distance} element.
 		\expand{cd:m:degree:header}
 	}
 ]
@@ -320,13 +327,16 @@ Distance ¤< Measure (m, ¤distance¤) ¤is the distance.
 ¤%%% ¡description!¤
 The distance of a graph is the shortest path between all pairs of nodes within a layer of the graph.
 For weighted graphs, the distance is calculated with the Dijkstra algorithm using the inverse weight as the distance associated to the edge.
+
+¤%%% ¡build!¤
+1
 \end{lstlisting}
 
 \begin{lstlisting}[
 	label=cd:m:distance:prop_update,
 	caption={
 		{\bf Distance element prop update.}
-		The \code{props\_update} section of the generator code for \fn{\_Distance.gen.m} updates the properties of the \code{Measure} element.
+		The \code{props\_update} section of the generator code in \fn{\_Distance.gen.m} updates the properties of the \code{Measure} element.
 		\expand{cd:m:degree:prop_update}
 	}
 ]
@@ -400,14 +410,14 @@ for li = 1:1:g.get('LAYERNUMBER')
     connectivity_layer = connectivity_type(li);
 
     if connectivity_layer == Graph.WEIGHTED  % weighted graphs
-        distance(li) = {getWeightedCalculation(Aii)}; ¥\circled{1}\twocirclednotes{1}{2}{call some callback functions that are provided below in \circled{3}.}¥
+        distance(li) = {getWeightedCalculation(Aii)}; ¥\circled{1}\circlednote{1}{ and \circled{2} call some callback functions that are provided below in \circled{3}.}¥
     else  % binary (i.e., non-weighted) graphs
         distance(li) = {getBinaryCalculation(Aii)}; ¥\circled{2}¥
     end
 end
 
 value = distance;
-%%%% ¡calculate_callbacks! ¥\circled{3}\circlednote{3}{This section contains the callback functions for the calculation of the measure.}¥
+%%%% ¡calculate_callbacks! ¥\circled{3}\circlednote{3}{ This section contains the callback functions for the calculation of the measure.}¥
 function weighted_distance = getWeightedCalculation(A)
     ...
 end
@@ -466,28 +476,32 @@ assert(isequal(m_inside_g.get('M'), ¤known_distance¤), ...
 ...¤
 \end{lstlisting}
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of Measure Parameters (Triangles)}
 
-Now, we implement the (nodal unilayer) measure \code{Triangles}, which depends on a parameter \code{RULE}, which we add as a property of category \code{parameter}.
+\section{Implementation of measure parameters (\code{Triangles})}
+
+Now, you will implement the (nodal unilayer) measure \code{Triangles}, which depends on a parameter \code{RULE}, which we add as a property of category \code{parameter}.
+{%TEX
 The parts of the code that are modified are highlighted.
+}%TEX
 
 \begin{lstlisting}[
 	label=cd:m:triangles:header,
 	caption={
 		{\bf Triangles element header.}
-		The \code{header} section of the generator code for \fn{\_Triangles.gen.m} provides the general information about the \code{Triangles} element.
+		The \code{header} section of the generator code in \fn{\_Triangles.gen.m} provides the general information about the \code{Triangles} element.
 		\expand{cd:m:triangles:header}
 	}
 ]
-
 ¤%% ¡header!¤
 Triangles ¤< Measure (m, ¤triangles¤) ¤is the triangles.
 
 ¤%%% ¡description!¤
 The triangles are calculated as the number of neighbors of a node that are also neighbors of each other within a layer. 
 In weighted graphs, the triangles are calculated as geometric mean of the weights of the edges forming the triangle.
+
+¤%%% ¡build!¤
+1
 \end{lstlisting}
 
 \begin{lstlisting}[
@@ -509,11 +523,11 @@ NAME (constant, string) is the name of the ¤triangles¤.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ¤triangles¤.
 %%%% ¡default!
-¤'The triangles are calculated as the number of neighbors of a node that are also neighbors of each other within a layer. In weighted graphs, the triangles are calculated as geometric mean of the weights of the edges forming the triangle.'¤
+¤'The triangles are calculated as the number of neighbors of a node that are also neighbors of each other within a layer. In weighted graphs, the triangles are calculated as geometric mean of the weights of the edges forming the triangle.'
 
-...
+¤...¤
 
-%%% ¡prop!
+¤%%% ¡prop!
 M (result, cell) is the ¤triangles¤.
 %%% ¡calculate!
 ¤g = m.get('G');  % graph from measure class
@@ -532,7 +546,7 @@ for li = 1:1:L
 		triangles(li) = {triangles_layer};
 	
 	else  % directed graphs
-		directed_triangles_rule = m.get('RULE'); ¥\circled{1}\circlednote{1}{gets the rule to calculate the measure Triangle. See below how this rule is defined in \circled{2}, \circled{3}, and \circled{4}.}¥
+		directed_triangles_rule = m.get('RULE'); ¥\circled{1}\circlednote{1}{ gets the rule to calculate the measure Triangle. See below how this rule is defined in \circled{2}, \circled{3}, and \circled{4}.}¥
 		switch lower(directed_triangles_rule)
 			case 'all'  % all rule
 				triangles_layer = diag((Aii.^(1/3) + transpose(Aii).^(1/3))^3) / 2;
@@ -556,11 +570,11 @@ value = triangles;¤
 ¤%% ¡props!
 
 %%% ¡prop! 
-RULE (parameter, option) is the rule to determine what is a triangle in a directed graph. ¥\circled{2}\circlednote{2}{defines a parameter to determine how the measure is calculated. This property must be of category \code{parameter}.}¥
+RULE (parameter, option) is the rule to determine what is a triangle in a directed graph. ¥\circled{2}\circlednote{2}{ defines a parameter to determine how the measure is calculated. This property must be of category \code{parameter}.}¥
 %%%% ¡settings!
-{'all' 'middleman' 'in' 'out' 'cycle'} ¥\circled{3}\circlednote{3}{defines the available triangle rule options, which are case sensitive.}¥
+{'all' 'middleman' 'in' 'out' 'cycle'} ¥\circled{3}\circlednote{3}{ defines the available triangle rule options, which are case sensitive.}¥
 %%%% ¡default!
-'cycle' ¥\circled{4}\circlednote{4}{defines the default option, in this case \code{'cycle'}.}¥
+'cycle' ¥\circled{4}\circlednote{4}{ defines the default option, in this case \code{'cycle'}.}¥
 \end{lstlisting}
 
 %\bibliography{biblio}

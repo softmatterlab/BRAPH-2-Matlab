@@ -11,6 +11,9 @@ It works for all categories, exept for __Category.RESULT__, __Category.QUERY__, 
 %%% ¡seealso!
 uieditfield, GUI, PanelElement
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

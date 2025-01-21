@@ -3,7 +3,7 @@ classdef AssortInIn < Measure
 	% It is a subclass of <a href="matlab:help Measure">Measure</a>.
 	%
 	% The In-In-Assortativity coefficient (AssortInIn) of a graph is the correlation coefficient between 
-	%   the degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
+	%   the inward degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
 	% The corresponding coefficient for directed and weighted networks is calculated by 
 	%   using the weighted and directed variants of in-degree/in-strength.
 	%
@@ -15,7 +15,7 @@ classdef AssortInIn < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the In-In-Assortativity.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the In-In-Assortativity.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the In-In-Assortativity.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -129,7 +129,7 @@ classdef AssortInIn < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the In-In-Assortativity.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the In-In-Assortativity.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the In-In-Assortativity.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -144,6 +144,21 @@ classdef AssortInIn < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the in-in-assortativity.
+			%
+			% BUILD = AssortInIn.GETBUILD() returns the build of 'AssortInIn'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the in-in-assortativity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('AssortInIn') returns the build of 'AssortInIn'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('AssortInIn')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the in-in-assortativity.
 			%
@@ -470,7 +485,7 @@ classdef AssortInIn < Measure
 			prop = AssortInIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortinin_description_list = { 'ELCLASS (constant, string) is the class of the In-In-Assortativity.'  'NAME (constant, string) is the name of the In-In-Assortativity.'  'DESCRIPTION (constant, string) is the description of the In-In-Assortativity.'  'TEMPLATE (parameter, item) is the template of the In-In-Assortativity.'  'ID (data, string) is a few-letter code of the In-In-Assortativity.'  'LABEL (metadata, string) is an extended label of the In-In-Assortativity.'  'NOTES (metadata, string) are some specific notes about the In-In-Assortativity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the In-In-Assortativity.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			assortinin_description_list = { 'ELCLASS (constant, string) is the class of the In-In-Assortativity.'  'NAME (constant, string) is the name of the In-In-Assortativity.'  'DESCRIPTION (constant, string) is the description of the In-In-Assortativity.'  'TEMPLATE (parameter, item) is the template of the In-In-Assortativity.'  'ID (data, string) is a few-letter code of the In-In-Assortativity.'  'LABEL (metadata, string) is an extended label of the In-In-Assortativity.'  'NOTES (metadata, string) are some specific notes about the In-In-Assortativity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the In-In-Assortativity.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = assortinin_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -530,7 +545,7 @@ classdef AssortInIn < Measure
 				case 2 % AssortInIn.NAME
 					prop_default = 'In-In-Assortativity';
 				case 3 % AssortInIn.DESCRIPTION
-					prop_default = 'The In-In-Assortativity coefficient (AssortInIn) of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-degree/in-strength.';
+					prop_default = 'The In-In-Assortativity coefficient (AssortInIn) of a graph is the correlation coefficient between the inward degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-degree/in-strength.';
 				case 4 % AssortInIn.TEMPLATE
 					prop_default = Format.getFormatDefault(8, AssortInIn.getPropSettings(prop));
 				case 5 % AssortInIn.ID
@@ -656,6 +671,8 @@ classdef AssortInIn < Measure
 					N = g.get('NODENUMBER');
 					in_in_assortativity = cell(L, 1);
 					connectivity_types = g.get('CONNECTIVITY_TYPE', L);  
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    Aii = A{li, li};
 					    connectivity_type = connectivity_types(li, li);
@@ -681,6 +698,7 @@ classdef AssortInIn < Measure
 					    
 					    in_in_assortativity(li) = {assortativity_layer};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = in_in_assortativity;
 					

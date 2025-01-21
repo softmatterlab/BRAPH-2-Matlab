@@ -10,6 +10,9 @@ MeasureEnsembleBrainPF_GS utilizes the surface created from BrainAtlasPF to inte
 %%% ¡seealso!
 BrainAtlas, BrainSurface, BrainAtlasPF
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

@@ -7,6 +7,9 @@ A Pipeline Exporter in BRAPH2 File (ExporterPipelineBRAPH2) exports a pipeline t
 %%% ¡seealso!
 Exporter, Pipeline, ImporterPipelineBRAPH2
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -141,7 +144,7 @@ Example
 .01
 %%%% ¡code!
 im = ImporterPipelineBRAPH2(...
-    'FILE', [fileparts(which('Pipeline')) filesep 'examples' filesep 'pipeline_atlas.braph2'], ...
+    'FILE', [fileparts(which('Pipeline')) filesep 'gui_examples' filesep 'pipeline_atlas.braph2'], ...
     'WAITBAR', true ...
     ); 
 pip = im.get('PIP');

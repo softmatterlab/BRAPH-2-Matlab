@@ -10,6 +10,9 @@ MeasureGroupBrainPF_NB  utilizes the surface created from BrainAtlasPF to integr
 %%% ¡seealso!
 BrainAtlas, BrainSurface, BrainAtlasPF
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

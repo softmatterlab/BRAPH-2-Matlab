@@ -7,6 +7,9 @@ Subject with a connectivity matrix (e.g. obtained from DTI).
 %%% ¡seealso!
 ImporterGroupSubjectCON_TXT, ExporterGroupSubjectCON_TXT, ImporterGroupSubjectCON_XLS, ExporterGroupSubjectCON_XLS
 
+%%% ¡build!
+1
+
 %% ¡gui!
 
 %%% ¡menu_import!
@@ -142,14 +145,14 @@ Subject NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the subject.
 %%%% ¡default!
 'SubjectCON'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the subject.
 %%%% ¡default!
-'SubjectCON'
+'Connectivity Subject'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the subject.

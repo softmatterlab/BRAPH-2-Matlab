@@ -8,6 +8,9 @@ The Assortativity coefficient (Assortativity) of a graph is the correlation coef
 The corresponding coefficient for directed and weighted networks is 
  calculated by using the weighted and directed variants of degree/strength.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

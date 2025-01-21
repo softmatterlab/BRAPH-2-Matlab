@@ -5,6 +5,9 @@ OverlappingDegAv < OverlappingDeg (m, average overlapping-degree) is the graph A
 The Average Overlapping Degree (OverlappingDegAv) of a graph is the average of the sum of the 
 degrees of a node in all layers. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

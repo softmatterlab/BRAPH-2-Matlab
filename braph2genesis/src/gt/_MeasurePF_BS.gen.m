@@ -7,6 +7,9 @@ A Panel Figure for Binodal Superglobal Measure (MeasurePF_BS) manages the basic 
 %%% ¡seealso!
 Measure
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -130,6 +133,7 @@ SETUP (query, empty) calculates the measure value and stores it.
 x = pf.get('M').get('G').get('APARTITIONTICKS');
 
 nodes = pf.get('NODES');
+
 y = cellfun(@(x) x(nodes(1), nodes(2)), pf.get('M').get('M'))';
 
 pf.memorize('ST_LINE').set('X', x, 'Y', y)
@@ -170,13 +174,17 @@ value = [];
 
 %%% ¡prop!
 NODES (figure, rvector) are the node numbers of the binodal measure.
+%%%% ¡default!
+[1 1]
+%%%% ¡postset!
+pf.get('SETUP')
 %%%% ¡gui!
 pr = MeasurePF_BxPP_Nodes('EL', pf, 'PROP', MeasurePF_BS.NODES);
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasurePF_BS.PARENT MeasurePF_BS.H MeasurePF_BS.ST_POSITION MeasurePF_BS.ST_AXIS MeasurePF_BS.ST_AREA MeasurePF_BS.ST_LINE MeasurePF_BS.ST_TITLE MeasurePF_BS.ST_XLABEL MeasurePF_BS.ST_YLABEL] 
+[MeasurePF_BS.SETUP MeasurePF_BS.PARENT MeasurePF_BS.H MeasurePF_BS.ST_POSITION MeasurePF_BS.ST_AXIS MeasurePF_BS.M MeasurePF_BS.ST_AREA MeasurePF_BS.ST_LINE MeasurePF_BS.ST_TITLE MeasurePF_BS.ST_XLABEL MeasurePF_BS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
@@ -186,6 +194,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':MeasurePF_BS'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':MeasurePF_BS'])

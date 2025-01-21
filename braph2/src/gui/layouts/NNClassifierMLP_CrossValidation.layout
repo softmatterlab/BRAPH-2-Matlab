@@ -56,8 +56,6 @@ PLOT TRAINING PROGRESS
 4
 Train All Neural Network Classifiers
 11
-P
-NaN
 Average of Area Under ROC Curve
 13
 Plot ROC Curve
@@ -66,5 +64,3 @@ Average of Macro Area Under ROC Curve
 14
 Confusion Matrix
 12
-Average of Feature Importance
-16

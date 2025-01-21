@@ -11,7 +11,7 @@ Cross Validation ID
 Cross Validation LABEL
 2
 Cross Validation NOTES
-22
+20
 TOSTRING
 NaN
 WAITBAR
@@ -56,8 +56,6 @@ PLOT TRAINING PROGRESS
 4
 TRAIN
 NaN
-Permutation Times for Feature Importance
-20
 Average of Correlation Coefficient
 15
 Average of Coefficient of Determination
@@ -68,7 +66,5 @@ Average of Mean Squared Error
 18
 Average of Root Mean Squared Error
 19
-Average of Feature Importance
-21
 Scatter Plot
 14

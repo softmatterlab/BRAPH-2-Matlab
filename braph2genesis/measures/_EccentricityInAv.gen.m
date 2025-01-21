@@ -5,6 +5,9 @@ EccentricityInAv < EccentricityIn (m, average in-eccentricity) is the graph Aver
 The Average In-Eccentricity (EccentricityInAv) of a node is the sum of the nodal 
 in-eccentricities divided by their number within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -123,9 +126,11 @@ eccentricity = calculateValue@EccentricityIn(m, prop);
 
 eccentricity_av = cell(L, 1);
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     eccentricity_av(li) = {mean(eccentricity{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = eccentricity_av;
 

@@ -7,6 +7,9 @@ ComparisonEnsemblePF_NU manages the basic functionalities to plot of a nodal uni
 %%% ¡seealso!
 ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

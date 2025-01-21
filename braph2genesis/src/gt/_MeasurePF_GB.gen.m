@@ -7,6 +7,9 @@ A Panel Figure for Global Bilayer Measure (MeasurePF_GB) manages the basic funct
 %%% ¡seealso!
 Measure
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

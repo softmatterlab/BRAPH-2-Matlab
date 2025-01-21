@@ -5,6 +5,9 @@ MultiplexKCor < Measure (m,  multiplex k-core) is the graph Multiplex K-Core.
 The Multiplex K-Core (MultiplexKCor) of a graph is the largest subnetwork comprising nodes of overlapping degree k or higher. 
 k is set by the user; the default value is equal to 1.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

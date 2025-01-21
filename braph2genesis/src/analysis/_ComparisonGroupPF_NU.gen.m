@@ -7,6 +7,9 @@ ComparisonGroupPF_NU manages the basic functionalities to plot of a nodal unilay
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

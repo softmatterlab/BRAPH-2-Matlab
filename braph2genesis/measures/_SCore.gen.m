@@ -5,6 +5,9 @@ SCore < Measure (m, score) is the S-Core.
 The S-Core (SCore) of a graph is the largest subnetwork comprising nodes of strength 
   s or higher. s is set by the user; the default value is equal to 1.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -121,6 +124,8 @@ assert(isnumeric(score_threshold) == 1, ...
 
 s_core = cell(L, 1);
 directionality_type = g.get('DIRECTIONALITY_TYPE', L);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L    
     
     Aii = A{li, li};
@@ -149,6 +154,8 @@ parfor li = 1:1:L
     end
     s_core(li) = {subAii};  % add s-core of layer li
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = s_core;
 
 %% ¡props!

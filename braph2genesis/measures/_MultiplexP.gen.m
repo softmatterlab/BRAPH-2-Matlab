@@ -10,6 +10,9 @@ It is calculated as: Pi = L/(L - 1) [1 - sum_{l=1}^{L} (ki(l)/oi)^2]
 Pi = 1 when the degree is the same in all layers and Pi = 0 when a 
  node has non-zero degree in only one layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -64,7 +67,7 @@ ELCLASS (constant, string) is the class of the Multiplex Participation.
 %%% ¡prop!
 NAME (constant, string) is the name of the Multiplex Participation.
 %%%% ¡default!
-'MultiplexParticipation'
+'Multiplex Participation'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the Multiplex Participation.

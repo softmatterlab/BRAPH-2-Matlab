@@ -2,13 +2,16 @@
 MultilayerBU < Graph (g, multilayer binary undirected graph) is a multilayer binary undirected graph.
 
 %%% ¡description!
-In a multilayer binary undirected (BU) graph, layers could have different number
+In a multilayer binary undirected graph (MultilayerBU), layers could have different number
  of nodes with within-layer undirected edges either 0 (absence of connection) 
  or 1 (existence of connection).
 The connectivity matrices are symmetric (within layer).
 All node connections are allowed between layers.
 On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized.
 On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -111,19 +114,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the multilayer binary undirected graph.
 %%%% ¡default!
 'MultilayerBU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the multilayer binary undirected graph.
 %%%% ¡default!
-'MultilayerBU'
+'Multilayer Binary Undirected'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multilayer binary undirected graph.
 %%%% ¡default!
-'In a multilayer binary undirected (BU) graph, layers could have different number of nodes with within-layer undirected edges either 0 (absence of connection) or 1 (existence of connection). The connectivity matrices are symmetric (within layer). All node connections are allowed between layers. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
+'In a multilayer binary undirected graph (MultilayerBU), layers could have different number of nodes with within-layer undirected edges either 0 (absence of connection) or 1 (existence of connection). The connectivity matrices are symmetric (within layer). All node connections are allowed between layers. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multilayer binary undirected graph.

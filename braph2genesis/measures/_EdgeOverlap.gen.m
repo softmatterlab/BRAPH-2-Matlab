@@ -5,6 +5,9 @@ EdgeOverlap < Measure (m, edge overlap) is the graph Edge Overlap.
 The Edge Overlap (EdgeOverlap) of a graph is the fraction of layers in which an edge between 
 a pair of nodes exists. Connection weights are ignored in calculations.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

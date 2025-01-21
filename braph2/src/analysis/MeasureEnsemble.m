@@ -12,7 +12,7 @@ classdef MeasureEnsemble < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graph ensemble measure.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graph ensemble measure.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graph ensemble measure.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>MEASURE</strong> 	MEASURE (data, class) is the measure class.
 	%  <strong>10</strong> <strong>A</strong> 	A (data, item) is the ensemble-based graph analysis.
 	%  <strong>11</strong> <strong>M</strong> 	M (result, cell) is the measure group-average result.
@@ -106,6 +106,8 @@ classdef MeasureEnsemble < ConcreteElement
 	%
 	%
 	% See also AnalyzeEnsemble, CompareEnsemble.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		MEASURE = 9; %CET: Computational Efficiency Trick
@@ -152,7 +154,7 @@ classdef MeasureEnsemble < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graph ensemble measure.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graph ensemble measure.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graph ensemble measure.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>MEASURE</strong> 	MEASURE (data, class) is the measure class.
 			%  <strong>10</strong> <strong>A</strong> 	A (data, item) is the ensemble-based graph analysis.
 			%  <strong>11</strong> <strong>M</strong> 	M (result, cell) is the measure group-average result.
@@ -165,6 +167,21 @@ classdef MeasureEnsemble < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graph ensemble measure.
+			%
+			% BUILD = MeasureEnsemble.GETBUILD() returns the build of 'MeasureEnsemble'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = ME.GETBUILD() returns the build of the graph ensemble measure ME.
+			%  BUILD = Element.GETBUILD(ME) returns the build of 'ME'.
+			%  BUILD = Element.GETBUILD('MeasureEnsemble') returns the build of 'MeasureEnsemble'.
+			%
+			% Note that the Element.GETBUILD(ME) and Element.GETBUILD('MeasureEnsemble')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function me_class = getClass()
 			%GETCLASS returns the class of the graph ensemble measure.
 			%
@@ -491,7 +508,7 @@ classdef MeasureEnsemble < ConcreteElement
 			prop = MeasureEnsemble.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measureensemble_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the graph ensemble measure.'  'DESCRIPTION (constant, string) is the description of the graph ensemble measure.'  'TEMPLATE (parameter, item) is the template of the graph ensemble measure.'  'ID (data, string) is a few-letter code for the graph ensemble measure.'  'LABEL (metadata, string) is an extended label of the graph ensemble measure.'  'NOTES (metadata, string) are some specific notes about the graph ensemble measure.'  'TOSTRING (query, string) returns a string that represents the object.'  'MEASURE (data, class) is the measure class.'  'A (data, item) is the ensemble-based graph analysis.'  'M (result, cell) is the measure group-average result.'  'PFME (gui, item) contains the panel figure of the measure.'  'PFBG (gui, item) contains the panel figure of the brain graph.' };
+			measureensemble_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the graph ensemble measure.'  'DESCRIPTION (constant, string) is the description of the graph ensemble measure.'  'TEMPLATE (parameter, item) is the template of the graph ensemble measure.'  'ID (data, string) is a few-letter code for the graph ensemble measure.'  'LABEL (metadata, string) is an extended label of the graph ensemble measure.'  'NOTES (metadata, string) are some specific notes about the graph ensemble measure.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'MEASURE (data, class) is the measure class.'  'A (data, item) is the ensemble-based graph analysis.'  'M (result, cell) is the measure group-average result.'  'PFME (gui, item) contains the panel figure of the measure.'  'PFBG (gui, item) contains the panel figure of the brain graph.' };
 			prop_description = measureensemble_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

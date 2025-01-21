@@ -60,18 +60,18 @@ classdef Format < handle
     %               (network, SeriesNetwork, DAGNetwork, dlnetwork).
     %
     %  HANDLE       Handle is a handle for a graphical or listener component.
-    %               It should only be used as an EVANESCENT property.
+    %               It should only be used as an evanescent property.
     %
     %  HANDLELIST   HandleList is a cell array with handles for graphical 
     %               or listener components.
-    %               It should only be used as an EVANESCENT property.
+    %               It should only be used as an evanescent property.
     %
-    %  COLOR        Color is an RGB color.
+    %  COLOR        Color is an RGB color, e.g., '[1 0 0' for red.
     %
     %  ALPHA        Alpha is a transparency level between 0 and 1.
     %
-    %  SIZE         Size represents the size of a graphical componet.
-    %               It is a positive numebr (default = 1).
+    %  SIZE         Size represents the size of a graphical component.
+    %               It is a positive number (default = 1).
     %
     %  MARKER       Marker represents the marker style.
     %               It can be 'o' (circle), '+' (plus), '*' (asterisk), 
@@ -299,7 +299,7 @@ classdef Format < handle
         CELL = 16
         CELL_TAG = 'll'
         CELL_NAME = 'cell'
-        CELL_DESCRIPTION = 'Cell is a 2D cell array of numeric data, typically used for adjaciency matrices and measures.'
+        CELL_DESCRIPTION = 'Cell is a 2D cell array of numeric data, typically used for adjacency matrices and measures.'
         
         NET = 17
         NET_TAG = 'ml'
@@ -309,12 +309,12 @@ classdef Format < handle
         HANDLE = 18
         HANDLE_TAG = 'ha'
         HANDLE_NAME = 'handle'
-        HANDLE_DESCRIPTION = 'Handle is a handle for a graphical or listener component. It should only be used as an EVANESCENT property.'
+        HANDLE_DESCRIPTION = 'Handle is a handle for a graphical or listener component. It should only be used as an evanescent property.'
 
         HANDLELIST = 19
         HANDLELIST_TAG = 'hl'
         HANDLELIST_NAME = 'handlelist'
-        HANDLELIST_DESCRIPTION = 'HandleList is a cell array with handles for graphical or listener components. It should only be used as an EVANESCENT property.'
+        HANDLELIST_DESCRIPTION = 'HandleList is a cell array with handles for graphical or listener components. It should only be used as an evanescent property.'
 
         COLOR = 20
         COLOR_TAG = 'co'
@@ -329,7 +329,7 @@ classdef Format < handle
         SIZE = 22
         SIZE_TAG = 'sz'
         SIZE_NAME = 'size'
-        SIZE_DESCRIPTION = 'Size represents the size of a graphical component. It is a positive numebr (default = 1).'
+        SIZE_DESCRIPTION = 'Size represents the size of a graphical component. It is a positive number (default = 1).'
 
         MARKER = 23
         MARKER_TAG = 'mr'
@@ -616,19 +616,19 @@ classdef Format < handle
                 case 15 % Format.SMATRIX
                     format_description = 'Smatrix is a numerical square matrix.';
                 case 16 % Format.CELL
-                    format_description = 'Cell is a 2D cell array of numeric data, typically used for adjaciency matrices and measures.';
+                    format_description = 'Cell is a 2D cell array of numeric data, typically used for adjacency matrices and measures.';
                 case 17 % Format.NET
                     format_description = 'Net is a MatLab neural network object (network, SeriesNetwork, DAGNetwork, dlnetwork).';
                 case 18 % Format.HANDLE
-                    format_description = 'Handle is a handle for a graphical or listener component. It should only be used as an EVANESCENT property.';
+                    format_description = 'Handle is a handle for a graphical or listener component. It should only be used as an evanescent property.';
                 case 19 % Format.HANDLELIST
-                    format_description = 'HandleList is a cell array with handles for graphical or listener components. It should only be used as an EVANESCENT property.';
+                    format_description = 'HandleList is a cell array with handles for graphical or listener components. It should only be used as an evanescent property.';
                 case 20 % Format.COLOR
                     format_description = 'Color is an RGB color.';
                 case 21 % Format.ALPHA
                     format_description = 'Alpha is a transparency level between 0 and 1.';
                 case 22 % Format.SIZE
-                    format_description = 'Size represents the size of a graphical component. It is a positive numebr (default = 1).';
+                    format_description = 'Size represents the size of a graphical component. It is a positive number (default = 1).';
                 case 23 % Format.MARKER
                     format_description = 'Marker represents the marker style. It can be ''o'' (circle), ''+'' (plus), ''*'' (asterisk), ''.'' (point), ''x'' (cross), ''_'' (horizontal line), ''|'' (vertical line), ''s'' (square), ''d'' (diamond), ''^'' (upward triangle), ''v'' (downward triangle), ''>'' (right triangle), ''<'' (left triangle), ''p'' (pentagram), ''h'' (hexagram), '''' (no marker).';
                 case 24 % Format.LINE

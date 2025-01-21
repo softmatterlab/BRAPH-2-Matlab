@@ -8,6 +8,9 @@ Instances of this class should not be created; Use one of its subclasses instead
 %%% ¡seealso!
 CompareGroup
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

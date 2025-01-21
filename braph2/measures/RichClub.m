@@ -15,7 +15,7 @@ classdef RichClub < Degree
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Rich-Club.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Rich-Club.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Rich-Club.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.PARAMETRIC.
@@ -23,7 +23,7 @@ classdef RichClub < Degree
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Rich-Club.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, scalar) 
+	%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, scalar) is the threshold (k).
 	%
 	% RichClub methods (constructor):
 	%  RichClub - constructor
@@ -136,7 +136,7 @@ classdef RichClub < Degree
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Rich-Club.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Rich-Club.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Rich-Club.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.PARAMETRIC.
@@ -144,7 +144,7 @@ classdef RichClub < Degree
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Rich-Club.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, scalar) 
+			%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, scalar) is the threshold (k).
 			%
 			% See also Category, Format.
 			
@@ -152,6 +152,21 @@ classdef RichClub < Degree
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the rich-club.
+			%
+			% BUILD = RichClub.GETBUILD() returns the build of 'RichClub'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the rich-club M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('RichClub') returns the build of 'RichClub'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('RichClub')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the rich-club.
 			%
@@ -478,7 +493,7 @@ classdef RichClub < Degree
 			prop = RichClub.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			richclub_description_list = { 'ELCLASS (constant, string) is the class of the Rich-Club.'  'NAME (constant, string) is the name of the Rich-Club.'  'DESCRIPTION (constant, string) is the description of the Rich-Club.'  'TEMPLATE (parameter, item) is the template of the Rich-Club.'  'ID (data, string) is a few-letter code of the Rich-Club.'  'LABEL (metadata, string) is an extended label of the Rich-Club.'  'NOTES (metadata, string) are some specific notes about the Rich-Club.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.PARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Rich-Club.'  'PFM (gui, item) contains the panel figure of the measure.'  'PARAMETRIC_VALUE (parameter, scalar) ' };
+			richclub_description_list = { 'ELCLASS (constant, string) is the class of the Rich-Club.'  'NAME (constant, string) is the name of the Rich-Club.'  'DESCRIPTION (constant, string) is the description of the Rich-Club.'  'TEMPLATE (parameter, item) is the template of the Rich-Club.'  'ID (data, string) is a few-letter code of the Rich-Club.'  'LABEL (metadata, string) is an extended label of the Rich-Club.'  'NOTES (metadata, string) are some specific notes about the Rich-Club.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.PARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Rich-Club.'  'PFM (gui, item) contains the panel figure of the measure.'  'PARAMETRIC_VALUE (parameter, scalar) is the threshold (k).' };
 			prop_description = richclub_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

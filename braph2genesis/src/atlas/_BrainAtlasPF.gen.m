@@ -10,6 +10,9 @@ BrainAtlasPF utilizes the surface created from BrainSurfacePF to integrate
 %%% ¡seealso!
 BrainAtlas, BrainSurface
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

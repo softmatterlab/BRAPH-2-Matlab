@@ -5,6 +5,9 @@ OverlappingDegOutAv < OverlappingDegOut (m, average overlapping out-degree) is t
 The Average Overlapping Out-Degree (OverlappingDegOutAv) of a graph is the average of the sum of the 
 out-degrees of a node in all layers. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

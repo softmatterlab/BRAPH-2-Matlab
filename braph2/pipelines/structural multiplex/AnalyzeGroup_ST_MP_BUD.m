@@ -6,14 +6,14 @@ classdef AnalyzeGroup_ST_MP_BUD < AnalyzeGroup
 	% analyzes them using binary undirected graphs.
 	%
 	% The list of AnalyzeGroup_ST_MP_BUD properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the graph analysis with structural multiplex data of fixed density.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graph analysis with structural multiplex data of fixed density.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graph analysis with structural multiplex data of fixed density.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the graph analysis with structural multiplex data of fixed density.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graph analysis with structural multiplex data of fixed density.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graph analysis with structural multiplex data of fixed density.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graph analysis with structural multiplex data of fixed density.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectST_MP.
 	%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the graph obtained from this analysis.
@@ -108,6 +108,8 @@ classdef AnalyzeGroup_ST_MP_BUD < AnalyzeGroup
 	%
 	%
 	% See also SubjectST_MP, MultiplexBUD.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		CORRELATION_RULE = 12; %CET: Computational Efficiency Trick
@@ -137,14 +139,14 @@ classdef AnalyzeGroup_ST_MP_BUD < AnalyzeGroup
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of AnalyzeGroup_ST_MP_BUD properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the graph analysis with structural multiplex data of fixed density.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graph analysis with structural multiplex data of fixed density.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graph analysis with structural multiplex data of fixed density.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the graph analysis with structural multiplex data of fixed density.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graph analysis with structural multiplex data of fixed density.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graph analysis with structural multiplex data of fixed density.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graph analysis with structural multiplex data of fixed density.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectST_MP.
 			%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the graph obtained from this analysis.
@@ -158,6 +160,21 @@ classdef AnalyzeGroup_ST_MP_BUD < AnalyzeGroup
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graph analysis with structural multiplex data of fixed density.
+			%
+			% BUILD = AnalyzeGroup_ST_MP_BUD.GETBUILD() returns the build of 'AnalyzeGroup_ST_MP_BUD'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the graph analysis with structural multiplex data of fixed density A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeGroup_ST_MP_BUD') returns the build of 'AnalyzeGroup_ST_MP_BUD'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeGroup_ST_MP_BUD')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the graph analysis with structural multiplex data of fixed density.
 			%
@@ -484,7 +501,7 @@ classdef AnalyzeGroup_ST_MP_BUD < AnalyzeGroup
 			prop = AnalyzeGroup_ST_MP_BUD.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			analyzegroup_st_mp_bud_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the graph analysis with structural multiplex data of fixed density.'  'DESCRIPTION (constant, string) is the description of the graph analysis with structural multiplex data of fixed density.'  'TEMPLATE (parameter, item) is the template of the graph analysis with structural multiplex data of fixed density.'  'ID (data, string) is a few-letter code for the graph analysis with structural multiplex data of fixed density.'  'LABEL (metadata, string) is an extended label of the graph analysis with structural multiplex data of fixed density.'  'NOTES (metadata, string) are some specific notes about the graph analysis with structural multiplex data of fixed density.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectST_MP.'  'G (result, item) is the graph obtained from this analysis.'  'CORRELATION_RULE (parameter, option) is the correlation type.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights.'  'DENSITIES (parameter, rvector) is the vector of densities.' };
+			analyzegroup_st_mp_bud_description_list = { 'ELCLASS (constant, string) is the class of the graph analysis with structural multiplex data of fixed density.'  'NAME (constant, string) is the name of the graph analysis with structural multiplex data of fixed density.'  'DESCRIPTION (constant, string) is the description of the graph analysis with structural multiplex data of fixed density.'  'TEMPLATE (parameter, item) is the template of the graph analysis with structural multiplex data of fixed density.'  'ID (data, string) is a few-letter code for the graph analysis with structural multiplex data of fixed density.'  'LABEL (metadata, string) is an extended label of the graph analysis with structural multiplex data of fixed density.'  'NOTES (metadata, string) are some specific notes about the graph analysis with structural multiplex data of fixed density.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectST_MP.'  'G (result, item) is the graph obtained from this analysis.'  'CORRELATION_RULE (parameter, option) is the correlation type.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights.'  'DENSITIES (parameter, rvector) is the vector of densities.' };
 			prop_description = analyzegroup_st_mp_bud_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -556,7 +573,7 @@ classdef AnalyzeGroup_ST_MP_BUD < AnalyzeGroup
 				case 1 % AnalyzeGroup_ST_MP_BUD.ELCLASS
 					prop_default = 'AnalyzeGroup_ST_MP_BUD';
 				case 2 % AnalyzeGroup_ST_MP_BUD.NAME
-					prop_default = 'AnalyzeGroup_ST_MP_BUD';
+					prop_default = 'Multiplex Structural Binary Undirected at fixed Densities Analyze Group';
 				case 3 % AnalyzeGroup_ST_MP_BUD.DESCRIPTION
 					prop_default = 'This graph analysis uses structural multiplex data of fixed density and analyzes them using binary undirected graphs.';
 				case 4 % AnalyzeGroup_ST_MP_BUD.TEMPLATE

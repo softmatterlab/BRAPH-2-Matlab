@@ -2,7 +2,7 @@
 OrdMlWU < Graph (g, ordinal multilayer weighted undirected graph) is an ordinal multilayer weighted undirected graph.
 
 %%% ¡description!
-In an ordinal multilayer weighted undirected (WU) graph, layers could have different number 
+In an ordinal multilayer weighted undirected graph (OrdMlWU), layers could have different number 
  of nodes with within-layer weighted undirected edges, associated with a real 
  number between 0 and 1 and indicating the strength of the connection.
 The connectivity matrices are symmetric (within layer).
@@ -10,6 +10,9 @@ All node connections are allowed between layers.
 The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.
 On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and standardized.
 On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and standardized.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -124,19 +127,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ordinal multilayer weighted undirected graph.
 %%%% ¡default!
 'OrdMlWU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the ordinal multilayer weighted undirected graph.
 %%%% ¡default!
-'OrdMlWU'
+'Ordinal Multilayer Weightd Undirected Graph'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ordinal multilayer weighted undirected graph.
 %%%% ¡default!
-'In an ordinal multilayer weighted undirected (WU) graph, layers could have different number of nodes with within-layer weighted undirected edges, associated with a real number between 0 and 1 and indicating the strength of the connection. The connectivity matrices are symmetric (within layer). All node connections are allowed between layers. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
+'In an ordinal multilayer weighted undirected graph (OrdMlWU), layers could have different number of nodes with within-layer weighted undirected edges, associated with a real number between 0 and 1 and indicating the strength of the connection. The connectivity matrices are symmetric (within layer). All node connections are allowed between layers. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the ordinal multilayer weighted undirected graph.

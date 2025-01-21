@@ -7,14 +7,14 @@ classdef AnalyzeGroup_CON_MP_GA_WU < AnalyzeGroup
 	% or binary undirected multigraphs with fixed densities.
 	%
 	% The list of AnalyzeGroup_CON_MP_GA_WU properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the group-based graph analysis with connectivity multiplex data.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the group-based graph analysis with connectivity multiplex data.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the group-based graph analysis with connectivity multiplex data.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the group-based graph analysis with connectivity multiplex data.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group-based graph analysis with connectivity multiplex data.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group-based graph analysis with connectivity multiplex data.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group-based graph analysis with connectivity multiplex data.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectCON_MP.
 	%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the average graph (MultiplexWU) obtained from this analysis.
@@ -106,6 +106,8 @@ classdef AnalyzeGroup_CON_MP_GA_WU < AnalyzeGroup
 	%
 	%
 	% See also SubjectCON_MP, MultiplexWU.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	methods % constructor
 		function a = AnalyzeGroup_CON_MP_GA_WU(varargin)
@@ -119,14 +121,14 @@ classdef AnalyzeGroup_CON_MP_GA_WU < AnalyzeGroup
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of AnalyzeGroup_CON_MP_GA_WU properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the group-based graph analysis with connectivity multiplex data.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the group-based graph analysis with connectivity multiplex data.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the group-based graph analysis with connectivity multiplex data.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the group-based graph analysis with connectivity multiplex data.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group-based graph analysis with connectivity multiplex data.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group-based graph analysis with connectivity multiplex data.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group-based graph analysis with connectivity multiplex data.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectCON_MP.
 			%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the average graph (MultiplexWU) obtained from this analysis.
@@ -137,6 +139,21 @@ classdef AnalyzeGroup_CON_MP_GA_WU < AnalyzeGroup
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the group-based graph analysis with connectivity multiplex data.
+			%
+			% BUILD = AnalyzeGroup_CON_MP_GA_WU.GETBUILD() returns the build of 'AnalyzeGroup_CON_MP_GA_WU'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the group-based graph analysis with connectivity multiplex data A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeGroup_CON_MP_GA_WU') returns the build of 'AnalyzeGroup_CON_MP_GA_WU'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeGroup_CON_MP_GA_WU')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the group-based graph analysis with connectivity multiplex data.
 			%
@@ -463,7 +480,7 @@ classdef AnalyzeGroup_CON_MP_GA_WU < AnalyzeGroup
 			prop = AnalyzeGroup_CON_MP_GA_WU.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			analyzegroup_con_mp_ga_wu_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the group-based graph analysis with connectivity multiplex data.'  'DESCRIPTION (constant, string) is the description of the group-based graph analysis with connectivity multiplex data.'  'TEMPLATE (parameter, item) is the template of the group-based graph analysis with connectivity multiplex data.'  'ID (data, string) is a few-letter code for the group-based graph analysis with connectivity multiplex data.'  'LABEL (metadata, string) is an extended label of the group-based graph analysis with connectivity multiplex data.'  'NOTES (metadata, string) are some specific notes about the group-based graph analysis with connectivity multiplex data.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectCON_MP.'  'G (result, item) is the average graph (MultiplexWU) obtained from this analysis.' };
+			analyzegroup_con_mp_ga_wu_description_list = { 'ELCLASS (constant, string) is the class of the group-based graph analysis with connectivity multiplex data.'  'NAME (constant, string) is the name of the group-based graph analysis with connectivity multiplex data.'  'DESCRIPTION (constant, string) is the description of the group-based graph analysis with connectivity multiplex data.'  'TEMPLATE (parameter, item) is the template of the group-based graph analysis with connectivity multiplex data.'  'ID (data, string) is a few-letter code for the group-based graph analysis with connectivity multiplex data.'  'LABEL (metadata, string) is an extended label of the group-based graph analysis with connectivity multiplex data.'  'NOTES (metadata, string) are some specific notes about the group-based graph analysis with connectivity multiplex data.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectCON_MP.'  'G (result, item) is the average graph (MultiplexWU) obtained from this analysis.' };
 			prop_description = analyzegroup_con_mp_ga_wu_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -523,7 +540,7 @@ classdef AnalyzeGroup_CON_MP_GA_WU < AnalyzeGroup
 				case 1 % AnalyzeGroup_CON_MP_GA_WU.ELCLASS
 					prop_default = 'AnalyzeGroup_CON_MP_GA_WU';
 				case 2 % AnalyzeGroup_CON_MP_GA_WU.NAME
-					prop_default = 'AnalyzeGroup_CON_MP_GA_WU';
+					prop_default = 'Multiplex Connectivity Weighted Undirected Group Average Analyze';
 				case 3 % AnalyzeGroup_CON_MP_GA_WU.DESCRIPTION
 					prop_default = 'This graph analysis uses connectivity multiplex data and analyzes them using weighted undirected graphs, binary undirected multigraphs with fixed thresholds, or binary undirected multigraphs with fixed densities.';
 				case 4 % AnalyzeGroup_CON_MP_GA_WU.TEMPLATE

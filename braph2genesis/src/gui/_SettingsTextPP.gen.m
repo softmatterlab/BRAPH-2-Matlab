@@ -11,6 +11,9 @@ It works for all categories.
 %%% ¡seealso!
 SettingsText, uieditfield, uipushbutton, uislider
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

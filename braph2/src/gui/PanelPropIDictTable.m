@@ -1,8 +1,8 @@
 classdef PanelPropIDictTable < PanelProp
-	%PanelPropIDictTable plots the panel of a prop idict in a table.
+	%PanelPropIDictTable plots the panel of a property idict in a table.
 	% It is a subclass of <a href="matlab:help PanelProp">PanelProp</a>.
 	%
-	% An Indexed-Dictionary Prop Panel with Table (PanelPropIDictTable) plots the panel of an IDICT prop with a table.
+	% An Indexed-Dictionary Prop Panel with Table (PanelPropIDictTable) plots the panel of an IDICT property with a table.
 	% It works for all categories.
 	% 
 	% It can be personalized with the following props:
@@ -25,17 +25,17 @@ classdef PanelPropIDictTable < PanelProp
 	%           cb_table_edit_default()
 	%
 	% The list of PanelPropIDictTable properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the idict prop panel with table.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the idict prop panel with table.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the idict prop panel with table.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the idict prop panel with table.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the idict prop panel with table.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the idict prop panel with table.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the idict prop panel with table.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the idict property panel with table.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the idict property panel with table.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the idict property panel with table.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the idict property panel with table.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the idict property panel with table.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the idict property panel with table.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the idict property panel with table.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
 	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -44,11 +44,11 @@ classdef PanelPropIDictTable < PanelProp
 	%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the item figures.
 	%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
 	%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.
-	%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the prop panel.
+	%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
 	%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
-	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.
+	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
 	%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
-	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the prop number.
+	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
 	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
 	%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
 	%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
@@ -60,7 +60,7 @@ classdef PanelPropIDictTable < PanelProp
 	%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
 	%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
 	%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-	%  <strong>36</strong> <strong>TABLE_HEIGHT</strong> 	TABLE_HEIGHT (gui, size) is the pixel height of the prop panel when the table is shown.
+	%  <strong>36</strong> <strong>TABLE_HEIGHT</strong> 	TABLE_HEIGHT (gui, size) is the pixel height of the property panel when the table is shown.
 	%  <strong>37</strong> <strong>SELECTED</strong> 	SELECTED (gui, cvector) is the list of selected items.
 	%  <strong>38</strong> <strong>COLS</strong> 	COLS (gui, rvector) is the ordered list of columns.
 	%  <strong>39</strong> <strong>ROWNAME</strong> 	ROWNAME (gui, stringlist) determines the table row names.
@@ -163,6 +163,8 @@ classdef PanelPropIDictTable < PanelProp
 	%
 	%
 	% See also uitable, GUI, PanelPropIDict, PanelElement, GUIElement.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % constants
 		SELECTOR = -1 % code for the selector column.
@@ -255,17 +257,17 @@ classdef PanelPropIDictTable < PanelProp
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of PanelPropIDictTable properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the idict prop panel with table.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the idict prop panel with table.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the idict prop panel with table.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the idict prop panel with table.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the idict prop panel with table.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the idict prop panel with table.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the idict prop panel with table.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the idict property panel with table.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the idict property panel with table.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the idict property panel with table.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the idict property panel with table.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the idict property panel with table.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the idict property panel with table.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the idict property panel with table.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
 			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -274,11 +276,11 @@ classdef PanelPropIDictTable < PanelProp
 			%  <strong>17</strong> <strong>HIDE</strong> 	HIDE (query, logical) hides the figure containing the panel and, possibly, the item figures.
 			%  <strong>18</strong> <strong>DELETE</strong> 	DELETE (query, logical) resets the handles when the panel is deleted.
 			%  <strong>19</strong> <strong>CLOSE</strong> 	CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.
-			%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the prop panel.
+			%  <strong>20</strong> <strong>X_DRAW</strong> 	X_DRAW (query, logical) draws the property panel.
 			%  <strong>21</strong> <strong>UPDATE</strong> 	UPDATE (query, logical) updates the content and permissions of the table.
-			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.
+			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
 			%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
-			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the prop number.
+			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
 			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel.
 			%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
 			%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
@@ -290,7 +292,7 @@ classdef PanelPropIDictTable < PanelProp
 			%  <strong>33</strong> <strong>LISTENER_SET</strong> 	LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.
 			%  <strong>34</strong> <strong>LISTENER_MEMORIZED</strong> 	LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.
 			%  <strong>35</strong> <strong>LISTENER_LOCKED</strong> 	LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.
-			%  <strong>36</strong> <strong>TABLE_HEIGHT</strong> 	TABLE_HEIGHT (gui, size) is the pixel height of the prop panel when the table is shown.
+			%  <strong>36</strong> <strong>TABLE_HEIGHT</strong> 	TABLE_HEIGHT (gui, size) is the pixel height of the property panel when the table is shown.
 			%  <strong>37</strong> <strong>SELECTED</strong> 	SELECTED (gui, cvector) is the list of selected items.
 			%  <strong>38</strong> <strong>COLS</strong> 	COLS (gui, rvector) is the ordered list of columns.
 			%  <strong>39</strong> <strong>ROWNAME</strong> 	ROWNAME (gui, stringlist) determines the table row names.
@@ -312,6 +314,21 @@ classdef PanelPropIDictTable < PanelProp
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the idict prop panel with table.
+			%
+			% BUILD = PanelPropIDictTable.GETBUILD() returns the build of 'PanelPropIDictTable'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PR.GETBUILD() returns the build of the idict prop panel with table PR.
+			%  BUILD = Element.GETBUILD(PR) returns the build of 'PR'.
+			%  BUILD = Element.GETBUILD('PanelPropIDictTable') returns the build of 'PanelPropIDictTable'.
+			%
+			% Note that the Element.GETBUILD(PR) and Element.GETBUILD('PanelPropIDictTable')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pr_class = getClass()
 			%GETCLASS returns the class of the idict prop panel with table.
 			%
@@ -642,7 +659,7 @@ classdef PanelPropIDictTable < PanelProp
 			prop = PanelPropIDictTable.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelpropidicttable_description_list = { 'ELCLASS (constant, string) is the class of the idict prop panel with table.'  'NAME (constant, string) is the name of the idict prop panel with table.'  'DESCRIPTION (constant, string) is the description of the idict prop panel with table.'  'TEMPLATE (parameter, item) is the template of the idict prop panel with table.'  'ID (data, string) is a few-letter code for the idict prop panel with table.'  'LABEL (metadata, string) is an extended label of the idict prop panel with table.'  'NOTES (metadata, string) are some specific notes about the idict prop panel with table.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the item figures.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the item figures.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.'  'X_DRAW (query, logical) draws the prop panel.'  'UPDATE (query, logical) updates the content and permissions of the table.'  'REDRAW (query, logical) resizes the prop panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the prop number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'TABLE_HEIGHT (gui, size) is the pixel height of the prop panel when the table is shown.'  'SELECTED (gui, cvector) is the list of selected items.'  'COLS (gui, rvector) is the ordered list of columns.'  'ROWNAME (gui, stringlist) determines the table row names.'  'COLUMNNAME (gui, stringlist) determines the table column names.'  'COLUMNWIDTH (gui, stringlist) determines the column widths.'  'COLUMNEDITABLE (gui, rvector) determines whether the columns are editable.'  'COLUMNFORMAT (gui, stringlist) determines the columns formats.'  'CB_TAB_EDIT (gui, string) is executed when a cell is updated (to be evaluated).'  'TABLE (evanescent, handle) is the table.'  'MENU_OPEN_ITEMS (gui, logical) determines whether to show the context menu to open the items.'  'APPLY_TO_SELECTION (gui, logical) determines whether to show the apply to selection button.'  'MENU_EXPORT (gui, logical) determines whether to show the context menu to export data.'  'CONTEXTMENU (evanescent, handle) is the context menu.'  'GUI_ITS_DICT (gui, idict) contains the GUIs for the items.' };
+			panelpropidicttable_description_list = { 'ELCLASS (constant, string) is the class of the idict property panel with table.'  'NAME (constant, string) is the name of the idict property panel with table.'  'DESCRIPTION (constant, string) is the description of the idict property panel with table.'  'TEMPLATE (parameter, item) is the template of the idict property panel with table.'  'ID (data, string) is a few-letter code for the idict property panel with table.'  'LABEL (metadata, string) is an extended label of the idict property panel with table.'  'NOTES (metadata, string) are some specific notes about the idict property panel with table.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the item figures.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the item figures.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the table.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'TABLE_HEIGHT (gui, size) is the pixel height of the property panel when the table is shown.'  'SELECTED (gui, cvector) is the list of selected items.'  'COLS (gui, rvector) is the ordered list of columns.'  'ROWNAME (gui, stringlist) determines the table row names.'  'COLUMNNAME (gui, stringlist) determines the table column names.'  'COLUMNWIDTH (gui, stringlist) determines the column widths.'  'COLUMNEDITABLE (gui, rvector) determines whether the columns are editable.'  'COLUMNFORMAT (gui, stringlist) determines the columns formats.'  'CB_TAB_EDIT (gui, string) is executed when a cell is updated (to be evaluated).'  'TABLE (evanescent, handle) is the table.'  'MENU_OPEN_ITEMS (gui, logical) determines whether to show the context menu to open the items.'  'APPLY_TO_SELECTION (gui, logical) determines whether to show the apply to selection button.'  'MENU_EXPORT (gui, logical) determines whether to show the context menu to export data.'  'CONTEXTMENU (evanescent, handle) is the context menu.'  'GUI_ITS_DICT (gui, idict) contains the GUIs for the items.' };
 			prop_description = panelpropidicttable_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -762,7 +779,7 @@ classdef PanelPropIDictTable < PanelProp
 				case 2 % PanelPropIDictTable.NAME
 					prop_default = 'Indexed-Dictionary Prop Panel with Table';
 				case 3 % PanelPropIDictTable.DESCRIPTION
-					prop_default = 'An Indexed-Dictionary Prop Panel with Table (PanelPropIDictTable) plots the panel of an IDICT prop with a table. It works for all categories. It can be personalized with the following props: COLS, ROWNAME, COLUMNNAME, COLUMNWIDTH, COLUMNEDITABLE, COLUMNFORMAT, CB_TAB_EDIT.';
+					prop_default = 'An Indexed-Dictionary Prop Panel with Table (PanelPropIDictTable) plots the panel of an IDICT property with a table. It works for all categories. It can be personalized with the following props: COLS, ROWNAME, COLUMNNAME, COLUMNWIDTH, COLUMNEDITABLE, COLUMNFORMAT, CB_TAB_EDIT.';
 				case 4 % PanelPropIDictTable.TEMPLATE
 					prop_default = Format.getFormatDefault(8, PanelPropIDictTable.getPropSettings(prop));
 				case 5 % PanelPropIDictTable.ID

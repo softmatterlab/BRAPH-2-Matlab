@@ -5,6 +5,9 @@ WeightedMxPAv < WeightedMxP (m, average weighted multiplex participation) is the
 The Average Weighted Multiplex Participation (WeightedMxPAv) of a graph is the average homogeneity 
  of its number of neighbors across the layers.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

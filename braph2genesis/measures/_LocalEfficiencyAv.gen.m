@@ -4,7 +4,10 @@ LocalEfficiencyAv < LocalEfficiency (m, average local efficiency) is the graph A
 %%% ¡description!
 The Average Local Efficiency (LocalEfficiencyAv) is the average of all the local efficiencies 
   within each layer.
- 
+
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -121,9 +124,11 @@ if L == 0
     return;
 end
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     local_efficiency_av(li) ={mean(local_efficiency{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = local_efficiency_av;
 

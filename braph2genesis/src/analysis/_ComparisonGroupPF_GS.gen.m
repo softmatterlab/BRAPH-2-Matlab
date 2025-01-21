@@ -7,6 +7,9 @@ ComparisonGroupPF_GS manages the basic functionalities to plot of a global super
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -180,7 +183,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupPF_GS.PARENT ComparisonGroupPF_GS.H ComparisonGroupPF_GS.ST_POSITION ComparisonGroupPF_GS.ST_AXIS ComparisonGroupPF_GS.ST_AREA ComparisonGroupPF_GS.ST_LINE_DIFF ComparisonGroupPF_GS.ST_LINE_CIL ComparisonGroupPF_GS.ST_LINE_CIU ComparisonGroupPF_GS.ST_TITLE ComparisonGroupPF_GS.ST_XLABEL ComparisonGroupPF_GS.ST_YLABEL] 
+[ComparisonGroupPF_GS.PARENT ComparisonGroupPF_GS.H ComparisonGroupPF_GS.ST_POSITION ComparisonGroupPF_GS.ST_AXIS ComparisonGroupPF_GS.CP ComparisonGroupPF_GS.ST_AREA ComparisonGroupPF_GS.ST_LINE_DIFF ComparisonGroupPF_GS.ST_LINE_CIL ComparisonGroupPF_GS.ST_LINE_CIU ComparisonGroupPF_GS.ST_TITLE ComparisonGroupPF_GS.ST_XLABEL ComparisonGroupPF_GS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

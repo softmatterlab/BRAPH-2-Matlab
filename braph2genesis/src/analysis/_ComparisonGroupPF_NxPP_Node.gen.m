@@ -8,6 +8,9 @@ It is supposed to be used with the property NODE of ComparisonGroupPF_NU, Compar
 %%% ¡seealso!
 uidropdown, GUI, ComparisonGroupPF_NU, ComparisonGroupPF_NS, ComparisonGroupPF_NB
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

@@ -2,9 +2,12 @@
 GraphWU < Graph (g, weighted undirected graph) is a weighted undirected graph.
 
 %%% ¡description!
-In a weighted undirected (WU) graph, the edges are are undirected and associated 
+In a weighted undirected graph (GraphWU), the edges are are undirected and associated 
  with a real number between 0 and 1 indicating the strength of the connection.
 The connectivity matrix is symmetric.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -107,19 +110,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the weighted undirected graph.
 %%%% ¡default!
 'GraphWU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the weighted undirected graph.
 %%%% ¡default!
-'GraphWU'
+'Graph Weighted Undirected'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the weighted undirected graph.
 %%%% ¡default!
-'In a weighted undirected (WU) graph, the edges are are undirected and associated with a real number between 0 and 1 indicating the strength of the connection. The connectivity matrix is symmetric.'
+'In a weighted undirected graph (GraphWU), the edges are are undirected and associated with a real number between 0 and 1 indicating the strength of the connection. The connectivity matrix is symmetric.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the weighted undirected graph.

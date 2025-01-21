@@ -7,8 +7,8 @@
 % 3. It analyzes these groups using structural multimodality data.
 % 4. It executes the cross-validation process.
 
-% PDF: 
-% README:
+% PDF: /tutorials/pipelines/tut_nn_clas_st_mm_data_xval/tut_nn_clas_st_mm_data_xval.pdf
+% README: /tutorials/pipelines/tut_nn_clas_st_mm_data_xval/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
@@ -19,4 +19,4 @@ gr2 = ImporterGroupSubjectST_MP_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').ge
 gr3 = ImporterGroupSubjectST_MP_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group ST_MP 3 from XLS % Group ST_MP 3
 
 %% Cross-Validation
-nncv = NNClassifierMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_ST_MM_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_MM_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_MM_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr1.get('ID')}), gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_ST_MM_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_MM_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_MM_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr2.get('ID')}), gr2.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_ST_MM_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_MM_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_MM_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr3.get('ID')}), gr3.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process
+nncv = NNClassifierMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_ST_MM_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_MM_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_MM_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr1.get('ID')}), gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_ST_MM_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_MM_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_MM_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr2.get('ID')}), gr2.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_ST_MM_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_ST_MM_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_ST_MM_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr3.get('ID')}), gr3.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process

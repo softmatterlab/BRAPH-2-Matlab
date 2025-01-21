@@ -2,11 +2,16 @@
 NNRegressorMLP < NNBase (nn, multi-layer perceptron regressor) comprises a multi-layer perceptron regressor model and a given dataset.
 
 %%% ¡description!
-A neural network multi-layer perceptron regressor (NNRegressorMLP) comprises a multi-layer perceptron regressor model and a given dataset.
-NNRegressorMLP trains the multi-layer perceptron regressor with a formatted inputs ("CB", channel and batch) derived from the given dataset.
+A neural network multi-layer perceptron regressor (NNRegressorMLP) comprises 
+ a multi-layer perceptron regressor model and a given dataset.
+NNRegressorMLP trains the multi-layer perceptron regressor with a formatted
+ inputs ("CB", channel and batch) derived from the given dataset.
 
 %%% ¡seealso!
 NNDataPoint_CON_REG, NNRegressor_Evaluator
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -91,14 +96,14 @@ Neural Networks NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the neural network multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the neural network multi-layer perceptron regressor.
 %%%% ¡default!
-'NNRegressorMLP'
+'Neural Network Multi-layer Perceptron Regressor'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network multi-layer perceptron regressor.
@@ -285,8 +290,11 @@ original_loss = crossentropy(net.predict(inputs), targets);
 wb = braph2waitbar(nn.get('WAITBAR'), 0, ['Feature importance permutation ...']);
 
 start = tic;
+
 for i = 1:1:P
     rng(seeds(i), 'twister')
+
+    warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
     parfor j = 1:1:number_features
         scrambled_inputs = inputs;
         permuted_value = squeeze(normrnd(mean(inputs(:, j)), std(inputs(:, j)), squeeze(size(inputs(:, j))))) + squeeze(randn(size(inputs(:, j)))) + mean(inputs(:, j));
@@ -294,6 +302,7 @@ for i = 1:1:P
         scrambled_loss = crossentropy(net.predict(scrambled_inputs), targets);
         feature_importance(j) = scrambled_loss;
     end
+    warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
     feature_importance_all_permutations{i} = feature_importance / original_loss;
 
@@ -319,7 +328,7 @@ train the regressor with example data
 
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_REG % create example files
+    create_data_NN_REG_CON_XLS() % create example files
 end
 
 % Load BrainAtlas

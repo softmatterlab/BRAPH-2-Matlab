@@ -5,14 +5,14 @@ classdef SubjectFUN < Subject
 	% Subject with a functional matrix (e.g. obtained from fMRI).
 	%
 	% The list of SubjectFUN properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the subject.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
 	%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 	%  <strong>11</strong> <strong>FUN</strong> 	FUN (data, matrix) is an adjacency matrix.
@@ -104,6 +104,8 @@ classdef SubjectFUN < Subject
 	%
 	%
 	% See also ImporterGroupSubjectFUN_TXT, ExporterGroupSubjectFUN_TXT, ImporterGroupSubjectFUN_XLS, ExporterGroupSubjectFUN_XLS.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		BA = 10; %CET: Computational Efficiency Trick
@@ -128,14 +130,14 @@ classdef SubjectFUN < Subject
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SubjectFUN properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the subject.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
 			%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 			%  <strong>11</strong> <strong>FUN</strong> 	FUN (data, matrix) is an adjacency matrix.
@@ -146,6 +148,21 @@ classdef SubjectFUN < Subject
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the subject with functional matrix.
+			%
+			% BUILD = SubjectFUN.GETBUILD() returns the build of 'SubjectFUN'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = SUB.GETBUILD() returns the build of the subject with functional matrix SUB.
+			%  BUILD = Element.GETBUILD(SUB) returns the build of 'SUB'.
+			%  BUILD = Element.GETBUILD('SubjectFUN') returns the build of 'SubjectFUN'.
+			%
+			% Note that the Element.GETBUILD(SUB) and Element.GETBUILD('SubjectFUN')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function sub_class = getClass()
 			%GETCLASS returns the class of the subject with functional matrix.
 			%
@@ -464,7 +481,7 @@ classdef SubjectFUN < Subject
 			prop = SubjectFUN.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			subjectfun_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'TOSTRING (query, string) returns a string that represents the object.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'FUN (data, matrix) is an adjacency matrix.' };
+			subjectfun_description_list = { 'ELCLASS (constant, string) is the class of the subject.'  'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'FUN (data, matrix) is an adjacency matrix.' };
 			prop_description = subjectfun_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -528,7 +545,7 @@ classdef SubjectFUN < Subject
 				case 1 % SubjectFUN.ELCLASS
 					prop_default = 'SubjectFUN';
 				case 2 % SubjectFUN.NAME
-					prop_default = 'SubjectFUN';
+					prop_default = 'Functional Subject';
 				case 3 % SubjectFUN.DESCRIPTION
 					prop_default = 'Subject with a functional matrix (e.g. obtained from fMRI).';
 				case 5 % SubjectFUN.ID

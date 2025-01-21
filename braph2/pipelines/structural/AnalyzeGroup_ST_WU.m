@@ -5,14 +5,14 @@ classdef AnalyzeGroup_ST_WU < AnalyzeGroup
 	% AnalyzeGroup_ST_WU uses structural data and analyzes them using weighted undirected graphs.
 	%
 	% The list of AnalyzeGroup_ST_WU properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the group-based graph analysis with structural data.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the group-based graph analysis with structural data.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the group-based graph analysis with structural data.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the group-based graph analysis with structural data.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group-based graph analysis with structural data.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group-based graph analysis with structural data.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group-based graph analysis with structural data.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectST.
 	%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the graph obtained from this analysis.
@@ -106,6 +106,8 @@ classdef AnalyzeGroup_ST_WU < AnalyzeGroup
 	%
 	%
 	% See also SubjectST, GraphWU.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		CORRELATION_RULE = 12; %CET: Computational Efficiency Trick
@@ -130,14 +132,14 @@ classdef AnalyzeGroup_ST_WU < AnalyzeGroup
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of AnalyzeGroup_ST_WU properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the group-based graph analysis with structural data.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the group-based graph analysis with structural data.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the group-based graph analysis with structural data.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the group-based graph analysis with structural data.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group-based graph analysis with structural data.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group-based graph analysis with structural data.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group-based graph analysis with structural data.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectST.
 			%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the graph obtained from this analysis.
@@ -150,6 +152,21 @@ classdef AnalyzeGroup_ST_WU < AnalyzeGroup
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graph analysis with structural data.
+			%
+			% BUILD = AnalyzeGroup_ST_WU.GETBUILD() returns the build of 'AnalyzeGroup_ST_WU'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the graph analysis with structural data A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeGroup_ST_WU') returns the build of 'AnalyzeGroup_ST_WU'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeGroup_ST_WU')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the graph analysis with structural data.
 			%
@@ -476,7 +493,7 @@ classdef AnalyzeGroup_ST_WU < AnalyzeGroup
 			prop = AnalyzeGroup_ST_WU.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			analyzegroup_st_wu_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the group-based graph analysis with structural data.'  'DESCRIPTION (constant, string) is the description of the group-based graph analysis with structural data.'  'TEMPLATE (parameter, item) is the template of the group-based graph analysis with structural data.'  'ID (data, string) is a few-letter code for the group-based graph analysis with structural data.'  'LABEL (metadata, string) is an extended label of the group-based graph analysis with structural data.'  'NOTES (metadata, string) are some specific notes about the group-based graph analysis with structural data.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectST.'  'G (result, item) is the graph obtained from this analysis.'  'CORRELATION_RULE (parameter, option) is the correlation type.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights.' };
+			analyzegroup_st_wu_description_list = { 'ELCLASS (constant, string) is the class of the group-based graph analysis with structural data.'  'NAME (constant, string) is the name of the group-based graph analysis with structural data.'  'DESCRIPTION (constant, string) is the description of the group-based graph analysis with structural data.'  'TEMPLATE (parameter, item) is the template of the group-based graph analysis with structural data.'  'ID (data, string) is a few-letter code for the group-based graph analysis with structural data.'  'LABEL (metadata, string) is an extended label of the group-based graph analysis with structural data.'  'NOTES (metadata, string) are some specific notes about the group-based graph analysis with structural data.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectST.'  'G (result, item) is the graph obtained from this analysis.'  'CORRELATION_RULE (parameter, option) is the correlation type.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights.' };
 			prop_description = analyzegroup_st_wu_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -544,7 +561,7 @@ classdef AnalyzeGroup_ST_WU < AnalyzeGroup
 				case 1 % AnalyzeGroup_ST_WU.ELCLASS
 					prop_default = 'AnalyzeGroup_ST_WU';
 				case 2 % AnalyzeGroup_ST_WU.NAME
-					prop_default = 'AnalyzeGroup_ST_WU';
+					prop_default = 'Structural Weighted Undirected Analyze Group';
 				case 3 % AnalyzeGroup_ST_WU.DESCRIPTION
 					prop_default = 'AnalyzeGroup_ST_WU uses structural data and analyzes them using weighted undirected graphs.';
 				case 4 % AnalyzeGroup_ST_WU.TEMPLATE

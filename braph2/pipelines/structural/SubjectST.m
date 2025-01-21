@@ -5,14 +5,14 @@ classdef SubjectST < Subject
 	% Subject with structural data (e.g. cortical thickness obtaibed from strcutural MRI) for each brain region.
 	%
 	% The list of SubjectST properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the subject.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
 	%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 	%  <strong>11</strong> <strong>ST</strong> 	ST (data, cvector) is a column vector with data for each brain region.
@@ -104,6 +104,8 @@ classdef SubjectST < Subject
 	%
 	%
 	% See also ImporterGroupSubjectST_TXT, ExporterGroupSubjectST_TXT, ImporterGroupSubjectST_XLS, ExporterGroupSubjectST_XLS.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		BA = 10; %CET: Computational Efficiency Trick
@@ -128,14 +130,14 @@ classdef SubjectST < Subject
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SubjectST properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the subject.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
 			%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 			%  <strong>11</strong> <strong>ST</strong> 	ST (data, cvector) is a column vector with data for each brain region.
@@ -146,6 +148,21 @@ classdef SubjectST < Subject
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the subject with structural data.
+			%
+			% BUILD = SubjectST.GETBUILD() returns the build of 'SubjectST'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = SUB.GETBUILD() returns the build of the subject with structural data SUB.
+			%  BUILD = Element.GETBUILD(SUB) returns the build of 'SUB'.
+			%  BUILD = Element.GETBUILD('SubjectST') returns the build of 'SubjectST'.
+			%
+			% Note that the Element.GETBUILD(SUB) and Element.GETBUILD('SubjectST')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function sub_class = getClass()
 			%GETCLASS returns the class of the subject with structural data.
 			%
@@ -464,7 +481,7 @@ classdef SubjectST < Subject
 			prop = SubjectST.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			subjectst_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'TOSTRING (query, string) returns a string that represents the object.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'ST (data, cvector) is a column vector with data for each brain region.' };
+			subjectst_description_list = { 'ELCLASS (constant, string) is the class of the subject.'  'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'ST (data, cvector) is a column vector with data for each brain region.' };
 			prop_description = subjectst_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -528,7 +545,7 @@ classdef SubjectST < Subject
 				case 1 % SubjectST.ELCLASS
 					prop_default = 'SubjectST';
 				case 2 % SubjectST.NAME
-					prop_default = 'SubjectST';
+					prop_default = 'Structural Subject';
 				case 3 % SubjectST.DESCRIPTION
 					prop_default = 'SubjectST with structural data (e.g. cortical thickness obtaibed from strcutural MRI) for each brain region.';
 				case 5 % SubjectST.ID

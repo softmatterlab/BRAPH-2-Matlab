@@ -10,6 +10,9 @@ The property GUICLASS determines whether the item figure is a 'GUIElement' or 'G
 %%% ¡seealso!
 uibutton, GUI, PanelElement, GUIElement, GUIFig
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

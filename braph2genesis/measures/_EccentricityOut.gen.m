@@ -5,6 +5,9 @@ EccentricityOut < Measure (m, out-eccentricity) is the graph Out-Eccentricity.
 The Out-Eccentricity (EccentricityOut) of a node is the maximal shortest out-path length 
 between a node and any other node within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -123,6 +126,7 @@ distance = Distance('G', g).get('M');
 eccentricityOut = cell(L, 1);
 eccentricity_rule = m.get('RULE');
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     switch lower(eccentricity_rule)
         case {'subgraphs'}
@@ -131,6 +135,7 @@ parfor li = 1:1:L
             eccentricityOut(li)  = {max(distance{li}, [], 2)};
     end
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = eccentricityOut;
 

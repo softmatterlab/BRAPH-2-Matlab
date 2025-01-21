@@ -60,11 +60,11 @@ directories_to_test = { ...
     [braph2_dir filesep 'graphs'] ...
     [braph2_dir filesep 'measures'] ...
 	[braph2_dir filesep 'neuralnetworks'] ...
+	[braph2_dir filesep 'sandbox'] ...
     };
 
 pipelines_dir = [fileparts(which('braph2')) filesep 'pipelines'];
 
-addpath(pipelines_dir)
 pipelines_dir_list = dir(pipelines_dir); % get the folder contents
 pipelines_dir_list = pipelines_dir_list([pipelines_dir_list(:).isdir] == 1); % remove all files (isdir property is 0)
 pipelines_dir_list = pipelines_dir_list(~ismember({pipelines_dir_list(:).name}, {'.', '..'})); % remove '.' and '..'
@@ -73,6 +73,8 @@ for i = 1:1:length(pipelines_dir_list)
 end
 
 clear braph2_dir pipelines_dir pipelines_dir_list i
+
+directories_to_test = directories_to_test(cellfun(@(dir) exist(dir, 'dir') == 7, directories_to_test));
 
 %% Runs tests
 warning_backup = warning();

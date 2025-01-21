@@ -2,7 +2,7 @@
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Implement a new Graph}
+\title{Implement a New Graph}
 
 \author[The BRAPH~2 Developers]{The BRAPH~2 Developers}
 
@@ -13,40 +13,41 @@
 \begin{abstract}
 \noindent
 This is the developer tutorial for implementing a new graph. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new graph, which can then be compiled by \code{braph2genesis}. All graphs are (direct or indirect) extensions of the base element \code{Graph}. Here, we will use as examples the graphs \code{GraphBD} (Binary Directed graph), \code{MultilayerWU} (Weighted Undirected multilayer graph), \code{MultiplexBUT} (Binary Undirected multiplex at fixed Thresholds), and \code{OrdMxBUT} (Binary Undirected ordinal multiplex with fixed Thresholds).
+In this tutorial, you will learn how to create the generator file \fn{*.gen.m} for a new graph, which can then be compiled by \code{braph2genesis}. All graphs are (direct or indirect) extensions of the base element \code{Graph}. Here, you will use as examples the graphs \code{GraphBD} (Binary Directed graph), \code{MultilayerWU} (Weighted Undirected multilayer graph), \code{MultiplexBUT} (Binary Undirected multiplex at fixed Thresholds), and \code{OrdMxBUT} (Binary Undirected ordinal multiplex with fixed Thresholds).
 \end{abstract}
 
 \tableofcontents
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of Unilayer Graphs}
+\section{Implementation of unilayer graphs}
 
-\subsection{Unilayer Binary Directed Graph (GraphBD)}
+\subsection{Unilayer binary directed graph (\code{GraphBD})}
 
-We will start by implementing in detail \code{GraphBD}, which  is a direct extension of  \code{Graph}.
-A unilayer graph is constituted by nodes connected by edges, where the edges are directed and they can be either 0 (absence of connection) or 1 (existence of connection).
+You will start by implementing in detail \code{GraphBD}, which  is a direct extension of  \code{Graph}.
+A unilayer graph is constituted by nodes connected by edges, where the can be either 0 (absence of connection) or 1 (existence of connection).
 
 \begin{lstlisting}[
 	label=cd:m:GraphBD:header,
 	caption={
 		{\bf GraphBD element header.}
-		The \code{header} section of the generator code for \fn{\_GraphBD.gen.m} provides the general information about the \code{GraphBD} element.
+		The \code{header} section of the generator code in \fn{\_GraphBD.gen.m} provides the general information about the \code{GraphBD} element.
 		}
 ]
 %% ¡header!
-GraphBD < Graph (g, binary directed graph) is a binary directed graph. ¥\circled{1}\circlednote{1}{defines \code{GraphBD} as a subclass of \code{Graph}. The moniker will be \code{g}.}¥
+GraphBD < Graph (g, binary directed graph) is a binary directed graph. ¥\circled{1}\circlednote{1}{ defines \code{GraphBD} as a subclass of \code{Graph}. The moniker will be \code{g}.}¥
 
-%%% ¡description!
+%%% ¡description! ¥\circled{2}\circlednote{2}{ provides a description of this graph.}¥
 In a binary directed (BD) graph, the edges are directed and they can be either 0 (absence of connection) or 1 (existence of connection).
+
+%%% ¡build! ¥\circled{3}\circlednote{3}{ defines the build number of the graph element.}¥
+1
 \end{lstlisting}
 
-
 \begin{lstlisting}[
-	label={cd:m:GraphBD:prop_update},
+	label=cd:m:GraphBD:prop_update,
 	caption={
 		{\bf GraphBD element prop update.}
-		The \code{props\_update} section of the generator code for \fn{GraphBD.gen.m} updates the properties of the \code{Graph} element. This defines the core properties of the graph.
+		The \code{props\_update} section of the generator code in \fn{\_GraphBD.gen.m} updates the properties of the \code{Graph} element. This defines the core properties of the graph.
 	}
 ]
 %% ¡props_update!
@@ -79,48 +80,47 @@ NOTES (metadata, string) are some specific notes about the binary directed graph
 %%%% ¡default!
 'GraphBD notes'
 
-%%% ¡prop! ¥\circled{1}\circlednote{1}{defines the \emph{graph type}: \code{Graph.GRAPH} (single layer), \code{Graph.MULTIGRAPH} (multiple unconnected layers), \code{Graph.MULTILAYER} (multiple layers), \code{Graph.ORDERED\_MULTILAYER} (multiple layers with subsequent layers) \code{Graph.MULTIPLEX} (multilayer with connections between corresponding nodes), and \code{Graph.ORDERED\_MULTIPLEX} (multilayer with connections between corresponding nodes in subsequent layers).}\circlednote{2}{defines the \emph{graph connectivity}: \code{Graph.BINARY} (0 or 1) or \code{Graph.WEIGHTED}.}\circlednote{3}{defines the \emph{edge directionality}: \code{Graph.DIRECTED} or \code{Graph.UNDIRECTED}.}\circlednote{4}{defines the \emph{graph self-connectivity}: \code{Graph.NONSELFCONNECTED} or \code{Graph.SELFCONNECTED}.}\circlednote{5}{defines the \emph{graph negativity}: \code{Graph.NONNEGATIVE} or \code{Graph.NEGATIVE}.}\circlednote{6}{The property \code{A} contains the supra-adjacency matrix of the graph, which is calculated by the code under \code{¡calculate!}.}\circlednote{7}{retrieves the adjacency matrix of the graph \code{B}, defined in the new properties below.}\threecirclednotes{8}{9}{10}{condition the adjaciency matrix removing the diagonal elements, making it semidefinte positive, and binarizing it. A list of useful functions is: \code{diagonalize} (removes the off-diagonal), \code{dediagonalize} (removes the diagonal), \code{binarize} (binarizes with threshold=0), \code{semipositivize} (removes negative weights), \code{standardize} (normalizes between 0 and 1) or \code{symmetrize} (symmetrizes the matrix). Use the MatLab help to see additional functionalities.}\circlednote{11}{preallocates the adjacency matrix to be calcualted.}\circlednote{12}{randomizes adjacency matrix when \code{'RANDOMIZE'} is \code{true} by calling the function of the graph named \code{RANDOMIZATION}}\circlednote{13}{returns the calculated graph \code{A} assigning it to the output variable \code{value}.}\circlednote{14}{employes the property panel \code{PanelPropCell} to be employed to visualize \code{A}, setting also its properties.}¥
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the \emph{graph type}: \code{Graph.GRAPH} (single layer), \code{Graph.MULTIGRAPH} (multiple unconnected layers), \code{Graph.MULTILAYER} (multiple layers), \code{Graph.ORDERED\_MULTILAYER} (multiple subsequent layers) \code{Graph.MULTIPLEX} (multilayer with connections between corresponding nodes), and \code{Graph.ORDERED\_MULTIPLEX} (multilayer with connections between corresponding nodes in subsequent layers).}¥
 GRAPH_TYPE (constant, scalar) returns the graph type __Graph.GRAPH__.
 %%%% ¡default!
 Graph.GRAPH
 
-%%% ¡prop! ¥\circled{2}¥
+%%% ¡prop! ¥\circled{2}\circlednote{2}{ defines the \emph{graph connectivity}: \code{Graph.BINARY} (0 or 1) or \code{Graph.WEIGHTED}.}¥
 CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type __Graph.BINARY__.
 %%%% ¡default!
 value = Graph.BINARY;
 
-%%% ¡prop! ¥\circled{3}¥
+%%% ¡prop! ¥\circled{3}\circlednote{3}{ defines the \emph{edge directionality}: \code{Graph.DIRECTED} or \code{Graph.UNDIRECTED}.}¥
 DIRECTIONALITY_TYPE  (query, smatrix) returns the directionality type __Graph.DIRECTED__.
 %%%% ¡default! 
 value = Graph.DIRECTED;
 
-%%% ¡prop! ¥\circled{4}¥
+%%% ¡prop! ¥\circled{4}\circlednote{4}{ defines the \emph{graph self-connectivity}: \code{Graph.NONSELFCONNECTED} or \code{Graph.SELFCONNECTED}.}¥
 SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type __Graph.NONSELFCONNECTED__.
 %%%% ¡default!
 value = Graph.NONSELFCONNECTED;
 
-%%% ¡prop! ¥\circled{5}¥
+%%% ¡prop! ¥\circled{5}\circlednote{5}{ defines the \emph{graph negativity}: \code{Graph.NONNEGATIVE} or \code{Graph.NEGATIVE}.}¥
 NEGATIVITY_TYPE (query, smatrix) returns the negativity type __Graph.NONNEGATIVE__.
 %%%% ¡default!
 value = Graph.NONNEGATIVE;
 
-%%% ¡prop! ¥\circled{6}¥
+%%% ¡prop! ¥\circled{6}\circlednote{6}{ The property \code{A} contains the supra-adjacency matrix of the graph, which is calculated by the code under \code{¡calculate!}.}¥
 A (result, cell) is the binary adjacency matrix of the binary directed graph.
 %%%% ¡calculate!
-B = g.get('B'); ¥\circled{7}¥
+B = g.get('B'); ¥\circled{7}\circlednote{7}{ retrieves the adjacency matrix of the graph \code{B}, defined in the new properties below.}¥
 
-B = dediagonalize(B);  ¥\circled{8}¥
+B = dediagonalize(B);  ¥\circled{8}\circlednote{8}{, \circled{9}, and \circled{10} condition the adjaciency matrix removing the diagonal elements, making it semidefinte positive, and binarizing it. A list of useful functions is: \code{diagonalize} (removes the off-diagonal), \code{dediagonalize} (removes the diagonal), \code{binarize} (binarizes with threshold=0), \code{semipositivize} (removes negative weights), \code{standardize} (normalizes between 0 and 1) or \code{symmetrize} (symmetrizes the matrix). Use the MatLab help to see additional functionalities.}¥
 B = semipositivize(B, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE')); ¥\circled{9}¥
 B = binarize(B); ¥\circled{10}¥
 
-A = {B}; ¥\circled{11}¥
-if g.get('RANDOMIZE') ¥\circled{12}¥
+A = {B}; ¥\circled{11}\circlednote{11}{ preallocates the adjacency matrix to be calculated.}¥
+if g.get('RANDOMIZE') ¥\circled{12}\circlednote{12}{ randomizes adjacency matrix when \code{'RANDOMIZE'} is \code{true} by calling the function of the graph named \code{RANDOMIZATION}}¥
 	random_A = g.get('RANDOMIZATION', A);
 	A = {random_A};
 end
-value = A; ¥\circled{13}¥
-
-%%%% ¡gui! ¥\circled{14}¥
+value = A; ¥\circled{13}\circlednote{13}{ returns the calculated graph \code{A} assigning it to the output variable \code{value}.}¥
+%%%% ¡gui! ¥\circled{14}\circlednote{14}{ employs the property panel \code{PanelPropCell} to be employed to visualize \code{A}, setting also its properties.}¥
 pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ... 
 	'TABLE_HEIGHT', s(40), ... 
 	'XSLIDERSHOW', false, ... 
@@ -128,47 +128,46 @@ pr = PanelPropCell('EL', g, 'PROP', GraphBD.A, ...
 	'ROWNAME' , g.getCallback('ANODELABELS'), ... 
 	'COLUMNNAME', g.getCallback('ANODELABELS'));
 
-
-%%% ¡prop! ¥\circled{15}\circlednote{15}{determines the list of compatible figures.}¥
+%%% ¡prop! ¥\circled{15}\circlednote{15}{ determines the list of compatible figures.}¥
 COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.
 %%%% ¡default!
 getCompatibleMeasures('GraphBD')
 \end{lstlisting}
 
 \begin{lstlisting}[
-	label={cd:m:GraphBD:props},
+	label=cd:m:GraphBD:props,
 	caption={
 		{\bf GraphBD element props.}
-		The \code{props} section of generator code for \fn{GraphBD.gen.m} defines the properties to be used in \fn{GraphBD}.
+		The \code{props} section of the generator code in \fn{\_GraphBD.gen.m} defines the properties to be used in \code{GraphBD}.
 	}
 ]
 %% ¡props!
 
-%%% ¡prop!¥\circled{1}\circlednote{1}{contains the input adjacency matrix  \code{B}, which is typically weighted and directed.}¥
+%%% ¡prop!¥\circled{1}\circlednote{1}{ contains the input adjacency matrix  \code{B}, which is typically weighted and directed.}¥
 B (data, smatrix) is the input graph adjacency matrix.
-%%%% ¡gui! ¥\circled{2}\circlednote{2}{defines the property panel \code{PanelPropMatrix} to plot this property with a table.}¥
+%%%% ¡gui! ¥\circled{2}\circlednote{2}{ defines the property panel \code{PanelPropMatrix} to plot this property with a table.}¥
 pr = PanelPropMatrix('EL', g, 'PROP', GraphBD.B, ... 
 	'TABLE_HEIGHT' , s(40), ...
 	'ROWNAME' , g.getCallback('ANODELABELS'), ... 
 	'COLUMNNAME', g.getCallback('ANODELABELS'), ...
-	varargin{:});¥\circlednote{3}{defines the semi-positivation rule (i.e., how to remove the negative edges) to be used when generating the adjacency matrix \code{A} from the intput property \code{B}. The admissible options are: 'zero' (default, convert negative values to zeros) or 'absolute' (convert negative values to absolute value). }¥
+	varargin{:});
 
-%%% ¡prop! ¥\circled{3}¥
+%%% ¡prop! ¥\circled{3}\circlednote{3}{ defines the semi-positivation rule (i.e., how to remove the negative edges) to be used when generating the adjacency matrix \code{A} from the intput property \code{B}. The admissible options are: \code{'zero'} (default, convert negative values to zeros) or \code{'absolute'} (convert negative values to absolute value).}¥
 SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.
 %%%% ¡settings!
 {'zero', 'absolute'}
 
-%%% ¡prop!¥\circled{4}\circlednote{4}{defines the number of attempts that will be used for each edge when calling \code{RANDOMIZATION}}¥
+%%% ¡prop!¥\circled{4}\circlednote{4}{ defines the number of attempts that will be used for each edge when calling \code{RANDOMIZATION}.}¥
 ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 %%%% ¡default!
 5
 
-%%% ¡prop!¥\circled{5}\circlednote{5}{randomizes the adjacency matrix contained in \code{cell}}¥
-RANDOMIZATION (query, cell) randomizes matrix contained in the cell
+%%% ¡prop!¥\circled{5}\circlednote{5}{ randomizes the adjacency matrix contained in \code{cell}.}¥
+RANDOMIZATION (query, cell) randomizes matrix contained in the cell.
 %%%% ¡calculate!
 rng(g.get('RANDOM_SEED'), 'twister')
 
-if isempty(varargin) ¥\circled{6}\circlednote{6}{returns empty cell is the input is an empty cell}¥
+if isempty(varargin) ¥\circled{6}\circlednote{6}{ returns empty cell is the input is an empty cell.}¥
 	value = {};
 	return
 end
@@ -177,16 +176,16 @@ A = cell2mat(varargin{1});
 attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 % remove self connections
 A(1:length(A)+1:numel(A)) = 0;
-[I_edges, J_edges] = find(A);  ¥\circled{7}\circlednote{7}{finds number of edges in the matrix (different from zero)}¥
-E = length(I_edges); ¥\circled{8}\circlednote{8}{returns number of edges in the matrix (different from zero)}¥
+[I_edges, J_edges] = find(A);  ¥\circled{7}\circlednote{7}{ finds number of edges in the matrix (different from zero).}¥
+E = length(I_edges); ¥\circled{8}\circlednote{8}{ returns number of edges in the matrix (different from zero).}¥
 
-if E == 0 ¥\circled{9}\circlednote{9}{returns same input matrix if it is all zeros}¥
+if E == 0 ¥\circled{9}\circlednote{9}{ returns same input matrix if it is all zeros.}¥
 	value = A;
 	swaps = 0;
 	return
 end
 
-if E == 1 ¥\circled{10}\circlednote{10}{randomizes the edge when there is only one edge in the input matrix}¥
+if E == 1 ¥\circled{10}\circlednote{10}{ randomizes the edge when there is only one edge in the input matrix.}¥
 	r_ab = A(I_edges(1), J_edges(1));
 	A(I_edges(1), J_edges(1)) = 0;
 	selected_nodes = randperm(size(A, 1), 2);
@@ -198,15 +197,15 @@ end
 
 random_A = A;
 swaps = 0; % number of successful edge swaps
-for attempt = 1:1:attempts_per_edge*E ¥\circled{11}\circlednote{11}{randomizes edges in the matrix when more than one edge (non-zero) were found in the input matrix}¥
+for attempt = 1:1:attempts_per_edge*E ¥\circled{11}\circlednote{11}{ randomizes edges in the matrix when more than one edge (non-zero) were found in the input matrix.}¥
 
-	selected_edges = randperm(E,2); ¥\circled{12}\circlednote{12}{takes two random edges}¥
+	selected_edges = randperm(E,2); ¥\circled{12}\circlednote{12}{ takes two random edges.}¥
 	node_start_1 = I_edges(selected_edges(1));
 	node_end_1 = J_edges(selected_edges(1));
 	node_start_2 = I_edges(selected_edges(2));
 	node_end_2 = J_edges(selected_edges(2));
 
-	r_1 = random_A(node_start_1, node_end_1); ¥\circled{13}\circlednote{13}{saves the values of the selected random edges (this is important when the property \code{RANDOMIZATION} is used by weighted graphs)}¥
+	r_1 = random_A(node_start_1, node_end_1); ¥\circled{13}\circlednote{13}{ saves the values of the selected random edges (this is important when the property \code{RANDOMIZATION} is used by weighted graphs).}¥
 	r_2 = random_A(node_start_2, node_end_2);
 
 	if ~random_A(node_start_1, node_end_2) && ...
@@ -216,11 +215,11 @@ for attempt = 1:1:attempts_per_edge*E ¥\circled{11}\circlednote{11}{randomizes 
 	node_start_1~=node_end_2 && ...
 	node_start_2~=node_end_1
 	
-		% erase old edges ¥\circled{14}\circlednote{14}{deletes edges in the old positions}¥
+		% erase old edges ¥\circled{14}\circlednote{14}{ deletes edges in the old positions.}¥
 		random_A(node_start_1, node_end_1) = 0;
 		random_A(node_start_2, node_end_2) = 0;
 
-		% write new edges ¥\circled{15}\circlednote{15}{sets values of edges in the new random positions}¥
+		% write new edges ¥\circled{15}\circlednote{15}{ sets values of edges in the new random positions.}¥
 		random_A(node_start_1, node_end_2) = r_1;
 		random_A(node_start_2, node_end_1) = r_2;
 		
@@ -232,48 +231,44 @@ for attempt = 1:1:attempts_per_edge*E ¥\circled{11}\circlednote{11}{randomizes 
 	end
 end
 value = random_A;
-
-
 \end{lstlisting}
-
-\clearpage
 
 \begin{lstlisting}[
 	label=cd:m:GraphBD:tests,
 	caption={
 		{\bf GraphBD element tests.}
-		The \code{tests} section from the element generator \fn{\_GraphBD.gen.m}.
-		A general test should be prepared to test the properties of the graph  when it is empty and full. Furthermore, additional tests should be prepared for the rules defined (one test per rule).
+		The \code{tests} section in the element generator \fn{\_GraphBD.gen.m}.
+		A general test should be prepared to test the properties of the graph  when it is empty and full. Furthermore, additional tests should be prepared for the defined rules (one test per rule).
 	}
 ]			
 %% ¡tests!
 
-%%% ¡excluded_props!  ¥\circled{1}\circlednote{1}{List of properties that are excluded from testing.}¥
+%%% ¡excluded_props!  ¥\circled{1}\circlednote{1}{ List of properties that are excluded from testing.}¥
 [GraphBD.PFGA GraphBD.PFGH]
 
 %%% ¡test!
 %%%% ¡name!
-Constructor - Empty  ¥\circled{2}\circlednote{2}{checks that an empty \fn{GraphBD} graph is constructing well.}¥
-%%%% ¡probability! ¥\circled{3}\circlednote{3}{assigns a low test execution probability.}¥
+Constructor - Empty  ¥\circled{2}\circlednote{2}{ checks that an empty \code{GraphBD} graph is constructing well.}¥
+%%%% ¡probability! ¥\circled{3}\circlednote{3}{ assigns a low test execution probability.}¥
 .01
 %%%% ¡code!
-B = []; ¥\circled{4}\circlednote{4}{initializes an empty input adjacency matrix \code{B}.}¥
-g = GraphBD('B', B);¥\circled{5}\circlednote{5}{constructs the \fn{GraphBD} graph from the initialized \fn{B}.}¥
+B = []; ¥\circled{4}\circlednote{4}{ initializes an empty input adjacency matrix \code{B}.}¥
+g = GraphBD('B', B);¥\circled{5}\circlednote{5}{ constructs the \code{GraphBD} graph from the initialized \code{B}.}¥
 
-g.get('A_CHECK'); ¥\circled{6}\circlednote{6}{performs the corresponding checks for the format of the adjacency matrix \code{A}: \code{GRAPH\_TYPE}, \code{CONNECTIVITY\_TYPE}, \code{DIRECTIONALITY\_TYPE}, \code{SELFCONNECTIVITY\_TYPE}, and \code{NEGATIVITY\_TYPE}.}¥
+g.get('A_CHECK'); ¥\circled{6}\circlednote{6}{ performs the corresponding checks for the format of the adjacency matrix \code{A}: \code{GRAPH\_TYPE}, \code{CONNECTIVITY\_TYPE}, \code{DIRECTIONALITY\_TYPE}, \code{SELFCONNECTIVITY\_TYPE}, and \code{NEGATIVITY\_TYPE}.}¥
 
-A = {binarize(semipositivize(dediagonalize(B)))}; ¥\circled{7}\circlednote{7}{calculates the value of the graph by apply the corresponding properties function.}¥
-assert(isequal(g.get('A'), A), ...¥\circled{8}\circlednote{8}{tests that the value of generated graph calculated by applying the properties functions coincides with the expected value.}¥
+A = {binarize(semipositivize(dediagonalize(B)))}; ¥\circled{7}\circlednote{7}{ calculates the value of the graph by applying the corresponding functions.}¥
+assert(isequal(g.get('A'), A), ...¥\circled{8}\circlednote{8}{ tests that the value of generated graph calculated by applying the functions coincides with the expected value.}¥
 	[BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 	'GraphBD is not constructing well.')
 
 %%% ¡test!
 %%%% ¡name!
-Constructor - Full ¥\circled{9}\circlednote{9}{checks that a full \fn{GraphBD} graph is constructing well.}¥
+Constructor - Full ¥\circled{9}\circlednote{9}{ checks that a full \code{GraphBD} graph is constructing well.}¥
 %%%% ¡probability!
 .01
 %%%% ¡code!
-B = randn(randi(10)); ¥\circled{10}\circlednote{10}{generates a random input adjacency matrix \code{B}.}¥
+B = randn(randi(10)); ¥\circled{10}\circlednote{10}{ generates a random input adjacency matrix \code{B}.}¥
 g = GraphBD('B', B);
 
 g.get('A_CHECK')
@@ -285,11 +280,11 @@ assert(isequal(g.get('A'), A), ...
 
 %%% ¡test!
 %%%% ¡name!
-Semipositivize Rules ¥\circled{11}\circlednote{11}{checks the \fn{SEMIPOSITIVIZE\_RULE} on the \fn{GraphBD} graph.}¥
+Semipositivize Rules ¥\circled{11}\circlednote{11}{ checks the \code{SEMIPOSITIVIZE\_RULE} on the \code{GraphBD} graph.}¥
 %%%% ¡probability!
 .01 ¥\circled{3}¥
 %%%% ¡code!
-B = [ ¥\circled{12}\circlednote{12}{generates an input adjacency matrix with negative weights.}¥
+B = [ ¥\circled{12}\circlednote{12}{ generates an input adjacency matrix with negative weights.}¥
 	-2 -1 0 1 2
 	-1 0 1 2 -2
 	0 1 2 -2 -1
@@ -297,8 +292,8 @@ B = [ ¥\circled{12}\circlednote{12}{generates an input adjacency matrix with ne
 	2 -2 -1 0 1
 	];
 
-g0 = GraphBD('B', B);  ¥\circled{13}\circlednote{13}{constructs the \fn{GraphBD} graph from the initialized \fn{B} with default RULE for \fn{SEMIPOSITIVIZE\_RULE}.}¥
-A0 = {[ ¥\circled{14}\circlednote{14}{provides the expected value of \code{A} calculated by external means.}¥
+g0 = GraphBD('B', B);  ¥\circled{13}\circlednote{13}{ constructs the \code{GraphBD} graph from the initialized \code{B} with default RULE for \code{SEMIPOSITIVIZE\_RULE}.}¥
+A0 = {[ ¥\circled{14}\circlednote{14}{ provides the expected value of \code{A} calculated by external means.}¥
 	0 0 0 1 1
 	0 0 1 1 0
 	0 1 0 0 0
@@ -309,7 +304,7 @@ assert(isequal(g0.get('A'), A0), ...
 	[BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 	'GraphBD is not constructing well.')
 
-g_zero = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'zero'); ¥\circled{15}\circlednote{15}{constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'zero' for \fn{SEMIPOSITIVIZE\_RULE}.}¥
+g_zero = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'zero'); ¥\circled{15}\circlednote{15}{ constructs the \code{GraphBD} graph from the initialized \code{B} with RULE = 'zero' for \code{SEMIPOSITIVIZE\_RULE}.}¥
 A_zero = {[
 	0 0 0 1 1
 	0 0 1 1 0
@@ -321,7 +316,7 @@ assert(isequal(g_zero.get('A'), A_zero), ...
 	[BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 	'GraphBD is not constructing well.')
 
-g_absolute = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'absolute'); ¥\circled{16}\circlednote{16}{constructs the \fn{GraphBD} graph from the initialized \fn{B} with RULE = 'absolute' for \code{SEMIPOSITIVIZE\_RULE}.}¥
+g_absolute = GraphBD('B', B, 'SEMIPOSITIVIZE_RULE', 'absolute'); ¥\circled{16}\circlednote{16}{ constructs the \code{GraphBD} graph from the initialized \code{B} with RULE = 'absolute' for \code{SEMIPOSITIVIZE\_RULE}.}¥
 A_absolute = {[
 	0 1 0 1 1
 	1 0 1 1 1
@@ -335,7 +330,7 @@ assert(isequal(g_absolute.get('A'), A_absolute), ...
 	
 %%% ¡test!
 %%%% ¡name!
-Randomize Rules ¥\circled{17}\circlednote{17}{tests that \code{RANZOMIZATION} works properly.}¥
+Randomize Rules ¥\circled{17}\circlednote{17}{ tests that \code{RANZOMIZATION} works properly.}¥
 %%%% ¡probability!
 .01
 %%%% ¡code!
@@ -347,7 +342,7 @@ g.set('ATTEMPTSPEREDGE', 4);
 
 A = g.get('A');
 
-assert(isequal(size(A{1}), size(B)), ... ¥\circled{18}\circlednote{18}{tests that \code{RANZOMIZATION} returns a matrix with same size.}¥
+assert(isequal(size(A{1}), size(B)), ... ¥\circled{18}\circlednote{18}{ tests that \code{RANZOMIZATION} returns a matrix with same size.}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD Randomize is not functioning well.')
 
@@ -357,21 +352,21 @@ g2.set('ATTEMPTSPEREDGE', 4);
 A2 = g2.get('A');
 random_A = g2.get('RANDOMIZATION', A2);
 
-if all(A2{1}==0, "all")¥\circled{19}\circlednote{19}{tests that \code{RANZOMIZATION} returns a matrix of zeros when input matrix is all zeros.}¥
+if all(A2{1}==0, "all")¥\circled{19}\circlednote{19}{ tests that \code{RANZOMIZATION} returns a matrix of zeros when input matrix is all zeros.}¥
 	assert(isequal(A2{1}, random_A), ...
 	[BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 	'GraphBD Randomize is not functioning well.')
-elseif isequal((length(A2{1}).^2)- length(A2{1}), sum(A2{1}==1, "all"))¥\circled{20}\circlednote{20}{tests that \code{RANZOMIZATION} returns a matrix of ones when input matrix is all ones (except diagonal).}¥
+elseif isequal((length(A2{1}).^2)- length(A2{1}), sum(A2{1}==1, "all"))¥\circled{20}\circlednote{20}{ tests that \code{RANZOMIZATION} returns a matrix of ones when input matrix is all ones (except diagonal).}¥
 	assert(isequal(A2{1}, random_A), ...
 	[BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 	'GraphBD Randomize is not functioning well.')
-else ¥\circled{21}\circlednote{21}{tests that new random matrix is different from original one.}¥
+else ¥\circled{21}\circlednote{21}{ tests that new random matrix is different from original one.}¥
 	assert(~isequal(A2{1}, random_A), ...
 	[BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 	'GraphBD Randomize is not functioning well.')
 end
 
-assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... ¥\circled{22}\circlednote{22}{tests that new random matrix has the same number of nodes as the original one}¥
+assert(isequal(numel(find(A2{1})), numel(find(random_A))), ... ¥\circled{22}\circlednote{22}{ tests that new random matrix has the same number of nodes as the original one}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD Randomize is not functioning well.')
 
@@ -379,26 +374,31 @@ deg_A = sum(A2{1}, 2);
 deg_B = sum(random_A, 2);
 [h, p, ks2stat] = kstest2(deg_A, deg_B);
 
-assert(isequal(0, h), ... % ¥\circled{23}\circlednote{23}{tests that new random matrix has the same degree distribution as the original one}¥
+assert(isequal(0, h), ... % ¥\circled{23}\circlednote{23}{ tests that new random matrix has the same degree distribution as the original one}¥
 [BRAPH2.STR ':GraphBD:' BRAPH2.FAIL_TEST], ...
 'GraphBD Randomize is not functioning well.')
 
 \end{lstlisting}
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
+
 \clearpage
-\section{Implementation of Multilayer Graphs}
 
-\subsection{Weigthed Directed Multilayer Graph (MultilayerWD )}
 
-We can now use \code{GraphBD} as the basis to implement the \code{MultilayerWD} graph. The parts of the code that are modified are highlighted.
+\section{Implementation of multilayer graphs}
+
+\subsection{Weighted directed multilayer graph (\code{MultilayerWD})}
+
+You can now use \code{GraphBD} as the basis to implement the \code{MultilayerWD} graph. 
+{%TEX
+The parts of the code that are modified are highlighted.
+}%TEX
 A multilayer graph allows connections between any nodes across the multiple layers, where all layers are interconnected following a categorical fashion.
 
 \begin{lstlisting}[
 	label=cd:m:MultilayerWD:header,
 	caption={
 		{\bf MultilayerWD element header.}
-		The \code{header} section of generator code for \fn{\_MultilayerWD.gen.m} provides the general information about the \code{MultilayerWD} element.
+		The \code{header} section of generator code in \fn{\_MultilayerWD.gen.m} provides the general information about the \code{MultilayerWD} element.
 		\expand{cd:m:GraphBD:header}
 	}
 ]
@@ -407,13 +407,16 @@ MultilayerWD ¤< Graph¤ (g, multilayer weighted directed graph) is a multilayer
 
 ¤%%% ¡description!¤
 In a multilayer weighted directed (WD) graph, layers could have different number of nodes with within-layer weighted directed edges, associated with a real number between 0 and 1 and indicating the strength of the connection. The connectivity matrices are symmetric (within layer). All node connections are allowed between layers.
+
+¤%%% ¡build!¤
+1
 \end{lstlisting}
 
 \begin{lstlisting}[
 	label=cd:m:MultilayerWD:prop_update,
 	caption={
 		{\bf MultilayerWD element prop update.}
-		The \code{props\_update} section of generator code for \fn{\_MultilayerWD.gen.m} updates the properties of \code{MultilayerWD}.
+		The \code{props\_update} section of the generator code in \fn{\_MultilayerWD.gen.m} updates the properties of \code{MultilayerWD}.
 		\expand{cd:m:GraphBD:prop_update}
 	}
 ]
@@ -502,7 +505,7 @@ between layers.
 B = g.get('B'); ¤
 L = length(B); 
 A = cell(L, L);
-for i = 1:1:L ¥\circled{1}\circlednote{1}{For each layer in \fn{MultilayerWD} graph, the corresponding functions are applied as in the notes \circled{8}, \circled{9}, and  \circled{10} of \Coderef{cd:m:GraphBD:prop_update}.}¥
+for i = 1:1:L ¥\circled{1}\circlednote{1}{ For each layer in \code{MultilayerWD} graph, the corresponding functions are applied as in the notes \circled{8}, \circled{9}, and  \circled{10} of \Coderef{cd:m:GraphBD:prop_update}.}¥
 	M = dediagonalize(B{i,i}); 
 	M = semipositivize(M, 'SemipositivizeRule', g.get('SEMIPOSITIVIZE_RULE'));
 	M = standardize(M, 'StandardizeRule', g.get('STANDARDIZE_RULE'));  
@@ -522,7 +525,7 @@ end
 	A = g.get('RANDOMIZATION', A);
 end
 value = A;¤
-¤%%%% ¡gui!¤¥\circlednote{2}{These are some properties of graph adjacency matrix \code{A} that can be used in the gui to make the visualization user friendly. The list of properties that can be used are: \code{ALAYERTICKS} (to set ticks for each layer according to the layer number), \code{ALAYERLABELS} (to set labels for each layer), and \code{ANODELABELS} (to set the nodel labels for each layer)).}¥
+¤%%%% ¡gui!¤
 pr = PanelPropCell('EL', g, 'PROP', ¤MultilayerWD.A, ...
 	¤'TABLE_HEIGHT', s(40), ...¤
 	'XYSLIDERLOCK', true, ... 
@@ -539,12 +542,12 @@ PARTITIONS (result, rvector) returns the number of layers in the partitions of t
 %%%% ¡calculate!
 value = ones(1, g.get('LAYERNUMBER'));
 
-%%% ¡prop! ¥\circled{2}¥
+%%% ¡prop! ¥\circled{2}\circlednote{2}{ These are some properties of the graph adjacency matrix \code{A} used in its  visualization. The list of properties that can be used are: \code{ALAYERTICKS} (to set ticks for each layer according to the layer number), \code{ALAYERLABELS} (to set labels for each layer), and \code{ANODELABELS} (to set the nodal labels for each layer)).}¥
 ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.
 %%%% ¡calculate!
-alayerlabels = g.get('LAYERLABELS'); ¥\circled{3}\circlednote{3}{returns the labels of the graph layers provided by the user.}¥
+alayerlabels = g.get('LAYERLABELS'); ¥\circled{3}\circlednote{3}{ returns the labels of the graph layers provided by the user.}¥
 if isempty(alayerlabels) && ~isa(g.getr('A'), 'NoValue') % ensures that it's not unecessarily calculated
-	alayerlabels = cellfun(@num2str, num2cell([1:1:g.get('LAYERNUMBER')]), 'uniformoutput', false); ¥\circled{4}\circlednote{4}{constructs the labels of the layers based on the number of the layer (in case no layer labels were provided by the user).}¥
+	alayerlabels = cellfun(@num2str, num2cell([1:1:g.get('LAYERNUMBER')]), 'uniformoutput', false); ¥\circled{4}\circlednote{4}{ constructs the labels of the layers based on the number of the layer (in case no layer labels were provided by the user).}¥
 end
 value = alayerlabels;
 
@@ -557,10 +560,10 @@ getCompatibleMeasures¤('MultilayerWD')
 
 
 \begin{lstlisting}[
-label={cd:m:MultilayerWD:props},
-caption={
+	label=cd:m:MultilayerWD:props,
+	caption={
 	{\bf MultilayerWD element props.}
-	The \code{props} section of generator code for \fn{MultilayerWD.gen.m} defines the properties to be used in \fn{MultilayerWD}.
+	The \code{props} section of the generator code for \fn{\_MultilayerWD.gen.m} defines the properties to be used in \code{MultilayerWD}.
 	\expand{cd:m:GraphBD:props}
 	}
 ]
@@ -570,7 +573,7 @@ caption={
 B (data, cell) is the input cell containing the multilayer adjacency matrices.
 %%%% ¡default!
 {[] []; [] []}
-%%%% ¡gui! ¥\circled{1}\circlednote{1}{Same as in note \circled{2} of \Coderef{cd:m:GraphBD:props}.}¥
+%%%% ¡gui! ¥\circled{1}\circlednote{1}{ Same as in note \circled{2} of \Coderef{cd:m:GraphBD:props}.}¥
 pr = PanelPropCell('EL', g, 'PROP', MultilayerWD.B, ...
 	'TABLE_HEIGHT', s(40), ...
 	'XSLIDERSHOW', true, ...
@@ -587,7 +590,7 @@ SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative ed
 %%%% ¡settings!
 {'zero', 'absolute'}¤
 
-%%% ¡prop!  ¥\circled{2}\circlednote{2}{Same as in  note \circled{3} of \Coderef{cd:m:GraphBD:props}.}¥
+%%% ¡prop!  ¥\circled{2}\circlednote{2}{ Same as in  note \circled{3} of \Coderef{cd:m:GraphBD:props}.}¥
 STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.
 %%%% ¡settings!
 {'threshold' 'range'}
@@ -598,7 +601,7 @@ ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 5¤
 
 %%% ¡prop!
-NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.  ¥\circled{3}\circlednote{3}{defines the number of weights that will be sorted at the same time when using \code{RANDOMIZATION}.}¥
+NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.  ¥\circled{3}\circlednote{3}{ defines the number of weights that will be sorted at the same time when using \code{RANDOMIZATION}.}¥
 %%%% ¡default!
 10
 
@@ -615,10 +618,10 @@ end
 A = varargin{1};
 attempts_per_edge = g.get('ATTEMPTSPEREDGE');¤
 
-for i = 1:length(A) ¥\circled{4}\circlednote{4}{iterates over each layer in \code{MultilayerWD} to randomize it.}¥
+for i = 1:length(A) ¥\circled{4}\circlednote{4}{ iterates over each layer in \code{MultilayerWD} to randomize it.}¥
 	tmp_a = A{i,i};
 
-	tmp_g = GraphWD(); ¥\circled{5}\circlednote{5}{initizalizes empty \code{GraphWD} to get \code{RANDOMIZATION} property from it.}¥
+	tmp_g = GraphWD(); ¥\circled{5}\circlednote{5}{ initizalizes empty \code{GraphWD} to get \code{RANDOMIZATION} property from it.}¥
 	tmp_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
 	tmp_g.set('NUMBEROFWEIGHTS', g.get('NUMBEROFWEIGHTS'));
 	random_A = tmp_g.get('RANDOMIZATION', {tmp_a});
@@ -723,7 +726,7 @@ g2.get('A_CHECK')
 A2 = g2.get('A');
 random_A = g2.get('RANDOMIZATION', A2);¤
 
-for i = 1:length(A2) ¥\circled{1}\circlednote{1}{tests \code{RANDOMIZATION} as in \Coderef{cd:m:GraphBD:tests} for each layer in \code{A2}.}¥
+for i = 1:length(A2) ¥\circled{1}\circlednote{1}{ tests \code{RANDOMIZATION} as in \Coderef{cd:m:GraphBD:tests} for each layer in \code{A2}.}¥
 	¤if all(A2{i, i}==0, "all") %if all edges are zero, the new random matrix is all zeros
 		assert(isequal(A2{i, i}, random_A{i, i}), ...
 		[BRAPH2.STR ':MultilayerWD:' BRAPH2.FAIL_TEST], ...
@@ -745,31 +748,37 @@ end
 
 \clearpage
 
-\subsection{Binary Undirected Multilayer Graph with fixed Thresholds (MultiplexBUT)}
+\subsection{Binary undirected multilayer graph with fixed thresholds (\code{MultiplexBUT})}
 
-Now we implement the \code{MultiplexBUT} graph based on previous codes \code{GraphBD} and \code{MultilayerWD}, again highlighting the differences.
-A multiplex graph is a type of multilayer graph where only interlayer edges are allowed between homologous nodes. In this case, the layers follow a categorical architecture, which means that all layers are interconnected.
+Now you will implement the \code{MultiplexBUT} graph building on the previous codes \code{GraphBD} and \code{MultilayerWD}. 
+{%TEX
+Again, the differences will be highlighted.
+}%TEX
+A multiplex graph is a type of multilayer graph where interlayer edges are allowed only between homologous nodes. In this case, the layers follow a categorical architecture, which means that all layers are interconnected.
 
 \begin{lstlisting}[
 	label=cd:m:MultiplexBUT:header,
 	caption={
 		{\bf MultiplexBUT element header.}
-		The \code{header} section of generator code for \fn{\_MultiplexBUT.gen.m} provides the general information about the \code{MultiplexBUT} element.
+		The \code{header} section of the generator code in \fn{\_MultiplexBUT.gen.m} provides the general information about the \code{MultiplexBUT} element.
 		\expand{cd:m:GraphBD:header}
 	}
 ]
 ¤%% ¡header!¤
-MultiplexBUT < MultiplexWU (g, binary undirected multiplex with fixed thresholds) is a binary undirected multiplex with fixed thresholds. ¥\circled{1}\circlednote{1}{MultiplexBUT is a child of \fn{MultiplexWU}, which in turn derives from \code{Graph}.}¥
+MultiplexBUT < MultiplexWU (g, binary undirected multiplex with fixed thresholds) is a binary undirected multiplex with fixed thresholds. ¥\circled{1}\circlednote{1}{ MultiplexBUT is a child of \code{MultiplexWU}, which in turn derives from \code{Graph}.}¥
 	
 ¤%%% ¡description!¤
 In a binary undirected multiplex with fixed thresholds (BUT), the layers are those of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds.The supra-connectivity matrix has a number of partitions equal to the number of thresholds.
+
+¤%%% ¡build!¤
+1
 \end{lstlisting}
 
 \begin{lstlisting}[
 	label=cd:m:MultiplexBUT:prop_update,
 	caption={
 		{\bf MultiplexBUT element prop update.}
-		The \code{props\_update} section of generator code for \fn{\_MultiplexBUT.gen.m} updates the properties of \code{MultiplexBUT}.
+		The \code{props\_update} section of the generator code in \fn{\_MultiplexBUT.gen.m} updates the properties of \code{MultiplexBUT}.
 		\expand{cd:m:GraphBD:prop_update}
 	}
 ]
@@ -853,19 +862,19 @@ value = Graph.NONNEGATIVE * ones(layernumber);¤
 A (result, cell) is the cell containing¤ multiplex binary adjacency matrices of the binary undirected multiplex.
 	
 ¤%%%% ¡calculate!¤
-A_WU = calculateValue@MultiplexWU(g, prop);¥\circled{1}\circlednote{1}{calculates the graph MultiplexWU calling its parent \fn{MultiplexWU}.}¥
+A_WU = calculateValue@MultiplexWU(g, prop);¥\circled{1}\circlednote{1}{ calculates the graph MultiplexWU calling its parent \code{MultiplexWU}.}¥
 	
-thresholds = g.get('THRESHOLDS'); ¥\circled{2}\circlednote{2}{gets the thresholds to be applied to \fn{A\_WU}.}¥
-L = length(A_WU); % number of layers ¥\circled{3}\circlednote{3}{gets the number of layers in graph \fn{A\_WU}.}¥
-A = cell(length(thresholds) * L); ¥\circled{4}\circlednote{4}{The new \fn{MultiplexBUT} graph will have \fn{L} layers for each threshold applied.}¥
+thresholds = g.get('THRESHOLDS'); ¥\circled{2}\circlednote{2}{ gets the thresholds to be applied to \code{A\_WU}.}¥
+L = length(A_WU); % number of layers ¥\circled{3}\circlednote{3}{ gets the number of layers in graph \code{A\_WU}.}¥
+A = cell(length(thresholds) * L); ¥\circled{4}\circlednote{4}{ The new \code{MultiplexBUT} graph will have \code{L} layers for each threshold applied.}¥
 	
 if L > 0 && ~isempty(cell2mat(A_WU))
 	A(:, :) = {eye(length(A_WU{1, 1}))};
-	for i = 1:1:length(thresholds) ¥\circled{5}\circlednote{5}{iterates over all the thresholds to be applied.}¥
+	for i = 1:1:length(thresholds) ¥\circled{5}\circlednote{5}{ iterates over all the thresholds to be applied.}¥
 		threshold = thresholds(i);
 		layer = 1;
-		for j = (i - 1) * L + 1:1:i * L ¥\circled{6}\circlednote{6}{iterates over all the layers in \fn{A\_WU}.}¥
-			A{j, j} = dediagonalize(binarize(A_WU{layer, layer}, 'threshold', threshold)); ¥\circled{7}\circlednote{7}{binarizes the present layer of the \fn{A\_WU} graph according to the present threshold.}¥
+		for j = (i - 1) * L + 1:1:i * L ¥\circled{6}\circlednote{6}{ iterates over all the layers in \code{A\_WU}.}¥
+			A{j, j} = dediagonalize(binarize(A_WU{layer, layer}, 'threshold', threshold)); ¥\circled{7}\circlednote{7}{ binarizes the present layer of the \code{A\_WU} graph according to the present threshold.}¥
 			layer = layer + 1;
 		end
 	end
@@ -875,7 +884,7 @@ end
 end
 value = A;¤
 
-¤%%%% ¡gui! ¥\circled{8}\circlednote{8}{Same as in note \circled{2} of \Coderef{cd:m:GraphBD:prop_update}.}¥
+¤%%%% ¡gui! ¥\circled{8}\circlednote{8}{ Same as in note \circled{2} of \Coderef{cd:m:GraphBD:prop_update}.}¥
 pr = PanelPropCell('EL', g, 'PROP', MultiplexBUT.A, ...
 	'TABLE_HEIGHT', s(40), ...
 	'XYSLIDERLOCK', true, ... 
@@ -908,7 +917,7 @@ if ~isa(g.getr('A'), 'NoValue') && length(alayerlabels) ~= g.get('LAYERNUMBER') 
 	end
 	
 	alayerlabels = {};
-	for i = 1:1:length(thresholds)¥\circled{9}\circlednote{9}{sets the labels of the layers considering the thresholds and the number of layers in each multiplex graph for each threshold}¥
+	for i = 1:1:length(thresholds)¥\circled{9}\circlednote{9}{ sets the labels of the layers considering the thresholds and the number of layers in each multiplex graph for each threshold}¥
 		for j = 1:1:length(blayerlabels)
 			alayerlabels = [alayerlabels, [blayerlabels{j} '|' thresholds{i}]];
 		end
@@ -942,7 +951,7 @@ attempts_per_edge = g.get('ATTEMPTSPEREDGE');
 for i = 1:length(A)
 	tmp_a = A{i,i};
 
-	¤random_g = GraphBU();¤  ¥\circled{10}\circlednote{10}{Same as in  \Coderef{cd:m:MultilayerWD:prop_update} but using \code{GraphBU}}¥
+	¤random_g = GraphBU();¤  ¥\circled{10}\circlednote{10}{ Same as in  \Coderef{cd:m:MultilayerWD:prop_update} but using \code{GraphBU}.}¥
 	random_g.set('ATTEMPTSPEREDGE', g.get('ATTEMPTSPEREDGE'));
 	random_A = random_g.get('RANDOMIZATION', {tmp_a});
 	A{i, i} = random_A;
@@ -952,10 +961,10 @@ value = A;¤
 \end{lstlisting}
 
 \begin{lstlisting}[
-label={cd:m:MultiplexBUT:props},
+label=cd:m:MultiplexBUT:props,
 caption={
 	{\bf MultiplexBUT element props.}
-	The \code{props} section of generator code for \fn{MultiplexBUT.gen.m} defines the properties to be used in \fn{MultiplexBUT}.
+	The \code{props} section of the generator code in \fn{\_MultiplexBUT.gen.m} defines the properties to be used in \code{MultiplexBUT}.
 	\expand{cd:m:GraphBD:props}
 }
 ]
@@ -963,7 +972,7 @@ caption={
 	
 %%% ¡prop!
 THRESHOLDS (parameter, rvector) is the vector of thresholds.
-%%%% ¡gui! ¥\circled{1}\circlednote{1}{\code{PanelPropRVectorSmart} plots the panel for a row vector with an edit field. Smart means that (almost) any MatLab expression leading to a correct row vector can be introduced in the edit field. Also, the value of the vector can be limited between some MIN and MAX.}¥
+%%%% ¡gui! ¥\circled{1}\circlednote{1}{ \code{PanelPropRVectorSmart} plots the panel for a row vector with an edit field. Smart means that (almost) any MatLab expression leading to a correct row vector can be introduced in the edit field. Also, the value of the vector can be limited between some MIN and MAX.}¥
 pr = PanelPropRVectorSmart('EL', g, 'PROP', MultiplexBUT.THRESHOLDS, ...
 	'MAX', 1, ...
 	'MIN', -1, ...
@@ -993,8 +1002,8 @@ B1 = [
 	.3 .2 .1 0 .1
 	.4 .3 .2 .1 0
 	]; 
-B = {B1, B1, B1}; ¥\circled{1}\circlednote{1}{creates an example of the necessary input adjacency matrices.}¥
-thresholds = [0 .1 .2 .3 .4]; ¥\circled{2}\circlednote{2}{defines the thresholds.}¥
+B = {B1, B1, B1}; ¥\circled{1}\circlednote{1}{ creates an example of the necessary input adjacency matrices.}¥
+thresholds = [0 .1 .2 .3 .4]; ¥\circled{2}\circlednote{2}{ defines the thresholds.}¥
 g = MultiplexBUT('B', B, 'THRESHOLDS', thresholds);
 	
 g.get('A_CHECK')
@@ -1065,7 +1074,7 @@ assert(isequal(numel(find(A2{i, i})), numel(find(random_A{i, i}))), ... % check 
 [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
 'MultilayerBUT Randomize is not functioning well.')¤
 
-assert(issymmetric(random_A{i, i}), ... % check symmetry ¥\circled{3}\circlednote{3}{checks symmetry of each layer in the new random graph \code{random\_A} since they are undirected}¥
+assert(issymmetric(random_A{i, i}), ... % check symmetry ¥\circled{3}\circlednote{3}{ checks symmetry of each layer in the new random graph \code{random\_A} since they are undirected.}¥
 [BRAPH2.STR ':MultilayerBUT:' BRAPH2.FAIL_TEST], ...
 'MultilayerBUT Randomize is not functioning well.')
 
@@ -1075,31 +1084,37 @@ end
 
 \clearpage
 
-\subsection{Binary Undirected Ordinal Multiplex Graph with fixed Thresholds (OrdMxBUT)}
+\subsection{Binary undirected ordinal multiplex graph with fixed thresholds (\code{OrdMxBUT})}
 
-Finally, we implement the \code{OrdMxBUT} graph based on previous codes \code{GraphBD}, \code{MultilayerWD} and \code{MultiplexBUT}, again highlighting the differences. An ordered multiplex is a type of multiplex graph that consists of a sequence of layers with ordinal edges between corresponding nodes in subsequent layers.
-
+Finally, you will implement the \code{OrdMxBUT} graph based on the previous codes \code{GraphBD}, \code{MultilayerWD} and \code{MultiplexBUT}.
+{%TEX 
+Again the differences will be highlighted.
+}%TEX 
+An ordered multiplex is a type of multiplex graph that consists of a sequence of layers with edges between corresponding nodes in subsequent layers.
 
 \begin{lstlisting}[
 	label=cd:m:OrdMxBUT:header,
 	caption={
 		{\bf OrdMxBUT element header.}
-		The \code{header} section of generator code for \fn{\_OrdMxBUT.gen.m} provides the general information about the \code{OrdMxBUT} element.
+		The \code{header} section of the generator code in \fn{\_OrdMxBUT.gen.m} provides the general information about the \code{OrdMxBUT} element.
 		\expand{cd:m:GraphBD:header}
 	}
 ]
 ¤%% ¡header!¤
-OrdMxBUT < OrdMxWU (g, ordinal multiplex binary undirected with fixed thresholds) is a binary undirected ordinal multiplex with fixed thresholds. ¥\circled{1}\circlednote{1}{\code{OrdMxBUT} is a child of \code{OrdMxWU}, which in turn derives from \code{Graph}.}¥
+OrdMxBUT < OrdMxWU (g, ordinal multiplex binary undirected with fixed thresholds) is a binary undirected ordinal multiplex with fixed thresholds. ¥\circled{1}\circlednote{1}{ \code{OrdMxBUT} is a child of \code{OrdMxWU}, which in turn derives from \code{Graph}.}¥
 	
 ¤%%% ¡description!¤
 In a binary undirected ordinal multiplex with fixed thresholds (BUT), all the layers consist of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.
+
+¤%%% ¡build!¤
+1
 \end{lstlisting}
 
 \begin{lstlisting}[
 	label=cd:m:OrdMxBUT:prop_update,
 	caption={
 		{\bf OrdMxBUT element prop update.}
-		The \code{props\_update} section of generator code for \fn{\_OrdMxBUT.gen.m} updates the properties of \code{OrdMxBUT}.
+		The \code{props\_update} section of the generator code in \fn{\_OrdMxBUT.gen.m} updates the properties of \code{OrdMxBUT}.
 		\expand{cd:m:MultiplexBUT:prop_update}
 	}
 ]
@@ -1183,24 +1198,24 @@ value = Graph.NONNEGATIVE * ones(layernumber);¤
 A (result, cell) is the cell containing¤binary supra-adjacency matrix of the binary undirected multiplex with fixed thresholds (BUT).
 	
 ¤%%%% ¡calculate!¤
-A_WU = calculateValue@OrdMxWU(g, prop);¥\circled{1}\circlednote{1}{calculates the graph OrdMxWU calling the parent \code{OrdMxWU}.}¥
+A_WU = calculateValue@OrdMxWU(g, prop);¥\circled{1}\circlednote{1}{ calculates the graph OrdMxWU calling the parent \code{OrdMxWU}.}¥
 	
-¤thresholds = g.get('THRESHOLDS');  ¥\circled{2}\circlednote{2}{Same as in notes  \circled{2}, \circled{3}, and \circled{4} of \Coderef{cd:m:MultiplexBUT:prop_update}..}¥
+¤thresholds = g.get('THRESHOLDS');  ¥\circled{2}\circlednote{2}{ Same as in notes  \circled{2}, \circled{3}, and \circled{4} of \Coderef{cd:m:MultiplexBUT:prop_update}..}¥
 L = length(A_WU); % number of layers 
 A = cell(length(thresholds)*L);¤
 	
 if L > 0 && ~isempty(cell2mat(A_WU))
 	A(:, :) = {zeros(length(A_WU{1, 1}))};
-	for i = 1:1:length(thresholds) ¥\circled{3}\circlednote{3}{constructs an ordinal muliplex binary undirected graph for each threshold.}¥
+	for i = 1:1:length(thresholds) ¥\circled{3}\circlednote{3}{ constructs an ordinal muliplex binary undirected graph for each threshold.}¥
 		threshold = thresholds(i);
 		layer = 1;
-		for j = (i - 1) * L + 1:1:i * L ¥\circled{4}\circlednote{4}{loops over the layers of \code{A\_Wu} for each threshold.}¥
+		for j = (i - 1) * L + 1:1:i * L ¥\circled{4}\circlednote{4}{ loops over the layers of \code{A\_Wu} for each threshold.}¥
 			for k = (i - 1) * L + 1:1:i * L
-				if j == k ¥\circled{5}\circlednote{5}{sets the layers constructed by binarizing \code{A\_Wu} according to the present threshold on the diagonal of the supra-adjacency matrix.}¥
+				if j == k ¥\circled{5}\circlednote{5}{ sets the layers constructed by binarizing \code{A\_Wu} according to the present threshold on the diagonal of the supra-adjacency matrix.}¥
 					A{j, j} = dediagonalize(binarize(A_WU{layer, layer}, 'threshold', threshold));
-				elseif (j-k)==1 || (k-j)==1 ¥\circled{6}\circlednote{6}{connects consecutive layers.}¥
+				elseif (j-k)==1 || (k-j)==1 ¥\circled{6}\circlednote{6}{ connects consecutive layers.}¥
 					A(j, k) = {eye(length(A{1, 1}))};
-				else ¥\circled{7}\circlednote{7}{does NOT connect NON-consecutive layers.}¥
+				else ¥\circled{7}\circlednote{7}{ does NOT connect NON-consecutive layers.}¥
 					A(j, k) = {zeros(length(A{1, 1}))};
 				end
 			end
@@ -1265,7 +1280,7 @@ ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.
 5
 
 %%% ¡prop!
-RANDOMIZATION (query, cell) is the attempts to rewire each edge. ¥\circled{8}\circlednote{8}{same as in \Coderef{cd:m:MultiplexBUT:prop_update}}¥
+RANDOMIZATION (query, cell) is the attempts to rewire each edge. ¥\circled{8}\circlednote{8}{ same as in \Coderef{cd:m:MultiplexBUT:prop_update}.}¥
 %%%% ¡calculate!
 rng(g.get('RANDOM_SEED'), 'twister')
 
@@ -1292,10 +1307,10 @@ value = A;¤
 
 
 \begin{lstlisting}[
-label={cd:m:OrdMxBUT:props},
-caption={
+	label=cd:m:OrdMxBUT:props,
+	caption={
 	{\bf OrdMxBUT element props.}
-	The \code{props} section of generator code for \fn{OrdMxBUT.gen.m} defines the properties to be used in \fn{MultiplexBUT}.
+	The \code{props} section of generator code for \fn{\_OrdMxBUT.gen.m} defines the properties to be used in \code{MultiplexBUT}.
 	\expand{cd:m:MultiplexBUT:props}
 	}
 ]
@@ -1366,7 +1381,7 @@ end
 
 ¤%%% ¡test!
 %%%% ¡name!
-Randomize Rules  ¥\circled{1}\circlednote{1}{same as in \Coderef{cd:m:MultiplexBUT:tests}}¥
+Randomize Rules  ¥\circled{1}\circlednote{1}{ same as in \Coderef{cd:m:MultiplexBUT:tests}.}¥
 %%%% ¡probability!
 .01
 %%%% ¡code!

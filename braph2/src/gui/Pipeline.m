@@ -12,7 +12,7 @@ classdef Pipeline < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>README</strong> 	README (metadata, string) is the web tutorial address (/tutorials/pipelines/tut/readme.md).
 	%  <strong>10</strong> <strong>PDF</strong> 	PDF (metadata, string) is the PDF tutorial file (/tutorials/pipelines/tut/tut.pdf).
 	%  <strong>11</strong> <strong>PS_DICT</strong> 	PS_DICT (data, idict) is an indexed dictionary with the code sections.
@@ -104,6 +104,8 @@ classdef Pipeline < ConcreteElement
 	%
 	%
 	% See also PipelinePP_PSDict, PipelineSection, PipelineCode.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		README = 9; %CET: Computational Efficiency Trick
@@ -140,7 +142,7 @@ classdef Pipeline < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>README</strong> 	README (metadata, string) is the web tutorial address (/tutorials/pipelines/tut/readme.md).
 			%  <strong>10</strong> <strong>PDF</strong> 	PDF (metadata, string) is the PDF tutorial file (/tutorials/pipelines/tut/tut.pdf).
 			%  <strong>11</strong> <strong>PS_DICT</strong> 	PS_DICT (data, idict) is an indexed dictionary with the code sections.
@@ -151,6 +153,21 @@ classdef Pipeline < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the analysis pipeline.
+			%
+			% BUILD = Pipeline.GETBUILD() returns the build of 'Pipeline'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PIP.GETBUILD() returns the build of the analysis pipeline PIP.
+			%  BUILD = Element.GETBUILD(PIP) returns the build of 'PIP'.
+			%  BUILD = Element.GETBUILD('Pipeline') returns the build of 'Pipeline'.
+			%
+			% Note that the Element.GETBUILD(PIP) and Element.GETBUILD('Pipeline')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pip_class = getClass()
 			%GETCLASS returns the class of the analysis pipeline.
 			%
@@ -469,7 +486,7 @@ classdef Pipeline < ConcreteElement
 			prop = Pipeline.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pipeline_description_list = { 'ELCLASS (constant, string) is the class of the pipeline.'  'NAME (constant, string) is the name of the pipeline.'  'DESCRIPTION (constant, string) is the description of the pipeline.'  'TEMPLATE (parameter, item) is the template of the pipeline.'  'ID (data, string) is a few-letter code for the pipeline.'  'LABEL (metadata, string) is an extended label of the pipeline.'  'NOTES (metadata, string) are some specific notes about the pipeline.'  'TOSTRING (query, string) returns a string that represents the object.'  'README (metadata, string) is the web tutorial address (/tutorials/pipelines/tut/readme.md).'  'PDF (metadata, string) is the PDF tutorial file (/tutorials/pipelines/tut/tut.pdf).'  'PS_DICT (data, idict) is an indexed dictionary with the code sections.' };
+			pipeline_description_list = { 'ELCLASS (constant, string) is the class of the pipeline.'  'NAME (constant, string) is the name of the pipeline.'  'DESCRIPTION (constant, string) is the description of the pipeline.'  'TEMPLATE (parameter, item) is the template of the pipeline.'  'ID (data, string) is a few-letter code for the pipeline.'  'LABEL (metadata, string) is an extended label of the pipeline.'  'NOTES (metadata, string) are some specific notes about the pipeline.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'README (metadata, string) is the web tutorial address (/tutorials/pipelines/tut/readme.md).'  'PDF (metadata, string) is the PDF tutorial file (/tutorials/pipelines/tut/tut.pdf).'  'PS_DICT (data, idict) is an indexed dictionary with the code sections.' };
 			prop_description = pipeline_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

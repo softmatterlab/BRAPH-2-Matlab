@@ -14,6 +14,9 @@ To obtain the prediction on a dataset D use: predictions = nn.get('PREDICT', D)
 %%% ¡seealso!
 NNDataPoint, NNDataset, NNEvaluator
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -24,7 +27,7 @@ ELCLASS (constant, string) is the class of the neural network base.
 %%% ¡prop!
 NAME (constant, string) is the name of the neural network base.
 %%%% ¡default!
-'Neural Network Base '
+'Neural Network Base'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network base.
@@ -113,7 +116,7 @@ nn.memorize('MODEL');
 value = [];
 
 %%% ¡prop!
-VERBOSE (metadata, logical) is an indicator to display training progress information.
+VERBOSE (gui, logical) is an indicator to display training progress information.
 %%%% ¡default!
 false
 

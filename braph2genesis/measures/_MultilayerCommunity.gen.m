@@ -6,6 +6,9 @@ The Multilayer Community Structure (MultilayerCommunity) of a multilayer graph i
  the network into non-overlapping groups of nodes which maximizes the number 
  of within group edges, and minimizes the number of between group edges.
 
+%%% ¡build!
+1
+
 %% ¡layout!
     
 %%% ¡prop!
@@ -135,7 +138,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'OrdMxWU' 'MultiplexBU' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};
+{'MultiplexWU' 'MultiplexWD' 'OrdMxWU' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};
 
 %%% ¡prop!
 M (result, cell) is the Multilayer Community Structure.

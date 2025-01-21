@@ -10,14 +10,14 @@ classdef IndexedDictionary < ConcreteElement
 	%  constructor using the property IT_CLASS.
 	%
 	% The list of IndexedDictionary properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the indexed dictionary.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the indexed dictionary (IndexedDictionary).
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the indexed dictionary.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the indexed dictionary.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the indexed dictionary.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the indexed dictionary.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the indexed dictionary.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the indexed dictionary.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>IT_CLASS</strong> 	IT_CLASS (parameter, class) is the class of the item elements.
 	%  <strong>10</strong> <strong>IT_KEY</strong> 	IT_KEY (parameter, scalar) is the property of the elements to be used as key (its category must be parameter or data, and its format must be string or class).
 	%  <strong>11</strong> <strong>IT_LIST</strong> 	IT_LIST (data, itemlist) is the list containing the items.
@@ -28,11 +28,11 @@ classdef IndexedDictionary < ConcreteElement
 	%  <strong>16</strong> <strong>CONTAINS_IT</strong> 	CONTAINS_IT (query, logical) checks whether an item exists in an indexed dictionary
 	%  <strong>17</strong> <strong>INDEX</strong> 	INDEX (query, scalar) returns the index of a key or item.
 	%  <strong>18</strong> <strong>INDEX_FROM_KEY</strong> 	INDEX_FROM_KEY (query, scalar) returns the index of a key.
-	%  <strong>19</strong> <strong>INDEX_FROM_IT</strong> 	INDEX_FROM_IT (query, scalar) returns the index of a item.
+	%  <strong>19</strong> <strong>INDEX_FROM_IT</strong> 	INDEX_FROM_IT (query, scalar) returns the index of an item.
 	%  <strong>20</strong> <strong>KEYS</strong> 	KEYS (query, stringlist) returns all the keys in the indexed dictionary.
 	%  <strong>21</strong> <strong>KEY</strong> 	KEY (query, string) returns the key of an index or item.
 	%  <strong>22</strong> <strong>KEY_FROM_INDEX</strong> 	KEY_FROM_INDEX (query, string) returns the key of an index
-	%  <strong>23</strong> <strong>KEY_FROM_IT</strong> 	KEY_FROM_IT (query, string) returns the key of a item.
+	%  <strong>23</strong> <strong>KEY_FROM_IT</strong> 	KEY_FROM_IT (query, string) returns the key of an item.
 	%  <strong>24</strong> <strong>IT</strong> 	IT (query, item) returns the item of an index or key.
 	%  <strong>25</strong> <strong>IT_FROM_INDEX</strong> 	IT_FROM_INDEX (query, item) returns the item of an index.
 	%  <strong>26</strong> <strong>IT_FROM_KEY</strong> 	IT_FROM_KEY (query, item) returns the item of a key.
@@ -298,14 +298,14 @@ classdef IndexedDictionary < ConcreteElement
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of IndexedDictionary properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the indexed dictionary.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the indexed dictionary (IndexedDictionary).
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the indexed dictionary.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the indexed dictionary.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the indexed dictionary.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the indexed dictionary.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the indexed dictionary.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the indexed dictionary.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>IT_CLASS</strong> 	IT_CLASS (parameter, class) is the class of the item elements.
 			%  <strong>10</strong> <strong>IT_KEY</strong> 	IT_KEY (parameter, scalar) is the property of the elements to be used as key (its category must be parameter or data, and its format must be string or class).
 			%  <strong>11</strong> <strong>IT_LIST</strong> 	IT_LIST (data, itemlist) is the list containing the items.
@@ -316,11 +316,11 @@ classdef IndexedDictionary < ConcreteElement
 			%  <strong>16</strong> <strong>CONTAINS_IT</strong> 	CONTAINS_IT (query, logical) checks whether an item exists in an indexed dictionary
 			%  <strong>17</strong> <strong>INDEX</strong> 	INDEX (query, scalar) returns the index of a key or item.
 			%  <strong>18</strong> <strong>INDEX_FROM_KEY</strong> 	INDEX_FROM_KEY (query, scalar) returns the index of a key.
-			%  <strong>19</strong> <strong>INDEX_FROM_IT</strong> 	INDEX_FROM_IT (query, scalar) returns the index of a item.
+			%  <strong>19</strong> <strong>INDEX_FROM_IT</strong> 	INDEX_FROM_IT (query, scalar) returns the index of an item.
 			%  <strong>20</strong> <strong>KEYS</strong> 	KEYS (query, stringlist) returns all the keys in the indexed dictionary.
 			%  <strong>21</strong> <strong>KEY</strong> 	KEY (query, string) returns the key of an index or item.
 			%  <strong>22</strong> <strong>KEY_FROM_INDEX</strong> 	KEY_FROM_INDEX (query, string) returns the key of an index
-			%  <strong>23</strong> <strong>KEY_FROM_IT</strong> 	KEY_FROM_IT (query, string) returns the key of a item.
+			%  <strong>23</strong> <strong>KEY_FROM_IT</strong> 	KEY_FROM_IT (query, string) returns the key of an item.
 			%  <strong>24</strong> <strong>IT</strong> 	IT (query, item) returns the item of an index or key.
 			%  <strong>25</strong> <strong>IT_FROM_INDEX</strong> 	IT_FROM_INDEX (query, item) returns the item of an index.
 			%  <strong>26</strong> <strong>IT_FROM_KEY</strong> 	IT_FROM_KEY (query, item) returns the item of a key.
@@ -343,6 +343,21 @@ classdef IndexedDictionary < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the indexed dictionary.
+			%
+			% BUILD = IndexedDictionary.GETBUILD() returns the build of 'IndexedDictionary'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = IDICT.GETBUILD() returns the build of the indexed dictionary IDICT.
+			%  BUILD = Element.GETBUILD(IDICT) returns the build of 'IDICT'.
+			%  BUILD = Element.GETBUILD('IndexedDictionary') returns the build of 'IndexedDictionary'.
+			%
+			% Note that the Element.GETBUILD(IDICT) and Element.GETBUILD('IndexedDictionary')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function idict_class = getClass()
 			%GETCLASS returns the class of the indexed dictionary.
 			%
@@ -661,7 +676,7 @@ classdef IndexedDictionary < ConcreteElement
 			prop = IndexedDictionary.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			indexeddictionary_description_list = { 'ELCLASS (constant, string) is the class of the indexed dictionary.'  'NAME (constant, string) is the name of the indexed dictionary.'  'DESCRIPTION (constant, string) is the description of the indexed dictionary.'  'TEMPLATE (parameter, item) is the template of the indexed dictionary.'  'ID (data, string) is a few-letter code for the indexed dictionary.'  'LABEL (metadata, string) is an extended label of the indexed dictionary.'  'NOTES (metadata, string) are some specific notes about the indexed dictionary.'  'TOSTRING (query, string) returns a string that represents the object.'  'IT_CLASS (parameter, class) is the class of the item elements.'  'IT_KEY (parameter, scalar) is the property of the elements to be used as key (its category must be parameter or data, and its format must be string or class).'  'IT_LIST (data, itemlist) is the list containing the items.'  'LENGTH (query, scalar) returns the number of items in the indexed dictionary.'  'CONTAINS (query, logical) checks whether an item exists in an indexed dictionary.'  'CONTAINS_INDEX (query, logical) checks whether an index exists in an indexed dictionary.'  'CONTAINS_KEY (query, logical) checks whether a key exists in an indexed dictionary.'  'CONTAINS_IT (query, logical) checks whether an item exists in an indexed dictionary'  'INDEX (query, scalar) returns the index of a key or item.'  'INDEX_FROM_KEY (query, scalar) returns the index of a key.'  'INDEX_FROM_IT (query, scalar) returns the index of a item.'  'KEYS (query, stringlist) returns all the keys in the indexed dictionary.'  'KEY (query, string) returns the key of an index or item.'  'KEY_FROM_INDEX (query, string) returns the key of an index'  'KEY_FROM_IT (query, string) returns the key of a item.'  'IT (query, item) returns the item of an index or key.'  'IT_FROM_INDEX (query, item) returns the item of an index.'  'IT_FROM_KEY (query, item) returns the item of a key.'  'ADD (query, empty) adds an item and key to an indexed dictionary'  'REMOVE (query, empty) removes a key and item from an indexed dictionary.'  'REPLACE (query, empty) replaces an item and key in an indexed dictionary.'  'REPLACE_KEY (query, empty) replaces key in indexed dictionary.'  'REPLACE_IT (query, empty) replaces item in indexed dictionary.'  'INVERT (query, empty) inverts position of two items in indexed dictionary.'  'MOVE_TO (query, empty) moves an item of an indexed dictionary to another position.'  'REMOVE_ALL (query, rvector) removes selected items.'  'MOVE_UP (query, rvector) moves up selected items.'  'MOVE_DOWN (query, rvector) moves down selected items.'  'MOVE_TO_TOP (query, empty) moves selected items to top.'  'MOVE_TO_BOTTOM (query, rvector) moves selected items to bottom.' };
+			indexeddictionary_description_list = { 'ELCLASS (constant, string) is the class of the indexed dictionary (IndexedDictionary).'  'NAME (constant, string) is the name of the indexed dictionary.'  'DESCRIPTION (constant, string) is the description of the indexed dictionary.'  'TEMPLATE (parameter, item) is the template of the indexed dictionary.'  'ID (data, string) is a few-letter code for the indexed dictionary.'  'LABEL (metadata, string) is an extended label of the indexed dictionary.'  'NOTES (metadata, string) are some specific notes about the indexed dictionary.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'IT_CLASS (parameter, class) is the class of the item elements.'  'IT_KEY (parameter, scalar) is the property of the elements to be used as key (its category must be parameter or data, and its format must be string or class).'  'IT_LIST (data, itemlist) is the list containing the items.'  'LENGTH (query, scalar) returns the number of items in the indexed dictionary.'  'CONTAINS (query, logical) checks whether an item exists in an indexed dictionary.'  'CONTAINS_INDEX (query, logical) checks whether an index exists in an indexed dictionary.'  'CONTAINS_KEY (query, logical) checks whether a key exists in an indexed dictionary.'  'CONTAINS_IT (query, logical) checks whether an item exists in an indexed dictionary'  'INDEX (query, scalar) returns the index of a key or item.'  'INDEX_FROM_KEY (query, scalar) returns the index of a key.'  'INDEX_FROM_IT (query, scalar) returns the index of an item.'  'KEYS (query, stringlist) returns all the keys in the indexed dictionary.'  'KEY (query, string) returns the key of an index or item.'  'KEY_FROM_INDEX (query, string) returns the key of an index'  'KEY_FROM_IT (query, string) returns the key of an item.'  'IT (query, item) returns the item of an index or key.'  'IT_FROM_INDEX (query, item) returns the item of an index.'  'IT_FROM_KEY (query, item) returns the item of a key.'  'ADD (query, empty) adds an item and key to an indexed dictionary'  'REMOVE (query, empty) removes a key and item from an indexed dictionary.'  'REPLACE (query, empty) replaces an item and key in an indexed dictionary.'  'REPLACE_KEY (query, empty) replaces key in indexed dictionary.'  'REPLACE_IT (query, empty) replaces item in indexed dictionary.'  'INVERT (query, empty) inverts position of two items in indexed dictionary.'  'MOVE_TO (query, empty) moves an item of an indexed dictionary to another position.'  'REMOVE_ALL (query, rvector) removes selected items.'  'MOVE_UP (query, rvector) moves up selected items.'  'MOVE_DOWN (query, rvector) moves down selected items.'  'MOVE_TO_TOP (query, empty) moves selected items to top.'  'MOVE_TO_BOTTOM (query, rvector) moves selected items to bottom.' };
 			prop_description = indexeddictionary_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -1163,8 +1178,8 @@ classdef IndexedDictionary < ConcreteElement
 					% keys = value
 					
 				case 21 % IndexedDictionary.KEY
-					% KEY = idict.get('KEY', POINTER) returns the key of POINTER (a index or
-					%  item). If the POINTER is a item, it returns the first occurrence.
+					% KEY = idict.get('KEY', POINTER) returns the key of POINTER (an index or
+					%  item). If the POINTER is an item, it returns the first occurrence.
 					if isempty(varargin)
 					    value = '';
 					    return
@@ -1241,7 +1256,7 @@ classdef IndexedDictionary < ConcreteElement
 					
 					it_list = idict.get('IT_LIST');
 					value = it_list{idict.get('INDEX_FROM_KEY', key)};
-					% item = value % error if idict does not containt the key
+					% item = value % error if idict does not contain the key
 					
 				case 27 % IndexedDictionary.ADD
 					% idict.get('ADD', IT, INDEX) adds an item and key to the indexed

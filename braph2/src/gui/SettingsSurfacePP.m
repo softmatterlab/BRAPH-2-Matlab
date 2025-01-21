@@ -8,17 +8,17 @@ classdef SettingsSurfacePP < SettingsPP
 	% It works for all categories.
 	%
 	% The list of SettingsSurfacePP properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the prop panel for surface settings.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the prop panel for surface settings.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the prop panel for surface settings.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the prop panel for surface settings.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the prop panel for surface settings.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the prop panel for surface settings.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the prop panel for surface settings.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the property panel for surface settings.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the property panel for surface settings.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the property panel for surface settings.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the property panel for surface settings.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the property panel for surface settings.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the property panel for surface settings.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the property panel for surface settings.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
 	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -32,7 +32,7 @@ classdef SettingsSurfacePP < SettingsPP
 	%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
 	%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
 	%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel for surface settings.
+	%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel for surface settings.
 	%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
 	%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
 	%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
@@ -138,6 +138,8 @@ classdef SettingsSurfacePP < SettingsPP
 	%
 	%
 	% See also SettingsPosition, uipushbutton, uieditfield, uislider.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		ENABLE = 36; %CET: Computational Efficiency Trick
@@ -187,17 +189,17 @@ classdef SettingsSurfacePP < SettingsPP
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SettingsSurfacePP properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the prop panel for surface settings.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the prop panel for surface settings.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the prop panel for surface settings.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the prop panel for surface settings.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the prop panel for surface settings.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the prop panel for surface settings.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the prop panel for surface settings.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the property panel for surface settings.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the property panel for surface settings.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the property panel for surface settings.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the property panel for surface settings.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the property panel for surface settings.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the property panel for surface settings.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the property panel for surface settings.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
 			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -211,7 +213,7 @@ classdef SettingsSurfacePP < SettingsPP
 			%  <strong>22</strong> <strong>REDRAW</strong> 	REDRAW (query, logical) resizes the property panel and repositions its graphical objects.
 			%  <strong>23</strong> <strong>EL</strong> 	EL (data, item) is the element.
 			%  <strong>24</strong> <strong>PROP</strong> 	PROP (data, scalar) is the property number.
-			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the prop panel for surface settings.
+			%  <strong>25</strong> <strong>HEIGHT</strong> 	HEIGHT (gui, size) is the pixel height of the property panel for surface settings.
 			%  <strong>26</strong> <strong>TITLE</strong> 	TITLE (gui, string) is the property title.
 			%  <strong>27</strong> <strong>LABEL_TITLE</strong> 	LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.
 			%  <strong>28</strong> <strong>BUTTON_CB</strong> 	BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].
@@ -236,6 +238,21 @@ classdef SettingsSurfacePP < SettingsPP
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the prop panel for surface settings.
+			%
+			% BUILD = SettingsSurfacePP.GETBUILD() returns the build of 'SettingsSurfacePP'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PR.GETBUILD() returns the build of the prop panel for surface settings PR.
+			%  BUILD = Element.GETBUILD(PR) returns the build of 'PR'.
+			%  BUILD = Element.GETBUILD('SettingsSurfacePP') returns the build of 'SettingsSurfacePP'.
+			%
+			% Note that the Element.GETBUILD(PR) and Element.GETBUILD('SettingsSurfacePP')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pr_class = getClass()
 			%GETCLASS returns the class of the prop panel for surface settings.
 			%
@@ -566,7 +583,7 @@ classdef SettingsSurfacePP < SettingsPP
 			prop = SettingsSurfacePP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingssurfacepp_description_list = { 'ELCLASS (constant, string) is the class of the prop panel for surface settings.'  'NAME (constant, string) is the name of the prop panel for surface settings.'  'DESCRIPTION (constant, string) is the description of the prop panel for surface settings.'  'TEMPLATE (parameter, item) is the template of the prop panel for surface settings.'  'ID (data, string) is a few-letter code for the prop panel for surface settings.'  'LABEL (metadata, string) is an extended label of the prop panel for surface settings.'  'NOTES (metadata, string) are some specific notes about the prop panel for surface settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the prop panel for surface settings.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.'  'BUTTON_FACECOLOR (evanescent, handle) is the face color button.'  'EDITFIELD_FACEALPHA (evanescent, handle) is the face alpha edit field.'  'SLIDER_FACEALPHA (evanescent, handle) is the face alpha slider.'  'BUTTON_EDGECOLOR (evanescent, handle) is the edge color button.'  'EDITFIELD_EDGEALPHA (evanescent, handle) is the edge alpha edit field.'  'SLIDER_EDGEALPHA (evanescent, handle) is the edge alpha slider.' };
+			settingssurfacepp_description_list = { 'ELCLASS (constant, string) is the class of the property panel for surface settings.'  'NAME (constant, string) is the name of the property panel for surface settings.'  'DESCRIPTION (constant, string) is the description of the property panel for surface settings.'  'TEMPLATE (parameter, item) is the template of the property panel for surface settings.'  'ID (data, string) is a few-letter code for the property panel for surface settings.'  'LABEL (metadata, string) is an extended label of the property panel for surface settings.'  'NOTES (metadata, string) are some specific notes about the property panel for surface settings.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the checkbox and editfields.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the property panel for surface settings.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'ENABLE (gui, logical) switches the checkbox and editfields between active and inactive appearance when not editable.'  'BUTTON_FACECOLOR (evanescent, handle) is the face color button.'  'EDITFIELD_FACEALPHA (evanescent, handle) is the face alpha edit field.'  'SLIDER_FACEALPHA (evanescent, handle) is the face alpha slider.'  'BUTTON_EDGECOLOR (evanescent, handle) is the edge color button.'  'EDITFIELD_EDGEALPHA (evanescent, handle) is the edge alpha edit field.'  'SLIDER_EDGEALPHA (evanescent, handle) is the edge alpha slider.' };
 			prop_description = settingssurfacepp_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

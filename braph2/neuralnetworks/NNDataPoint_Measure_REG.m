@@ -9,14 +9,14 @@ classdef NNDataPoint_Measure_REG < NNDataPoint
 	% The target is obtained from the variables of interest of the subject.
 	%
 	% The list of NNDataPoint_Measure_REG properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of a data point for regression with graph measures.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of a data point for regression with graph measures.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of a data point for regression with graph measures.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for a data point for regression with graph measures.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of a data point for regression with graph measures.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about a data point for regression with graph measures.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the data point for regression with graph measures.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the data point for regression with graph measures.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the data point for regression with graph measures.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the data point for regression with graph measures.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the data point for regression with graph measures.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the data point for regression with graph measures.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the data point for regression with graph measures.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>INPUT</strong> 	INPUT (result, cell) is the input value for this data point.
 	%  <strong>10</strong> <strong>TARGET</strong> 	TARGET (result, cell) is the target value for this data point.
 	%  <strong>11</strong> <strong>G</strong> 	G (data, item) is a graph containing the added graph measures (M_DICT).
@@ -111,6 +111,8 @@ classdef NNDataPoint_Measure_REG < NNDataPoint
 	%
 	%
 	% See also NNDataPoint_Graph_REG, NNDataPoint_Graph_REG, NNDataPoint_Measure_CLA.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		G = 11; %CET: Computational Efficiency Trick
@@ -145,14 +147,14 @@ classdef NNDataPoint_Measure_REG < NNDataPoint
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNDataPoint_Measure_REG properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of a data point for regression with graph measures.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of a data point for regression with graph measures.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of a data point for regression with graph measures.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for a data point for regression with graph measures.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of a data point for regression with graph measures.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about a data point for regression with graph measures.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the data point for regression with graph measures.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the data point for regression with graph measures.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the data point for regression with graph measures.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the data point for regression with graph measures.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the data point for regression with graph measures.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the data point for regression with graph measures.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the data point for regression with graph measures.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>INPUT</strong> 	INPUT (result, cell) is the input value for this data point.
 			%  <strong>10</strong> <strong>TARGET</strong> 	TARGET (result, cell) is the target value for this data point.
 			%  <strong>11</strong> <strong>G</strong> 	G (data, item) is a graph containing the added graph measures (M_DICT).
@@ -166,6 +168,21 @@ classdef NNDataPoint_Measure_REG < NNDataPoint
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the measure regression data point.
+			%
+			% BUILD = NNDataPoint_Measure_REG.GETBUILD() returns the build of 'NNDataPoint_Measure_REG'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = DP.GETBUILD() returns the build of the measure regression data point DP.
+			%  BUILD = Element.GETBUILD(DP) returns the build of 'DP'.
+			%  BUILD = Element.GETBUILD('NNDataPoint_Measure_REG') returns the build of 'NNDataPoint_Measure_REG'.
+			%
+			% Note that the Element.GETBUILD(DP) and Element.GETBUILD('NNDataPoint_Measure_REG')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function dp_class = getClass()
 			%GETCLASS returns the class of the measure regression data point.
 			%
@@ -488,7 +505,7 @@ classdef NNDataPoint_Measure_REG < NNDataPoint
 			prop = NNDataPoint_Measure_REG.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nndatapoint_measure_reg_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of a data point for regression with graph measures.'  'DESCRIPTION (constant, string) is the description of a data point for regression with graph measures.'  'TEMPLATE (parameter, item) is the template of a data point for regression with graph measures.'  'ID (data, string) is a few-letter code for a data point for regression with graph measures.'  'LABEL (metadata, string) is an extended label of a data point for regression with graph measures.'  'NOTES (metadata, string) are some specific notes about a data point for regression with graph measures.'  'TOSTRING (query, string) returns a string that represents the object.'  'INPUT (result, cell) is the input value for this data point.'  'TARGET (result, cell) is the target value for this data point.'  'G (data, item) is a graph containing the added graph measures (M_DICT).'  'M_LIST (parameter, classlist) is a list of graph measure to be used as the input'  'SUB (data, item) is a subject.'  'TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as the class targets.' };
+			nndatapoint_measure_reg_description_list = { 'ELCLASS (constant, string) is the class of the data point for regression with graph measures.'  'NAME (constant, string) is the name of the data point for regression with graph measures.'  'DESCRIPTION (constant, string) is the description of the data point for regression with graph measures.'  'TEMPLATE (parameter, item) is the template of the data point for regression with graph measures.'  'ID (data, string) is a few-letter code for the data point for regression with graph measures.'  'LABEL (metadata, string) is an extended label of the data point for regression with graph measures.'  'NOTES (metadata, string) are some specific notes about the data point for regression with graph measures.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'INPUT (result, cell) is the input value for this data point.'  'TARGET (result, cell) is the target value for this data point.'  'G (data, item) is a graph containing the added graph measures (M_DICT).'  'M_LIST (parameter, classlist) is a list of graph measure to be used as the input'  'SUB (data, item) is a subject.'  'TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as the class targets.' };
 			prop_description = nndatapoint_measure_reg_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -562,7 +579,7 @@ classdef NNDataPoint_Measure_REG < NNDataPoint
 				case 1 % NNDataPoint_Measure_REG.ELCLASS
 					prop_default = 'NNDataPoint_Measure_REG';
 				case 2 % NNDataPoint_Measure_REG.NAME
-					prop_default = 'NNDataPoint_Measure_REG';
+					prop_default = 'Neural Network Data Point for Regression with Graph Measures';
 				case 3 % NNDataPoint_Measure_REG.DESCRIPTION
 					prop_default = 'A data point for regression with graph measures (NNDataPoint_Measure_REG) contains both input and target for neural network analysis. The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), calculated from the derived graph of the subject. The target is obtained from the variables of interest of the subject.';
 				case 4 % NNDataPoint_Measure_REG.TEMPLATE

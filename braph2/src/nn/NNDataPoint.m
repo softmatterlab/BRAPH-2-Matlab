@@ -7,14 +7,14 @@ classdef NNDataPoint < ConcreteElement
 	% Its subclasses shall be specifically designed to cater to different use cases such as classification task, regression task, or data generation.
 	%
 	% The list of NNDataPoint properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the data point for neural network analysis .
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the data point for neural network analysis.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the data point for neural network analysis.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the data point for neural network analysis.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the data point for neural network analysis.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the data point for neural network analysis.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the data point for neural network analysis.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>INPUT</strong> 	INPUT (result, cell) is the input value for this data point.
 	%  <strong>10</strong> <strong>TARGET</strong> 	TARGET (result, cell) is the target value for this data point.
 	%
@@ -105,6 +105,8 @@ classdef NNDataPoint < ConcreteElement
 	%
 	%
 	% See also NNData.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		INPUT = 9; %CET: Computational Efficiency Trick
@@ -129,14 +131,14 @@ classdef NNDataPoint < ConcreteElement
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNDataPoint properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the data point for neural network analysis .
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the data point for neural network analysis.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the data point for neural network analysis.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the data point for neural network analysis.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the data point for neural network analysis.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the data point for neural network analysis.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the data point for neural network analysis.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>INPUT</strong> 	INPUT (result, cell) is the input value for this data point.
 			%  <strong>10</strong> <strong>TARGET</strong> 	TARGET (result, cell) is the target value for this data point.
 			%
@@ -146,6 +148,21 @@ classdef NNDataPoint < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the neural network data point.
+			%
+			% BUILD = NNDataPoint.GETBUILD() returns the build of 'NNDataPoint'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = DP.GETBUILD() returns the build of the neural network data point DP.
+			%  BUILD = Element.GETBUILD(DP) returns the build of 'DP'.
+			%  BUILD = Element.GETBUILD('NNDataPoint') returns the build of 'NNDataPoint'.
+			%
+			% Note that the Element.GETBUILD(DP) and Element.GETBUILD('NNDataPoint')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function dp_class = getClass()
 			%GETCLASS returns the class of the neural network data point.
 			%
@@ -176,7 +193,7 @@ classdef NNDataPoint < ConcreteElement
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'NNDataPoint'  'NNDataPoint_Graph_CLA'  'NNDataPoint_Graph_REG'  'NNDataPoint_Measure_CLA'  'NNDataPoint_Measure_REG'  'NNDataPoint_CON_CLA'  'NNDataPoint_CON_REG'  'NNDataPoint_CON_FUN_MP_CLA'  'NNDataPoint_CON_FUN_MP_REG'  'NNDataPoint_FUN_CLA'  'NNDataPoint_FUN_REG'  'NNDataPoint_ST_CLA'  'NNDataPoint_ST_REG'  'NNDataPoint_ST_MM_CLA'  'NNDataPoint_ST_MM_REG' }; %CET: Computational Efficiency Trick
+			subclass_list = { 'NNDataPoint'  'NNDataPointMLP_Shuffled'  'NNDataPoint_Graph_CLA'  'NNDataPoint_Graph_REG'  'NNDataPoint_Measure_CLA'  'NNDataPoint_Measure_REG'  'NNDataPoint_CON_CLA'  'NNDataPoint_CON_REG'  'NNDataPoint_CON_FUN_MP_CLA'  'NNDataPoint_CON_FUN_MP_REG'  'NNDataPoint_FUN_CLA'  'NNDataPoint_FUN_REG'  'NNDataPoint_ST_CLA'  'NNDataPoint_ST_REG'  'NNDataPoint_ST_MM_CLA'  'NNDataPoint_ST_MM_REG' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of neural network data point.
@@ -468,7 +485,7 @@ classdef NNDataPoint < ConcreteElement
 			prop = NNDataPoint.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nndatapoint_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the data point for neural network analysis.'  'DESCRIPTION (constant, string) is the description of the data point for neural network analysis.'  'TEMPLATE (parameter, item) is the template of the data point for neural network analysis.'  'ID (data, string) is a few-letter code for the data point for neural network analysis.'  'LABEL (metadata, string) is an extended label of the data point for neural network analysis.'  'NOTES (metadata, string) are some specific notes about the data point for neural network analysis.'  'TOSTRING (query, string) returns a string that represents the object.'  'INPUT (result, cell) is the input value for this data point.'  'TARGET (result, cell) is the target value for this data point.' };
+			nndatapoint_description_list = { 'ELCLASS (constant, string) is the class of the data point for neural network analysis .'  'NAME (constant, string) is the name of the data point for neural network analysis.'  'DESCRIPTION (constant, string) is the description of the data point for neural network analysis.'  'TEMPLATE (parameter, item) is the template of the data point for neural network analysis.'  'ID (data, string) is a few-letter code for the data point for neural network analysis.'  'LABEL (metadata, string) is an extended label of the data point for neural network analysis.'  'NOTES (metadata, string) are some specific notes about the data point for neural network analysis.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'INPUT (result, cell) is the input value for this data point.'  'TARGET (result, cell) is the target value for this data point.' };
 			prop_description = nndatapoint_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -534,7 +551,7 @@ classdef NNDataPoint < ConcreteElement
 				case 1 % NNDataPoint.ELCLASS
 					prop_default = 'NNDataPoint';
 				case 2 % NNDataPoint.NAME
-					prop_default = 'NNDataPoint';
+					prop_default = 'Neural Network Data Point';
 				case 3 % NNDataPoint.DESCRIPTION
 					prop_default = 'A neural network data point (NNDataPoint) contains a data point with its inputs and targets for neural network analysis. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses shall be specifically designed to cater to different use cases such as classification task, regression task, or data generation.';
 				case 4 % NNDataPoint.TEMPLATE

@@ -16,7 +16,7 @@ classdef BrainAtlas < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain atlas.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain atlas.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain atlas.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>BR_DICT</strong> 	BR_DICT (data, idict) contains the brain regions of the brain atlas.
 	%  <strong>10</strong> <strong>PFBA</strong> 	PFBA (gui, item) contains the panel figure of the brain atlas.
 	%
@@ -107,6 +107,8 @@ classdef BrainAtlas < ConcreteElement
 	%
 	%
 	% See also BrainRegion, BrainSurface, ImporterBrainAtlasXLS, ImporterBrainAtlasTXT, ExporterBrainAtlasXLS, ExporterBrainAtlasTXT.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		BR_DICT = 9; %CET: Computational Efficiency Trick
@@ -138,7 +140,7 @@ classdef BrainAtlas < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain atlas.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain atlas.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain atlas.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>BR_DICT</strong> 	BR_DICT (data, idict) contains the brain regions of the brain atlas.
 			%  <strong>10</strong> <strong>PFBA</strong> 	PFBA (gui, item) contains the panel figure of the brain atlas.
 			%
@@ -148,6 +150,21 @@ classdef BrainAtlas < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the brain atlas.
+			%
+			% BUILD = BrainAtlas.GETBUILD() returns the build of 'BrainAtlas'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = BA.GETBUILD() returns the build of the brain atlas BA.
+			%  BUILD = Element.GETBUILD(BA) returns the build of 'BA'.
+			%  BUILD = Element.GETBUILD('BrainAtlas') returns the build of 'BrainAtlas'.
+			%
+			% Note that the Element.GETBUILD(BA) and Element.GETBUILD('BrainAtlas')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function ba_class = getClass()
 			%GETCLASS returns the class of the brain atlas.
 			%
@@ -470,7 +487,7 @@ classdef BrainAtlas < ConcreteElement
 			prop = BrainAtlas.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			brainatlas_description_list = { 'ELCLASS (constant, string) is the class of the brain atlas (BrainAtlas).'  'NAME (constant, string) is the name of the brain atlas.'  'DESCRIPTION (constant, string) is the description of the brain atlas.'  'TEMPLATE (parameter, item) is the template of the brain atlas.'  'ID (data, string) is a few-letter code for the brain atlas.'  'LABEL (metadata, string) is an extended label of the brain atlas.'  'NOTES (metadata, string) are some specific notes about the brain atlas.'  'TOSTRING (query, string) returns a string that represents the object.'  'BR_DICT (data, idict) contains the brain regions of the brain atlas.'  'PFBA (gui, item) contains the panel figure of the brain atlas.' };
+			brainatlas_description_list = { 'ELCLASS (constant, string) is the class of the brain atlas (BrainAtlas).'  'NAME (constant, string) is the name of the brain atlas.'  'DESCRIPTION (constant, string) is the description of the brain atlas.'  'TEMPLATE (parameter, item) is the template of the brain atlas.'  'ID (data, string) is a few-letter code for the brain atlas.'  'LABEL (metadata, string) is an extended label of the brain atlas.'  'NOTES (metadata, string) are some specific notes about the brain atlas.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'BR_DICT (data, idict) contains the brain regions of the brain atlas.'  'PFBA (gui, item) contains the panel figure of the brain atlas.' };
 			prop_description = brainatlas_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

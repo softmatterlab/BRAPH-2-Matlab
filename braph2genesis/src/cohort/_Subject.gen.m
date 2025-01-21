@@ -9,6 +9,9 @@ A Subject provides the methods necessary for all subjects.
 %%% ¡seealso!
 Group
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

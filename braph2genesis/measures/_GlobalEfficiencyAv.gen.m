@@ -5,6 +5,9 @@ GlobalEfficiencyAv < GlobalEfficiency (m, average global efficiency) is the grap
 The Average Global Efficiency (GlobalEfficiencyAv) is the average of the 
 global efficiency within each layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -116,9 +119,13 @@ A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for m
 L = g.get('LAYERNUMBER');
 
 global_efficiency_av = cell(L, 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     global_efficiency_av(li) = {mean(global_efficiency{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = global_efficiency_av;
 
 %% ¡tests!

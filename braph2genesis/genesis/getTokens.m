@@ -29,7 +29,7 @@ if isempty(varargin)
     for j = 1:1:length(splits)
         split = splits{j};
         if regexp(split, ['^' h1 '!'])
-            [~, final_index] = regexp(split, [h1 '!(\s*)']);
+            [~, final_index] = regexp(split, ['^' h1 '!(\s*)']);
             t = t + 1;
             split = regexprep(split, '%%%\s*¡', '%% ¡');
             tokens{t}.token = deblank(split(final_index+1:end)); %#ok<AGROW>

@@ -62,7 +62,7 @@ end
 if ~exist(target_dir, 'dir') 
     time_start = tic;
 
-    [target_dir, source_dir] = genesis(target_dir, [], 2, false);
+    [target_dir, source_dir] = genesis(target_dir, [], 2);
 
     addpath(target_dir)
 
@@ -74,5 +74,5 @@ if ~exist(target_dir, 'dir')
     
     braph2(false)
 
-    % test_braph2 % % % ON RELEASE: uncomment
+    test_braph2 % % % ON RELEASE: uncomment
 end

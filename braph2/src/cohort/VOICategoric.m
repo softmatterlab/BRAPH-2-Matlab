@@ -12,7 +12,7 @@ classdef VOICategoric < VOI
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the categorical variable of interest.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the categorical variable of interest.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the categorical variable of interest.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>V</strong> 	V (data, scalar) is the value of the categorical variable of interest.
 	%  <strong>10</strong> <strong>CATEGORIES</strong> 	CATEGORIES (parameter, stringlist) is the list of categories.
 	%
@@ -103,6 +103,8 @@ classdef VOICategoric < VOI
 	%
 	%
 	% See also VOINumeric.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		CATEGORIES = 10; %CET: Computational Efficiency Trick
@@ -129,7 +131,7 @@ classdef VOICategoric < VOI
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the categorical variable of interest.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the categorical variable of interest.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the categorical variable of interest.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>V</strong> 	V (data, scalar) is the value of the categorical variable of interest.
 			%  <strong>10</strong> <strong>CATEGORIES</strong> 	CATEGORIES (parameter, stringlist) is the list of categories.
 			%
@@ -139,6 +141,21 @@ classdef VOICategoric < VOI
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the categorical variable of interest.
+			%
+			% BUILD = VOICategoric.GETBUILD() returns the build of 'VOICategoric'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = VOI.GETBUILD() returns the build of the categorical variable of interest VOI.
+			%  BUILD = Element.GETBUILD(VOI) returns the build of 'VOI'.
+			%  BUILD = Element.GETBUILD('VOICategoric') returns the build of 'VOICategoric'.
+			%
+			% Note that the Element.GETBUILD(VOI) and Element.GETBUILD('VOICategoric')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function voi_class = getClass()
 			%GETCLASS returns the class of the categorical variable of interest.
 			%
@@ -457,7 +474,7 @@ classdef VOICategoric < VOI
 			prop = VOICategoric.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			voicategoric_description_list = { 'ELCLASS (constant, string) is the class of the categorical variable of interest.'  'NAME (constant, string) is the name of the categorical variable of interest.'  'DESCRIPTION (constant, string) is the description of the categorical variable of interest.'  'TEMPLATE (parameter, item) is the template of the categorical variable of interest.'  'ID (data, string) is a few-letter code for the categorical variable of interest.'  'LABEL (metadata, string) is an extended label of the categorical variable of interest.'  'NOTES (metadata, string) are some specific notes about the categorical variable of interest.'  'TOSTRING (query, string) returns a string that represents the object.'  'V (data, scalar) is the value of the categorical variable of interest.'  'CATEGORIES (parameter, stringlist) is the list of categories.' };
+			voicategoric_description_list = { 'ELCLASS (constant, string) is the class of the categorical variable of interest.'  'NAME (constant, string) is the name of the categorical variable of interest.'  'DESCRIPTION (constant, string) is the description of the categorical variable of interest.'  'TEMPLATE (parameter, item) is the template of the categorical variable of interest.'  'ID (data, string) is a few-letter code for the categorical variable of interest.'  'LABEL (metadata, string) is an extended label of the categorical variable of interest.'  'NOTES (metadata, string) are some specific notes about the categorical variable of interest.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'V (data, scalar) is the value of the categorical variable of interest.'  'CATEGORIES (parameter, stringlist) is the list of categories.' };
 			prop_description = voicategoric_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

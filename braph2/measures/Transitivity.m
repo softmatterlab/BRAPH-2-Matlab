@@ -4,8 +4,6 @@ classdef Transitivity < Triangles
 	%
 	% The Transitivity (Transitivity) of a graph is the fraction of triangles to the number 
 	%  of (unordered) triplets within a layer.
-	% 
-	%  %% ¡layout!
 	%
 	% The list of Transitivity properties is:
 	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the Transitivity.
@@ -15,7 +13,7 @@ classdef Transitivity < Triangles
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Transitivity.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Transitivity.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Transitivity.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -130,7 +128,7 @@ classdef Transitivity < Triangles
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Transitivity.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Transitivity.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Transitivity.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -146,6 +144,21 @@ classdef Transitivity < Triangles
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the transitivity.
+			%
+			% BUILD = Transitivity.GETBUILD() returns the build of 'Transitivity'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the transitivity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('Transitivity') returns the build of 'Transitivity'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('Transitivity')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the transitivity.
 			%
@@ -472,7 +485,7 @@ classdef Transitivity < Triangles
 			prop = Transitivity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			transitivity_description_list = { 'ELCLASS (constant, string) is the class of the Transitivity.'  'NAME (constant, string) is the name of the Transitivity.'  'DESCRIPTION (constant, string) is the description of the Transitivity.'  'TEMPLATE (parameter, item) is the template of the Transitivity.'  'ID (data, string) is a few-letter code of the Transitivity.'  'LABEL (metadata, string) is an extended label of the Transitivity.'  'NOTES (metadata, string) are some specific notes about the Transitivity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Transitivity.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, option) is the rule to determine what is a triangle in a directed graph.' };
+			transitivity_description_list = { 'ELCLASS (constant, string) is the class of the Transitivity.'  'NAME (constant, string) is the name of the Transitivity.'  'DESCRIPTION (constant, string) is the description of the Transitivity.'  'TEMPLATE (parameter, item) is the template of the Transitivity.'  'ID (data, string) is a few-letter code of the Transitivity.'  'LABEL (metadata, string) is an extended label of the Transitivity.'  'NOTES (metadata, string) are some specific notes about the Transitivity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Transitivity.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, option) is the rule to determine what is a triangle in a directed graph.' };
 			prop_description = transitivity_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -660,6 +673,8 @@ classdef Transitivity < Triangles
 					triangles = calculateValue@Triangles(m, prop);
 					
 					directionality_type =  g.get('DIRECTIONALITY_TYPE', g.get('LAYERNUMBER'));
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L      
 					    Aii = A{li, li};
 					    if directionality_type == 2  % undirected graphs
@@ -679,6 +694,8 @@ classdef Transitivity < Triangles
 					    transitivity_layer(isnan(transitivity_layer)) = 0;  % Should return zeros, not NaN
 					    transitivity(li) = {transitivity_layer};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = transitivity;
 					
 					rng(rng_settings_)

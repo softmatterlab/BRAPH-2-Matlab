@@ -6,6 +6,9 @@ The Average Out-Strength (StrengthOutAv) of a graph is the mean of the sum of al
 connected to a node within a layer, i.e., it is the sum of the rows of 
 the adjacency matrix. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -116,9 +119,11 @@ L = g.get('LAYERNUMBER');
 
 out_strength_av = cell(L, 1);
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     out_strength_av(li) = {mean(out_strength{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = out_strength_av;
 

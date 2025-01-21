@@ -7,6 +7,9 @@ Subject with data for each brain region corresponding to L functional layers (e.
 %%% ¡seealso!
 ImporterGroupSubjectFUN_MP_TXT, ExporterGroupSubjectFUN_MP_TXT, ImporterGroupSubjectFUN_MP_XLS, ExporterGroupSubjectFUN_MP_XLS
 
+%%% ¡build!
+1
+
 %% ¡gui!
 
 %%% ¡menu_import!
@@ -154,14 +157,14 @@ Subject NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the subject.
 %%%% ¡default!
 'SubjectFUN_MP'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the subject.
 %%%% ¡default!
-'SubjectFUN_MP'
+'Multiplex Functional Subject'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the subject.
@@ -197,8 +200,6 @@ BA (data, item) is a brain atlas.
 
 %%% ¡prop!
 L (data, scalar) is the number of layers of subject data.
-%%%% ¡default!
-2
 %%%% ¡preset!
 value = abs(round(value));
 %%%% ¡postset!
@@ -212,7 +213,7 @@ LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.
 if ~isa(sub.getr('L'), 'NoValue') && length(sub.get('LAYERLABELS')) ~= sub.get('L')
     title = ['About Layer Labels'];
     message = {''
-        ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use doubl slashes to avoid genesis problem
+        ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use double slashes to avoid genesis problem
         ['{\\color{gray}version ' BRAPH2.VERSION '}']
         ['{\\color{gray}build ' int2str(BRAPH2.BUILD) '}']
         ''

@@ -12,7 +12,21 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 			'NNDataPoint_FUN_CLA().get(''ELCLASS'') should return ''NNDataPoint_FUN_CLA''.')
 	end
 	 
-	% getClass
+	% getBuild()
+	assert(NNDataPoint_FUN_CLA.getBuild() == 1 && NNDataPoint_FUN_CLA.getBuild() > 0, ...
+		[BRAPH2.STR ':NNDataPoint_FUN_CLA:' BRAPH2.FAIL_TEST], ...
+		'NNDataPoint_FUN_CLA.getBuild() should return the NNDataPoint_FUN_CLA build number.')
+	assert(dp.getBuild() == 1 && dp.getBuild() > 0 , ...
+		[BRAPH2.STR ':NNDataPoint_FUN_CLA:' BRAPH2.FAIL_TEST], ...
+		'dp.getBuild() should return the NNDataPoint_FUN_CLA build number.')
+	assert(Element.getBuild(dp) == 1 && Element.getBuild(dp) > 0, ...
+		[BRAPH2.STR ':NNDataPoint_FUN_CLA:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(dp) should return the NNDataPoint_FUN_CLA build number.')
+	assert(Element.getBuild('NNDataPoint_FUN_CLA') == 1 && Element.getBuild('NNDataPoint_FUN_CLA') > 0, ...
+		[BRAPH2.STR ':NNDataPoint_FUN_CLA:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(''NNDataPoint_FUN_CLA'') should return the NNDataPoint_FUN_CLA build number.')
+	 
+	% getClass()
 	assert(strcmp(NNDataPoint_FUN_CLA.getClass(), 'NNDataPoint_FUN_CLA'), ...
 		[BRAPH2.STR ':NNDataPoint_FUN_CLA:' BRAPH2.FAIL_TEST], ...
 		'NNDataPoint_FUN_CLA.getClass() should return ''NNDataPoint_FUN_CLA''.')
@@ -452,7 +466,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.SUB), ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_IDS) ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_CLASS) ...
 		);
 	 
 	for prop = 1:1:NNDataPoint_FUN_CLA.getPropNumber()
@@ -565,7 +579,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.SUB), ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_IDS) ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_CLASS) ...
 		);
 	 
 	for prop = 1:1:NNDataPoint_FUN_CLA.getPropNumber()
@@ -813,7 +827,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.SUB), ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_IDS) ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_CLASS) ...
 		);
 	 
 	% NNDataPoint_FUN_CLA with 1st callbacks
@@ -829,7 +843,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, dp_0.getCallback(11), ..., ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, dp_0.getCallback(12) ... ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, dp_0.getCallback(12) ... ...
 		);
 	 
 	prop_number = NNDataPoint_FUN_CLA.getPropNumber();
@@ -869,7 +883,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, dp_1.getCallback(11), ..., ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, dp_1.getCallback(12) ... ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, dp_1.getCallback(12) ... ...
 		);
 	 
 	prop_number = NNDataPoint_FUN_CLA.getPropNumber();
@@ -909,7 +923,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, dp_2.getCallback(11), ..., ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, dp_2.getCallback(12) ... ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, dp_2.getCallback(12) ... ...
 		);
 	 
 	prop_number = NNDataPoint_FUN_CLA.getPropNumber();
@@ -1031,7 +1045,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.SUB), ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_IDS) ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_CLASS) ...
 		);
 	 
 	for prop = 1:1:NNDataPoint_FUN_CLA.getPropNumber()
@@ -1135,7 +1149,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.SUB), ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_IDS) ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_CLASS) ...
 		);
 	 
 	dp = NNDataPoint_FUN_CLA( ...
@@ -1150,7 +1164,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, dp_0.getCallback(11), ..., ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, dp_0.getCallback(12) ... ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, dp_0.getCallback(12) ... ...
 		);
 	 
 	dp_copy = dp.copy();
@@ -1311,7 +1325,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.SUB), ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_IDS) ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_CLASS) ...
 		);
 	 
 	filename = [fileparts(which('test_braph2')) filesep 'nndatapoint_fun_cla_to_be_erased.b2'];
@@ -1343,7 +1357,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		NNDataPoint_FUN_CLA.INPUT, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.TARGET, NNDataPoint_FUN_CLA.getNoValue(), ...
 		NNDataPoint_FUN_CLA.SUB, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.SUB), ...
-		NNDataPoint_FUN_CLA.TARGET_IDS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_IDS) ...
+		NNDataPoint_FUN_CLA.TARGET_CLASS, NNDataPoint_FUN_CLA.getPropDefault(NNDataPoint_FUN_CLA.TARGET_CLASS) ...
 		);
 	 
 	[json, struct, el_list] = encodeJSON(dp);
@@ -1361,257 +1375,33 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	end
 end
 
-%% Test 12: Create example files for classification
+%% Test 12: Example
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
-	data_dir = [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS'];
-	if ~isdir(data_dir)
-	    mkdir(data_dir);
-	
-	    % Brain Atlas
-	    im_ba = ImporterBrainAtlasXLS('FILE', 'aal90_atlas.xlsx');
-	    ba = im_ba.get('BA');
-	    ex_ba = ExporterBrainAtlasXLS( ...
-	        'BA', ba, ...
-	        'FILE', [data_dir filesep() 'atlas.xlsx'] ...
-	        );
-	    ex_ba.get('SAVE')
-	    N = ba.get('BR_DICT').get('LENGTH');
-	
-	    % saves RNG
-	    rng_settings_ = rng(); rng('default')
-	
-	    sex_options = {'Female' 'Male'};
-	
-	    %% Specify the network parameters for the two groups
-	    N_nodes = 90; % AAL atlas
-	    
-	    %% Specify length of time series 
-	    N_tslength = 200;
-	    
-	    %% Specify number of subjects
-	    N_groups = 10;
-	    
-	    %% Group 1
-	    gr1_ts = cell(1, N_groups);
-	    gr1_name = 'FUN_Group_1_XLS';
-	    gr1_dir = [data_dir filesep() gr1_name];
-	    mkdir(gr1_dir);
-	    vois1 = [
-	    {{'Subject ID'} {'Age'} {'Sex'}}
-	    {{} {} cell2str(sex_options)}
-	    ];
-	    for i_gr = 1:1:10 % subject number
-	        sub_id = ['SubjectFUN_' num2str(i_gr)];
-	        % create WS graphs with random beta
-	            % initialize values for the WS model
-	        N_module = randi([1 8], 1);
-	        %N_module = 8;
-	        num_module(i_gr) = N_module;
-	        K_temp = 1:1:1+N_module-1;
-	        K = K_temp(randperm(N_module));
-	        beta = rand([1 N_module]);
-	        
-	        % initialize the indices where the matrices will be placed
-	        L_indice = floor(N_nodes/N_module);
-	        for j  = 1:1:N_module
-	            if j ~= N_module
-	                indices{j} = 1+(j-1)*L_indice:1+(j-1)*L_indice+L_indice-1;
-	            else
-	                indices{j} = 1+(j-1)*L_indice:N_nodes;
-	            end
-	        end
-	    
-	        % initialize matrix for the subject
-	        A_full = zeros(N_nodes);
-	    
-	        % loop over each module
-	        for i_mod = 1:1:N_module
-	            A_full(indices{i_mod},indices{i_mod}) = full(adjacency(WattsStrogatz(length(indices{i_mod}), K(i_mod), beta(i_mod))));
-	        end
-	        A_full(1:length(A_full)+1:numel(A_full)) = 1;
-	    
-	        % this is needed to make the matrices positive definite
-	        A_full = A_full*transpose(A_full);
-	    
-	        % This matrix will be covariance matrices for the group
-	        % Specify the mean
-	        mu_gr = ones(1, length(A_full));
-	    
-	        % calculate time series
-	        R = mvnrnd(mu_gr, A_full, N_tslength);
-	    
-	        % Normalize the time series
-	        mean_R = mean(R);
-	        std_R = std(R);
-	        R = (R - mean(R)) ./ std(R);
-	    
-	        % place in the array
-	        gr1_ts{1, i_gr} = R;
-	        
-	        writetable(array2table(R), [gr1_dir filesep() sub_id '.xlsx'], 'WriteVariableNames', false)
-	
-	        % variables of interest
-	        vois1 = [vois1; {sub_id, randi(90), sex_options(randi(2))}];
-	
-	    end
-	    writetable(table(vois1), [data_dir filesep() gr1_name '.vois.xlsx'], 'WriteVariableNames', false)
-	
-	    %% Group 2
-	    gr2_ts = cell(1, N_groups);
-	    gr2_name = 'FUN_Group_2_XLS';
-	    gr2_dir = [data_dir filesep() gr2_name];
-	    mkdir(gr2_dir);
-	    vois2 = [
-	    {{'Subject ID'} {'Age'} {'Sex'}}
-	    {{} {} cell2str(sex_options)}
-	    ];
-	    for i_gr = 11:1:20 % subject number
-	        sub_id = ['SubjectFUN_' num2str(i_gr)];
-	        % create WS graphs with random beta
-	            % initialize values for the WS model
-	        N_module = randi([1 8], 1);
-	        %N_module = 8;
-	        num_module(i_gr) = N_module;
-	        K_temp = 1:1:1+N_module-1;
-	        K = K_temp(randperm(N_module));
-	        beta = rand([1 N_module]);
-	        
-	        % initialize the indices where the matrices will be placed
-	        L_indice = floor(N_nodes/N_module);
-	        for j  = 1:1:N_module
-	            if j ~= N_module
-	                indices{j} = 1+(j-1)*L_indice:1+(j-1)*L_indice+L_indice-1;
-	            else
-	                indices{j} = 1+(j-1)*L_indice:N_nodes;
-	            end
-	        end
-	    
-	        % initialize matrix for the subject
-	        A_full = zeros(N_nodes);
-	    
-	        % loop over each module
-	        for i_mod = 1:1:N_module
-	            A_full(indices{i_mod},indices{i_mod}) = full(adjacency(WattsStrogatz(length(indices{i_mod}), K(i_mod), beta(i_mod))));
-	        end
-	        A_full(1:length(A_full)+1:numel(A_full)) = 1;
-	    
-	        % this is needed to make the matrices positive definite
-	        A_full = A_full*transpose(A_full);
-	    
-	        % This matrix will be covariance matrices for the group
-	        % Specify the mean
-	        mu_gr = ones(1, length(A_full));
-	    
-	        % calculate time series
-	        R = mvnrnd(mu_gr, A_full, N_tslength);
-	    
-	        % Normalize the time series
-	        mean_R = mean(R);
-	        std_R = std(R);
-	        R = (R - mean(R)) ./ std(R);
-	    
-	        % place in the array
-	        gr2_ts{1, i_gr} = R;
-	        
-	        writetable(array2table(R), [gr2_dir filesep() sub_id '.xlsx'], 'WriteVariableNames', false)
-	
-	        % variables of interest
-	        vois2 = [vois2; {sub_id, randi(90), sex_options(randi(2))}];
-	
-	    end
-	    writetable(table(vois2), [data_dir filesep() gr2_name '.vois.xlsx'], 'WriteVariableNames', false)
-	
-	    %% Group 3
-	    gr3_ts = cell(1, N_groups);
-	    gr3_name = 'FUN_Group_3_XLS';
-	    gr3_dir = [data_dir filesep() gr3_name];
-	    mkdir(gr3_dir);
-	    vois3 = [
-	    {{'Subject ID'} {'Age'} {'Sex'}}
-	    {{} {} cell2str(sex_options)}
-	    ];
-	    for i_gr = 21:1:30  % subject number
-	        sub_id = ['SubjectFUN_' num2str(i_gr)];
-	        % create WS graphs with random beta
-	            % initialize values for the WS model
-	        N_module = randi([1 8], 1);
-	        %N_module = 8;
-	        num_module(i_gr) = N_module;
-	        K_temp = 1:1:1+N_module-1;
-	        K = K_temp(randperm(N_module));
-	        beta = rand([1 N_module]);
-	        
-	        % initialize the indices where the matrices will be placed
-	        L_indice = floor(N_nodes/N_module);
-	        for j  = 1:1:N_module
-	            if j ~= N_module
-	                indices{j} = 1+(j-1)*L_indice:1+(j-1)*L_indice+L_indice-1;
-	            else
-	                indices{j} = 1+(j-1)*L_indice:N_nodes;
-	            end
-	        end
-	    
-	        % initialize matrix for the subject
-	        A_full = zeros(N_nodes);
-	    
-	        % loop over each module
-	        for i_mod = 1:1:N_module
-	            A_full(indices{i_mod},indices{i_mod}) = full(adjacency(WattsStrogatz(length(indices{i_mod}), K(i_mod), beta(i_mod))));
-	        end
-	        A_full(1:length(A_full)+1:numel(A_full)) = 1;
-	    
-	        % this is needed to make the matrices positive definite
-	        A_full = A_full*transpose(A_full);
-	    
-	        % This matrix will be covariance matrices for the group
-	        % Specify the mean
-	        mu_gr = ones(1, length(A_full));
-	    
-	        % calculate time series
-	        R = mvnrnd(mu_gr, A_full, N_tslength);
-	    
-	        % Normalize the time series
-	        mean_R = mean(R);
-	        std_R = std(R);
-	        R = (R - mean(R)) ./ std(R);
-	    
-	        % place in the array
-	        gr3_ts{1, i_gr} = R;
-	        
-	        writetable(array2table(R), [gr3_dir filesep() sub_id '.xlsx'], 'WriteVariableNames', false)
-	
-	        % variables of interest
-	        vois3 = [vois3; {sub_id, randi(90), sex_options(randi(2))}];
-	
-	    end
-	    writetable(table(vois3), [data_dir filesep() gr3_name '.vois.xlsx'], 'WriteVariableNames', false)
-	
-	    % reset RNG
-	    rng(rng_settings_)
-	end
+	create_data_NN_CLA_FUN_XLS() % only creates files if the example folder doesn't already exist
+	create_data_NN_CLA_FUN_TXT() % only creates files if the example folder doesn't already exist
 end
 
 %% Test 13: Create a NNDataset containg NNDataPoint_FUN_CLA with simulated data
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	% Load BrainAtlas
-	im_ba = ImporterBrainAtlasXLS( ...
-	    'FILE', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'atlas.xlsx'], ...
+	im_ba = ImporterBrainAtlasTXT( ...
+	    'FILE', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN TXT' filesep 'atlas.txt'], ...
 	    'WAITBAR', true ...
 	    );
 	
 	ba = im_ba.get('BA');
 	
 	% Load Groups of SubjectFUN
-	im_gr1 = ImporterGroupSubjectFUN_XLS( ...
-	    'DIRECTORY', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'FUN_Group_1_XLS'], ...
+	im_gr1 = ImporterGroupSubjectFUN_TXT( ...
+	    'DIRECTORY', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN TXT' filesep 'FUN_Group_1_TXT'], ...
 	    'BA', ba, ...
 	    'WAITBAR', true ...
 	    );
 	
 	gr1 = im_gr1.get('GR');
 	
-	im_gr2 = ImporterGroupSubjectFUN_XLS( ...
-	    'DIRECTORY', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'FUN_Group_2_XLS'], ...
+	im_gr2 = ImporterGroupSubjectFUN_TXT( ...
+	    'DIRECTORY', [fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN TXT' filesep 'FUN_Group_2_TXT'], ...
 	    'BA', ba, ...
 	    'WAITBAR', true ...
 	    );
@@ -1623,7 +1413,7 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	it_list1 = cellfun(@(x) NNDataPoint_FUN_CLA( ...
 	    'ID', x.get('ID'), ...
 	    'SUB', x, ...
-	    'TARGET_IDS', {group_folder_name}), ...
+	    'TARGET_CLASS', {group_folder_name}), ...
 	    gr1.get('SUB_DICT').get('IT_LIST'), ...
 	    'UniformOutput', false);
 	
@@ -1631,7 +1421,7 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	it_list2 = cellfun(@(x) NNDataPoint_FUN_CLA( ...
 	    'ID', x.get('ID'), ...
 	    'SUB', x, ...
-	    'TARGET_IDS', {group_folder_name}), ...
+	    'TARGET_CLASS', {group_folder_name}), ...
 	    gr2.get('SUB_DICT').get('IT_LIST'), ...
 	    'UniformOutput', false);
 	
@@ -1705,7 +1495,7 @@ end
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	% ensure the example data is generated
 	if ~isfile([fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'atlas.xlsx'])
-	    test_NNDataPoint_FUN_CLA % create example files
+	    create_data_NN_CLA_FUN_XLS() % create example files
 	end
 	
 	example_NN_FUN_CLA
@@ -1725,31 +1515,3 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	delete(findall(0, 'type', 'figure'))
 end
 
-%% Test functions
-function h = WattsStrogatz(N, K, beta)
-% H = WattsStrogatz(N,K,beta) returns a Watts-Strogatz model graph with N
-% nodes, N*K edges, mean node degree 2*K, and rewiring probability beta.
-%
-% beta = 0 is a ring lattice, and beta = 1 is a random graph.
-
-% Connect each node to its K next and previous neighbors. This constructs
-% indices for a ring lattice.
-    s = repelem((1:N)', 1, K);
-    t = s + repmat(1:K, N, 1);
-    t = mod(t - 1, N) + 1;
-    
-    % Rewire the target node of each edge with probability beta
-    for source = 1:N
-        switchEdge = rand(K, 1) < beta;
-        
-        newTargets = rand(N, 1);
-        newTargets(source) = 0;
-        newTargets(s(t == source)) = 0;
-        newTargets(t(source, ~switchEdge)) = 0;
-        
-        [~, ind] = sort(newTargets, 'descend');
-        t(source, switchEdge) = ind(1:nnz(switchEdge));
-    end
-    
-    h = graph(s,t);
-end

@@ -13,7 +13,7 @@ classdef Strength < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Strength.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Strength.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Strength.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -127,7 +127,7 @@ classdef Strength < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Strength.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Strength.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Strength.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -142,6 +142,21 @@ classdef Strength < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the strength.
+			%
+			% BUILD = Strength.GETBUILD() returns the build of 'Strength'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the strength M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('Strength') returns the build of 'Strength'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('Strength')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the strength.
 			%
@@ -468,7 +483,7 @@ classdef Strength < Measure
 			prop = Strength.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			strength_description_list = { 'ELCLASS (constant, string) is the class of the Strength.'  'NAME (constant, string) is the name of the Strength.'  'DESCRIPTION (constant, string) is the description of the Strength.'  'TEMPLATE (parameter, item) is the template of the Strength.'  'ID (data, string) is a few-letter code of the Strength.'  'LABEL (metadata, string) is an extended label of the Strength.'  'NOTES (metadata, string) are some specific notes about the Strength.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Strength.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			strength_description_list = { 'ELCLASS (constant, string) is the class of the Strength.'  'NAME (constant, string) is the name of the Strength.'  'DESCRIPTION (constant, string) is the description of the Strength.'  'TEMPLATE (parameter, item) is the template of the Strength.'  'ID (data, string) is a few-letter code of the Strength.'  'LABEL (metadata, string) is an extended label of the Strength.'  'NOTES (metadata, string) are some specific notes about the Strength.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Strength.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = strength_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -654,10 +669,13 @@ classdef Strength < Measure
 					L = g.get('LAYERNUMBER');
 					strength = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    Aii = A{li, li};
 					    strength(li) = {sum(Aii, 2)};  % calculates the strength of a node for layer li
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = strength;
 					
 					rng(rng_settings_)

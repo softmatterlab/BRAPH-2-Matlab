@@ -5,6 +5,9 @@ GlobalEfficiencyOut < Distance (m, out-global efficiency) is the graph Out-Globa
 The Out-Global Efficiency (GlobalEfficiencyOut) is the average inverse shortest out-path length within each layer. 
 It is inversely related to the characteristic out-path length.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -117,12 +120,16 @@ N = g.get('NODENUMBER');
 distance = calculateValue@Distance(m, prop);
 
 out_global_efficiency = cell(L, 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     inverse_distance = distance{li}.^-1;  % inverse distance
     inverse_distance(1:N(li)+1:end) = 0;
     global_efficiency_layer = (sum(inverse_distance, 2) / (N(li)-1));
     out_global_efficiency(li) = {global_efficiency_layer};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = out_global_efficiency;
 
 %% ¡tests!

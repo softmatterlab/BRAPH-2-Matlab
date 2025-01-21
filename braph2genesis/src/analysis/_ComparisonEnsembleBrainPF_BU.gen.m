@@ -7,6 +7,9 @@ ComparisonEnsembleBrainPF_BU manages the basic functionalities to plot of a bino
 %%% ¡seealso!
 ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

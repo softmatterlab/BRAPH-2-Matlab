@@ -8,6 +8,9 @@ It is intended to be used only with the property ME_DICT of AnalyzeEnsemble.
 %%% ¡seealso!
 uitable, AnalyzeEnsemble, Graph, Measure
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

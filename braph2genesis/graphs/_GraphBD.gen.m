@@ -2,8 +2,11 @@
 GraphBD < Graph (g, binary directed graph) is a binary directed graph.
 
 %%% ¡description!
-In a binary directed (BD) graph, the edges are directed and they can be 
+In a binary directed graph (GraphBD), the edges are directed and they can be 
  either 0 (absence of connection) or 1 (existence of connection).
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -88,19 +91,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the binary directed graph.
 %%%% ¡default!
 'GraphBD'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the binary directed graph.
 %%%% ¡default!
-'GraphBD'
+'Graph Binary Directed'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the binary directed graph.
 %%%% ¡default!
-'In a binary directed (BD) graph, the edges are directed and they can be either 0 (absence of connection) or 1 (existence of connection).'
+'In a binary directed graph (GraphBD), the edges are directed and they can be either 0 (absence of connection) or 1 (existence of connection).'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the binary directed graph.

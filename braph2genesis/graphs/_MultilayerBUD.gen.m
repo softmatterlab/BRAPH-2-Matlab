@@ -1,16 +1,19 @@
 %% ¡header!
 MultilayerBUD < MultilayerWU (g, multilayer binary undirected with fixed densities graph) is a binary undirected multilayer graph with fixed densities.
 %%% ¡description!
-In a multilayer binary undirected with fixed densities (BUD) graph, the layers 
- are those of binary undirected (BU) multilayer graphs derived from the same 
+In a multilayer binary undirected graph with fixed densities (MultilayerBUD), the layers 
+ are those of binary undirected multilayer graphs derived from the same 
  weighted supra-adjacency matrix binarized at different densities. The supra-adjacency 
  matrix has a number of partitions equal to the number of densities. Layers
- within the binary undirected (BU) multilayer graphs could have different number of nodes 
+ within the binary undirected multilayer graphs could have different number of nodes 
  with within-layer binary undirected edges. Edges can be either 0 (absence of connection) 
  or 1 (existence of connection).
 All node connections are allowed between layers.
 On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized.
 On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -144,12 +147,12 @@ ELCLASS (constant, string) is the class of the binary undirected multilayer grap
 %%% ¡prop!
 NAME (constant, string) is the name of the binary undirected multilayer graph with fixed densities.
 %%%% ¡default!
-'MultilayerBUD'
+'Multilayer Binary Undirected at fixed Densities'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the binary undirected multilayer graph with fixed densities.
 %%%% ¡default!
-'In a multilayer binary undirected with fixed densities (BUD) graph, the layers are those of binary undirected (BU) multilayer graphs derived from the same weighted supra-adjacency matrix binarized at different densities. The supra-adjacency matrix has a number of partitions equal to the number of densities. Layerswithin the binary undirected (BU) multilayer graphs could have different number of nodes with within-layer binary undirected edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). All node connections are allowed between layers. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
+'In a multilayer binary undirected graph with fixed densities (MultilayerBUD), the layers are those of binary undirected multilayer graphs derived from the same weighted supra-adjacency matrix binarized at different densities. The supra-adjacency matrix has a number of partitions equal to the number of densities. Layerswithin the binary undirected multilayer graphs could have different number of nodes with within-layer binary undirected edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). All node connections are allowed between layers. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the binary undirected multilayer graph with fixed densities.

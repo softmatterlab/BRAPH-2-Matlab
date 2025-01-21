@@ -12,7 +12,7 @@ classdef CompareGroup < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group-based comparison.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group-based comparison.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group-based comparison.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>VERBOSE</strong> 	VERBOSE (gui, logical) sets whether to write the progress of the comparisons.
 	%  <strong>11</strong> <strong>INTERRUPTIBLE</strong> 	INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
@@ -115,6 +115,8 @@ classdef CompareGroup < ConcreteElement
 	%
 	%
 	% See also AnalyzeGroup, ComparisonGroup.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -206,7 +208,7 @@ classdef CompareGroup < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group-based comparison.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group-based comparison.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group-based comparison.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>VERBOSE</strong> 	VERBOSE (gui, logical) sets whether to write the progress of the comparisons.
 			%  <strong>11</strong> <strong>INTERRUPTIBLE</strong> 	INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
@@ -228,6 +230,21 @@ classdef CompareGroup < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the group-based comparison.
+			%
+			% BUILD = CompareGroup.GETBUILD() returns the build of 'CompareGroup'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = C.GETBUILD() returns the build of the group-based comparison C.
+			%  BUILD = Element.GETBUILD(C) returns the build of 'C'.
+			%  BUILD = Element.GETBUILD('CompareGroup') returns the build of 'CompareGroup'.
+			%
+			% Note that the Element.GETBUILD(C) and Element.GETBUILD('CompareGroup')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function c_class = getClass()
 			%GETCLASS returns the class of the group-based comparison.
 			%
@@ -554,7 +571,7 @@ classdef CompareGroup < ConcreteElement
 			prop = CompareGroup.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			comparegroup_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the group-based comparison.'  'DESCRIPTION (constant, string) is the description of the group-based comparison.'  'TEMPLATE (parameter, item) is the template of the group-based comparison.'  'ID (data, string) is a few-letter code for the group-based comparison.'  'LABEL (metadata, string) is an extended label of the group-based comparison.'  'NOTES (metadata, string) are some specific notes about the group-based comparison.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'VERBOSE (gui, logical) sets whether to write the progress of the comparisons.'  'INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.'  'MEMORIZE (metadata, logical) sets whether to memorize the permuted analyses.'  'P (parameter, scalar) is the permutation number.'  'LONGITUDINAL (parameter, logical) determines whether the comparison is longitudinal.'  'A1 (data, item) is the first analysis to compare.'  'A2 (data, item) is the second analysis to compare.'  'PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.'  'A1_PERM_DICT (result, idict) is the list of permuted analyses for the first analysis.'  'A2_PERM_DICT (result, idict) is the list of permuted analyses for the second analysis.'  'CP_DICT (result, idict) contains the results of the comparison.'  'COMPARISON (query, item) returns a comparison.'  'PERM (query, itemlist) returns the permuted analyses.' };
+			comparegroup_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the group-based comparison.'  'DESCRIPTION (constant, string) is the description of the group-based comparison.'  'TEMPLATE (parameter, item) is the template of the group-based comparison.'  'ID (data, string) is a few-letter code for the group-based comparison.'  'LABEL (metadata, string) is an extended label of the group-based comparison.'  'NOTES (metadata, string) are some specific notes about the group-based comparison.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'VERBOSE (gui, logical) sets whether to write the progress of the comparisons.'  'INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.'  'MEMORIZE (metadata, logical) sets whether to memorize the permuted analyses.'  'P (parameter, scalar) is the permutation number.'  'LONGITUDINAL (parameter, logical) determines whether the comparison is longitudinal.'  'A1 (data, item) is the first analysis to compare.'  'A2 (data, item) is the second analysis to compare.'  'PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.'  'A1_PERM_DICT (result, idict) is the list of permuted analyses for the first analysis.'  'A2_PERM_DICT (result, idict) is the list of permuted analyses for the second analysis.'  'CP_DICT (result, idict) contains the results of the comparison.'  'COMPARISON (query, item) returns a comparison.'  'PERM (query, itemlist) returns the permuted analyses.' };
 			prop_description = comparegroup_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

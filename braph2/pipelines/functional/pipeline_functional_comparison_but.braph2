@@ -12,7 +12,7 @@
 % README: /tutorials/pipelines/tut_a_fun_but/readme.md
 
 %% Brain Atlas
-ba = ImporterBrainAtlasXLS('WAITBAR', true).get('DIR_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
+ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
 
 %% Groups
 gr1 = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN 1 from XLS % Group FUN 1

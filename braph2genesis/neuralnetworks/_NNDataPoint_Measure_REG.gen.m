@@ -11,40 +11,43 @@ The target is obtained from the variables of interest of the subject.
 %%% ¡seealso!
 NNDataPoint_Graph_REG, NNDataPoint_Graph_REG, NNDataPoint_Measure_CLA
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the data point for regression with graph measures.
 %%%% ¡default!
 'NNDataPoint_Measure_REG'
 
 %%% ¡prop!
-NAME (constant, string) is the name of a data point for regression with graph measures.
+NAME (constant, string) is the name of the data point for regression with graph measures.
 %%%% ¡default!
-'NNDataPoint_Measure_REG'
+'Neural Network Data Point for Regression with Graph Measures'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of a data point for regression with graph measures.
+DESCRIPTION (constant, string) is the description of the data point for regression with graph measures.
 %%%% ¡default!
 'A data point for regression with graph measures (NNDataPoint_Measure_REG) contains both input and target for neural network analysis. The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), calculated from the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of a data point for regression with graph measures.
+TEMPLATE (parameter, item) is the template of the data point for regression with graph measures.
 %%%% ¡settings!
 'NNDataPoint_Measure_REG'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for a data point for regression with graph measures.
+ID (data, string) is a few-letter code for the data point for regression with graph measures.
 %%%% ¡default!
 'NNDataPoint_Measure_REG ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of a data point for regression with graph measures.
+LABEL (metadata, string) is an extended label of the data point for regression with graph measures.
 %%%% ¡default!
 'NNDataPoint_Measure_REG label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about a data point for regression with graph measures.
+NOTES (metadata, string) are some specific notes about the data point for regression with graph measures.
 %%%% ¡default!
 'NNDataPoint_Measure_REG notes'
 
@@ -87,7 +90,7 @@ Construct the data point with the adjacency matrix derived from its weighted und
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_REG % create example files
+    create_data_NN_REG_CON_XLS() % create example files
 end
 
 % Load BrainAtlas
@@ -155,7 +158,7 @@ Construct the data point with the adjacency matrix derived from its binary undir
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_REG % create example files
+    create_data_NN_REG_CON_XLS() % create example files
 end
 
 % Load BrainAtlas
@@ -225,13 +228,13 @@ end
 Construct the data point with the adjacency matrix derived from its multiplex weighted undirected graph (MultiplexWU) 
 %%%% ¡code!
 % ensure the example data is generated
-if ~isfile([fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'])
-    test_SubjectCON_FUN_MP % create example files
+if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'atlas.xlsx'])
+    create_data_NN_REG_CON_FUN_MP_XLS() % create example files
 end
 
 % Load BrainAtlas
 im_ba = ImporterBrainAtlasXLS( ...
-    'FILE', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'], ...
+    'FILE', [fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
     );
 
@@ -239,7 +242,7 @@ ba = im_ba.get('BA');
 
 % Load Groups of SubjectCON
 im_gr = ImporterGroupSubjectCON_XLS( ...
-    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.CON'], ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'Connectivity' filesep 'CON_FUN_MP_Group_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -248,7 +251,7 @@ gr_CON = im_gr.get('GR');
 
 % Load Groups of SubjectFUN
 im_gr = ImporterGroupSubjectFUN_XLS( ...
-    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.FUN'], ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'Functional' filesep 'CON_FUN_MP_Group_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -312,7 +315,7 @@ end
 Example script for weighted undirected graph (GraphWU) using connectivity data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_REG % create example files
+    create_data_NN_REG_CON_XLS() % create example files
 end
 example_NNCV_CON_WU_M_REG
 
@@ -321,7 +324,7 @@ example_NNCV_CON_WU_M_REG
 Example script for weighted undirected multiplex (MultiplexWU) using connectivity data and functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_FUN_MP_REG % create example files
+    create_data_NN_REG_CON_FUN_MP_XLS() % create example files
 end
 example_NNCV_CON_FUN_MP_WU_M_REG
 
@@ -330,6 +333,6 @@ example_NNCV_CON_FUN_MP_WU_M_REG
 Example script for weighted undirected graph (GraphWU) using functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_FUN_REG')) filesep 'Example data NN REG FUN XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_FUN_REG % create example files
+    create_data_NN_REG_FUN_XLS() % create example files
 end
 example_NNCV_FUN_WU_M_REG

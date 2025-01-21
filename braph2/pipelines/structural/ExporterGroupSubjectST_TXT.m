@@ -15,14 +15,14 @@ classdef ExporterGroupSubjectST_TXT < Exporter
 	%  variables of interest, and each subsequent row the values for each subject.
 	%
 	% The list of ExporterGroupSubjectST_TXT properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ST subject group exporter in TXT.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ST subject group exporter in TXT.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ST subject group exporter in TXT.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ST subject group exporter in TXT.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ST subject group exporter in TXT.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ST subject group exporter in TXT.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is a group of subjects with structural data.
 	%  <strong>11</strong> <strong>FILE</strong> 	FILE (data, string) is the TXT file name where to save the group of subjects with structural data.
@@ -116,6 +116,8 @@ classdef ExporterGroupSubjectST_TXT < Exporter
 	%
 	%
 	% See also Group, SubjectST, ImporterGroupSubjectST_TXT.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		GR = 10; %CET: Computational Efficiency Trick
@@ -150,14 +152,14 @@ classdef ExporterGroupSubjectST_TXT < Exporter
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of ExporterGroupSubjectST_TXT properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ST subject group exporter in TXT.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ST subject group exporter in TXT.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ST subject group exporter in TXT.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ST subject group exporter in TXT.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ST subject group exporter in TXT.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ST subject group exporter in TXT.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is a group of subjects with structural data.
 			%  <strong>11</strong> <strong>FILE</strong> 	FILE (data, string) is the TXT file name where to save the group of subjects with structural data.
@@ -170,6 +172,21 @@ classdef ExporterGroupSubjectST_TXT < Exporter
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the exporter of ST subject group in TXT.
+			%
+			% BUILD = ExporterGroupSubjectST_TXT.GETBUILD() returns the build of 'ExporterGroupSubjectST_TXT'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = EX.GETBUILD() returns the build of the exporter of ST subject group in TXT EX.
+			%  BUILD = Element.GETBUILD(EX) returns the build of 'EX'.
+			%  BUILD = Element.GETBUILD('ExporterGroupSubjectST_TXT') returns the build of 'ExporterGroupSubjectST_TXT'.
+			%
+			% Note that the Element.GETBUILD(EX) and Element.GETBUILD('ExporterGroupSubjectST_TXT')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function ex_class = getClass()
 			%GETCLASS returns the class of the exporter of ST subject group in TXT.
 			%
@@ -496,7 +513,7 @@ classdef ExporterGroupSubjectST_TXT < Exporter
 			prop = ExporterGroupSubjectST_TXT.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			exportergroupsubjectst_txt_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the ST subject group exporter in TXT.'  'DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.'  'TEMPLATE (parameter, item) is the template of the ST subject group exporter in TXT.'  'ID (data, string) is a few-letter code for the ST subject group exporter in TXT.'  'LABEL (metadata, string) is an extended label of the ST subject group exporter in TXT.'  'NOTES (metadata, string) are some specific notes about the ST subject group exporter in TXT.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is a group of subjects with structural data.'  'FILE (data, string) is the TXT file name where to save the group of subjects with structural data.'  'PUT_FILE (query, item) opens a dialog box to set the TXT file where to save the group of subjects with structural data.'  'SAVE (result, empty) saves the group of subjects with structural data in the selected TXT file.' };
+			exportergroupsubjectst_txt_description_list = { 'ELCLASS (constant, string) is the class of the ST subject group exporter in TXT.'  'NAME (constant, string) is the name of the ST subject group exporter in TXT.'  'DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.'  'TEMPLATE (parameter, item) is the template of the ST subject group exporter in TXT.'  'ID (data, string) is a few-letter code for the ST subject group exporter in TXT.'  'LABEL (metadata, string) is an extended label of the ST subject group exporter in TXT.'  'NOTES (metadata, string) are some specific notes about the ST subject group exporter in TXT.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is a group of subjects with structural data.'  'FILE (data, string) is the TXT file name where to save the group of subjects with structural data.'  'PUT_FILE (query, item) opens a dialog box to set the TXT file where to save the group of subjects with structural data.'  'SAVE (result, empty) saves the group of subjects with structural data in the selected TXT file.' };
 			prop_description = exportergroupsubjectst_txt_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -570,7 +587,7 @@ classdef ExporterGroupSubjectST_TXT < Exporter
 				case 1 % ExporterGroupSubjectST_TXT.ELCLASS
 					prop_default = 'ExporterGroupSubjectST_TXT';
 				case 2 % ExporterGroupSubjectST_TXT.NAME
-					prop_default = 'ExporterGroupSubjectST_TXT';
+					prop_default = 'Structural Subject Group TXT Exporter';
 				case 3 % ExporterGroupSubjectST_TXT.DESCRIPTION
 					prop_default = 'ExporterGroupSubjectST_TXT exports a group of subjects with structural data to an TXT file and their covariates (if existing) to another TXT file.';
 				case 4 % ExporterGroupSubjectST_TXT.TEMPLATE

@@ -9,6 +9,9 @@ The handle can be a text.
 %%% ¡seealso!
 text, PanelFig, GUIFig, check_graphics
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

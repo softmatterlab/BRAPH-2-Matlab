@@ -17,17 +17,20 @@ The variables of interest (if existing) are saved in another XLSX file
 %%% ¡seealso!
 Group, SubjectST, ImporterGroupSubjectST_TXT
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ST subject group exporter in TXT.
 %%%% ¡default!
 'ExporterGroupSubjectST_TXT'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the ST subject group exporter in TXT.
 %%%% ¡default!
-'ExporterGroupSubjectST_TXT'
+'Structural Subject Group TXT Exporter'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.

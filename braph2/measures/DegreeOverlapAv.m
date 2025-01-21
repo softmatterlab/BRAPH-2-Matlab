@@ -13,7 +13,7 @@ classdef DegreeOverlapAv < DegreeOverlap
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Degree Overlap.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Degree Overlap.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Degree Overlap.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -127,7 +127,7 @@ classdef DegreeOverlapAv < DegreeOverlap
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Degree Overlap.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Degree Overlap.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Degree Overlap.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -142,6 +142,21 @@ classdef DegreeOverlapAv < DegreeOverlap
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the average average degree overlap.
+			%
+			% BUILD = DegreeOverlapAv.GETBUILD() returns the build of 'DegreeOverlapAv'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the average average degree overlap M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('DegreeOverlapAv') returns the build of 'DegreeOverlapAv'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('DegreeOverlapAv')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the average average degree overlap.
 			%
@@ -468,7 +483,7 @@ classdef DegreeOverlapAv < DegreeOverlap
 			prop = DegreeOverlapAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			degreeoverlapav_description_list = { 'ELCLASS (constant, string) is the class of the Average Degree Overlap.'  'NAME (constant, string) is the name of the Average Degree Overlap.'  'DESCRIPTION (constant, string) is the description of the Average Degree Overlap.'  'TEMPLATE (parameter, item) is the template of the Average Degree Overlap.'  'ID (data, string) is a few-letter code of the Average Degree Overlap.'  'LABEL (metadata, string) is an extended label of the Average Degree Overlap.'  'NOTES (metadata, string) are some specific notes about the Average Degree Overlap.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Degree Overlap.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			degreeoverlapav_description_list = { 'ELCLASS (constant, string) is the class of the Average Degree Overlap.'  'NAME (constant, string) is the name of the Average Degree Overlap.'  'DESCRIPTION (constant, string) is the description of the Average Degree Overlap.'  'TEMPLATE (parameter, item) is the template of the Average Degree Overlap.'  'ID (data, string) is a few-letter code of the Average Degree Overlap.'  'LABEL (metadata, string) is an extended label of the Average Degree Overlap.'  'NOTES (metadata, string) are some specific notes about the Average Degree Overlap.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Degree Overlap.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = degreeoverlapav_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

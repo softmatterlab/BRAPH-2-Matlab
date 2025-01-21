@@ -16,6 +16,9 @@ No element can be a subclass of Callback.
 %%% ¡seealso!
 Element
 
+%%% ¡build!
+1
+
 %% ¡props!
 
 %%% ¡prop!

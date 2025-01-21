@@ -4,6 +4,9 @@ Eccentricity < Measure (m, eccentricity) is the graph Eccentricity.
 %%% ¡description!
 The Eccentricity (Eccentricity) of a node is the maximal shortest path length between a node and any other node within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -122,6 +125,7 @@ distance = Distance('G', g).get('M');
 eccentricity = cell(L, 1);
 eccentricity_rule = m.get('RULE');
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     switch lower(eccentricity_rule)
         case {'subgraphs'}
@@ -130,6 +134,7 @@ parfor li = 1:1:L
             eccentricity(li)  = {max(distance{li}, [], 2)};
     end
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = eccentricity;
 

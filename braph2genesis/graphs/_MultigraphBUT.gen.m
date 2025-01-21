@@ -2,10 +2,13 @@
 MultigraphBUT < GraphWU (g, binary undirected multigraph with fixed thresholds) is a binary undirected multigraph with fixed thresholds.
 
 %%% ¡description!
-In a binary undirected multigraph with fixed thresholds, all the layers 
- consist of binary undirected (BU) graphs derived from the same 
+In a binary undirected multigraph with fixed thresholds (MultigraphBUT), all the layers 
+ consist of binary undirected graphs derived from the same 
  weighted connectivity matrix binarized at different thresholds.
 There are no connections between layers.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -121,12 +124,12 @@ ELCLASS (constant, string) is the class of the binary undirected multigraph with
 %%% ¡prop!
 NAME (constant, string) is the name of the binary undirected multigraph with fixed thresholds.
 %%%% ¡default!
-'MultigraphBUT'
+'Multigraph Binary Undirected at fixed Thresholds'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the binary undirected multigraph with fixed thresholds.
 %%%% ¡default!
-'In a binary undirected multigraph with fixed thresholds, all the layers consist of binary undirected (BU) graphs derived from the same weighted connectivity matrix binarized at different thresholds. There are no connections between layers.'
+'In a binary undirected multigraph with fixed thresholds (MultigraphBUT), all the layers consist of binary undirected graphs derived from the same weighted connectivity matrix binarized at different thresholds. There are no connections between layers.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the binary undirected multigraph with fixed thresholds.

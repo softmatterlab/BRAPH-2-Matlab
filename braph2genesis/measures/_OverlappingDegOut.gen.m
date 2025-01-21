@@ -5,6 +5,9 @@ OverlappingDegOut < DegreeOut (m, overlapping out-degree) is the graph Overlappi
 The Overlapping Out-Degree (OverlappingDegOut) of a graph is the sum of the out-degrees of a node 
 in all layers. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

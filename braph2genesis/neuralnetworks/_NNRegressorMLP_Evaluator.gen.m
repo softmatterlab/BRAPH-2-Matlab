@@ -1,12 +1,15 @@
 %% ¡header!
-NNRegressorMLP_Evaluator < NNEvaluator (nne, neural network evaluator for regressor) evaluates the performance of a multi-layer perceptron regressor with a given dataset.
+NNRegressorMLP_Evaluator < NNEvaluator (nne, neural network evaluator for multi-layer perceptron regressor) evaluates the performance of a multi-layer perceptron regressor with a given dataset.
 
 %%% ¡description!
-A neural network evaluator for regressor (NNRegressorMLP_Evaluator) evaluates the performance of a multi-layer perceptron regressor with a given dataset.
+A neural network evaluator for a multi-layer perceptron regressor (NNRegressorMLP_Evaluator) evaluates the performance of a multi-layer perceptron regressor with a given dataset.
 NNRegressorMLP_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).
 
 %%% ¡seealso!
 NNDataPoint_CON_REG, NNRegressorMLP
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -60,18 +63,6 @@ Root Mean Squared Error
 
 %%% ¡prop!
 %%%% ¡id!
-NNRegressorMLP_Evaluator.P
-%%%% ¡title!
-Permutation Times for Feature Importance
-
-%%% ¡prop!
-%%%% ¡id!
-NNRegressorMLP_Evaluator.FEATURE_IMPORTANCE
-%%%% ¡title!
-Feature Importance
-
-%%% ¡prop!
-%%%% ¡id!
 NNRegressorMLP_Evaluator.NOTES
 %%%% ¡title!
 Evaluator NOTES
@@ -79,42 +70,42 @@ Evaluator NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the neural network evaluator for a multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP_Evaluator'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the neural network evaluator for the regression task.
+NAME (constant, string) is the name of the neural network evaluator for a multi-layer perceptron regressor.
 %%%% ¡default!
-'NNRegressorMLP_Evaluator'
+'Neural Network Evaluator for a Multi-layer Perceptron Regressor'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the neural network evaluator for the regression task.
+DESCRIPTION (constant, string) is the description of the neural network evaluator for multi-layer perceptron regressor.
 %%%% ¡default!
-'A neural network evaluator for regressor (NNRegressorMLP_Evaluator) evaluates the performance of a multi-layer perceptron regressor with a given dataset. NNRegressorMLP_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
+'A neural network evaluator for a multi-layer perceptron regressor (NNRegressorMLP_Evaluator) evaluates the performance of a multi-layer perceptron regressor with a given dataset. NNRegressorMLP_Evaluator evaluates the performance of the trained regressor with a given dataset in terms of various regression metrics (e.g., coefficient of determination, mean squared error).'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the neural network evaluator for the regression task.
+TEMPLATE (parameter, item) is the template of the neural network evaluator for multi-layer perceptron regressor.
 %%%% ¡settings!
 'NNRegressorMLP_Evaluator'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the neural network evaluator for the regression task.
+ID (data, string) is a few-letter code for the neural network evaluator for multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP_Evaluator ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the neural network evaluator for the regression task.
+LABEL (metadata, string) is an extended label of the neural network evaluator for multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP_Evaluator label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the neural network evaluator for the regression task.
+NOTES (metadata, string) are some specific notes about the neural network evaluator for multi-layer perceptron regressor.
 %%%% ¡default!
 'NNRegressorMLP_Evaluator notes'
     
 %%% ¡prop!
-NN (data, item) contains a trained neural network regressor.
+NN (data, item) contains a trained neural network multi-layer perceptron regressor.
 %%%% ¡settings!
 'NNRegressorMLP'
 
@@ -214,49 +205,6 @@ else
     end
 end
 
-
-%%% ¡prop!
-P (parameter, scalar) is the permutation number.
-%%%% ¡default!
-1e+2
-%%%% ¡check_prop!
-check = value > 0 && value == round(value);
-
-%%% ¡prop!
-PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.
-%%%% ¡calculate!
-value = randi(intmax('uint32'), 1, nne.get('P'));
-
-%%% ¡prop!
-FEATURE_IMPORTANCE (result, cell) quantifies the average significance and impact of individual input features within neural network models. Various techniques, such as permutation feature importance for MLPs and gradient-based analysis for CNNs, can be applied to quantify this aspect.
-%%%% ¡calculate!
-all_fi = nne.get('NN').get('FEATURE_IMPORTANCE', nne.get('D'), nne.get('P'), nne.get('PERM_SEEDS'));
-if isempty(cell2mat(all_fi))
-    value = {};
-else
-    average_fi = zeros(size(all_fi{1}));
-    for i = 1:numel(all_fi)
-        % Add the current cell contents to the averageCell
-        average_fi = average_fi + all_fi{i};
-    end
-    average_fi = average_fi / numel(all_fi);
-    value = {average_fi};
-end
-
-%%%% ¡gui!
-input_dataset = nne.get('D');
-dp_class = input_dataset.get('DP_CLASS');
-graph_dp_classes = {NNDataPoint_Graph_CLA().get('NAME'), NNDataPoint_Graph_REG().get('NAME')};
-measure_dp_classes = {NNDataPoint_Measure_CLA().get('NAME'), NNDataPoint_Measure_REG().get('NAME')};
-
-if any(strcmp(dp_class, graph_dp_classes)) % GRAPH input
-    pr = NNxMLP_xPP_FI_Graph('EL', nne, 'D', input_dataset, 'PROP', NNRegressorMLP_Evaluator.FEATURE_IMPORTANCE, varargin{:});
-elseif any(strcmp(dp_class, measure_dp_classes))% MEASURE input
-    pr = NNxMLP_xPP_FI_Measure('EL', nne, 'D', input_dataset, 'PROP', NNRegressorMLP_Evaluator.FEATURE_IMPORTANCE, varargin{:});
-else % DATA input
-    pr = NNxMLP_xPP_FI_Data('EL', nne, 'D', input_dataset, 'PROP', NNRegressorMLP_Evaluator.FEATURE_IMPORTANCE, varargin{:});
-end
-
 %%% ¡prop!
 PFSP (gui, item) contains the panel figure of the scatter plot for regression model.
 %%%% ¡settings!
@@ -283,7 +231,7 @@ Evaluate a regressor with the example data
 
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_REG % create example files
+    create_data_NN_REG_CON_XLS() % create example files
 end
 
 % Load BrainAtlas

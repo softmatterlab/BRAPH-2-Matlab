@@ -3,7 +3,11 @@ classdef (Sealed=true) Callback < Element
 	% It is a subclass of <a href="matlab:help Element">Element</a>.
 	%
 	% A callback refers to a property of another element, which are identified 
-	% by its properties EL and PROP/TAG.
+	%  by its properties EL and PROP/TAG.
+	% For computational efficiency, it is best to use only one instance of Callback
+	%  for each prop of an instance of a concrete element EL, using 
+	%  EL.getCallback('PROP', <prop number>) or EL.getCallback('TAG', <prop tag>),
+	%  instead of creating new callback instances using its constructor. 
 	% No element can be a subclass of Callback.
 	%
 	% The list of Callback properties is:
@@ -99,6 +103,8 @@ classdef (Sealed=true) Callback < Element
 	%
 	%
 	% See also Element.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		EL = 1; %CET: Computational Efficiency Trick
@@ -144,6 +150,21 @@ classdef (Sealed=true) Callback < Element
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the callback.
+			%
+			% BUILD = Callback.GETBUILD() returns the build of 'Callback'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = CB.GETBUILD() returns the build of the callback CB.
+			%  BUILD = Element.GETBUILD(CB) returns the build of 'CB'.
+			%  BUILD = Element.GETBUILD('Callback') returns the build of 'Callback'.
+			%
+			% Note that the Element.GETBUILD(CB) and Element.GETBUILD('Callback')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function cb_class = getClass()
 			%GETCLASS returns the class of the callback.
 			%

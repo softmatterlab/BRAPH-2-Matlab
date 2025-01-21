@@ -12,7 +12,21 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 			'NNDataPoint_Measure_REG().get(''ELCLASS'') should return ''NNDataPoint_Measure_REG''.')
 	end
 	 
-	% getClass
+	% getBuild()
+	assert(NNDataPoint_Measure_REG.getBuild() == 1 && NNDataPoint_Measure_REG.getBuild() > 0, ...
+		[BRAPH2.STR ':NNDataPoint_Measure_REG:' BRAPH2.FAIL_TEST], ...
+		'NNDataPoint_Measure_REG.getBuild() should return the NNDataPoint_Measure_REG build number.')
+	assert(dp.getBuild() == 1 && dp.getBuild() > 0 , ...
+		[BRAPH2.STR ':NNDataPoint_Measure_REG:' BRAPH2.FAIL_TEST], ...
+		'dp.getBuild() should return the NNDataPoint_Measure_REG build number.')
+	assert(Element.getBuild(dp) == 1 && Element.getBuild(dp) > 0, ...
+		[BRAPH2.STR ':NNDataPoint_Measure_REG:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(dp) should return the NNDataPoint_Measure_REG build number.')
+	assert(Element.getBuild('NNDataPoint_Measure_REG') == 1 && Element.getBuild('NNDataPoint_Measure_REG') > 0, ...
+		[BRAPH2.STR ':NNDataPoint_Measure_REG:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(''NNDataPoint_Measure_REG'') should return the NNDataPoint_Measure_REG build number.')
+	 
+	% getClass()
 	assert(strcmp(NNDataPoint_Measure_REG.getClass(), 'NNDataPoint_Measure_REG'), ...
 		[BRAPH2.STR ':NNDataPoint_Measure_REG:' BRAPH2.FAIL_TEST], ...
 		'NNDataPoint_Measure_REG.getClass() should return ''NNDataPoint_Measure_REG''.')
@@ -1387,7 +1401,7 @@ end
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	% ensure the example data is generated
 	if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-	    test_NNDataPoint_CON_REG % create example files
+	    create_data_NN_REG_CON_XLS() % create example files
 	end
 	
 	% Load BrainAtlas
@@ -1454,7 +1468,7 @@ end
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	% ensure the example data is generated
 	if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-	    test_NNDataPoint_CON_REG % create example files
+	    create_data_NN_REG_CON_XLS() % create example files
 	end
 	
 	% Load BrainAtlas
@@ -1523,13 +1537,13 @@ end
 %% Test 14: Construct the data point with the adjacency matrix derived from its multiplex weighted undirected graph (MultiplexWU)
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	% ensure the example data is generated
-	if ~isfile([fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'])
-	    test_SubjectCON_FUN_MP % create example files
+	if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'atlas.xlsx'])
+	    create_data_NN_REG_CON_FUN_MP_XLS() % create example files
 	end
 	
 	% Load BrainAtlas
 	im_ba = ImporterBrainAtlasXLS( ...
-	    'FILE', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'], ...
+	    'FILE', [fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'atlas.xlsx'], ...
 	    'WAITBAR', true ...
 	    );
 	
@@ -1537,7 +1551,7 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	
 	% Load Groups of SubjectCON
 	im_gr = ImporterGroupSubjectCON_XLS( ...
-	    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.CON'], ...
+	    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'Connectivity' filesep 'CON_FUN_MP_Group_XLS'], ...
 	    'BA', ba, ...
 	    'WAITBAR', true ...
 	    );
@@ -1546,7 +1560,7 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	
 	% Load Groups of SubjectFUN
 	im_gr = ImporterGroupSubjectFUN_XLS( ...
-	    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.FUN'], ...
+	    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'Functional' filesep 'CON_FUN_MP_Group_XLS'], ...
 	    'BA', ba, ...
 	    'WAITBAR', true ...
 	    );
@@ -1609,7 +1623,7 @@ end
 %% Test 15: Example script for weighted undirected graph (GraphWU) using connectivity data
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-	    test_NNDataPoint_CON_REG % create example files
+	    create_data_NN_REG_CON_XLS() % create example files
 	end
 	example_NNCV_CON_WU_M_REG
 end
@@ -1617,7 +1631,7 @@ end
 %% Test 16: Example script for weighted undirected multiplex (MultiplexWU) using connectivity data and functional data
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_REG')) filesep 'Example data NN REG CON_FUN_MP XLS' filesep 'atlas.xlsx'])
-	    test_NNDataPoint_CON_FUN_MP_REG % create example files
+	    create_data_NN_REG_CON_FUN_MP_XLS() % create example files
 	end
 	example_NNCV_CON_FUN_MP_WU_M_REG
 end
@@ -1625,7 +1639,7 @@ end
 %% Test 17: Example script for weighted undirected graph (GraphWU) using functional data
 if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	if ~isfile([fileparts(which('NNDataPoint_FUN_REG')) filesep 'Example data NN REG FUN XLS' filesep 'atlas.xlsx'])
-	    test_NNDataPoint_FUN_REG % create example files
+	    create_data_NN_REG_FUN_XLS() % create example files
 	end
 	example_NNCV_FUN_WU_M_REG
 end

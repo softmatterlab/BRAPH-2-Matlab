@@ -13,7 +13,7 @@ classdef GlobalEfficiency < Distance
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the degree.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Global Efficiency.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Global Efficiency.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -127,7 +127,7 @@ classdef GlobalEfficiency < Distance
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the degree.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Global Efficiency.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Global Efficiency.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -142,6 +142,21 @@ classdef GlobalEfficiency < Distance
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the global efficiency.
+			%
+			% BUILD = GlobalEfficiency.GETBUILD() returns the build of 'GlobalEfficiency'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the global efficiency M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('GlobalEfficiency') returns the build of 'GlobalEfficiency'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('GlobalEfficiency')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the global efficiency.
 			%
@@ -468,7 +483,7 @@ classdef GlobalEfficiency < Distance
 			prop = GlobalEfficiency.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			globalefficiency_description_list = { 'ELCLASS (constant, string) is the class of the Global Efficiency.'  'NAME (constant, string) is the name of the Global Efficiency.'  'DESCRIPTION (constant, string) is the description of the Global Efficiency.'  'TEMPLATE (parameter, item) is the template of the Global Efficiency.'  'ID (data, string) is a few-letter code of the degree.'  'LABEL (metadata, string) is an extended label of the Global Efficiency.'  'NOTES (metadata, string) are some specific notes about the Global Efficiency.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Global Efficiency.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			globalefficiency_description_list = { 'ELCLASS (constant, string) is the class of the Global Efficiency.'  'NAME (constant, string) is the name of the Global Efficiency.'  'DESCRIPTION (constant, string) is the description of the Global Efficiency.'  'TEMPLATE (parameter, item) is the template of the Global Efficiency.'  'ID (data, string) is a few-letter code of the degree.'  'LABEL (metadata, string) is an extended label of the Global Efficiency.'  'NOTES (metadata, string) are some specific notes about the Global Efficiency.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Global Efficiency.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = globalefficiency_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -656,12 +671,16 @@ classdef GlobalEfficiency < Distance
 					distance = calculateValue@Distance(m, prop);
 					
 					global_efficiency = cell(L, 1);
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    inverse_distance = distance{li}.^-1;  % inverse distance
 					    inverse_distance(1:N(li)+1:end) = 0;
 					    global_efficiency_layer = (sum(inverse_distance, 2) / (N(li)-1));
 					    global_efficiency(li) = {global_efficiency_layer};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = global_efficiency;
 					
 					rng(rng_settings_)

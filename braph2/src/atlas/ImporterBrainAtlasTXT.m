@@ -19,7 +19,7 @@ classdef ImporterBrainAtlasTXT < Importer
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain atlas importer from TXT.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain atlas importer from TXT.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain atlas importer from TXT.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>FILE</strong> 	FILE (data, string) is the TXT file from where to load the brain atlas.
 	%  <strong>11</strong> <strong>GET_FILE</strong> 	GET_FILE (query, item) opens a dialog box to get the TXT file from where to load the brain atlas.
@@ -112,6 +112,8 @@ classdef ImporterBrainAtlasTXT < Importer
 	%
 	%
 	% See also BrainAtlas, ExporterBrainAtlasTXT.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		FILE = 10; %CET: Computational Efficiency Trick
@@ -148,7 +150,7 @@ classdef ImporterBrainAtlasTXT < Importer
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain atlas importer from TXT.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain atlas importer from TXT.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain atlas importer from TXT.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>FILE</strong> 	FILE (data, string) is the TXT file from where to load the brain atlas.
 			%  <strong>11</strong> <strong>GET_FILE</strong> 	GET_FILE (query, item) opens a dialog box to get the TXT file from where to load the brain atlas.
@@ -160,6 +162,21 @@ classdef ImporterBrainAtlasTXT < Importer
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the brain atlas importer from TXT.
+			%
+			% BUILD = ImporterBrainAtlasTXT.GETBUILD() returns the build of 'ImporterBrainAtlasTXT'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = IM.GETBUILD() returns the build of the brain atlas importer from TXT IM.
+			%  BUILD = Element.GETBUILD(IM) returns the build of 'IM'.
+			%  BUILD = Element.GETBUILD('ImporterBrainAtlasTXT') returns the build of 'ImporterBrainAtlasTXT'.
+			%
+			% Note that the Element.GETBUILD(IM) and Element.GETBUILD('ImporterBrainAtlasTXT')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function im_class = getClass()
 			%GETCLASS returns the class of the brain atlas importer from TXT.
 			%
@@ -486,7 +503,7 @@ classdef ImporterBrainAtlasTXT < Importer
 			prop = ImporterBrainAtlasTXT.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			importerbrainatlastxt_description_list = { 'ELCLASS (constant, string) is the class of the brain atlas importer from TXT.'  'NAME (constant, string) is the name of the brain atlas importer from TXT.'  'DESCRIPTION (constant, string) is the description of the brain atlas importer from TXT.'  'TEMPLATE (parameter, item) is the template of the brain atlas importer from TXT.'  'ID (data, string) is a few-letter code for the brain atlas importer from TXT.'  'LABEL (metadata, string) is an extended label of the brain atlas importer from TXT.'  'NOTES (metadata, string) are some specific notes about the brain atlas importer from TXT.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'FILE (data, string) is the TXT file from where to load the brain atlas.'  'GET_FILE (query, item) opens a dialog box to get the TXT file from where to load the brain atlas.'  'BA (result, item) is a brain atlas.' };
+			importerbrainatlastxt_description_list = { 'ELCLASS (constant, string) is the class of the brain atlas importer from TXT.'  'NAME (constant, string) is the name of the brain atlas importer from TXT.'  'DESCRIPTION (constant, string) is the description of the brain atlas importer from TXT.'  'TEMPLATE (parameter, item) is the template of the brain atlas importer from TXT.'  'ID (data, string) is a few-letter code for the brain atlas importer from TXT.'  'LABEL (metadata, string) is an extended label of the brain atlas importer from TXT.'  'NOTES (metadata, string) are some specific notes about the brain atlas importer from TXT.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'FILE (data, string) is the TXT file from where to load the brain atlas.'  'GET_FILE (query, item) opens a dialog box to get the TXT file from where to load the brain atlas.'  'BA (result, item) is a brain atlas.' };
 			prop_description = importerbrainatlastxt_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

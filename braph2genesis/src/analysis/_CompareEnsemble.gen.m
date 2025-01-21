@@ -8,6 +8,9 @@ which need to be of the same class.
 %%% ¡seealso!
 AnalyzeEnsemble, ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

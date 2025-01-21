@@ -5,6 +5,9 @@ MultiplexKCorC < Measure (m, multiplex k-coreness centrality) is the graph Multi
 The Multiplex K-Coreness Centrality (MultiplexKCorC) of a node is k if the node belongs to the k-core 
 but not to the (k+1)-core.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

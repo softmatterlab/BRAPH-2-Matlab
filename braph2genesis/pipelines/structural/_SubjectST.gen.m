@@ -7,6 +7,9 @@ Subject with structural data (e.g. cortical thickness obtaibed from strcutural M
 %%% ¡seealso!
 ImporterGroupSubjectST_TXT, ExporterGroupSubjectST_TXT, ImporterGroupSubjectST_XLS, ExporterGroupSubjectST_XLS
 
+%%% ¡build!
+1
+
 %% ¡gui!
 
 %%% ¡menu_import!
@@ -142,14 +145,14 @@ Subject NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the subject.
 %%%% ¡default!
 'SubjectST'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the subject.
 %%%% ¡default!
-'SubjectST'
+'Structural Subject'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the subject.

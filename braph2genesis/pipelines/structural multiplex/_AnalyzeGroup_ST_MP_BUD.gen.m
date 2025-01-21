@@ -8,6 +8,9 @@ analyzes them using binary undirected graphs.
 %%% ¡seealso!
 SubjectST_MP, MultiplexBUD
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -67,14 +70,14 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the graph analysis with structural multiplex data of fixed density.
 %%%% ¡default!
 'AnalyzeGroup_ST_MP_BUD'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the graph analysis with structural multiplex data of fixed density.
 %%%% ¡default!
-'AnalyzeGroup_ST_MP_BUD'
+'Multiplex Structural Binary Undirected at fixed Densities Analyze Group'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the graph analysis with structural multiplex data of fixed density.

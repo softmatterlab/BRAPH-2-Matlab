@@ -9,6 +9,9 @@ and any overlapping datapoints are excluded to ensure data consistency.
 %%% ¡seealso!
 NNDataset, NNDatasetSplit
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -19,7 +22,7 @@ ELCLASS (constant, string) is the class of the combiner of neural networks datas
 %%% ¡prop!
 NAME (constant, string) is the name of the combiner of neural networks datasets.
 %%%% ¡default!
-'NNDatasetCombine'
+'Neural Network Dataset Combiner'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the combiner of neural networks datasets.
@@ -74,7 +77,7 @@ dp_classes = cellfun(@(x) x.get('DP_CLASS'), dco.get('D_LIST'), 'UniformOutput',
 dp_list = horzcat(dp_list{:});
 
 % inspect whether there are overlapping datapoints
-if isempty(dp_list) | isempty(dp_classes)
+if isempty(dp_list)
     unique_dp_list = {};
     dp_class = 'NNDataPoint';
 else
@@ -86,7 +89,7 @@ end
 
 % create the combined NNDataset
 combined_dp_dict = IndexedDictionary(...
-    'IT_CLASS', 'NNDataPoint', ...
+    'IT_CLASS', dp_class, ...
     'IT_LIST',  unique_dp_list ...
     );
 

@@ -10,6 +10,9 @@ A Group represents a group of subjects whose class is defined in the property SU
 %%% ¡seealso!
 Subject, IndexedDictionary
 
+%%% ¡build!
+1
+
 %% ¡gui!
 
 %%% ¡menu_import!

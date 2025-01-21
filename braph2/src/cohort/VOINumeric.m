@@ -12,7 +12,7 @@ classdef VOINumeric < VOI
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the numerical variable of interest.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the numerical variable of interest.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the numerical variable of interest.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>V</strong> 	V (data, scalar) is the value of the variable of interest.
 	%
 	% VOINumeric methods (constructor):
@@ -102,6 +102,8 @@ classdef VOINumeric < VOI
 	%
 	%
 	% See also VOICategoric.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	methods % constructor
 		function voi = VOINumeric(varargin)
@@ -122,7 +124,7 @@ classdef VOINumeric < VOI
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the numerical variable of interest.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the numerical variable of interest.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the numerical variable of interest.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>V</strong> 	V (data, scalar) is the value of the variable of interest.
 			%
 			% See also Category, Format.
@@ -131,6 +133,21 @@ classdef VOINumeric < VOI
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the numerical variable of interest.
+			%
+			% BUILD = VOINumeric.GETBUILD() returns the build of 'VOINumeric'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = VOI.GETBUILD() returns the build of the numerical variable of interest VOI.
+			%  BUILD = Element.GETBUILD(VOI) returns the build of 'VOI'.
+			%  BUILD = Element.GETBUILD('VOINumeric') returns the build of 'VOINumeric'.
+			%
+			% Note that the Element.GETBUILD(VOI) and Element.GETBUILD('VOINumeric')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function voi_class = getClass()
 			%GETCLASS returns the class of the numerical variable of interest.
 			%
@@ -449,7 +466,7 @@ classdef VOINumeric < VOI
 			prop = VOINumeric.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			voinumeric_description_list = { 'ELCLASS (constant, string) is the class of the numerical variable of interest.'  'NAME (constant, string) is the name of the numerical variable of interest.'  'DESCRIPTION (constant, string) is the description of the numerical variable of interest.'  'TEMPLATE (parameter, item) is the template of the numerical variable of interest.'  'ID (data, string) is a few-letter code for the numerical variable of interest.'  'LABEL (metadata, string) is an extended label of the numerical variable of interest.'  'NOTES (metadata, string) are some specific notes about the numerical variable of interest.'  'TOSTRING (query, string) returns a string that represents the object.'  'V (data, scalar) is the value of the variable of interest.' };
+			voinumeric_description_list = { 'ELCLASS (constant, string) is the class of the numerical variable of interest.'  'NAME (constant, string) is the name of the numerical variable of interest.'  'DESCRIPTION (constant, string) is the description of the numerical variable of interest.'  'TEMPLATE (parameter, item) is the template of the numerical variable of interest.'  'ID (data, string) is a few-letter code for the numerical variable of interest.'  'LABEL (metadata, string) is an extended label of the numerical variable of interest.'  'NOTES (metadata, string) are some specific notes about the numerical variable of interest.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'V (data, scalar) is the value of the variable of interest.' };
 			prop_description = voinumeric_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

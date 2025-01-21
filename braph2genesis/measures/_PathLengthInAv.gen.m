@@ -4,6 +4,9 @@ PathLengthInAv < PathLengthIn (m, average in-path length) is the graph Average I
 %%% ¡description!
 The Average In-Path Length (PathLengthInAv) of a graph is the average of the sum of the in-path lengths within each layer. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -120,6 +123,8 @@ L = g.get('LAYERNUMBER');
 in_path_length = calculateValue@PathLengthIn(m, prop);
 in_path_length_av = cell(L, 1);
 path_length_rule = m.get('RULE');
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:length(in_path_length_av)
     switch lower(path_length_rule)
         case {'subgraphs'}
@@ -131,6 +136,8 @@ parfor li = 1:1:length(in_path_length_av)
             in_path_length_av(li) = {harmmean(in_path_length{li})};
     end
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = in_path_length_av;
 
 %% ¡tests!

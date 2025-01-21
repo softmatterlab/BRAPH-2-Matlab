@@ -15,7 +15,7 @@ classdef BrainRegion < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain region.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain region.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain region.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>X</strong> 	X (data, scalar) is the x-coordinate of the brain region.
 	%  <strong>10</strong> <strong>Y</strong> 	Y (data, scalar) is the y-coordinate of the brain region.
 	%  <strong>11</strong> <strong>Z</strong> 	Z (data, scalar) is the z-coordinate of the brain region.
@@ -107,6 +107,8 @@ classdef BrainRegion < ConcreteElement
 	%
 	%
 	% See also BrainAtlas, BrainSurface.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		X = 9; %CET: Computational Efficiency Trick
@@ -143,7 +145,7 @@ classdef BrainRegion < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain region.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain region.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain region.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>X</strong> 	X (data, scalar) is the x-coordinate of the brain region.
 			%  <strong>10</strong> <strong>Y</strong> 	Y (data, scalar) is the y-coordinate of the brain region.
 			%  <strong>11</strong> <strong>Z</strong> 	Z (data, scalar) is the z-coordinate of the brain region.
@@ -154,6 +156,21 @@ classdef BrainRegion < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the brain region.
+			%
+			% BUILD = BrainRegion.GETBUILD() returns the build of 'BrainRegion'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = BR.GETBUILD() returns the build of the brain region BR.
+			%  BUILD = Element.GETBUILD(BR) returns the build of 'BR'.
+			%  BUILD = Element.GETBUILD('BrainRegion') returns the build of 'BrainRegion'.
+			%
+			% Note that the Element.GETBUILD(BR) and Element.GETBUILD('BrainRegion')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function br_class = getClass()
 			%GETCLASS returns the class of the brain region.
 			%
@@ -472,7 +489,7 @@ classdef BrainRegion < ConcreteElement
 			prop = BrainRegion.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			brainregion_description_list = { 'ELCLASS (constant, string) is the class of the brain region.'  'NAME (constant, string) is the name of the brain region.'  'DESCRIPTION (constant, string) is the description of the brain region.'  'TEMPLATE (parameter, item) is the template of the brain region.'  'ID (data, string) is a few-letter code for the brain region.'  'LABEL (metadata, string) is an extended label of the brain region.'  'NOTES (metadata, string) are some specific notes about the brain region.'  'TOSTRING (query, string) returns a string that represents the object.'  'X (data, scalar) is the x-coordinate of the brain region.'  'Y (data, scalar) is the y-coordinate of the brain region.'  'Z (data, scalar) is the z-coordinate of the brain region.' };
+			brainregion_description_list = { 'ELCLASS (constant, string) is the class of the brain region.'  'NAME (constant, string) is the name of the brain region.'  'DESCRIPTION (constant, string) is the description of the brain region.'  'TEMPLATE (parameter, item) is the template of the brain region.'  'ID (data, string) is a few-letter code for the brain region.'  'LABEL (metadata, string) is an extended label of the brain region.'  'NOTES (metadata, string) are some specific notes about the brain region.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'X (data, scalar) is the x-coordinate of the brain region.'  'Y (data, scalar) is the y-coordinate of the brain region.'  'Z (data, scalar) is the z-coordinate of the brain region.' };
 			prop_description = brainregion_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

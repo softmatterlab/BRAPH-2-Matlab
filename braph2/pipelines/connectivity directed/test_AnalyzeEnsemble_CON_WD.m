@@ -12,7 +12,21 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 			'AnalyzeEnsemble_CON_WD().get(''ELCLASS'') should return ''AnalyzeEnsemble_CON_WD''.')
 	end
 	 
-	% getClass
+	% getBuild()
+	assert(AnalyzeEnsemble_CON_WD.getBuild() == 1 && AnalyzeEnsemble_CON_WD.getBuild() > 0, ...
+		[BRAPH2.STR ':AnalyzeEnsemble_CON_WD:' BRAPH2.FAIL_TEST], ...
+		'AnalyzeEnsemble_CON_WD.getBuild() should return the AnalyzeEnsemble_CON_WD build number.')
+	assert(a.getBuild() == 1 && a.getBuild() > 0 , ...
+		[BRAPH2.STR ':AnalyzeEnsemble_CON_WD:' BRAPH2.FAIL_TEST], ...
+		'a.getBuild() should return the AnalyzeEnsemble_CON_WD build number.')
+	assert(Element.getBuild(a) == 1 && Element.getBuild(a) > 0, ...
+		[BRAPH2.STR ':AnalyzeEnsemble_CON_WD:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(a) should return the AnalyzeEnsemble_CON_WD build number.')
+	assert(Element.getBuild('AnalyzeEnsemble_CON_WD') == 1 && Element.getBuild('AnalyzeEnsemble_CON_WD') > 0, ...
+		[BRAPH2.STR ':AnalyzeEnsemble_CON_WD:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(''AnalyzeEnsemble_CON_WD'') should return the AnalyzeEnsemble_CON_WD build number.')
+	 
+	% getClass()
 	assert(strcmp(AnalyzeEnsemble_CON_WD.getClass(), 'AnalyzeEnsemble_CON_WD'), ...
 		[BRAPH2.STR ':AnalyzeEnsemble_CON_WD:' BRAPH2.FAIL_TEST], ...
 		'AnalyzeEnsemble_CON_WD.getClass() should return ''AnalyzeEnsemble_CON_WD''.')
@@ -1385,20 +1399,20 @@ end
 
 %% Test 12: Example
 if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
-	create_data_CON_XLS() % only creates files if the example folder doesn't already exist
+	create_data_COND_XLS() % only creates files if the example folder doesn't already exist
 	
 	example_CON_WD
 end
 
 %% Test 13: Template for Graphs and Measures
 if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
-	if ~isfile([fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'atlas.txt'])
-	    test_ImporterGroupSubjectCON_TXT % create example files
+	if ~isfile([fileparts(which('AnalyzeEnsemble_CON_WD')) filesep 'Example data CON D TXT' filesep 'atlas.txt'])
+	    create_data_COND_TXT % create example files
 	end
 	
-	ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'atlas.txt']).get('BA');
-	gr1 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'CON_Group_1_TXT'], 'BA', ba).get('GR');
-	gr2 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'CON_Group_2_TXT'], 'BA', ba).get('GR');
+	ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('AnalyzeEnsemble_CON_WD')) filesep 'Example data CON D TXT' filesep 'atlas.txt']).get('BA');
+	gr1 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('AnalyzeEnsemble_CON_WD')) filesep 'Example data CON D TXT' filesep 'COND_Group_1_TXT'], 'BA', ba).get('GR');
+	gr2 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('AnalyzeEnsemble_CON_WD')) filesep 'Example data CON D TXT' filesep 'COND_Group_2_TXT'], 'BA', ba).get('GR');
 	
 	% check that analysis parameters are correctly templated between analysis 1 and 2
 	a_WD1 = AnalyzeEnsemble_CON_WD('GR', gr1);

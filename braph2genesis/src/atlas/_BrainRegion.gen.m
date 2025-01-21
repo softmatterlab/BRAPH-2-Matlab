@@ -10,6 +10,9 @@ A Brain Region (BrainRegion) contains the information of a brain region.
 %%% ¡seealso!
 BrainAtlas, BrainSurface
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

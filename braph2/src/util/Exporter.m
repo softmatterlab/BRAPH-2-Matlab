@@ -12,7 +12,7 @@ classdef Exporter < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the exporter.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the exporter.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the exporter.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%
 	% Exporter methods (constructor):
@@ -102,6 +102,8 @@ classdef Exporter < ConcreteElement
 	%
 	%
 	% See also ConcreteElement, Importer.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -128,7 +130,7 @@ classdef Exporter < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the exporter.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the exporter.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the exporter.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%
 			% See also Category, Format.
@@ -137,6 +139,21 @@ classdef Exporter < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the exporter to a file.
+			%
+			% BUILD = Exporter.GETBUILD() returns the build of 'Exporter'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = EX.GETBUILD() returns the build of the exporter to a file EX.
+			%  BUILD = Element.GETBUILD(EX) returns the build of 'EX'.
+			%  BUILD = Element.GETBUILD('Exporter') returns the build of 'Exporter'.
+			%
+			% Note that the Element.GETBUILD(EX) and Element.GETBUILD('Exporter')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function ex_class = getClass()
 			%GETCLASS returns the class of the exporter to a file.
 			%
@@ -459,7 +476,7 @@ classdef Exporter < ConcreteElement
 			prop = Exporter.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			exporter_description_list = { 'ELCLASS (constant, string) is the class of the exporter.'  'NAME (constant, string) is the name of the exporter.'  'DESCRIPTION (constant, string) is the description of the exporter.'  'TEMPLATE (parameter, item) is the template of the exporter.'  'ID (data, string) is a few-letter code for the exporter.'  'LABEL (metadata, string) is an extended label of the exporter.'  'NOTES (metadata, string) are some specific notes about the exporter.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.' };
+			exporter_description_list = { 'ELCLASS (constant, string) is the class of the exporter.'  'NAME (constant, string) is the name of the exporter.'  'DESCRIPTION (constant, string) is the description of the exporter.'  'TEMPLATE (parameter, item) is the template of the exporter.'  'ID (data, string) is a few-letter code for the exporter.'  'LABEL (metadata, string) is an extended label of the exporter.'  'NOTES (metadata, string) are some specific notes about the exporter.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.' };
 			prop_description = exporter_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

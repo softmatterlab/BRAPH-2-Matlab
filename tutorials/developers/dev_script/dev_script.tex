@@ -10,62 +10,72 @@
 
 \begin{abstract}
 \noindent
-This is the developer tutorial for adapting a script for calculating different graph measures. In this tutorial, we will explain how to edit an example script to calculate different graph measures in braph2genesis. Here, we use. \fn{EXAMPLE\_ST\_MP\_WU} as an example to show how to edit this script to calculate different graph measures for structural data using a multiplex weighted undirected graph.
+This is the developer tutorial for adapting a script to calculate different graph measures. In this tutorial, you will learn how to edit an example script to calculate different graph measures. Here, you will use the scrip in file \fn{example\_ST\_MP\_WU.m} as an example to learn how to edit this script to calculate different graph measures for structural data using a multiplex weighted undirected graph.
 \end{abstract}
 
 \tableofcontents
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Atlas Loading}
-We started with implementing the brain atlas. Here we use the function \fn{ImporterBrainAtlasXLS} as an example. The function allows users to import the atlas from an XLS/XLSX file. 
+
+\section{Header}
+
+The header section of the script in \fn{example\_ST\_MP\_WU.m} is shown in \Coderef{cd:header}.
+
 \begin{lstlisting}[
-	label=cd:m:degree:header,
+	label=cd:header,
 	caption={
-		{\bf Brain Atlas Importer.}
-		The \code{header} section of the pipeline \fn{EXAMPLE\_ST\_MP\_WU}. It defines the importer for Atlas loading.
+		{\bf Script header.}
+		The header section of the pipeline names and describes the script.
 	}
 ]
-%% ¡header!
-% EXAMPLE_ST_MP_WU
-% Script example pipeline ST MP WU
+% EXAMPLE_ST_MP_WU ¥\circled{1}\circlednote{1}{ defines the name of the script.}¥
+% Script example pipeline ST MP WU ¥\circled{2}\circlednote{2}{ provides a brief description of the script.}¥
 
-clear variables %#ok<*NASGU>
+clear variables %#ok<*NASGU> ¥\circled{3}\circlednote{3}{ clears the workspace.}¥
+\end{lstlisting}
 
+\section{Atlas Loading}
+
+The script starts by importing the brain atlas. For this, it uses the element \code{ImporterBrainAtlasXLS} to import the atlas from an \fn{*.xlsx} file, as shown in \Coderef{cd:atlas}.
+ 
+\begin{lstlisting}[
+	label=cd:atlas,
+	caption={
+		{\bf Load brain atlas.}
+		This section defines the importer to load the brain atlas.
+	}
+]
 %% Load BrainAtlas
-im_ba = ImporterBrainAtlasXLS( ... ¥\circled{1}\circlednote{1}{First, the script loads the brain atlas from the excel file atlas.xlsx}¥
-    'FILE', [fileparts(which('example_ST_MP_WU')) filesep 'Example data ST_MP XLS' filesep 'atlas.xlsx'], ...
-    'WAITBAR', true ...
+im_ba = ImporterBrainAtlasXLS( ...
+    'FILE', [fileparts(which('example_ST_MP_WU')) filesep 'Example data ST_MP XLS' filesep 'atlas.xlsx'], ... ¥\circled{1}\circlednote{1}{ loads the brain atlas from the file \fn{atlas.xlsx}.}¥
+    'WAITBAR', true ... ¥\circled{2}\circlednote{2}{ shows a waitbar during the loading process.}¥
     );
 
 ba = im_ba.get('BA');
 \end{lstlisting}
 
-
-
-
-
-%%%%% %%%%% %%%%% %%%%% %%%%%
-%\clearpage
 \section{Data Loading}
-This step is to load the data of two groups. In this section, we use \fn{ImporterGroupSubjectST\_MP\_XLS} as an example, Users can define the path to the group data in XLS/XLSX files contained in a folder.
+
+The next step is to load the data of the two groups from the folders where the relative \fn{*.xlsx} files are stored. It uses the element \code{ImporterGroupSubjectST\_MP\_XLS} to load the \code{SubjectST\_MP} subjects, as shown in \Coderef{cd:gr}.
+
 \begin{lstlisting}[
-	label=cd:m:degreeav:header,
+	label=cd:gr,
 	caption={
-		{\bf Group Subject Data Importer.}
-		The group data importer section provides the code for loading group subject data.
+		{\bf Load groups of subjects.}
+		The group data importer section provides the code for loading the data corresponding to the groups of subjects.
 	}
 ]
-im_gr1 = ImporterGroupSubjectST_MP_XLS( ...¥\circled{1}\circlednote{1}{ImporterGroupSubjectST\_MP\_XLS imports a group of subjects with structural data and their covariates (optional) from another XLS/XLSX file.}¥
-    'DIRECTORY', [fileparts(which('SubjectST_MP')) filesep 'Example data ST_MP XLS' filesep 'ST_MP_Group_1_XLS'], ...
-    'BA', ba, ...
-    'WAITBAR', true ...
+%% Load Groups of SubjectST_MP
+im_gr1 = ImporterGroupSubjectST_MP_XLS( ...
+    'DIRECTORY', [fileparts(which('SubjectST_MP')) filesep 'Example data ST_MP XLS' filesep 'ST_MP_Group_1_XLS'], ... ¥\circled{1}\circlednote{1}{ imports the first group of subjects with structural data and their (optional) covariates from the files contained in the folder.}¥
+    'BA', ba, ... ¥\circled{2}\circlednote{2}{ uses the previously loaded brain atlas.}¥
+    'WAITBAR', true ... ¥\circled{3}\circlednote{3}{ shows a waitbar during the loading process.}¥
     );
 
 gr1 = im_gr1.get('GR');
 
-im_gr2 = ImporterGroupSubjectST_MP_XLS( ...¥\circled{2}\circlednote{2}{imports a second group of subjects with structural data and their covariates (optional) from another XLS/XLSX file.}¥
-    'DIRECTORY', [fileparts(which('SubjectST_MP')) filesep 'Example data ST_MP XLS' filesep 'ST_MP_Group_2_XLS'], ...
+im_gr2 = ImporterGroupSubjectST_MP_XLS( ...
+    'DIRECTORY', [fileparts(which('SubjectST_MP')) filesep 'Example data ST_MP XLS' filesep 'ST_MP_Group_2_XLS'], ... ¥\circled{4}\circlednote{4}{ imports the first group of subjects.}¥
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -73,79 +83,80 @@ im_gr2 = ImporterGroupSubjectST_MP_XLS( ...¥\circled{2}\circlednote{2}{imports 
 gr2 = im_gr2.get('GR');
 
 \end{lstlisting}
-\clearpage
 
 \section{Group Analysis}
-This step is to initialize the group data analysis. Users are allowed to specify the correlation type and \fn{NEGATIVE\_WEIGHT\_RULE}  in this section, the script will perform the group analysis automatically for each group loaded from previous step.
+
+The next step is to perform the group data analysis using the element \code{}, as shown in \Coderef{cd:a}.
+
 \begin{lstlisting}[
-	label=cd:m:degreeav:header,
+	label=cd:a,
 	caption={
-		{\bf Group Subject Data Analysis.}
-		The group data analysis provides code for initialization of group data analysis.
+		{\bf Analysis.}
+		The group data analysis sections provides code to perform the analyses for the two groups.
 	}
 ]
-a_WU1 = AnalyzeGroup_ST_MP_WU( ...¥\circled{1}\circlednote{1}{creation of the group analysis with the loaded atlas and groups data.}¥
-    'GR', gr1, ...
-    'CORRELATION_RULE', Correlation.PEARSON ...
+%% Analysis ST MP WU
+a_WU1 = AnalyzeGroup_ST_MP_WU( ...
+    'GR', gr1, ... ¥\circled{1}\circlednote{1}{ uses the previously defined group \code{gr1} for the first analysis.}¥
+    'CORRELATION_RULE', Correlation.PEARSON ... ¥\circled{2}\circlednote{2}{ defines the correlation rule to be used.}¥
     );
 
-a_WU2 = AnalyzeGroup_ST_MP_WU( ...¥\circled{1}¥
-    'TEMPLATE', a_WU1, ...
-    'GR', gr2 ...
+a_WU2 = AnalyzeGroup_ST_MP_WU( ...
+    'TEMPLATE', a_WU1, ... ¥\circled{3}\circlednote{3}{ uses the same parameters as in the analysis \code{a\_WU1}.}¥
+    'GR', gr2 ... ¥\circled{4}\circlednote{4}{ uses the previously defined group \code{gr2} for the second analysis.}¥
     );
 
 \end{lstlisting}
-%\clearpage
+
 \section{Measure Calculation}
-This step is to calculate graph measures with data loaded in the previous step. Here we use \fn{overlapping strength} as an example.
+
+You can now calculate graph measures with the analyses defined in the previous step, as shown in \Coderef{cd:m}.
+
 \begin{lstlisting}[
-	label=cd:m:degreeav:header,
+	label=cd:m,
 	caption={
-		{\bf Group Subject Data Analysis.}
-		The group data analysis provides code for initialization of group data analysis.
+		{\bf Within-group measure calculation.}
+		The measure calculation section calculates the measures for each group independently.
 	}
 ]
-g_WU1 = a_WU1.memorize('G');¥\circled{1}\circlednote{1}{memorize in case there are measures with non-default rules.}¥
-ovstrength_WU2 = g_WU2.get('MEASURE', 'OverlappingS').get('M');¥\circled{2}\circlednote{2}{The function calculates graph measure. In this case, \fn{overlapping strength} is calculated.}¥
-ovstrength_av_WU2 = g_WU2.get('MEASURE', 'OverlappingSAv').get('M'); ¥\circled{3}\circlednote{3}{Other measures can also be calculated by changing the measure name. For example, \fn{OverlappingS} calculates overlapping strength and \fn{OverlappingSAv} calculates overlapping strength average}¥
+% measure calculation
+g_WU1 = a_WU1.memorize('G'); ¥\circled{1}\circlednote{1}{ memorizes the graphs to ensure consistency if there are measures with non-default rules.}¥
+ovstrength_WU2 = g_WU2.get('MEASURE', 'OverlappingS').get('M'); ¥\circled{2}\circlednote{2}{ calculates the \emph{overlapping strength} measure for the analysis \code{a\_WU1}.}¥
+ovstrength_av_WU2 = g_WU2.get('MEASURE', 'OverlappingSAv').get('M'); ¥\circled{3}\circlednote{3}{ calculates the \emph{overlapping strength average} measure for the analysis \code{a\_WU1}.}¥
 
-g_WU2 = a_WU2.get('G');
-ovstrength_WU2 = g_WU2.get('MEASURE', 'OverlappingS').get('M');¥\circled{2}¥
-ovstrength_av_WU2 = g_WU2.get('MEASURE', 'OverlappingSAv').get('M');¥\circled{3}¥
+g_WU2 = a_WU2.get('G'); ¥\circled{4}\circlednote{4}{ calculates the same measures for the analysis \code{a\_WU2}.}¥
+ovstrength_WU2 = g_WU2.get('MEASURE', 'OverlappingS').get('M');
+ovstrength_av_WU2 = g_WU2.get('MEASURE', 'OverlappingSAv').get('M');
 \end{lstlisting}
 
-
-\clearpage
 \section{Group Comparison}
-The last step is to perform group comparison. \fn{CompareGroup} contains the results of a group-based comparison for a given measure.
+
+The last step is to perform the group comparison. This uses the element \code{CompareGroup} as shown in \Coderef{cd:c}.
+
 Specifically, it contains the one-tailed and two-tailed p-values and the 95\% confidence interval.
+
 \begin{lstlisting}[
-	label=cd:m:degreeav:header,
+	label=cd:c,
 	caption={
-		{\bf Group Subject Data Analysis.}
-		The group data analysis provides code for initialization of group data analysis.
+		{\bf Between-group measure comparison.}
+		The comparison section performs the comparison of the measures between the two groups.
 	}
 ]
 % comparison
-c_WU = CompareGroup( ...¥\circled{1}\circlednote{1}{Creation of group comparison based on previous group analysis.}¥
-    'P', 10, ...
-    'A1', a_WU1, ...
-    'A2', a_WU2, ...
-    'WAITBAR', true, ...
-    'VERBOSE', false, ...
-    'MEMORIZE', true ...
+c_WU = CompareGroup( ...
+    'P', 1000, ... ¥\circled{1}\circlednote{1}{ uses 1000 permutations in the false-discovery-rate (FDR) test.}¥
+    'A1', a_WU1, ... ¥\circled{2}\circlednote{2}{ and \circled{3} define the two analyses to be compared.}¥
+    'A2', a_WU2, ... ¥\circled{3}¥
+    'WAITBAR', true, ... ¥\circled{4}\circlednote{4}{ shows a waitbar during the comparison.}¥
+    'VERBOSE', false, ... ¥\circled{5}\circlednote{5}{ does not print updates during the comparison.}¥
+    'MEMORIZE', true ... ¥\circled{6}\circlednote{6}{ memorizes the intermediate results of the comparison. This speeds up the comparison at the cost of estra memory requirements.}¥
     );
 
-ovstrength_WU_diff = c_WU.get('COMPARISON', 'OverlappingS').get('DIFF');¥\circled{2}\circlednote{2}{\fn{DIFF} calculates the difference of group comparison.}¥
-ovstrength_WU_p1 = c_WU.get('COMPARISON', 'OverlappingS').get('P1');¥\circled{3}\circlednote{3}{\fn{P1}  calculates the one-tailed p-value.}¥
-ovstrength_WU_p2 = c_WU.get('COMPARISON', 'OverlappingS').get('P2');¥\circled{4}\circlednote{4}{\fn{P1} calculates the two-tailed p-value.}¥
-ovstrength_WU_cil = c_WU.get('COMPARISON', 'OverlappingS').get('CIL');¥\circled{5}\circlednote{5}{\fn{CIL} calculates the lower value of the 95\% confidence interval.}¥
-ovstrength_WU_ciu = c_WU.get('COMPARISON', 'OverlappingS').get('CIU');¥\circled{6}\circlednote{6}{\fn{CIU} calculates the upper value of the 95\% confidence interval.}¥
+ovstrength_WU_diff = c_WU.get('COMPARISON', 'OverlappingS').get('DIFF'); ¥\circled{7}\circlednote{7}{---\circled{11} calculate the difference of group comparison (\code{'DIFF'}), the one-tailed p-value (\code{'P1'}), the two-tailed p-value (\code{'P2'}), the lower value of the 95\% confidence interval (\code{'CIL'}), and the upper value of the 95\% confidence interval (\code{'CIU'}) for the overlapping strength measure (\code{'OverlappingS'}).}¥
+ovstrength_WU_p1 = c_WU.get('COMPARISON', 'OverlappingS').get('P1'); ¥\circled{8}¥
+ovstrength_WU_p2 = c_WU.get('COMPARISON', 'OverlappingS').get('P2'); ¥\circled{9}¥
+ovstrength_WU_cil = c_WU.get('COMPARISON', 'OverlappingS').get('CIL'); ¥\circled{10}¥
+ovstrength_WU_ciu = c_WU.get('COMPARISON', 'OverlappingS').get('CIU'); ¥\circled{11}¥
 \end{lstlisting}
-
-
-%%%%% %%%%% %%%%% %%%%% %%%%%
-%\clearpage
-
 
 \end{document}

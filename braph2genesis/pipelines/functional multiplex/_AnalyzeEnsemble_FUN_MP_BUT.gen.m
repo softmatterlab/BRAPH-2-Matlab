@@ -8,6 +8,9 @@ using binary undirected multigraphs with fixed thresholds.
 %%% ¡seealso!
 SubjectFUN_MP, MultiplexBUT
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -97,14 +100,14 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ensemble-based graph analysis with functional multiplex data of fixed threshold.
 %%%% ¡default!
 'AnalyzeEnsemble_FUN_MP_BUT'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the ensemble-based graph analysis with functional multiplex data of fixed threshold.
 %%%% ¡default!
-'AnalyzeEnsemble_FUN_MP_BUT'
+'Multiplex Functional Binary Undirected at fixed Thresholds Analyze Ensemble'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with functional multiplex data of fixed threshold.

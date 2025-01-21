@@ -7,6 +7,9 @@ AnalyzeGroup_ST_WU uses structural data and analyzes them using weighted undirec
 %%% ¡seealso!
 SubjectST, GraphWU
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -60,14 +63,14 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the group-based graph analysis with structural data.
 %%%% ¡default!
 'AnalyzeGroup_ST_WU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the group-based graph analysis with structural data.
 %%%% ¡default!
-'AnalyzeGroup_ST_WU'
+'Structural Weighted Undirected Analyze Group'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the group-based graph analysis with structural data.
@@ -163,11 +166,11 @@ Template for Graphs and Measures
 %%%% ¡probability!
 .01
 %%%% ¡code!
-create_data_ST_XLS() % only creates files if the example folder doesn't already exist
+create_data_ST_TXT() % only creates files if the example folder doesn't already exist
 
 ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST TXT' filesep 'atlas.txt']).get('BA');
-gr1 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST txt' filesep 'ST_Group_1.txt'], 'BA', ba).get('GR');
-gr2 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST txt' filesep 'ST_Group_2.txt'], 'BA', ba).get('GR');
+gr1 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST TXT' filesep 'ST_Group_1.txt'], 'BA', ba).get('GR');
+gr2 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST TXT' filesep 'ST_Group_2.txt'], 'BA', ba).get('GR');
 
 % check that analysis parameters are correclty templated between analysis 1 and 2
 negative_weight_rule = Correlation.ABS;

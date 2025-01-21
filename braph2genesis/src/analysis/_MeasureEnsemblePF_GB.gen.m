@@ -7,6 +7,9 @@ MeasureEnsemblePF_GB manages the basic functionalities to plot of a global bilay
 %%% ¡seealso!
 MeasureEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

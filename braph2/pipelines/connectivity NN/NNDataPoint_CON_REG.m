@@ -15,7 +15,7 @@ classdef NNDataPoint_CON_REG < NNDataPoint
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for a data point for regression with connectivity data.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of a data point for regression with connectivity data.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about a data point for regression with connectivity data.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>INPUT</strong> 	INPUT (result, cell) is the input value for this data point.
 	%  <strong>10</strong> <strong>TARGET</strong> 	TARGET (result, cell) is the target value for this data point.
 	%  <strong>11</strong> <strong>SUB</strong> 	SUB (data, item) is a subject with connectivity data.
@@ -108,6 +108,8 @@ classdef NNDataPoint_CON_REG < NNDataPoint
 	%
 	%
 	% See also SubjectCON.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		SUB = 11; %CET: Computational Efficiency Trick
@@ -139,7 +141,7 @@ classdef NNDataPoint_CON_REG < NNDataPoint
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for a data point for regression with connectivity data.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of a data point for regression with connectivity data.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about a data point for regression with connectivity data.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>INPUT</strong> 	INPUT (result, cell) is the input value for this data point.
 			%  <strong>10</strong> <strong>TARGET</strong> 	TARGET (result, cell) is the target value for this data point.
 			%  <strong>11</strong> <strong>SUB</strong> 	SUB (data, item) is a subject with connectivity data.
@@ -151,6 +153,21 @@ classdef NNDataPoint_CON_REG < NNDataPoint
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the connectivity regression data point.
+			%
+			% BUILD = NNDataPoint_CON_REG.GETBUILD() returns the build of 'NNDataPoint_CON_REG'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = DP.GETBUILD() returns the build of the connectivity regression data point DP.
+			%  BUILD = Element.GETBUILD(DP) returns the build of 'DP'.
+			%  BUILD = Element.GETBUILD('NNDataPoint_CON_REG') returns the build of 'NNDataPoint_CON_REG'.
+			%
+			% Note that the Element.GETBUILD(DP) and Element.GETBUILD('NNDataPoint_CON_REG')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function dp_class = getClass()
 			%GETCLASS returns the class of the connectivity regression data point.
 			%
@@ -473,7 +490,7 @@ classdef NNDataPoint_CON_REG < NNDataPoint
 			prop = NNDataPoint_CON_REG.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nndatapoint_con_reg_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of a data point for regression with connectivity data.'  'DESCRIPTION (constant, string) is the description of a data point for regression with connectivity data.'  'TEMPLATE (parameter, item) is the template of a data point for regression with connectivity data.'  'ID (data, string) is a few-letter code for a data point for regression with connectivity data.'  'LABEL (metadata, string) is an extended label of a data point for regression with connectivity data.'  'NOTES (metadata, string) are some specific notes about a data point for regression with connectivity data.'  'TOSTRING (query, string) returns a string that represents the object.'  'INPUT (result, cell) is the input value for this data point.'  'TARGET (result, cell) is the target value for this data point.'  'SUB (data, item) is a subject with connectivity data.'  'TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as regression targets.' };
+			nndatapoint_con_reg_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of a data point for regression with connectivity data.'  'DESCRIPTION (constant, string) is the description of a data point for regression with connectivity data.'  'TEMPLATE (parameter, item) is the template of a data point for regression with connectivity data.'  'ID (data, string) is a few-letter code for a data point for regression with connectivity data.'  'LABEL (metadata, string) is an extended label of a data point for regression with connectivity data.'  'NOTES (metadata, string) are some specific notes about a data point for regression with connectivity data.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'INPUT (result, cell) is the input value for this data point.'  'TARGET (result, cell) is the target value for this data point.'  'SUB (data, item) is a subject with connectivity data.'  'TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as regression targets.' };
 			prop_description = nndatapoint_con_reg_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -539,7 +556,7 @@ classdef NNDataPoint_CON_REG < NNDataPoint
 				case 1 % NNDataPoint_CON_REG.ELCLASS
 					prop_default = 'NNDataPoint_CON_REG';
 				case 2 % NNDataPoint_CON_REG.NAME
-					prop_default = 'NNDataPoint_CON_REG';
+					prop_default = 'Neural Network Connectivity Data Point Regression';
 				case 3 % NNDataPoint_CON_REG.DESCRIPTION
 					prop_default = 'A data point for regression with connectivity data (NNDataPoint_CON_REG) contains the input and target for neural network analysis with a subject with connectivity data (SubjectCON). The input is the connectivity data of the subject. The target is obtained from the variables of interest of the subject.';
 				case 4 % NNDataPoint_CON_REG.TEMPLATE

@@ -8,6 +8,9 @@ It works for all categories.
 %%% ¡seealso!
 uicheckbox, GUI, PanelElement
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

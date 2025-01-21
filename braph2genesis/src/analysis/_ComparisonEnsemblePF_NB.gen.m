@@ -7,6 +7,9 @@ ComparisonEnsemblePF_NB manages the basic functionalities to plot of a nodal bil
 %%% ¡seealso!
 ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

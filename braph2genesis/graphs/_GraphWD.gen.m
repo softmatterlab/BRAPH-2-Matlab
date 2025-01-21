@@ -2,8 +2,11 @@
 GraphWD < Graph (g, weighted directed graph) is a weighted directed graph.
 
 %%% ¡description!
-In a weighted directed (WD) graph, the edges are directed and associated 
+In a weighted directed graph (GraphWD), the edges are directed and associated 
  with a real number between 0 and 1 indicating the strength of the connection.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -100,14 +103,14 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the weighted directed graph.
 %%%% ¡default!
 'GraphWD'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the weighted directed graph.
 %%%% ¡default!
-'GraphWD'
+'Graph Weighted Directed'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the weighted undirected graph.

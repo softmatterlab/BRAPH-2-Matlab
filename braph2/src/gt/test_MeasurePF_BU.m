@@ -14,7 +14,21 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 			'MeasurePF_BU().get(''ELCLASS'') should return ''MeasurePF_BU''.')
 	end
 	 
-	% getClass
+	% getBuild()
+	assert(MeasurePF_BU.getBuild() == 1 && MeasurePF_BU.getBuild() > 0, ...
+		[BRAPH2.STR ':MeasurePF_BU:' BRAPH2.FAIL_TEST], ...
+		'MeasurePF_BU.getBuild() should return the MeasurePF_BU build number.')
+	assert(pf.getBuild() == 1 && pf.getBuild() > 0 , ...
+		[BRAPH2.STR ':MeasurePF_BU:' BRAPH2.FAIL_TEST], ...
+		'pf.getBuild() should return the MeasurePF_BU build number.')
+	assert(Element.getBuild(pf) == 1 && Element.getBuild(pf) > 0, ...
+		[BRAPH2.STR ':MeasurePF_BU:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(pf) should return the MeasurePF_BU build number.')
+	assert(Element.getBuild('MeasurePF_BU') == 1 && Element.getBuild('MeasurePF_BU') > 0, ...
+		[BRAPH2.STR ':MeasurePF_BU:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(''MeasurePF_BU'') should return the MeasurePF_BU build number.')
+	 
+	% getClass()
 	assert(strcmp(MeasurePF_BU.getClass(), 'MeasurePF_BU'), ...
 		[BRAPH2.STR ':MeasurePF_BU:' BRAPH2.FAIL_TEST], ...
 		'MeasurePF_BU.getClass() should return ''MeasurePF_BU''.')
@@ -493,7 +507,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:MeasurePF_BU.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL])
+		if any(prop == [MeasurePF_BU.SETUP MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL])
 			continue
 		end
 	 
@@ -639,7 +653,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:MeasurePF_BU.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL])
+		if any(prop == [MeasurePF_BU.SETUP MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL])
 			continue
 		end
 	 
@@ -742,7 +756,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		for prop = 1:1:MeasurePF_BU.getPropNumber()
 	 
 			% excluded props
-			if any(prop == [MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL])
+			if any(prop == [MeasurePF_BU.SETUP MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL])
 				continue
 			end
 	 
@@ -1542,7 +1556,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:MeasurePF_BU.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL])
+		if any(prop == [MeasurePF_BU.SETUP MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL])
 			continue
 		end
 	 

@@ -4,6 +4,9 @@ PathLengthOutAv < PathLengthOut (m, average out-path length) is the graph Averag
 %%% ¡description!
 The Average Out-Path Length (PathLengthOutAv) is the average shortest out-path lengths of one node to all other nodes within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -120,6 +123,8 @@ L = g.get('LAYERNUMBER');
 out_path_length = calculateValue@PathLengthOut(m, prop);
 out_path_length_av = cell(L, 1);
 path_length_rule = m.get('RULE');
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:length(out_path_length_av)
     switch lower(path_length_rule)
         case {'subgraphs'}
@@ -131,6 +136,8 @@ parfor li = 1:1:length(out_path_length_av)
             out_path_length_av(li) = {harmmean(out_path_length{li})};
     end
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = out_path_length_av;
 
 %% ¡tests!

@@ -21,17 +21,20 @@ The variables of interest are from another TXT file named "GROUP_ID.vois.txt"
 %%% ¡seealso!
 Group, SubjectST_MP, ExporterGroupSubjectST_MP_TXT
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ST MP subject group importer from TXT.
 %%%% ¡default!
 'ImporterGroupSubjectST_MP_TXT'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the ST MP subject group importer from TXT.
 %%%% ¡default!
-'ImporterGroupSubjectST_MP_TXT'
+'Multiplex Structural Subject Group TXT Importer'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ST MP subject group importer from TXT.

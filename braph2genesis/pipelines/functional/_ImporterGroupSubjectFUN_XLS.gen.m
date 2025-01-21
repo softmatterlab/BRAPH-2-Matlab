@@ -16,17 +16,20 @@ The variables of interest are from another XLS/XLSX file named "GROUP_ID.vois.xl
 %%% ¡seealso!
 Group, SubjectFUN, ExporterGroupSubjectFUN_XLS
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the FUN subject group importer from XLS/XLSX.
 %%%% ¡default!
 'ImporterGroupSubjectFUN_XLS'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the FUN subject group importer from XLS/XLSX.
 %%%% ¡default!
-'ImporterGroupSubjectFUN_XLS'
+'Functional Subject Group XLS Importer'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the FUN subject group importer from XLS/XLSX.

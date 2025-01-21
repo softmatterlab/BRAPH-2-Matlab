@@ -2,9 +2,12 @@
 GraphBU < Graph (g, binary undirected graph) is a binary undirected graph.
 
 %%% ¡description!
-In a binary undirected (BU) graph, the edges are undirected and can be 
+In a binary undirected graph (GraphBU) , the edges are undirected and can be 
  either 0 (absence of connection) or 1 (existence of connection).
 The connectivity matrix is symmetric.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -95,19 +98,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the binary undirected graph.
 %%%% ¡default!
 'GraphBU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the binary undirected graph.
 %%%% ¡default!
-'GraphBU'
+'Graph Binary Undirected'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the binary undirected graph.
 %%%% ¡default!
-'In a binary undirected (BU) graph, the edges are undirected and can be either 0 (absence of connection) or 1 (existence of connection). The connectivity matrix is symmetric.'
+'In a binary undirected graph (GraphBU), the edges are undirected and can be either 0 (absence of connection) or 1 (existence of connection). The connectivity matrix is symmetric.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the binary undirected graph.

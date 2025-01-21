@@ -8,6 +8,9 @@ It works for all categories.
 %%% ¡seealso!
 uibutton, GUI, PanelElement, PanelProp
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -161,7 +164,7 @@ function cb_button(~, ~)
         title = ['About Network Visualization Windows'];
         
         message = {''
-            ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use doubl slashes to avoid genesis problem
+            ['{\\bf\\color{orange}' BRAPH2.STR '}'] % note to use double slashes to avoid genesis problem
             ['{\\color{gray}version ' BRAPH2.VERSION '}']
             ['{\\color{gray}build ' int2str(BRAPH2.BUILD) '}']
             ''

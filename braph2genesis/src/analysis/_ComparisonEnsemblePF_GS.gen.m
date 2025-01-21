@@ -7,6 +7,9 @@ ComparisonEnsemblePF_GS manages the basic functionalities to plot of a global su
 %%% ¡seealso!
 ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -184,7 +187,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonEnsemblePF_GS.PARENT ComparisonEnsemblePF_GS.H ComparisonEnsemblePF_GS.ST_POSITION ComparisonEnsemblePF_GS.ST_AXIS ComparisonEnsemblePF_GS.ST_AREA ComparisonEnsemblePF_GS.ST_LINE_DIFF ComparisonEnsemblePF_GS.ST_LINE_CIL ComparisonEnsemblePF_GS.ST_LINE_CIU ComparisonEnsemblePF_GS.ST_TITLE ComparisonEnsemblePF_GS.ST_XLABEL ComparisonEnsemblePF_GS.ST_YLABEL] 
+[ComparisonEnsemblePF_GS.PARENT ComparisonEnsemblePF_GS.H ComparisonEnsemblePF_GS.ST_POSITION ComparisonEnsemblePF_GS.ST_AXIS ComparisonEnsemblePF_GS.CP ComparisonEnsemblePF_GS.ST_AREA ComparisonEnsemblePF_GS.ST_LINE_DIFF ComparisonEnsemblePF_GS.ST_LINE_CIL ComparisonEnsemblePF_GS.ST_LINE_CIU ComparisonEnsemblePF_GS.ST_TITLE ComparisonEnsemblePF_GS.ST_XLABEL ComparisonEnsemblePF_GS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

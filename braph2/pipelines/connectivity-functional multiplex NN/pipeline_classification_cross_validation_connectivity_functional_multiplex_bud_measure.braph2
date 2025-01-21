@@ -9,8 +9,8 @@
 % 3. It analyzes these groups using connectivity-functional analyses (CON-FUN) based on binary undirected multiplex at fix densities (MultiplexBUD).
 % 4. It executes the cross-validation process.
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_nn_clas_con_fun_mp_bud_m_xval/tut_nn_clas_con_fun_mp_bud_m_xval.pdf
+% README: /tutorials/pipelines/tut_nn_clas_con_fun_mp_bud_m_xval/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
@@ -18,22 +18,24 @@ ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a 
 %% Connectivity Groups
 gr1_CON = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 1 from XLS % Group CON 1
 gr2_CON = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 2 from XLS % Group CON 2
-gr3_CON = ImporterGroupSubjectCON_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group CON 3 from XLS % Group CON 3
 
 %% Functional Groups
 gr1_FUN = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN 1 from XLS % Group FUN 1
 gr2_FUN = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN 2 from XLS % Group FUN 2
-gr3_FUN = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN 3 from XLS % Group FUN 3
 
 %% Group Combination
 gr1 = CombineGroups_CON_FUN_MP('GR_CON', gr1_CON, 'GR_FUN', gr1_FUN, 'WAITBAR', true).get('GR_CON_FUN_MP'); % Combine Groups 1 % Group CON-FUN_MP 1
 gr2 = CombineGroups_CON_FUN_MP('GR_CON', gr2_CON, 'GR_FUN', gr2_FUN, 'WAITBAR', true).get('GR_CON_FUN_MP'); % Combine Groups 2 % Group CON-FUN_MP 2
-gr3 = CombineGroups_CON_FUN_MP('GR_CON', gr3_CON, 'GR_FUN', gr3_FUN, 'WAITBAR', true).get('GR_CON_FUN_MP'); % Combine Groups 3 % Group CON-FUN_MP 3
 
 %% Analysis
 a_BUD1 = AnalyzeEnsemble_CON_FUN_MP_BUD('GR', gr1, 'DENSITIES', 1:1:2); % Analyze Group 1 % Group 1 Analysis
 a_BUD2 = AnalyzeEnsemble_CON_FUN_MP_BUD('GR', gr2, 'TEMPLATE', a_BUD1); % Analyze Group 2 % Group 2 Analysis
-a_BUD3 = AnalyzeEnsemble_CON_FUN_MP_BUD('GR', gr3, 'TEMPLATE', a_BUD1); % Analyze Group 3 % Group 3 Analysis
 
 %% Cross-Validation
-nncv = NNClassifierMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_Measure_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Measure_CLA', 'IT_LIST', cellfun(@(g, sub) NNDataPoint_Measure_CLA('ID', g.get('ID'), 'G', g, 'M_LIST', a_BUD1.get('ME_DICT').get('KEYS'), 'TARGET_IDS', {gr1.get('ID')}), a_BUD1.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Measure_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Measure_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Measure_CLA('ID', g.get('ID'), 'G', g, 'M_LIST', a_BUD2.get('ME_DICT').get('KEYS'), 'TARGET_IDS', {gr2.get('ID')}), a_BUD2.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Measure_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Measure_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Measure_CLA('ID', g.get('ID'), 'G', g, 'M_LIST', a_BUD3.get('ME_DICT').get('KEYS'), 'TARGET_IDS', {gr3.get('ID')}), a_BUD3.get('G_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process
+nncv = NNClassifierMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_Measure_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Measure_CLA', 'IT_LIST', cellfun(@(g, sub) NNDataPoint_Measure_CLA('ID', g.get('ID'), 'G', g, 'M_LIST', a_BUD1.get('ME_DICT').get('KEYS'), 'TARGET_CLASS', {gr1.get('ID')}), a_BUD1.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Measure_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Measure_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Measure_CLA('ID', g.get('ID'), 'G', g, 'M_LIST', a_BUD2.get('ME_DICT').get('KEYS'), 'TARGET_CLASS', {gr2.get('ID')}), a_BUD2.get('G_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process
+
+%% Measure Importance
+nnfi = NNxMLP_FeatureImportanceAcrossMeasures_CV('NNCV', nncv, 'FI_TEMPLATE', NNxMLP_FeatureImportanceAcrossMeasures()); % Measure Importance % Measure Importance
+
+%% Brain Region Importance
+nnfi = NNxMLP_FeatureImportanceBrainSurface_CV('BA', ba, 'NNCV', nncv, 'FI_TEMPLATE', NNxMLP_FeatureImportanceBrainSurface()); % Brain Region Importance % Brain Region Importance

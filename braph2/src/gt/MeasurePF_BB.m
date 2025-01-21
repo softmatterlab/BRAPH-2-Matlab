@@ -1,18 +1,18 @@
 classdef MeasurePF_BB < MeasurePF
-	%MeasurePF_BB is the base element to plot a binodal bilayer measure.
+	%MeasurePF_BB is the base element to plot the panel figure of a binodal bilayer measure.
 	% It is a subclass of <a href="matlab:help MeasurePF">MeasurePF</a>.
 	%
-	% A Panel Figure for Binodal Bilayer Measure (MeasurePF_BB) manages the basic functionalities to plot of a binodal bilayer measure.
+	% A Panel Figure for Binodal Bilayer Measure (MeasurePF_BB) manages the basic functionalities to plot the panel figure of a binodal bilayer measure.
 	%
 	% The list of MeasurePF_BB properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel figure for binodal bilayer measure.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel figure for binodal bilayer measure (MeasurePF_BB).
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel figure for binodal bilayer measure.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel figure for binodal bilayer measure.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel figure for binodal bilayer measure.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel figure for binodal bilayer measure.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel figure for binodal bilayer measure.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel figure for binodal bilayer measure.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
 	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the figure measure.
@@ -133,6 +133,8 @@ classdef MeasurePF_BB < MeasurePF
 	%
 	%
 	% See also Measure.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		NODES = 40; %CET: Computational Efficiency Trick
@@ -152,14 +154,14 @@ classdef MeasurePF_BB < MeasurePF
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of MeasurePF_BB properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel figure for binodal bilayer measure.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel figure for binodal bilayer measure (MeasurePF_BB).
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel figure for binodal bilayer measure.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel figure for binodal bilayer measure.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel figure for binodal bilayer measure.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel figure for binodal bilayer measure.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel figure for binodal bilayer measure.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel figure for binodal bilayer measure.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
 			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the figure measure.
@@ -199,6 +201,21 @@ classdef MeasurePF_BB < MeasurePF
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the panel figure for binodal bilayer measure.
+			%
+			% BUILD = MeasurePF_BB.GETBUILD() returns the build of 'MeasurePF_BB'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PF.GETBUILD() returns the build of the panel figure for binodal bilayer measure PF.
+			%  BUILD = Element.GETBUILD(PF) returns the build of 'PF'.
+			%  BUILD = Element.GETBUILD('MeasurePF_BB') returns the build of 'MeasurePF_BB'.
+			%
+			% Note that the Element.GETBUILD(PF) and Element.GETBUILD('MeasurePF_BB')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pf_class = getClass()
 			%GETCLASS returns the class of the panel figure for binodal bilayer measure.
 			%
@@ -529,7 +546,7 @@ classdef MeasurePF_BB < MeasurePF
 			prop = MeasurePF_BB.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			measurepf_bb_description_list = { 'ELCLASS (constant, string) is the class of the panel figure for binodal bilayer measure.'  'NAME (constant, string) is the name of the panel figure for binodal bilayer measure.'  'DESCRIPTION (constant, string) is the description of the panel figure for binodal bilayer measure.'  'TEMPLATE (parameter, item) is the template of the panel figure for binodal bilayer measure.'  'ID (data, string) is a few-letter code for the panel figure for binodal bilayer measure.'  'LABEL (metadata, string) is an extended label of the panel figure for binodal bilayer measure.'  'NOTES (metadata, string) are some specific notes about the panel figure for binodal bilayer measure.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure measure.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure graph is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'M (metadata, item) is the measure.'  'SETUP (query, empty) calculates the measure value and stores it.'  'H_AREA (evanescent, handle) is the handle for the measure area.'  'ST_AREA (figure, item) determines the area settings.'  'LISTENER_ST_AREA (evanescent, handle) contains the listener to the measure area settings to update the pushbutton.'  'H_LINE (evanescent, handle) is the handle for the measure line.'  'ST_LINE (figure, item) determines the line settings.'  'LISTENER_ST_LINE (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.'  'H_TITLE (evanescent, handle) is the axis title.'  'ST_TITLE (figure, item) determines the title settings.'  'H_XLABEL (evanescent, handle) is the axis x-label.'  'ST_XLABEL (figure, item) determines the x-label settings.'  'H_YLABEL (evanescent, handle) is the axis y-label.'  'ST_YLABEL (figure, item) determines the y-label settings.'  'NODES (figure, rvector) are the node numbers of the binodal measure.' };
+			measurepf_bb_description_list = { 'ELCLASS (constant, string) is the class of the panel figure for binodal bilayer measure (MeasurePF_BB).'  'NAME (constant, string) is the name of the panel figure for binodal bilayer measure.'  'DESCRIPTION (constant, string) is the description of the panel figure for binodal bilayer measure.'  'TEMPLATE (parameter, item) is the template of the panel figure for binodal bilayer measure.'  'ID (data, string) is a few-letter code for the panel figure for binodal bilayer measure.'  'LABEL (metadata, string) is an extended label of the panel figure for binodal bilayer measure.'  'NOTES (metadata, string) are some specific notes about the panel figure for binodal bilayer measure.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure measure.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure graph is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'M (metadata, item) is the measure.'  'SETUP (query, empty) calculates the measure value and stores it.'  'H_AREA (evanescent, handle) is the handle for the measure area.'  'ST_AREA (figure, item) determines the area settings.'  'LISTENER_ST_AREA (evanescent, handle) contains the listener to the measure area settings to update the pushbutton.'  'H_LINE (evanescent, handle) is the handle for the measure line.'  'ST_LINE (figure, item) determines the line settings.'  'LISTENER_ST_LINE (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.'  'H_TITLE (evanescent, handle) is the axis title.'  'ST_TITLE (figure, item) determines the title settings.'  'H_XLABEL (evanescent, handle) is the axis x-label.'  'ST_XLABEL (figure, item) determines the x-label settings.'  'H_YLABEL (evanescent, handle) is the axis y-label.'  'ST_YLABEL (figure, item) determines the y-label settings.'  'NODES (figure, rvector) are the node numbers of the binodal measure.' };
 			prop_description = measurepf_bb_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -593,7 +610,7 @@ classdef MeasurePF_BB < MeasurePF
 				case 2 % MeasurePF_BB.NAME
 					prop_default = 'Panel Figure for Binodal Bilayer Measure';
 				case 3 % MeasurePF_BB.DESCRIPTION
-					prop_default = 'A Panel Figure for Binodal Bilayer Measure (MeasurePF_BB) manages the basic functionalities to plot of a binodal bilayer measure.';
+					prop_default = 'A Panel Figure for Binodal Bilayer Measure (MeasurePF_BB) manages the basic functionalities to plot the panel figure of a binodal bilayer measure.';
 				case 4 % MeasurePF_BB.TEMPLATE
 					prop_default = Format.getFormatDefault(8, MeasurePF_BB.getPropSettings(prop));
 				case 5 % MeasurePF_BB.ID

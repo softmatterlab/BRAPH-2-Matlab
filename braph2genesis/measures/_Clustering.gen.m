@@ -7,6 +7,9 @@ around a node. The clustering coefficient is calculated as the ratio between
 the number of triangles present around a node and the maximum number of 
 triangles that could possibly be formed around that node.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -125,7 +128,8 @@ triangles = calculateValue@Triangles(m, prop);
 
 clustering = cell(L, 1);
 directionality_type =   g.get('DIRECTIONALITY_TYPE', L);
-            
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     Aii = A{li, li};
     if directionality_type == Graph.UNDIRECTED              
@@ -152,6 +156,7 @@ parfor li = 1:1:L
     clustering_layer(isnan(clustering_layer)) = 0;  % Should return zeros, not NaN
     clustering(li) = {clustering_layer};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = clustering;
 

@@ -11,6 +11,9 @@ The brain atlas and variables of interest are copied from the SubjectCON group.
 %%% ¡seealso!
 SubjectCON_FUN_MP, SubjectCON, SubjectFUN, SeparateGroups_CON_FUN
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -21,7 +24,7 @@ ELCLASS (constant, string) is the class of the combiner of CON and FUN subject g
 %%% ¡prop!
 NAME (constant, string) is the name of the combiner of CON and FUN subject groups.
 %%%% ¡default!
-'CombineGroups_CON_FUN_MP'
+'Multiplex Connectivity-Functional Group Combiner'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the combiner of CON and FUN subject groups.
@@ -147,14 +150,14 @@ im_ba = ImporterBrainAtlasXLS('FILE', [fileparts(which('SubjectCON_FUN_MP')) fil
 ba = im_ba.get('BA');
 
 im_gr_CON = ImporterGroupSubjectCON_XLS( ...
-    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'Connectivity' filesep 'CON_Group1_XLS'], ...
+    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.CON'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
 gr_CON = im_gr_CON.get('GR');
 
 im_gr_FUN = ImporterGroupSubjectFUN_XLS( ...
-    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'Functional' filesep 'FUN_Group1_XLS'], ...
+    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.FUN'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );

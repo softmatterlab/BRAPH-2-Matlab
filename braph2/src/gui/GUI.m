@@ -33,7 +33,7 @@ classdef GUI < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graphical user interface.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graphical user interface.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graphical user interface.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
 	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
@@ -143,6 +143,8 @@ classdef GUI < ConcreteElement
 	%
 	%
 	% See also uifigure, GUIElement, GUIFig.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -269,7 +271,7 @@ classdef GUI < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graphical user interface.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graphical user interface.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graphical user interface.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
 			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
@@ -298,6 +300,21 @@ classdef GUI < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graphical user interface.
+			%
+			% BUILD = GUI.GETBUILD() returns the build of 'GUI'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = GUI.GETBUILD() returns the build of the graphical user interface GUI.
+			%  BUILD = Element.GETBUILD(GUI) returns the build of 'GUI'.
+			%  BUILD = Element.GETBUILD('GUI') returns the build of 'GUI'.
+			%
+			% Note that the Element.GETBUILD(GUI) and Element.GETBUILD('GUI')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function gui_class = getClass()
 			%GETCLASS returns the class of the graphical user interface.
 			%
@@ -624,7 +641,7 @@ classdef GUI < ConcreteElement
 			prop = GUI.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			gui_description_list = { 'ELCLASS (constant, string) is the class of the graphical user interface.'  'NAME (constant, string) is the name of the graphical user interface.'  'DESCRIPTION (constant, string) is the description of the graphical user interface.'  'TEMPLATE (parameter, item) is the template of the graphical user interface.'  'ID (data, string) is a few-letter code for the graphical user interface.'  'LABEL (metadata, string) is an extended label of the graphical user interface.'  'NOTES (metadata, string) are some specific notes about the graphical user interface.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar [set before DRAW].'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about [set before DRAW].'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar [set before DRAW].'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons [set before DRAW].'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates POSITION when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.' };
+			gui_description_list = { 'ELCLASS (constant, string) is the class of the graphical user interface.'  'NAME (constant, string) is the name of the graphical user interface.'  'DESCRIPTION (constant, string) is the description of the graphical user interface.'  'TEMPLATE (parameter, item) is the template of the graphical user interface.'  'ID (data, string) is a few-letter code for the graphical user interface.'  'LABEL (metadata, string) is an extended label of the graphical user interface.'  'NOTES (metadata, string) are some specific notes about the graphical user interface.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar [set before DRAW].'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about [set before DRAW].'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar [set before DRAW].'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons [set before DRAW].'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates POSITION when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.' };
 			prop_description = gui_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -1007,9 +1024,9 @@ classdef GUI < ConcreteElement
 					    'Label', 'Forums ...', ...
 					    'Callback', 'BRAPH2.forum()')
 					uimenu(menu_about, ...
-					    'Tag', 'MENU.About.Twitter', ...
-					    'Label', 'Twitter ...', ...
-					    'Callback', 'BRAPH2.twitter()')
+					    'Tag', 'MENU.About.Bluesky', ...
+					    'Label', 'Bluesky ...', ...
+					    'Callback', 'BRAPH2.bluesky()')
 					uimenu(menu_about, ...
 					    'Tag', 'MENU.About.License', ...
 					    'Label', 'License ...', ...
@@ -1048,13 +1065,13 @@ classdef GUI < ConcreteElement
 					        'CData', imread('icon_forum.png'), ...
 					        'ClickedCallback', 'BRAPH2.forum()');
 					
-					    % Twitter
-					    tool_about_twitter = uipushtool(toolbar, ...
-					        'Tag', 'BRAPH2.Twitter', ...                
+					    % Bluesky
+					    tool_about_bluesky = uipushtool(toolbar, ...
+					        'Tag', 'BRAPH2.Bluesky', ...                
 					        'Separator', 'off', ...
-					        'Tooltip', 'Link to the BRAPH 2.0 Twitter', ...
-					        'CData', imread('icon_twitter.png'), ...
-					        'ClickedCallback', 'BRAPH2.twitter()');
+					        'Tooltip', 'Link to the BRAPH 2 Bluesky', ...
+					        'CData', imread('icon_bluesky.png'), ...
+					        'ClickedCallback', 'BRAPH2.bluesky()');
 					
 					    tool_spacer_2 = uipushtool(toolbar, 'Separator', 'on', 'Visible', 'off');
 					
@@ -1074,7 +1091,7 @@ classdef GUI < ConcreteElement
 					        'CData', imread('icon_about.png'), ...
 					        'ClickedCallback', 'BRAPH2.credits()');
 					    
-					    value = {value{:}, tool_spacer_1, tool_about_web, tool_about_forum, tool_about_twitter, tool_spacer_2, tool_about_license, tool_about_credits};
+					    value = {value{:}, tool_spacer_1, tool_about_web, tool_about_forum, tool_about_bluesky, tool_spacer_2, tool_about_license, tool_about_credits};
 					end
 					
 				case 24 % GUI.H

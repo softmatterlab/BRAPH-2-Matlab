@@ -7,6 +7,9 @@ ComparisonEnsemblePF_BU manages the basic functionalities to plot of a binodal u
 %%% ¡seealso!
 ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

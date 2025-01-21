@@ -1,5 +1,5 @@
 classdef PanelProp < Panel
-	%PanelProp is a prop panel.
+	%PanelProp is a property panel.
 	% It is a subclass of <a href="matlab:help Panel">Panel</a>.
 	%
 	% A Prop Panel (PanelProp) renders a property of an element in a panel. 
@@ -45,17 +45,17 @@ classdef PanelProp < Panel
 	%     pn.get('<strong>CLOSE</strong>') - closes the figure containing the panel.
 	%
 	% The list of PanelProp properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the prop panel.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the prop panel.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the prop panel.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the prop panel.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the prop panel.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the prop panel.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the prop panel.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the property panel.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the property panel.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the property panel.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the property panel.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the property panel.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the property panel.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the property panel.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
 	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -168,6 +168,8 @@ classdef PanelProp < Panel
 	%
 	%
 	% See also uipanel, uilabel, uibutton, GUI, GUIElement, PanelElement.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		X_DRAW = 20; %CET: Computational Efficiency Trick
@@ -262,17 +264,17 @@ classdef PanelProp < Panel
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of PanelProp properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the prop panel.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the prop panel.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the prop panel.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the prop panel.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the prop panel.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the prop panel.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the prop panel.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the property panel.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the property panel.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the property panel.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the property panel.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the property panel.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the property panel.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the property panel.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
 			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -304,6 +306,21 @@ classdef PanelProp < Panel
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the prop panel.
+			%
+			% BUILD = PanelProp.GETBUILD() returns the build of 'PanelProp'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PR.GETBUILD() returns the build of the prop panel PR.
+			%  BUILD = Element.GETBUILD(PR) returns the build of 'PR'.
+			%  BUILD = Element.GETBUILD('PanelProp') returns the build of 'PanelProp'.
+			%
+			% Note that the Element.GETBUILD(PR) and Element.GETBUILD('PanelProp')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pr_class = getClass()
 			%GETCLASS returns the class of the prop panel.
 			%
@@ -334,7 +351,7 @@ classdef PanelProp < Panel
 			%
 			% See also subclasses.
 			
-			subclass_list = { 'PanelProp'  'NNxMLP_xPP_FI_Data'  'NNxMLP_xPP_FI_Graph'  'NNxMLP_xPP_FI_Measure'  'AnalyzeEnsemblePP_GDict'  'AnalyzeEnsemblePP_MeDict'  'AnalyzeGroupPP_G'  'CompareEnsemblePP_CpDict'  'CompareGroupPP_CpDict'  'ComparisonEnsembleBrainPF_xSPP_Layer'  'ComparisonEnsembleBrainPF_xUPP_Layer'  'ComparisonEnsemblePF_BxPP_Nodes'  'ComparisonEnsemblePF_NxPP_Node'  'ComparisonEnsemblePF_xUPP_Layer'  'ComparisonGroupBrainPF_xSPP_Layer'  'ComparisonGroupBrainPF_xUPP_Layer'  'ComparisonGroupPF_BxPP_Nodes'  'ComparisonGroupPF_NxPP_Node'  'ComparisonGroupPF_xUPP_Layer'  'MeasureEnsembleBrainPF_xSPP_Layer'  'MeasureEnsembleBrainPF_xUPP_Layer'  'MeasureEnsemblePF_BxPP_Nodes'  'MeasureEnsemblePF_NxPP_Node'  'MeasureEnsemblePF_xUPP_Layer'  'MeasureGroupBrainPF_xSPP_Layer'  'MeasureGroupBrainPF_xUPP_Layer'  'SubjectPP_VOIDict'  'GraphPP_MDict'  'LayersPP'  'MeasurePF_BxPP_Nodes'  'MeasurePF_NxPP_Node'  'MeasurePF_xUPP_Layer'  'PanelPropAlpha'  'PanelPropCell'  'PanelPropClass'  'PanelPropClassList'  'PanelPropColor'  'PanelPropIDict'  'PanelPropIDictTable'  'PanelPropItem'  'PanelPropItemList'  'PanelPropLine'  'PanelPropLogical'  'PanelPropMarker'  'PanelPropMatrix'  'PanelPropNet'  'PanelPropOption'  'PanelPropRVectorSmart'  'PanelPropRVectorView'  'PanelPropScalar'  'PanelPropSize'  'PanelPropString'  'PanelPropStringList'  'PanelPropStringTextArea'  'PipelinePP_Notes'  'PipelinePP_PSDict'  'SettingsAmbientPP'  'SettingsAreaPP'  'SettingsAxisPP'  'SettingsLinePP'  'SettingsPP'  'SettingsPositionPP'  'SettingsSurfacePP'  'SettingsTextPP' }; %CET: Computational Efficiency Trick
+			subclass_list = { 'PanelProp'  'NNxMLP_FeatureImportanceBSPF_xSPP_Layer'  'NNxMLP_FeatureImportanceBSPF_xUPP_Layer'  'NNxMLP_FeatureImportanceBrainSurfacePP_Data'  'NNxMLP_FeatureImportanceBrainSurfacePP_Graph'  'NNxMLP_FeatureImportanceBrainSurfacePP_Measure'  'AnalyzeEnsemblePP_GDict'  'AnalyzeEnsemblePP_MeDict'  'AnalyzeGroupPP_G'  'CompareEnsemblePP_CpDict'  'CompareGroupPP_CpDict'  'ComparisonEnsembleBrainPF_xSPP_Layer'  'ComparisonEnsembleBrainPF_xUPP_Layer'  'ComparisonEnsemblePF_BxPP_Nodes'  'ComparisonEnsemblePF_NxPP_Node'  'ComparisonEnsemblePF_xUPP_Layer'  'ComparisonGroupBrainPF_xSPP_Layer'  'ComparisonGroupBrainPF_xUPP_Layer'  'ComparisonGroupPF_BxPP_Nodes'  'ComparisonGroupPF_NxPP_Node'  'ComparisonGroupPF_xUPP_Layer'  'MeasureEnsembleBrainPF_xSPP_Layer'  'MeasureEnsembleBrainPF_xUPP_Layer'  'MeasureEnsemblePF_BxPP_Nodes'  'MeasureEnsemblePF_NxPP_Node'  'MeasureEnsemblePF_xUPP_Layer'  'MeasureGroupBrainPF_xSPP_Layer'  'MeasureGroupBrainPF_xUPP_Layer'  'MeasureGroupBrainPF_xUPP_Module'  'PanelPropCellFDR'  'SubjectPP_VOIDict'  'GraphPP_MDict'  'LayersPP'  'MeasurePF_BxPP_Nodes'  'MeasurePF_NxPP_Node'  'MeasurePF_xUPP_Layer'  'PanelPropAlpha'  'PanelPropCell'  'PanelPropClass'  'PanelPropClassList'  'PanelPropColor'  'PanelPropIDict'  'PanelPropIDictTable'  'PanelPropItem'  'PanelPropItemList'  'PanelPropLine'  'PanelPropLogical'  'PanelPropMarker'  'PanelPropMatrix'  'PanelPropNet'  'PanelPropOption'  'PanelPropRVectorSmart'  'PanelPropRVectorView'  'PanelPropScalar'  'PanelPropSize'  'PanelPropString'  'PanelPropStringList'  'PanelPropStringTextArea'  'PipelinePP_Notes'  'PipelinePP_PSDict'  'SettingsAmbientPP'  'SettingsAreaPP'  'SettingsAxisPP'  'SettingsLinePP'  'SettingsPP'  'SettingsPositionPP'  'SettingsSurfacePP'  'SettingsTextPP' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
 			%GETPROPS returns the property list of prop panel.
@@ -634,7 +651,7 @@ classdef PanelProp < Panel
 			prop = PanelProp.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelprop_description_list = { 'ELCLASS (constant, string) is the class of the prop panel.'  'NAME (constant, string) is the name of the prop panel.'  'DESCRIPTION (constant, string) is the description of the prop panel.'  'TEMPLATE (parameter, item) is the template of the prop panel.'  'ID (data, string) is a few-letter code for the prop panel.'  'LABEL (metadata, string) is an extended label of the prop panel.'  'NOTES (metadata, string) are some specific notes about the prop panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the graphical objects of the prop panel [to be implemented in subelements].'  'UPDATE (query, logical) updates the content of the prop panel and its graphical objects.'  'REDRAW (query, logical) resizes the prop panel and repositions its graphical objects [accept Width-value pair].'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.' };
+			panelprop_description_list = { 'ELCLASS (constant, string) is the class of the property panel.'  'NAME (constant, string) is the name of the property panel.'  'DESCRIPTION (constant, string) is the description of the property panel.'  'TEMPLATE (parameter, item) is the template of the property panel.'  'ID (data, string) is a few-letter code for the property panel.'  'LABEL (metadata, string) is an extended label of the property panel.'  'NOTES (metadata, string) are some specific notes about the property panel.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel and, possibly, the callback figure.'  'HIDE (query, logical) hides the figure containing the panel and, possibly, the callback figure.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the callback figure.'  'X_DRAW (query, logical) draws the graphical objects of the prop panel [to be implemented in subelements].'  'UPDATE (query, logical) updates the content of the prop panel and its graphical objects.'  'REDRAW (query, logical) resizes the prop panel and repositions its graphical objects [accept Width-value pair].'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.' };
 			prop_description = panelprop_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

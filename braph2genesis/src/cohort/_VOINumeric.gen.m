@@ -6,7 +6,10 @@ A Numerical Variable Of Interest (VOINumeric) is a numerical variable of interes
 
 %%% ¡seealso!
 VOICategoric
- 
+
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

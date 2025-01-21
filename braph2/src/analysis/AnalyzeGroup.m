@@ -13,7 +13,7 @@ classdef AnalyzeGroup < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group-based graph analysis.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group-based graph analysis.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group-based graph analysis.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class.
 	%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the graph obtained from this analysis.
@@ -105,6 +105,8 @@ classdef AnalyzeGroup < ConcreteElement
 	%
 	%
 	% See also CompareGroup.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -141,7 +143,7 @@ classdef AnalyzeGroup < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group-based graph analysis.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group-based graph analysis.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group-based graph analysis.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class.
 			%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the graph obtained from this analysis.
@@ -152,6 +154,21 @@ classdef AnalyzeGroup < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the group-based graph analysis.
+			%
+			% BUILD = AnalyzeGroup.GETBUILD() returns the build of 'AnalyzeGroup'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the group-based graph analysis A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeGroup') returns the build of 'AnalyzeGroup'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeGroup')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the group-based graph analysis.
 			%
@@ -478,7 +495,7 @@ classdef AnalyzeGroup < ConcreteElement
 			prop = AnalyzeGroup.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			analyzegroup_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the group-based graph analysis.'  'DESCRIPTION (constant, string) is the description of the group-based graph analysis.'  'TEMPLATE (parameter, item) is the template of the group-based graph analysis.'  'ID (data, string) is a few-letter code for the group-based graph analysis.'  'LABEL (metadata, string) is an extended label of the group-based graph analysis.'  'NOTES (metadata, string) are some specific notes about the group-based graph analysis.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class.'  'G (result, item) is the graph obtained from this analysis.' };
+			analyzegroup_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the group-based graph analysis.'  'DESCRIPTION (constant, string) is the description of the group-based graph analysis.'  'TEMPLATE (parameter, item) is the template of the group-based graph analysis.'  'ID (data, string) is a few-letter code for the group-based graph analysis.'  'LABEL (metadata, string) is an extended label of the group-based graph analysis.'  'NOTES (metadata, string) are some specific notes about the group-based graph analysis.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class.'  'G (result, item) is the graph obtained from this analysis.' };
 			prop_description = analyzegroup_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

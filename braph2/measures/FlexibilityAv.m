@@ -13,7 +13,7 @@ classdef FlexibilityAv < Flexibility
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Flexibility.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Flexibility.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Flexibility.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -135,7 +135,7 @@ classdef FlexibilityAv < Flexibility
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Flexibility.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Flexibility.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Flexibility.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -158,6 +158,21 @@ classdef FlexibilityAv < Flexibility
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the average flexibility.
+			%
+			% BUILD = FlexibilityAv.GETBUILD() returns the build of 'FlexibilityAv'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the average flexibility M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('FlexibilityAv') returns the build of 'FlexibilityAv'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('FlexibilityAv')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the average flexibility.
 			%
@@ -484,7 +499,7 @@ classdef FlexibilityAv < Flexibility
 			prop = FlexibilityAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			flexibilityav_description_list = { 'ELCLASS (constant, string) is the class of the Average Flexibility.'  'NAME (constant, string) is the name of the Average Flexibility.'  'DESCRIPTION (constant, string) is the description of the Average Flexibility.'  'TEMPLATE (parameter, item) is the template of the Average Flexibility.'  'ID (data, string) is a few-letter code of the Average Flexibility.'  'LABEL (metadata, string) is an extended label of the Average Flexibility.'  'NOTES (metadata, string) are some specific notes about the Average Flexibility.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Flexibility.'  'PFM (gui, item) contains the panel figure of the measure.'  'LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.'  'RANDORD (parameter, LOGICAL) is used to set randperm.'  'RANDMOVE (parameter, LOGICAL) is the move function.'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.'  'S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.'  'OM (data, MATRIX) is the multilayer modularity matrix.'  'QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.' };
+			flexibilityav_description_list = { 'ELCLASS (constant, string) is the class of the Average Flexibility.'  'NAME (constant, string) is the name of the Average Flexibility.'  'DESCRIPTION (constant, string) is the description of the Average Flexibility.'  'TEMPLATE (parameter, item) is the template of the Average Flexibility.'  'ID (data, string) is a few-letter code of the Average Flexibility.'  'LABEL (metadata, string) is an extended label of the Average Flexibility.'  'NOTES (metadata, string) are some specific notes about the Average Flexibility.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Flexibility.'  'PFM (gui, item) contains the panel figure of the measure.'  'LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.'  'RANDORD (parameter, LOGICAL) is used to set randperm.'  'RANDMOVE (parameter, LOGICAL) is the move function.'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.'  'S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.'  'OM (data, MATRIX) is the multilayer modularity matrix.'  'QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.' };
 			prop_description = flexibilityav_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -542,7 +557,7 @@ classdef FlexibilityAv < Flexibility
 				case 1 % FlexibilityAv.ELCLASS
 					prop_default = 'FlexibilityAv';
 				case 2 % FlexibilityAv.NAME
-					prop_default = 'FlexibilityAv ';
+					prop_default = 'Average Flexibility';
 				case 3 % FlexibilityAv.DESCRIPTION
 					prop_default = 'The Average Flexibility (FlexibilityAv) of a multilayer graph is the average of the flexibility of all nodes.';
 				case 4 % FlexibilityAv.TEMPLATE
@@ -560,7 +575,7 @@ classdef FlexibilityAv < Flexibility
 				case 11 % FlexibilityAv.PARAMETRICITY
 					prop_default = 2;
 				case 12 % FlexibilityAv.COMPATIBLE_GRAPHS
-					prop_default = {'MultiplexWU' 'OrdMxWU' 'MultiplexBU' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};;
+					prop_default = {'MultiplexWU' 'MultiplexWD' 'OrdMxWU' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};;
 				otherwise
 					prop_default = getPropDefault@Flexibility(prop);
 			end

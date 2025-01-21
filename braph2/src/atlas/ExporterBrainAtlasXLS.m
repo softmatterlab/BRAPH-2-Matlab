@@ -12,7 +12,7 @@ classdef ExporterBrainAtlasXLS < Exporter
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain atlas exporter in XLS.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain atlas exporter in XLS.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain atlas exporter in XLS.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 	%  <strong>11</strong> <strong>FILE</strong> 	FILE (data, string) is the XLS/XLSX file where to save the brain atlas.
@@ -106,6 +106,8 @@ classdef ExporterBrainAtlasXLS < Exporter
 	%
 	%
 	% See also BrainAtlas, ImporterBrainAtlasXLS.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		BA = 10; %CET: Computational Efficiency Trick
@@ -147,7 +149,7 @@ classdef ExporterBrainAtlasXLS < Exporter
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the brain atlas exporter in XLS.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the brain atlas exporter in XLS.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the brain atlas exporter in XLS.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 			%  <strong>11</strong> <strong>FILE</strong> 	FILE (data, string) is the XLS/XLSX file where to save the brain atlas.
@@ -160,6 +162,21 @@ classdef ExporterBrainAtlasXLS < Exporter
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the brain atlas exporter in XLS.
+			%
+			% BUILD = ExporterBrainAtlasXLS.GETBUILD() returns the build of 'ExporterBrainAtlasXLS'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = EX.GETBUILD() returns the build of the brain atlas exporter in XLS EX.
+			%  BUILD = Element.GETBUILD(EX) returns the build of 'EX'.
+			%  BUILD = Element.GETBUILD('ExporterBrainAtlasXLS') returns the build of 'ExporterBrainAtlasXLS'.
+			%
+			% Note that the Element.GETBUILD(EX) and Element.GETBUILD('ExporterBrainAtlasXLS')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function ex_class = getClass()
 			%GETCLASS returns the class of the brain atlas exporter in XLS.
 			%
@@ -486,7 +503,7 @@ classdef ExporterBrainAtlasXLS < Exporter
 			prop = ExporterBrainAtlasXLS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			exporterbrainatlasxls_description_list = { 'ELCLASS (constant, string) is the class of the brain atlas exporter in XLS.'  'NAME (constant, string) is the name of the brain atlas exporter in XLS.'  'DESCRIPTION (constant, string) is the description of the brain atlas exporter in XLS.'  'TEMPLATE (parameter, item) is the template of the brain atlas exporter in XLS.'  'ID (data, string) is a few-letter code for the brain atlas exporter in XLS.'  'LABEL (metadata, string) is an extended label of the brain atlas exporter in XLS.'  'NOTES (metadata, string) are some specific notes about the brain atlas exporter in XLS.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'BA (data, item) is a brain atlas.'  'FILE (data, string) is the XLS/XLSX file where to save the brain atlas.'  'PUT_FILE (query, item) opens a dialog box to set the XLS/XLSX file where to save the brain atlas.'  'SAVE (result, empty) saves the brain atlas in the selected XLS/XLSX file.' };
+			exporterbrainatlasxls_description_list = { 'ELCLASS (constant, string) is the class of the brain atlas exporter in XLS.'  'NAME (constant, string) is the name of the brain atlas exporter in XLS.'  'DESCRIPTION (constant, string) is the description of the brain atlas exporter in XLS.'  'TEMPLATE (parameter, item) is the template of the brain atlas exporter in XLS.'  'ID (data, string) is a few-letter code for the brain atlas exporter in XLS.'  'LABEL (metadata, string) is an extended label of the brain atlas exporter in XLS.'  'NOTES (metadata, string) are some specific notes about the brain atlas exporter in XLS.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'BA (data, item) is a brain atlas.'  'FILE (data, string) is the XLS/XLSX file where to save the brain atlas.'  'PUT_FILE (query, item) opens a dialog box to set the XLS/XLSX file where to save the brain atlas.'  'SAVE (result, empty) saves the brain atlas in the selected XLS/XLSX file.' };
 			prop_description = exporterbrainatlasxls_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

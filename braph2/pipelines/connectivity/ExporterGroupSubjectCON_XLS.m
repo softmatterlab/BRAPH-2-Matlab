@@ -13,14 +13,14 @@ classdef ExporterGroupSubjectCON_XLS < Exporter
 	%  variables of interest, and each subsequent row the values for each subject.
 	%
 	% The list of ExporterGroupSubjectCON_XLS properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the CON subject group exporter in XLSX.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the CON subject group exporter in XLSX.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the CON subject group exporter in XLSX.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the CON subject group exporter in XLSX.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the CON subject group exporter in XLSX.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the CON subject group exporter in XLSX.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the CON subject group exporter in XLSX.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is a group of subjects with connectivity data.
 	%  <strong>11</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory name where to save the group of subjects with connectivity data.
@@ -114,6 +114,8 @@ classdef ExporterGroupSubjectCON_XLS < Exporter
 	%
 	%
 	% See also Group, SunbjectCON, ImporterGroupSubjectCON_XLS.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		GR = 10; %CET: Computational Efficiency Trick
@@ -148,14 +150,14 @@ classdef ExporterGroupSubjectCON_XLS < Exporter
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of ExporterGroupSubjectCON_XLS properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the CON subject group exporter in XLSX.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the CON subject group exporter in XLSX.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the CON subject group exporter in XLSX.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the CON subject group exporter in XLSX.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the CON subject group exporter in XLSX.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the CON subject group exporter in XLSX.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the CON subject group exporter in XLSX.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is a group of subjects with connectivity data.
 			%  <strong>11</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory name where to save the group of subjects with connectivity data.
@@ -168,6 +170,21 @@ classdef ExporterGroupSubjectCON_XLS < Exporter
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the exporter of CON subject group in XLSX.
+			%
+			% BUILD = ExporterGroupSubjectCON_XLS.GETBUILD() returns the build of 'ExporterGroupSubjectCON_XLS'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = EX.GETBUILD() returns the build of the exporter of CON subject group in XLSX EX.
+			%  BUILD = Element.GETBUILD(EX) returns the build of 'EX'.
+			%  BUILD = Element.GETBUILD('ExporterGroupSubjectCON_XLS') returns the build of 'ExporterGroupSubjectCON_XLS'.
+			%
+			% Note that the Element.GETBUILD(EX) and Element.GETBUILD('ExporterGroupSubjectCON_XLS')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function ex_class = getClass()
 			%GETCLASS returns the class of the exporter of CON subject group in XLSX.
 			%
@@ -494,7 +511,7 @@ classdef ExporterGroupSubjectCON_XLS < Exporter
 			prop = ExporterGroupSubjectCON_XLS.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			exportergroupsubjectcon_xls_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the CON subject group exporter in XLSX.'  'DESCRIPTION (constant, string) is the description of the CON subject group exporter in XLSX.'  'TEMPLATE (parameter, item) is the template of the CON subject group exporter in XLSX.'  'ID (data, string) is a few-letter code for the CON subject group exporter in XLSX.'  'LABEL (metadata, string) is an extended label of the CON subject group exporter in XLSX.'  'NOTES (metadata, string) are some specific notes about the CON subject group exporter in XLSX.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is a group of subjects with connectivity data.'  'DIRECTORY (data, string) is the directory name where to save the group of subjects with connectivity data.'  'PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with connectivity data.'  'SAVE (result, empty) saves the group of subjects with connectivity data in XLSX files in the selected directory.' };
+			exportergroupsubjectcon_xls_description_list = { 'ELCLASS (constant, string) is the class of the CON subject group exporter in XLSX.'  'NAME (constant, string) is the name of the CON subject group exporter in XLSX.'  'DESCRIPTION (constant, string) is the description of the CON subject group exporter in XLSX.'  'TEMPLATE (parameter, item) is the template of the CON subject group exporter in XLSX.'  'ID (data, string) is a few-letter code for the CON subject group exporter in XLSX.'  'LABEL (metadata, string) is an extended label of the CON subject group exporter in XLSX.'  'NOTES (metadata, string) are some specific notes about the CON subject group exporter in XLSX.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is a group of subjects with connectivity data.'  'DIRECTORY (data, string) is the directory name where to save the group of subjects with connectivity data.'  'PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with connectivity data.'  'SAVE (result, empty) saves the group of subjects with connectivity data in XLSX files in the selected directory.' };
 			prop_description = exportergroupsubjectcon_xls_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -568,7 +585,7 @@ classdef ExporterGroupSubjectCON_XLS < Exporter
 				case 1 % ExporterGroupSubjectCON_XLS.ELCLASS
 					prop_default = 'ExporterGroupSubjectCON_XLS';
 				case 2 % ExporterGroupSubjectCON_XLS.NAME
-					prop_default = 'ExporterGroupSubjectCON_XLS';
+					prop_default = 'Connectivity Subject Group XLS Exporter';
 				case 3 % ExporterGroupSubjectCON_XLS.DESCRIPTION
 					prop_default = 'ExporterGroupSubjectCON_XLS exports a group of subjects with connectivity data to a series of XLSX files. The variables of interest (if existing) are saved in another XLSX file.';
 				case 4 % ExporterGroupSubjectCON_XLS.TEMPLATE

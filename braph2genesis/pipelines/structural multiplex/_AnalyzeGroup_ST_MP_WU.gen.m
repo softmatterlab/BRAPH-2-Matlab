@@ -9,6 +9,9 @@ or binary undirected multiplexes with fixed densities.
 %%% ¡seealso!
 SubjectST_MP, MultiplexWU
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -62,14 +65,14 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the graph analysis with structural multiplex data.
 %%%% ¡default!
 'AnalyzeGroup_ST_MP_WU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the graph analysis with structural multiplex data.
 %%%% ¡default!
-'AnalyzeGroup_ST_MP_WU'
+'Multiplex Structural Weighted Undirected Analyze Group'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the graph analysis with structural multiplex data.

@@ -9,14 +9,14 @@ classdef NNDataPoint_ST_MM_REG < NNDataPoint
 	% The target is obtained from the variables of interest of the subject.
 	%
 	% The list of NNDataPoint_ST_MM_REG properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the data point for regression with structural multimodality data.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of a data point for regression with structural multimodality data.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of a data point for regression with structural multimodality data.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of a data point for regression with structural multimodality data.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for a data point for regression with structural multimodality data.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of a data point for regression with structural multimodality data.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about a data point for regression with structural multimodality data.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>INPUT</strong> 	INPUT (result, cell) is the input value for this data point.
 	%  <strong>10</strong> <strong>TARGET</strong> 	TARGET (result, cell) is the target value for this data point.
 	%  <strong>11</strong> <strong>SUB</strong> 	SUB (data, item) is a subject with structural multimodality data.
@@ -109,6 +109,8 @@ classdef NNDataPoint_ST_MM_REG < NNDataPoint
 	%
 	%
 	% See also SubjectST_MP.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		SUB = 11; %CET: Computational Efficiency Trick
@@ -133,14 +135,14 @@ classdef NNDataPoint_ST_MM_REG < NNDataPoint
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNDataPoint_ST_MM_REG properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the data point for regression with structural multimodality data.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of a data point for regression with structural multimodality data.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of a data point for regression with structural multimodality data.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of a data point for regression with structural multimodality data.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for a data point for regression with structural multimodality data.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of a data point for regression with structural multimodality data.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about a data point for regression with structural multimodality data.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>INPUT</strong> 	INPUT (result, cell) is the input value for this data point.
 			%  <strong>10</strong> <strong>TARGET</strong> 	TARGET (result, cell) is the target value for this data point.
 			%  <strong>11</strong> <strong>SUB</strong> 	SUB (data, item) is a subject with structural multimodality data.
@@ -152,6 +154,21 @@ classdef NNDataPoint_ST_MM_REG < NNDataPoint
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the structural multimodality regression data point.
+			%
+			% BUILD = NNDataPoint_ST_MM_REG.GETBUILD() returns the build of 'NNDataPoint_ST_MM_REG'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = DP.GETBUILD() returns the build of the structural multimodality regression data point DP.
+			%  BUILD = Element.GETBUILD(DP) returns the build of 'DP'.
+			%  BUILD = Element.GETBUILD('NNDataPoint_ST_MM_REG') returns the build of 'NNDataPoint_ST_MM_REG'.
+			%
+			% Note that the Element.GETBUILD(DP) and Element.GETBUILD('NNDataPoint_ST_MM_REG')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function dp_class = getClass()
 			%GETCLASS returns the class of the structural multimodality regression data point.
 			%
@@ -474,7 +491,7 @@ classdef NNDataPoint_ST_MM_REG < NNDataPoint
 			prop = NNDataPoint_ST_MM_REG.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nndatapoint_st_mm_reg_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of a data point for regression with structural multimodality data.'  'DESCRIPTION (constant, string) is the description of a data point for regression with structural multimodality data.'  'TEMPLATE (parameter, item) is the template of a data point for regression with structural multimodality data.'  'ID (data, string) is a few-letter code for a data point for regression with structural multimodality data.'  'LABEL (metadata, string) is an extended label of a data point for regression with structural multimodality data.'  'NOTES (metadata, string) are some specific notes about a data point for regression with structural multimodality data.'  'TOSTRING (query, string) returns a string that represents the object.'  'INPUT (result, cell) is the input value for this data point.'  'TARGET (result, cell) is the target value for this data point.'  'SUB (data, item) is a subject with structural multimodality data.'  'TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as regression targets.' };
+			nndatapoint_st_mm_reg_description_list = { 'ELCLASS (constant, string) is the class of the data point for regression with structural multimodality data.'  'NAME (constant, string) is the name of a data point for regression with structural multimodality data.'  'DESCRIPTION (constant, string) is the description of a data point for regression with structural multimodality data.'  'TEMPLATE (parameter, item) is the template of a data point for regression with structural multimodality data.'  'ID (data, string) is a few-letter code for a data point for regression with structural multimodality data.'  'LABEL (metadata, string) is an extended label of a data point for regression with structural multimodality data.'  'NOTES (metadata, string) are some specific notes about a data point for regression with structural multimodality data.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'INPUT (result, cell) is the input value for this data point.'  'TARGET (result, cell) is the target value for this data point.'  'SUB (data, item) is a subject with structural multimodality data.'  'TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as regression targets.' };
 			prop_description = nndatapoint_st_mm_reg_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -540,7 +557,7 @@ classdef NNDataPoint_ST_MM_REG < NNDataPoint
 				case 1 % NNDataPoint_ST_MM_REG.ELCLASS
 					prop_default = 'NNDataPoint_ST_MM_REG';
 				case 2 % NNDataPoint_ST_MM_REG.NAME
-					prop_default = 'NNDataPoint_ST_MM_REG';
+					prop_default = 'Neural Network Structural Multimodality Data Point for Regression';
 				case 3 % NNDataPoint_ST_MM_REG.DESCRIPTION
 					prop_default = 'A data point for regression with structural multimodality data (NNDataPoint_ST_MM_REG) contains the input and target for neural network analysis with a subject with structural multiplex data (SubjectST_MP). The input is the structural multiplex data of the subject. The target is obtained from the variables of interest of the subject.';
 				case 4 % NNDataPoint_ST_MM_REG.TEMPLATE

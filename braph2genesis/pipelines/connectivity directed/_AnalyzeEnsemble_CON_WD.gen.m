@@ -7,6 +7,9 @@ This graph analysis uses connectivity data and analyzes them using weighted dire
 %%% ¡seealso!
 SubjectCON, GraphWD
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -60,37 +63,37 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ensemble-based graph analysis using connectivity directed data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_WD'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the ensenmble-based graph analysis using connectivity data.
+NAME (constant, string) is the name of the ensemble-based graph analysis using connectivity directed data.
 %%%% ¡default!
-'AnalyzeEnsemble_CON_WD'
+'Connectivity Weighted Directed Analyze Ensemble'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the ensenmble-based graph analysis using connectivity data.
+DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis using connectivity directed data.
 %%%% ¡default!
 'This ensemble-based graph analysis (AnalyzeEnsemble_CON_WD) analyzes connectivity data using weighted directed graphs.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the ensenmble-based graph analysis using connectivity data.
+TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis using connectivity directed data.
 %%%% ¡settings!
 'AnalyzeEnsemble_CON_WD'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the ensenmble-based graph analysis using connectivity data.
+ID (data, string) is a few-letter code for the ensemble-based graph analysis using connectivity directed data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_WD ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the ensenmble-based graph analysis using connectivity data.
+LABEL (metadata, string) is an extended label of the ensemble-based graph analysis using connectivity directed data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_WD label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the ensenmble-based graph analysis using connectivity data.
+NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis using connectivity directed data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_WD notes'
 
@@ -144,7 +147,7 @@ Example
 %%%% ¡probability!
 .01
 %%%% ¡code!
-create_data_CON_XLS() % only creates files if the example folder doesn't already exist
+create_data_COND_XLS() % only creates files if the example folder doesn't already exist
 
 example_CON_WD
 
@@ -154,13 +157,13 @@ Template for Graphs and Measures
 %%%% ¡probability!
 .01
 %%%% ¡code!
-if ~isfile([fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'atlas.txt'])
-    test_ImporterGroupSubjectCON_TXT % create example files
+if ~isfile([fileparts(which('AnalyzeEnsemble_CON_WD')) filesep 'Example data CON D TXT' filesep 'atlas.txt'])
+    create_data_COND_TXT % create example files
 end
 
-ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'atlas.txt']).get('BA');
-gr1 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'CON_Group_1_TXT'], 'BA', ba).get('GR');
-gr2 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('SubjectCON')) filesep 'Example data CON TXT' filesep 'CON_Group_2_TXT'], 'BA', ba).get('GR');
+ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('AnalyzeEnsemble_CON_WD')) filesep 'Example data CON D TXT' filesep 'atlas.txt']).get('BA');
+gr1 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('AnalyzeEnsemble_CON_WD')) filesep 'Example data CON D TXT' filesep 'COND_Group_1_TXT'], 'BA', ba).get('GR');
+gr2 = ImporterGroupSubjectCON_TXT('DIRECTORY', [fileparts(which('AnalyzeEnsemble_CON_WD')) filesep 'Example data CON D TXT' filesep 'COND_Group_2_TXT'], 'BA', ba).get('GR');
 
 % check that analysis parameters are correctly templated between analysis 1 and 2
 a_WD1 = AnalyzeEnsemble_CON_WD('GR', gr1);

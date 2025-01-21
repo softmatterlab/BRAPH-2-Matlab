@@ -17,7 +17,7 @@ classdef Flexibility < MultilayerCommunity
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Flexibility.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Flexibility.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Flexibility.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -139,7 +139,7 @@ classdef Flexibility < MultilayerCommunity
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Flexibility.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Flexibility.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Flexibility.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -162,6 +162,21 @@ classdef Flexibility < MultilayerCommunity
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the flexibility.
+			%
+			% BUILD = Flexibility.GETBUILD() returns the build of 'Flexibility'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the flexibility M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('Flexibility') returns the build of 'Flexibility'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('Flexibility')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the flexibility.
 			%
@@ -488,7 +503,7 @@ classdef Flexibility < MultilayerCommunity
 			prop = Flexibility.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			flexibility_description_list = { 'ELCLASS (constant, string) is the class of the Flexibility.'  'NAME (constant, string) is the name of the Flexibility.'  'DESCRIPTION (constant, string) is the description of the Flexibility.'  'TEMPLATE (parameter, item) is the template of the Flexibility.'  'ID (data, string) is a few-letter code of the Flexibility.'  'LABEL (metadata, string) is an extended label of the Flexibility.'  'NOTES (metadata, string) are some specific notes about the Flexibility.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Flexibility.'  'PFM (gui, item) contains the panel figure of the measure.'  'LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.'  'RANDORD (parameter, LOGICAL) is used to set randperm.'  'RANDMOVE (parameter, LOGICAL) is the move function.'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.'  'S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.'  'OM (data, MATRIX) is the multilayer modularity matrix.'  'QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.' };
+			flexibility_description_list = { 'ELCLASS (constant, string) is the class of the Flexibility.'  'NAME (constant, string) is the name of the Flexibility.'  'DESCRIPTION (constant, string) is the description of the Flexibility.'  'TEMPLATE (parameter, item) is the template of the Flexibility.'  'ID (data, string) is a few-letter code of the Flexibility.'  'LABEL (metadata, string) is an extended label of the Flexibility.'  'NOTES (metadata, string) are some specific notes about the Flexibility.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.SUPERGLOBAL.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Flexibility.'  'PFM (gui, item) contains the panel figure of the measure.'  'LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.'  'RANDORD (parameter, LOGICAL) is used to set randperm.'  'RANDMOVE (parameter, LOGICAL) is the move function.'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.'  'S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.'  'OM (data, MATRIX) is the multilayer modularity matrix.'  'QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.' };
 			prop_description = flexibility_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -548,7 +563,7 @@ classdef Flexibility < MultilayerCommunity
 				case 2 % Flexibility.NAME
 					prop_default = 'Flexibility';
 				case 3 % Flexibility.DESCRIPTION
-					prop_default = 'The Flexibility (Flexibility) of each node in a multilayer network is calculated as the number of times that it changes community assignment, normalized by the total possible number of changes. In ordered multilayer networks (e. g. temporal, changes are possible only between adjacent layers, whereas in categorical multilayer networks, community assignment changes are possible between any pairs of layers.';
+					prop_default = 'The Flexibility (Flexibility) of each node in a multilayer network is calculated as the number of times that it changes community assignment, normalized by the total possible number of changes. In ordered multilayer networks (e.g. temporal, changes are possible only between adjacent layers, whereas in categorical multilayer networks, community assignment changes are possible between any pairs of layers.';
 				case 4 % Flexibility.TEMPLATE
 					prop_default = Format.getFormatDefault(8, Flexibility.getPropSettings(prop));
 				case 5 % Flexibility.ID
@@ -564,7 +579,7 @@ classdef Flexibility < MultilayerCommunity
 				case 11 % Flexibility.PARAMETRICITY
 					prop_default = 2;
 				case 12 % Flexibility.COMPATIBLE_GRAPHS
-					prop_default = {'MultiplexWU' 'OrdMxWU' 'MultiplexBU' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};;
+					prop_default = {'MultiplexWU' 'MultiplexWD' 'OrdMxWU' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};;
 				otherwise
 					prop_default = getPropDefault@MultilayerCommunity(prop);
 			end

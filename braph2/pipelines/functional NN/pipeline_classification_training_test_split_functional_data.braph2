@@ -8,8 +8,8 @@
 % 4. It trains the classifier using the training dataset.
 % 5. It evaluates the performance of the trained classifier using both the training and test dataset.
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_nn_clas_fun_data_split/tut_nn_clas_fun_data_split.pdf
+% README: /tutorials/pipelines/tut_nn_clas_fun_data_split/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
@@ -20,9 +20,9 @@ gr2 = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get(
 gr3 = ImporterGroupSubjectFUN_XLS('BA', ba, 'WAITBAR', true).get('GET_DIR').get('GR'); % Load Group FUN 3 from XLS % Group FUN 3
 
 %% Training-Test Split
-d_split1 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_FUN_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_FUN_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_FUN_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr1.get('ID')}), gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 1 % Dataset 1 Splitter
-d_split2 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_FUN_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_FUN_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_FUN_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr2.get('ID')}), gr2.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 2 % Dataset 2 Splitter
-d_split3 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_FUN_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_FUN_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_FUN_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_IDS', {gr3.get('ID')}), gr3.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 3 % Dataset 3 Splitter
+d_split1 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_FUN_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_FUN_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_FUN_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr1.get('ID')}), gr1.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 1 % Dataset 1 Splitter
+d_split2 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_FUN_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_FUN_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_FUN_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr2.get('ID')}), gr2.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 2 % Dataset 2 Splitter
+d_split3 = NNDatasetSplit('D', NNDataset('DP_CLASS', 'NNDataPoint_FUN_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_FUN_CLA', 'IT_LIST', cellfun(@(x) NNDataPoint_FUN_CLA('ID', x.get('ID'), 'SUB', x, 'TARGET_CLASS', {gr3.get('ID')}), gr3.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false))), 'SPLIT', {0.7, 0.3}); % Split Dataset for Group 3 % Dataset 3 Splitter
 
 %% Neural Network
 nn = NNClassifierMLP('D', NNDatasetCombine('D_LIST', {d_split1.get('D_LIST_IT', 1), d_split2.get('D_LIST_IT', 1), d_split3.get('D_LIST_IT', 1)}).get('D'), 'LAYERS', [20 20]); % Train Neural Network % Trained Neural Network

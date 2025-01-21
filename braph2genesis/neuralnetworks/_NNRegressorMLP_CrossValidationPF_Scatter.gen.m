@@ -1,11 +1,16 @@
 %% ¡header!
-NNRegressorMLP_CrossValidationPF_Scatter < PanelFig (pf, panel ensemble-based comparison figure) is the base element to plot an ensemble-based comparison.
+NNRegressorMLP_CrossValidationPF_Scatter < PanelFig (pf, panel scatter plot figure) is the panel for scatter plots in regression tasks.
 
 %%% ¡description!
-NNRegressorMLP_CrossValidationPF_Scatter manages the basic functionalities to plot of an ensemble-based comparison.
+The scatter plot panel for a cross-validation with MLP regressors
+ (NNRegressorMLP_CrossValidationPF_Scatter) manages the functionalities to plot 
+ a panel of the scatter plots in regression tasks.
 
 %%% ¡seealso!
-ComparisonEnsemble
+NNRegressorMLP_CrossValidation
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -90,42 +95,42 @@ Y-LABEL
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the panel scatter plot for a cross-validation with MLP regressors.
 %%%% ¡default!
 'NNRegressorMLP_CrossValidationPF_Scatter'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the panel ensemble-based comparison figure.
+NAME (constant, string) is the name of the panel scatter plot for a cross-validation with MLP regressors.
 %%%% ¡default!
-'NNRegressorMLP_CrossValidationPF_Scatter'
+'Scatter Plot Panel for a Cross-Validation with MLP Regressors'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.
+DESCRIPTION (constant, string) is the description of the panel scatter plot for a cross-validation with MLP regressors.
 %%%% ¡default!
-'NNRegressorMLP_CrossValidationPF_Scatter manages the basic functionalities to plot of an ensemble-based comparison.'
+'The scatter plot panel for cross-validation MLP regressor (NNRegressorMLP_CrossValidationPF_Scatter) manages the functionalities to plot a panel of the scatter plots in regression tasks.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.
+TEMPLATE (parameter, item) is the template of the panel scatter plot for a cross-validation with MLP regressors.
 %%%% ¡settings!
 'NNRegressorMLP_CrossValidationPF_Scatter'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.
+ID (data, string) is a few-letter code for the panel scatter plot for a cross-validation with MLP regressors.
 %%%% ¡default!
 'NNRegressorMLP_CrossValidationPF_Scatter ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.
+LABEL (metadata, string) is an extended label of the panel scatter plot for a cross-validation with MLP regressors.
 %%%% ¡default!
 'NNRegressorMLP_CrossValidationPF_Scatter label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.
+NOTES (metadata, string) are some specific notes about the panel scatter plot for a cross-validation with MLP regressors.
 %%%% ¡default!
 'NNRegressorMLP_CrossValidationPF_Scatter notes'
 
 %%% ¡prop!
-DRAW (query, logical) draws the figure comparison figure.
+DRAW (query, logical) draws the scatter plot figure.
 %%%% ¡calculate!
 value = calculateValue@PanelFig(pf, PanelFig.DRAW, varargin{:}); % also warning
 if value
@@ -303,7 +308,7 @@ function cb_listener_st_axis(~, ~)
 end
 
 %%% ¡prop!
-NNCV (metadata, item) is the ensemble-based comparison.
+NNCV (metadata, item) is the neural network cross-validation.
 %%%% ¡settings!
 'NNRegressorMLP_CrossValidation'
 
@@ -314,7 +319,7 @@ PREDICTIONS_VALUE (metadata, matrix) is the predictions value.
 GROUNDTRUTH_VALUE (metadata, matrix) is the ground truth value.
 
 %%% ¡prop!
-SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.
+SETUP (query, empty) calculates the prediction value and ground truth value, and then initializes the panel figure.
 %%%% ¡calculate!
 pf.memorize('H_PREDICTIONS');
 
@@ -379,7 +384,11 @@ value = [];
 %%% ¡prop!
 H_PREDICTIONS (evanescent, handlelist) is the set of handles for the prediction plots.
 %%%% ¡calculate!
-targets = pf.memorize('NNCV').get('D_LIST_IT', 1).get('DP_DICT').get('IT', 1).get('TARGET_IDS');
+if ~isa(pf.memorize('NNCV').getr('D'), 'NoValue')
+    targets = pf.memorize('NNCV').get('D_LIST_IT', 1).get('DP_DICT').get('IT', 1).get('TARGET_IDS');
+else
+    targets = {};
+end
 L = length(targets);
 h_predictions = cell(1, L);
 for i = 1:1:L
@@ -418,8 +427,12 @@ PREDICTION_DICT (figure, idict) contains the prediction plot for each target.
 if pf.get('PREDICTIONS') && ~isa(pf.getr('NNCV'), 'NoValue')
     predictions = pf.memorize('PREDICTIONS_VALUE');
     ground_truth = pf.memorize('GROUNDTRUTH_VALUE');
-    targets = pf.memorize('NNCV').get('D_LIST_IT', 1).get('DP_DICT').get('IT', 1).get('TARGET_IDS');
-    
+    if ~isa(pf.memorize('NNCV').getr('D'), 'NoValue')
+        targets = pf.memorize('NNCV').get('D_LIST_IT', 1).get('DP_DICT').get('IT', 1).get('TARGET_IDS');
+    else
+        targets = {};
+    end
+
     if pf.get('PREDICTION_DICT').get('LENGTH') == 0 && ~isempty(ground_truth)
         for i = 1:1:length(targets)
             target = targets{i};
@@ -451,19 +464,19 @@ pr = PanelPropIDictTable('EL', pf, 'PROP', NNRegressorMLP_CrossValidationPF_Scat
     varargin{:});
 
 %%% ¡prop!
-H_LINE_BASE (evanescent, handle) is the handle for the ensemble-based comparison line.
+H_LINE_BASE (evanescent, handle) is the handle for the base line.
 %%%% ¡calculate!
 value = plot(pf.get('H_AXES'), [0], [0], 'b', 'LineWidth', 2);
 
 %%% ¡prop!
-ST_LINE_BASE (figure, item) determines the line settings.
+ST_LINE_BASE (figure, item) determines the base line settings.
 %%%% ¡settings!
 'SettingsLine'
 %%%% ¡gui!
 pr = SettingsLinePP('EL', pf, 'PROP', NNRegressorMLP_CrossValidationPF_Scatter.ST_LINE_BASE, varargin{:});
 
 %%% ¡prop!
-LISTENER_ST_LINE_BASE (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.
+LISTENER_ST_LINE_BASE (evanescent, handle) contains the listener to the base line settings to update the pushbutton.
 %%%% ¡calculate!
 value = listener(pf.get('ST_LINE_BASE'), 'PropSet', @cb_listener_st_line_base); 
 %%%% ¡calculate_callbacks!
@@ -569,6 +582,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':NNRegressorMLP_CrossValidationPF_Scatter'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':NNRegressorMLP_CrossValidationPF_Scatter'])

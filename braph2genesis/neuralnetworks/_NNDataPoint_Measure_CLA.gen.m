@@ -11,40 +11,43 @@ The target is obtained from the variables of interest of the subject.
 %%% ¡seealso!
 NNDataPoint_Measure_REG, NNDataPoint_Graph_REG, NNDataPoint_Graph_CLA
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the data point for classification with graph measures.
 %%%% ¡default!
 'NNDataPoint_Measure_CLA'
 
 %%% ¡prop!
-NAME (constant, string) is the name of a data point for classification with graph measures.
+NAME (constant, string) is the name of the data point for classification with graph measures.
 %%%% ¡default!
-'NNDataPoint_Measure_CLA'
+'Neural Network Data Point for Classification with Graph Measures'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of a data point for classification with graph measures.
+DESCRIPTION (constant, string) is the description of the data point for classification with graph measures.
 %%%% ¡default!
 'A data point for classification with graph measures (NNDataPoint_Measure_CLA) contains both input and target for neural network analysis. The input is the value of the graph measures (e.g. Degree, DegreeAv, and Distance), calculated from the derived graph of the subject. The target is obtained from the variables of interest of the subject.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of a data point for classification with graph measures.
+TEMPLATE (parameter, item) is the template of the data point for classification with graph measures.
 %%%% ¡settings!
 'NNDataPoint_Measure_CLA'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for a data point for classification with graph measures.
+ID (data, string) is a few-letter code for the data point for classification with graph measures.
 %%%% ¡default!
 'NNDataPoint_Measure_CLA ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of a data point for classification with graph measures.
+LABEL (metadata, string) is an extended label of the data point for classification with graph measures.
 %%%% ¡default!
 'NNDataPoint_Measure_CLA label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about a data point for classification with graph measures.
+NOTES (metadata, string) are some specific notes about the data point for classification with graph measures.
 %%%% ¡default!
 'NNDataPoint_Measure_CLA notes'
 
@@ -54,9 +57,9 @@ INPUT (result, cell) is the input value for this data point.
 value = cellfun(@(m_class) dp.get('G').get('MEASURE', m_class).get('M'), dp.get('M_LIST'), 'UniformOutput', false);
     
 %%% ¡prop!
-TARGET (result, stringlist) is the target values for this data point.
+TARGET (result, cell) is the target values for this data point.
 %%%% ¡calculate!
-value = dp.get('TARGET_IDS');
+value = cellfun(@(c) sum(double(c)), dp.get('TARGET_CLASS'), 'UniformOutput', false);
 
 %% ¡props!
 
@@ -69,7 +72,7 @@ G (data, item) is a graph containing the added graph measures (M_DICT).
 M_LIST (parameter, classlist) is a list of graph measure to be used as the input.
 
 %%% ¡prop!
-TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be used as the class targets.
+TARGET_CLASS (parameter, stringlist) is a list of variable-of-interest IDs to be used as the class targets.
 
 %% ¡tests!
 
@@ -82,7 +85,7 @@ Construct the data point with the graph measures derived from its weighted undir
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_CLA % create example files
+    create_data_NN_CLA_CON_XLS() % create example files
 end
 
 % Load BrainAtlas
@@ -134,7 +137,7 @@ it_list1 = cellfun(@(x) NNDataPoint_Measure_CLA( ...
     'ID', x.get('ID'), ...
     'G', x, ...
     'M_LIST', {'Degree' 'DegreeAv' 'Distance'}, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     a_WU1.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -143,7 +146,7 @@ it_list2 = cellfun(@(x) NNDataPoint_Measure_CLA( ...
     'ID', x.get('ID'), ...
     'G', x, ...
     'M_LIST', {'Degree' 'DegreeAv' 'Distance'}, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     a_WU2.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -196,7 +199,7 @@ Construct the data point with the graph measures derived from its binary undirec
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_CLA % create example files
+    create_data_NN_CLA_CON_XLS() % create example files
 end
 
 % Load BrainAtlas
@@ -251,7 +254,7 @@ it_list1 = cellfun(@(x) NNDataPoint_Measure_CLA( ...
     'ID', x.get('ID'), ...
     'G', x, ...
     'M_LIST', {'Degree' 'DegreeAv' 'Distance'}, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     a_BUD1.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -260,7 +263,7 @@ it_list2 = cellfun(@(x) NNDataPoint_Measure_CLA( ...
     'ID', x.get('ID'), ...
     'G', x, ...
     'M_LIST', {'Degree' 'DegreeAv' 'Distance'}, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     a_BUD2.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -312,13 +315,13 @@ end
 Construct the data point with the graph measures derived from its multiplex weighted undirected graph (MultiplexWU) 
 %%%% ¡code!
 % ensure the example data is generated
-if ~isfile([fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'])
-    test_SubjectCON_FUN_MP % create example files
+if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'atlas.xlsx'])
+    create_data_NN_CLA_CON_FUN_MP_XLS() % create example files
 end
 
 % Load BrainAtlas
 im_ba = ImporterBrainAtlasXLS( ...
-    'FILE', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'atlas.xlsx'], ...
+    'FILE', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'atlas.xlsx'], ...
     'WAITBAR', true ...
     );
 
@@ -326,7 +329,7 @@ ba = im_ba.get('BA');
 
 % Load Groups of SubjectCON
 im_gr1 = ImporterGroupSubjectCON_XLS( ...
-    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.CON'], ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Connectivity' filesep 'CON_FUN_MP_Group1_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -334,7 +337,7 @@ im_gr1 = ImporterGroupSubjectCON_XLS( ...
 gr1_CON = im_gr1.get('GR');
 
 im_gr2 = ImporterGroupSubjectCON_XLS( ...
-    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_2_XLS.CON'], ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Connectivity' filesep 'CON_FUN_MP_Group2_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -343,7 +346,7 @@ gr2_CON = im_gr2.get('GR');
 
 % Load Groups of SubjectFUN
 im_gr1 = ImporterGroupSubjectFUN_XLS( ...
-    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_1_XLS.FUN'], ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Functional' filesep 'CON_FUN_MP_Group1_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -351,7 +354,7 @@ im_gr1 = ImporterGroupSubjectFUN_XLS( ...
 gr1_FUN = im_gr1.get('GR');
 
 im_gr2 = ImporterGroupSubjectFUN_XLS( ...
-    'DIRECTORY', [fileparts(which('SubjectCON_FUN_MP')) filesep 'Example data CON_FUN_MP XLS' filesep 'CON_FUN_MP_Group_2_XLS.FUN'], ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'Functional' filesep 'CON_FUN_MP_Group2_XLS'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -400,7 +403,7 @@ it_list1 = cellfun(@(x) NNDataPoint_Measure_CLA( ...
     'ID', x.get('ID'), ...
     'G', x, ...
     'M_LIST', {'Degree' 'DegreeAv' 'Distance'}, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     a_WU1.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -409,7 +412,7 @@ it_list2 = cellfun(@(x) NNDataPoint_Measure_CLA( ...
     'ID', x.get('ID'), ...
     'G', x, ...
     'M_LIST', {'Degree' 'DegreeAv' 'Distance'}, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     a_WU2.get('G_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -461,7 +464,7 @@ end
 Example script for binary undirected graph at fixed densities (GraphBUD) using connectivity data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_CLA % create example files
+    create_data_NN_CLA_CON_XLS() % create example files
 end
 example_NNCV_CON_BUD_M_CLA
 
@@ -470,7 +473,7 @@ example_NNCV_CON_BUD_M_CLA
 Example script for binary undirected graph at fixed thresholds (MultigraphBUT) using connectivity data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_CLA % create example files
+    create_data_NN_CLA_CON_XLS() % create example files
 end
 example_NNCV_CON_BUT_M_CLA
 
@@ -479,7 +482,7 @@ example_NNCV_CON_BUT_M_CLA
 Example script for binary undirected graph at fixed densities (MultigraphBUD) using connectivity data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_CLA % create example files
+    create_data_NN_CLA_CON_XLS() % create example files
 end
 example_NNCV_CON_BUD_M_CLA
 
@@ -488,7 +491,7 @@ example_NNCV_CON_BUD_M_CLA
 Example script for binary undirected multiplex at fixed densities (MultiplexBUD) using connectivity data and functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_FUN_MP_CLA % create example files
+    create_data_NN_CLA_CON_FUN_MP_XLS() % create example files
 end
 example_NNCV_CON_FUN_MP_BUD_M_CLA
 
@@ -497,7 +500,7 @@ example_NNCV_CON_FUN_MP_BUD_M_CLA
 Example script for binary undirected multiplex at fixed thresholds (MultiplexBUT) using connectivity data and functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_CON_FUN_MP_CLA')) filesep 'Example data NN CLA CON_FUN_MP XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_FUN_MP_CLA % create example files
+    create_data_NN_CLA_CON_FUN_MP_XLS % create example files
 end
 example_NNCV_CON_FUN_MP_BUT_M_CLA
 
@@ -506,7 +509,7 @@ example_NNCV_CON_FUN_MP_BUT_M_CLA
 Example script for binary undirected multigraph at fixed densities (MultiplexBUD) using functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_FUN_CLA % create example files
+    create_data_NN_CLA_FUN_XLS() % create example files
 end
 example_NNCV_FUN_BUD_M_CLA
 
@@ -515,6 +518,6 @@ example_NNCV_FUN_BUD_M_CLA
 Example script for binary undirected multigraph at fixed thresholds (MultiplexBUT) using functional data
 %%%% ¡code!
 if ~isfile([fileparts(which('NNDataPoint_FUN_CLA')) filesep 'Example data NN CLA FUN XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_FUN_CLA % create example files
+    create_data_NN_CLA_FUN_XLS() % create example files
 end
 example_NNCV_FUN_BUT_M_CLA

@@ -111,6 +111,8 @@ classdef Element < Category & Format & matlab.mixin.Copyable
     %
     % See also Category, Format, NoValue, Callback, ConcreteElement,
     %  IndexedDictionary, handle, matlab.mixin.Copyable.
+    %
+    % BUILD BRAPH2 6 Element 6
    
 	properties (Access=private)
         % props is a private struct containing the element properties whose
@@ -157,6 +159,28 @@ classdef Element < Category & Format & matlab.mixin.Copyable
         PropLocked
     end
     methods (Static) % inspection
+        function build = getBuild(el)
+            %GETBUILD returns the build of the element.
+            %
+            % BUILD = Element.GETBUILD() returns the €6€ = 6.
+            %
+            % Alternative forms to call this method are:
+            %  BUILD = EL.GETBUILD() returns the build of EL.
+            %  BUILD = Element.BUILD(EL) returns the build of EL.
+            %  BUILD = Element.GETBUILD(CLASS) returns the build of CLASS.
+            %
+            % Note that the Element.BUILD(EL) and Element.BUILD(CLASS) 
+            %  are less computationally efficient. 
+
+            % calls from Element
+            if nargin == 0
+                build = 6;
+                return
+            end
+            
+            % calls from subclasses of Element
+            build = eval([Element.getClass(el) '.getBuild()']);
+        end
         function el_class = getClass(el)
             %GETCLASS returns the class of the element.
             %
@@ -668,7 +692,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
             %  either property numbers (PROP) or tags (TAG).
             % 
             % The random number generator shuffle [rng('shuffle', 'twister')] should be
-            %  done before creating the element to ensure reproducibitlity of the 
+            %  done before creating the element to ensure reproducibility of the 
             %  random numbers.  
             %
             % See also Category, Format, set, check.
@@ -961,7 +985,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
             % VALUE = GET(EL, POINTER) returns the value of property POINTER of element
             %  EL. POINTER can be either a property number (PROP) or tag (TAG).
             %
-            % If the raw value of the property is a NoValue, it proceed to return the
+            % If the raw value of the property is a NoValue, it proceeds to return the
             %  default property value (for categories METADATA, PARAMETER, DATA,
             %  FIGURE, and GUI).
             %
@@ -974,7 +998,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
             %  properties of categories PARAMETER and DATA are irreversibly locked.
             % If the property is checked, it proceeds to check all properties
             %  after the calculation calling the function <a href="matlab:help Element.check">check</a>.
-            %  if the check fails, it resets the property to NoValue, returns NoValue,
+            %  If the check fails, it resets the property to NoValue and returns NoValue,
             %  does not lock the property, and throws a warning.
             %  Warning id: BRAPH2:<Element Class>
             %
@@ -1257,7 +1281,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
             %  occurs and a warning is thrown. 
             %  Warning id: BRAPH2:<Element Class>
             %
-            % LOCK(EL, POINTER, 'Iterative', false) only locks the property but do not
+            % LOCK(EL, POINTER, 'Iterative', false) only locks the property but does not
             %  iteratively lock the corresponding element(s) (if ITEM, ITEMLIST, or
             %  IDICT) 
             %
@@ -1414,7 +1438,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
         function value = preset(el, prop, value) %#ok<INUSL>
             %PRESET preprocesses the value of a property before setting it.
             %
-            % VALUE = PRESET(EL, PROP, VALUE) prepropcesses the VALUE of the property
+            % VALUE = PRESET(EL, PROP, VALUE) preprocesses the VALUE of the property
             %  PROP. It works only with properties with category METADATA,
             %  PARAMETER, DATA, FIGURE and GUI. By default, this function does not do 
             %  anything, so it should be implemented in the subclasses of Element when
@@ -1466,7 +1490,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
         function postset(el, prop) %#ok<INUSD>
             %POSTSET postprocessing after a prop has been set.
             %
-            % POSTSET(EL, PROP) postprocessesing after PROP has been set. By default, 
+            % POSTSET(EL, PROP) postprocessing after PROP has been set. By default, 
             %  this function does not do anything, so it should be implemented
             %  in the subclasses of Element when needed.
             %
@@ -1720,7 +1744,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
             % CHECK = ISEQUAL(EL1, EL2) determines whether elements EL1 and EL2 are
             %  equal in terms of values and locked status. It ignores EVANESCENT props.
             %
-            % Note that, instead, EL1 == EL2 detemines whether the two handles 
+            % Note that, instead, EL1 == EL2 determines whether the two handles 
             %  EL1 and EL2 refer to the very same element.
             %
             % See also getElementList.
@@ -1855,7 +1879,8 @@ classdef Element < Category & Format & matlab.mixin.Copyable
                 build = 6;
                 matlab_version = ver('MATLAB').Version;
                 matlab_version_details = ver();
-                save(filename, 'el', 'build', 'matlab_version', 'matlab_version_details');
+                build_log = load('build_log.mat', '-mat');  % % % double-check
+                save(filename, 'el', 'build', 'matlab_version', 'matlab_version_details', 'build_log', '-v7.3');  % % % double-check
                 
                 saved = true;
                 
@@ -1902,11 +1927,12 @@ classdef Element < Category & Format & matlab.mixin.Copyable
                 wb = braph2waitbar(waitbar, .5, 'Loading file (this might take a while) ...'); 
                 drawnow()
                 
-                tmp = load(filename, '-mat', 'el', 'build', 'matlab_version', 'matlab_version_details');
+                tmp = load(filename, '-mat', 'el', 'build', 'matlab_version', 'matlab_version_details', 'build_log');  % % % double-check
                 el = tmp.el;
                 build  = tmp.build;
                 matlab_version = tmp.matlab_version;
                 matlab_version_details = tmp.matlab_version_details;
+                build_log = tmp.build_log;  % % % double-check
                 
                 braph2waitbar(wb, 'close')                
             else
@@ -2015,7 +2041,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
             %
             % See also encodeJSON.
             
-            struct = jsondecode(json);
+            struct = jsondecode(regexprep(json, '\\', '\\\\'));
             
             % manages special case when only one element
             if length(struct) == 1
@@ -2042,8 +2068,16 @@ classdef Element < Category & Format & matlab.mixin.Copyable
             for i = 1:1:length(el_list)
                 el = el_list{i};
 
-                for prop = 1:1:el.getPropNumber()
-                    value = struct{i}.props(prop).value;
+                if isa(el, 'NoValue')
+                    continue
+                end
+                
+                for json_prop = 1:1:length(struct{i}.props)
+                    value = struct{i}.props(json_prop).value;
+                
+                    tag = struct{i}.props(json_prop).tag;
+                    prop = el.getPropProp(tag);
+
                     if isnumeric(value)
                         if ~isequal(el.getPropFormat(prop), 9) || (numel(value) == 1 && isa(el_list{value}, 'NoValue')) % case {Format.ITEM Format.IDICT}
                             el.props{prop}.value = el_list{value};
@@ -2069,9 +2103,9 @@ classdef Element < Category & Format & matlab.mixin.Copyable
                                 el.props{prop}.value = Element.getNoValue(); % HANDLE and HANDLELIST properties are not saved
                         end
                     end
-                    el.props{prop}.seed = uint32(struct{i}.props(prop).seed);
-                    el.props{prop}.locked = struct{i}.props(prop).locked;
-                    el.props{prop}.checked = struct{i}.props(prop).checked;
+                    el.props{prop}.seed = uint32(struct{i}.props(json_prop).seed);
+                    el.props{prop}.locked = struct{i}.props(json_prop).locked;
+                    el.props{prop}.checked = struct{i}.props(json_prop).checked;
                 end
             end
             
@@ -2235,7 +2269,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
         end        
     end  
     methods (Static) % GUI Static
-        function getGUIMenuImport(el, menu_import, pe)
+        function getGUIMenuImport(el, menu_import, pe) %#ok<INUSD> 
             %GETGUIMENUIMPORT sets the import submenu gui json.
             % 
             % GETGUIMENUIMPORT(EL, UI_MENU, PL) sets the import submenu

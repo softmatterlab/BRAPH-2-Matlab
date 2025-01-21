@@ -8,6 +8,9 @@ using weighted undirected graphs.
 %%% ¡seealso!
 SubjectFUN_MP, OrdMxWU
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -79,14 +82,14 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the graph analysis with functional ordinal multiplex data.
 %%%% ¡default!
 'AnalyzeGroup_FUN_OMP_GA_WU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the graph analysis with functional ordinal multiplex data.
 %%%% ¡default!
-'AnalyzeGroup_FUN_OMP_GA_WU'
+'Multiplex Functional Ordered Weighted Undirected Group Average Analyze Ensemble'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the graph analysis with functional ordinal multiplex data.

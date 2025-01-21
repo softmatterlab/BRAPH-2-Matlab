@@ -17,17 +17,20 @@ The variables of interest (if existing) are saved in another XLSX file
 %%% ¡seealso!
 Group, SubjectFUN_MP, ImporterGroupSubjectFUN_MP_XLS
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the FUN MP subject group exporter in XLSX.
 %%%% ¡default!
 'ExporterGroupSubjectFUN_MP_XLS'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the FUN MP subject group exporter in XLSX.
 %%%% ¡default!
-'ExporterGroupSubjectFUN_MP_XLS'
+'Multiplex Functional Subject Group XLS Exporter'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the FUN MP subject group exporter in XLSX.

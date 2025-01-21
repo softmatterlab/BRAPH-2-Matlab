@@ -14,7 +14,7 @@ classdef SettingsSymbol < Settings
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the symbol settings.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the symbol settings.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the symbol settings.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
 	%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
 	%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
@@ -117,6 +117,8 @@ classdef SettingsSymbol < Settings
 	%
 	%
 	% See also line, PanelFig, GUIFig, check_graphics.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		VISIBLE = 15; %CET: Computational Efficiency Trick
@@ -178,7 +180,7 @@ classdef SettingsSymbol < Settings
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the symbol settings.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the symbol settings.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the symbol settings.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
 			%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
 			%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
@@ -200,6 +202,21 @@ classdef SettingsSymbol < Settings
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the symbol settings.
+			%
+			% BUILD = SettingsSymbol.GETBUILD() returns the build of 'SettingsSymbol'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = ST.GETBUILD() returns the build of the symbol settings ST.
+			%  BUILD = Element.GETBUILD(ST) returns the build of 'ST'.
+			%  BUILD = Element.GETBUILD('SettingsSymbol') returns the build of 'SettingsSymbol'.
+			%
+			% Note that the Element.GETBUILD(ST) and Element.GETBUILD('SettingsSymbol')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function st_class = getClass()
 			%GETCLASS returns the class of the symbol settings.
 			%
@@ -526,7 +543,7 @@ classdef SettingsSymbol < Settings
 			prop = SettingsSymbol.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingssymbol_description_list = { 'ELCLASS (constant, string) is the class of the symbol settings.'  'NAME (constant, string) is the name of the symbol settings.'  'DESCRIPTION (constant, string) is the description of the symbol settings.'  'TEMPLATE (parameter, item) is the template of the symbol settings.'  'ID (data, string) is a few-letter code for the symbol settings.'  'LABEL (metadata, string) is an extended label of the symbol settings.'  'NOTES (metadata, string) are some specific notes about the symbol settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'VISIBLE (figure, logical) determines whether the symbol is visible.'  'X (figure, scalar) is the x-coordinate.'  'Y (figure, scalar) is the y-coordinate.'  'Z (figure, scalar) is the z-coordinate.'  'SYMBOL (figure, marker) is the symbol.'  'SYMBOLSIZE (figure, size) is the symbol size.'  'EDGECOLOR (figure, color) is the symbol RGB edge color.'  'FACECOLOR (figure, color) is the symbol RGB face color.' };
+			settingssymbol_description_list = { 'ELCLASS (constant, string) is the class of the symbol settings.'  'NAME (constant, string) is the name of the symbol settings.'  'DESCRIPTION (constant, string) is the description of the symbol settings.'  'TEMPLATE (parameter, item) is the template of the symbol settings.'  'ID (data, string) is a few-letter code for the symbol settings.'  'LABEL (metadata, string) is an extended label of the symbol settings.'  'NOTES (metadata, string) are some specific notes about the symbol settings.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'VISIBLE (figure, logical) determines whether the symbol is visible.'  'X (figure, scalar) is the x-coordinate.'  'Y (figure, scalar) is the y-coordinate.'  'Z (figure, scalar) is the z-coordinate.'  'SYMBOL (figure, marker) is the symbol.'  'SYMBOLSIZE (figure, size) is the symbol size.'  'EDGECOLOR (figure, color) is the symbol RGB edge color.'  'FACECOLOR (figure, color) is the symbol RGB face color.' };
 			prop_description = settingssymbol_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

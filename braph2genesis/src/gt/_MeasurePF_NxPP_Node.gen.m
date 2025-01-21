@@ -8,6 +8,9 @@ It is supposed to be used with the property NODE of MeasurePF_NU, MeasurePF_NS, 
 %%% ¡seealso!
 uidropdown, GUI, MeasurePF_NU, MeasurePF_NS, MeasurePF_NB
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

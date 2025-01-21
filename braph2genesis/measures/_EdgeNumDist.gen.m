@@ -5,6 +5,9 @@ EdgeNumDist < Measure (m, edge number distance) is the Edge Number Distance.
 The Edge Number Distance (EdgeNumDist) of a graph is the number of edges in the shortest 
 weighted path between two nodes within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

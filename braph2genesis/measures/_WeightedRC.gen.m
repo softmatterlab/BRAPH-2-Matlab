@@ -3,10 +3,13 @@ WeightedRC < Strength (m, weighted rich-club) is the graph Weighted Rich-Club.
 
 %%% ¡description!
 The Weighted Rich-Club (WeightedRC) coefficient of a node at level s is the fraction of the 
- edges weights that connect nodes of strength WRC_PARAMETER or higher out of the 
+ edges weights that connect nodes of strength s or higher out of the 
  maximum number of edges weights that such nodes might share within a layer. 
- WRC_PARAMETER is set by the user and it can be a vector containing all the 
+ Parameter s is set by the user and it can be a vector containing all the 
  strength thresholds; the default value is equal to 1.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -21,6 +24,12 @@ Measure ID
 WeightedRC.LABEL
 %%%% ¡title!
 Measure NAME
+
+%%% ¡prop!
+%%%% ¡id!
+WeightedRC.PARAMETRIC_VALUE
+%%%% ¡title!
+Weighted Rich-Club parameter (strength level)
 
 %%% ¡prop!
 %%%% ¡id!
@@ -67,7 +76,7 @@ NAME (constant, string) is the name of the Weighted Rich-Club.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the Weighted Rich-Club.
 %%%% ¡default!
-'The Weighted Rich-Club (WeightedRC) coefficient of a node at level s is the fraction of the edges weights that connect nodes of strength WRC_PARAMETER or higher out of the maximum number of edges weights that such nodes might share within a layer. WRC_PARAMETER is set by the user and it can be a vector containing all the strength thresholds; the default value is equal to 1.'
+'The Weighted Rich-Club (WeightedRC) coefficient of a node at level s is the fraction of the edges weights that connect nodes of strength s or higher out of the maximum number of edges weights that such nodes might share within a layer. Parameter s is set by the user and it can be a vector containing all the strength thresholds; the default value is equal to 1.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the Weighted Rich-Club.
@@ -100,9 +109,9 @@ SCOPE (constant, scalar) is the measure scope __Measure.UNILAYER__.
 Measure.SUPERGLOBAL
 
 %%% ¡prop!
-PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.NONPARAMETRIC__.
+PARAMETRICITY (constant, scalar) is the parametricity of the measure __Measure.PARAMETRIC__.
 %%%% ¡default!
-Measure.NONPARAMETRIC
+Measure.PARAMETRIC
 
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
@@ -118,7 +127,7 @@ l = g.get('LAYERNUMBER');
 
 weighted_rich_club = cell(l, 1);
 directionality_layer = g.get('DIRECTIONALITY_TYPE', l);
-weighted_rich_club_threshold = m.get('WRC_PARAMETER');
+weighted_rich_club_threshold = m.get('PARAMETRIC_VALUE');
 assert(isnumeric(weighted_rich_club_threshold) == 1, ...
     [BRAPH2.STR ':WeightedRichClub:' BRAPH2.WRONG_INPUT], ...
     ['WeightedRichClub threshold must be a positive number ' ...
@@ -169,7 +178,7 @@ value = weighted_rich_club;
 %% ¡props!
 
 %%% ¡prop! 
-WRC_PARAMETER (parameter, RVECTOR) is the threshold.
+PARAMETRIC_VALUE (parameter, RVECTOR) is the threshold (s).
 %%%% ¡default!
 1
 
@@ -197,7 +206,7 @@ r(1, 1, 3) = 0;
 known_weighted_rich_club = {r};  
 
 g = GraphWU('B', A);
-m_outside_g = WeightedRC('G', g, 'WRC_PARAMETER', [1, 1.5, 2]);
+m_outside_g = WeightedRC('G', g, 'PARAMETRIC_VALUE', [1, 1.5, 2]);
 
 ansWRD = m_outside_g.get('M');
 assert(isequal(round(ansWRD{1}, 3), round(known_weighted_rich_club{1}, 3)), ...
@@ -205,7 +214,7 @@ assert(isequal(round(ansWRD{1}, 3), round(known_weighted_rich_club{1}, 3)), ...
     [class(m_outside_g) ' is not being calculated correctly for ' class(g) '.'])
 
 m_inside_g = g.get('MEASURE', 'WeightedRC');
-m_inside_g.set('WRC_PARAMETER', [1, 1.5, 2]);
+m_inside_g.set('PARAMETRIC_VALUE', [1, 1.5, 2]);
 ansWRD = m_inside_g.get('M');
 assert(isequal(round(ansWRD{1}, 3), round(known_weighted_rich_club{1}, 3)), ...
     [BRAPH2.STR ':WeightedRC:' BRAPH2.FAIL_TEST], ...

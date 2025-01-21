@@ -7,6 +7,9 @@ ComparisonGroupBrainPF_GU manages the basic functionalities to plot of a global 
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

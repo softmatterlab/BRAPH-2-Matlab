@@ -7,6 +7,9 @@ A Panel Figure for Global Superglobal Measure (MeasurePF_GS) manages the basic f
 %%% ¡seealso!
 Measure
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -161,7 +164,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasurePF_GS.PARENT MeasurePF_GS.H MeasurePF_GS.ST_POSITION MeasurePF_GS.ST_AXIS MeasurePF_GS.ST_AREA MeasurePF_GS.ST_LINE MeasurePF_GS.ST_TITLE MeasurePF_GS.ST_XLABEL MeasurePF_GS.ST_YLABEL] 
+[MeasurePF_GS.PARENT MeasurePF_GS.H MeasurePF_GS.ST_POSITION MeasurePF_GS.ST_AXIS MeasurePF_GS.M MeasurePF_GS.ST_AREA MeasurePF_GS.ST_LINE MeasurePF_GS.ST_TITLE MeasurePF_GS.ST_XLABEL MeasurePF_GS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

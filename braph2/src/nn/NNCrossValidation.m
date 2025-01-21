@@ -1,22 +1,22 @@
 classdef NNCrossValidation < ConcreteElement
-	%NNCrossValidation is a process for evaluating neural network models using cross-validation.
+	%NNCrossValidation is a process for evaluating a neural network model using cross-validation.
 	% It is a subclass of <a href="matlab:help ConcreteElement">ConcreteElement</a>.
 	%
-	% A cross validation (NNCrossValidation) is a process that facilitates the evaluation of neural network models using cross-validation. 
+	% A cross-validation (NNCrossValidation) is a process that facilitates the evaluation of neural network models using cross-validation. 
 	%  It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. 
 	%  This helps in assessing the generalization performance of the model and detecting overfitting.
 	% 
 	% To train all the neural networks for all folds, use: nncv.get('TRAIN')
 	%
 	% The list of NNCrossValidation properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the cross-validation.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the cross-validation.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the cross-validation.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the cross-validation.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the cross-validation.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the cross-validation.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the element to evaluate a neural network model using cross-validation.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the element to evaluate a neural network model using cross-validation.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the element to evaluate a neural network model using cross-validation.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the element to evaluate a neural network model using cross-validation.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the element to evaluate a neural network model using cross-validation.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the element to evaluate a neural network model using cross-validation.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the evaluating neural network model using cross-validation.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>KFOLDS</strong> 	KFOLDS (data, scalar) is the number of folds.
 	%  <strong>11</strong> <strong>SPLIT</strong> 	SPLIT (data, cell) is a cell containing the ratio numbers or the vectors stating which datapoints belong to the splitted neural network datasets.
@@ -35,7 +35,7 @@ classdef NNCrossValidation < ConcreteElement
 	%  <strong>24</strong> <strong>BATCH</strong> 	BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.
 	%  <strong>25</strong> <strong>SHUFFLE</strong> 	SHUFFLE (parameter, option) is an option for data shuffling.
 	%  <strong>26</strong> <strong>SOLVER</strong> 	SOLVER (parameter, option) is an option for the solver.
-	%  <strong>27</strong> <strong>VERBOSE</strong> 	VERBOSE (metadata, logical) is an indicator to display training progress information.
+	%  <strong>27</strong> <strong>VERBOSE</strong> 	VERBOSE (gui, logical) is an indicator to display training progress information.
 	%  <strong>28</strong> <strong>PLOT_TRAINING</strong> 	PLOT_TRAINING (metadata, option) determines whether to plot the training progress.
 	%  <strong>29</strong> <strong>TRAIN</strong> 	TRAIN (query, empty) trains all neural network models for all folds.
 	%
@@ -126,6 +126,8 @@ classdef NNCrossValidation < ConcreteElement
 	%
 	%
 	% See also NNDataset, NNEvaluator, NNBase.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -220,7 +222,7 @@ classdef NNCrossValidation < ConcreteElement
 		
 		VERBOSE = 27; %CET: Computational Efficiency Trick
 		VERBOSE_TAG = 'VERBOSE';
-		VERBOSE_CATEGORY = 2;
+		VERBOSE_CATEGORY = 9;
 		VERBOSE_FORMAT = 4;
 		
 		PLOT_TRAINING = 28; %CET: Computational Efficiency Trick
@@ -245,14 +247,14 @@ classdef NNCrossValidation < ConcreteElement
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNCrossValidation properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the cross-validation.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the cross-validation.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the cross-validation.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the cross-validation.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the cross-validation.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the cross-validation.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the element to evaluate a neural network model using cross-validation.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the element to evaluate a neural network model using cross-validation.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the element to evaluate a neural network model using cross-validation.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the element to evaluate a neural network model using cross-validation.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the element to evaluate a neural network model using cross-validation.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the element to evaluate a neural network model using cross-validation.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the evaluating neural network model using cross-validation.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>KFOLDS</strong> 	KFOLDS (data, scalar) is the number of folds.
 			%  <strong>11</strong> <strong>SPLIT</strong> 	SPLIT (data, cell) is a cell containing the ratio numbers or the vectors stating which datapoints belong to the splitted neural network datasets.
@@ -271,7 +273,7 @@ classdef NNCrossValidation < ConcreteElement
 			%  <strong>24</strong> <strong>BATCH</strong> 	BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.
 			%  <strong>25</strong> <strong>SHUFFLE</strong> 	SHUFFLE (parameter, option) is an option for data shuffling.
 			%  <strong>26</strong> <strong>SOLVER</strong> 	SOLVER (parameter, option) is an option for the solver.
-			%  <strong>27</strong> <strong>VERBOSE</strong> 	VERBOSE (metadata, logical) is an indicator to display training progress information.
+			%  <strong>27</strong> <strong>VERBOSE</strong> 	VERBOSE (gui, logical) is an indicator to display training progress information.
 			%  <strong>28</strong> <strong>PLOT_TRAINING</strong> 	PLOT_TRAINING (metadata, option) determines whether to plot the training progress.
 			%  <strong>29</strong> <strong>TRAIN</strong> 	TRAIN (query, empty) trains all neural network models for all folds.
 			%
@@ -281,6 +283,21 @@ classdef NNCrossValidation < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the neural network cross-validation.
+			%
+			% BUILD = NNCrossValidation.GETBUILD() returns the build of 'NNCrossValidation'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = NNCV.GETBUILD() returns the build of the neural network cross-validation NNCV.
+			%  BUILD = Element.GETBUILD(NNCV) returns the build of 'NNCV'.
+			%  BUILD = Element.GETBUILD('NNCrossValidation') returns the build of 'NNCrossValidation'.
+			%
+			% Note that the Element.GETBUILD(NNCV) and Element.GETBUILD('NNCrossValidation')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function nncv_class = getClass()
 			%GETCLASS returns the class of the neural network cross-validation.
 			%
@@ -343,7 +360,7 @@ classdef NNCrossValidation < ConcreteElement
 				case 1 % Category.CONSTANT
 					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [6 7 27 28];
+					prop_list = [6 7 28];
 				case 3 % Category.PARAMETER
 					prop_list = [4 13 14 23 24 25 26];
 				case 4 % Category.DATA
@@ -353,7 +370,7 @@ classdef NNCrossValidation < ConcreteElement
 				case 6 % Category.QUERY
 					prop_list = [8 18 20 22 29];
 				case 9 % Category.GUI
-					prop_list = 9;
+					prop_list = [9 27];
 				otherwise
 					prop_list = [];
 			end
@@ -387,7 +404,7 @@ classdef NNCrossValidation < ConcreteElement
 				case 1 % Category.CONSTANT
 					prop_number = 3;
 				case 2 % Category.METADATA
-					prop_number = 4;
+					prop_number = 3;
 				case 3 % Category.PARAMETER
 					prop_number = 7;
 				case 4 % Category.DATA
@@ -397,7 +414,7 @@ classdef NNCrossValidation < ConcreteElement
 				case 6 % Category.QUERY
 					prop_number = 5;
 				case 9 % Category.GUI
-					prop_number = 1;
+					prop_number = 2;
 				otherwise
 					prop_number = 0;
 			end
@@ -555,7 +572,7 @@ classdef NNCrossValidation < ConcreteElement
 			prop = NNCrossValidation.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nncrossvalidation_category_list = { 1  1  1  3  4  2  2  6  9  4  4  4  3  3  5  5  5  6  5  6  5  6  3  3  3  3  2  2  6 };
+			nncrossvalidation_category_list = { 1  1  1  3  4  2  2  6  9  4  4  4  3  3  5  5  5  6  5  6  5  6  3  3  3  3  9  2  6 };
 			prop_category = nncrossvalidation_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -607,7 +624,7 @@ classdef NNCrossValidation < ConcreteElement
 			prop = NNCrossValidation.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nncrossvalidation_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the cross-validation.'  'DESCRIPTION (constant, string) is the description of the cross-validation.'  'TEMPLATE (parameter, item) is the template of the cross-validation.'  'ID (data, string) is a few-letter code for the cross-validation.'  'LABEL (metadata, string) is an extended label of the cross-validation.'  'NOTES (metadata, string) are some specific notes about the cross-validation.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'KFOLDS (data, scalar) is the number of folds.'  'SPLIT (data, cell) is a cell containing the ratio numbers or the vectors stating which datapoints belong to the splitted neural network datasets.'  'D (data, itemlist) is the datasets from groups to be cross-validated.'  'NN_TEMPLATE (parameter, item) is the neural network template to set all neural network parameters.'  'NNEVALUATOR_TEMPLATE (parameter, item) is the neural network evaluator template to set all evalutor parameters.'  'DSP (result, itemlist) is a list of dataset splitter that splits the dataset per group.'  'DCO (result, itemlist) is a list of dataset combiners that combines the datasets per fold.'  'D_LIST (result, itemlist) contains the split datasets corresponding to the k folds.'  'D_LIST_IT (query, item) returns a dataset at a specified index in the itemlist of splitted neural network datasets.'  'NN_LIST (result, itemlist) contains the neural network models corresponding to the k folds.'  'NN_LIST_IT (query, item) returns a neural networks model at a specified index in the itemlist of splitted neural network datasets.'  'EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to the k folds.'  'EVALUATOR_LIST_IT (query, item) returns a neural networks evaluator at a specified index in the itemlist of splitted neural network datasets.'  'EPOCHS (parameter, scalar) is the maximum number of epochs.'  'BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.'  'SHUFFLE (parameter, option) is an option for data shuffling.'  'SOLVER (parameter, option) is an option for the solver.'  'VERBOSE (metadata, logical) is an indicator to display training progress information.'  'PLOT_TRAINING (metadata, option) determines whether to plot the training progress.'  'TRAIN (query, empty) trains all neural network models for all folds.' };
+			nncrossvalidation_description_list = { 'ELCLASS (constant, string) is the class of the element to evaluate a neural network model using cross-validation.'  'NAME (constant, string) is the name of the element to evaluate a neural network model using cross-validation.'  'DESCRIPTION (constant, string) is the description of the element to evaluate a neural network model using cross-validation.'  'TEMPLATE (parameter, item) is the template of the element to evaluate a neural network model using cross-validation.'  'ID (data, string) is a few-letter code of the element to evaluate a neural network model using cross-validation.'  'LABEL (metadata, string) is an extended label of the element to evaluate a neural network model using cross-validation.'  'NOTES (metadata, string) are some specific notes about the evaluating neural network model using cross-validation.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'KFOLDS (data, scalar) is the number of folds.'  'SPLIT (data, cell) is a cell containing the ratio numbers or the vectors stating which datapoints belong to the splitted neural network datasets.'  'D (data, itemlist) is the datasets from groups to be cross-validated.'  'NN_TEMPLATE (parameter, item) is the neural network template to set all neural network parameters.'  'NNEVALUATOR_TEMPLATE (parameter, item) is the neural network evaluator template to set all evalutor parameters.'  'DSP (result, itemlist) is a list of dataset splitter that splits the dataset per group.'  'DCO (result, itemlist) is a list of dataset combiners that combines the datasets per fold.'  'D_LIST (result, itemlist) contains the split datasets corresponding to the k folds.'  'D_LIST_IT (query, item) returns a dataset at a specified index in the itemlist of splitted neural network datasets.'  'NN_LIST (result, itemlist) contains the neural network models corresponding to the k folds.'  'NN_LIST_IT (query, item) returns a neural networks model at a specified index in the itemlist of splitted neural network datasets.'  'EVALUATOR_LIST (result, itemlist) contains the evaluators corresponding to the k folds.'  'EVALUATOR_LIST_IT (query, item) returns a neural networks evaluator at a specified index in the itemlist of splitted neural network datasets.'  'EPOCHS (parameter, scalar) is the maximum number of epochs.'  'BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.'  'SHUFFLE (parameter, option) is an option for data shuffling.'  'SOLVER (parameter, option) is an option for the solver.'  'VERBOSE (gui, logical) is an indicator to display training progress information.'  'PLOT_TRAINING (metadata, option) determines whether to plot the training progress.'  'TRAIN (query, empty) trains all neural network models for all folds.' };
 			prop_description = nncrossvalidation_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -749,9 +766,9 @@ classdef NNCrossValidation < ConcreteElement
 				case 1 % NNCrossValidation.ELCLASS
 					prop_default = 'NNCrossValidation';
 				case 2 % NNCrossValidation.NAME
-					prop_default = 'NNCrossValidation';
+					prop_default = 'Neural Network Cross-Validation';
 				case 3 % NNCrossValidation.DESCRIPTION
-					prop_default = 'A cross validation (NNCrossValidation) is a process that facilitates the evaluation of neural network models using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.';
+					prop_default = 'A cross-validation (NNCrossValidation) is a process that facilitates the evaluation of neural network models using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.';
 				case 4 % NNCrossValidation.TEMPLATE
 					prop_default = Format.getFormatDefault(8, NNCrossValidation.getPropSettings(prop));
 				case 5 % NNCrossValidation.ID
@@ -885,31 +902,6 @@ classdef NNCrossValidation < ConcreteElement
 			end
 		end
 	end
-	methods (Access=protected) % postset
-		function postset(nncv, prop)
-			%POSTSET postprocessing after a prop has been set.
-			%
-			% POSTPROCESSING(EL, PROP) postprocessesing after PROP has been set. By
-			%  default, this function does not do anything, so it should be implemented
-			%  in the subclasses of Element when needed.
-			%
-			% This postprocessing occurs only when PROP is set.
-			%
-			% See also conditioning, preset, checkProp, postprocessing, calculateValue,
-			%  checkValue.
-			
-			switch prop
-				case 10 % NNCrossValidation.KFOLDS
-					kfolds = nncv.get('KFOLDS');
-					nncv.set('SPLIT', repmat({1 / kfolds}, 1, kfolds));
-					
-				otherwise
-					if prop <= 8
-						postset@ConcreteElement(nncv, prop);
-					end
-			end
-		end
-	end
 	methods (Access=protected) % postprocessing
 		function postprocessing(nncv, prop)
 			%POSTPROCESSING postprocessesing after setting.
@@ -929,7 +921,8 @@ classdef NNCrossValidation < ConcreteElement
 					split = nncv.get('SPLIT');
 					d = nncv.get('D');
 					if isempty(split) && length(d) > 0 && d{1}.get('DP_DICT').get('LENGTH') > kfolds
-					    nncv.set('SPLIT', repmat({1 / kfolds}, 1, kfolds));
+					    split = repmat({1 / kfolds}, length(d), kfolds);
+					    nncv.set('SPLIT', split);
 					end
 					
 				otherwise
@@ -960,7 +953,16 @@ classdef NNCrossValidation < ConcreteElement
 					rng_settings_ = rng(); rng(nncv.getPropSeed(15), 'twister')
 					
 					d_list = nncv.get('D');
-					value = cellfun(@(d) NNDatasetSplit('D', d, 'SPLIT', nncv.get('SPLIT')), d_list, 'UniformOutput', false);
+					split = nncv.get('SPLIT');
+					if isempty(split)
+					    split_per_dataset = {};
+					else
+					    for i = 1:length(d_list)
+					        split_per_dataset{i} = split(i, :);
+					    end
+					end
+					
+					value = cellfun(@(d, s) NNDatasetSplit('D', d, 'SPLIT', s), d_list, split_per_dataset, 'UniformOutput', false);
 					
 					rng(rng_settings_)
 					

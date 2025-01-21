@@ -42,8 +42,7 @@ d = NNDataset( ...
     );
 
 %% Create a regressor cross-validation
-nne_template = NNRegressorMLP_Evaluator('P', 2);
-nncv = NNRegressorMLP_CrossValidation('D', {d}, 'KFOLDS', 2, 'NNEVALUATOR_TEMPLATE', nne_template);
+nncv = NNRegressorMLP_CrossValidation('D', {d}, 'KFOLDS', 2);
 nncv.get('TRAIN');
 
 %% Evaluate the performance
@@ -52,4 +51,3 @@ av_coeff_determination = nncv.get('AV_DET');
 av_mae = nncv.get('AV_MAE');
 av_mse = nncv.get('AV_MSE');
 av_rmse = nncv.get('AV_RMSE');
-av_fi = nncv.get('AV_FEATURE_IMPORTANCE');

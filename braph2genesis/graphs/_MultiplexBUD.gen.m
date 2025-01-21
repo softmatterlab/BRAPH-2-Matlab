@@ -2,10 +2,13 @@
 MultiplexBUD < MultiplexWU (g, binary undirected multiplex with fixed densities) is a binary undirected multiplex with fixed densities.
 
 %%% ¡description!
-In a binary undirected multiplex with fixed densities (BUD), the layers are 
- those of binary undirected (BU) multiplex graphs derived from the same 
+In a binary undirected multiplex graph with fixed densities (MultiplexBUD), the layers are 
+ those of binary undirected multiplex graphs derived from the same 
  weighted supra-connectivity matrices binarized at different densities.
 The supra-connectivity matrix has a number of partitions equal to the number of densities.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -133,12 +136,12 @@ ELCLASS (constant, string) is the class of the binary undirected multiplex with 
 %%% ¡prop!
 NAME (constant, string) is the name of the binary undirected multiplex with fixed densities.
 %%%% ¡default!
-'MultiplexBUD'
+'Multiplex Binary Undirected at fixed Densities'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the binary undirected multiplex with fixed densities.
 %%%% ¡default!
-'In a binary undirected multiplex with fixed densities (BUD), the layers are those of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different densities. The supra-connectivity matrix has a number of partitions equal to the number of densities.'
+'In a binary undirected multiplex graph with fixed densities (MultiplexBUD), the layers are those of binary undirected multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different densities. The supra-connectivity matrix has a number of partitions equal to the number of densities.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the binary undirected multiplex with fixed densities.

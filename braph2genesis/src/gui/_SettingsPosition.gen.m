@@ -10,6 +10,9 @@ The handle can be an uipanel.
 %%% ¡seealso!
 uipanel, SettingsPositionPP, PanelFig, GUIFig, check_graphics
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

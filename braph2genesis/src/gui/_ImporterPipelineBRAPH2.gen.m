@@ -8,6 +8,9 @@ The format of the BRAPH2 file should include the label, description and at least
 %%% ¡seealso!
 Importer, Pipeline, ExporterPipelineBRAPH2
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -77,7 +80,7 @@ pip = Pipeline();
 % analyzes file
 file = im.get('FILE');
 if ~isfile(file)
-    file = [fileparts(which('braph2')) filesep 'src' filesep 'gui' filesep 'examples' filesep file];
+    file = [fileparts(which('braph2')) filesep 'src' filesep 'gui' filesep 'gui_examples' filesep file];
 end
 
 if isfile(file)

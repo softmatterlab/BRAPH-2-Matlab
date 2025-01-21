@@ -5,6 +5,9 @@ FlexibilityAv < Flexibility (m, average flexibility) is the graph Average Flexib
 The Average Flexibility (FlexibilityAv) of a multilayer graph is the average of the flexibility 
 of all nodes.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -59,7 +62,7 @@ ELCLASS (constant, string) is the class of the Average Flexibility.
 %%% ¡prop!
 NAME (constant, string) is the name of the Average Flexibility.
 %%%% ¡default!
-'FlexibilityAv '
+'Average Flexibility'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the Average Flexibility.
@@ -104,7 +107,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'OrdMxWU' 'MultiplexBU' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};
+{'MultiplexWU' 'MultiplexWD' 'OrdMxWU' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};
 
 %%% ¡prop!
 M (result, cell) is the Average Flexibility.

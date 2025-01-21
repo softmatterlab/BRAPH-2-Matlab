@@ -13,7 +13,7 @@ classdef LocalEfficiencyAv < LocalEfficiency
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Local Efficiency.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Local Efficiency.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Local Efficiency.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -127,7 +127,7 @@ classdef LocalEfficiencyAv < LocalEfficiency
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Local Efficiency.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Local Efficiency.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Local Efficiency.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -142,6 +142,21 @@ classdef LocalEfficiencyAv < LocalEfficiency
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the average local efficiency.
+			%
+			% BUILD = LocalEfficiencyAv.GETBUILD() returns the build of 'LocalEfficiencyAv'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the average local efficiency M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('LocalEfficiencyAv') returns the build of 'LocalEfficiencyAv'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('LocalEfficiencyAv')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the average local efficiency.
 			%
@@ -468,7 +483,7 @@ classdef LocalEfficiencyAv < LocalEfficiency
 			prop = LocalEfficiencyAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			localefficiencyav_description_list = { 'ELCLASS (constant, string) is the class of the Average Local Efficiency.'  'NAME (constant, string) is the name of the Average Local Efficiency.'  'DESCRIPTION (constant, string) is the description of the Average Local Efficiency.'  'TEMPLATE (parameter, item) is the template of the Average Local Efficiency.'  'ID (data, string) is a few-letter code of the Average Local Efficiency.'  'LABEL (metadata, string) is an extended label of the Average Local Efficiency.'  'NOTES (metadata, string) are some specific notes about the Average Local Efficiency.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Local Efficiency.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			localefficiencyav_description_list = { 'ELCLASS (constant, string) is the class of the Average Local Efficiency.'  'NAME (constant, string) is the name of the Average Local Efficiency.'  'DESCRIPTION (constant, string) is the description of the Average Local Efficiency.'  'TEMPLATE (parameter, item) is the template of the Average Local Efficiency.'  'ID (data, string) is a few-letter code of the Average Local Efficiency.'  'LABEL (metadata, string) is an extended label of the Average Local Efficiency.'  'NOTES (metadata, string) are some specific notes about the Average Local Efficiency.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Local Efficiency.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = localefficiencyav_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -658,9 +673,11 @@ classdef LocalEfficiencyAv < LocalEfficiency
 					    return;
 					end
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    local_efficiency_av(li) ={mean(local_efficiency{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = local_efficiency_av;
 					

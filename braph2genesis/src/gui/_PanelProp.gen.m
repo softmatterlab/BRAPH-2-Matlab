@@ -47,6 +47,9 @@ CALLBACKS - These are the public callback (to be further implemented by the deri
 %%% ¡seealso!
 uipanel, uilabel, uibutton, GUI, GUIElement, PanelElement
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

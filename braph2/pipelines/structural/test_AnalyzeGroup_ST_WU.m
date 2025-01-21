@@ -12,7 +12,21 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 			'AnalyzeGroup_ST_WU().get(''ELCLASS'') should return ''AnalyzeGroup_ST_WU''.')
 	end
 	 
-	% getClass
+	% getBuild()
+	assert(AnalyzeGroup_ST_WU.getBuild() == 1 && AnalyzeGroup_ST_WU.getBuild() > 0, ...
+		[BRAPH2.STR ':AnalyzeGroup_ST_WU:' BRAPH2.FAIL_TEST], ...
+		'AnalyzeGroup_ST_WU.getBuild() should return the AnalyzeGroup_ST_WU build number.')
+	assert(a.getBuild() == 1 && a.getBuild() > 0 , ...
+		[BRAPH2.STR ':AnalyzeGroup_ST_WU:' BRAPH2.FAIL_TEST], ...
+		'a.getBuild() should return the AnalyzeGroup_ST_WU build number.')
+	assert(Element.getBuild(a) == 1 && Element.getBuild(a) > 0, ...
+		[BRAPH2.STR ':AnalyzeGroup_ST_WU:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(a) should return the AnalyzeGroup_ST_WU build number.')
+	assert(Element.getBuild('AnalyzeGroup_ST_WU') == 1 && Element.getBuild('AnalyzeGroup_ST_WU') > 0, ...
+		[BRAPH2.STR ':AnalyzeGroup_ST_WU:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(''AnalyzeGroup_ST_WU'') should return the AnalyzeGroup_ST_WU build number.')
+	 
+	% getClass()
 	assert(strcmp(AnalyzeGroup_ST_WU.getClass(), 'AnalyzeGroup_ST_WU'), ...
 		[BRAPH2.STR ':AnalyzeGroup_ST_WU:' BRAPH2.FAIL_TEST], ...
 		'AnalyzeGroup_ST_WU.getClass() should return ''AnalyzeGroup_ST_WU''.')
@@ -1381,11 +1395,11 @@ end
 
 %% Test 13: Template for Graphs and Measures
 if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
-	create_data_ST_XLS() % only creates files if the example folder doesn't already exist
+	create_data_ST_TXT() % only creates files if the example folder doesn't already exist
 	
 	ba = ImporterBrainAtlasTXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST TXT' filesep 'atlas.txt']).get('BA');
-	gr1 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST txt' filesep 'ST_Group_1.txt'], 'BA', ba).get('GR');
-	gr2 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST txt' filesep 'ST_Group_2.txt'], 'BA', ba).get('GR');
+	gr1 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST TXT' filesep 'ST_Group_1.txt'], 'BA', ba).get('GR');
+	gr2 = ImporterGroupSubjectST_TXT('FILE', [fileparts(which('SubjectST')) filesep 'Example data ST TXT' filesep 'ST_Group_2.txt'], 'BA', ba).get('GR');
 	
 	% check that analysis parameters are correclty templated between analysis 1 and 2
 	negative_weight_rule = Correlation.ABS;

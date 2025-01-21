@@ -9,6 +9,9 @@ The handle can be either a patch or a surface.
 %%% ¡seealso!
 patch, surface, SettingsSurfacePP, PanelFig, GUIFig, check_graphics
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

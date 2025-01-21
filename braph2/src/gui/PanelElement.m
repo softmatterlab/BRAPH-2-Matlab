@@ -34,11 +34,11 @@ classdef PanelElement < Panel
 	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the element panel.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the element panel.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the element panel.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the line element panel.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the element panel.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the element panel.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the element panel.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the element panel.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
 	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the element panel.
@@ -147,6 +147,8 @@ classdef PanelElement < Panel
 	%
 	%
 	% See also uigridlayout, GUI, GUIElement, PanelProp.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		EL = 20; %CET: Computational Efficiency Trick
@@ -209,11 +211,11 @@ classdef PanelElement < Panel
 			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the element panel.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the element panel.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the element panel.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the line element panel.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the element panel.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the element panel.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the element panel.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the element panel.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
 			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the element panel.
@@ -241,6 +243,21 @@ classdef PanelElement < Panel
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the element panel.
+			%
+			% BUILD = PanelElement.GETBUILD() returns the build of 'PanelElement'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PE.GETBUILD() returns the build of the element panel PE.
+			%  BUILD = Element.GETBUILD(PE) returns the build of 'PE'.
+			%  BUILD = Element.GETBUILD('PanelElement') returns the build of 'PanelElement'.
+			%
+			% Note that the Element.GETBUILD(PE) and Element.GETBUILD('PanelElement')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pe_class = getClass()
 			%GETCLASS returns the class of the element panel.
 			%
@@ -575,7 +592,7 @@ classdef PanelElement < Panel
 			prop = PanelElement.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			panelelement_description_list = { 'ELCLASS (constant, string) is the class of the element panel.'  'NAME (constant, string) is the name of the element panel.'  'DESCRIPTION (constant, string) is the description of the element panel.'  'TEMPLATE (parameter, item) is the template of the line element panel.'  'ID (data, string) is a few-letter code for the element panel.'  'LABEL (metadata, string) is an extended label of the element panel.'  'NOTES (metadata, string) are some specific notes about the element panel.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the element panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the grid layout handle.'  'SHOW (query, logical) brings to the front the figures dependent on the element panel.'  'HIDE (query, logical) hides the figures dependent on the element panel.'  'DELETE (query, logical) resets the handles when the element panel is deleted.'  'CLOSE (query, logical) closes the figures dependent on the element panel.'  'EL (data, item) is the element to be plotted.'  'PR_ORDER (gui, rvector) is the order of the property plots.'  'PR_TITLE (gui, stringlist) is the list of property plot titles.'  'PR_VISIBLE (gui, rvector) is the list of visible property plots.'  'PR_DICT (result, idict) is a dictionary of the property plots.'  'MIN_WIDTH (gui, size) is the minimal panel width in pixels.'  'RESIZEX (query, logical) resizes the x-extension of the element panel and its prop panels.'  'RESIZEY (query, logical) resizes the y-extension of the element panel and its prop panels.'  'LISTENER_PPHEIGHT (evanescent, handlelist) contains the listeners to the PropSet events.' };
+			panelelement_description_list = { 'ELCLASS (constant, string) is the class of the element panel.'  'NAME (constant, string) is the name of the element panel.'  'DESCRIPTION (constant, string) is the description of the element panel.'  'TEMPLATE (parameter, item) is the template of the element panel.'  'ID (data, string) is a few-letter code for the element panel.'  'LABEL (metadata, string) is an extended label of the element panel.'  'NOTES (metadata, string) are some specific notes about the element panel.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the element panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the grid layout handle.'  'SHOW (query, logical) brings to the front the figures dependent on the element panel.'  'HIDE (query, logical) hides the figures dependent on the element panel.'  'DELETE (query, logical) resets the handles when the element panel is deleted.'  'CLOSE (query, logical) closes the figures dependent on the element panel.'  'EL (data, item) is the element to be plotted.'  'PR_ORDER (gui, rvector) is the order of the property plots.'  'PR_TITLE (gui, stringlist) is the list of property plot titles.'  'PR_VISIBLE (gui, rvector) is the list of visible property plots.'  'PR_DICT (result, idict) is a dictionary of the property plots.'  'MIN_WIDTH (gui, size) is the minimal panel width in pixels.'  'RESIZEX (query, logical) resizes the x-extension of the element panel and its prop panels.'  'RESIZEY (query, logical) resizes the y-extension of the element panel and its prop panels.'  'LISTENER_PPHEIGHT (evanescent, handlelist) contains the listeners to the PropSet events.' };
 			prop_description = panelelement_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

@@ -3,7 +3,10 @@ Modularity < CommunityStructure (m, modularity) is the graph Modularity.
 
 %%% ¡description!
 The Modularity (Modularity) of a graph is the quality function Q of the resulting partition of the network.
- 
+
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

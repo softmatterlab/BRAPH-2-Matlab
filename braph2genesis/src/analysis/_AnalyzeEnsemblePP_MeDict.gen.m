@@ -8,6 +8,9 @@ It is intended to be used only with the property ME_DICT of AnalyzeEnsemble.
 %%% ¡seealso!
 uitable, AnalyzeEnsemble, Graph, Measure
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -380,7 +383,7 @@ set(pr.get('TABLE'), 'ContextMenu', contextmenu)
 value = contextmenu;
 %%%% ¡calculate_callbacks!
 function cb_select_all(~, ~) 
-    g = pr.get('EL').getPropDefaultConditioned(pr.get('PROP'));
+    g = pr.get('EL').get('GRAPH_TEMPLATE');
     m_list = g.get('COMPATIBLE_MEASURES');
 
     pr.set('SELECTED', [1:1:length(m_list)])
@@ -410,16 +413,14 @@ function cb_calculate(~, ~)
     
     wb = braph2waitbar(pr.get('WAITBAR'), 0, ['Calculating ' num2str(length(selected))  ' measures ...']);
 
-    for i = 1:1:length(m_list)
-        if ismember(i, selected)
-            measure = m_list{i};
-            me = a.get('MEASUREENSEMBLE', measure);
+    for s = 1:1:length(selected)
+        measure = m_list{selected(s)};
+        me = a.get('MEASUREENSEMBLE', measure);
 
-            braph2waitbar(wb, .1 + .9 * i / length(selected), ['Calculating measure ' int2str(i) ' (' measure ') of ' int2str(length(selected)) ' ...'])
+        braph2waitbar(wb, .1 + s / length(selected), ['Calculating measure ' int2str(s) ' (' measure ') of ' int2str(length(selected)) ' ...'])
 
-            if isa(me.getr('M'), 'NoValue')
-                a.get('MEASUREENSEMBLE', measure).memorize('M');
-            end
+        if isa(me.getr('M'), 'NoValue')
+            a.get('MEASUREENSEMBLE', measure).memorize('M');
         end
     end
     

@@ -32,6 +32,9 @@ Typically, it is used as a prop of a subclass of Panel (pn) and it is
 %%% ¡seealso!
 Panel, listener
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

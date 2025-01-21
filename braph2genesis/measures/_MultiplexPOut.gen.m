@@ -5,6 +5,9 @@ MultiplexPOut < Measure (m, multiplex out-participation) is the graph Multiplex 
 The Multiplex Out-Participation (MultiplexPOut) is the homogeneity of the number of outward 
  neighbors of a node across the layers.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

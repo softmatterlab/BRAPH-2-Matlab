@@ -6,8 +6,8 @@
 % 2. It loads the data of a group of subjects from a directory containing XLS files (e.g., ST_MP_Group_1_XLS.1.xlsx and ST_MP_Group_2_XLS.2.xlsx).
 % 3. It analyzes the data using structural multiplex analysis (ST_MP) based on a binary undirected graph using thresholds.
 
-% PDF: 
-% README:
+% PDF: /tutorials/pipelines/tut_a_mp_st_but/tut_a_mp_st_but.pdf
+% README: /tutorials/pipelines/tut_a_mp_st_but/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas XLS % Brain Atlas

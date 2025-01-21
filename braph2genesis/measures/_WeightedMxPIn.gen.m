@@ -5,6 +5,9 @@ WeightedMxPIn < Measure (m, weighted in-participation) is the graph Weighted Mul
 The Weighted Multiplex In-Participation (WeightedMxPIn) of a graph is the nodal homogeneity 
   of its number of inward neighbors across the layers. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

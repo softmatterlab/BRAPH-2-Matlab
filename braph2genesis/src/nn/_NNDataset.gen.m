@@ -8,6 +8,9 @@ NNDataset can contain all the necessary inputs and targets.
 %%% ¡seealso!
 NNDataPoint, NNDatasetCombine, NNDatasetSplit
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -18,7 +21,7 @@ ELCLASS (constant, string) is the class of the dataset for neural network analys
 %%% ¡prop!
 NAME (constant, string) is the name of the dataset for neural network analysis.
 %%%% ¡default!
-'NNDataset'
+'Neural Network Dataset'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.

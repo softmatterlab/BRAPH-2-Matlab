@@ -5,6 +5,9 @@ OverlappingDegInAv < OverlappingDegIn (m, average overlapping in-degree) is the 
 The Average Overlapping In-Degree (OverlappingDegInAv) of a graph is the average of the sum of the 
 in-degrees of a node in all layers.  
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

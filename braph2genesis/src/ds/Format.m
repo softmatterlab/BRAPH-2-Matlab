@@ -70,7 +70,7 @@ classdef Format < handle
     %
     %  ALPHA        Alpha is a transparency level between 0 and 1.
     %
-    %  SIZE         Size represents the size of a graphical componet.
+    %  SIZE         Size represents the size of a graphical component.
     %               It is a positive number (default = 1).
     %
     %  MARKER       Marker represents the marker style.
@@ -299,7 +299,7 @@ classdef Format < handle
         CELL = 16
         CELL_TAG = 'll'
         CELL_NAME = 'cell'
-        CELL_DESCRIPTION = 'Cell is a 2D cell array of numeric data, typically used for adjaciency matrices and measures.'
+        CELL_DESCRIPTION = 'Cell is a 2D cell array of numeric data, typically used for adjacency matrices and measures.'
         
         NET = 17
         NET_TAG = 'ml'

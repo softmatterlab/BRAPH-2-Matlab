@@ -10,6 +10,9 @@ BrainSurface contains and manages the vertex_number, coordinates,
 %%% ¡seealso!
 BrainAtlas, BrainRegion, BrainSurfacePF
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

@@ -7,6 +7,9 @@ A Panel Figure for Binodal Bilayer Measure (MeasurePF_BB) manages the basic func
 %%% ¡seealso!
 Measure
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

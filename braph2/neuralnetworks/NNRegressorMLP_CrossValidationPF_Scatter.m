@@ -1,21 +1,23 @@
 classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
-	%NNRegressorMLP_CrossValidationPF_Scatter is the base element to plot an ensemble-based comparison.
+	%NNRegressorMLP_CrossValidationPF_Scatter is the panel for scatter plots in regression tasks.
 	% It is a subclass of <a href="matlab:help PanelFig">PanelFig</a>.
 	%
-	% NNRegressorMLP_CrossValidationPF_Scatter manages the basic functionalities to plot of an ensemble-based comparison.
+	% The scatter plot panel for a cross-validation with MLP regressors
+	%  (NNRegressorMLP_CrossValidationPF_Scatter) manages the functionalities to plot 
+	%  a panel of the scatter plots in regression tasks.
 	%
 	% The list of NNRegressorMLP_CrossValidationPF_Scatter properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel ensemble-based comparison figure.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel scatter plot for a cross-validation with MLP regressors.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel scatter plot for a cross-validation with MLP regressors.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel scatter plot for a cross-validation with MLP regressors.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel scatter plot for a cross-validation with MLP regressors.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel scatter plot for a cross-validation with MLP regressors.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel scatter plot for a cross-validation with MLP regressors.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel scatter plot for a cross-validation with MLP regressors.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the figure comparison figure.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the scatter plot figure.
 	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -30,16 +32,16 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 	%  <strong>23</strong> <strong>H_AXES</strong> 	H_AXES (evanescent, handle) is the handle for the axes.
 	%  <strong>24</strong> <strong>ST_AXIS</strong> 	ST_AXIS (figure, item) determines the axis settings.
 	%  <strong>25</strong> <strong>LISTENER_ST_AXIS</strong> 	LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.
-	%  <strong>26</strong> <strong>NNCV</strong> 	NNCV (metadata, item) is the ensemble-based comparison.
+	%  <strong>26</strong> <strong>NNCV</strong> 	NNCV (metadata, item) is the neural network cross-validation.
 	%  <strong>27</strong> <strong>PREDICTIONS_VALUE</strong> 	PREDICTIONS_VALUE (metadata, matrix) is the predictions value.
 	%  <strong>28</strong> <strong>GROUNDTRUTH_VALUE</strong> 	GROUNDTRUTH_VALUE (metadata, matrix) is the ground truth value.
-	%  <strong>29</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.
+	%  <strong>29</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the prediction value and ground truth value, and then initializes the panel figure.
 	%  <strong>30</strong> <strong>H_PREDICTIONS</strong> 	H_PREDICTIONS (evanescent, handlelist) is the set of handles for the prediction plots.
 	%  <strong>31</strong> <strong>PREDICTIONS</strong> 	PREDICTIONS (figure, logical) determines whether the prediction plot are shown.
 	%  <strong>32</strong> <strong>PREDICTION_DICT</strong> 	PREDICTION_DICT (figure, idict) contains the prediction plot for each target.
-	%  <strong>33</strong> <strong>H_LINE_BASE</strong> 	H_LINE_BASE (evanescent, handle) is the handle for the ensemble-based comparison line.
-	%  <strong>34</strong> <strong>ST_LINE_BASE</strong> 	ST_LINE_BASE (figure, item) determines the line settings.
-	%  <strong>35</strong> <strong>LISTENER_ST_LINE_BASE</strong> 	LISTENER_ST_LINE_BASE (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.
+	%  <strong>33</strong> <strong>H_LINE_BASE</strong> 	H_LINE_BASE (evanescent, handle) is the handle for the base line.
+	%  <strong>34</strong> <strong>ST_LINE_BASE</strong> 	ST_LINE_BASE (figure, item) determines the base line settings.
+	%  <strong>35</strong> <strong>LISTENER_ST_LINE_BASE</strong> 	LISTENER_ST_LINE_BASE (evanescent, handle) contains the listener to the base line settings to update the pushbutton.
 	%  <strong>36</strong> <strong>H_TITLE</strong> 	H_TITLE (evanescent, handle) is the axis title.
 	%  <strong>37</strong> <strong>ST_TITLE</strong> 	ST_TITLE (figure, item) determines the title settings.
 	%  <strong>38</strong> <strong>H_XLABEL</strong> 	H_XLABEL (evanescent, handle) is the axis x-label.
@@ -65,33 +67,33 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 	%  unchecked - sets a property to NOT checked
 	%
 	% NNRegressorMLP_CrossValidationPF_Scatter methods (display):
-	%  tostring - string with information about the panel ensemble-based comparison figure
-	%  disp - displays information about the panel ensemble-based comparison figure
-	%  tree - displays the tree of the panel ensemble-based comparison figure
+	%  tostring - string with information about the panel scatter plot figure
+	%  disp - displays information about the panel scatter plot figure
+	%  tree - displays the tree of the panel scatter plot figure
 	%
 	% NNRegressorMLP_CrossValidationPF_Scatter methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two panel ensemble-based comparison figure are equal (values, locked)
+	%  isequal - determines whether two panel scatter plot figure are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the panel ensemble-based comparison figure
+	%  copy - copies the panel scatter plot figure
 	%
 	% NNRegressorMLP_CrossValidationPF_Scatter methods (save/load, Static):
-	%  save - saves BRAPH2 panel ensemble-based comparison figure as b2 file
-	%  load - loads a BRAPH2 panel ensemble-based comparison figure from a b2 file
+	%  save - saves BRAPH2 panel scatter plot figure as b2 file
+	%  load - loads a BRAPH2 panel scatter plot figure from a b2 file
 	%
 	% NNRegressorMLP_CrossValidationPF_Scatter method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the panel ensemble-based comparison figure
+	%  encodeJSON - returns a JSON string encoding the panel scatter plot figure
 	%
 	% NNRegressorMLP_CrossValidationPF_Scatter method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the panel ensemble-based comparison figure
+	%   decodeJSON - returns a JSON string encoding the panel scatter plot figure
 	%
 	% NNRegressorMLP_CrossValidationPF_Scatter methods (inspection, Static):
-	%  getClass - returns the class of the panel ensemble-based comparison figure
+	%  getClass - returns the class of the panel scatter plot figure
 	%  getSubclasses - returns all subclasses of NNRegressorMLP_CrossValidationPF_Scatter
-	%  getProps - returns the property list of the panel ensemble-based comparison figure
-	%  getPropNumber - returns the property number of the panel ensemble-based comparison figure
+	%  getProps - returns the property list of the panel scatter plot figure
+	%  getPropNumber - returns the property number of the panel scatter plot figure
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -133,7 +135,9 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 	% To print full list of constants, click here <a href="matlab:metaclass = ?NNRegressorMLP_CrossValidationPF_Scatter; properties = metaclass.PropertyList;for i = 1:1:length(properties), if properties(i).Constant, disp([properties(i).Name newline() tostring(properties(i).DefaultValue) newline()]), end, end">NNRegressorMLP_CrossValidationPF_Scatter constants</a>.
 	%
 	%
-	% See also ComparisonEnsemble.
+	% See also NNRegressorMLP_CrossValidation.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		H_AXES = 23; %CET: Computational Efficiency Trick
@@ -233,7 +237,7 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 	end
 	methods % constructor
 		function pf = NNRegressorMLP_CrossValidationPF_Scatter(varargin)
-			%NNRegressorMLP_CrossValidationPF_Scatter() creates a panel ensemble-based comparison figure.
+			%NNRegressorMLP_CrossValidationPF_Scatter() creates a panel scatter plot figure.
 			%
 			% NNRegressorMLP_CrossValidationPF_Scatter(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -243,17 +247,17 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNRegressorMLP_CrossValidationPF_Scatter properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel ensemble-based comparison figure.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel scatter plot for a cross-validation with MLP regressors.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel scatter plot for a cross-validation with MLP regressors.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel scatter plot for a cross-validation with MLP regressors.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel scatter plot for a cross-validation with MLP regressors.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel scatter plot for a cross-validation with MLP regressors.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel scatter plot for a cross-validation with MLP regressors.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel scatter plot for a cross-validation with MLP regressors.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the figure comparison figure.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the scatter plot figure.
 			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -268,16 +272,16 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 			%  <strong>23</strong> <strong>H_AXES</strong> 	H_AXES (evanescent, handle) is the handle for the axes.
 			%  <strong>24</strong> <strong>ST_AXIS</strong> 	ST_AXIS (figure, item) determines the axis settings.
 			%  <strong>25</strong> <strong>LISTENER_ST_AXIS</strong> 	LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.
-			%  <strong>26</strong> <strong>NNCV</strong> 	NNCV (metadata, item) is the ensemble-based comparison.
+			%  <strong>26</strong> <strong>NNCV</strong> 	NNCV (metadata, item) is the neural network cross-validation.
 			%  <strong>27</strong> <strong>PREDICTIONS_VALUE</strong> 	PREDICTIONS_VALUE (metadata, matrix) is the predictions value.
 			%  <strong>28</strong> <strong>GROUNDTRUTH_VALUE</strong> 	GROUNDTRUTH_VALUE (metadata, matrix) is the ground truth value.
-			%  <strong>29</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.
+			%  <strong>29</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the prediction value and ground truth value, and then initializes the panel figure.
 			%  <strong>30</strong> <strong>H_PREDICTIONS</strong> 	H_PREDICTIONS (evanescent, handlelist) is the set of handles for the prediction plots.
 			%  <strong>31</strong> <strong>PREDICTIONS</strong> 	PREDICTIONS (figure, logical) determines whether the prediction plot are shown.
 			%  <strong>32</strong> <strong>PREDICTION_DICT</strong> 	PREDICTION_DICT (figure, idict) contains the prediction plot for each target.
-			%  <strong>33</strong> <strong>H_LINE_BASE</strong> 	H_LINE_BASE (evanescent, handle) is the handle for the ensemble-based comparison line.
-			%  <strong>34</strong> <strong>ST_LINE_BASE</strong> 	ST_LINE_BASE (figure, item) determines the line settings.
-			%  <strong>35</strong> <strong>LISTENER_ST_LINE_BASE</strong> 	LISTENER_ST_LINE_BASE (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.
+			%  <strong>33</strong> <strong>H_LINE_BASE</strong> 	H_LINE_BASE (evanescent, handle) is the handle for the base line.
+			%  <strong>34</strong> <strong>ST_LINE_BASE</strong> 	ST_LINE_BASE (figure, item) determines the base line settings.
+			%  <strong>35</strong> <strong>LISTENER_ST_LINE_BASE</strong> 	LISTENER_ST_LINE_BASE (evanescent, handle) contains the listener to the base line settings to update the pushbutton.
 			%  <strong>36</strong> <strong>H_TITLE</strong> 	H_TITLE (evanescent, handle) is the axis title.
 			%  <strong>37</strong> <strong>ST_TITLE</strong> 	ST_TITLE (figure, item) determines the title settings.
 			%  <strong>38</strong> <strong>H_XLABEL</strong> 	H_XLABEL (evanescent, handle) is the axis x-label.
@@ -291,13 +295,28 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the panel scatter plot figure.
+			%
+			% BUILD = NNRegressorMLP_CrossValidationPF_Scatter.GETBUILD() returns the build of 'NNRegressorMLP_CrossValidationPF_Scatter'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PF.GETBUILD() returns the build of the panel scatter plot figure PF.
+			%  BUILD = Element.GETBUILD(PF) returns the build of 'PF'.
+			%  BUILD = Element.GETBUILD('NNRegressorMLP_CrossValidationPF_Scatter') returns the build of 'NNRegressorMLP_CrossValidationPF_Scatter'.
+			%
+			% Note that the Element.GETBUILD(PF) and Element.GETBUILD('NNRegressorMLP_CrossValidationPF_Scatter')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pf_class = getClass()
-			%GETCLASS returns the class of the panel ensemble-based comparison figure.
+			%GETCLASS returns the class of the panel scatter plot figure.
 			%
 			% CLASS = NNRegressorMLP_CrossValidationPF_Scatter.GETCLASS() returns the class 'NNRegressorMLP_CrossValidationPF_Scatter'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = PF.GETCLASS() returns the class of the panel ensemble-based comparison figure PF.
+			%  CLASS = PF.GETCLASS() returns the class of the panel scatter plot figure PF.
 			%  CLASS = Element.GETCLASS(PF) returns the class of 'PF'.
 			%  CLASS = Element.GETCLASS('NNRegressorMLP_CrossValidationPF_Scatter') returns 'NNRegressorMLP_CrossValidationPF_Scatter'.
 			%
@@ -307,12 +326,12 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 			pf_class = 'NNRegressorMLP_CrossValidationPF_Scatter';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the panel ensemble-based comparison figure.
+			%GETSUBCLASSES returns all subclasses of the panel scatter plot figure.
 			%
 			% LIST = NNRegressorMLP_CrossValidationPF_Scatter.GETSUBCLASSES() returns all subclasses of 'NNRegressorMLP_CrossValidationPF_Scatter'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = PF.GETSUBCLASSES() returns all subclasses of the panel ensemble-based comparison figure PF.
+			%  LIST = PF.GETSUBCLASSES() returns all subclasses of the panel scatter plot figure PF.
 			%  LIST = Element.GETSUBCLASSES(PF) returns all subclasses of 'PF'.
 			%  LIST = Element.GETSUBCLASSES('NNRegressorMLP_CrossValidationPF_Scatter') returns all subclasses of 'NNRegressorMLP_CrossValidationPF_Scatter'.
 			%
@@ -324,16 +343,16 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 			subclass_list = { 'NNRegressorMLP_CrossValidationPF_Scatter' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of panel ensemble-based comparison figure.
+			%GETPROPS returns the property list of panel scatter plot figure.
 			%
-			% PROPS = NNRegressorMLP_CrossValidationPF_Scatter.GETPROPS() returns the property list of panel ensemble-based comparison figure
+			% PROPS = NNRegressorMLP_CrossValidationPF_Scatter.GETPROPS() returns the property list of panel scatter plot figure
 			%  as a row vector.
 			%
 			% PROPS = NNRegressorMLP_CrossValidationPF_Scatter.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = PF.GETPROPS([CATEGORY]) returns the property list of the panel ensemble-based comparison figure PF.
+			%  PROPS = PF.GETPROPS([CATEGORY]) returns the property list of the panel scatter plot figure PF.
 			%  PROPS = Element.GETPROPS(PF[, CATEGORY]) returns the property list of 'PF'.
 			%  PROPS = Element.GETPROPS('NNRegressorMLP_CrossValidationPF_Scatter'[, CATEGORY]) returns the property list of 'NNRegressorMLP_CrossValidationPF_Scatter'.
 			%
@@ -371,15 +390,15 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of panel ensemble-based comparison figure.
+			%GETPROPNUMBER returns the property number of panel scatter plot figure.
 			%
-			% N = NNRegressorMLP_CrossValidationPF_Scatter.GETPROPNUMBER() returns the property number of panel ensemble-based comparison figure.
+			% N = NNRegressorMLP_CrossValidationPF_Scatter.GETPROPNUMBER() returns the property number of panel scatter plot figure.
 			%
-			% N = NNRegressorMLP_CrossValidationPF_Scatter.GETPROPNUMBER(CATEGORY) returns the property number of panel ensemble-based comparison figure
+			% N = NNRegressorMLP_CrossValidationPF_Scatter.GETPROPNUMBER(CATEGORY) returns the property number of panel scatter plot figure
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = PF.GETPROPNUMBER([CATEGORY]) returns the property number of the panel ensemble-based comparison figure PF.
+			%  N = PF.GETPROPNUMBER([CATEGORY]) returns the property number of the panel scatter plot figure PF.
 			%  N = Element.GETPROPNUMBER(PF) returns the property number of 'PF'.
 			%  N = Element.GETPROPNUMBER('NNRegressorMLP_CrossValidationPF_Scatter') returns the property number of 'NNRegressorMLP_CrossValidationPF_Scatter'.
 			%
@@ -417,7 +436,7 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in panel ensemble-based comparison figure/error.
+			%EXISTSPROP checks whether property exists in panel scatter plot figure/error.
 			%
 			% CHECK = NNRegressorMLP_CrossValidationPF_Scatter.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -455,7 +474,7 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in panel ensemble-based comparison figure/error.
+			%EXISTSTAG checks whether tag exists in panel scatter plot figure/error.
 			%
 			% CHECK = NNRegressorMLP_CrossValidationPF_Scatter.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -621,7 +640,7 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 			prop = NNRegressorMLP_CrossValidationPF_Scatter.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nnregressormlp_crossvalidationpf_scatter_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the panel ensemble-based comparison figure.'  'DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.'  'TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.'  'ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.'  'LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.'  'NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure comparison figure.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure graph is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'NNCV (metadata, item) is the ensemble-based comparison.'  'PREDICTIONS_VALUE (metadata, matrix) is the predictions value.'  'GROUNDTRUTH_VALUE (metadata, matrix) is the ground truth value.'  'SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.'  'H_PREDICTIONS (evanescent, handlelist) is the set of handles for the prediction plots.'  'PREDICTIONS (figure, logical) determines whether the prediction plot are shown.'  'PREDICTION_DICT (figure, idict) contains the prediction plot for each target.'  'H_LINE_BASE (evanescent, handle) is the handle for the ensemble-based comparison line.'  'ST_LINE_BASE (figure, item) determines the line settings.'  'LISTENER_ST_LINE_BASE (evanescent, handle) contains the listener to the measure line settings to update the pushbutton.'  'H_TITLE (evanescent, handle) is the axis title.'  'ST_TITLE (figure, item) determines the title settings.'  'H_XLABEL (evanescent, handle) is the axis x-label.'  'ST_XLABEL (figure, item) determines the x-label settings.'  'H_YLABEL (evanescent, handle) is the axis y-label.'  'ST_YLABEL (figure, item) determines the y-label settings.' };
+			nnregressormlp_crossvalidationpf_scatter_description_list = { 'ELCLASS (constant, string) is the class of the panel scatter plot for a cross-validation with MLP regressors.'  'NAME (constant, string) is the name of the panel scatter plot for a cross-validation with MLP regressors.'  'DESCRIPTION (constant, string) is the description of the panel scatter plot for a cross-validation with MLP regressors.'  'TEMPLATE (parameter, item) is the template of the panel scatter plot for a cross-validation with MLP regressors.'  'ID (data, string) is a few-letter code for the panel scatter plot for a cross-validation with MLP regressors.'  'LABEL (metadata, string) is an extended label of the panel scatter plot for a cross-validation with MLP regressors.'  'NOTES (metadata, string) are some specific notes about the panel scatter plot for a cross-validation with MLP regressors.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the scatter plot figure.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure graph is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'NNCV (metadata, item) is the neural network cross-validation.'  'PREDICTIONS_VALUE (metadata, matrix) is the predictions value.'  'GROUNDTRUTH_VALUE (metadata, matrix) is the ground truth value.'  'SETUP (query, empty) calculates the prediction value and ground truth value, and then initializes the panel figure.'  'H_PREDICTIONS (evanescent, handlelist) is the set of handles for the prediction plots.'  'PREDICTIONS (figure, logical) determines whether the prediction plot are shown.'  'PREDICTION_DICT (figure, idict) contains the prediction plot for each target.'  'H_LINE_BASE (evanescent, handle) is the handle for the base line.'  'ST_LINE_BASE (figure, item) determines the base line settings.'  'LISTENER_ST_LINE_BASE (evanescent, handle) contains the listener to the base line settings to update the pushbutton.'  'H_TITLE (evanescent, handle) is the axis title.'  'ST_TITLE (figure, item) determines the title settings.'  'H_XLABEL (evanescent, handle) is the axis x-label.'  'ST_XLABEL (figure, item) determines the x-label settings.'  'H_YLABEL (evanescent, handle) is the axis y-label.'  'ST_YLABEL (figure, item) determines the y-label settings.' };
 			prop_description = nnregressormlp_crossvalidationpf_scatter_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -755,9 +774,9 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 				case 1 % NNRegressorMLP_CrossValidationPF_Scatter.ELCLASS
 					prop_default = 'NNRegressorMLP_CrossValidationPF_Scatter';
 				case 2 % NNRegressorMLP_CrossValidationPF_Scatter.NAME
-					prop_default = 'NNRegressorMLP_CrossValidationPF_Scatter';
+					prop_default = 'Scatter Plot Panel for a Cross-Validation with MLP Regressors';
 				case 3 % NNRegressorMLP_CrossValidationPF_Scatter.DESCRIPTION
-					prop_default = 'NNRegressorMLP_CrossValidationPF_Scatter manages the basic functionalities to plot of an ensemble-based comparison.';
+					prop_default = 'The scatter plot panel for cross-validation MLP regressor (NNRegressorMLP_CrossValidationPF_Scatter) manages the functionalities to plot a panel of the scatter plots in regression tasks.';
 				case 4 % NNRegressorMLP_CrossValidationPF_Scatter.TEMPLATE
 					prop_default = Format.getFormatDefault(8, NNRegressorMLP_CrossValidationPF_Scatter.getPropSettings(prop));
 				case 5 % NNRegressorMLP_CrossValidationPF_Scatter.ID
@@ -933,8 +952,12 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 					if pf.get('PREDICTIONS') && ~isa(pf.getr('NNCV'), 'NoValue')
 					    predictions = pf.memorize('PREDICTIONS_VALUE');
 					    ground_truth = pf.memorize('GROUNDTRUTH_VALUE');
-					    targets = pf.memorize('NNCV').get('D_LIST_IT', 1).get('DP_DICT').get('IT', 1).get('TARGET_IDS');
-					    
+					    if ~isa(pf.memorize('NNCV').getr('D'), 'NoValue')
+					        targets = pf.memorize('NNCV').get('D_LIST_IT', 1).get('DP_DICT').get('IT', 1).get('TARGET_IDS');
+					    else
+					        targets = {};
+					    end
+					
 					    if pf.get('PREDICTION_DICT').get('LENGTH') == 0 && ~isempty(ground_truth)
 					        for i = 1:1:length(targets)
 					            target = targets{i};
@@ -1062,7 +1085,11 @@ classdef NNRegressorMLP_CrossValidationPF_Scatter < PanelFig
 					value = [];
 					
 				case 30 % NNRegressorMLP_CrossValidationPF_Scatter.H_PREDICTIONS
-					targets = pf.memorize('NNCV').get('D_LIST_IT', 1).get('DP_DICT').get('IT', 1).get('TARGET_IDS');
+					if ~isa(pf.memorize('NNCV').getr('D'), 'NoValue')
+					    targets = pf.memorize('NNCV').get('D_LIST_IT', 1).get('DP_DICT').get('IT', 1).get('TARGET_IDS');
+					else
+					    targets = {};
+					end
 					L = length(targets);
 					h_predictions = cell(1, L);
 					for i = 1:1:L

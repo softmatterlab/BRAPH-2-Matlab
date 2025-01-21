@@ -20,6 +20,8 @@ function create_Element(generator_file, target_dir)
 %  It can occupy several lines.
 % <strong>%%% ¡seealso!</strong>
 %  Related functions and classes in a single line, coma-separated and without fullstop.
+% <strong>%%% ¡build!</strong>
+%  Number of the build of the element starting from 1.
 %
 %<strong>%% ¡layout!</strong>
 % <strong>%%% ¡prop!</strong>
@@ -83,7 +85,8 @@ function create_Element(generator_file, target_dir)
 %   The prop value is in the variable 'value'.
 %   The outcome should be in variable 'check' and the message in 'msg'.
 %  <strong>%%%% ¡calculate!</strong>
-%   Code to calculate prop results (only for category RESULT).
+%   Code to calculate prop results 
+%   (only for categories RESULT, QUERY and EVANESCENT).
 %   Can be on multiple lines.
 %   Can include callbacks as {@cb_get, 'TAG', varargin} and 
 %   {@cb_set, 'TAG1', value1, ...}.
@@ -158,9 +161,9 @@ disp('¡! generator file read')
 
 %% Analysis
 [class_name, superclass_name, moniker, descriptive_name, header_description, ...
-    class_attributes, description, seealso] = analyze_header();
+    class_attributes, description, seealso, build] = analyze_header();
     function [class_name, superclass_name, moniker, descriptive_name, header_description, ...
-            class_attributes, description, seealso] = analyze_header()
+            class_attributes, description, seealso, build] = analyze_header()
         header = getToken(txt, 'header');
         res = regexp(header, ...
             ['^\s*(?<class_name>\w*)\s*<\s*(?<superclass_name>\w*)' ...
@@ -179,6 +182,8 @@ disp('¡! generator file read')
         description = splitlines(getToken(txt, 'header', 'description'));
         
         seealso = getToken(txt, 'header', 'seealso');
+
+        build = getToken(txt, 'header', 'build');
     end
 
 element_created = exist(class_name, 'class') == 8;
@@ -558,6 +563,8 @@ generate_header()
                 gs(1, {
                      '%'
                     ['% See also ' seealso '.']
+                     '%'
+                    ['% BUILD BRAPH2 BRAPH2.BUILD class_name ' build]
                     })
             end
             g(1, '')
@@ -638,6 +645,25 @@ generate_inspection()
     function generate_inspection()
         g(1, 'methods (Static) % inspection')
         
+        % getBuild()
+        g(2, 'function build = getBuild()')
+            gs(3, {
+                ['%GETBUILD returns the build of the ' descriptive_name '.']
+                 '%'
+                ['% BUILD = ' class_name '.GETBUILD() returns the build of ''' class_name '''.']
+                 '%'
+                 '% Alternative forms to call this method are:'
+                ['%  BUILD = ' upper(moniker) '.GETBUILD() returns the build of the ' descriptive_name ' ' upper(moniker) '.']
+                ['%  BUILD = Element.GETBUILD(' upper(moniker) ') returns the build of ''' upper(moniker) '''.']
+                ['%  BUILD = Element.GETBUILD(''' class_name ''') returns the build of ''' class_name '''.']
+                 '%'
+                ['% Note that the Element.GETBUILD(' upper(moniker) ') and Element.GETBUILD(''' class_name ''')']
+                 '%  are less computationally efficient.'
+                 ''
+                 ['build = ' build ';']
+                })
+        g(2, 'end')
+
         % getClass()
         g(2, ['function ' moniker '_class = getClass()'])
             gs(3, {

@@ -6,14 +6,14 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 	% and functional multiplex data using binary undirected graphs at fixed thresholds.
 	%
 	% The list of AnalyzeEnsemble_CON_FUN_MP_BUT properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold..
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectCON_FUN_MP.
 	%  <strong>11</strong> <strong>GRAPH_TEMPLATE</strong> 	GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
@@ -114,6 +114,8 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 	%
 	%
 	% See also SubjectCON_FUN_MP, MultiplexBUT.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		REPETITION = 15; %CET: Computational Efficiency Trick
@@ -158,14 +160,14 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of AnalyzeEnsemble_CON_FUN_MP_BUT properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold..
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectCON_FUN_MP.
 			%  <strong>11</strong> <strong>GRAPH_TEMPLATE</strong> 	GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
@@ -185,6 +187,21 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graph analysis with connectivity and functional multiplex data of fixed threshold.
+			%
+			% BUILD = AnalyzeEnsemble_CON_FUN_MP_BUT.GETBUILD() returns the build of 'AnalyzeEnsemble_CON_FUN_MP_BUT'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the graph analysis with connectivity and functional multiplex data of fixed threshold A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeEnsemble_CON_FUN_MP_BUT') returns the build of 'AnalyzeEnsemble_CON_FUN_MP_BUT'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeEnsemble_CON_FUN_MP_BUT')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the graph analysis with connectivity and functional multiplex data of fixed threshold.
 			%
@@ -511,7 +528,7 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 			prop = AnalyzeEnsemble_CON_FUN_MP_BUT.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			analyzeensemble_con_fun_mp_but_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectCON_FUN_MP.'  'GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.'  'G_DICT (result, idict) is the multiplex (MultiplexBUT) ensemble obtained from this analysis.'  'ME_DICT (result, idict) contains the calculated measures of the graph ensemble.'  'MEASUREENSEMBLE (query, item) returns an ensemble-based measure.'  'REPETITION (parameter, scalar) is the number of repetitions for functional data.'  'F_MIN (parameter, scalar) is the minimum frequency value for functional data.'  'F_MAX (parameter, scalar) is the maximum frequency value for functional data.'  'CORRELATION_RULE (parameter, option) is the correlation type for functional data.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights of functional data.'  'THRESHOLDS (parameter, rvector) is the vector of thresholds.' };
+			analyzeensemble_con_fun_mp_but_description_list = { 'ELCLASS (constant, string) is the class of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold..'  'NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity and functional multiplex data of fixed threshold.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectCON_FUN_MP.'  'GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.'  'G_DICT (result, idict) is the multiplex (MultiplexBUT) ensemble obtained from this analysis.'  'ME_DICT (result, idict) contains the calculated measures of the graph ensemble.'  'MEASUREENSEMBLE (query, item) returns an ensemble-based measure.'  'REPETITION (parameter, scalar) is the number of repetitions for functional data.'  'F_MIN (parameter, scalar) is the minimum frequency value for functional data.'  'F_MAX (parameter, scalar) is the maximum frequency value for functional data.'  'CORRELATION_RULE (parameter, option) is the correlation type for functional data.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights of functional data.'  'THRESHOLDS (parameter, rvector) is the vector of thresholds.' };
 			prop_description = analyzeensemble_con_fun_mp_but_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -597,7 +614,7 @@ classdef AnalyzeEnsemble_CON_FUN_MP_BUT < AnalyzeEnsemble
 				case 1 % AnalyzeEnsemble_CON_FUN_MP_BUT.ELCLASS
 					prop_default = 'AnalyzeEnsemble_CON_FUN_MP_BUT';
 				case 2 % AnalyzeEnsemble_CON_FUN_MP_BUT.NAME
-					prop_default = 'AnalyzeEnsemble_CON_FUN_MP_BUT';
+					prop_default = 'Multiplex Connectivity-Functional Binary at fixed Thresholds Analyze Ensemble';
 				case 3 % AnalyzeEnsemble_CON_FUN_MP_BUT.DESCRIPTION
 					prop_default = 'This graph analysis (AnalyzeEnsemble_CON_FUN_MP_BUT) analyzes connectivity and functional multiplex data using binary undirected graphs at fixed thresholds.';
 				case 4 % AnalyzeEnsemble_CON_FUN_MP_BUT.TEMPLATE

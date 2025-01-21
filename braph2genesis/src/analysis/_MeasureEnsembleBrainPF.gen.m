@@ -10,6 +10,9 @@ MeasureEnsembleBrainPF utilizes the surface created from BrainAtlasPF to integra
 %%% ¡seealso!
 BrainAtlas, BrainSurface, BrainAtlasPF
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

@@ -4,6 +4,10 @@ OverlappingSOut < StrengthOut (m, overlapping out-strength) is the graph Overlap
 %%% ¡description!
 The Overlapping Out-Strength (OverlappingSOut) of a graph is the sum of the out-strengths of a 
  node in all layers. 
+
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

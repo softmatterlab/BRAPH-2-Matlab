@@ -9,6 +9,9 @@ It works for all categories.
 %%% ¡seealso!
 SettingsArea, uicheckbox, , uipushbutton, uieditfield, uislider
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

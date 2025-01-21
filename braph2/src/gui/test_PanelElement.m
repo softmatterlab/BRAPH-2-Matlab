@@ -14,7 +14,21 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 			'PanelElement().get(''ELCLASS'') should return ''PanelElement''.')
 	end
 	 
-	% getClass
+	% getBuild()
+	assert(PanelElement.getBuild() == 1 && PanelElement.getBuild() > 0, ...
+		[BRAPH2.STR ':PanelElement:' BRAPH2.FAIL_TEST], ...
+		'PanelElement.getBuild() should return the PanelElement build number.')
+	assert(pe.getBuild() == 1 && pe.getBuild() > 0 , ...
+		[BRAPH2.STR ':PanelElement:' BRAPH2.FAIL_TEST], ...
+		'pe.getBuild() should return the PanelElement build number.')
+	assert(Element.getBuild(pe) == 1 && Element.getBuild(pe) > 0, ...
+		[BRAPH2.STR ':PanelElement:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(pe) should return the PanelElement build number.')
+	assert(Element.getBuild('PanelElement') == 1 && Element.getBuild('PanelElement') > 0, ...
+		[BRAPH2.STR ':PanelElement:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(''PanelElement'') should return the PanelElement build number.')
+	 
+	% getClass()
 	assert(strcmp(PanelElement.getClass(), 'PanelElement'), ...
 		[BRAPH2.STR ':PanelElement:' BRAPH2.FAIL_TEST], ...
 		'PanelElement.getClass() should return ''PanelElement''.')
@@ -1605,18 +1619,24 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	assert(isequal(pe.get('H').get('ColumnWidth'), {'1x'}))
 	
 	pe.get('RESIZEX')
-	assert(isequal(pe.get('H').get('ColumnWidth'), {300}))
+	if ~isunix % the assert is not performed in linux OS because the window size from the linux container is not fixed.
+	    assert(isequal(pe.get('H').get('ColumnWidth'), {300})) 
+	end 
 	
 	pe.get('RESIZEY')
 	% cellfun(@(pr) assert(h(pr.get('H')) == pr.get('HEIGHT')), pe.get('PR_DICT').get('IT_LIST'), 'UniformOutput', false)
 	
 	gui.set('POSITION', [0 .8 1 .2])
 	pe.get('RESIZEX')
-	assert(~isequal(pe.get('H').get('ColumnWidth'), {300}))
+	if ~isunix % the assert is not performed in linux OS because the window size from the linux container is not fixed.
+	    assert(~isequal(pe.get('H').get('ColumnWidth'), {300})) 
+	end 
 	
 	gui.set('POSITION', [0 0 .1 1])
 	pe.get('RESIZEX')
-	assert(isequal(pe.get('H').get('ColumnWidth'), {300}))
+	if ~isunix % the assert is not performed in linux OS because the window size from the linux container is not fixed.
+	    assert(isequal(pe.get('H').get('ColumnWidth'), {300})) 
+	end 
 	
 	% set(gui.memorize('H'), 'SizeChangedFcn', 'pe.get(''RESIZEX'')')
 	

@@ -25,6 +25,9 @@ The measures are characterized by their:
 %%% ¡seealso!
 Graph
 
+%%% ¡build!
+1
+
 %% ¡constants!
 % Measure shape
 GLOBAL = 1  

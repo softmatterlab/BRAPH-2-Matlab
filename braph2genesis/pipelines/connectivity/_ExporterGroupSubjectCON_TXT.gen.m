@@ -15,17 +15,20 @@ The variables of interest (if existing) are saved in another tab-separated
 %%% ¡seealso!
 Group, SunbjectCON, ImporterGroupSubjectCON_TXT
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the CON subject group exporter in TXT.
 %%%% ¡default!
 'ExporterGroupSubjectCON_TXT'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the CON subject group exporter in TXT.
 %%%% ¡default!
-'ExporterGroupSubjectCON_TXT'
+'Connectivity Subject Group TXT Exporter'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the CON subject group exporter in TXT.

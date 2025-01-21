@@ -19,7 +19,7 @@ classdef NNBase < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the neural network base.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the neural network base.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the neural network base.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>D</strong> 	D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
 	%  <strong>10</strong> <strong>DP_CLASSES</strong> 	DP_CLASSES (parameter, classlist) is the list of compatible data points.
 	%  <strong>11</strong> <strong>EPOCHS</strong> 	EPOCHS (parameter, scalar) is the maximum number of epochs.
@@ -30,7 +30,7 @@ classdef NNBase < ConcreteElement
 	%  <strong>16</strong> <strong>INPUTS</strong> 	INPUTS (query, cell) constructs the cell array of the data.
 	%  <strong>17</strong> <strong>TARGETS</strong> 	TARGETS (query, cell) constructs the cell array of the targets.
 	%  <strong>18</strong> <strong>TRAIN</strong> 	TRAIN (query, empty) trains the neural network model with the given dataset.
-	%  <strong>19</strong> <strong>VERBOSE</strong> 	VERBOSE (metadata, logical) is an indicator to display training progress information.
+	%  <strong>19</strong> <strong>VERBOSE</strong> 	VERBOSE (gui, logical) is an indicator to display training progress information.
 	%  <strong>20</strong> <strong>PLOT_TRAINING</strong> 	PLOT_TRAINING (metadata, option) determines whether to plot the training progress.
 	%  <strong>21</strong> <strong>PREDICT</strong> 	PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.
 	%
@@ -121,6 +121,8 @@ classdef NNBase < ConcreteElement
 	%
 	%
 	% See also NNDataPoint, NNDataset, NNEvaluator.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		D = 9; %CET: Computational Efficiency Trick
@@ -175,7 +177,7 @@ classdef NNBase < ConcreteElement
 		
 		VERBOSE = 19; %CET: Computational Efficiency Trick
 		VERBOSE_TAG = 'VERBOSE';
-		VERBOSE_CATEGORY = 2;
+		VERBOSE_CATEGORY = 9;
 		VERBOSE_FORMAT = 4;
 		
 		PLOT_TRAINING = 20; %CET: Computational Efficiency Trick
@@ -207,7 +209,7 @@ classdef NNBase < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the neural network base.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the neural network base.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the neural network base.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>D</strong> 	D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
 			%  <strong>10</strong> <strong>DP_CLASSES</strong> 	DP_CLASSES (parameter, classlist) is the list of compatible data points.
 			%  <strong>11</strong> <strong>EPOCHS</strong> 	EPOCHS (parameter, scalar) is the maximum number of epochs.
@@ -218,7 +220,7 @@ classdef NNBase < ConcreteElement
 			%  <strong>16</strong> <strong>INPUTS</strong> 	INPUTS (query, cell) constructs the cell array of the data.
 			%  <strong>17</strong> <strong>TARGETS</strong> 	TARGETS (query, cell) constructs the cell array of the targets.
 			%  <strong>18</strong> <strong>TRAIN</strong> 	TRAIN (query, empty) trains the neural network model with the given dataset.
-			%  <strong>19</strong> <strong>VERBOSE</strong> 	VERBOSE (metadata, logical) is an indicator to display training progress information.
+			%  <strong>19</strong> <strong>VERBOSE</strong> 	VERBOSE (gui, logical) is an indicator to display training progress information.
 			%  <strong>20</strong> <strong>PLOT_TRAINING</strong> 	PLOT_TRAINING (metadata, option) determines whether to plot the training progress.
 			%  <strong>21</strong> <strong>PREDICT</strong> 	PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.
 			%
@@ -228,6 +230,21 @@ classdef NNBase < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the neural network.
+			%
+			% BUILD = NNBase.GETBUILD() returns the build of 'NNBase'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = NN.GETBUILD() returns the build of the neural network NN.
+			%  BUILD = Element.GETBUILD(NN) returns the build of 'NN'.
+			%  BUILD = Element.GETBUILD('NNBase') returns the build of 'NNBase'.
+			%
+			% Note that the Element.GETBUILD(NN) and Element.GETBUILD('NNBase')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function nn_class = getClass()
 			%GETCLASS returns the class of the neural network.
 			%
@@ -290,7 +307,7 @@ classdef NNBase < ConcreteElement
 				case 1 % Category.CONSTANT
 					prop_list = [1 2 3];
 				case 2 % Category.METADATA
-					prop_list = [6 7 19 20];
+					prop_list = [6 7 20];
 				case 3 % Category.PARAMETER
 					prop_list = [4 10 11 12 13 14];
 				case 4 % Category.DATA
@@ -299,6 +316,8 @@ classdef NNBase < ConcreteElement
 					prop_list = 15;
 				case 6 % Category.QUERY
 					prop_list = [8 16 17 18 21];
+				case 9 % Category.GUI
+					prop_list = 19;
 				otherwise
 					prop_list = [];
 			end
@@ -332,7 +351,7 @@ classdef NNBase < ConcreteElement
 				case 1 % Category.CONSTANT
 					prop_number = 3;
 				case 2 % Category.METADATA
-					prop_number = 4;
+					prop_number = 3;
 				case 3 % Category.PARAMETER
 					prop_number = 6;
 				case 4 % Category.DATA
@@ -341,6 +360,8 @@ classdef NNBase < ConcreteElement
 					prop_number = 1;
 				case 6 % Category.QUERY
 					prop_number = 5;
+				case 9 % Category.GUI
+					prop_number = 1;
 				otherwise
 					prop_number = 0;
 			end
@@ -498,7 +519,7 @@ classdef NNBase < ConcreteElement
 			prop = NNBase.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nnbase_category_list = { 1  1  1  3  4  2  2  6  4  3  3  3  3  3  5  6  6  6  2  2  6 };
+			nnbase_category_list = { 1  1  1  3  4  2  2  6  4  3  3  3  3  3  5  6  6  6  9  2  6 };
 			prop_category = nnbase_category_list{prop};
 		end
 		function prop_format = getPropFormat(pointer)
@@ -550,7 +571,7 @@ classdef NNBase < ConcreteElement
 			prop = NNBase.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nnbase_description_list = { 'ELCLASS (constant, string) is the class of the neural network base.'  'NAME (constant, string) is the name of the neural network base.'  'DESCRIPTION (constant, string) is the description of the neural network base.'  'TEMPLATE (parameter, item) is the template of the neural network base.'  'ID (data, string) is a few-letter code for the neural network base.'  'LABEL (metadata, string) is an extended label of the neural network base.'  'NOTES (metadata, string) are some specific notes about the neural network base.'  'TOSTRING (query, string) returns a string that represents the object.'  'D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.'  'DP_CLASSES (parameter, classlist) is the list of compatible data points.'  'EPOCHS (parameter, scalar) is the maximum number of epochs.'  'BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.'  'SHUFFLE (parameter, option) is an option for data shuffling.'  'SOLVER (parameter, option) is an option for the solver.'  'MODEL (result, net) is a trained neural network model with the given dataset.'  'INPUTS (query, cell) constructs the cell array of the data.'  'TARGETS (query, cell) constructs the cell array of the targets.'  'TRAIN (query, empty) trains the neural network model with the given dataset.'  'VERBOSE (metadata, logical) is an indicator to display training progress information.'  'PLOT_TRAINING (metadata, option) determines whether to plot the training progress.'  'PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.' };
+			nnbase_description_list = { 'ELCLASS (constant, string) is the class of the neural network base.'  'NAME (constant, string) is the name of the neural network base.'  'DESCRIPTION (constant, string) is the description of the neural network base.'  'TEMPLATE (parameter, item) is the template of the neural network base.'  'ID (data, string) is a few-letter code for the neural network base.'  'LABEL (metadata, string) is an extended label of the neural network base.'  'NOTES (metadata, string) are some specific notes about the neural network base.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.'  'DP_CLASSES (parameter, classlist) is the list of compatible data points.'  'EPOCHS (parameter, scalar) is the maximum number of epochs.'  'BATCH (parameter, scalar) is the size of the mini-batch used for each training iteration.'  'SHUFFLE (parameter, option) is an option for data shuffling.'  'SOLVER (parameter, option) is an option for the solver.'  'MODEL (result, net) is a trained neural network model with the given dataset.'  'INPUTS (query, cell) constructs the cell array of the data.'  'TARGETS (query, cell) constructs the cell array of the targets.'  'TRAIN (query, empty) trains the neural network model with the given dataset.'  'VERBOSE (gui, logical) is an indicator to display training progress information.'  'PLOT_TRAINING (metadata, option) determines whether to plot the training progress.'  'PREDICT (query, cell) returns the predictions of the trained neural network for a dataset.' };
 			prop_description = nnbase_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -660,7 +681,7 @@ classdef NNBase < ConcreteElement
 				case 1 % NNBase.ELCLASS
 					prop_default = 'NNBase';
 				case 2 % NNBase.NAME
-					prop_default = 'Neural Network Base ';
+					prop_default = 'Neural Network Base';
 				case 3 % NNBase.DESCRIPTION
 					prop_default = 'A Neural Network Base (NNBase) comprises a neural network model with a specific dataset. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses need to implement the props MODEL, INPUTS and TARGETS.';
 				case 4 % NNBase.TEMPLATE

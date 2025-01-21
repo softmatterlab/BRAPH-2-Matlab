@@ -8,6 +8,9 @@ ordinal multiplex data using weighted undirected graphs.
 %%% ¡seealso!
 SubjectCON_MP, OrdMxWU
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -61,14 +64,14 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_OMP_WU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 %%%% ¡default!
-'AnalyzeEnsemble_CON_OMP_WU'
+'Multiplex Ordered Connectivity Weighted Undirected'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity ordinal multiplex data.

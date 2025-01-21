@@ -1,22 +1,22 @@
 classdef OrdMxBUD < OrdMxWU
-	%OrdMxBUD is a ordinal multiplex binary undirected with fixed densities.
+	%OrdMxBUD is a ordinal multiplex binary undirected graph with fixed densities.
 	% It is a subclass of <a href="matlab:help OrdMxWU">OrdMxWU</a>.
 	%
-	% In an ordinal binary undirected multiplex with fixed densities (BUD), the layers are 
-	%  those of binary undirected (BU) multiplex graphs derived from the same 
+	% In an ordinal multiplex binary undirected graph with fixed densities (OrdMxBUD), the layers are 
+	%  those of binary undirected multiplex graphs derived from the same 
 	%  weighted supra-adjacency matrices binarized at different densities.
 	% The supra-adjacency matrix has a number of partitions equal to the number of densities.
 	% The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.
 	%
 	% The list of OrdMxBUD properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal binary undirected multiplex with fixed densities.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal binary undirected multiplex with fixed densities.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal binary undirected multiplex with fixed densities.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal binary undirected multiplex with fixed densities.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal binary undirected multiplex with fixed densities.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal binary undirected multiplex with fixed densities.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal binary undirected multiplex with fixed densities.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal multiplex binary undirected with fixed densities.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal multiplex binary undirected graph with fixed densities.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal multiplex binary undirected graph with fixed densities.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal multiplex binary undirected graph with fixed densities.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal multiplex binary undirected graph with fixed densities.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal multiplex binary undirected graph with fixed densities.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal multiplex binary undirected graph with fixed densities.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTIPLEX.
 	%  <strong>10</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).
 	%  <strong>11</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).
@@ -31,7 +31,7 @@ classdef OrdMxBUD < OrdMxWU
 	%  <strong>20</strong> <strong>PARTITIONLABELS</strong> 	PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.
 	%  <strong>21</strong> <strong>APARTITIONLABELS</strong> 	APARTITIONLABELS (query, stringlist) returns the partition (density) labels for A.
 	%  <strong>22</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-	%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
+	%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the node labels for each layer.
 	%  <strong>24</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
 	%  <strong>25</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
 	%  <strong>26</strong> <strong>A</strong> 	A (result, cell) is the cell array containing the multiplex binary supra-adjacency matrices of the binary undirected multiplex. 
@@ -71,33 +71,33 @@ classdef OrdMxBUD < OrdMxWU
 	%  unchecked - sets a property to NOT checked
 	%
 	% OrdMxBUD methods (display):
-	%  tostring - string with information about the binary undirected multiplex with fixed densities
-	%  disp - displays information about the binary undirected multiplex with fixed densities
-	%  tree - displays the tree of the binary undirected multiplex with fixed densities
+	%  tostring - string with information about the ordinal multiplex binary undirected graph with fixed densities
+	%  disp - displays information about the ordinal multiplex binary undirected graph with fixed densities
+	%  tree - displays the tree of the ordinal multiplex binary undirected graph with fixed densities
 	%
 	% OrdMxBUD methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two binary undirected multiplex with fixed densities are equal (values, locked)
+	%  isequal - determines whether two ordinal multiplex binary undirected graph with fixed densities are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the binary undirected multiplex with fixed densities
+	%  copy - copies the ordinal multiplex binary undirected graph with fixed densities
 	%
 	% OrdMxBUD methods (save/load, Static):
-	%  save - saves BRAPH2 binary undirected multiplex with fixed densities as b2 file
-	%  load - loads a BRAPH2 binary undirected multiplex with fixed densities from a b2 file
+	%  save - saves BRAPH2 ordinal multiplex binary undirected graph with fixed densities as b2 file
+	%  load - loads a BRAPH2 ordinal multiplex binary undirected graph with fixed densities from a b2 file
 	%
 	% OrdMxBUD method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the binary undirected multiplex with fixed densities
+	%  encodeJSON - returns a JSON string encoding the ordinal multiplex binary undirected graph with fixed densities
 	%
 	% OrdMxBUD method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the binary undirected multiplex with fixed densities
+	%   decodeJSON - returns a JSON string encoding the ordinal multiplex binary undirected graph with fixed densities
 	%
 	% OrdMxBUD methods (inspection, Static):
-	%  getClass - returns the class of the binary undirected multiplex with fixed densities
+	%  getClass - returns the class of the ordinal multiplex binary undirected graph with fixed densities
 	%  getSubclasses - returns all subclasses of OrdMxBUD
-	%  getProps - returns the property list of the binary undirected multiplex with fixed densities
-	%  getPropNumber - returns the property number of the binary undirected multiplex with fixed densities
+	%  getProps - returns the property list of the ordinal multiplex binary undirected graph with fixed densities
+	%  getPropNumber - returns the property number of the ordinal multiplex binary undirected graph with fixed densities
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -147,7 +147,7 @@ classdef OrdMxBUD < OrdMxWU
 	end
 	methods % constructor
 		function g = OrdMxBUD(varargin)
-			%OrdMxBUD() creates a binary undirected multiplex with fixed densities.
+			%OrdMxBUD() creates a ordinal multiplex binary undirected graph with fixed densities.
 			%
 			% OrdMxBUD(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -157,14 +157,14 @@ classdef OrdMxBUD < OrdMxWU
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of OrdMxBUD properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal binary undirected multiplex with fixed densities.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal binary undirected multiplex with fixed densities.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal binary undirected multiplex with fixed densities.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal binary undirected multiplex with fixed densities.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal binary undirected multiplex with fixed densities.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal binary undirected multiplex with fixed densities.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal binary undirected multiplex with fixed densities.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal multiplex binary undirected with fixed densities.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal multiplex binary undirected graph with fixed densities.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal multiplex binary undirected graph with fixed densities.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal multiplex binary undirected graph with fixed densities.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal multiplex binary undirected graph with fixed densities.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal multiplex binary undirected graph with fixed densities.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal multiplex binary undirected graph with fixed densities.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTIPLEX.
 			%  <strong>10</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).
 			%  <strong>11</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).
@@ -179,7 +179,7 @@ classdef OrdMxBUD < OrdMxWU
 			%  <strong>20</strong> <strong>PARTITIONLABELS</strong> 	PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.
 			%  <strong>21</strong> <strong>APARTITIONLABELS</strong> 	APARTITIONLABELS (query, stringlist) returns the partition (density) labels for A.
 			%  <strong>22</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-			%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
+			%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the node labels for each layer.
 			%  <strong>24</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
 			%  <strong>25</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
 			%  <strong>26</strong> <strong>A</strong> 	A (result, cell) is the cell array containing the multiplex binary supra-adjacency matrices of the binary undirected multiplex. 
@@ -207,13 +207,28 @@ classdef OrdMxBUD < OrdMxWU
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the ordinal multiplex binary undirected graph with fixed densities.
+			%
+			% BUILD = OrdMxBUD.GETBUILD() returns the build of 'OrdMxBUD'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = G.GETBUILD() returns the build of the ordinal multiplex binary undirected graph with fixed densities G.
+			%  BUILD = Element.GETBUILD(G) returns the build of 'G'.
+			%  BUILD = Element.GETBUILD('OrdMxBUD') returns the build of 'OrdMxBUD'.
+			%
+			% Note that the Element.GETBUILD(G) and Element.GETBUILD('OrdMxBUD')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function g_class = getClass()
-			%GETCLASS returns the class of the binary undirected multiplex with fixed densities.
+			%GETCLASS returns the class of the ordinal multiplex binary undirected graph with fixed densities.
 			%
 			% CLASS = OrdMxBUD.GETCLASS() returns the class 'OrdMxBUD'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = G.GETCLASS() returns the class of the binary undirected multiplex with fixed densities G.
+			%  CLASS = G.GETCLASS() returns the class of the ordinal multiplex binary undirected graph with fixed densities G.
 			%  CLASS = Element.GETCLASS(G) returns the class of 'G'.
 			%  CLASS = Element.GETCLASS('OrdMxBUD') returns 'OrdMxBUD'.
 			%
@@ -223,12 +238,12 @@ classdef OrdMxBUD < OrdMxWU
 			g_class = 'OrdMxBUD';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the binary undirected multiplex with fixed densities.
+			%GETSUBCLASSES returns all subclasses of the ordinal multiplex binary undirected graph with fixed densities.
 			%
 			% LIST = OrdMxBUD.GETSUBCLASSES() returns all subclasses of 'OrdMxBUD'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = G.GETSUBCLASSES() returns all subclasses of the binary undirected multiplex with fixed densities G.
+			%  LIST = G.GETSUBCLASSES() returns all subclasses of the ordinal multiplex binary undirected graph with fixed densities G.
 			%  LIST = Element.GETSUBCLASSES(G) returns all subclasses of 'G'.
 			%  LIST = Element.GETSUBCLASSES('OrdMxBUD') returns all subclasses of 'OrdMxBUD'.
 			%
@@ -240,16 +255,16 @@ classdef OrdMxBUD < OrdMxWU
 			subclass_list = { 'OrdMxBUD' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of binary undirected multiplex with fixed densities.
+			%GETPROPS returns the property list of ordinal multiplex binary undirected graph with fixed densities.
 			%
-			% PROPS = OrdMxBUD.GETPROPS() returns the property list of binary undirected multiplex with fixed densities
+			% PROPS = OrdMxBUD.GETPROPS() returns the property list of ordinal multiplex binary undirected graph with fixed densities
 			%  as a row vector.
 			%
 			% PROPS = OrdMxBUD.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = G.GETPROPS([CATEGORY]) returns the property list of the binary undirected multiplex with fixed densities G.
+			%  PROPS = G.GETPROPS([CATEGORY]) returns the property list of the ordinal multiplex binary undirected graph with fixed densities G.
 			%  PROPS = Element.GETPROPS(G[, CATEGORY]) returns the property list of 'G'.
 			%  PROPS = Element.GETPROPS('OrdMxBUD'[, CATEGORY]) returns the property list of 'OrdMxBUD'.
 			%
@@ -285,15 +300,15 @@ classdef OrdMxBUD < OrdMxWU
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of binary undirected multiplex with fixed densities.
+			%GETPROPNUMBER returns the property number of ordinal multiplex binary undirected graph with fixed densities.
 			%
-			% N = OrdMxBUD.GETPROPNUMBER() returns the property number of binary undirected multiplex with fixed densities.
+			% N = OrdMxBUD.GETPROPNUMBER() returns the property number of ordinal multiplex binary undirected graph with fixed densities.
 			%
-			% N = OrdMxBUD.GETPROPNUMBER(CATEGORY) returns the property number of binary undirected multiplex with fixed densities
+			% N = OrdMxBUD.GETPROPNUMBER(CATEGORY) returns the property number of ordinal multiplex binary undirected graph with fixed densities
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = G.GETPROPNUMBER([CATEGORY]) returns the property number of the binary undirected multiplex with fixed densities G.
+			%  N = G.GETPROPNUMBER([CATEGORY]) returns the property number of the ordinal multiplex binary undirected graph with fixed densities G.
 			%  N = Element.GETPROPNUMBER(G) returns the property number of 'G'.
 			%  N = Element.GETPROPNUMBER('OrdMxBUD') returns the property number of 'OrdMxBUD'.
 			%
@@ -329,7 +344,7 @@ classdef OrdMxBUD < OrdMxWU
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in binary undirected multiplex with fixed densities/error.
+			%EXISTSPROP checks whether property exists in ordinal multiplex binary undirected graph with fixed densities/error.
 			%
 			% CHECK = OrdMxBUD.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -367,7 +382,7 @@ classdef OrdMxBUD < OrdMxWU
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in binary undirected multiplex with fixed densities/error.
+			%EXISTSTAG checks whether tag exists in ordinal multiplex binary undirected graph with fixed densities/error.
 			%
 			% CHECK = OrdMxBUD.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -533,7 +548,7 @@ classdef OrdMxBUD < OrdMxWU
 			prop = OrdMxBUD.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			ordmxbud_description_list = { 'ELCLASS (constant, string) is the class of the ordinal binary undirected multiplex with fixed densities.'  'NAME (constant, string) is the name of the ordinal binary undirected multiplex with fixed densities.'  'DESCRIPTION (constant, string) is the description of the ordinal binary undirected multiplex with fixed densities.'  'TEMPLATE (parameter, item) is the template of the ordinal binary undirected multiplex with fixed densities.'  'ID (data, string) is a few-letter code for the ordinal binary undirected multiplex with fixed densities.'  'LABEL (metadata, string) is an extended label of the ordinal binary undirected multiplex with fixed densities.'  'NOTES (metadata, string) are some specific notes about the ordinal binary undirected multiplex with fixed densities.'  'TOSTRING (query, string) returns a string that represents the object.'  'GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTIPLEX.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels for A.'  'PARTITIONTICKS (metadata, rvector) are the partition tick values.'  'APARTITIONTICKS (query, rvector) returns the partition (density) ticks for A.'  'PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.'  'APARTITIONLABELS (query, stringlist) returns the partition (density) labels for A.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the nodel labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell array containing the multiplex binary supra-adjacency matrices of the binary undirected multiplex. '  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of multiplex layers for each partition (density) of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multiplex adjacency matrices on the diagonal.'  'SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.'  'RANDOMIZATION (query, cell) performs the randomization of a connectivity matrix.'  'DENSITIES (parameter, rvector) is the vector of densities.' };
+			ordmxbud_description_list = { 'ELCLASS (constant, string) is the class of the ordinal multiplex binary undirected with fixed densities.'  'NAME (constant, string) is the name of the ordinal multiplex binary undirected graph with fixed densities.'  'DESCRIPTION (constant, string) is the description of the ordinal multiplex binary undirected graph with fixed densities.'  'TEMPLATE (parameter, item) is the template of the ordinal multiplex binary undirected graph with fixed densities.'  'ID (data, string) is a few-letter code for the ordinal multiplex binary undirected graph with fixed densities.'  'LABEL (metadata, string) is an extended label of the ordinal multiplex binary undirected graph with fixed densities.'  'NOTES (metadata, string) are some specific notes about the ordinal multiplex binary undirected graph with fixed densities.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTIPLEX.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels for A.'  'PARTITIONTICKS (metadata, rvector) are the partition tick values.'  'APARTITIONTICKS (query, rvector) returns the partition (density) ticks for A.'  'PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.'  'APARTITIONLABELS (query, stringlist) returns the partition (density) labels for A.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the node labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell array containing the multiplex binary supra-adjacency matrices of the binary undirected multiplex. '  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of multiplex layers for each partition (density) of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multiplex adjacency matrices on the diagonal.'  'SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.'  'RANDOMIZATION (query, cell) performs the randomization of a connectivity matrix.'  'DENSITIES (parameter, rvector) is the vector of densities.' };
 			prop_description = ordmxbud_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -595,9 +610,9 @@ classdef OrdMxBUD < OrdMxWU
 				case 1 % OrdMxBUD.ELCLASS
 					prop_default = 'OrdMxBUD';
 				case 2 % OrdMxBUD.NAME
-					prop_default = 'OrdMxBUD';
+					prop_default = 'Ordinal Multiplex Binary Undirected Graph at Fixed Densities';
 				case 3 % OrdMxBUD.DESCRIPTION
-					prop_default = 'In an ordinal binary undirected multiplex with fixed densities (BUD), the layers are those of binary undirected (BU) multiplex graphs derived from the same weighted supra-adjacency matrix binarized at different densities. The supra-adjacency matrix has a number of partitions equal to the number of densities.The layers are connected in an ordinal fashion, where just consecutive layers are connected';
+					prop_default = 'In an ordinal multiplex binary undirected graph with fixed densities (OrdMxBUD), the layers are those of binary undirected multiplex graphs derived from the same weighted supra-adjacency matrix binarized at different densities. The supra-adjacency matrix has a number of partitions equal to the number of densities.The layers are connected in an ordinal fashion, where just consecutive layers are connected';
 				case 4 % OrdMxBUD.TEMPLATE
 					prop_default = Format.getFormatDefault(8, OrdMxBUD.getPropSettings(prop));
 				case 5 % OrdMxBUD.ID

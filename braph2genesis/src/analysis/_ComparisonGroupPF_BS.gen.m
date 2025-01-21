@@ -7,6 +7,9 @@ ComparisonGroupPF_BS manages the basic functionalities to plot of a binodal supe
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -194,13 +197,17 @@ value = [];
 
 %%% ¡prop!
 NODES (figure, rvector) are the node numbers of the binodal group comparison figure.
+%%%% ¡default!
+[1 1]
+%%%% ¡postset!
+pf.get('SETUP')
 %%%% ¡gui!
 pr = ComparisonGroupPF_BxPP_Node('EL', pf, 'PROP', ComparisonGroupPF_BS.NODES);
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupPF_BS.PARENT ComparisonGroupPF_BS.H ComparisonGroupPF_BS.ST_POSITION ComparisonGroupPF_BS.ST_AXIS ComparisonGroupPF_BS.ST_AREA ComparisonGroupPF_BS.ST_LINE_DIFF ComparisonGroupPF_BS.ST_LINE_CIL ComparisonGroupPF_BS.ST_LINE_CIU ComparisonGroupPF_BS.ST_TITLE ComparisonGroupPF_BS.ST_XLABEL ComparisonGroupPF_BS.ST_YLABEL] 
+[ComparisonGroupPF_BS.PARENT ComparisonGroupPF_BS.H ComparisonGroupPF_BS.ST_POSITION ComparisonGroupPF_BS.ST_AXIS ComparisonGroupPF_BS.CP ComparisonGroupPF_BS.ST_AREA ComparisonGroupPF_BS.ST_LINE_DIFF ComparisonGroupPF_BS.ST_LINE_CIL ComparisonGroupPF_BS.ST_LINE_CIU ComparisonGroupPF_BS.ST_TITLE ComparisonGroupPF_BS.ST_XLABEL ComparisonGroupPF_BS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
@@ -210,6 +217,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonGroupPF_BS'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonGroupPF_BS'])

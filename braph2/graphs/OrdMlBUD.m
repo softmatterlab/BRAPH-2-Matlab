@@ -2,10 +2,10 @@ classdef OrdMlBUD < OrdMlWU
 	%OrdMlBUD is an ordinal multilayer binary undirected with fixed densities.
 	% It is a subclass of <a href="matlab:help OrdMlWU">OrdMlWU</a>.
 	%
-	% In an ordinal binary undirected multilayer with fixed densities (BUD) graph, layers 
-	%  consist of binary undirected (BU) multilayer graphs derived from the same 
+	% In an ordinal multilayer binary undirected graph with fixed densities (OrdMlBUD), layers 
+	%  consist of binary undirected multilayer graphs derived from the same 
 	%  weighted supra-connectivity matrices binarized at different densities. Layers 
-	%  within the binary undirected (BU) multilayer graphs could have different number of nodes 
+	%  within the binary undirected multilayer graphs could have different number of nodes 
 	%  with within-layer binary undirected edges. Edges can be either 0 (absence of connection) 
 	%  or 1 (existence of connection).
 	% The supra-connectivity matrix has a number of partitions equal to the number of densities.
@@ -14,14 +14,14 @@ classdef OrdMlBUD < OrdMlWU
 	% On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.
 	%
 	% The list of OrdMlBUD properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal binary undirected multilayer with fixed densities.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal binary undirected multilayer with fixed densities.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal binary undirected multilayer with fixed densities.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal binary undirected multilayer with fixed densities.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal binary undirected multilayer with fixed densities.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal binary undirected multilayer with fixed densities.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal binary undirected multilayer with fixed densities.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal multilayer binary undirected with fixed densities.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal multilayer binary undirected with fixed densities.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal multilayer binary undirected with fixed densities.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal multilayer binary undirected with fixed densities.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal multilayer binary undirected with fixed densities.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal multilayer binary undirected with fixed densities.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal multilayer binary undirected with fixed densities.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTILAYER.
 	%  <strong>10</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).
 	%  <strong>11</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).
@@ -36,7 +36,7 @@ classdef OrdMlBUD < OrdMlWU
 	%  <strong>20</strong> <strong>PARTITIONLABELS</strong> 	PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.
 	%  <strong>21</strong> <strong>APARTITIONLABELS</strong> 	APARTITIONLABELS (query, stringlist) returns the partition (density) labels for A.
 	%  <strong>22</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-	%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
+	%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the node labels for each layer.
 	%  <strong>24</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
 	%  <strong>25</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
 	%  <strong>26</strong> <strong>A</strong> 	A (result, cell) is the cell array containing the multilayer binary supra-adjacency matrices of the binary undirected multilayer. 
@@ -76,33 +76,33 @@ classdef OrdMlBUD < OrdMlWU
 	%  unchecked - sets a property to NOT checked
 	%
 	% OrdMlBUD methods (display):
-	%  tostring - string with information about the binary undirected multilayer with fixed densities
-	%  disp - displays information about the binary undirected multilayer with fixed densities
-	%  tree - displays the tree of the binary undirected multilayer with fixed densities
+	%  tostring - string with information about the ordinal multilayer binary undirected with fixed densities
+	%  disp - displays information about the ordinal multilayer binary undirected with fixed densities
+	%  tree - displays the tree of the ordinal multilayer binary undirected with fixed densities
 	%
 	% OrdMlBUD methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two binary undirected multilayer with fixed densities are equal (values, locked)
+	%  isequal - determines whether two ordinal multilayer binary undirected with fixed densities are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the binary undirected multilayer with fixed densities
+	%  copy - copies the ordinal multilayer binary undirected with fixed densities
 	%
 	% OrdMlBUD methods (save/load, Static):
-	%  save - saves BRAPH2 binary undirected multilayer with fixed densities as b2 file
-	%  load - loads a BRAPH2 binary undirected multilayer with fixed densities from a b2 file
+	%  save - saves BRAPH2 ordinal multilayer binary undirected with fixed densities as b2 file
+	%  load - loads a BRAPH2 ordinal multilayer binary undirected with fixed densities from a b2 file
 	%
 	% OrdMlBUD method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the binary undirected multilayer with fixed densities
+	%  encodeJSON - returns a JSON string encoding the ordinal multilayer binary undirected with fixed densities
 	%
 	% OrdMlBUD method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the binary undirected multilayer with fixed densities
+	%   decodeJSON - returns a JSON string encoding the ordinal multilayer binary undirected with fixed densities
 	%
 	% OrdMlBUD methods (inspection, Static):
-	%  getClass - returns the class of the binary undirected multilayer with fixed densities
+	%  getClass - returns the class of the ordinal multilayer binary undirected with fixed densities
 	%  getSubclasses - returns all subclasses of OrdMlBUD
-	%  getProps - returns the property list of the binary undirected multilayer with fixed densities
-	%  getPropNumber - returns the property number of the binary undirected multilayer with fixed densities
+	%  getProps - returns the property list of the ordinal multilayer binary undirected with fixed densities
+	%  getPropNumber - returns the property number of the ordinal multilayer binary undirected with fixed densities
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -152,7 +152,7 @@ classdef OrdMlBUD < OrdMlWU
 	end
 	methods % constructor
 		function g = OrdMlBUD(varargin)
-			%OrdMlBUD() creates a binary undirected multilayer with fixed densities.
+			%OrdMlBUD() creates a ordinal multilayer binary undirected with fixed densities.
 			%
 			% OrdMlBUD(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -162,14 +162,14 @@ classdef OrdMlBUD < OrdMlWU
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of OrdMlBUD properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal binary undirected multilayer with fixed densities.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal binary undirected multilayer with fixed densities.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal binary undirected multilayer with fixed densities.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal binary undirected multilayer with fixed densities.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal binary undirected multilayer with fixed densities.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal binary undirected multilayer with fixed densities.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal binary undirected multilayer with fixed densities.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal multilayer binary undirected with fixed densities.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal multilayer binary undirected with fixed densities.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal multilayer binary undirected with fixed densities.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal multilayer binary undirected with fixed densities.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal multilayer binary undirected with fixed densities.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal multilayer binary undirected with fixed densities.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal multilayer binary undirected with fixed densities.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTILAYER.
 			%  <strong>10</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).
 			%  <strong>11</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).
@@ -184,7 +184,7 @@ classdef OrdMlBUD < OrdMlWU
 			%  <strong>20</strong> <strong>PARTITIONLABELS</strong> 	PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.
 			%  <strong>21</strong> <strong>APARTITIONLABELS</strong> 	APARTITIONLABELS (query, stringlist) returns the partition (density) labels for A.
 			%  <strong>22</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-			%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
+			%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the node labels for each layer.
 			%  <strong>24</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
 			%  <strong>25</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
 			%  <strong>26</strong> <strong>A</strong> 	A (result, cell) is the cell array containing the multilayer binary supra-adjacency matrices of the binary undirected multilayer. 
@@ -212,13 +212,28 @@ classdef OrdMlBUD < OrdMlWU
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the ordinal multilayer binary undirected with fixed densities.
+			%
+			% BUILD = OrdMlBUD.GETBUILD() returns the build of 'OrdMlBUD'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = G.GETBUILD() returns the build of the ordinal multilayer binary undirected with fixed densities G.
+			%  BUILD = Element.GETBUILD(G) returns the build of 'G'.
+			%  BUILD = Element.GETBUILD('OrdMlBUD') returns the build of 'OrdMlBUD'.
+			%
+			% Note that the Element.GETBUILD(G) and Element.GETBUILD('OrdMlBUD')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function g_class = getClass()
-			%GETCLASS returns the class of the binary undirected multilayer with fixed densities.
+			%GETCLASS returns the class of the ordinal multilayer binary undirected with fixed densities.
 			%
 			% CLASS = OrdMlBUD.GETCLASS() returns the class 'OrdMlBUD'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = G.GETCLASS() returns the class of the binary undirected multilayer with fixed densities G.
+			%  CLASS = G.GETCLASS() returns the class of the ordinal multilayer binary undirected with fixed densities G.
 			%  CLASS = Element.GETCLASS(G) returns the class of 'G'.
 			%  CLASS = Element.GETCLASS('OrdMlBUD') returns 'OrdMlBUD'.
 			%
@@ -228,12 +243,12 @@ classdef OrdMlBUD < OrdMlWU
 			g_class = 'OrdMlBUD';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the binary undirected multilayer with fixed densities.
+			%GETSUBCLASSES returns all subclasses of the ordinal multilayer binary undirected with fixed densities.
 			%
 			% LIST = OrdMlBUD.GETSUBCLASSES() returns all subclasses of 'OrdMlBUD'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = G.GETSUBCLASSES() returns all subclasses of the binary undirected multilayer with fixed densities G.
+			%  LIST = G.GETSUBCLASSES() returns all subclasses of the ordinal multilayer binary undirected with fixed densities G.
 			%  LIST = Element.GETSUBCLASSES(G) returns all subclasses of 'G'.
 			%  LIST = Element.GETSUBCLASSES('OrdMlBUD') returns all subclasses of 'OrdMlBUD'.
 			%
@@ -245,16 +260,16 @@ classdef OrdMlBUD < OrdMlWU
 			subclass_list = { 'OrdMlBUD' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of binary undirected multilayer with fixed densities.
+			%GETPROPS returns the property list of ordinal multilayer binary undirected with fixed densities.
 			%
-			% PROPS = OrdMlBUD.GETPROPS() returns the property list of binary undirected multilayer with fixed densities
+			% PROPS = OrdMlBUD.GETPROPS() returns the property list of ordinal multilayer binary undirected with fixed densities
 			%  as a row vector.
 			%
 			% PROPS = OrdMlBUD.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = G.GETPROPS([CATEGORY]) returns the property list of the binary undirected multilayer with fixed densities G.
+			%  PROPS = G.GETPROPS([CATEGORY]) returns the property list of the ordinal multilayer binary undirected with fixed densities G.
 			%  PROPS = Element.GETPROPS(G[, CATEGORY]) returns the property list of 'G'.
 			%  PROPS = Element.GETPROPS('OrdMlBUD'[, CATEGORY]) returns the property list of 'OrdMlBUD'.
 			%
@@ -290,15 +305,15 @@ classdef OrdMlBUD < OrdMlWU
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of binary undirected multilayer with fixed densities.
+			%GETPROPNUMBER returns the property number of ordinal multilayer binary undirected with fixed densities.
 			%
-			% N = OrdMlBUD.GETPROPNUMBER() returns the property number of binary undirected multilayer with fixed densities.
+			% N = OrdMlBUD.GETPROPNUMBER() returns the property number of ordinal multilayer binary undirected with fixed densities.
 			%
-			% N = OrdMlBUD.GETPROPNUMBER(CATEGORY) returns the property number of binary undirected multilayer with fixed densities
+			% N = OrdMlBUD.GETPROPNUMBER(CATEGORY) returns the property number of ordinal multilayer binary undirected with fixed densities
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = G.GETPROPNUMBER([CATEGORY]) returns the property number of the binary undirected multilayer with fixed densities G.
+			%  N = G.GETPROPNUMBER([CATEGORY]) returns the property number of the ordinal multilayer binary undirected with fixed densities G.
 			%  N = Element.GETPROPNUMBER(G) returns the property number of 'G'.
 			%  N = Element.GETPROPNUMBER('OrdMlBUD') returns the property number of 'OrdMlBUD'.
 			%
@@ -334,7 +349,7 @@ classdef OrdMlBUD < OrdMlWU
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in binary undirected multilayer with fixed densities/error.
+			%EXISTSPROP checks whether property exists in ordinal multilayer binary undirected with fixed densities/error.
 			%
 			% CHECK = OrdMlBUD.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -372,7 +387,7 @@ classdef OrdMlBUD < OrdMlWU
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in binary undirected multilayer with fixed densities/error.
+			%EXISTSTAG checks whether tag exists in ordinal multilayer binary undirected with fixed densities/error.
 			%
 			% CHECK = OrdMlBUD.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -538,7 +553,7 @@ classdef OrdMlBUD < OrdMlWU
 			prop = OrdMlBUD.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			ordmlbud_description_list = { 'ELCLASS (constant, string) is the class of the ordinal binary undirected multilayer with fixed densities.'  'NAME (constant, string) is the name of the ordinal binary undirected multilayer with fixed densities.'  'DESCRIPTION (constant, string) is the description of the ordinal binary undirected multilayer with fixed densities.'  'TEMPLATE (parameter, item) is the template of the ordinal binary undirected multilayer with fixed densities.'  'ID (data, string) is a few-letter code for the ordinal binary undirected multilayer with fixed densities.'  'LABEL (metadata, string) is an extended label of the ordinal binary undirected multilayer with fixed densities.'  'NOTES (metadata, string) are some specific notes about the ordinal binary undirected multilayer with fixed densities.'  'TOSTRING (query, string) returns a string that represents the object.'  'GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTILAYER.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels for A.'  'PARTITIONTICKS (metadata, rvector) are the partition tick values.'  'APARTITIONTICKS (query, rvector) returns the partition (density) ticks for A.'  'PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.'  'APARTITIONLABELS (query, stringlist) returns the partition (density) labels for A.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the nodel labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell array containing the multilayer binary supra-adjacency matrices of the binary undirected multilayer. '  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of layers for each partition (density) of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multilayer adjacency matrices on the diagonal.'  'SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.'  'RANDOMIZATION (query, cell) performs the randomization of a connectivity matrix.'  'DENSITIES (parameter, rvector) is the vector of densities.' };
+			ordmlbud_description_list = { 'ELCLASS (constant, string) is the class of the ordinal multilayer binary undirected with fixed densities.'  'NAME (constant, string) is the name of the ordinal multilayer binary undirected with fixed densities.'  'DESCRIPTION (constant, string) is the description of the ordinal multilayer binary undirected with fixed densities.'  'TEMPLATE (parameter, item) is the template of the ordinal multilayer binary undirected with fixed densities.'  'ID (data, string) is a few-letter code for the ordinal multilayer binary undirected with fixed densities.'  'LABEL (metadata, string) is an extended label of the ordinal multilayer binary undirected with fixed densities.'  'NOTES (metadata, string) are some specific notes about the ordinal multilayer binary undirected with fixed densities.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTILAYER.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.UNDIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels for A.'  'PARTITIONTICKS (metadata, rvector) are the partition tick values.'  'APARTITIONTICKS (query, rvector) returns the partition (density) ticks for A.'  'PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.'  'APARTITIONLABELS (query, stringlist) returns the partition (density) labels for A.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the node labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell array containing the multilayer binary supra-adjacency matrices of the binary undirected multilayer. '  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of layers for each partition (density) of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multilayer adjacency matrices on the diagonal.'  'SYMMETRIZE_RULE (parameter, option) determines how to symmetrize the matrix.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.'  'RANDOMIZATION (query, cell) performs the randomization of a connectivity matrix.'  'DENSITIES (parameter, rvector) is the vector of densities.' };
 			prop_description = ordmlbud_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -600,9 +615,9 @@ classdef OrdMlBUD < OrdMlWU
 				case 1 % OrdMlBUD.ELCLASS
 					prop_default = 'OrdMlBUD';
 				case 2 % OrdMlBUD.NAME
-					prop_default = 'OrdMlBUD';
+					prop_default = 'Ordinal Multilayer Binary Undirected at fixed Densities';
 				case 3 % OrdMlBUD.DESCRIPTION
-					prop_default = 'In an ordinal binary undirected multilayer with fixed densities (BUD) graph, layers consist of binary undirected (BU) multilayer graphs derived from the same weighted supra-connectivity matrices binarized at different densities. Layers within the binary undirected (BU) multilayer graphs could have different number of nodes with within-layer binary undirected edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). The supra-connectivity matrix has a number of partitions equal to the number of densities. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.';
+					prop_default = 'In an ordinal multilayer binary undirected graph with fixed densities (OrdMlBUD), layers consist of binary undirected multilayer graphs derived from the same weighted supra-connectivity matrices binarized at different densities. Layers within the binary undirected multilayer graphs could have different number of nodes with within-layer binary undirected edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). The supra-connectivity matrix has a number of partitions equal to the number of densities. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.';
 				case 4 % OrdMlBUD.TEMPLATE
 					prop_default = Format.getFormatDefault(8, OrdMlBUD.getPropSettings(prop));
 				case 5 % OrdMlBUD.ID

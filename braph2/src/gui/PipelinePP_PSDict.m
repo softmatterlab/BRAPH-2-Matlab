@@ -1,5 +1,5 @@
 classdef PipelinePP_PSDict < PanelProp
-	%PipelinePP_PSDict plots the panel for a pipeline.
+	%PipelinePP_PSDict manages the dictionary of pipeline panel plots.
 	% It is a subclass of <a href="matlab:help PanelProp">PanelProp</a>.
 	%
 	% A Pipeline Plot (PipelinePP_PSDict) plots a pipeline allowing the user to execute it in the correct order.
@@ -7,17 +7,17 @@ classdef PipelinePP_PSDict < PanelProp
 	% It should be used only with the prop PS_DICT of the element Pipeline.
 	%
 	% The list of PipelinePP_PSDict properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the pipeline plot.
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the pipeline plot.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the pipeline plot.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the pipeline plot.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline plot.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline plot.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the pipeline panel plot dictionary.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the pipeline panel plot dictionary.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the pipeline panel plot dictionary.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the pipeline panel plot dictionary.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline panel plot dictionary.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline panel plot dictionary.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline plot.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
 	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -140,6 +140,8 @@ classdef PipelinePP_PSDict < PanelProp
 	%
 	%
 	% See also Pipeline.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		HEIGHT_MIN = 36; %CET: Computational Efficiency Trick
@@ -204,17 +206,17 @@ classdef PipelinePP_PSDict < PanelProp
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of PipelinePP_PSDict properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the pipeline plot.
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the pipeline plot.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the pipeline plot.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the pipeline plot.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline plot.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline plot.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the pipeline panel plot dictionary.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the pipeline panel plot dictionary.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the pipeline panel plot dictionary.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the pipeline panel plot dictionary.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline panel plot dictionary.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline panel plot dictionary.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline plot.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the prop panel.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the property panel.
 			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -256,6 +258,21 @@ classdef PipelinePP_PSDict < PanelProp
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the pipeline plot.
+			%
+			% BUILD = PipelinePP_PSDict.GETBUILD() returns the build of 'PipelinePP_PSDict'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PR.GETBUILD() returns the build of the pipeline plot PR.
+			%  BUILD = Element.GETBUILD(PR) returns the build of 'PR'.
+			%  BUILD = Element.GETBUILD('PipelinePP_PSDict') returns the build of 'PipelinePP_PSDict'.
+			%
+			% Note that the Element.GETBUILD(PR) and Element.GETBUILD('PipelinePP_PSDict')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pr_class = getClass()
 			%GETCLASS returns the class of the pipeline plot.
 			%
@@ -586,7 +603,7 @@ classdef PipelinePP_PSDict < PanelProp
 			prop = PipelinePP_PSDict.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pipelinepp_psdict_description_list = { 'ELCLASS (constant, string) is the class of the pipeline plot.'  'NAME (constant, string) is the name of the pipeline plot.'  'DESCRIPTION (constant, string) is the description of the pipeline plot.'  'TEMPLATE (parameter, item) is the template of the pipeline plot.'  'ID (data, string) is a few-letter code for the pipeline plot.'  'LABEL (metadata, string) is an extended label of the pipeline plot.'  'NOTES (metadata, string) are some specific notes about the pipeline plot.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the prop panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figures of the elements/buttons.'  'HIDE (query, logical) hides the figures of the elements/buttons.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the table.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'HEIGHT_MIN (gui, scalar) is the default (minumum) height.'  'HEIGHT_PS_HEADER (gui, scalar) is the height section header.'  'HEIGHT_PC (gui, scalar) is the height code button.'  'HEIGHT_PS_FOOTER (gui, scalar) is the height section footer.'  'HEIGHT_PS_MARGIN (gui, scalar) is the height section margin.'  'HANDLES (evanescent, handlelist) is the list of section panels and buttons.'  'PS_PANEL (query, handle) returns graphics handle of a section panel.'  'PC_BTN (query, handle) returns graphics handle of a button.'  'PC_CLEAR_BTN (query, handle) returns graphics handle of a clear button.'  'GUI_PC_DICT (gui, idict) contains the GUIs for the element/buttons.' };
+			pipelinepp_psdict_description_list = { 'ELCLASS (constant, string) is the class of the pipeline panel plot dictionary.'  'NAME (constant, string) is the name of the pipeline panel plot dictionary.'  'DESCRIPTION (constant, string) is the description of the pipeline panel plot dictionary.'  'TEMPLATE (parameter, item) is the template of the pipeline panel plot dictionary.'  'ID (data, string) is a few-letter code for the pipeline panel plot dictionary.'  'LABEL (metadata, string) is an extended label of the pipeline panel plot dictionary.'  'NOTES (metadata, string) are some specific notes about the pipeline plot.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the property panel.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figures of the elements/buttons.'  'HIDE (query, logical) hides the figures of the elements/buttons.'  'DELETE (query, logical) resets the handles when the panel is deleted.'  'CLOSE (query, logical) closes the figure containing the panel and, possibly, the item figures.'  'X_DRAW (query, logical) draws the property panel.'  'UPDATE (query, logical) updates the content and permissions of the table.'  'REDRAW (query, logical) resizes the property panel and repositions its graphical objects.'  'EL (data, item) is the element.'  'PROP (data, scalar) is the property number.'  'HEIGHT (gui, size) is the pixel height of the prop panel.'  'TITLE (gui, string) is the property title.'  'LABEL_TITLE (evanescent, handle) is the handle for the title uilabel.'  'BUTTON_CB (evanescent, handle) is the handle for the callback button [only for PARAMETER, DATA, FIGURE and GUI].'  'GUI_CB (data, item) is the handle to the item figure.'  'LISTENER_CB (evanescent, handle) contains the listener to the updates in the property callback.'  'BUTTON_CALC (evanescent, handle) is the handle for the calculate button [only for RESULT, QUERY and EVANESCENT].'  'BUTTON_DEL (evanescent, handle) is the handle for the delete button [only for RESULT, QUERY and EVANESCENT].'  'LISTENER_SET (evanescent, handlelist) contains the listeners to the PropSet events.'  'LISTENER_MEMORIZED (evanescent, handlelist) contains the listeners to the PropMemorized events.'  'LISTENER_LOCKED (evanescent, handlelist) contains the listeners to the PropLocked events.'  'HEIGHT_MIN (gui, scalar) is the default (minumum) height.'  'HEIGHT_PS_HEADER (gui, scalar) is the height section header.'  'HEIGHT_PC (gui, scalar) is the height code button.'  'HEIGHT_PS_FOOTER (gui, scalar) is the height section footer.'  'HEIGHT_PS_MARGIN (gui, scalar) is the height section margin.'  'HANDLES (evanescent, handlelist) is the list of section panels and buttons.'  'PS_PANEL (query, handle) returns graphics handle of a section panel.'  'PC_BTN (query, handle) returns graphics handle of a button.'  'PC_CLEAR_BTN (query, handle) returns graphics handle of a clear button.'  'GUI_PC_DICT (gui, idict) contains the GUIs for the element/buttons.' };
 			prop_description = pipelinepp_psdict_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

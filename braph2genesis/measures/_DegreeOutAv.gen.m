@@ -4,6 +4,9 @@ DegreeOutAv < DegreeOut (m, average out-degree) is the graph Average Out-Degree.
 %%% ¡description!
 The Average Out-Degree (DegreeOutAv) of a graph is the average of all number of outward edges connected to a node within a layer. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -113,9 +116,11 @@ g = m.get('G'); % graph from measure class
 L = g.get('LAYERNUMBER');
 degree_out_av = cell(L, 1);
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     degree_out_av(li) = {mean(out_degree{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = degree_out_av;
 

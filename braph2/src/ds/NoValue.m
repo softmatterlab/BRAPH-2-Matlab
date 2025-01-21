@@ -3,12 +3,12 @@ classdef (Sealed=true) NoValue < Element
 	% It is a subclass of <a href="matlab:help Element">Element</a>.
 	%
 	% NoValue is an element without values used to represent a value that has
-	% not been set (for properties of categories METADATA, PARAMETER, DATA, FIGURE or GUI) 
-	% or calculated (for properties of category RESULT, QUERY, EVANESCENT), 
-	% while it should not be used for properties of category CONSTANT.
-	% For computational efficiency, it is best to use only one instance of NV 
-	% using Element.getNoValue(), instead of creating new instances using the 
-	% constructor NoValue(). 
+	%  not been set (for properties of categories METADATA, PARAMETER, DATA, FIGURE or GUI) 
+	%  or calculated (for properties of category RESULT, QUERY, EVANESCENT), 
+	%  while it should not be used for properties of category CONSTANT.
+	% For computational efficiency, it is best to use only one instance of NoValue 
+	%  using Element.getNoValue(), instead of creating new instances using the 
+	%  constructor NoValue(). 
 	% No element can be a subclass of NoValue.
 	%
 	% NoValue has no properties.
@@ -100,6 +100,8 @@ classdef (Sealed=true) NoValue < Element
 	%
 	%
 	% See also ConcreteElement.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	methods % constructor
 		function nv = NoValue(varargin)
@@ -120,6 +122,21 @@ classdef (Sealed=true) NoValue < Element
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the NoValue.
+			%
+			% BUILD = NoValue.GETBUILD() returns the build of 'NoValue'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = NV.GETBUILD() returns the build of the NoValue NV.
+			%  BUILD = Element.GETBUILD(NV) returns the build of 'NV'.
+			%  BUILD = Element.GETBUILD('NoValue') returns the build of 'NoValue'.
+			%
+			% Note that the Element.GETBUILD(NV) and Element.GETBUILD('NoValue')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function nv_class = getClass()
 			%GETCLASS returns the class of the NoValue.
 			%

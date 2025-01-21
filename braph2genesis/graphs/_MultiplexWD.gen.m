@@ -2,10 +2,13 @@
 MultiplexWD < Graph (g, multiplex weighted directed graph) is a multiplex weighted directed graph.
 
 %%% ¡description!
-In a multiplex weighted directed (WD) graph, all layers have the same number 
+In a multiplex weighted directed graph (MultiplexWD) graph, all layers have the same number 
  of nodes with within-layer weighted directed edges, associated with a real 
  number between 0 and 1 and indicating the strength of the connection.
 There are connections between layers connecting the corresponding nodes.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -114,19 +117,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the multiplex weighted directed graph.
 %%%% ¡default!
 'MultiplexWD'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex weighted directed graph.
 %%%% ¡default!
-'MultiplexWD'
+'Multiplex Weighted Directed'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex weighted directed graph.
 %%%% ¡default!
-'In a multiplex weighted directed (WD) graph, all layers have the same number of nodes with within-layer weighted directed edges, associated with a real number between 0 and 1 and indicating the strength of the connection. There are connections between layers connecting the corresponding nodes.'
+'In a multiplex weighted directed graph (MultiplexWD), all layers have the same number of nodes with within-layer weighted directed edges, associated with a real number between 0 and 1 and indicating the strength of the connection. There are connections between layers connecting the corresponding nodes.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex weighted directed graph.

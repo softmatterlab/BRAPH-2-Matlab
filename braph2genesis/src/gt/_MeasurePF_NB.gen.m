@@ -7,6 +7,9 @@ A Panel Figure for Nodal Bilayer Measure (MeasurePF_NB) manages the basic functi
 %%% ¡seealso!
 Measure
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

@@ -10,6 +10,9 @@ Alternatively, using the SPLIT property as {0.2, 0.8}, NNDatasetSplit will rando
 %%% ¡seealso!
 NNDataset, NNDatasetCombine
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -59,7 +62,7 @@ ELCLASS (constant, string) is the class of the splitter of a neural network data
 %%% ¡prop!
 NAME (constant, string) is the name of the splitter of a neural network dataset.
 %%%% ¡default!
-'NNDatasetSplit'
+'Neural Network Dataset Splitter'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the splitter of a neural network dataset.

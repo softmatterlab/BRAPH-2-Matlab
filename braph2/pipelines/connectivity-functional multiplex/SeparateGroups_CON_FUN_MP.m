@@ -7,14 +7,14 @@ classdef SeparateGroups_CON_FUN_MP < ConcreteElement
 	%  SubjectCON_FUN.
 	%
 	% The list of SeparateGroups_CON_FUN_MP properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the separator of a CON_FUN_MP subject group.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the separator of a CON_FUN_MP subject group.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the separator of a CON_FUN_MP subject group.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the separator of a CON_FUN_MP subject group.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the separator of a CON_FUN_MP subject group.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the separator of a CON_FUN_MP subject group.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the separator of a CON_FUN_MP subject group.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (metadata, logical) determines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR_CON_FUN_MP</strong> 	GR_CON_FUN_MP (data, item) is a group of subjects with functional and connectivity data.
 	%  <strong>11</strong> <strong>GR_CON</strong> 	GR_CON (result, item) is a group of subjects with connectivity data.
@@ -107,6 +107,8 @@ classdef SeparateGroups_CON_FUN_MP < ConcreteElement
 	%
 	%
 	% See also SubjectCON_FUN_MP, SubjectCON, SubjectFUN, CombineGroups_CON_FUN.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -141,14 +143,14 @@ classdef SeparateGroups_CON_FUN_MP < ConcreteElement
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SeparateGroups_CON_FUN_MP properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the separator of a CON_FUN_MP subject group.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the separator of a CON_FUN_MP subject group.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the separator of a CON_FUN_MP subject group.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the separator of a CON_FUN_MP subject group.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the separator of a CON_FUN_MP subject group.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the separator of a CON_FUN_MP subject group.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the separator of a CON_FUN_MP subject group.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (metadata, logical) determines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR_CON_FUN_MP</strong> 	GR_CON_FUN_MP (data, item) is a group of subjects with functional and connectivity data.
 			%  <strong>11</strong> <strong>GR_CON</strong> 	GR_CON (result, item) is a group of subjects with connectivity data.
@@ -160,6 +162,21 @@ classdef SeparateGroups_CON_FUN_MP < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the separator of a CON_FUN_MP subject group.
+			%
+			% BUILD = SeparateGroups_CON_FUN_MP.GETBUILD() returns the build of 'SeparateGroups_CON_FUN_MP'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = SE.GETBUILD() returns the build of the separator of a CON_FUN_MP subject group SE.
+			%  BUILD = Element.GETBUILD(SE) returns the build of 'SE'.
+			%  BUILD = Element.GETBUILD('SeparateGroups_CON_FUN_MP') returns the build of 'SeparateGroups_CON_FUN_MP'.
+			%
+			% Note that the Element.GETBUILD(SE) and Element.GETBUILD('SeparateGroups_CON_FUN_MP')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function se_class = getClass()
 			%GETCLASS returns the class of the separator of a CON_FUN_MP subject group.
 			%
@@ -482,7 +499,7 @@ classdef SeparateGroups_CON_FUN_MP < ConcreteElement
 			prop = SeparateGroups_CON_FUN_MP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			separategroups_con_fun_mp_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the separator of a CON_FUN_MP subject group.'  'DESCRIPTION (constant, string) is the description of the separator of a CON_FUN_MP subject group.'  'TEMPLATE (parameter, item) is the template of the separator of a CON_FUN_MP subject group.'  'ID (data, string) is a few-letter code for the separator of a CON_FUN_MP subject group.'  'LABEL (metadata, string) is an extended label of the separator of a CON_FUN_MP subject group.'  'NOTES (metadata, string) are some specific notes about the separator of a CON_FUN_MP subject group.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (metadata, logical) determines whether to show the waitbar.'  'GR_CON_FUN_MP (data, item) is a group of subjects with functional and connectivity data.'  'GR_CON (result, item) is a group of subjects with connectivity data.'  'GR_FUN (result, item) is a group of subjects with functional data.' };
+			separategroups_con_fun_mp_description_list = { 'ELCLASS (constant, string) is the class of the separator of a CON_FUN_MP subject group.'  'NAME (constant, string) is the name of the separator of a CON_FUN_MP subject group.'  'DESCRIPTION (constant, string) is the description of the separator of a CON_FUN_MP subject group.'  'TEMPLATE (parameter, item) is the template of the separator of a CON_FUN_MP subject group.'  'ID (data, string) is a few-letter code for the separator of a CON_FUN_MP subject group.'  'LABEL (metadata, string) is an extended label of the separator of a CON_FUN_MP subject group.'  'NOTES (metadata, string) are some specific notes about the separator of a CON_FUN_MP subject group.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (metadata, logical) determines whether to show the waitbar.'  'GR_CON_FUN_MP (data, item) is a group of subjects with functional and connectivity data.'  'GR_CON (result, item) is a group of subjects with connectivity data.'  'GR_FUN (result, item) is a group of subjects with functional data.' };
 			prop_description = separategroups_con_fun_mp_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -554,7 +571,7 @@ classdef SeparateGroups_CON_FUN_MP < ConcreteElement
 				case 1 % SeparateGroups_CON_FUN_MP.ELCLASS
 					prop_default = 'SeparateGroups_CON_FUN_MP';
 				case 2 % SeparateGroups_CON_FUN_MP.NAME
-					prop_default = 'SeparateGroups_CON_FUN_MP';
+					prop_default = 'Multiplex Connectivity-Functional Group Separator';
 				case 3 % SeparateGroups_CON_FUN_MP.DESCRIPTION
 					prop_default = 'SeparateGroups_CON_FUN_MP separates a group of subjects with connectivity and functional data (SubjectCON_FUN_MP) into groups of SubjectCON and SubjectCON_FUN.';
 				case 5 % SeparateGroups_CON_FUN_MP.ID

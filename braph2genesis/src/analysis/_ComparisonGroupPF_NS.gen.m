@@ -7,6 +7,9 @@ ComparisonGroupPF_NS manages the basic functionalities to plot of a nodal superg
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -200,7 +203,7 @@ pr = ComparisonGroupPF_NxPP_Node('EL', pf, 'PROP', ComparisonGroupPF_NS.NODE);
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonGroupPF_NS.PARENT ComparisonGroupPF_NS.H ComparisonGroupPF_NS.ST_POSITION ComparisonGroupPF_NS.ST_AXIS ComparisonGroupPF_NS.ST_AREA ComparisonGroupPF_NS.ST_LINE_DIFF ComparisonGroupPF_NS.ST_LINE_CIL ComparisonGroupPF_NS.ST_LINE_CIU ComparisonGroupPF_NS.ST_TITLE ComparisonGroupPF_NS.ST_XLABEL ComparisonGroupPF_NS.ST_YLABEL] 
+[ComparisonGroupPF_NS.PARENT ComparisonGroupPF_NS.H ComparisonGroupPF_NS.ST_POSITION ComparisonGroupPF_NS.ST_AXIS ComparisonGroupPF_NS.CP ComparisonGroupPF_NS.ST_AREA ComparisonGroupPF_NS.ST_LINE_DIFF ComparisonGroupPF_NS.ST_LINE_CIL ComparisonGroupPF_NS.ST_LINE_CIU ComparisonGroupPF_NS.ST_TITLE ComparisonGroupPF_NS.ST_XLABEL ComparisonGroupPF_NS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

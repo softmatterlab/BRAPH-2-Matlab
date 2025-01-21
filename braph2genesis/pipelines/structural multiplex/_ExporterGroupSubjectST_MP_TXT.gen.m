@@ -20,17 +20,20 @@ The variables of interest are from another XLSX file named "GROUP_ID.vois.txt"
 %%% ¡seealso!
 Group, SubjectST_MP, ImporterGroupSubjectST_MP_TXT
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ST subject group exporter in TXT.
 %%%% ¡default!
 'ExporterGroupSubjectST_MP_TXT'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the ST subject group exporter in TXT.
 %%%% ¡default!
-'ExporterGroupSubjectST_MP_TXT'
+'Multiplex Structural Subject Group TXT Exporter'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the ST subject group exporter in TXT.

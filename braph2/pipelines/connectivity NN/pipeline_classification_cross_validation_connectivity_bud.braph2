@@ -7,8 +7,8 @@
 % 3. It analyzes these groups using connectivity analyses (CON) based on binary undirected graph at fix densities (BUD).
 % 4. It executes the cross-validation process.
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_nn_clas_con_bud_xval/tut_nn_clas_con_bud_xval.pdf
+% README: /tutorials/pipelines/tut_nn_clas_con_bud_xval/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load a Brain Atlas XLS % Brain Atlas
@@ -24,4 +24,4 @@ a_BUD2 = AnalyzeEnsemble_CON_BUD('GR', gr2, 'TEMPLATE', a_BUD1); % Analyze Group
 a_BUD3 = AnalyzeEnsemble_CON_BUD('GR', gr3, 'TEMPLATE', a_BUD1); % Analyze Group 3 % Group 3 Analysis
 
 %% Cross-Validation
-nncv = NNClassifierMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_IDS', {gr1.get('ID')}), a_BUD1.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_IDS', {gr2.get('ID')}), a_BUD2.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_IDS', {gr3.get('ID')}), a_BUD3.get('G_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process
+nncv = NNClassifierMLP_CrossValidation('D', {NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_CLASS', {gr1.get('ID')}), a_BUD1.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_CLASS', {gr2.get('ID')}), a_BUD2.get('G_DICT').get('IT_LIST'), 'UniformOutput', false))), NNDataset('DP_CLASS', 'NNDataPoint_Graph_CLA', 'DP_DICT', IndexedDictionary('IT_CLASS', 'NNDataPoint_Graph_CLA', 'IT_LIST', cellfun(@(g) NNDataPoint_Graph_CLA('ID', g.get('ID'), 'G', g, 'TARGET_CLASS', {gr3.get('ID')}), a_BUD3.get('G_DICT').get('IT_LIST'), 'UniformOutput', false)))}); % Cross-Validation % Cross-Validation Process

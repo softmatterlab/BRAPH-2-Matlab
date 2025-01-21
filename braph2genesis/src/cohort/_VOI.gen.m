@@ -8,7 +8,10 @@ A Variable Of Interest (VOI) is the base element for a variable of interest.
 
 %%% ¡seealso!
 VOINumeric, VOICategoric
- 
+
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

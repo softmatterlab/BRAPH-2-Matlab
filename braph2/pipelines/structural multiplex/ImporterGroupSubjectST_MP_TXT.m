@@ -19,14 +19,14 @@ classdef ImporterGroupSubjectST_MP_TXT < Importer
 	%  variables of interest, and each subsequent row the values for each subject.
 	%
 	% The list of ImporterGroupSubjectST_MP_TXT properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ST MP subject group importer from TXT.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ST MP subject group importer from TXT.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ST MP subject group importer from TXT.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ST MP subject group importer from TXT.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ST MP subject group importer from TXT.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ST MP subject group importer from TXT.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ST MP subject group importer from TXT.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory containing the ST MP subject group files from which to load the L layers of the subject group.
 	%  <strong>11</strong> <strong>GET_DIR</strong> 	GET_DIR (query, item) opens a dialog box to set the directory from where to load the TXT files of the ST MP subject group with L layers.
@@ -120,6 +120,8 @@ classdef ImporterGroupSubjectST_MP_TXT < Importer
 	%
 	%
 	% See also Group, SubjectST_MP, ExporterGroupSubjectST_MP_TXT.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		DIRECTORY = 10; %CET: Computational Efficiency Trick
@@ -154,14 +156,14 @@ classdef ImporterGroupSubjectST_MP_TXT < Importer
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of ImporterGroupSubjectST_MP_TXT properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ST MP subject group importer from TXT.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ST MP subject group importer from TXT.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ST MP subject group importer from TXT.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ST MP subject group importer from TXT.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ST MP subject group importer from TXT.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ST MP subject group importer from TXT.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ST MP subject group importer from TXT.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory containing the ST MP subject group files from which to load the L layers of the subject group.
 			%  <strong>11</strong> <strong>GET_DIR</strong> 	GET_DIR (query, item) opens a dialog box to set the directory from where to load the TXT files of the ST MP subject group with L layers.
@@ -174,6 +176,21 @@ classdef ImporterGroupSubjectST_MP_TXT < Importer
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the importer of ST MP subject group from TXT.
+			%
+			% BUILD = ImporterGroupSubjectST_MP_TXT.GETBUILD() returns the build of 'ImporterGroupSubjectST_MP_TXT'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = IM.GETBUILD() returns the build of the importer of ST MP subject group from TXT IM.
+			%  BUILD = Element.GETBUILD(IM) returns the build of 'IM'.
+			%  BUILD = Element.GETBUILD('ImporterGroupSubjectST_MP_TXT') returns the build of 'ImporterGroupSubjectST_MP_TXT'.
+			%
+			% Note that the Element.GETBUILD(IM) and Element.GETBUILD('ImporterGroupSubjectST_MP_TXT')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function im_class = getClass()
 			%GETCLASS returns the class of the importer of ST MP subject group from TXT.
 			%
@@ -500,7 +517,7 @@ classdef ImporterGroupSubjectST_MP_TXT < Importer
 			prop = ImporterGroupSubjectST_MP_TXT.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			importergroupsubjectst_mp_txt_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the ST MP subject group importer from TXT.'  'DESCRIPTION (constant, string) is the description of the ST MP subject group importer from TXT.'  'TEMPLATE (parameter, item) is the template of the ST MP subject group importer from TXT.'  'ID (data, string) is a few-letter code for the ST MP subject group importer from TXT.'  'LABEL (metadata, string) is an extended label of the ST MP subject group importer from TXT.'  'NOTES (metadata, string) are some specific notes about the ST MP subject group importer from TXT.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DIRECTORY (data, string) is the directory containing the ST MP subject group files from which to load the L layers of the subject group.'  'GET_DIR (query, item) opens a dialog box to set the directory from where to load the TXT files of the ST MP subject group with L layers.'  'BA (data, item) is a brain atlas.'  'GR (result, item) is a group of subjects with structural multiplex data.' };
+			importergroupsubjectst_mp_txt_description_list = { 'ELCLASS (constant, string) is the class of the ST MP subject group importer from TXT.'  'NAME (constant, string) is the name of the ST MP subject group importer from TXT.'  'DESCRIPTION (constant, string) is the description of the ST MP subject group importer from TXT.'  'TEMPLATE (parameter, item) is the template of the ST MP subject group importer from TXT.'  'ID (data, string) is a few-letter code for the ST MP subject group importer from TXT.'  'LABEL (metadata, string) is an extended label of the ST MP subject group importer from TXT.'  'NOTES (metadata, string) are some specific notes about the ST MP subject group importer from TXT.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DIRECTORY (data, string) is the directory containing the ST MP subject group files from which to load the L layers of the subject group.'  'GET_DIR (query, item) opens a dialog box to set the directory from where to load the TXT files of the ST MP subject group with L layers.'  'BA (data, item) is a brain atlas.'  'GR (result, item) is a group of subjects with structural multiplex data.' };
 			prop_description = importergroupsubjectst_mp_txt_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -574,7 +591,7 @@ classdef ImporterGroupSubjectST_MP_TXT < Importer
 				case 1 % ImporterGroupSubjectST_MP_TXT.ELCLASS
 					prop_default = 'ImporterGroupSubjectST_MP_TXT';
 				case 2 % ImporterGroupSubjectST_MP_TXT.NAME
-					prop_default = 'ImporterGroupSubjectST_MP_TXT';
+					prop_default = 'Multiplex Structural Subject Group TXT Importer';
 				case 3 % ImporterGroupSubjectST_MP_TXT.DESCRIPTION
 					prop_default = 'ImporterGroupSubjectST_MP_TXT imports a group of subjects with structural multiplex data from an TXT file and their covariates from another TXT file.';
 				case 4 % ImporterGroupSubjectST_MP_TXT.TEMPLATE

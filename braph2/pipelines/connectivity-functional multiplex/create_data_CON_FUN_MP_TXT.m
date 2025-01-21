@@ -52,7 +52,7 @@ if ~isfolder(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} {['{' sprintf(' ''%s'' ', sex_options{:}) '}']}}
         ];
-    for i = 1:1:50 % subject number
+    for i = 1:1:25 % subject number
         sub_id = ['SubjectCON_FUN_MP_' num2str(i)];
 
         h1 = WattsStrogatz(N, K1, beta1); % create two WS graph
@@ -72,7 +72,7 @@ if ~isfolder(data_dir)
         % variables of interest
         vois1 = [vois1; {sub_id, randi(90), sex_options(randi(2))}];
     end
-    writetable(table(vois1), [data_dir filesep() gr1_name '.vois.txt'], 'Delimiter', '\t', 'WriteVariableNames', false)
+    writetable(table(vois1), [data_dir filesep() gr1_name '.CON' '.vois.txt'], 'Delimiter', '\t', 'WriteVariableNames', false)
 
     % Group 1 directories
     gr2_name = 'CON_FUN_MP_Group_2_TXT';
@@ -87,7 +87,7 @@ if ~isfolder(data_dir)
         {{'Subject ID'} {'Age'} {'Sex'}}
         {{} {} {['{' sprintf(' ''%s'' ', sex_options{:}) '}']}}
         ];
-    for i = 51:1:100
+    for i = 26:1:50
         sub_id = ['SubjectCON_FUN_MP_' num2str(i)];
 
         h2 = WattsStrogatz(N, K2, beta2);
@@ -107,7 +107,7 @@ if ~isfolder(data_dir)
         % variables of interest
         vois2 = [vois2; {sub_id, randi(90), sex_options(randi(2))}];
     end
-    writetable(table(vois2), [data_dir filesep() gr2_name '.vois.txt'], 'Delimiter', '\t', 'WriteVariableNames', false)
+    writetable(table(vois2), [data_dir filesep() gr2_name '.CON' '.vois.txt'], 'Delimiter', '\t', 'WriteVariableNames', false)
 
     % Group 1 - FUN - 5 modules of 18 nodes each
     % initialize values for the WS model
@@ -120,7 +120,7 @@ if ~isfolder(data_dir)
     indices4 = 55:1:72;
     indices5 = 73:1:90;
     indices = {indices1; indices2; indices3; indices4; indices5};
-    for i = 1:1:50 % subject number
+    for i = 1:1:25 % subject number
         sub_id = ['SubjectCON_FUN_MP_' num2str(i)];
 
         % randomize the parameters
@@ -162,7 +162,7 @@ if ~isfolder(data_dir)
     indices1 = 1:1:45;
     indices2 = 46:1:90;
     indices = {indices1; indices2};
-    for i = 51:1:100
+    for i = 26:1:50
         sub_id = ['SubjectCON_FUN_MP_' num2str(i)];
 
         % randomize the parameters

@@ -9,6 +9,9 @@ It is supposed to be used with the property LAYER of MeasurePF_NU, MeasurePF_BU,
 %%% ¡seealso!
 uidropdown, GUI, MeasurePF_NU, MeasurePF_BU, MeasurePF_GU
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

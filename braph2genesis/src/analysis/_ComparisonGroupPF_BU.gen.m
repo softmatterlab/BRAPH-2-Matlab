@@ -7,6 +7,9 @@ ComparisonGroupPF_BU manages the basic functionalities to plot of a binodal unil
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

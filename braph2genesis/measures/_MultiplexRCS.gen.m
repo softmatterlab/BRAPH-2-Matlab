@@ -7,6 +7,9 @@ The Multiplex Rich-Club Strength (MultiplexRCS) of a node at level s is the sum 
 The relevance of each layer is controlled by the coefficients c that are 
  between 0 and 1; the default coefficients are (1/layernumber).
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

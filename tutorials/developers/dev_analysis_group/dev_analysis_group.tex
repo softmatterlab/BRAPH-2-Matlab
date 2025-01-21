@@ -1,8 +1,10 @@
-\documentclass[justified]{tufte-handout}
+\documentclass{tufte-handout}
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Getting Started}
+\title{Implement a New Group Analysis}
+
+\author[The BRAPH~2 Developers]{The BRAPH~2 Developers}
 
 \begin{document}
 
@@ -10,7 +12,286 @@
 
 \begin{abstract}
 \noindent
-This Tutorial is under construction.
+This is the developer tutorial for implementing a new group analysis. 
+In this tutorial, you will learn how to create a \fn{*.gen.m} for a new group analysis, which can then be compiled by \code{braph2genesis}.
+Here, you will use as examples the group analysis \code{AnalyzeGroup\_ST\_BUD}, a group-based graph analysis (AnalyzeGroup) analyzing structural data (ST) using binary undirected multigraphs at fixed densities (BUD).
 \end{abstract}
+
+\tableofcontents
+
+\clearpage
+
+\section{Implementation of the group analysis}
+
+You will implement in detail \code{AnalyzeGroup\_ST\_BUD}, a direct extension of \code{AnalyzeGroup}.
+An \code{AnalyzeGroup\_ST\_BUD} processes structural data to construct binary undirected graphs at fixed densities.
+
+\subsection{Basic properties}
+This section focuses on implementing the basic properties required to define \code{AnalyzeGroup\_ST\_BUD}, including its class, name, and associated metadata.
+
+\begin{lstlisting}[
+	label=cd:m:AnalyzeGroup_ST_BUD:header,
+	caption={
+		{\bf AnalyzeGroup\_ST\_BUD element header.}
+		The \code{header} section of the generator code in \fn{\_AnalyzeGroup\_ST\_BUD.gen.m} provides the general information about the \code{AnalyzeGroup\_ST\_BUD} element.
+		}
+]
+%% ¡header! ¥\circled{1}\circlednote{1}{ defines \code{AnalyzeGroup\_ST\_BUD} as a subclass of \code{AnalyzeGroup}. The moniker is \code{a}.}¥
+AnalyzeGroup_ST_BUD < AnalyzeGroup (a, graph analysis with structural data at fixed density) is a graph analysis using structural data at fixed density.
+
+%%% ¡description! ¥\circled{2}\circlednote{2}{ provides a description of this group analysis.}¥
+AnalyzeGroup_ST_BUD uses structural data at fixed density and analyzes them using binary undirected graphs.
+
+%%% ¡seealso!
+SubjectST, MultigraphBUD
+
+%%% ¡build! ¥\circled{3}\circlednote{3}{ defines the build number of the group analysis element.}¥
+1
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:AnalyzeGroup_ST_BUD:basic_props,
+	caption={
+		{\bf Basic properties of AnalyzeGroup\_ST\_BUD.}
+		This section of the generator code in \fn{\_AnalyzeGroup\_ST\_BUD.gen.m} updates the basic properties required to describe the \code{AnalyzeGroup\_ST\_BUD} element, including its class, name, description, and other metadata.
+	}
+]
+%% ¡props_update!
+
+%%% ¡prop!
+ELCLASS (constant, string) is the class of the group-based graph analysis with structural data at fixed density.
+%%%% ¡default!
+'AnalyzeGroup_ST_BUD'
+
+%%% ¡prop!
+NAME (constant, string) is the name of the group-based graph analysis with structural data at fixed density.
+%%%% ¡default!
+'Structural Binary Undirected at fixed Densities Analyze Group'
+
+%%% ¡prop!
+DESCRIPTION (constant, string) is the description of the group-based graph analysis with structural data at fixed density.
+%%%% ¡default!
+'AnalyzeGroup_ST_BUD uses structural data at fixed density and analyzes them using binary undirected graphs.'
+
+\end{lstlisting}
+
+\subsection{Functionality-focused properties}
+
+This section details the implementation of functionality-focused properties that directly enable \code{AnalyzeGroup\_ST\_BUD} to perform graph analysis.
+
+\begin{lstlisting}[
+	label=cd:m:AnalyzeGroup_ST_BUD:implementation_props,
+	caption={
+		{\bf Implementation properties of AnalyzeGroup\_ST\_BUD.}
+		This section of the generator code in \fn{\_AnalyzeGroup\_ST\_BUD.gen.m} updates the properties to be used, including \code{TEMPLATE} for specifying its \code{G} with graph type and parameters as a graph template, \code{GR} for defining subjects' data, and \code{G} for managing the graph instance obtained using the subjects' data.
+	}
+]
+
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ S
+specifies the \code{TEMPLATE} property, in which \code{G}, serving as a graph template, defines parameters such as \code{DENSITIES}, \code{SEMIPOSITIVIZE\_RULE}, and \code{STANDARDIZE\_RULE}. These settings are applied to the graph in \circled{8}.}¥
+TEMPLATE (parameter, item) is the template of the group-based graph analysis with structural data at fixed density.
+%%%% ¡settings!
+'AnalyzeGroup_ST_BUD'
+
+%%% ¡prop!
+ID (data, string) is a few-letter code for the group-based graph analysis with structural data at fixed density.
+%%%% ¡default!
+'AnalyzeGroup_ST_BUD ID'
+
+%%% ¡prop!
+LABEL (metadata, string) is an extended label of the group-based graph analysis with structural data at fixed density.
+%%%% ¡default!
+'AnalyzeGroup_ST_BUD label'
+
+%%% ¡prop!
+NOTES (metadata, string) are some specific notes about the group-based graph analysis with structural data at fixed density.
+%%%% ¡default!
+'AnalyzeGroup_ST_BUD notes'
+
+%%% ¡prop! ¥\circled{2}\circlednote{2}{ defines the \code{GR} property, which stores the subjects using the \code{SubjectST} element. This property contains the subjects’ data to be analyzed.}¥
+GR (data, item) is the subject group, which also defines the subject class SubjectST.
+%%%% ¡default!
+Group('SUB_CLASS', 'SubjectST')
+
+%%% ¡prop! ¥\circled{3}\circlednote{3}{ creates the \code{G} property, a graph that uses \code{MultigraphBUD}.}¥
+G (result, item) is the graph obtained from this analysis.
+%%%% ¡settings!
+'MultigraphBUD'
+%%%% ¡calculate!
+gr = a.get('GR');
+data_list = cellfun(@(x) x.get('ST'), gr.get('SUB_DICT').get('IT_LIST'), 'UniformOutput', false); ¥\circled{4}\circlednote{4}{ retrieves the subjects’ structural data from \circled{2}, which is used to construct the \code{MultigraphBUD} instance for analysis.}¥
+data = cat(2, data_list{:})'; % correlation is a column based operation
+
+if any(strcmp(a.get('CORRELATION_RULE'), {Correlation.PEARSON_CV, Correlation.SPEARMAN_CV}))
+	A = Correlation.getAdjacencyMatrix(data, a.get('CORRELATION_RULE'), a.get('NEGATIVE_WEIGHT_RULE'), gr.get('COVARIATES'));¥\circled{5}\circlednote{5}{ or \circled{6} calculates the adjacency matrix based on whether group covariates (e.g., age and sex) are considered. Covariates are included for partial correlation if the \code{CORRELATION\_RULE} property, introduced in \circled{1} of \Coderef{cd:m:AnalyzeGroup_ST_BUD:props}, is set to \code{PEARSON\_CV} (Pearson with covariates) or \code{SPEARMAN\_CV} (Spearman with covariates).}¥
+else
+    A = Correlation.getAdjacencyMatrix(data, a.get('CORRELATION_RULE'), a.get('NEGATIVE_WEIGHT_RULE'));¥\circled{6}¥
+end
+
+densities = a.get('DENSITIES'); % this is a vector ¥\circled{7}\circlednote{7}{ retrieves the densities defined in the new property in \circled{2} of \Coderef{cd:m:AnalyzeGroup_ST_BUD:props}. These densities configure the \code{MultigraphBUD} instance for analysis.}¥
+
+g = MultigraphBUD( ...¥\circled{8}\circlednote{8}{ defines the graph by constructing an instance of \code{MultigraphBUD} for the calculated adjacency matrix and applying the specified \code{DENSITIES} parameter.}¥
+    'ID', ['Graph ' gr.get('ID')], ...
+    'B', A, ...
+    'DENSITIES', densities, ... 
+    'LAYERLABELS', cellfun(@(x) [num2str(x) '%'], num2cell(densities), 'UniformOutput', false) ...
+    );
+
+if ~isa(a.getr('TEMPLATE'), 'NoValue') % the analysis has a template
+    g.set('TEMPLATE', a.get('TEMPLATE').memorize('G')) % the template is memorized - overwrite densities ¥\circled{9}\circlednote{9}{ ensures the \code{MultigraphBUD} instance is updated with pre-defined parameters (e.g., \code{DENSITIES}, \code{SEMIPOSITIVIZE\_RULE}, and \code{STANDARDIZE\_RULE}) from the graph template specified in \circled{1}. If explicitly set by the user during initialization of \code{AnalyzeGroup\_ST\_BUD}, the densities will be overwritten with those in the graph template.}¥
+end
+
+if a.get('GR').get('SUB_DICT').get('LENGTH')
+    g.set('NODELABELS', a.get('GR').get('SUB_DICT').get('IT', 1).get('BA').get('BR_DICT').get('KEYS'))
+end
+
+value = g;
+\end{lstlisting}
+
+\begin{lstlisting}[
+label=cd:m:AnalyzeGroup_ST_BUD:props,
+caption={
+	{\bf AnalyzeGroup\_ST\_BUD element props.}
+	The \code{props} section of the generator code in \fn{\_AnalyzeGroup\_ST\_BUD.gen.m} defines the properties to be used in \code{AnalyzeGroup\_ST\_BUD}.
+}
+]
+%% ¡props!
+
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the \code{CORRELATION\_RULE} as one of the options in the list (PEARSON, SPEARMAN, KENDALL, PEARSON\_CV, SPEARMAN\_CV), used in \circled{5} of \Coderef{cd:m:AnalyzeGroup_ST_BUD:implementation_props}.}¥
+CORRELATION_RULE (parameter, option) is the correlation type.
+%%%% ¡settings!
+Correlation.CORRELATION_RULE_LIST
+%%%% ¡default!
+Correlation.PEARSON
+
+%%% ¡prop! ¥\circled{2}\circlednote{2}{ defines the \code{NEGATIVE\_WEIGHT\_RULE} as one of the options in the list (ZERO, ABS, NONE), used in \circled{5} of \Coderef{cd:m:AnalyzeGroup_ST_BUD:implementation_props}.}¥
+NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights.
+%%%% ¡settings!
+Correlation.NEGATIVE_WEIGHT_RULE_LIST
+%%%% ¡default!
+Correlation.ZERO
+
+%%% ¡prop! ¥\circled{3}\circlednote{3}{ defines the densities for binarizing the connectivity matrix in a binary undirected multigraph, used in \circled{7} of \Coderef{cd:m:AnalyzeGroup_ST_BUD:implementation_props}.}¥
+DENSITIES (parameter, rvector) is the vector of densities.
+%%%% ¡default!
+[1:1:10]
+%%%% ¡gui! ¥\circled{4}\circlednote{4}{ \code{PanelPropRVectorSmart} renders a GUI row vector panel for defining densities, supporting MATLAB expressions and limiting values between MIN and MAX.}¥
+pr = PanelPropRVectorSmart('EL', a, 'PROP', AnalyzeGroup_ST_BUD.DENSITIES, ...
+    'MIN', 0, 'MAX', 100, ...
+    'DEFAULT', AnalyzeGroup_ST_BUD.getPropDefault('DENSITIES'), ...
+    varargin{:});
+\end{lstlisting}
+
+\subsection{Verification through testing}
+This section tests \code{AnalyzeGroup\_ST\_BUD} to confirm its functionality via example scripts and ensure GUI integration.
+
+\begin{lstlisting}[
+	label=cd:m:AnalyzeGroup_ST_BUD:tests,
+	caption={
+		{\bf AnalyzeGroup\_ST\_BUD element tests.}
+		The \code{tests} section in the element generator \fn{\_AnalyzeGroup\_ST\_BUD.gen.m} includes logic test, which verifies correct functionality using example scripts and simulated datasets, and integration tests, which ensure the instance operation of the direct GUI and associated GUIs.
+	}
+]	
+
+%% ¡tests!
+
+%%% ¡test!¥\circled{1}\circlednote{1}{ Tests the functionality of \code{AnalyzeGroup\_ST\_BUD} using an example script.}¥
+%%%% ¡name!
+Example
+%%%% ¡probability!¥\circled{2}\circlednote{2}{ assigns a low test execution probability.}¥
+.01
+%%%% ¡code! 
+create_data_ST_XLS() % only creates files if the example folder doesn't already exist
+
+example_ST_BUD
+
+%%% ¡test! ¥\circled{3}\circlednote{3}{ Tests the direct GUI functionality of \code{AnalyzeGroup\_ST\_BUD}.}¥
+%%%% ¡name!
+GUI - Analysis
+%%%% ¡probability!
+.01
+%%%% ¡code!
+im_ba = ImporterBrainAtlasXLS('FILE', 'destrieux_atlas.xlsx');
+ba = im_ba.get('BA');¥\circled{4}\circlednote{4}{ and \circled{5} define the necessary objects to initialize an instance of \code{AnalyzeGroup\_ST\_BUD}.}¥
+
+gr = Group('SUB_CLASS', 'SubjectST', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectST')); ¥\circled{5}¥
+for i = 1:1:50
+    sub = SubjectST( ...
+        'ID', ['SUB ST ' int2str(i)], ...
+        'LABEL', ['Subject ST ' int2str(i)], ...
+        'NOTES', ['Notes on subject ST ' int2str(i)], ...
+        'BA', ba, ...
+        'ST', rand(ba.get('BR_DICT').get('LENGTH'), 1) ...
+        );
+    sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
+    sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
+    gr.get('SUB_DICT').get('ADD', sub)
+end
+
+a = AnalyzeGroup_ST_BUD('GR', gr, 'DENSITIES', 5:10:35); ¥\circled{6}\circlednote{6}{ initializes an \code{AnalyzeGroup\_ST\_BUD} instance using the specified \code{gr} (group) and \code{densities}.}¥
+
+gui = GUIElement('PE', a, 'CLOSEREQ', false);¥\circled{7}\circlednote{7}{, \circled{8}, and \circled{9} test the process of creating a GUI for \code{AnalyzeGroup\_ST\_BUD}, drawing it, and showing it on the screen.}¥
+gui.get('DRAW')¥\circled{8}¥
+gui.get('SHOW')¥\circled{9}¥
+
+gui.get('CLOSE')¥\circled{10}\circlednote{10}{ tests the process of closing the shown GUI.}¥
+
+%%% ¡test!¥\circled{11}\circlednote{11}{ tests the associated GUI functionality of \code{AnalyzeGroup\_ST\_BUD}.}¥
+%%%% ¡name!
+GUI - Comparison
+%%%% ¡probability!
+.01
+%%%% ¡code!
+im_ba = ImporterBrainAtlasXLS('FILE', 'destrieux_atlas.xlsx');
+ba = im_ba.get('BA');
+
+gr1 = Group('SUB_CLASS', 'SubjectST', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectST'));
+for i = 1:1:50
+    sub = SubjectST( ...
+        'ID', ['SUB ST ' int2str(i)], ...
+        'LABEL', ['Subject ST ' int2str(i)], ...
+        'NOTES', ['Notes on subject ST ' int2str(i)], ...
+        'BA', ba, ...
+        'ST', rand(ba.get('BR_DICT').get('LENGTH'), 1) ...
+        );
+    sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
+    sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
+    gr1.get('SUB_DICT').get('ADD', sub)
+end
+
+gr2 = Group('SUB_CLASS', 'SubjectST', 'SUB_DICT', IndexedDictionary('IT_CLASS', 'SubjectST'));
+for i = 1:1:50
+    sub = SubjectST( ...
+        'ID', ['SUB ST ' int2str(i)], ...
+        'LABEL', ['Subject ST ' int2str(i)], ...
+        'NOTES', ['Notes on subject ST ' int2str(i)], ...
+        'BA', ba, ...
+        'ST', rand(ba.get('BR_DICT').get('LENGTH'), 1) ...
+        );
+    sub.memorize('VOI_DICT').get('ADD', VOINumeric('ID', 'Age', 'V', 100 * rand()))
+    sub.memorize('VOI_DICT').get('ADD', VOICategoric('ID', 'Sex', 'CATEGORIES', {'Female', 'Male'}, 'V', randi(2, 1)))
+    gr2.get('SUB_DICT').get('ADD', sub)
+end
+
+a1 = AnalyzeGroup_ST_BUD('GR', gr1, 'DENSITIES', 5:10:35);¥\circled{12}\circlednote{12}{ initializes the first \code{AnalyzeGroup\_ST\_BUD} similar to the previous test, using the specified \code{gr} and densities.}¥
+a2 = AnalyzeGroup_ST_BUD('GR', gr2, 'TEMPLATE', a1); ¥\circled{13}\circlednote{13}{ initializes the second \code{AnalyzeGroup\_ST\_BUD} using the first \code{AnalyzeGroup\_ST\_BUD} instance as a template. This setup allows the second instance to have its own \code{gr} data while applying the same parameters, specifically the densities.}¥
+
+c = CompareGroup( ...¥\circled{14}\circlednote{14}{ creates a \code{CompareGroup} instance with the defined \code{AnalyzeGroup\_ST\_BUD} instances.}¥
+    'P', 10, ...
+    'A1', a1, ...
+    'A2', a2, ...
+    'WAITBAR', true, ...
+    'VERBOSE', false, ...
+    'MEMORIZE', true ...
+    );
+
+gui = GUIElement('PE', c, 'CLOSEREQ', false);¥\circled{15}\circlednote{15}{, \circled{16}, \circled{17}, and \circled{18} test creating, drawing, showing, and closing the GUI of the \code{CompareGroup}, which is the associated GUI of \code{AnalyzeGroup\_ST\_BUD}}¥
+gui.get('DRAW')¥\circled{16}¥
+gui.get('SHOW')¥\circled{17}¥
+
+gui.get('CLOSE')¥\circled{18}¥
+
+\end{lstlisting}
+
 
 \end{document}

@@ -1,13 +1,16 @@
 %% ¡header!
-OrdMxBUT < OrdMxWU (g, ordinal multiplex binary undirected with fixed thresholds) is a binary undirected ordinal multiplex with fixed thresholds.
+OrdMxBUT < OrdMxWU (g, ordinal multiplex binary undirected with fixed thresholds) is a ordinal multiplex binary undirected with fixed thresholds.
 
 %%% ¡description!
-In a binary undirected ordinal multiplex with fixed thresholds (BUT), 
-all the layers consist of binary undirected (BU) multiplex graphs 
+In a ordinal multiplex binary undirected graph with fixed thresholds (OrdMxBUT), 
+all the layers consist of binary undirected multiplex graphs 
 derived from the same weighted supra-connectivity matrices 
 binarized at different thresholds.
 The supra-connectivity matrix has a number of partitions equal to the number of thresholds.
 The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -128,37 +131,37 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the binary undirected ordinal multiplex with fixed thresholds.
+ELCLASS (constant, string) is the class of the ordinal multiplex binary undirected with fixed thresholds.
 %%%% ¡default!
 'OrdMxBUT'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the binary undirected ordinal multiplex with fixed thresholds.
+NAME (constant, string) is the name of the ordinal multiplex binary undirected with fixed thresholds.
 %%%% ¡default!
-'OrdMxBUT'
+'Ordinal Multiplex Binary Undirected at fixed Thresholds'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the binary undirected multiplex with fixed thresholds.
 %%%% ¡default!
-'In a binary undirected ordinal multiplex with fixed thresholds (BUT),  all the layers consist of binary undirected (BU) multiplex graphs  derived from the same weighted supra-connectivity matrices  binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.'
+'In a ordinal multiplex binary undirected graph with fixed threshold (OrdMxBUT),  all the layers consist of binary undirected multiplex graphs  derived from the same weighted supra-connectivity matrices  binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the binary undirected ordinal multiplex with fixed thresholds.
+TEMPLATE (parameter, item) is the template of the ordinal multiplex binary undirected with fixed thresholds.
 %%%% ¡settings!
 'OrdMxBUT'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the binary undirected ordinal multiplex with fixed thresholds.
+ID (data, string) is a few-letter code for the ordinal multiplex binary undirected with fixed thresholds.
 %%%% ¡default!
 'OrdMxBUT ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the binary undirected ordinal multiplex with fixed thresholds.
+LABEL (metadata, string) is an extended label of the ordinal multiplex binary undirected with fixed thresholds.
 %%%% ¡default!
 'OrdMxBUT label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the binary undirected ordinal multiplex with fixed thresholds.
+NOTES (metadata, string) are some specific notes about the ordinal multiplex binary undirected with fixed thresholds.
 %%%% ¡default!
 'OrdMxBUT notes'
 

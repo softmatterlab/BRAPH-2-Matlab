@@ -7,6 +7,9 @@ MeasureEnsemblePF_BS manages the basic functionalities to plot of a binodal supe
 %%% ¡seealso!
 MeasureEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -178,7 +181,7 @@ pr = MeasureEnsemblePF_BxPP_Nodes('EL', pf, 'PROP', MeasureEnsemblePF_BS.NODES);
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_BS.PARENT MeasureEnsemblePF_BS.H MeasureEnsemblePF_BS.ST_POSITION MeasureEnsemblePF_BS.ST_AXIS MeasureEnsemblePF_BS.ST_AREA MeasureEnsemblePF_BS.ST_LINE_M MeasureEnsemblePF_BS.ST_TITLE MeasureEnsemblePF_BS.ST_XLABEL MeasureEnsemblePF_BS.ST_YLABEL] 
+[MeasureEnsemblePF_BS.PARENT MeasureEnsemblePF_BS.H MeasureEnsemblePF_BS.ST_POSITION MeasureEnsemblePF_BS.ST_AXIS MeasureEnsemblePF_BS.ME MeasureEnsemblePF_BS.ST_AREA MeasureEnsemblePF_BS.ST_LINE_M MeasureEnsemblePF_BS.ST_TITLE MeasureEnsemblePF_BS.ST_XLABEL MeasureEnsemblePF_BS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
@@ -188,6 +191,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':MeasureEnsemblePF_BS'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':MeasureEnsemblePF_BS'])

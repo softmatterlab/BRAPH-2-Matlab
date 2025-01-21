@@ -7,6 +7,9 @@ A Panel Figure for Binodal Unilayer Measure (MeasurePF_BU) manages the basic fun
 %%% ¡seealso!
 Measure
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -202,7 +205,7 @@ pr = MeasurePF_xUPP_Layer('EL', pf, 'PROP', MeasurePF_BU.LAYER);
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL] 
+[MeasurePF_BU.SETUP MeasurePF_BU.PARENT MeasurePF_BU.H MeasurePF_BU.ST_POSITION MeasurePF_BU.ST_AXIS MeasurePF_BU.M MeasurePF_BU.ST_AREA MeasurePF_BU.ST_LINE MeasurePF_BU.ST_TITLE MeasurePF_BU.ST_XLABEL MeasurePF_BU.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

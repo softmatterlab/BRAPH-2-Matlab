@@ -13,7 +13,7 @@ classdef Richness < Degree
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Richness.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Richness.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Richness.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -127,7 +127,7 @@ classdef Richness < Degree
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Richness.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Richness.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Richness.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -142,6 +142,21 @@ classdef Richness < Degree
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the richness.
+			%
+			% BUILD = Richness.GETBUILD() returns the build of 'Richness'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the richness M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('Richness') returns the build of 'Richness'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('Richness')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the richness.
 			%
@@ -468,7 +483,7 @@ classdef Richness < Degree
 			prop = Richness.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			richness_description_list = { 'ELCLASS (constant, string) is the class of the Richness.'  'NAME (constant, string) is the name of the Richness.'  'DESCRIPTION (constant, string) is the description of the Richness.'  'TEMPLATE (parameter, item) is the template of the Richness.'  'ID (data, string) is a few-letter code of the Richness.'  'LABEL (metadata, string) is an extended label of the Richness.'  'NOTES (metadata, string) are some specific notes about the Richness.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Richness.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			richness_description_list = { 'ELCLASS (constant, string) is the class of the Richness.'  'NAME (constant, string) is the name of the Richness.'  'DESCRIPTION (constant, string) is the description of the Richness.'  'TEMPLATE (parameter, item) is the template of the Richness.'  'ID (data, string) is a few-letter code of the Richness.'  'LABEL (metadata, string) is an extended label of the Richness.'  'NOTES (metadata, string) are some specific notes about the Richness.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Richness.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = richness_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -544,7 +559,7 @@ classdef Richness < Degree
 				case 11 % Richness.PARAMETRICITY
 					prop_default = 2;
 				case 12 % Richness.COMPATIBLE_GRAPHS
-					prop_default = {'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT'} ;;
+					prop_default = {'GraphWU' 'GraphWD' 'GraphBU' 'GraphBD' 'MultigraphBUD' 'MultigraphBUT' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUD' 'MultiplexBUT' 'OrdMxWU'} ;;
 				otherwise
 					prop_default = getPropDefault@Degree(prop);
 			end

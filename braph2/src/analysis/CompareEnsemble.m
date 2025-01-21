@@ -13,7 +13,7 @@ classdef CompareEnsemble < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the comparison between two ensemble-based analyses.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the comparison between two ensemble-based analyses.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the comparison between two ensemble-based analyses.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>VERBOSE</strong> 	VERBOSE (gui, logical) sets whether to write the progress of the comparisons.
 	%  <strong>11</strong> <strong>INTERRUPTIBLE</strong> 	INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
@@ -116,6 +116,8 @@ classdef CompareEnsemble < ConcreteElement
 	%
 	%
 	% See also AnalyzeEnsemble, ComparisonEnsemble.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -207,7 +209,7 @@ classdef CompareEnsemble < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the comparison between two ensemble-based analyses.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the comparison between two ensemble-based analyses.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the comparison between two ensemble-based analyses.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>VERBOSE</strong> 	VERBOSE (gui, logical) sets whether to write the progress of the comparisons.
 			%  <strong>11</strong> <strong>INTERRUPTIBLE</strong> 	INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
@@ -229,6 +231,21 @@ classdef CompareEnsemble < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the ensemble-based comparison.
+			%
+			% BUILD = CompareEnsemble.GETBUILD() returns the build of 'CompareEnsemble'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = C.GETBUILD() returns the build of the ensemble-based comparison C.
+			%  BUILD = Element.GETBUILD(C) returns the build of 'C'.
+			%  BUILD = Element.GETBUILD('CompareEnsemble') returns the build of 'CompareEnsemble'.
+			%
+			% Note that the Element.GETBUILD(C) and Element.GETBUILD('CompareEnsemble')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function c_class = getClass()
 			%GETCLASS returns the class of the ensemble-based comparison.
 			%
@@ -555,7 +572,7 @@ classdef CompareEnsemble < ConcreteElement
 			prop = CompareEnsemble.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			compareensemble_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the comparison between two ensemble-based analyses.'  'DESCRIPTION (constant, string) is the description of the comparison between two ensemble-based analyses.'  'TEMPLATE (parameter, item) is the template of the comparison between two ensemble-based analyses.'  'ID (data, string) is a few-letter code for the comparison between two ensemble-based analyses.'  'LABEL (metadata, string) is an extended label of the comparison between two ensemble-based analyses.'  'NOTES (metadata, string) are some specific notes about the comparison between two ensemble-based analyses.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'VERBOSE (gui, logical) sets whether to write the progress of the comparisons.'  'INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.'  'MEMORIZE (metadata, logical) sets whether to memorize the permuted analyses.'  'P (parameter, scalar) is the permutation number.'  'LONGITUDINAL (parameter, logical) determines whether the comparison is longitudinal.'  'A1 (data, item) is the first analysis to compare.'  'A2 (data, item) is the second analysis to compare.'  'PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.'  'A1_PERM_DICT (result, idict) is the list of permuted analyses for the first analysis.'  'A2_PERM_DICT (result, idict) is the list of permuted analyses for the second analysis.'  'CP_DICT (result, idict) contains the results of the comparison.'  'COMPARISON (query, item) returns a comparison.'  'PERM (query, itemlist) returns the permuted analyses.' };
+			compareensemble_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the comparison between two ensemble-based analyses.'  'DESCRIPTION (constant, string) is the description of the comparison between two ensemble-based analyses.'  'TEMPLATE (parameter, item) is the template of the comparison between two ensemble-based analyses.'  'ID (data, string) is a few-letter code for the comparison between two ensemble-based analyses.'  'LABEL (metadata, string) is an extended label of the comparison between two ensemble-based analyses.'  'NOTES (metadata, string) are some specific notes about the comparison between two ensemble-based analyses.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'VERBOSE (gui, logical) sets whether to write the progress of the comparisons.'  'INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.'  'MEMORIZE (metadata, logical) sets whether to memorize the permuted analyses.'  'P (parameter, scalar) is the permutation number.'  'LONGITUDINAL (parameter, logical) determines whether the comparison is longitudinal.'  'A1 (data, item) is the first analysis to compare.'  'A2 (data, item) is the second analysis to compare.'  'PERM_SEEDS (result, rvector) is the list of seeds for the random permutations.'  'A1_PERM_DICT (result, idict) is the list of permuted analyses for the first analysis.'  'A2_PERM_DICT (result, idict) is the list of permuted analyses for the second analysis.'  'CP_DICT (result, idict) contains the results of the comparison.'  'COMPARISON (query, item) returns a comparison.'  'PERM (query, itemlist) returns the permuted analyses.' };
 			prop_description = compareensemble_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

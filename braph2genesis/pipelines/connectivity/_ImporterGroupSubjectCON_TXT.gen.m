@@ -16,17 +16,20 @@ The variables of interest are from another tab-separated TXT file named
 %%% ¡seealso!
 Group, SunbjectCON, ExporterGroupSubjectCON_TXT
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the CON subject group importer from TXT.
 %%%% ¡default!
 'ImporterGroupSubjectCON_TXT'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the CON subject group importer from TXT.
 %%%% ¡default!
-'ImporterGroupSubjectCON_TXT'
+'Connectivity Subject Group TXT Importer'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the CON subject group importer from TXT.

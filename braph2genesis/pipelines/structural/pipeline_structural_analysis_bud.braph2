@@ -6,8 +6,8 @@
 % 2. It loads the data of a group of subjects from an XLS file (e.g., ST_group1.xlsx).
 % 3. It analyzes these data using a structural analysis (ST) based on a binary undirected graph using densities (BUD).
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_a_st_bud/tut_a_st_bud.pdf
+% README: /tutorials/pipelines/tut_a_st_bud/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas

@@ -13,7 +13,7 @@ classdef Participation < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Participation.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Participation.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Participation.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -140,7 +140,7 @@ classdef Participation < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Participation.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Participation.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Participation.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -157,6 +157,21 @@ classdef Participation < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the participation.
+			%
+			% BUILD = Participation.GETBUILD() returns the build of 'Participation'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the participation M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('Participation') returns the build of 'Participation'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('Participation')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the participation.
 			%
@@ -483,7 +498,7 @@ classdef Participation < Measure
 			prop = Participation.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			participation_description_list = { 'ELCLASS (constant, string) is the class of the Participation.'  'NAME (constant, string) is the name of the Participation.'  'DESCRIPTION (constant, string) is the description of the Participation.'  'TEMPLATE (parameter, item) is the template of the Participation.'  'ID (data, string) is a few-letter code of the Participation.'  'LABEL (metadata, string) is an extended label of the Participation.'  'NOTES (metadata, string) are some specific notes about the Participation.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Participation.'  'PFM (gui, item) contains the panel figure of the measure.'  'CI (parameter, MATRIX) '  'RULE (parameter, option)' };
+			participation_description_list = { 'ELCLASS (constant, string) is the class of the Participation.'  'NAME (constant, string) is the name of the Participation.'  'DESCRIPTION (constant, string) is the description of the Participation.'  'TEMPLATE (parameter, item) is the template of the Participation.'  'ID (data, string) is a few-letter code of the Participation.'  'LABEL (metadata, string) is an extended label of the Participation.'  'NOTES (metadata, string) are some specific notes about the Participation.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Participation.'  'PFM (gui, item) contains the panel figure of the measure.'  'CI (parameter, MATRIX) '  'RULE (parameter, option)' };
 			prop_description = participation_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -567,7 +582,7 @@ classdef Participation < Measure
 				case 11 % Participation.PARAMETRICITY
 					prop_default = 2;
 				case 12 % Participation.COMPATIBLE_GRAPHS
-					prop_default = {'GraphBD' 'GraphBU' 'MultigraphBUT' 'MultiplexBU'};;
+					prop_default = {'GraphWU' 'GraphWD' 'GraphBD' 'GraphBU' 'MultigraphBUT' 'MultigraphBUD' 'MultiplexWU' 'MultiplexWD' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUT' 'MultiplexBUD'};;
 				otherwise
 					prop_default = getPropDefault@Measure(prop);
 			end
@@ -694,7 +709,9 @@ classdef Participation < Measure
 					    connectivity_layer = connectivity_type(li, li);
 					    directionality_layer = directionality_type(li, li);
 					    Aii = A{li, li};
-					    m.set('CI', cell2mat(S));
+					    if ~isequal(m.get('CI'), cell2mat(S))
+					        m.set('CI', cell2mat(S));
+					    end
 					   
 					    if connectivity_layer == 1  % weighted graphs
 					        if directionality_layer == 2  % undirected graphs

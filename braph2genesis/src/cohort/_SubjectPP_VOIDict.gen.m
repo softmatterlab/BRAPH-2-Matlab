@@ -9,6 +9,9 @@ It is intended to be used with the property VOI_DICT of Subject.
 %%% ¡seealso!
 Subject, uieditfield, uidropdown
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

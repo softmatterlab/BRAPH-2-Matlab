@@ -6,8 +6,8 @@
 % 2. It loads the data of a group of subjects from an XLS file (e.g., ST_group1.xlsx).
 % 3. It analyzes these data using a structural analysis (ST) based on a weighted graph (WU).
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_a_st_wu/tut_a_st_wu.pdf
+% README: /tutorials/pipelines/tut_a_st_wu/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas

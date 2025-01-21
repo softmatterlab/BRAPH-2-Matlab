@@ -7,6 +7,9 @@ ComparisonEnsembleBrainPF_NS manages the basic functionalities to plot of a noda
 %%% ¡seealso!
 ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

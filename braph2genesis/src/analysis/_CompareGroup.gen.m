@@ -7,6 +7,9 @@ CompareGroup compares two group-based analyses, which need to be of the same cla
 %%% ¡seealso!
 AnalyzeGroup, ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

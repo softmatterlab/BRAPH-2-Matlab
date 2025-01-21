@@ -5,6 +5,9 @@ DegreeOut < Measure (m, out-degree) is the graph Out-Degree.
 The Out-Degree (DegreeOut) of a node is the number of outward edges connected to a node within a layer. 
 Connection weights are ignored in calculations.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -114,11 +117,13 @@ A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for m
 L = g.get('LAYERNUMBER');
 out_degree = cell(L, 1);
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     Aii = A{li, li};
     Aii = binarize(Aii);  % binarizes the adjacency matrix
     out_degree(li) = {sum(Aii, 2)};  % calculates the out-degree of a node for layer li
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = out_degree;
 

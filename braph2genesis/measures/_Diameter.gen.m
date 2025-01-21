@@ -4,6 +4,9 @@ Diameter < Measure (m, diameter) is the graph Diameter.
 %%% ¡description!
 The Diameter (Diameter) is the maximum eccentricity among the vertices within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -115,9 +118,11 @@ L = g.get('LAYERNUMBER');
 eccentricity = Eccentricity('G', g, 'RULE', m.get('RULE')).get('M'); 
 diameter = cell(L, 1);
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     diameter(li) = {max(eccentricity{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = diameter;
 

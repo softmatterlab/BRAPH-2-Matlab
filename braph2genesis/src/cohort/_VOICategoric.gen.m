@@ -7,6 +7,9 @@ A Categorical Variable Of Interest (VOICategoric) is a categorical variable of i
 %%% ¡seealso!
 VOINumeric
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

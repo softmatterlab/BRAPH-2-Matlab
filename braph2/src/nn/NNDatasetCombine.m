@@ -7,14 +7,14 @@ classdef NNDatasetCombine < ConcreteElement
 	% and any overlapping datapoints are excluded to ensure data consistency.
 	%
 	% The list of NNDatasetCombine properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
-	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the combier of a neural network data.
-	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the combier of a neural network data.
-	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the combier of a neural network data.
-	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the combier of a neural network data.
-	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the combier of a neural network data.
-	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the combier of a neural network data.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the combiner of neural networks datasets.
+	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the combiner of neural networks datasets.
+	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the combiner of neural networks datasets.
+	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the combiner of neural networks datasets.
+	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the combiner of neural networks datasets.
+	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the combiner of neural networks datasets.
+	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes of the combiner of neural networks datasets.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>D_LIST</strong> 	D_LIST (data, itemlist) is a items of datasets to be combined.
 	%  <strong>10</strong> <strong>D</strong> 	D (result, item) is the combined neural network dataset.
 	%
@@ -36,33 +36,33 @@ classdef NNDatasetCombine < ConcreteElement
 	%  unchecked - sets a property to NOT checked
 	%
 	% NNDatasetCombine methods (display):
-	%  tostring - string with information about the splitter of a neural network data
-	%  disp - displays information about the splitter of a neural network data
-	%  tree - displays the tree of the splitter of a neural network data
+	%  tostring - string with information about the combiner of a neural network data
+	%  disp - displays information about the combiner of a neural network data
+	%  tree - displays the tree of the combiner of a neural network data
 	%
 	% NNDatasetCombine methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two splitter of a neural network data are equal (values, locked)
+	%  isequal - determines whether two combiner of a neural network data are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the splitter of a neural network data
+	%  copy - copies the combiner of a neural network data
 	%
 	% NNDatasetCombine methods (save/load, Static):
-	%  save - saves BRAPH2 splitter of a neural network data as b2 file
-	%  load - loads a BRAPH2 splitter of a neural network data from a b2 file
+	%  save - saves BRAPH2 combiner of a neural network data as b2 file
+	%  load - loads a BRAPH2 combiner of a neural network data from a b2 file
 	%
 	% NNDatasetCombine method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the splitter of a neural network data
+	%  encodeJSON - returns a JSON string encoding the combiner of a neural network data
 	%
 	% NNDatasetCombine method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the splitter of a neural network data
+	%   decodeJSON - returns a JSON string encoding the combiner of a neural network data
 	%
 	% NNDatasetCombine methods (inspection, Static):
-	%  getClass - returns the class of the splitter of a neural network data
+	%  getClass - returns the class of the combiner of a neural network data
 	%  getSubclasses - returns all subclasses of NNDatasetCombine
-	%  getProps - returns the property list of the splitter of a neural network data
-	%  getPropNumber - returns the property number of the splitter of a neural network data
+	%  getProps - returns the property list of the combiner of a neural network data
+	%  getPropNumber - returns the property number of the combiner of a neural network data
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -105,6 +105,8 @@ classdef NNDatasetCombine < ConcreteElement
 	%
 	%
 	% See also NNDataset, NNDatasetSplit.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		D_LIST = 9; %CET: Computational Efficiency Trick
@@ -119,7 +121,7 @@ classdef NNDatasetCombine < ConcreteElement
 	end
 	methods % constructor
 		function dco = NNDatasetCombine(varargin)
-			%NNDatasetCombine() creates a splitter of a neural network data.
+			%NNDatasetCombine() creates a combiner of a neural network data.
 			%
 			% NNDatasetCombine(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -129,14 +131,14 @@ classdef NNDatasetCombine < ConcreteElement
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNDatasetCombine properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
-			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the combier of a neural network data.
-			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the combier of a neural network data.
-			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the combier of a neural network data.
-			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the combier of a neural network data.
-			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the combier of a neural network data.
-			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the combier of a neural network data.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the combiner of neural networks datasets.
+			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the combiner of neural networks datasets.
+			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the combiner of neural networks datasets.
+			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the combiner of neural networks datasets.
+			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the combiner of neural networks datasets.
+			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the combiner of neural networks datasets.
+			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes of the combiner of neural networks datasets.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>D_LIST</strong> 	D_LIST (data, itemlist) is a items of datasets to be combined.
 			%  <strong>10</strong> <strong>D</strong> 	D (result, item) is the combined neural network dataset.
 			%
@@ -146,13 +148,28 @@ classdef NNDatasetCombine < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the combiner of a neural network data.
+			%
+			% BUILD = NNDatasetCombine.GETBUILD() returns the build of 'NNDatasetCombine'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = DCO.GETBUILD() returns the build of the combiner of a neural network data DCO.
+			%  BUILD = Element.GETBUILD(DCO) returns the build of 'DCO'.
+			%  BUILD = Element.GETBUILD('NNDatasetCombine') returns the build of 'NNDatasetCombine'.
+			%
+			% Note that the Element.GETBUILD(DCO) and Element.GETBUILD('NNDatasetCombine')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function dco_class = getClass()
-			%GETCLASS returns the class of the splitter of a neural network data.
+			%GETCLASS returns the class of the combiner of a neural network data.
 			%
 			% CLASS = NNDatasetCombine.GETCLASS() returns the class 'NNDatasetCombine'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = DCO.GETCLASS() returns the class of the splitter of a neural network data DCO.
+			%  CLASS = DCO.GETCLASS() returns the class of the combiner of a neural network data DCO.
 			%  CLASS = Element.GETCLASS(DCO) returns the class of 'DCO'.
 			%  CLASS = Element.GETCLASS('NNDatasetCombine') returns 'NNDatasetCombine'.
 			%
@@ -162,12 +179,12 @@ classdef NNDatasetCombine < ConcreteElement
 			dco_class = 'NNDatasetCombine';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the splitter of a neural network data.
+			%GETSUBCLASSES returns all subclasses of the combiner of a neural network data.
 			%
 			% LIST = NNDatasetCombine.GETSUBCLASSES() returns all subclasses of 'NNDatasetCombine'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = DCO.GETSUBCLASSES() returns all subclasses of the splitter of a neural network data DCO.
+			%  LIST = DCO.GETSUBCLASSES() returns all subclasses of the combiner of a neural network data DCO.
 			%  LIST = Element.GETSUBCLASSES(DCO) returns all subclasses of 'DCO'.
 			%  LIST = Element.GETSUBCLASSES('NNDatasetCombine') returns all subclasses of 'NNDatasetCombine'.
 			%
@@ -179,16 +196,16 @@ classdef NNDatasetCombine < ConcreteElement
 			subclass_list = { 'NNDatasetCombine' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of splitter of a neural network data.
+			%GETPROPS returns the property list of combiner of a neural network data.
 			%
-			% PROPS = NNDatasetCombine.GETPROPS() returns the property list of splitter of a neural network data
+			% PROPS = NNDatasetCombine.GETPROPS() returns the property list of combiner of a neural network data
 			%  as a row vector.
 			%
 			% PROPS = NNDatasetCombine.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = DCO.GETPROPS([CATEGORY]) returns the property list of the splitter of a neural network data DCO.
+			%  PROPS = DCO.GETPROPS([CATEGORY]) returns the property list of the combiner of a neural network data DCO.
 			%  PROPS = Element.GETPROPS(DCO[, CATEGORY]) returns the property list of 'DCO'.
 			%  PROPS = Element.GETPROPS('NNDatasetCombine'[, CATEGORY]) returns the property list of 'NNDatasetCombine'.
 			%
@@ -222,15 +239,15 @@ classdef NNDatasetCombine < ConcreteElement
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of splitter of a neural network data.
+			%GETPROPNUMBER returns the property number of combiner of a neural network data.
 			%
-			% N = NNDatasetCombine.GETPROPNUMBER() returns the property number of splitter of a neural network data.
+			% N = NNDatasetCombine.GETPROPNUMBER() returns the property number of combiner of a neural network data.
 			%
-			% N = NNDatasetCombine.GETPROPNUMBER(CATEGORY) returns the property number of splitter of a neural network data
+			% N = NNDatasetCombine.GETPROPNUMBER(CATEGORY) returns the property number of combiner of a neural network data
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = DCO.GETPROPNUMBER([CATEGORY]) returns the property number of the splitter of a neural network data DCO.
+			%  N = DCO.GETPROPNUMBER([CATEGORY]) returns the property number of the combiner of a neural network data DCO.
 			%  N = Element.GETPROPNUMBER(DCO) returns the property number of 'DCO'.
 			%  N = Element.GETPROPNUMBER('NNDatasetCombine') returns the property number of 'NNDatasetCombine'.
 			%
@@ -264,7 +281,7 @@ classdef NNDatasetCombine < ConcreteElement
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in splitter of a neural network data/error.
+			%EXISTSPROP checks whether property exists in combiner of a neural network data/error.
 			%
 			% CHECK = NNDatasetCombine.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -302,7 +319,7 @@ classdef NNDatasetCombine < ConcreteElement
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in splitter of a neural network data/error.
+			%EXISTSTAG checks whether tag exists in combiner of a neural network data/error.
 			%
 			% CHECK = NNDatasetCombine.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -468,7 +485,7 @@ classdef NNDatasetCombine < ConcreteElement
 			prop = NNDatasetCombine.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nndatasetcombine_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the combier of a neural network data.'  'DESCRIPTION (constant, string) is the description of the combier of a neural network data.'  'TEMPLATE (parameter, item) is the template of the combier of a neural network data.'  'ID (data, string) is a few-letter code for the combier of a neural network data.'  'LABEL (metadata, string) is an extended label of the combier of a neural network data.'  'NOTES (metadata, string) are some specific notes about the combier of a neural network data.'  'TOSTRING (query, string) returns a string that represents the object.'  'D_LIST (data, itemlist) is a items of datasets to be combined.'  'D (result, item) is the combined neural network dataset.' };
+			nndatasetcombine_description_list = { 'ELCLASS (constant, string) is the class of the combiner of neural networks datasets.'  'NAME (constant, string) is the name of the combiner of neural networks datasets.'  'DESCRIPTION (constant, string) is the description of the combiner of neural networks datasets.'  'TEMPLATE (parameter, item) is the template of the combiner of neural networks datasets.'  'ID (data, string) is a few-letter code of the combiner of neural networks datasets.'  'LABEL (metadata, string) is an extended label of the combiner of neural networks datasets.'  'NOTES (metadata, string) are some specific notes of the combiner of neural networks datasets.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'D_LIST (data, itemlist) is a items of datasets to be combined.'  'D (result, item) is the combined neural network dataset.' };
 			prop_description = nndatasetcombine_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -534,7 +551,7 @@ classdef NNDatasetCombine < ConcreteElement
 				case 1 % NNDatasetCombine.ELCLASS
 					prop_default = 'NNDatasetCombine';
 				case 2 % NNDatasetCombine.NAME
-					prop_default = 'NNDatasetCombine';
+					prop_default = 'Neural Network Dataset Combiner';
 				case 3 % NNDatasetCombine.DESCRIPTION
 					prop_default = 'A dataset combiner (NNDatasetCombine) takes a list of neural network datasets and combines them into a single dataset. The resulting combined dataset contains all the unique datapoints from the input datasets, and any overlapping datapoints are excluded to ensure data consistency.';
 				case 4 % NNDatasetCombine.TEMPLATE
@@ -669,7 +686,7 @@ classdef NNDatasetCombine < ConcreteElement
 					dp_list = horzcat(dp_list{:});
 					
 					% inspect whether there are overlapping datapoints
-					if isempty(dp_list) | isempty(dp_classes)
+					if isempty(dp_list)
 					    unique_dp_list = {};
 					    dp_class = 'NNDataPoint';
 					else
@@ -681,7 +698,7 @@ classdef NNDatasetCombine < ConcreteElement
 					
 					% create the combined NNDataset
 					combined_dp_dict = IndexedDictionary(...
-					    'IT_CLASS', 'NNDataPoint', ...
+					    'IT_CLASS', dp_class, ...
 					    'IT_LIST',  unique_dp_list ...
 					    );
 					

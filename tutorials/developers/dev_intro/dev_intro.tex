@@ -2,7 +2,7 @@
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{General Developer Tutorial for BRAPH 2.0}
+\title{General Developer Tutorial for BRAPH 2}
 
 \author[The BRAPH~2 Developers]{The BRAPH~2 Developers}
 
@@ -12,28 +12,27 @@
 
 \begin{abstract}
 \noindent
-The software architecture of BRAPH~2.0 provides a clear structure for developers to understand and extend its functionalities. All objects (\emph{elements}) in BRAPH~2.0 are derived from the base object \code{Element}. Developers can easily add new elements by writing the new elements in the simplified BRAPH~2.0 pseudocode. 
-By recompiling BRAPH~2.0, the new elements and their functionalities are immediately integrated, also into the graphical user interface.
-In this Developer Tutorial, we will explain how BRAPH~2.0 is compiled, how the elements are strcutured, and how new elements can be implemented.
+The software architecture of BRAPH~2 provides a clear structure for developers to understand and extend its functionalities. All objects (\emph{elements}) in BRAPH~2 are derived from the base object \code{Element}. Developers can easily add new elements by writing the new elements in the simplified BRAPH~2 pseudocode. 
+By recompiling BRAPH~2, the new elements and their functionalities are immediately integrated, also into the graphical user interface.
+In this developer tutorial, you will learn how BRAPH~2 is compiled, how the elements are strcutured, and how new elements can be implemented.
 \end{abstract}
 
 \tableofcontents
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
 \section{Compilation and Element (Re)Generation}
 
-BRAPH~2.0 is a compiled object-oriented programming software.
+BRAPH~2 is a compiled object-oriented programming software.
 Its objects are \emph{elements}, which contain a set of \emph{props} of various \emph{categories} and \emph{formats}, as described in detail in the following sections. 
-These elements are written in the BRAPH~2.0 pseudocode, which simplifies and streamlines the coding process.
-To convert them into usable matlab objects, BRAPH~2.0 needs to be compiled, which is done by calling the script \code{braph2genesis}, which will compile the whole code, as shown in \Coderef{cd:compilation}.
-%
+These elements are written in the BRAPH~2 pseudocode, which simplifies and streamlines the coding process.
+To convert them into usable MatLab objects, BRAPH~2 needs to be compiled, which is done by calling the script \code{braph2genesis}, which will compile the whole BRAPH~2 code base, as shown in \Coderef{cd:compilation}.
+
 \begin{lstlisting}[
 	label=cd:compilation,
 	caption={
-		{\bf Compilation of BRAPH~2.0.}
-		Executing the script \code{braph2genesis} compiles BRAPH~2.0 and , subsequently, unit tests it.
-		Importantly, this function might take several hours to run (plus several more hours to unit test the compiled code).
+		{\bf Compilation of BRAPH~2.}
+		Executing the script \code{braph2genesis} compiles BRAPH~2 and , subsequently, unit tests it.
+		Importantly, this script might take several hours to run (plus several more hours to unit test the compiled code).
 	}
 ]
 >> braph2genesis
@@ -41,39 +40,43 @@ To convert them into usable matlab objects, BRAPH~2.0 needs to be compiled, whic
 
 During the compilation, there are several phases to improve the computational efficiency of the executable code:
 \begin{enumerate}
-	\item {\bf First compilation}, where the elements are created.
-	\item {\bf Second compilation}, where the elements are computationally optimized.
-	\item {\bf Constant hard-coding}, where several contants are hard-coded in the executable code to further optimize the run time.
+
+\item{} {\bf First compilation}, where the elements are created.
+
+\item{} {\bf Second compilation}, where the elements are computationally optimized.
+
+\item{} {\bf Constant hard-coding}, where several contants are hard-coded in the executable code to further optimize the run time.
+
 \end{enumerate}
 
-Because this multi-stage compilation, it is not always possible to regenerate a single element without regenerating the whole BRAPH~2.0. 
+Because of this multi-stage compilation, it is not always possible to regenerate a single element without regenerating the whole BRAPH~2. 
 Nevertheless, it is usually possible to regenerate a single element as long as the element already exists and its props have not been changed.
 This can be done with the function \code{regenerate()}, as shown in \Coderef{cd:regenerate}.
-%
+
 \begin{lstlisting}[
 	label=cd:regenerate,
 	caption={
 		{\bf Regeneration of elements.}
-		The function \code{regenerate()} can be used to regenerate some elements, as long as they already exist in the current BRAPH~2.0 compilation and their list of props has not been altered (e.g., renamed, moved, added). In this case, it is necessary to recompile BRAPH~2.0 with \code{braph2genesis}.
+		The function \code{regenerate()} can be used to regenerate some elements, as long as they already exist in the current BRAPH~2 compilation and their list of props has not been altered (e.g., renamed, moved, added), in which case it is necessary to recompile BRAPH~2 with \code{braph2genesis}.
 	}
 ]
->> close all; delete(findall(0, 'type', 'figure')); clear all ¥\circled{1}\circlednote{1}{clears the workspace (not always necessary, but needed is some element instances are still in the workspace).}¥
+>> close all; delete(findall(0, 'type', 'figure')); clear all ¥\circled{1}\circlednote{1}{ clears the workspace (not always necessary, but needed if some element instances are still in the workspace).}¥
 
->> regenerate(regenerate('/src/gui', {'Pipeline'}) ¥\circled{2}\circlednote{2}{regenerates \code{Pipeline}.}¥
+>> regenerate('/src/gui', {'Pipeline'}) ¥\circled{2}\circlednote{2}{ regenerates \code{Pipeline}.}¥
 
->> regenerate(regenerate('/src/gui', {'Pipeline'}, 'DoubleCompilation', false) ¥\circled{3}\circlednote{3}{performs only one compilation.}¥
+>> regenerate('/src/gui', {'Pipeline'}, 'DoubleCompilation', false) ¥\circled{3}\circlednote{3}{ performs only one compilation.}¥
 
->> regenerate(regenerate('/src/gui', {'Pipeline'}, 'CreateElement', false) ¥\circled{4}\circlednote{4}{does not regenerate the element, but only the layout and the unit test.}¥
+>> regenerate('/src/gui', {'Pipeline'}, 'CreateElement', false) ¥\circled{4}\circlednote{4}{ does not regenerate the element, but only the layout and the unit test.}¥
 
->> regenerate(regenerate('/src/gui', {'Pipeline'}, 'CreateLayout', false) ¥\circled{5}\circlednote{5}{does not regenerate the layout.}¥
+>> regenerate('/src/gui', {'Pipeline'}, 'CreateLayout', false) ¥\circled{5}\circlednote{5}{ does not regenerate the layout.}¥
 
->> regenerate(regenerate('/src/gui', {'Pipeline'}, 'CreateTest', false) ¥\circled{6}\circlednote{6}{does not regenerate the unit test.}¥
+>> regenerate('/src/gui', {'Pipeline'}, 'CreateTest', false) ¥\circled{6}\circlednote{6}{ does not regenerate the unit test.}¥
 
->> regenerate(regenerate('/src/gui', {'Pipeline'}, 'UnitTest', false) ¥\circled{7}\circlednote{7}{does not perform the unit test.}¥
+>> regenerate('/src/gui', {'Pipeline'}, 'UnitTest', false) ¥\circled{7}\circlednote{7}{ does not perform the unit test.}¥
 
->> regenerate(regenerate('/src/gui', {'Pipeline'}, 'CreateLayout', false, 'UnitTest', false) ¥\circled{8}\circlednote{8}{Multiple options can be selected at once. In this ces, it does not regenerate the layout and it does not perform the unit test.}¥
+>> regenerate('/src/gui', {'Pipeline'}, 'CreateLayout', false, 'UnitTest', false) ¥\circled{8}\circlednote{8}{ Multiple options can be selected at once. In this case, it does not regenerate the layout and it does not perform the unit test.}¥
 
->> regenerate(regenerate('/src/gui', {'Pipeline', 'GUI'}) ¥\circled{9}\circlednote{9}{Multiple elements can be regenerated at once. This can throw an error, typically because an instance of the element to be regenerated remains in the workspace. In this case, regenerate the elements one by one.}¥
+>> regenerate('/src/gui', {'Pipeline', 'GUI'}) ¥\circled{9}\circlednote{9}{ Multiple elements can be regenerated at once. This can throw an error, typically because an instance of the element to be regenerated remains in the workspace. In this case, regenerate the elements one by one.}¥
 \end{lstlisting}
 
 \section{Elements}
@@ -81,22 +84,25 @@ This can be done with the function \code{regenerate()}, as shown in \Coderef{cd:
 The base class for all elements is \code{Element}. 
 Each element is essentially a container for a series of \emph{props} (properties). Each prop is characterized by the following static features (i.e., equal for all instances of the prop):
 \begin{itemize}
-	\item A \emph{sequential number} (integer starting from 1).
+
+\item A \emph{sequential number} (integer starting from 1).
 		
-	\item A \emph{tag} (a string).
+\item A \emph{tag} (a string).
 	
-	\item A \emph{category}, which determines for how a prop is used.\footnote{The possible categories and formats are shown in the boxes below.}
+\item A \emph{category}, which determines for how a prop is used.\footnote{The possible categories and formats are shown in the boxes below.}
 	
-	\item A \emph{format}, which determines what a prop can contain.
+\item A \emph{format}, which determines what a prop can contain.
+
 \end{itemize}
 The functions to inspect these features can be found by using the command \code{help Element} in the MatLab command line.
 
 Furthermore, each instance of a prop has the following features:
 \begin{itemize}
-	\item A \emph{value}.\footnote{The value is by defalut a \code{NoValue}. For \code{PARAMETER}, \code{DATA}, \code{FIGURE}, and \code{GUI} props, it can also be a callback. For \code{CONSTANT} props, it is usually a concrete value.}
+
+\item A \emph{value}.\footnote{The value is by defalut a \code{NoValue}. For \code{PARAMETER}, \code{DATA}, \code{FIGURE}, and \code{GUI} props, it can also be a callback. For \code{CONSTANT} props, it is usually a concrete value.}
 	The functions to set, get, and memorize a value will be discussed in the following sections.
 	
-	\item A \emph{seed} for the random number generator to ensure the reproducibility of the results. 
+\item A \emph{seed} for the random number generator to ensure the reproducibility of the results. 
 	The seed of each property is a 32-bit unsigned integer and is initialized when an element is constructed by calling \code{randi(intmax('uint32'))}.
 	
 	The seed can be obtained using:\\
@@ -104,8 +110,8 @@ Furthermore, each instance of a prop has the following features:
 	where \code{pointer} can be either a prop number or tag.
 	It cannot be changed.
  	
-	\item A \emph{checked} status, which is true by default.
-	Checked props are checked for format when they are set and for value when they are set/calculated.\footnote{When \code{BRAPH2.CHECKED = false}, no checks are performed. This needs to be changes in the file \fn{BRAPH2.m}.}
+\item A \emph{checked} status, which is true by default.
+	Checked props are checked for format when they are set and for value when they are set/calculated.\footnote{When \code{BRAPH2.CHECKED = false}, no checks are performed. This needs to be changed in the file \fn{BRAPH2.m}.}
 	
 	The checked status of a prop can be altered with the functions:\\
 	\code{el.checked(pointer)}\\
@@ -114,7 +120,7 @@ Furthermore, each instance of a prop has the following features:
 	\code{checked = el.isChecked(pointer)}\\
 	where \code{pointer} can be either a prop number or tag.
 	
-	\item A \emph{locked} status, which is false by default.\footnote{The \code{PARAMETER} and \code{DATA} props get locked the first time a \code{RESULT} property is successfully calculated. The locked status is not used for \code{CONSTANT} props.}
+\item A \emph{locked} status, which is false by default.\footnote{The \code{PARAMETER} and \code{DATA} props get locked the first time a \code{RESULT} property is successfully calculated. The locked status is not used for \code{CONSTANT} props.}
 	
 	A prop can be locked with the function:\\
 	\code{el.lock(pointer)}\\
@@ -123,7 +129,7 @@ Furthermore, each instance of a prop has the following features:
 	\code{locked = el.isLocked(pointer)}\\
 	where \code{pointer} can be either a prop number or tag.
 	
-	\item A \emph{callback} instance.\footnote{Callbacks are not used with \code{METADATA} props.}
+\item A \emph{callback} instance.\footnote{Callbacks are not used with \code{METADATA} props.}
 	
 	The callback to a prop can be obtained using the function:\\
 	\code{cb = el.getCallback(pointer)}\\
@@ -137,93 +143,97 @@ Additional functions to operate with these features can be found by using the co
 	title=Property Categories
 ]
 \begin{description} 
- 	\item[\code{CONSTANT}] Static constant equal for all instances of the element. It allows incoming callbacks.
+
+ \item[\code{CONSTANT}] Static constant equal for all instances of the element. It allows incoming callbacks.
  
- 	\item[\code{METADATA}] Metadata NOT used in the calculation of the results. It does not allow callbacks. It is not locked when a result is calculated.
+ \item[\code{METADATA}] Metadata NOT used in the calculation of the results. It does not allow callbacks. It is not locked when a result is calculated.
  
- 	\item[\code{PARAMETER}] Parameter used to calculate the results of the element. It allows incoming and outgoing callbacks. It is connected with a callback when using a template. It is locked when a result is calculated.
+ \item[\code{PARAMETER}] Parameter used to calculate the results of the element. It allows incoming and outgoing callbacks. It is connected with a callback when using a template. It is locked when a result is calculated.
  
- 	\item[\code{DATA}] Data used to calculate the results of the element. It is \code{NoValue} when not set. It allows incoming and outgoing callbacks. It is locked when a result is calculated.
+ \item[\code{DATA}] Data used to calculate the results of the element. It is \code{NoValue} when not set. It allows incoming and outgoing callbacks. It is locked when a result is calculated.
  
- 	\item[\code{RESULT}] Result calculated by the element using parameters and data. The calculation of a result locks the element. It is \code{NoValue} when not calculated. It allows incoming callbacks.
+ \item[\code{RESULT}] Result calculated by the element using parameters and data. The calculation of a result locks the element. It is \code{NoValue} when not calculated. It allows incoming callbacks.
  
- 	\item[\code{QUERY}] Query result calculated by the element. The calculation of a query does NOT lock the element. It is \code{NoValue} when not calculated. Typically, it should not be memorized.
+ \item[\code{QUERY}] Query result calculated by the element. The calculation of a query does NOT lock the element. It is \code{NoValue} when not calculated. Typically, it should not be memorized.
 It does not allow callbacks.
  
- 	\item[\code{EVANESCENT}] Evanescent variable calculated at runtime (typically employed for handles of GUI components). It is \code{NoValue} when not calculated. Typically, it should be memorized at first use.
+ \item[\code{EVANESCENT}] Evanescent variable calculated at runtime (typically employed for handles of GUI components). It is \code{NoValue} when not calculated. Typically, it should be memorized at first use.
 It does not allow callbacks.
  
- 	\item[\code{FIGURE}] Parameter used to plot the results in a figure. It allows incoming and outgoing callbacks. It is not locked when a result is calculated.
+ \item[\code{FIGURE}] Parameter used to plot the results in a figure. It allows incoming and outgoing callbacks. It is not locked when a result is calculated.
                 
- 	\item[\code{GUI}] Parameter used by the graphical user interface (GUI). It allows incoming and outgoing callbacks. It is not locked when a result is calculated.
+ \item[\code{GUI}] Parameter used by the graphical user interface (GUI). It allows incoming and outgoing callbacks. It is not locked when a result is calculated.
+
 \end{description}
 \end{tcolorbox}
 \end{fullwidth}
 
 \begin{fullwidth}
 \begin{tcolorbox}[
-	title=Property Categories
+	title=Property Formats
 ]
 \begin{description} 
-	\item [\code{EMPTY}] Empty has an empty value and is typically used as a result or query to execute some code. 
+
+\item[\code{EMPTY}] Empty has an empty value and is typically used as a result or query to execute some code. 
  
-	\item [\code{STRING}] String is a char array.
+\item[\code{STRING}] String is a char array.
  
-	\item [\code{STRINGLIST}] StringList is a cell array with char arrays.
+\item[\code{STRINGLIST}] StringList is a cell array with char arrays.
  
-	\item [\code{LOGICAL}] Logical is a boolean value.
+\item[\code{LOGICAL}] Logical is a boolean value.
  
-	\item [\code{OPTION}] Option is a char array representing an option within a set defined in the element (case sensitive).\\ 
+\item[\code{OPTION}] Option is a char array representing an option within a set defined in the element (case sensitive).
                 Settings: cell array of chars representing the options, e.g., \code{\{'plus', 'minus', 'zero'\}}.
  
-	\item [\code{CLASS}] Class is a char array corresponding to an element class.\\
+\item[\code{CLASS}] Class is a char array corresponding to an element class.
                 Settings: class name of a subclass of Element (or Element itself).
  
-	\item [\code{CLASSLIST}] ClassList is a cell array with char arrays corresponding to element classes.\\
+\item[\code{CLASSLIST}] ClassList is a cell array with char arrays corresponding to element classes.
                 Settings: class name of a subclass of Element (or Element itself), which represents the base element.
  
-	\item [\code{ITEM}] Item is a pointer to an element of a class defined in the element.\\ 
+\item[\code{ITEM}] Item is a pointer to an element of a class defined in the element.
                 Settings: class name of a subclass of Element (or Element itself).
  
-	\item [\code{ITEMLIST}] ItemList is a cell array with pointers to elements of a class defined in the element.\\
+\item[\code{ITEMLIST}] ItemList is a cell array with pointers to elements of a class defined in the element.
                 Settings: class name of a subclass of Element (or Element itself), which represents the base element.
  
-	\item [\code{IDICT}] Idict is an indexed dictionary of elements of a class defined in the element.\\
+\item[\code{IDICT}] Idict is an indexed dictionary of elements of a class defined in the element.
                 Settings: class name of a subclass of Element (or Element itself), which represents the dictionary element.
  
-	\item [\code{SCALAR}] Scalar is a scalar numerical value.
+\item[\code{SCALAR}] Scalar is a scalar numerical value.
  
-	\item [\code{RVECTOR}] RVector is a numerical row vector.
+\item[\code{RVECTOR}] RVector is a numerical row vector.
  
-	\item [\code{CVECTOR}] CVector is a numerical column vector.
+\item[\code{CVECTOR}] CVector is a numerical column vector.
  
-	\item [\code{MATRIX}] Matrix is a numerical matrix.
+\item[\code{MATRIX}] Matrix is a numerical matrix.
  
-	\item [\code{SMATRIX}] SMatrix is a numerical square matrix.
+\item[\code{SMATRIX}] SMatrix is a numerical square matrix.
  
-	\item [\code{CELL}] Cell is a 2D cell array of numeric data, typically used for adjaciency matrices and measures.
+\item[\code{CELL}] Cell is a 2D cell array of numeric data, typically used for adjaciency matrices and measures.
  
-	\item [\code{NET}] Net is a MatLab neural network object (network, SeriesNetwork, DAGNetwork, dlnetwork).
+\item[\code{NET}] Net is a MatLab neural network object (network, SeriesNetwork, DAGNetwork, dlnetwork).
  
-	\item [\code{HANDLE}] Handle is a handle for a graphical or listener component. It should only be used as an evanescent property.
+\item[\code{HANDLE}] Handle is a handle for a graphical or listener component. It should only be used as an evanescent property.
  
-	\item [\code{HANDLELIST}] HandleList is a cell array with handles for graphical or listener components. It should only be used as an evanescent property.
+\item[\code{HANDLELIST}] HandleList is a cell array with handles for graphical or listener components. It should only be used as an evanescent property.
  
-	\item [\code{COLOR}] Color is an RGB color, e.g., \code{'[1 0 0]'} for red.
+\item[\code{COLOR}] Color is an RGB color, e.g., \code{'[1 0 0]'} for red.
  
-	\item [\code{ALPHA}] Alpha is a transparency level between 0 and 1.
+\item[\code{ALPHA}] Alpha is a transparency level between 0 and 1.
  
-	\item [\code{SIZE}] Size represents the size of a graphical componet. It is a positive number (default = 1).
+\item[\code{SIZE}] Size represents the size of a graphical component. It is a positive number (default = 1).
  
-	\item [\code{MARKER}] Marker represents the marker style.
+\item[\code{MARKER}] Marker represents the marker style.
                 It can be \code{'o'}, \code{'+'}, \code{'*'}, \code{'.'}, 'x', \code{'\_'}, \code{'|'}, \code{'s'}, \code{'d'}, \code{'\^'}, \code{'v'}, \code{'>'}, \code{'<'}, \code{'p'}, \code{'h'}, \code{''} (no marker).
  
-	\item [\code{LINE}] Line represents the line style. It can be \code{'-'}, \code{':'}, \code{'-.'}, \code{'--'}, \code{''} (no line).
+\item[\code{LINE}] Line represents the line style. It can be \code{'-'}, \code{':'}, \code{'-.'}, \code{'--'}, \code{''} (no line).
+
 \end{description}
 \end{tcolorbox}
 \end{fullwidth}
 
-Even though it is possible to create instances of \code{Element}, typically one uses its subclasses and does not have any props.
+Even though it is possible to create instances of \code{Element}, it does not have any props and typically one uses its subclasses.
 Its three direct subclasses are \code{NoValue}, \code{Callback}, and \code{ConcreteElement}, as shown in \Figref{fig:elements}.
 
 \fig{figure*}
@@ -236,9 +246,11 @@ Its three direct subclasses are \code{NoValue}, \code{Callback}, and \code{Concr
 	Concrete elements further derive directly or indirectly from \code{ConcreteElement}.
 	}
 
+%! FIG1 !%
+
 The element \code{NoValue} is used to represent a value that has not been set (for properties of categories \code{METADATA}, \code{PARAMETER}, \code{DATA}, \code{FIGURE} or \code{GUI}) or calculated (for properties of category \code{RESULT}, \code{QUERY}, \code{EVANESCENT}), while it should not be used for properties of category \code{CONSTANT}.
 It should be instantiated using \Coderef{cd:novalue}.
-%
+
 \begin{lstlisting}[
 	label=cd:novalue,
 	caption={
@@ -248,12 +260,12 @@ It should be instantiated using \Coderef{cd:novalue}.
 ]
 Element.getNoValue()
 \end{lstlisting}
-%
+
 No element can be a subclass of NoValue.
   
 A \code{Callback} refers to a prop of another element \code{el}, identified by prop number or tag.
 It should be instantiated using \Coderef{cd:callback}.
-%
+
 \begin{lstlisting}[
 	label=cd:callback,
 	caption={
@@ -264,7 +276,7 @@ It should be instantiated using \Coderef{cd:callback}.
 el.getCallback('PROP', PROP_NUMBER)
 el.getCallback('TAG', PROP_TAG)
 \end{lstlisting}
-%
+
 No element can be a subclass of \code{Callback}.
 
 A concrete element (\code{ConcreteElement}) provides the infrastructure necessary for all concrete elements. 
@@ -274,7 +286,7 @@ Even though it is possible to create instances of \code{ConcreteElement}, typica
 \subsection{Setting Props}
 
 The value of a prop can be set with \Coderef{cd:set}.
-%
+
 \begin{lstlisting}[
 	label=cd:set,
 	caption={
@@ -282,62 +294,61 @@ The value of a prop can be set with \Coderef{cd:set}.
 		This script illustrates various ways in which props can be set.
 	}
 ]
-el.set('ID', 'new el id') ¥\circled{1}\twocirclednotes{1}{2}{set the value of a prop with the prop tag or the prop number.}¥
+el.set('ID', 'new el id') ¥\circled{1}\circlednote{1}{ and \circled{2} set the value of a prop with the prop tag or the prop number.}¥
 el.set(5, 'new el id') ¥\circled{2}¥
 
-el.set( ... ¥\circled{3}\circlednote{3}{sets the values of multiple props at once. The pointers can be either property numbers or property tags.}¥
+el.set( ... ¥\circled{3}\circlednote{3}{ sets the values of multiple props at once. The pointers can be either property numbers or property tags.}¥
 	'ID', 'new el id', ...
 	'LABEL', 'new el label', ...
 	7, 'new el notes' ...
 	) 
 
-el = el.set('ID', 'new el id') ¥\circled{3}\circlednote{3}{returns the element.}¥
+el = el.set('ID', 'new el id') ¥\circled{4}\circlednote{4}{ returns the element.}¥
 \end{lstlisting}
-%
+
 When a prop is set to a certain value, the following operations are performed:
 \begin{enumerate}
-	\item The value is {\bf conditioned} before being set (by calling the protected \emph{static} function \code{conditioning()}, which can be defined in each subelement).
+
+\item{} The value is {\bf conditioned} before being set (by calling the protected \emph{static} function \code{conditioning()}, which can be defined in each subelement).
 	
 	This can be set with the token \code{¡conditioning!}.
 	
-	\item The value is {\bf preset} before being set (by calling the protected function \code{preset()}, which can be defined in each subelement).\footnote{Differently from the \emph{static} function \code{conditioning()}, the function \code{preset()} has access to the element instance.}
+\item{} The value is {\bf preset} before being set (by calling the protected function \code{preset()}, which can be defined in each subelement).\footnote{Differently from the \emph{static} function \code{conditioning()}, the function \code{preset()} has access to the element instance.}
 
 	This can be set with the token \code{¡preset!}.
 	
-	\item If a property is checked, its {\bf format is checked} before proceeding to its setting by calling \code{Format.checkFormat()}.\\
-	If the check fails, the property is not set and an error is thrown with error id\\
-	\code{BRAPH2:<Element Class>:WrongInput}.
+\item{} If a property is checked, its {\bf format is checked} before proceeding to its setting by calling \code{Format.checkFormat()}.\\
+	If the check fails, the property is not set and an error is thrown with error id \code{BRAPH2:<Element Class>:WrongInput}.
 	
 	This can be set with the token \code{¡checkProp!}.
 
-	\item The value is {\bf set}.
+\item{} The value is {\bf set}.
 
-		If the property is of category \code{PARAMETER}, \code{DATA}, \code{FIGURE}, or \code{GUI}, the value is set only if the property is unlocked.\\
-		If an attempt is made to set a locked property, no setting occurs and a warning is thrown with warning id \code{BRAPH2:<Element Class>}.\\
-		If the value is a callback, a warning is thrown if the element, property number and/or settings of the callback do not coincide with those of the property with warning id\\
-		\code{BRAPH2:<Element Class>}.
+	If the property is of category \code{PARAMETER}, \code{DATA}, \code{FIGURE}, or \code{GUI}, the value is set only if the property is unlocked.\\
+	If an attempt is made to set a locked property, no setting occurs and a warning is thrown with warning id \code{BRAPH2:<Element Class>}.\\
+	If the value is a callback, a warning is thrown if the element, property number and/or settings of the callback do not coincide with those of the property with warning id \code{BRAPH2:<Element Class>}.
  
-		If the property is of category RESULT, QUERY or EVANESCENT, the value can only be set to \code{Element.getNoValue()}.
+	If the property is of category \code{RESULT}, \code{QUERY} or \code{EVANESCENT}, the value can only be set to \code{Element.getNoValue()}.
 
-	\item The value is {\bf postset} after being set (by calling the protected function \code{postset()}, which is defined in each subelement).
+\item{} The value is {\bf postset} after being set (by calling the protected function \code{postset()}, which is defined in each subelement).
 	
 	This can be set with the token \code{¡postset!}.
 
-	\item {\bf All props} are {\bf postprocessed} after being set (by calling the protected function \code{postprocessing()}, which is defined in each subelement).
+\item{} {\bf All props} are {\bf postprocessed} after being set (by calling the protected function \code{postprocessing()}, which is defined in each subelement).
 	
 	This can be set with the token \code{¡postprocessing!}.
 
-	\item If ANY property is checked, the function \code{Element.check()} is called after all settings are made and the consistency of the values of {\bf all pros} are {\bf checked}.\\
-	If the check fails an error is thrown with error id\\
-	\code{BRAPH2:<Element Class>:WrongInput}.
+\item{} If ANY property is checked, the function \code{Element.check()} is called after all settings are made and the consistency of the values of {\bf all pros} are {\bf checked}.\\
+	If the check fails an error is thrown with error id \code{BRAPH2:<Element Class>:WrongInput}.
 	
-	\item When a prop is successfully set, an {\bf event} \code{PropSet()} is {\bf notified}.
+\item{} When a prop is successfully set, an {\bf event} \code{PropSet()} is {\bf notified}.
+
 \end{enumerate} 
 
 \subsection{Getting Props}
 
 The value of a prop can be retrieved with \Coderef{cd:get}.
-%
+
 \begin{lstlisting}[
 	label=cd:get,
 	caption={
@@ -345,14 +356,14 @@ The value of a prop can be retrieved with \Coderef{cd:get}.
 		This script illustrates various ways in which the value of a prop can be retrieved.
 	}
 ]
-value = el.get('ID'); ¥\circled{1}\circlednote{1}{gets the value of a prop using the prop tag.}¥
+value = el.get('ID'); ¥\circled{1}\circlednote{1}{ gets the value of a prop using the prop tag.}¥
 
-value = el.get(ConcreteElement.ID); ¥\circled{2}\circlednote{2}{gets the value of a prop using the prop number.}¥
+value = el.get(ConcreteElement.ID); ¥\circled{2}\circlednote{2}{ gets the value of a prop using the prop number.}¥
 
-el.get('ID') ¥\circled{3}\twocirclednotes{3}{4}{do not return any output value. This can be useful, e.g., when a code needs to be executed, e.g., by a \code{QUERY}.}¥
+el.get('ID') ¥\circled{3}\circlednote{3}{ and \circled{4} do not return any output value. This can be useful, e.g., when a code needs to be executed, e.g., by a \code{QUERY}.}¥
 el.get(ConcreteElement.ID) ¥\circled{4}¥
 
-value = el.get('QUERY', ARG1, ARG2, ... ); ¥\circled{5}\circlednote{5}{can be used with a series of arguments for props of category \code{QUERY}. Any additional arguments are ignored for props of other categories.}¥
+value = el.get('QUERY', ARG1, ARG2, ... ); ¥\circled{5}\circlednote{5}{ can be used with a series of arguments for props of category \code{QUERY}. Any additional arguments are ignored for props of other categories.}¥
 \end{lstlisting}
 
 If the raw value of the property is a \code{NoValue}, it proceed to return the default property value (for categories \code{METADATA}, \code{PARAMETER}, \code{DATA}, \code{FIGURE}, and \code{GUI}).
@@ -363,7 +374,7 @@ If a property of category \code{RESULT}, \code{QUERY}, or \code{EVANESCENT} is n
 If the property is checked, it proceeds to check all properties after the calculation calling the function \code{check()}. If the check fails, it resets the property to \code{NoValue} and returns \code{NoValue}, does not lock the property, and throws a warning with warning id \code{BRAPH2:<Element Class>}.
 
 The raw value of a prop can be retrieved with \Coderef{cd:getr}.
-%
+
 \begin{lstlisting}[
 	label=cd:getr,
 	caption={
@@ -378,18 +389,18 @@ value = el.getr(ConcreteElement.ID);
 \subsection{Memorizing Props}  
 
 The value of a prop can be memorized using \Coderef{cd:memorize}.
-%
+
 \begin{lstlisting}[
-	label=cd:get,
+	label=cd:memorize,
 	caption={
-		{\bf Getting a prop.}
-		This script illustrates various ways in which the value of a prop can be retrieved.
+		{\bf Memorizing a prop.}
+		This script illustrates various ways in which the value of a prop can be memorized.
 	}
 ]
-value = el.memorize('ID'); ¥\circled{1}\twocirclednotes{1}{2}{memorize the value of a prop using the prop tag and the prop number.}¥
+value = el.memorize('ID'); ¥\circled{1}\circlednote{1}{ and \circled{2} memorize the value of a prop using the prop tag and the prop number.}¥
 value = el.memorize(ConcreteElement.ID); ¥\circled{2}¥
 
-el.memorize('ID') ¥\circled{3}\twocirclednotes{3}{4}{do not return any output value.}¥
+el.memorize('ID') ¥\circled{3}\circlednote{3}{ and \circled{4} do not return any output value.}¥
 el.memorize(ConcreteElement.ID) ¥\circled{4}¥
 \end{lstlisting}
 
@@ -404,7 +415,7 @@ If a property of category \code{QUERY} is memorized, a warning is thrown with wa
 \section{Element tokens}
 
 A generator file has the structure illustrated \Coderef{cd:tokens}.
-%
+
 \begin{fullwidth}
 \begin{lstlisting}[
 	label=cd:tokens,
@@ -412,7 +423,7 @@ A generator file has the structure illustrated \Coderef{cd:tokens}.
 		{\bf Element tokens in a generator file.}
 		All tokens available in a generator file.
 		The name of this file must end with \fn{.gen.m}, and tipically starts with \fn{\_}.
-		The token \code{¡header!} is required, while the rest is optional.
+		The token \code{¡header!} is required (and the token \code{¡build!}), while the rest is optional.
 	}
 ]
 %% ¡header!
@@ -424,7 +435,9 @@ A generator file has the structure illustrated \Coderef{cd:tokens}.
    It can occupy several lines.
   %%% ¡seealso!
    Related functions and classes in a single line, coma-separated and without fullstop.
-  
+  %%% ¡build!
+  Number of the build of the element starting from 1.
+    
  %% ¡constants!
   Constants.
  
@@ -553,7 +566,7 @@ A generator file has the structure illustrated \Coderef{cd:tokens}.
 \end{fullwidth}
 
 A list of special instructions is shown in \Coderef{cd:special}.
-%
+
 \begin{lstlisting}[
 	label=cd:special,
 	caption={
@@ -561,16 +574,16 @@ A list of special instructions is shown in \Coderef{cd:special}.
 		There are some special and specialized instructions that can be used in a generator file.
 	}
 ]
-¥€¥ConcreteElement.NAME¥€¥ ¥\circled{1}\circlednote{1}{substitutes the prop with its default value, when hard-coding the element.}¥
+¥€¥ConcreteElement.NAME¥€¥ ¥\circled{1}\circlednote{1}{ substitutes the prop with its default value, when hard-coding the element.}¥
 
-__Category.CONSTANT__ ¥\circled{2}\circlednote{2}{keeps \code{Category.CONSTANT} even after hard-coding the element, instead of substituting it with its value. \circled{3}-\circled{5} It works similarly also for the other constants of \code{Category} and \code{Format}.}¥
+__Category.CONSTANT__ ¥\circled{2}\circlednote{2}{ keeps \code{Category.CONSTANT} even after hard-coding the element, instead of substituting it with its value. \circled{3}---\circled{5} It works similarly also for the other constants of \code{Category} and \code{Format}.}¥
 __Category.CONSTANT_TAG__ ¥\circled{3}¥
 ...
 __Format.EMPTY__ ¥\circled{4}¥
 __Format.EMPTY_TAG__ ¥\circled{5}¥
 ...
 
-%%%__WARN_TBI__ ¥\circled{6}\circlednote{6}{adds a warning that the specific feature is not implemented yet.}¥
+%%%__WARN_TBI__ ¥\circled{6}\circlednote{6}{ adds a warning that the specific feature is not implemented yet.}¥
 \end{lstlisting}
 
 \section{Overview of Elements}
@@ -578,18 +591,20 @@ __Format.EMPTY_TAG__ ¥\circled{5}¥
 \fig{figure*}
 	{fig:genesis}
 	{\includegraphics{../braph2genesis.png}}
-	{BRAPH~2.0 genesis.}
+	{BRAPH~2 genesis.}
 	{
 	Directory structure of \fn{braph2genesis} (left) and \fn{braph2} (right).
 	}
 
+%! FIG2 !%
+
 The directory structure of \fn{braph2} and the relation with \fn{braph2genesis} is illustrated in \Figref{fig:genesis}.
 All objects are derived from a base object called \code{Element} and written in a simplified pseudocode (files \fn{*.gen.m}) that is compiled into the actual elements (files \fn{*.m}) by the command \code{braph2genesis} (some examples of these elements are shown).
 The compiled code can be launched by the command \code{braph2}.
-The core of BRAPH 2.0 (gray shaded area) includes the compiler (\code{genesis}), the essential source code (\fn{src}), and the essential functionalities for the GUI (\fn{gui}, yellow-shaded area).
+The core of BRAPH~2 (gray shaded area) includes the compiler (\code{genesis}), the essential source code (\fn{src}), and the essential functionalities for the GUI (\fn{gui}, yellow-shaded area).
 The users can easily add new brain surfaces (\fn{brainsurfs}), atlases (\fn{atlases}), example scripts and GUI pipelines (in the corresponding folder under \fn{pipelines}).
 Furthermore, the users can add new elements such as new graphs (e.g., \code{GraphWU} in \fn{graphs}), measures (e.g., \code{Strength} in \fn{measures}), data types (e.g., \code{SubjectCON} in \fn{pipelines/connectivity}), data importers (e.g., \code{ImporterGroupSubjectCON\_XLS} in \fn{pipelines/connectivity}), data exporters (e.g., \code{ExporterGroupSubjectCON\_XLS} in \fn{pipelines/connectivity}), and analyses (e.g., \code{AnalyzeEnsemble\_CON\_WU} in \fn{pipelines/connectivity}) by writing new elements and recompiling the whole code: the new elements and their functionalities will be immediately available also in the GUI.
-Finally, BRAPH~2.0 is provided with a set of unit tests (executable by the command \fn{test\_braph2}) that ensure the formal correctness of the code, including that of any newly added elements.
+Finally, BRAPH~2 is provided with a set of unit tests (executable by the command \fn{test\_braph2}) that ensure the formal correctness of the code, including that of any newly added elements.
 
 \section{Implementation of an Element}
 
@@ -597,37 +612,61 @@ We will now see how to implement a few concrete elements.
 
 \begin{fullwidth}
 \begin{tcolorbox}[
-	title=Light compilation of BRAPH~2.0
+	title=Light compilation of BRAPH~2
 ]
-To speed up the compilation of BRAPH~2.0 when trying these examples, it is possible to perform a light version of the compilation using the script \code{braph2genesis\_with\_exclusions}, which permits one to exclude entire folders or individual elements, as shown in \Coderef{cd:exclusions}.
-%
+To speed up the compilation of BRAPH~2 when trying these examples, it is possible to perform a light version of the compilation using the script \code{braph2genesis\_with\_rollcall}, which permits one to exclude/include specific folders or elements, as shown in \Coderef{cd:rollcall}.
+
 \begin{lstlisting}[
-	label=cd:exclusions,
+	label=cd:rollcall,
 	caption={
-		{\bf BRAPH~2.0 genesis with exclusions.}
-		Using \code{braph2genesis\_with\_exclusions}, it is possible to exclude some folders and elements, which are defined in the variable \code{excluded}.
-		You can place your elements in the folder \fn{util}.
+		{\bf BRAPH~2 genesis with rollcall.}
+		Using \code{braph2genesis\_with\_rollcall} (which is found in the folder \fn{sandbox}), it is possible to exclude some folders and elements, which are defined in the variable \code{rollcall}.
+		You can place your elements in the folder \fn{sandbox}.
 	}
 ]
 ¤...¤
-excluded = { ...
-	'gt', 'atlas', 'cohort', 'analysis', 'nn', 'gui', ...
-	'brainsurfs', 'atlases', 'graphs', 'measures', 'neuralnetworks', 'pipelines', ...
-	'_Exporter.gen.m', '_Importer.gen.m' ...
-	};
+%% Add here all included and excluded folders and elements
+% '-folder'                 the folder and its elements will be excluded
+%
+% '+folder'                 the folder is included, but not its elements
+%   '+_ElementName.gen.m'   the element is included,
+%                           if the folder is included
+%
+% '+folder*'                the folder and its elements are included
+%   '-_ElementName.gen.m'   the element is excluded,
+%                           if the folder and its elements are included
+% (by default, the folders are included as '+folder*')
+rollcall = { ...
+    '+util*', '-_Exporter.gen.m', '+_Importer.gen.m', ...
+    '+ds*', '-ds_examples', ...
+    '-atlas', ...
+    '-gt', ...
+    '-cohort', ...
+    '-analysis', ...
+    '-nn', ...
+    '-gui', '-gui_examples', ...
+    '-brainsurfs', ...
+    '-atlases', ...
+    '-graphs', ...
+    '-measures', ...
+    '-neuralnetworks', ...
+    '-pipelines', ...
+    '+test*', ...
+    '+sandbox*' ...
+    };
 ¤...¤
 \end{lstlisting}
 
-This same approach (appropriately altering the excluded folders and elements) can also be used to reduce the compilation time when developing new functionalities.
+This same approach (appropriately altering the included/excluded folders and elements) can also be used to reduce the compilation time when developing new functionalities.
 
 Importantly, the directory \fn{braph2genesis} must be in the MatLab file path and the directory \fn{braph2} must not be in the MatLab file path.
-The compiled BRAPH~2.0 is saved in \fn{brap2\_with\_exclusions}, which is ignored by GIT.
+The compiled BRAPH~2 is saved in \fn{brap2\_with\_rollcall}, which is ignored by GIT.
 \end{tcolorbox}
 \end{fullwidth}
 
 \subsection{A Simple Calculator}
 
-We will now create our first element (\Coderef{cd:ao}), a simple calcualator that contains two numbers (which are data scalar props) and calculates their sum and difference (which are result scalar props).
+You will now create your first element (\Coderef{cd:ao}), a simple calculator that contains two numbers (which are data scalar props) and calculates their sum and difference (which are result scalar props).
 
 \begin{lstlisting}[
 	label=cd:ao,
@@ -636,7 +675,7 @@ We will now create our first element (\Coderef{cd:ao}), a simple calcualator tha
 		This is a simple element direclty deriving from \code{ConcreteElement}.
 	}
 ]
-%% ¡header! ¥\circled{1}\circlednote{1}{The \code{¡header!} token is the only required one.}¥
+%% ¡header! ¥\circled{1}\circlednote{1}{ The \code{¡header!} and \circled{2} \code{¡build!} tokens are the only required one.}¥
 ArithmeticOperations < ConcreteElement (ao, arithmetic operation calculator) calculates simple arithmetic operations.
 
 %%% ¡description!
@@ -647,13 +686,16 @@ An Arithmetic Operation Calculator (ArithmeticOperations) contains two
 %%% ¡seealso!
 LogicalOperations, GeometricalOperations
 
+%%% ¡build! ¥\circled{2}¥
+1
 
-%% ¡props_update! ¥\circled{2}\circlednote{2}{The \code{¡props\_update!} token permits to update the properties of the \code{ConcreteElement}. The updated parts have been highlighted.}¥
+
+%% ¡props_update! ¥\circled{3}\circlednote{3}{ The \code{¡props\_update!} token permits to update the properties of the \code{ConcreteElement}. The updated parts have been highlighted.}¥
 
 %%% ¡prop!
 ¤ELCLASS (constant, string) is the class of the¤ arithmetic operation calculator¤.¤
 %%%% ¡default!
-'ArithmeticOperations' ¥\circled{3}\circlednote{3}{must be the name of the element.}¥
+'ArithmeticOperations' ¥\circled{4}\circlednote{4}{ must be the name of the element.}¥
 
 %%% ¡prop!
 ¤NAME (constant, string) is the name of the¤ arithmetic operation calculator¤.¤
@@ -668,7 +710,7 @@ LogicalOperations, GeometricalOperations
 %%% ¡prop!
 ¤TEMPLATE (parameter, item) is the template of the¤ arithmetic operation calculator¤.¤
 %%%% ¡settings!
-'ArithmeticOperations' ¥\circled{4}\circlednote{4}{must be the name of the element.}¥
+'ArithmeticOperations' ¥\circled{5}\circlednote{5}{ must be the name of the element.}¥
 
 %%% ¡prop!
 ¤ID (data, string) is a few-letter code for the¤ arithmetic operation calculator¤.¤
@@ -685,34 +727,34 @@ LogicalOperations, GeometricalOperations
 %%%% ¡default!
 'ArithmeticOperations notes'
 
-%%% ¡prop! ¥\circled{5}\circlednote{5}{Often, it is not necessary to updated \code{TOSTRING}, as the default works for most cases.}¥
+%%% ¡prop! ¥\circled{6}\circlednote{6}{ Often, it is not necessary to updated \code{TOSTRING}, as the default works for most cases.}¥
 ¤TOSTRING (query, string) returns a string that represents the ¤ arithmetic operation calculator¤.¤
-%%%% ¡calcualte! ¥\circled{6}\circlednote{6}{returns the string, which must be saved in the variable \code{value}.}¥
+%%%% ¡calculate! ¥\circled{7}\circlednote{7}{ returns the string, which must be saved in the variable \code{value}.}¥
 a = ao.get('A');
 b = ao.get('B');
 value = ['Calculator of the sum and difference of ' num2str(A) ' and ' num2str(B)];
 
 
-%% ¡props! ¥\circled{7}\circlednote{7}{The \code{¡props!} token permits to add additional props.}¥
+%% ¡props! ¥\circled{8}\circlednote{8}{ The \code{¡props!} token permits to add additional props.}¥
 
-%%% ¡prop! ¥\circled{8}\twocirclednotes{8}{9}{are two data props.}¥
+%%% ¡prop! ¥\circled{9}\circlednote{9}{ and \circled{10} are two data props.}¥
 A (data, scalar) is the first number.
 
-%%% ¡prop! ¥\circled{9}¥
+%%% ¡prop! ¥\circled{10}¥
 B (data, scalar) is the second number.
 
-%%% ¡prop! ¥\circled{10}\circlednote{10}{is a result prop.}¥
+%%% ¡prop! ¥\circled{11}\circlednote{11}{ is a result prop.}¥
 SUM (result, scalar) is the sum of the two numbers (A + B).
-%%%% ¡calculate! ¥\circled{11}\circlednote{11}{calculates the sum of the two numbers. The result must be saved in the variable \code{value}.}¥
+%%%% ¡calculate! ¥\circled{12}\circlednote{12}{ calculates the sum of the two numbers. The result must be saved in the variable \code{value}.}¥
 value = ao.get('A') + ao.get('B');
 
-%%% ¡prop! ¥\circled{12}\circlednote{12}{is a result prop.}¥
+%%% ¡prop! ¥\circled{13}\circlednote{13}{ is a result prop.}¥
 DIFF (result, scalar) is the difference of the two numbers (A - B).
-%%%% ¡calculate! ¥\circled{13}\circlednote{13}{calculates the difference of the two numbers. The result must be saved in the variable \code{value}.}¥
+%%%% ¡calculate! ¥\circled{14}\circlednote{14}{ calculates the difference of the two numbers. The result must be saved in the variable \code{value}.}¥
 value = ao.get('A') - ao.get('B');
 
 
-%% ¡tests! ¥\circled{14}\circlednote{14}{The \code{¡tests!} token permits to add unit tests.}¥
+%% ¡tests! ¥\circled{15}\circlednote{15}{ The \code{¡tests!} token permits to add unit tests.}¥
 
 %%% ¡test!
 %%%% ¡name!
@@ -721,21 +763,21 @@ Simple test
 ao = ArithmeticOperations('A', 6, 'B', 4)
 
 string = ao.get('TOSTRING')
-assert(~ao.isLocked('A')) ¥\circled{15}\twocirclednotes{15}{16}{Both props \code{A} and \code{B} are not locked, even though the query prop \code{TOSTRING} has been calculated.}¥
-assert(~ao.isLocked('B')) ¥\circled{16}¥
+assert(~ao.isLocked('A')) ¥\circled{16}\circlednote{16}{ and \circled{17} Both props \code{A} and \code{B} are not locked, even though the query prop \code{TOSTRING} has been calculated.}¥
+assert(~ao.isLocked('B')) ¥\circled{17}¥
 
 sum = ao.get('SUM')
 
-assert(ao.isLocked('A')) ¥\circled{17}\twocirclednotes{17}{18}{Both props \code{A} and \code{B} are now locked, because the result prop \code{SUM} has been calculated. From now on their value cannot be changed.}¥
-assert(ao.isLocked('B')) ¥\circled{18}¥
+assert(ao.isLocked('A')) ¥\circled{18}\circlednote{18}{ and \circled{19} Both props \code{A} and \code{B} are now locked, because the result prop \code{SUM} has been calculated. From now on their value cannot be changed.}¥
+assert(ao.isLocked('B')) ¥\circled{19}¥
 
 diff = ao.get('DIFF')
 
-sum_raw = ao.getr('SUM') ¥\circled{19}\twocirclednotes{19}{20}{Note that both the result props \code{SUM} and \code{DIFF} are \code{NoValue}, because they have not been memorized yet.}¥
-diff_raw = ao.getr('DIFF') ¥\circled{20}¥
+sum_raw = ao.getr('SUM') ¥\circled{20}\circlednote{20}{ and \circled{21} Note that both the result props \code{SUM} and \code{DIFF} are \code{NoValue}, because they have not been memorized yet.}¥
+diff_raw = ao.getr('DIFF') ¥\circled{21}¥
 assert(isa(sum_raw, 'NoValue') && isa(diff_raw, 'NoValue'))
 
-%%% ¡test!  ¥\circled{21}\circlednote{21}{alters the previous test to memorize the results.}¥
+%%% ¡test!  ¥\circled{22}\circlednote{22}{ alters the previous test to memorize the results.}¥
 %%%% ¡name!
 Simple test with memorization
 %%%% ¡code!
@@ -751,20 +793,23 @@ assert(~isa(sum_raw, 'NoValue') && ~isa(diff_raw, 'NoValue'))
 
 \subsection{Calculator with Seeded Randomness}
 
-We can now create an element that demonstrate how the seeded randomness works (\Coderef{cd:sr}).
+You can now create an element that demonstrate how the seeded randomness works (\Coderef{cd:sr}).
 
 \begin{lstlisting}[
 	label=cd:sr,
 	caption={
 		{\bf Arithmetic Operation Calculator.}
-		This is a simple element direclty deriving from \code{ConcreteElement}.
+		This is a simple element directly deriving from \code{ConcreteElement}.
 	}
 ]
 %% ¡header!
 SeededRandomness < ConcreteElement (sr, randomizer) generates a random number.
 
 %%% ¡description!
-¤...¤ ¥\circled{1}\circlednote{1}{Here, a detailed description should be provided.}¥
+¤...¤ ¥\circled{1}\circlednote{1}{ Here, a detailed description should be provided.}¥
+
+%%% ¡build!
+1
 
 
 %% ¡props_update!
@@ -774,7 +819,7 @@ SeededRandomness < ConcreteElement (sr, randomizer) generates a random number.
 %%%% ¡default!
 'SeededRandomness'
 
-¤...¤ ¥\circled{2}\circlednote{2}{Here, the other standard properties derived from \code{ConcreteElement} should be updated as well (with the possible exception of \code{TOSTRING}).}¥
+¤...¤ ¥\circled{2}\circlednote{2}{ Here, the other standard properties derived from \code{ConcreteElement} should be updated as well (with the possible exception of \code{TOSTRING}).}¥
 
 
 %% ¡props!
@@ -793,14 +838,14 @@ Simple test
 sr1 = SeededRandomness()
 sr2 = SeededRandomness()
 
-assert(sr1.get('RANDOM_NUMBER') == sr1.get('RANDOM_NUMBER')) ¥\circled{3}\twocirclednotes{3}{4}{check that subsequent calls to the calculation of the random number return the same value.}¥
+assert(sr1.get('RANDOM_NUMBER') == sr1.get('RANDOM_NUMBER')) ¥\circled{3}\circlednote{3}{ and \circled{4} check that subsequent calls to the calculation of the random number return the same value.}¥
 assert(sr2.get('RANDOM_NUMBER') == sr2.get('RANDOM_NUMBER')) ¥\circled{5}¥
-assert(sr1.get('RANDOM_NUMBER') ~= sr2.get('RANDOM_NUMBER')) ¥\circled{6}\circlednote{6}{checks that calls to the calculation of the random number of differen randomizers return different values.}¥
+assert(sr1.get('RANDOM_NUMBER') ~= sr2.get('RANDOM_NUMBER')) ¥\circled{6}\circlednote{6}{ checks that calls to the calculation of the random number of differen randomizers return different values.}¥
 \end{lstlisting}
 
 \subsection{Query}
 
-We can now demonstrate the use of query props by expanding the \code{ArithmeticOperations} (\Coderef{cd:ao2}).
+You can now learn how to use query props by expanding the \code{ArithmeticOperations} (\Coderef{cd:ao2}).
 
 \begin{lstlisting}[
 	label=cd:ao2,
@@ -814,6 +859,9 @@ ArithmeticOperationsWithQuery < ArithmeticOperations (ao, calculator with query)
 
 %%% ¡description!
 ¤...¤
+
+%%% ¡build!
+1
 
 
 %% ¡props_update!
@@ -831,10 +879,10 @@ ArithmeticOperationsWithQuery < ArithmeticOperations (ao, calculator with query)
 %%% ¡prop!
 SUM_OR_DIFF (query, scalar) returns the sum or difference depending on the argument.
 %%%% ¡calculate!
-% R = ao.get('SUM_OR_DIFF', SUM_OR_DIFF) returns the sum of A and B if ¥\circled{1}\circlednote{1}{It is good practice to add some comments about the arguments for the query.}¥
+% R = ao.get('SUM_OR_DIFF', SUM_OR_DIFF) returns the sum of A and B if ¥\circled{1}\circlednote{1}{ It is good practice to add some comments about the arguments for the query.}¥
 %  SUM_OR_DIFF = 'SUM' or the difference of A and B if SUM_OR_DIFF = 'DIFF'.
 
-if isempty(varargin) ¥\circled{2}\circlednote{2}{It is also good practice to check the input arguments and provide a reasonable output for absent/unexpected arguments.}¥
+if isempty(varargin) ¥\circled{2}\circlednote{2}{ It is also good practice to check the input arguments and provide a reasonable output for absent/unexpected arguments.}¥
     value = NaN;
     return
 end    
@@ -860,15 +908,15 @@ Simple test
 %%%% ¡code!
 ao = ArithmeticOperationsWithQuery('A', 6, 'B', 4)
 
-assert(ao.get('SUM_OR_DIFF', 'SUM') == ao.get('SUM')) ¥\circled{3}\twocirclednotes{3}{4}{returns the sum or the difference depening on the argument.}¥
+assert(ao.get('SUM_OR_DIFF', 'SUM') == ao.get('SUM')) ¥\circled{3}\circlednote{3}{ and \circled{4} return the sum or the difference depening on the argument.}¥
 assert(ao.get('SUM_OR_DIFF', 'DIFF') == ao.get('DIFF')) ¥\circled{4}¥
-assert(isnan(ao.get('SUM_OR_DIFF'))) ¥\circled{5}\twocirclednotes{5}{6}{retunrs \code{NaN} when the input is absent or unexpected.}¥
+assert(isnan(ao.get('SUM_OR_DIFF'))) ¥\circled{5}\circlednote{5}{ and \circled{6} return \code{NaN} when the input is absent or unexpected.}¥
 assert(isnan(ao.get('SUM_OR_DIFF', 'anything else'))) ¥\circled{6}¥
 \end{lstlisting}
 
 \subsection{Evanescent, Gui, Figure}
 
-We can now demonstrate the use of evanescent props and graphical handles (\Coderef{cd:f}).
+You can now learn how to use evanescent props and graphical handles (\Coderef{cd:f}).
 
 \begin{lstlisting}[
 	label=cd:f,
@@ -882,6 +930,9 @@ ElementWithFigure < ConcreteElement (ef, element with figure) is an element with
 
 %%% ¡description!
 ¤...¤
+
+%%% ¡build!
+1
 
 
 %% ¡props_update!
@@ -899,7 +950,7 @@ ElementWithFigure < ConcreteElement (ef, element with figure) is an element with
 %%% ¡prop!
 FIG (evanescent, handle) is the handle of a figure.
 %%%% ¡calculate!
-value = uifigure( ... ¥\circled{1}\circlednote{1}{renders a figure and returns its handle.}¥
+value = uifigure( ... ¥\circled{1}\circlednote{1}{ renders a figure and returns its handle.}¥
     'Name', 'Figure from ElementWithFigure', ...
     'Color', BRAPH2.COL ...
     );
@@ -907,14 +958,14 @@ value = uifigure( ... ¥\circled{1}\circlednote{1}{renders a figure and returns 
 %%% ¡prop!
 PANEL (evanescent, handle) is the handle of the panel.
 %%%% ¡calculate!
-if ~check_graphics(ef.memorize('FIG'), 'figure') ¥\circled{2}\circlednote{2}{checks whether the figure still exists, otherwise \circled{3} erases it so that \circled{4} recreates it.}¥
+if ~check_graphics(ef.memorize('FIG'), 'figure') ¥\circled{2}\circlednote{2}{ checks whether the figure still exists, otherwise \circled{3} erases it so that \circled{4} recreates it.}¥
     ef.set('FIG', Element.getNoValue()); ¥\circled{3}¥
 end
 
 fig = ef.memorize('FIG'); ¥\circled{4}¥
 
 value = uipanel( ...
-    'Parent', fig, ... ¥\circled{5}\circlednote{5}{ensures that \code{FIG} is the parent of the panel.}¥
+    'Parent', fig, ... ¥\circled{5}\circlednote{5}{ ensures that \code{FIG} is the parent of the panel.}¥
     'Units', 'normalized', ...
     'Position', [.25 .25 .50 .50], ...
     'BackgroundColor', BRAPH2.COL_BKG ...
@@ -923,7 +974,7 @@ value = uipanel( ...
 %%% ¡prop!
 BUTTONS (evanescent, handlelist) is the list of handles of the buttons.
 %%%% ¡calculate!
-if ~check_graphics(ef.getr('PANEL'), 'uipanel') ¥\circled{6}\circlednote{6}{checks whether the panel still exists, otherwise \circled{7} erases it so that \circled{8} recreates it.}¥
+if ~check_graphics(ef.getr('PANEL'), 'uipanel') ¥\circled{6}\circlednote{6}{ checks whether the panel still exists, otherwise \circled{7} erases it so that \circled{8} recreates it.}¥
     ef.set('PANEL', Element.getNoValue()); ¥\circled{7}¥
 end
 
@@ -932,7 +983,7 @@ panel = ef.memorize('PANEL'); ¥\circled{8}¥
 value = {};
 for i = 1:1:10
     value{i} = uibutton( ...
-        'Parent', panel, ... ¥\circled{9}\circlednote{9}{ensures that \code{PANEL} is the parent of each button.}¥
+        'Parent', panel, ... ¥\circled{9}\circlednote{9}{ ensures that \code{PANEL} is the parent of each button.}¥
         'Text', ['B' int2str(i)], ...
         'Position', [ ...
             (i - 1) * w(panel, 'pixels') / 10 ...
@@ -940,21 +991,21 @@ for i = 1:1:10
             w(panel, 'pixels') / 10 ...
             h(panel, 'pixels') / 10 ...
             ], ...
-        'ButtonPushedFcn', {@cb_button} ... ¥\circled{10}\circlednote{10}{defines the same callback for all buttons.}¥
+        'ButtonPushedFcn', {@cb_button} ... ¥\circled{10}\circlednote{10}{ defines the same callback for all buttons.}¥
         );
 end
-%%%% ¡calculate_callbacks! ¥\circled{11}\circlednote{11}{The callbacks are defined in the token \code{¡calculate\_callbacks!}.}¥
-function cb_button(src, ~) ¥\circled{12}\circlednote{12}{All callbacks have two parameters at least, corresponding to the source of the callback \code{src} and to its event (here, not used).}¥
+%%%% ¡calculate_callbacks! ¥\circled{11}\circlednote{11}{ The callbacks are defined in the token \code{¡calculate\_callbacks!}.}¥
+function cb_button(src, ~) ¥\circled{12}\circlednote{12}{ All callbacks have two parameters at least, corresponding to the source of the callback \code{src} and to its event (here, not used).}¥
     disp(src.get('Text'))
 end
 
 
 %% ¡tests!
 
-%%% ¡excluded_props! ¥\circled{13}\circlednote{13}{The token \code{¡excluded\_props!} determines which props to exclude from testing. Often evanescent handle and handlelist properties need to be excluded from the unit testing.}¥
+%%% ¡excluded_props! ¥\circled{13}\circlednote{13}{ The token \code{¡excluded\_props!} determines which props to exclude from testing. Often evanescent handle and handlelist properties need to be excluded from the unit testing.}¥
 [ElementWithFigure.PANEL ElementWithFigure.BUTTONS]
 
-%%% ¡test! ¥\circled{14}\circlednote{14}{This test removes the figures left over from the basic unit testing. It is good practice to ensure that no figures are left over at the end of the unit testing.}¥
+%%% ¡test! ¥\circled{14}\circlednote{14}{ This test removes the figures left over from the basic unit testing. It is good practice to ensure that no figures are left over at the end of the unit testing.}¥
 %%%% ¡name!
 Remove Figures
 %%%% ¡code!
@@ -968,12 +1019,9 @@ Simple test
 %%%% ¡code!
 ef = ElementWithFigure()
 
-ef.memorize('BUTTONS') ¥\circled{15}\circlednote{15}{memorizes the prop \code{BUTTON}, which in turn memorizes the props \code{PANEL} and \code{FIG}.}¥
+ef.memorize('BUTTONS') ¥\circled{15}\circlednote{15}{ memorizes the prop \code{BUTTON}, which in turn memorizes the props \code{PANEL} and \code{FIG}.}¥
 
-close(ef.get('FIG')) ¥\circled{16}\circlednote{16}{closes the figure created in this test to ensure that no figures are left over at the end of the unit testing.}¥
+close(ef.get('FIG')) ¥\circled{16}\circlednote{16}{ closes the figure created in this test to ensure that no figures are left over at the end of the unit testing.}¥
 \end{lstlisting}
-
-%\bibliography{biblio}
-%\bibliographystyle{plainnat}
 
 \end{document}

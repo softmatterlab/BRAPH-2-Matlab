@@ -7,6 +7,9 @@ MeasureEnsemblePF_GS manages the basic functionalities to plot of a global super
 %%% ¡seealso!
 MeasureEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -154,7 +157,7 @@ value = [];
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_GS.PARENT MeasureEnsemblePF_GS.H MeasureEnsemblePF_GS.ST_POSITION MeasureEnsemblePF_GS.ST_AXIS MeasureEnsemblePF_GS.ST_AREA MeasureEnsemblePF_GS.ST_LINE_M MeasureEnsemblePF_GS.ST_TITLE MeasureEnsemblePF_GS.ST_XLABEL MeasureEnsemblePF_GS.ST_YLABEL] 
+[MeasureEnsemblePF_GS.PARENT MeasureEnsemblePF_GS.H MeasureEnsemblePF_GS.ST_POSITION MeasureEnsemblePF_GS.ST_AXIS MeasureEnsemblePF_GS.ME MeasureEnsemblePF_GS.ST_AREA MeasureEnsemblePF_GS.ST_LINE_M MeasureEnsemblePF_GS.ST_TITLE MeasureEnsemblePF_GS.ST_XLABEL MeasureEnsemblePF_GS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true

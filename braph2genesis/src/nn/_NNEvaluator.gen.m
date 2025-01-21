@@ -9,6 +9,9 @@ Its subclasses shall be specifically designed to cater to different evaluation c
 %%% ¡seealso!
 NNDataPoint, NNDataset, NNBase
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -19,7 +22,7 @@ ELCLASS (constant, string) is the class of the evaluator of the neural network a
 %%% ¡prop!
 NAME (constant, string) is the name of the evaluator for the neural network analysis.
 %%%% ¡default!
-'NNEvaluator'
+'Neural Network Evaluator'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the evaluator for the neural network analysis.

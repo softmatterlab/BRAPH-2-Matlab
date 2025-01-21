@@ -8,6 +8,9 @@ It is supposed to be used with the property NODES of ComparisonEnsemblePF_BU, Co
 %%% ¡seealso!
 uidropdown, GUI, ComparisonEnsemblePF_BU, ComparisonEnsemblePF_BS, ComparisonEnsemblePF_BB
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

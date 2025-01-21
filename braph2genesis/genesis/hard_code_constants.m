@@ -79,8 +79,8 @@ if isempty(constants)
     % BRAPH2
     constants{end+1, 1} = '€BRAPH2\.NAME€';
     constants{end, 2} = BRAPH2.NAME;
-    constants{end+1, 1} = 'BRAPH2\.NAME';
-    constants{end, 2} = ['''' BRAPH2.NAME ''''];
+    constants{end+1, 1} = ' BRAPH2\.NAME';
+    constants{end, 2} = [' ''' BRAPH2.NAME ''''];
 
     constants{end+1, 1} = '€BRAPH2\.VERSION€';
     constants{end, 2} = BRAPH2.VERSION;
@@ -104,8 +104,8 @@ if isempty(constants)
     constants{end+1, 1} = 'BRAPH2\.WEB';
     constants{end, 2} = ['''' BRAPH2.WEB ''''];
 
-    constants{end+1, 1} = 'BRAPH2\.TWITTER';
-    constants{end, 2} = ['''' BRAPH2.TWITTER ''''];
+    constants{end+1, 1} = 'BRAPH2\.BLUESKY';
+    constants{end, 2} = ['''' BRAPH2.BLUESKY ''''];
     
     constants{end+1, 1} = 'BRAPH2\.MATLAB_VERSION';
     constants{end, 2} = ['''' BRAPH2.MATLAB_VERSION ''''];

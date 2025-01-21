@@ -13,7 +13,7 @@ classdef EccentricityIn < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the In-Eccentricity.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the In-Eccentricity.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the In-Eccentricity.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -134,7 +134,7 @@ classdef EccentricityIn < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the In-Eccentricity.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the In-Eccentricity.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the In-Eccentricity.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -150,6 +150,21 @@ classdef EccentricityIn < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the in-eccentricity.
+			%
+			% BUILD = EccentricityIn.GETBUILD() returns the build of 'EccentricityIn'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the in-eccentricity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('EccentricityIn') returns the build of 'EccentricityIn'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('EccentricityIn')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the in-eccentricity.
 			%
@@ -476,7 +491,7 @@ classdef EccentricityIn < Measure
 			prop = EccentricityIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			eccentricityin_description_list = { 'ELCLASS (constant, string) is the class of the In-Eccentricity.'  'NAME (constant, string) is the name of the In-Eccentricity.'  'DESCRIPTION (constant, string) is the description of the In-Eccentricity.'  'TEMPLATE (parameter, item) is the template of the In-Eccentricity.'  'ID (data, string) is a few-letter code of the In-Eccentricity.'  'LABEL (metadata, string) is an extended label of the In-Eccentricity.'  'NOTES (metadata, string) are some specific notes about the In-Eccentricity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the In-Eccentricity.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, OPTION)  % calculation in a graph or its subgraph' };
+			eccentricityin_description_list = { 'ELCLASS (constant, string) is the class of the In-Eccentricity.'  'NAME (constant, string) is the name of the In-Eccentricity.'  'DESCRIPTION (constant, string) is the description of the In-Eccentricity.'  'TEMPLATE (parameter, item) is the template of the In-Eccentricity.'  'ID (data, string) is a few-letter code of the In-Eccentricity.'  'LABEL (metadata, string) is an extended label of the In-Eccentricity.'  'NOTES (metadata, string) are some specific notes about the In-Eccentricity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the In-Eccentricity.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, OPTION)  % calculation in a graph or its subgraph' };
 			prop_description = eccentricityin_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -670,6 +685,7 @@ classdef EccentricityIn < Measure
 					eccentricityIn = cell(L, 1);
 					eccentricity_rule = m.get('RULE');
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    switch lower(eccentricity_rule)
 					        case {'subgraphs'}
@@ -678,6 +694,7 @@ classdef EccentricityIn < Measure
 					            eccentricityIn(li)  = {max(distance{li}, [], 1)};
 					    end
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = eccentricityIn;
 					

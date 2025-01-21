@@ -14,7 +14,21 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 			'NNClassifierMLP_CrossValidationPF_ROC().get(''ELCLASS'') should return ''NNClassifierMLP_CrossValidationPF_ROC''.')
 	end
 	 
-	% getClass
+	% getBuild()
+	assert(NNClassifierMLP_CrossValidationPF_ROC.getBuild() == 1 && NNClassifierMLP_CrossValidationPF_ROC.getBuild() > 0, ...
+		[BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC:' BRAPH2.FAIL_TEST], ...
+		'NNClassifierMLP_CrossValidationPF_ROC.getBuild() should return the NNClassifierMLP_CrossValidationPF_ROC build number.')
+	assert(pf.getBuild() == 1 && pf.getBuild() > 0 , ...
+		[BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC:' BRAPH2.FAIL_TEST], ...
+		'pf.getBuild() should return the NNClassifierMLP_CrossValidationPF_ROC build number.')
+	assert(Element.getBuild(pf) == 1 && Element.getBuild(pf) > 0, ...
+		[BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(pf) should return the NNClassifierMLP_CrossValidationPF_ROC build number.')
+	assert(Element.getBuild('NNClassifierMLP_CrossValidationPF_ROC') == 1 && Element.getBuild('NNClassifierMLP_CrossValidationPF_ROC') > 0, ...
+		[BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(''NNClassifierMLP_CrossValidationPF_ROC'') should return the NNClassifierMLP_CrossValidationPF_ROC build number.')
+	 
+	% getClass()
 	assert(strcmp(NNClassifierMLP_CrossValidationPF_ROC.getClass(), 'NNClassifierMLP_CrossValidationPF_ROC'), ...
 		[BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC:' BRAPH2.FAIL_TEST], ...
 		'NNClassifierMLP_CrossValidationPF_ROC.getClass() should return ''NNClassifierMLP_CrossValidationPF_ROC''.')
@@ -491,7 +505,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:NNClassifierMLP_CrossValidationPF_ROC.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.PREDICTIONS_VALUE NNClassifierMLP_CrossValidationPF_ROC.GROUNDTRUTH_VALUE NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.H_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL])
+		if any(prop == [NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.H_XLABEL  NNClassifierMLP_CrossValidationPF_ROC.H_YLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL NNClassifierMLP_CrossValidationPF_ROC.H_TITLE NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_AXES])
 			continue
 		end
 	 
@@ -635,7 +649,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:NNClassifierMLP_CrossValidationPF_ROC.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.PREDICTIONS_VALUE NNClassifierMLP_CrossValidationPF_ROC.GROUNDTRUTH_VALUE NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.H_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL])
+		if any(prop == [NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.H_XLABEL  NNClassifierMLP_CrossValidationPF_ROC.H_YLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL NNClassifierMLP_CrossValidationPF_ROC.H_TITLE NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_AXES])
 			continue
 		end
 	 
@@ -738,7 +752,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		for prop = 1:1:NNClassifierMLP_CrossValidationPF_ROC.getPropNumber()
 	 
 			% excluded props
-			if any(prop == [NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.PREDICTIONS_VALUE NNClassifierMLP_CrossValidationPF_ROC.GROUNDTRUTH_VALUE NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.H_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL])
+			if any(prop == [NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.H_XLABEL  NNClassifierMLP_CrossValidationPF_ROC.H_YLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL NNClassifierMLP_CrossValidationPF_ROC.H_TITLE NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_AXES])
 				continue
 			end
 	 
@@ -1524,7 +1538,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:NNClassifierMLP_CrossValidationPF_ROC.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.PREDICTIONS_VALUE NNClassifierMLP_CrossValidationPF_ROC.GROUNDTRUTH_VALUE NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.H_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL])
+		if any(prop == [NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.H_XLABEL  NNClassifierMLP_CrossValidationPF_ROC.H_YLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL NNClassifierMLP_CrossValidationPF_ROC.H_TITLE NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_AXES])
 			continue
 		end
 	 
@@ -1707,7 +1721,7 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	warning('off', [BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC'])
 	
 	warning('off', [BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC'])
-	assert(length(findall(0, 'type', 'figure')) == 1)
+	assert(length(findall(0, 'type', 'figure')) == 6)
 	delete(findall(0, 'type', 'figure'))
 	warning('on', [BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC'])
 	

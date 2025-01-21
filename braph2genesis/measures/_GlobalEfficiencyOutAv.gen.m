@@ -4,6 +4,9 @@ GlobalEfficiencyOutAv < GlobalEfficiencyOut (m, average out-global efficiency) i
 %%% ¡description!
 The Average Out-Global Efficiency (GlobalEfficiencyOutAv) is the average inverse shortest out-path length within each layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -114,9 +117,13 @@ L = g.get('LAYERNUMBER');
 out_global_efficiency = calculateValue@GlobalEfficiencyOut(m, prop);
 
 out_global_efficiency_av = cell(L, 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     out_global_efficiency_av(li) = {mean(out_global_efficiency{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = out_global_efficiency_av;
 
 %% ¡tests!

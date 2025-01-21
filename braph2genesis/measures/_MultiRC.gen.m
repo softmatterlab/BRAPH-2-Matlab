@@ -7,6 +7,9 @@ The Multirichness (MultiRC) of a node is the sum of the edges that connect nodes
  controlled by the coefficients c that are between 0 and 1; 
  the default coefficients are (1/layernumber).
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

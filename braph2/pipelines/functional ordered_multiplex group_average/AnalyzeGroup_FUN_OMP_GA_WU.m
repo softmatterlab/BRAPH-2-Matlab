@@ -5,14 +5,14 @@ classdef AnalyzeGroup_FUN_OMP_GA_WU < AnalyzeGroup
 	% 
 	%
 	% The list of AnalyzeGroup_FUN_OMP_GA_WU properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the graph analysis with functional ordinal multiplex data.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graph analysis with functional ordinal multiplex data.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graph analysis with functional ordinal multiplex data.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the graph analysis with functional ordinal multiplex data.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graph analysis with functional ordinal multiplex data.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graph analysis with functional ordinal multiplex data.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graph analysis with functional ordinal multiplex data.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectFUN_MP.
 	%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the average graph (OrdMxWU) obtained from this analysis.
@@ -109,6 +109,8 @@ classdef AnalyzeGroup_FUN_OMP_GA_WU < AnalyzeGroup
 	%
 	%
 	% See also SubjectFUN_MP, OrdMxWU.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		REPETITION = 12; %CET: Computational Efficiency Trick
@@ -148,14 +150,14 @@ classdef AnalyzeGroup_FUN_OMP_GA_WU < AnalyzeGroup
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of AnalyzeGroup_FUN_OMP_GA_WU properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the graph analysis with functional ordinal multiplex data.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the graph analysis with functional ordinal multiplex data.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the graph analysis with functional ordinal multiplex data.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the graph analysis with functional ordinal multiplex data.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graph analysis with functional ordinal multiplex data.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graph analysis with functional ordinal multiplex data.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graph analysis with functional ordinal multiplex data.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectFUN_MP.
 			%  <strong>11</strong> <strong>G</strong> 	G (result, item) is the average graph (OrdMxWU) obtained from this analysis.
@@ -171,6 +173,21 @@ classdef AnalyzeGroup_FUN_OMP_GA_WU < AnalyzeGroup
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graph analysis with functional ordinal multiplex data.
+			%
+			% BUILD = AnalyzeGroup_FUN_OMP_GA_WU.GETBUILD() returns the build of 'AnalyzeGroup_FUN_OMP_GA_WU'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the graph analysis with functional ordinal multiplex data A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeGroup_FUN_OMP_GA_WU') returns the build of 'AnalyzeGroup_FUN_OMP_GA_WU'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeGroup_FUN_OMP_GA_WU')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the graph analysis with functional ordinal multiplex data.
 			%
@@ -497,7 +514,7 @@ classdef AnalyzeGroup_FUN_OMP_GA_WU < AnalyzeGroup
 			prop = AnalyzeGroup_FUN_OMP_GA_WU.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			analyzegroup_fun_omp_ga_wu_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the graph analysis with functional ordinal multiplex data.'  'DESCRIPTION (constant, string) is the description of the graph analysis with functional ordinal multiplex data.'  'TEMPLATE (parameter, item) is the template of the graph analysis with functional ordinal multiplex data.'  'ID (data, string) is a few-letter code for the graph analysis with functional ordinal multiplex data.'  'LABEL (metadata, string) is an extended label of the graph analysis with functional ordinal multiplex data.'  'NOTES (metadata, string) are some specific notes about the graph analysis with functional ordinal multiplex data.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectFUN_MP.'  'G (result, item) is the average graph (OrdMxWU) obtained from this analysis.'  'REPETITION (parameter, scalar) is the number of repetitions'  'F_MIN (parameter, scalar) is the minimum frequency value'  'F_MAX (parameter, scalar) is the maximum frequency value'  'CORRELATION_RULE (parameter, option) is the correlation type.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights.' };
+			analyzegroup_fun_omp_ga_wu_description_list = { 'ELCLASS (constant, string) is the class of the graph analysis with functional ordinal multiplex data.'  'NAME (constant, string) is the name of the graph analysis with functional ordinal multiplex data.'  'DESCRIPTION (constant, string) is the description of the graph analysis with functional ordinal multiplex data.'  'TEMPLATE (parameter, item) is the template of the graph analysis with functional ordinal multiplex data.'  'ID (data, string) is a few-letter code for the graph analysis with functional ordinal multiplex data.'  'LABEL (metadata, string) is an extended label of the graph analysis with functional ordinal multiplex data.'  'NOTES (metadata, string) are some specific notes about the graph analysis with functional ordinal multiplex data.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectFUN_MP.'  'G (result, item) is the average graph (OrdMxWU) obtained from this analysis.'  'REPETITION (parameter, scalar) is the number of repetitions'  'F_MIN (parameter, scalar) is the minimum frequency value'  'F_MAX (parameter, scalar) is the maximum frequency value'  'CORRELATION_RULE (parameter, option) is the correlation type.'  'NEGATIVE_WEIGHT_RULE (parameter, option) determines how to deal with negative weights.' };
 			prop_description = analyzegroup_fun_omp_ga_wu_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -577,7 +594,7 @@ classdef AnalyzeGroup_FUN_OMP_GA_WU < AnalyzeGroup
 				case 1 % AnalyzeGroup_FUN_OMP_GA_WU.ELCLASS
 					prop_default = 'AnalyzeGroup_FUN_OMP_GA_WU';
 				case 2 % AnalyzeGroup_FUN_OMP_GA_WU.NAME
-					prop_default = 'AnalyzeGroup_FUN_OMP_GA_WU';
+					prop_default = 'Multiplex Functional Ordered Weighted Undirected Group Average Analyze Ensemble';
 				case 3 % AnalyzeGroup_FUN_OMP_GA_WU.DESCRIPTION
 					prop_default = 'This graph analysis uses functional ordinal multiplex data and analyzes them using weighted undirected graphs.';
 				case 4 % AnalyzeGroup_FUN_OMP_GA_WU.TEMPLATE

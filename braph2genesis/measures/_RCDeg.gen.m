@@ -6,6 +6,9 @@ The Rich-Club Degree (RCDeg) of a node at level k is the sum of
  the edges that connect nodes of degree k or higher within a layer. 
  k is set by the user; the default value is equal to 1. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

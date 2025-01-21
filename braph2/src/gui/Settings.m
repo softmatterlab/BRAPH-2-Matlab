@@ -37,7 +37,7 @@ classdef Settings < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graphics settings.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graphics settings.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graphics settings.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
 	%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
 	%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
@@ -132,6 +132,8 @@ classdef Settings < ConcreteElement
 	%
 	%
 	% See also Panel, listener.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		PANEL = 9; %CET: Computational Efficiency Trick
@@ -183,7 +185,7 @@ classdef Settings < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the graphics settings.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the graphics settings.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the graphics settings.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
 			%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
 			%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
@@ -197,6 +199,21 @@ classdef Settings < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graphics settings.
+			%
+			% BUILD = Settings.GETBUILD() returns the build of 'Settings'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = ST.GETBUILD() returns the build of the graphics settings ST.
+			%  BUILD = Element.GETBUILD(ST) returns the build of 'ST'.
+			%  BUILD = Element.GETBUILD('Settings') returns the build of 'Settings'.
+			%
+			% Note that the Element.GETBUILD(ST) and Element.GETBUILD('Settings')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function st_class = getClass()
 			%GETCLASS returns the class of the graphics settings.
 			%
@@ -519,7 +536,7 @@ classdef Settings < ConcreteElement
 			prop = Settings.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settings_description_list = { 'ELCLASS (constant, string) is the class of the graphics settings.'  'NAME (constant, string) is the name of the graphics settings.'  'DESCRIPTION (constant, string) is the description of the graphics settings.'  'TEMPLATE (parameter, item) is the template of the line graphics settings.'  'ID (data, string) is a few-letter code for the graphics settings.'  'LABEL (metadata, string) is an extended label of the graphics settings.'  'NOTES (metadata, string) are some specific notes about the graphics settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.' };
+			settings_description_list = { 'ELCLASS (constant, string) is the class of the graphics settings.'  'NAME (constant, string) is the name of the graphics settings.'  'DESCRIPTION (constant, string) is the description of the graphics settings.'  'TEMPLATE (parameter, item) is the template of the line graphics settings.'  'ID (data, string) is a few-letter code for the graphics settings.'  'LABEL (metadata, string) is an extended label of the graphics settings.'  'NOTES (metadata, string) are some specific notes about the graphics settings.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.' };
 			prop_description = settings_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

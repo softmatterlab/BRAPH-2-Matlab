@@ -1,11 +1,16 @@
 %% ¡header!
-NNClassifierMLP_CrossValidationPF_ROC < PanelFig (pf, panel ensemble-based comparison figure) is the base element to plot an ensemble-based comparison.
+NNClassifierMLP_CrossValidationPF_ROC < PanelFig (pf, panel receiver operating characteristic figure) plots a panel of receiver operating characteristic curves.
 
 %%% ¡description!
-NNClassifierMLP_CrossValidationPF_ROC manages the basic functionalities to plot of an ensemble-based comparison.
+The receiver operating characteristic panel for cross-validation MLP classifier 
+ (NNClassifierMLP_CrossValidationPF_ROC) manages the functionalities to plot 
+ a panel of the receiver operating characteristic curves.
 
 %%% ¡seealso!
-ComparisonEnsemble
+NNClassifierMLP_CrossValidation
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -84,50 +89,50 @@ Y-LABEL
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the panel for receiver operating characteristic figure.
 %%%% ¡default!
 'NNClassifierMLP_CrossValidationPF_ROC'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the panel ensemble-based comparison figure.
+NAME (constant, string) is the name of the panel for receiver operating characteristic figure.
 %%%% ¡default!
-'NNClassifierMLP_CrossValidationPF_ROC'
+'ROC Panel for Cross-Validation MLP Classifier'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.
+DESCRIPTION (constant, string) is the description of the panel for receiver operating characteristic figure.
 %%%% ¡default!
-'NNClassifierMLP_CrossValidationPF_ROC manages the basic functionalities to plot of an ensemble-based comparison.'
+'The receiver operating characteristic panel for cross-validation MLP classifier (NNClassifierMLP_CrossValidationPF_ROC) manages the functionalities to plot a panel of the receiver operating characteristic curves.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.
+TEMPLATE (parameter, item) is the template of the panel for receiver operating characteristic figure.
 %%%% ¡settings!
 'NNClassifierMLP_CrossValidationPF_ROC'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.
+ID (data, string) is a few-letter code for the panel for receiver operating characteristic figure.
 %%%% ¡default!
 'NNClassifierMLP_CrossValidationPF_ROC ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.
+LABEL (metadata, string) is an extended label of the panel for receiver operating characteristic figure.
 %%%% ¡default!
 'NNClassifierMLP_CrossValidationPF_ROC label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.
+NOTES (metadata, string) are some specific notes about the panel for receiver operating characteristic figure.
 %%%% ¡default!
 'NNClassifierMLP_CrossValidationPF_ROC notes'
 
 %%% ¡prop!
-DRAW (query, logical) draws the figure comparison figure.
+DRAW (query, logical) draws the receiver operating characteristic figure.
 %%%% ¡calculate!
 value = calculateValue@PanelFig(pf, PanelFig.DRAW, varargin{:}); % also warning
 if value
-    if isa(pf.get('NNCV').getr('NN_LIST'), 'NoValue')
+    if isa(pf.get('NNCV').getr('NN_LIST'), 'NoValue') & ~isa(pf.get('NNCV').getr('D'), 'NoValue')
         pf.get('NNCV').memorize('D_LIST'); % trigger calculation in order to plot
         pf.get('NNCV').memorize('NN_LIST'); % trigger calculation in order to plot
     end
-    if isa(pf.get('NNCV').getr('EVALUATOR_LIST'), 'NoValue')
+    if isa(pf.get('NNCV').getr('EVALUATOR_LIST'), 'NoValue') & ~isa(pf.get('NNCV').getr('D'), 'NoValue')
         pf.get('NNCV').memorize('EVALUATOR_LIST'); % trigger calculation in order to plot
     end
 
@@ -137,7 +142,9 @@ if value
 
     pf.memorize('H_AXES')
     pf.memorize('H_ROC');
+
     pf.memorize('ROC_DICT');
+    pf.set('ROC', pf.get('ROC')); 
     
     pf.memorize('ST_AXIS').set('PANEL', pf, 'PROP', NNClassifierMLP_CrossValidationPF_ROC.H_AXES).get('SETUP')
     pf.memorize('LISTENER_ST_AXIS');
@@ -287,7 +294,7 @@ function cb_listener_st_axis(~, ~)
 end
 
 %%% ¡prop!
-NNCV (metadata, item) is the ensemble-based comparison.
+NNCV (metadata, item) is the cross-validation.
 %%%% ¡settings!
 'NNClassifierMLP_CrossValidation'
 
@@ -299,7 +306,7 @@ if isempty(pf.getr('CLASSNAMES')) && ~isa(pf.get('NNCV').getr('NN_LIST'), 'NoVal
 end
 
 %%% ¡prop!
-X_VALUES (metadata, matrix) is the ROC X value.
+X_VALUES (metadata, matrix) gets the x values for receiver operating characteristic curves.
 %%%% ¡postset!
 if isequal(pf.getr('X_VALUES'), []) && ~isa(pf.get('NNCV').getr('NN_LIST'), 'NoValue')
     class_names = pf.get('CLASSNAMES');
@@ -315,14 +322,27 @@ if isequal(pf.getr('X_VALUES'), []) && ~isa(pf.get('NNCV').getr('NN_LIST'), 'NoV
         for j = 1:1:length(class_names)
             counter = counter + 1;
             idx_class = strcmp(rocNet.Metrics.ClassName, class_names{j});
-            values(counter, :) = rocNet.Metrics(idx_class,:).FalsePositiveRate;
+            x_val = rocNet.Metrics(idx_class,:).FalsePositiveRate;
+            if counter == 1
+                values(counter, :) = x_val;
+            else
+                x_val_fixed_length = size(values, 2);
+                if length(x_val) == x_val_fixed_length
+                    values(counter, :) = x_val;
+                else % make sure all the x_value have the same length
+                    x_val_ind = linspace(1, length(x_val), length(x_val));
+                    x_val_new_ind = linspace(1, length(x_val), x_val_fixed_length);
+                    x_val_resampled = interp1(x_val_ind, x_val, x_val_new_ind, 'linear');
+                    values(counter, :) = x_val_resampled;
+                end
+            end
         end
     end
     pf.set('X_VALUES', values);
 end
                         
 %%% ¡prop!
-Y_VALUES (metadata, matrix) is the ROC Y value.
+Y_VALUES (metadata, matrix) gets the y values for receiver operating characteristic curves.
 %%%% ¡postset!
 if isequal(pf.getr('Y_VALUES'), []) && ~isa(pf.get('NNCV').getr('NN_LIST'), 'NoValue')
     class_names = pf.get('CLASSNAMES');
@@ -338,14 +358,29 @@ if isequal(pf.getr('Y_VALUES'), []) && ~isa(pf.get('NNCV').getr('NN_LIST'), 'NoV
         for j = 1:1:length(class_names)
             counter = counter + 1;
             idx_class = strcmp(rocNet.Metrics.ClassName, class_names{j});
-            values(counter, :) = rocNet.Metrics(idx_class,:).TruePositiveRate;
+            %values(counter, :) = rocNet.Metrics(idx_class,:).TruePositiveRate;
+            y_val = rocNet.Metrics(idx_class,:).TruePositiveRate;
+            if counter == 1
+                values(counter, :) = y_val;
+            else
+                y_val_fixed_length = size(values, 2);
+                if length(y_val) == y_val_fixed_length
+                    values(counter, :) = y_val;
+                else % make sure all the y_value have the same length
+                    y_val_ind = linspace(1, length(y_val), length(y_val));
+                    y_val_new_ind = linspace(1, length(y_val), y_val_fixed_length);
+                    y_val_resampled = interp1(y_val_ind, y_val, y_val_new_ind, 'linear');
+                    values(counter, :) = y_val_resampled;
+                end
+            end
+
         end
     end
     pf.set('Y_VALUES', values);
 end
 
 %%% ¡prop!
-SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.
+SETUP (query, empty) initializes the receiver operating characteristic figure.
 %%%% ¡calculate!
 xlim = pf.get('H_AXES').get('XLim');
 ylim = pf.get('H_AXES').get('YLim');
@@ -374,7 +409,7 @@ pf.get('ST_YLABEL').set( ...
 value = [];
 
 %%% ¡prop!
-H_ROC (evanescent, handlelist) is the set of handles for the prediction plots.
+H_ROC (evanescent, handlelist) is the set of handles for the ROC plots.
 %%%% ¡calculate!
 if ~isempty(pf.get('CLASSNAMES')) && ~isa(pf.getr('NNCV'), 'NoValue')
     class_names = pf.get('CLASSNAMES');
@@ -389,9 +424,8 @@ else
     value = {};
 end
 
-
 %%% ¡prop!
-ROC (figure, logical) determines whether the prediction plot are shown.
+ROC (figure, logical) determines whether the ROC plots are shown.
 %%%% ¡default!
 true
 %%%% ¡postset!
@@ -414,7 +448,7 @@ end
 pf.get('SETUP');
 
 %%% ¡prop!
-ROC_DICT (figure, idict) contains the prediction plot for each target.
+ROC_DICT (figure, idict) contains the ROC plots for each class.
 %%%% ¡settings!
 'SettingsLine'
 %%%% ¡postset!
@@ -461,8 +495,10 @@ if pf.get('ROC') && ~isa(pf.getr('NNCV'), 'NoValue')
         roc_st_lines{1}.set('VISIBLE', true);
         pf.get('ROC_DICT').set('IT_LIST', roc_st_lines)
     end
-    for i = 1:1:length(classNames)*kfolds + 1
-        pf.get('ROC_DICT').get('IT', i).get('SETUP')
+    if ~isempty(classNames)
+        for i = 1:1:length(classNames)*kfolds + 1
+            pf.get('ROC_DICT').get('IT', i).get('SETUP')
+        end
     end
 end
 %%%% ¡gui!
@@ -551,7 +587,7 @@ pr = SettingsTextPP('EL', pf, 'PROP', NNClassifierMLP_CrossValidationPF_ROC.ST_Y
 %% ¡tests!
 
 %%% ¡excluded_props!
-[NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.PREDICTIONS_VALUE NNClassifierMLP_CrossValidationPF_ROC.GROUNDTRUTH_VALUE NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.H_LINE_BASE NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL] 
+[NNClassifierMLP_CrossValidationPF_ROC.PARENT NNClassifierMLP_CrossValidationPF_ROC.H NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.H_XLABEL  NNClassifierMLP_CrossValidationPF_ROC.H_YLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_POSITION NNClassifierMLP_CrossValidationPF_ROC.ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_ROC NNClassifierMLP_CrossValidationPF_ROC.ROC_DICT NNClassifierMLP_CrossValidationPF_ROC.ST_TITLE NNClassifierMLP_CrossValidationPF_ROC.ST_XLABEL NNClassifierMLP_CrossValidationPF_ROC.ST_YLABEL NNClassifierMLP_CrossValidationPF_ROC.H_TITLE NNClassifierMLP_CrossValidationPF_ROC.LISTENER_ST_AXIS NNClassifierMLP_CrossValidationPF_ROC.H_AXES] 
 
 %%% ¡warning_off!
 true
@@ -561,6 +597,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 6)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':NNClassifierMLP_CrossValidationPF_ROC'])

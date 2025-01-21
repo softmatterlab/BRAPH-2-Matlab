@@ -7,6 +7,9 @@ ComparisonGroupBrainPF_GS manages the  % % % .
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

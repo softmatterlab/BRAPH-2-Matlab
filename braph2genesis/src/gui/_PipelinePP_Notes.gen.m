@@ -10,6 +10,9 @@ It should be used only with the prop NOTES of the element Pipeline.
 %%% ¡seealso!
 uitextarea, uicontextmenu, Pipeline
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -243,7 +246,7 @@ end
 %% ¡tests!
 
 %%% ¡excluded_props!
-[PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU]
+[PipelinePP_Notes.PARENT PipelinePP_Notes.H PipelinePP_Notes.LISTENER_CB PipelinePP_Notes.TEXTAREA PipelinePP_Notes.CONTEXTMENU PipelinePP_Notes.MENUS]
 
 %%% ¡warning_off!
 true
@@ -253,6 +256,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':PipelinePP_Notes'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 2)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':PipelinePP_Notes'])

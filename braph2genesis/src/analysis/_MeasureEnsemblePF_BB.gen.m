@@ -7,6 +7,9 @@ MeasureEnsemblePF_BB manages the basic functionalities to plot of a binodal bila
 %%% ¡seealso!
 MeasureEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

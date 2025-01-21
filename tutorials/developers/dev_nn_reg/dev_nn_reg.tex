@@ -2,7 +2,7 @@
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Implement a new Neural Network Regressor}
+\title{Implement a New Neural Network Regressor}
 
 \author[The BRAPH~2 Developers]{The BRAPH~2 Developers}
 
@@ -13,38 +13,41 @@
 \begin{abstract}
 \noindent
 This is the developer tutorial for implementing a new neural network regressor. 
-In this Tutorial, we will explain how to create the generator file \fn{*.gen.m} for a new neural network regressor, which can then be compiled by \code{braph2genesis}. All kinds of neural network models are (direct or indirect) extensions of the base element \code{NNBase}. Here, we will use as examples the neural network regressor \code{NNRegressorMLP} (multi-layer perceptron regressor).
+In this tutorial, you will learn how to create the generator file \fn{*.gen.m} for a new neural network regressor, which can then be compiled by \code{braph2genesis}. All kinds of neural network models are (direct or indirect) extensions of the base element \code{NNBase}. Here, you will use as example the neural network regressor \code{NNRegressorMLP} (multi-layer perceptron regressor).
 \end{abstract}
 
 \tableofcontents
 
-%%%%% %%%%% %%%%% %%%%% %%%%%
 \clearpage
-\section{Implementation of a Neural Network Regressor}
 
-We will start by implementing in detail \code{NNRegressorMLP}, which is a direct extension of \code{NNBase}.
+\section{Implementation of a neural network regressor (\code{NNRegressorMLP})}
+
+You will start by implementing in detail \code{NNRegressorMLP}, which is a direct extension of \code{NNBase}.
 A multi-layer perceptron regressor \code{NNRegressorMLP} comprises a multi-layer perceptron regressor model and a given dataset.
 
 \begin{lstlisting}[
 	label=cd:m:NNRegressorMLP:header,
 	caption={
 		{\bf NNRegressorMLP element header.}
-		The \code{header} section of the generator code for \fn{\_NNRegressorMLP.gen.m} provides the general information about the \code{NNRegressorMLP} element.
+		The \code{header} section of the generator code in \fn{\_NNRegressorMLP.gen.m} provides the general information about the \code{NNRegressorMLP} element.
 		}
 ]
 %% ¡header!
-NNRegressorMLP < NNBase (nn, multi-layer perceptron regressor) comprises a multi-layer perceptron regressor model and a given dataset. ¥\circled{1}\circlednote{1}{defines \code{NNRegressorMLP} as a subclass of \code{NNBase}. The moniker will be \code{nn}.}¥
+NNRegressorMLP < NNBase (nn, multi-layer perceptron regressor) comprises a multi-layer perceptron regressor model and a given dataset. ¥\circled{1}\circlednote{1}{ defines \code{NNRegressorMLP} as a subclass of \code{NNBase}. The moniker will be \code{nn}.}¥
 
 %%% ¡description!
 A neural network multi-layer perceptron regressor (NNRegressorMLP) comprises a multi-layer perceptron regressor model and a given dataset.
 NNRegressorMLP trains the multi-layer perceptron regressor with a formatted inputs ("CB", channel and batch) derived from the given dataset.
+
+%%% ¡build!
+1
 \end{lstlisting}
 
 \begin{lstlisting}[
 	label={cd:m:NNRegressorMLP:prop_update},
 	caption={
 		{\bf NNRegressorMLP element prop update.}
-		The \code{props\_update} section of the generator code for \fn{\_NNRegressorMLP.gen.m} updates the properties of the \code{NNRegressorMLP} element. This defines the core properties of the data point.
+		The \code{props\_update} section of the generator code in \fn{\_NNRegressorMLP.gen.m} updates the properties of the \code{NNRegressorMLP} element. This defines the core properties of the data point.
 	}
 ]
 %% ¡props_update!
@@ -79,7 +82,7 @@ NOTES (metadata, string) are some specific notes about the neural network multi-
 %%%% ¡default!
 'NNRegressorMLP notes'
 
-%%% ¡prop!  ¥\circled{1}\circlednote{1}{defines \code{NNDataset} which contains the \code{NNDataPoint} to train this regressor.}¥
+%%% ¡prop!  ¥\circled{1}\circlednote{1}{ defines \code{NNDataset} which contains the \code{NNDataPoint} to train this regressor.}¥
 D (data, item) is the dataset to train the neural network model, and its data point class DP_CLASS defaults to one of the compatible classes within the set of DP_CLASSES.
 %%%% ¡settings!
 'NNDataset'
@@ -88,12 +91,12 @@ NNDataset('DP_CLASS', 'NNDataPoint_CON_REG')
 
 %%% ¡prop!
 DP_CLASSES (parameter, classlist) is the list of compatible data points.
-%%%% ¡default! ¥\circled{2}\circlednote{2}{defines the compatible \code{NNDataPoint} classes with this \code{NNRegressorMLP}.}¥
+%%%% ¡default! ¥\circled{2}\circlednote{2}{ defines the compatible \code{NNDataPoint} classes with this \code{NNRegressorMLP}.}¥
 {'NNDataPoint_CON_REG' 'NNDataPoint_CON_FUN_MP_REG' 'NNDataPoint_Graph_REG' 'NNDataPoint_Measure_REG'}
 
 %%% ¡prop!
 INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
-%%%% ¡calculate! ¥\circled{3}\circlednote{3}{is a query that transforms the input data of \code{NNDataPoint} to the CB (channel-batch) format by flattening its included cells.}¥
+%%%% ¡calculate! ¥\circled{3}\circlednote{3}{ is a query that transforms the input data of \code{NNDataPoint} to the CB (channel-batch) format by flattening its included cells.}¥
 % inputs = nn.get('inputs', D) returns a cell array with the
 %  inputs for all data points in dataset D.
 if isempty(varargin)
@@ -128,7 +131,7 @@ end
 
 %%% ¡prop!
 TARGETS (query, cell) constructs the targets in the CB (channel-batch) format.
-%%%% ¡calculate! ¥\circled{4}\circlednote{4}{is a query that collects all the target values from all data points.}¥
+%%%% ¡calculate! ¥\circled{4}\circlednote{4}{ is a query that collects all the target values from all data points.}¥
 % targets = nn.get('PREDICT', D) returns a cell array with the
 %  targets for all data points in dataset D.
 if isempty(varargin)
@@ -150,15 +153,15 @@ end
 
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model.
-%%%% ¡calculate! ¥\circled{5}\circlednote{5}{trains the regressor with the defined dataset by the code under \code{¡calculate!}.}¥
+%%%% ¡calculate! ¥\circled{5}\circlednote{5}{ trains the regressor.}¥
 inputs = cell2mat(nn.get('INPUTS', nn.get('D')));  ¥\circled{6}¥
-targets = cell2mat(nn.get('TARGETS', nn.get('D')));  ¥\circled{7}\twocirclednotes{6}{7}{firstly extract the inputs and targets with the corresponding format.}¥
+targets = cell2mat(nn.get('TARGETS', nn.get('D')));  ¥\circled{7}\circlednote{6}{ and \circled{7} extract the inputs and targets.}¥
 if isempty(inputs) || isempty(targets)
     value = network();
 else
     number_features = size(inputs, 2);
     number_targets = size(targets, 2);
-    layers = nn.get('LAYERS');¥\circled{8}\circlednote{8}{defines the neural network architecture with user specified number of neurons and number of layers.}¥
+    layers = nn.get('LAYERS');¥\circled{8}\circlednote{8}{ defines the neural network architecture with user-specified number of neurons and number of layers.}¥
     
     nn_architecture = [featureInputLayer(number_features, 'Name', 'Input')];
     for i = 1:1:length(layers)
@@ -174,7 +177,7 @@ else
         regressionLayer('Name', 'Output')
         ];
     
-    % specify trianing options  ¥\circled{9}\circlednote{9}{defines the neural network training options.}¥
+    % specify trianing options  ¥\circled{9}\circlednote{9}{ defines the neural network training options.}¥
     options = trainingOptions( ...
         nn.get('SOLVER'), ...
         'MiniBatchSize', nn.get('BATCH'), ...
@@ -184,7 +187,7 @@ else
         'Verbose', nn.get('VERBOSE') ...
         );
 
-    % train the neural network  ¥\circled{10}\circlednote{10}{trains the model with those parameters and the neural network architecture.}¥
+    % train the neural network  ¥\circled{10}\circlednote{10}{ trains the model with those parameters and the neural network architecture.}¥
     value = trainNetwork(inputs, targets, nn_architecture, options);
 end
 
@@ -194,12 +197,12 @@ end
 	label={cd:m:NNRegressorMLP:props},
 	caption={
 		{\bf NNRegressorMLP element props.}
-		The \code{props} section of generator code for \fn{\_NNRegressorMLP.gen.m} defines the properties to be used in \fn{NNRegressorMLP}.
+		The \code{props} section of generator code in \fn{\_NNRegressorMLP.gen.m} defines the properties to be used in \fn{NNRegressorMLP}.
 	}
 ]
 %% ¡props!
 
-%%% ¡prop! ¥\circled{1}\circlednote{1}{defines the number of neuron per layer. For example, \code{[32 32]} represents two layers, each containing 32 neurons.}¥
+%%% ¡prop! ¥\circled{1}\circlednote{1}{ defines the number of neuron per layer. For example, \code{[32 32]} represents two layers, each containing 32 neurons.}¥
 LAYERS (data, rvector) defines the number of layers and their neurons.
 %%%% ¡default!
 [32 32]
@@ -214,63 +217,6 @@ WAITBAR (gui, logical) detemines whether to show the waitbar.
 %%%% ¡default!
 true
 
-%%% ¡prop!
-INTERRUPTIBLE (gui, scalar) sets whether the comparison computation is interruptible for multitasking.
-%%%% ¡default!
-.001
-
-%%% ¡prop! ¥\circled{2}\circlednote{2}{is a query that calculates the permuation feature importance. Note that, other neural network architectures, such as convolutional neural network, have other techniques to obtain feature importance.}¥
-FEATURE_IMPORTANCE (query, cell) evaluates the average significance of each feature by iteratively shuffling its values P times and measuring the resulting average decrease in model performance.
-%%%% ¡calculate!
-% fi = nn.get('FEATURE_IMPORTANCE', D) retrieves a cell array containing
-%  the feature importance values for the trained model, as assessed by
-%  evaluating it on the input dataset D.
-if isempty(varargin)
-    value = {};
-    return
-end
-d = varargin{1};
-P = varargin{2};
-seeds = varargin{3};
-
-inputs = cell2mat(nn.get('INPUTS', d));
-if isempty(inputs)
-    value = {};
-    return
-end
-targets = cell2mat(nn.get('TARGETS', d));
-net = nn.get('MODEL');
-
-number_features = size(inputs, 2);
-original_loss = crossentropy(net.predict(inputs), targets);
-
-wb = braph2waitbar(nn.get('WAITBAR'), 0, ['Feature importance permutation ...']);
-
-start = tic;
-for i = 1:1:P ¥\circled{4}\twocirclednotes{4}{5}{iteratively shuffle the feature values from any given dataset P times and measuring the resulting average decrease in model performance.}¥
-    rng(seeds(i), 'twister')
-    parfor j = 1:1:number_features ¥\circled{5}¥
-        scrambled_inputs = inputs;
-        permuted_value = squeeze(normrnd(mean(inputs(:, j)), std(inputs(:, j)), squeeze(size(inputs(:, j))))) + squeeze(randn(size(inputs(:, j)))) + mean(inputs(:, j));
-        scrambled_inputs(:, j) = permuted_value;
-        scrambled_loss = crossentropy(net.predict(scrambled_inputs), targets);
-        feature_importance(j) = scrambled_loss;
-    end
-
-    feature_importance_all_permutations{i} = feature_importance / original_loss;
-
-    braph2waitbar(wb, i / P, ['Feature importance permutation ' num2str(i) ' of ' num2str(P) ' - ' int2str(toc(start)) '.' int2str(mod(toc(start), 1) * 10) 's ...'])
-    if nn.get('VERBOSE')
-        disp(['** PERMUTATION FEATURE IMPORTANCE - sampling #' int2str(i) '/' int2str(P) ' - ' int2str(toc(start)) '.' int2str(mod(toc(start), 1) * 10) 's'])
-    end
-    if nn.get('INTERRUPTIBLE')
-        pause(nn.get('INTERRUPTIBLE'))
-    end
-end
-
-braph2waitbar(wb, 'close')
-
-value = feature_importance_all_permutations;
 \end{lstlisting}
 
 \clearpage
@@ -292,7 +238,7 @@ train the regressor with example data
 
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_REG % create example files
+    create_data_NN_REG_CON_XLS() % create example files
 end
 
 % Load BrainAtlas
@@ -335,15 +281,12 @@ d = NNDataset( ...
 nn = NNRegressorMLP('D', d, 'LAYERS', [20 20]);
 trained_model = nn.get('MODEL');
 
-% Check whether the number of fully-connected layers matches (excluding Dense_output layer)¥\circled{1}\circlednote{1}{checks whether the number of layers from the trained model is correctly set.}¥
+% Check whether the number of fully-connected layers matches (excluding Dense_output layer)¥\circled{1}\circlednote{1}{ checks whether the number of layers from the trained model is correctly set.}¥
 assert(length(nn.get('LAYERS')) == sum(contains({trained_model.Layers.Name}, 'Dense')) - 1, ...
     [BRAPH2.STR ':NNRegressorMLP:' BRAPH2.FAIL_TEST], ...
     'NNRegressorMLP does not construct the layers correctly. The number of the inputs should be the same as the length of dense layers the property.' ...
     )
 
 \end{lstlisting}
-
-%\bibliography{biblio}
-%\bibliographystyle{plainnat}
 
 \end{document}

@@ -2,12 +2,15 @@
 MultilayerBD < Graph (g, multilayer binary directed graph) is a multilayer binary directed graph.
 
 %%% ¡description!
-In a multilayer binary directed (BD) graph, layers could have different number 
+In a multilayer binary directed graph (MultilayerBD), layers could have different number 
 of nodes with within-layer directed edges. Edges can be either 0 (absence of connection) 
 or 1 (existence of connection).
 All node connections are allowed between layers.
 On the diagonal of the supra adjacency matrix, matrices are dediagonalized, semipositivized, and binarized.
 On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -104,19 +107,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the multilayer weighted directed graph.
 %%%% ¡default!
 'MultilayerBD'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the multilayer weighted undirected graph.
+NAME (constant, string) is the name of the multilayer weighted directed graph.
 %%%% ¡default!
-'MultilayerBD'
+'Multilayer Binary Directed'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the multilayer weighted undirected graph.
+DESCRIPTION (constant, string) is the description of the multilayer weighted directed graph.
 %%%% ¡default!
-'In a multilayer binary directed (BD) graph, layers could have different number of nodes with within-layer directed edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). All node connections are allowed between layers.On the diagonal of the supra adjacency matrix, matrices are dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
+'In a multilayer binary directed graph (MultilayerBD), layers could have different number of nodes with within-layer directed edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). All node connections are allowed between layers.On the diagonal of the supra adjacency matrix, matrices are dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multilayer binary directed graph.

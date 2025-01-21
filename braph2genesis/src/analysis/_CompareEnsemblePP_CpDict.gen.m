@@ -8,6 +8,9 @@ It is intended to be used only with the property CP_DICT of CompareEnsemble.
 %%% ¡seealso!
 uitable, CompareEnsemble, ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

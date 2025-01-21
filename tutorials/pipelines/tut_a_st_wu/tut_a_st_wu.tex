@@ -10,20 +10,19 @@
 
 \fig{marginfigure}
 	{fig:01}
-	{
-	\includegraphics{fig_01_01.jpg}
-	\includegraphics{fig_01_02.jpg}
-	\includegraphics{fig_01_03.jpg}
-	}
+	{\includegraphics{fig01.png}}
 	{Figure examples}
 	{
-	Examples of displays of \code{Clustering} with weighted structural data obtained using BRAPH 2.
+	Examples of displays of the clustering measure with weighted structural data obtained using BRAPH~2.
 	}
  
 \begin{abstract}
 \noindent
-This tutorial shows how to perform a network analysis using \emph{structural data} (see tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_st}{Group of Subjects with Structural Data}), where one connectivity matrix per group is calculated, as in T1-weighted imaging, static arterial spin labelling and positron emission tomography Step by step, this pipeline guides you to compare the data from two groups of subjects using their unthresholded weighted matrices, which correspond, for example, to correlation coefficients in cortical thickness, blood perfusion or glucose metabolism. You will also be able to generate publication-quality figures.
+This tutorial shows how to perform a network analysis using \emph{structural data} (see tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_st}{Group of Subjects with Structural Data}), where one connectivity matrix per group is calculated, as in T1-weighted imaging, static arterial spin labelling, and positron emission tomography. Step by step, this pipeline guides you to compare the data from two groups of subjects using their unthresholded weighted matrices, which correspond, for example, to correlation coefficients in cortical thickness, blood perfusion, or glucose metabolism. You will also be able to generate publication-quality figures.
 \end{abstract}
+
+%! FIG1 400px !%
+
 \tableofcontents
 
 
@@ -32,12 +31,12 @@ This tutorial shows how to perform a network analysis using \emph{structural dat
 \section{Generate Example Data}
 
 You can generate the example data by typing in the command line the instruction in \Coderef{cd:generate}.
-%
+
 \begin{lstlisting}[
 	label=cd:generate,
 	caption={
 		{\bf Command to generate example data.}
-		Command to generate the example data for structural analyses. They will be placed in the folder \fn{./braph2/pipelines/structural/Example data ST XLS}, and include the brain atlas \fn{atlas.xlsx}, two folders with the subject files \fn{ST\_Group\_1\_XLS} and \fn{ST\_Group\_2\_XLS}, and the associated covariates files \fn{ST\_Group\_1\_XLS.vois} and \fn{ST\_Group\_2\_XLS.vois}. The details about the format of these files can be found in the tutorials \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba}{Brain Atlas} and \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_st}{Group of Subjects with Structural Data}.
+		Command to generate the example data for structural analyses. They will be placed in the folder \fn{./braph2/pipelines/structural/Example data ST XLS}, and include the brain atlas \fn{atlas.xlsx}, two folders with the subject files \fn{ST\_Group\_1\_XLS} and \fn{ST\_Group\_2\_XLS}, and the associated covariates files \fn{ST\_Group\_1\_XLS.vois.xlsx} and \fn{ST\_Group\_2\_XLS.vois.xlsx}. The details about the format of these files can be found in the tutorials \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{Brain Atlas} and \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_st}{Group of Subjects with Structural Data}.
 	}
 	]
 	create_data_ST_XLS()
@@ -46,23 +45,22 @@ You can generate the example data by typing in the command line the instruction 
 
 \section{Open the GUI}
 
-The general GUI of BRAPH 2.0 can be opened by typing \code{braph2} in MatLab's terminal. This GUI allows you to select a pipeline, in this case, \emph{Pipeline Structural Comparison WU}, as shown in \Figref{fig:03}.
+The general GUI of BRAPH~2 can be opened by typing \code{braph2} in MatLab's terminal. This GUI allows you to select a pipeline, in this case, \emph{Pipeline Structural Comparison WU}, as shown in \Figref{fig:03}.
 
 \fig{figure}
-{fig:02}
-{
-	\includegraphics{fig02.jpg}
-}
-{BRAPH 2 main GUI}
-{
-	BRAPH 2 main GUI with the pipeline \emph{Pipeline Structural Comparison WU} selected.
-}
+ {fig:02}
+ {\includegraphics{fig02.jpg}}
+	{BRAPH~2 main GUI}
+	{
+	BRAPH~2 main GUI with the pipeline \emph{Pipeline Structural Comparison WU} selected.
+	}
 
+%! FIG2 !%
 
 \begin{tcolorbox}[
 	title=Pipeline launch from command line
 	]
-	To open the GUI and upload the structural comparison pipeline, you can also do it from the command line by typing the commands in \Coderef{cd:launch}.
+	To open the GUI and upload the structural comparison pipeline, you can also use the command line by typing the commands in \Coderef{cd:launch}.
 
 \begin{lstlisting}[
 	label=cd:launch,
@@ -70,77 +68,80 @@ The general GUI of BRAPH 2.0 can be opened by typing \code{braph2} in MatLab's t
 		{\bf Code to launch the GUI to upload a pipeline file to compare two groups of subjects.}
 		This code can be used in the MatLab command line to launch the GUI to upload a pipeline file
 	}
-	]
-	im = ImporterPipelineBRAPH2( ...
+]
+im = ImporterPipelineBRAPH2( ...
 	'FILE', which('pipeline_structural_comparison_wu.braph2') ...
 	);
-	pip = im.get('PIP');
+pip = im.get('PIP');
 	
-	gui = GUIElement('PE', pip, 'WAITBAR', true); gui.get('DRAW')
-	gui.get('SHOW')
+gui = GUIElement('PE', pip, 'WAITBAR', true)
+gui.get('DRAW')
+gui.get('SHOW')
 \end{lstlisting}
 \end{tcolorbox}
 
 
 Once the pipeline is uploaded, you can see a GUI that contains different steps: to upload a brain atlas, to upload the structural data of two groups, analyze them, and finally, to compare the groups (\Figref{fig:03}). 
 
-% This figure should be changed -> substitute by nice brain figures
 \fig{marginfigure}
 	{fig:03}
-	{
-	\includegraphics{fig03.jpg}
-	}
+	{\includegraphics{fig03.jpg}}
 	{Pipeline steps}
 	{
 	These are the steps of the pipeline. Only the first step is active when the pipeline is first opened. Subsequent steps will become active sequentially.
 	}
+
+%! FIG3 400px !%
+
 \clearpage
 
 \section{Step 1: Load the Brain Atlas}
-\Figref{fig:04} shows how to upload and plot the brain atlas that you used to extract the \emph{structural data} for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba}{Brain Atlas} tutorial.
 
-% This figure should be changed -> remove b
+\Figref{fig:04} shows how to upload and plot the brain atlas that you used to extract the data for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{Brain Atlas} tutorial.
+
 \fig{figure*}
 	{fig:04}
-	{
-	\includegraphics{fig04.jpg}
-	}
+	{\includegraphics{fig04.jpg}}
 	{Uploading the Brain Atlas}
 	{
 	Steps to upload the brain atlas:
 	{\bf a} Click on \fn{Load Atlas} from the pipeline GUI.
 	{\bf b} Navigate to the \fn{./braph2/pipelines/structural/Example data ST XLS} and select the atlas file \fn{atlas.xlsx} that would be used in this example. You can also plot the brain atlas by pressing \fn{Plot Brain Atlas}. 
 	}
+
+%! FIG4 !%
  
 \section{Step 2: Load the Structural Group Data}
 
-After you loaded the brain atlas, you can upload the \emph{structural data} for each group as in \Figref{fig:05}. A new interface will be shown containing the data for the group you just selected. You can open each subject’s structural values by selecting the subject, right click, and select “Open selection” (for more information check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_st}{Group of Subjects with Structural Data}).	
+After you loaded the brain atlas, you can upload the \emph{structural data} for each group as in \Figref{fig:05}. A new interface will be shown containing the data for the group you just selected. You can open each subject’s structural values by selecting the subject, right click, and select “Open selection” (for more information check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_st}{Group of Subjects with Structural Data}).	
 
-% This figure should be changed -> c should have Open Selection
-	\fig{figure}
+\fig{figure}
 	{fig:05}
-	{
-	\includegraphics{fig05.jpg}
-	}
+	{\includegraphics{fig05.jpg}}
 	{Loading the Group Data}
 	{
-	% change this legend
 	{\bf a} From the pipeline GUI, click on \fn{Load Group ST 1 XLS} to load the data of group 1, and \fn{Load Group ST 2 XLS} to load the data of group 2.
 	{\bf b} Data for group 1 is uploaded. {\bf c} Data for group 2 is uploaded.
 	}
+
+%! FIG5 !%
 
 \section{Step 3: Analyzing the Data of Group 1}
  
 After you have loaded the data for both groups, you can analyze the data of your first group by clicking on \fn{Analyze Group 1} (\Figref{fig:06}a-b). A new interface will be shown that allows you to pre-calculate network measures for this group and explore them. First of all, you can specify the parameters for constructing the graph from the structural group data (\Figref{fig:06}c): you can select the statistical test to calculate correlations in structural values between pairs of brain regions (\Figref{fig:06}d), and you can decide how you want to analyze the negative weights from the correlations (\Figref{fig:06}e). 
 
 Before these network measures are calculated, it is important to ensure the following things: 
-\begin{enumerate}
-	\item The analysis parameters are set correctly.
-	\item The graph parameters are set correctly.
-	\item The measures are configured with the parameters you desire (note that not all measures have parameters).
-\end{enumerate}
+\begin{itemize}
 
-Importantly, the parameters you select at the beginning will remain fixed for the rest of pipeline (including the analysis of the second group and the comparison between groups). We will now guide you through the process of preparing these parameters for both measures and graphs. It is important to keep in mind that the default parameters should work well for most cases.
+\item The analysis parameters are set correctly.
+
+\item The graph parameters are set correctly.
+
+\item The measures are configured with the parameters you desire (note that not all measures have parameters).
+
+\end{itemize}
+
+Importantly, the parameters you select at the beginning will remain fixed for the rest of pipeline to ensure the consistency of the analysis (including the analysis of the second group and the comparison between groups). We will now guide you through the process of preparing these parameters for both measures and graphs. It is important to keep in mind that the default parameters should work well for most cases.
 
 \subsection{Setting Analysis Parameters}
 
@@ -148,98 +149,103 @@ Importantly, the parameters you select at the beginning will remain fixed for th
 First of all, you can specify the parameters for constructing the graph from the structural group data (\Figref{fig:06}c).In the \code{CORRELATION RULE} section, you can select the statistical test to calculate correlations in structural values between pairs of brain regions (\Figref{fig:06}d).
 In the \code{NEGATIVE WEIGHTS RULE} you can decide how you want to analyze the negative weights from the correlation (\Figref{fig:06}e). 
 
-	\fig{figure}
+\fig{figure}
 	{fig:06}
-	{
-	\includegraphics{fig06.jpg}
-	}
+	{\includegraphics{fig06.jpg}}
 	{Analyze the Group Data}
 	{
 	{\bf a} Click on \fn{Analyze Group 1} in the pipeline's GUI.
-        {\bf b} After clicking on \fn{Analyze Group 1} in the pipeline's GUI, a new window will appear where first you can select the parameters for the graph construction {\bf c}. In this pipeline, you can select the statistical test to be used for the correlations {\bf d}, and what you want to do with the negative correlation weights {\bf e}.
+    {\bf b} After clicking on \fn{Analyze Group 1} in the pipeline's GUI, a new window will appear where first you can select the parameters for the graph construction {\bf c}. In this pipeline, you can select the statistical test to be used for the correlations {\bf d}, and what you want to do with the negative correlation weights {\bf e}.
 	}
-	\fig{figure}
+
+%! FIG6 !%
+
+\fig{figure}
 	{fig:07}
-	{
-	\includegraphics{fig07.jpg}
-	}
+	{\includegraphics{fig07.jpg}}
 	{Setting Analysis Parameters}
 	{
 	{\bf a} Click on \fn{Data Selected Measures} after selecting the measure.
 	{\bf b} This new window shows the array of values for the measure, in this case \fn{Clustering}.
  	{\bf c} This new window shows the array of values for the measure, in this case \fn{Clustering}.
  	{\bf d} After the calculation of the measure, a new table appears with the measure results, and the rule is blocked (in blue).
- }
+	}
+
+%! FIG7 !%
  
 \subsection{Calculate Measures}
-After the rule is set, you can calculate the measure by pressing the "C" (\Figref{fig:07}c) and the results will appear in a new table within the same panel (\Figref{fig:07}d). Also notice that after the measure is calculated, the rule is blocked (\Figref{fig:07}d).
+After the rule is set, you can calculate the measure by pressing the \code{C} button (\Figref{fig:07}c) and the results will appear in a new table within the same panel (\Figref{fig:07}d). Also notice that after the measure is calculated, the rule is blocked (\Figref{fig:07}d).
  
 If you want to visualize the results, select the measure and press \fn{Plot Selected Measures on Brain} in the analysis' GUI (\Figref{fig:08}a). In settings (\Figref{fig:08}b-c), you can change the visualization of the plots and save them. 
  
-	\fig{figure}
+\fig{figure}
 	{fig:08}
-	{
-	\includegraphics{fig08.jpg}
-	}
+	{\includegraphics{fig08.jpg}}
 	{Visualize the measure's results in a brain plot}
 	{
 	{\bf a} Click on \fn{Plot Selected Measures on Brain} in the analysis' GUI and a brain surface with the results from the calculated measures will appear. The size of the spheres and the color are proportional to the measure's value.   
-        {\bf b} In the new window, press the button settings to obtain further visualization options of the results {\bf c}. 
+	{\bf b} In the new window, press the button settings to obtain further visualization options of the results {\bf c}. 
 	}
+
+%! FIG8 !%
  
- Finally, when you do right click, in the \fn{GRAPH $\&$ MEASURES} panel, there are other options you can explore such as \fn{Plot Graph Plot} (connectivity adjacency matrix) as well as Data Graph (labels of brain regions, values of the adjacency matrix, options to plot matrix and histogram), all of which can also be saved.
+ Finally, when you do right click, in the \code{GRAPH \& MEASURES} panel, there are other options you can explore such as \code{Plot Graph Plot} (connectivity adjacency matrix) as well as \code{Data Graph} (labels of brain regions, values of the adjacency matrix, options to plot matrix and histogram), all of which can also be saved.
   
 \section{Step 4: Analyzing the Data of Group 2}
 
-After the analysis of group 1, you can proceed with the analysis of the second group by clicking on \fn{Analyze Group 2} (\Figref{fig:09}a). You will notice that, in the new window that is shown (\Figref{fig:09}b-d), the parameters you selected for group 1 are already selected and fixed for this analysis (both graph and measure parameters). If you realize that some of the options you previously selected are not the ones you would like, you can reset the analysis parameters of group 1 by clicking on the C checkbox next to it.
+After the analysis of group 1, you can proceed with the analysis of the second group by clicking on \fn{Analyze Group 2} (\Figref{fig:09}a). You will notice that, in the new window that is shown (\Figref{fig:09}b-d), the parameters you selected for group 1 are already selected and fixed for this analysis (both graph and measure parameters). If you realize that some of the options you previously selected are not the ones you would like, you can reset the analysis parameters of group 1 by clicking on the \code{D} button next to it.
 
-	\fig{figure}
+\fig{figure}
 	{fig:09}
-	{
-	\includegraphics{fig09.jpg}
-	}
+	{\includegraphics{fig09.jpg}}
 	{Parameters blocked in Analysis of Group 2}
 	{
 	{\bf a} Click on \fn{Analysis 2} in the pipeline's GUI.
 	{\bf b} In this new window, you can see that the graph properties such as \fn{Correlation rule} and \fn{Negative weights rule} are blocked since they are the same as the ones set in the analysis of group 1. If you select a measure, in this case \fn{Clustering}, and press \fn{Data Selected Measures} {\bf c}, you can observe that the measure's rules and parameters are also set in case you calculated the measures in analysis 1, and if not, you can set the rule by pressing at the "@" {\bf d}.
 	}
+
+%! FIG9 !%
  
 \section{Step 5: Comparing Groups}
 
-Once you have explored the network measures for each group, you can proceed with their statistical comparison. To do this, you should click on \fn{Compare Groups} (\Figref{fig:10}a) and in the new window select if you want a waiting bar and verbose functions ON while you wait for the analysis to finish, as well as how many permutations you want to use to assess differences between groups ({\Figref{fig:10}b}). If the groups are not independent but represent the same subjects in two different points in time, you can select the longitudinal comparison option, which will permute the values within each subject ({\Figref{fig:10}b}). We set the permutations to 10 for computational time purposes ({\Figref{fig:10}c}), but for your research analysis we recommend using 1000 or 10000 permutations to guarantee the results are robust. Finally, you can select the graph measures you want to compare between groups and once you have selected all the measures you are interested in, you should right click and select \fn{Calculate all selected comparisons} ({\Figref{fig:10}d}). If you turn ON the wait bar and verbose functions, two window bars will open that show you at which point in time the comparison calculation is. There is one last option on this GUI that you can select to save intermediate results during the permutations.
-	\fig{figure}
+Once you have explored the network measures for each group, you can proceed with their statistical comparison. To do this, you should click on \fn{Compare Groups} (\Figref{fig:10}a) and in the new window select if you want a waiting bar and verbose functions ON while you wait for the analysis to finish, as well as how many permutations you want to use to assess differences between groups (\Figref{fig:10}b). If the groups are not independent but represent the same subjects in two different points in time, you can select the longitudinal comparison option, which will permute the values within each subject (\Figref{fig:10}b). We set the permutations to 10 for computational time purposes (\Figref{fig:10}c), but for your research analysis we recommend using 1000 or 10000 permutations to guarantee the results are robust. Finally, you can select the graph measures you want to compare between groups and once you have selected all the measures you are interested in, you should right click and select \fn{Calculate all selected comparisons} (\Figref{fig:10}d). If you turn ON the wait bar and verbose functions, two window bars will open that show you at which point in time the comparison calculation is. There is one last option on this GUI that you can select to save intermediate results during the permutations.
+
+\fig{figure}
 	{fig:10}
-	{
-	\includegraphics{fig10.jpg}
-	}
+	{\includegraphics{fig10.jpg}}
 	{Compare the Group Data}
 	{
 	{\bf a} Click on \fn{Compare Groups} in the pipeline's GUI.
 	{\bf b} In this new window, you can select what to turn ON/OFF the wait bar and verbose functions, you can change the number of permutations, and whether to perform a longitudinal group comparison. We set the number of permutations to 10 for this tutorial {\bf c}. Finally, you can calculate the comparison of some graph measures between groups {\bf d}.
 	}
- 
-To obtain the results from the measure/s comparison, select the measures in the \fn{GRAPH $\&$ MEASURES} panel and press \fn{Data Selected Comparisons}({\Figref{fig:11}a}), and a new window will open ({\Figref{fig:11}b}) where we can check the difference value between groups, the p-values (1-tailed and 2-tailed), as well as the confidence intervals.
 
- \fig{figure}
+%! FIG10 !%
+ 
+To obtain the results from the measure comparison, select the measures in the \code{GRAPH \& MEASURES} panel and press \code{Data Selected Comparisons} (\Figref{fig:11}a), and a new window will open (\Figref{fig:11}b) where we can check the difference value between groups, the p-values (1-tailed and 2-tailed), as well as the confidence intervals.
+
+\fig{figure}
 	{fig:11}
-	{
-	\includegraphics{fig11.jpg}
-	}
+	{\includegraphics{fig11.jpg}}
 	{Visualize the comparison results in a table}
 	{
 	{\bf a} Click on \fn{Data Selected Comparisons} in the Comparisons panel.
 	{\bf b} In this new window, you can see the results from the comparison: the difference values between groups, the p-values (1-tailed and 2-tailed), as well as the confidence intervals.
 	}
-Finally, we can visualize the comparison results on a brain surface by selecting the measure comparisons we want and right click and press \fn{Plot Selected Comparisons on Brain} ({\Figref{fig:12}a}). A new window with comparison results on a brain surface will appear, where blue color indicates group 1 > group 2 and red color group 2 > group 1, and the size of the spheres is proportional to the absolute difference value between groups. If you press the Settings button ({\Figref{fig:12}b}), then you will have available more options, for example to apply FDR correction to your plot ({\Figref{fig:12}c}), which by default is set to off.
-  	\fig{figure*}
+
+%! FIG11 !%
+
+Finally, we can visualize the comparison results on a brain surface by selecting the measure comparisons we want and right click and press \code{Plot Selected Comparisons on Brain} (\Figref{fig:12}a). A new window with comparison results on a brain surface will appear, where blue color indicates group 1 > group 2 and red color group 2 > group 1, and the size of the spheres is proportional to the absolute difference value between groups. If you press the Settings button (\Figref{fig:12}b), then you will have available more options, for example to apply FDR correction to your plot (\Figref{fig:12}c), which by default is set to off.
+
+\fig{figure}
 	{fig:12}
+	{\includegraphics{fig12.jpg}}
+	{Visualize the comparison results on a brain surface}
 	{
-	\includegraphics{fig12.jpg}
-	}
- 	{Visualize the comparison results on a brain surface}
- 	{
  	{\bf a} Click on \fn{Plot Selected Comparisons on Brain} in the comparison's GUI and a brain surface with the results from the calculated measures comparison will appear. The size of the spheres is proportional to the measure value difference between groups and the colors indicate if it is a positive or negative difference.   
-        {\bf b} In the new window, press the button settings to obtain further visualization options of the results. 
-        {\bf c} In the settings, you can activate the FDR correction by setting the desired q value and changing from off to on the button.
-        }
+	{\bf b} In the new window, press the button settings to obtain further visualization options of the results. 
+	{\bf c} In the settings, you can activate the FDR correction by setting the desired q value and changing from off to on the button.
+	}
+
+%! FIG12 !%
+
 \end{document}

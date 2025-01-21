@@ -2,20 +2,20 @@ classdef MultiplexBD < Graph
 	%MultiplexBD is a multiplex binary directed graph.
 	% It is a subclass of <a href="matlab:help Graph">Graph</a>.
 	%
-	% In a multiplex binary directed (BD) graph, all layers have the same number 
+	% In a multiplex binary directed graph (MultiplexBD), all layers have the same number 
 	%  of nodes with within-layer directed edges either 0 (absence of connection) 
 	%  or 1 (existence of connection).
 	% There are connections between layers connecting the corresponding nodes.
 	%
 	% The list of MultiplexBD properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the multiplex binary directed graph.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the multiplex binary directed graph.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the multiplex binary directed graph.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the multiplex binary directed graph.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the multiplex binary directed graph.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the multiplex binary directed graph.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the multiplex binary directed graph.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type 4.
 	%  <strong>10</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).
 	%  <strong>11</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.DIRECTED * ones(layernumber).
@@ -30,7 +30,7 @@ classdef MultiplexBD < Graph
 	%  <strong>20</strong> <strong>PARTITIONLABELS</strong> 	PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.
 	%  <strong>21</strong> <strong>APARTITIONLABELS</strong> 	APARTITIONLABELS (query, stringlist) returns the partition labels for A.
 	%  <strong>22</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-	%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
+	%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the node labels for each layer.
 	%  <strong>24</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
 	%  <strong>25</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
 	%  <strong>26</strong> <strong>A</strong> 	A (result, cell) is the cell containing the multiplex binary adjacency matrices of the multiplex binary directed graph.
@@ -167,14 +167,14 @@ classdef MultiplexBD < Graph
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of MultiplexBD properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the multiplex binary directed graph.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the multiplex binary directed graph.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the multiplex binary directed graph.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the multiplex binary directed graph.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the multiplex binary directed graph.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the multiplex binary directed graph.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the multiplex binary directed graph.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type 4.
 			%  <strong>10</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).
 			%  <strong>11</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.DIRECTED * ones(layernumber).
@@ -189,7 +189,7 @@ classdef MultiplexBD < Graph
 			%  <strong>20</strong> <strong>PARTITIONLABELS</strong> 	PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.
 			%  <strong>21</strong> <strong>APARTITIONLABELS</strong> 	APARTITIONLABELS (query, stringlist) returns the partition labels for A.
 			%  <strong>22</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-			%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
+			%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the node labels for each layer.
 			%  <strong>24</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
 			%  <strong>25</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
 			%  <strong>26</strong> <strong>A</strong> 	A (result, cell) is the cell containing the multiplex binary adjacency matrices of the multiplex binary directed graph.
@@ -213,6 +213,21 @@ classdef MultiplexBD < Graph
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the multiplex binary directed graph.
+			%
+			% BUILD = MultiplexBD.GETBUILD() returns the build of 'MultiplexBD'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = G.GETBUILD() returns the build of the multiplex binary directed graph G.
+			%  BUILD = Element.GETBUILD(G) returns the build of 'G'.
+			%  BUILD = Element.GETBUILD('MultiplexBD') returns the build of 'MultiplexBD'.
+			%
+			% Note that the Element.GETBUILD(G) and Element.GETBUILD('MultiplexBD')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function g_class = getClass()
 			%GETCLASS returns the class of the multiplex binary directed graph.
 			%
@@ -539,7 +554,7 @@ classdef MultiplexBD < Graph
 			prop = MultiplexBD.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			multiplexbd_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the multiplex binary directed graph.'  'DESCRIPTION (constant, string) is the description of the multiplex binary directed graph.'  'TEMPLATE (parameter, item) is the template of the multiplex binary directed graph.'  'ID (data, string) is a few-letter code for the multiplex binary directed graph.'  'LABEL (metadata, string) is an extended label of the multiplex binary directed graph.'  'NOTES (metadata, string) are some specific notes about the multiplex binary directed graph.'  'TOSTRING (query, string) returns a string that represents the object.'  'GRAPH_TYPE (constant, scalar) returns the graph type 4.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.DIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.'  'PARTITIONTICKS (metadata, rvector) are the partition tick values.'  'APARTITIONTICKS (query, rvector) returns the partition tick values.'  'PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.'  'APARTITIONLABELS (query, stringlist) returns the partition labels for A.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the nodel labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell containing the multiplex binary adjacency matrices of the multiplex binary directed graph.'  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multiplex adjacency matrices.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'RANDOMIZATION (query, cell) performs the randomization of a connectivity matrix.' };
+			multiplexbd_description_list = { 'ELCLASS (constant, string) is the class of the multiplex binary directed graph.'  'NAME (constant, string) is the name of the multiplex binary directed graph.'  'DESCRIPTION (constant, string) is the description of the multiplex binary directed graph.'  'TEMPLATE (parameter, item) is the template of the multiplex binary directed graph.'  'ID (data, string) is a few-letter code for the multiplex binary directed graph.'  'LABEL (metadata, string) is an extended label of the multiplex binary directed graph.'  'NOTES (metadata, string) are some specific notes about the multiplex binary directed graph.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'GRAPH_TYPE (constant, scalar) returns the graph type 4.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.BINARY * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.DIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels to be used by the slider.'  'PARTITIONTICKS (metadata, rvector) are the partition tick values.'  'APARTITIONTICKS (query, rvector) returns the partition tick values.'  'PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.'  'APARTITIONLABELS (query, stringlist) returns the partition labels for A.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the node labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell containing the multiplex binary adjacency matrices of the multiplex binary directed graph.'  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multiplex adjacency matrices.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'RANDOMIZATION (query, cell) performs the randomization of a connectivity matrix.' };
 			prop_description = multiplexbd_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -613,9 +628,9 @@ classdef MultiplexBD < Graph
 				case 1 % MultiplexBD.ELCLASS
 					prop_default = 'MultiplexBD';
 				case 2 % MultiplexBD.NAME
-					prop_default = 'MultiplexBD';
+					prop_default = 'Multiplex Binary Directed';
 				case 3 % MultiplexBD.DESCRIPTION
-					prop_default = 'In a multiplex binary directed (BD) graph, all layers have the same number of nodes with within-layer directed edges either 0 (absence of connection) or 1 (existence of connection). There are connections between layers connecting the corresponding nodes.';
+					prop_default = 'In a multiplex binary directed graph (MultiplexBD), all layers have the same number of nodes with within-layer directed edges either 0 (absence of connection) or 1 (existence of connection). There are connections between layers connecting the corresponding nodes.';
 				case 4 % MultiplexBD.TEMPLATE
 					prop_default = Format.getFormatDefault(8, MultiplexBD.getPropSettings(prop));
 				case 5 % MultiplexBD.ID
@@ -627,7 +642,7 @@ classdef MultiplexBD < Graph
 				case 9 % MultiplexBD.GRAPH_TYPE
 					prop_default = 4;
 				case 32 % MultiplexBD.COMPATIBLE_MEASURES
-					prop_default = { 'AssortInIn'  'AssortInOut'  'AssortOutIn'  'AssortOutOut'  'BetweennessCentrality'  'Clustering'  'ClusteringAv'  'CorePeriphery'  'DegreeIn'  'DegreeInAv'  'DegreeOut'  'DegreeOutAv'  'Distance'  'EccentricityIn'  'EccentricityInAv'  'EccentricityOut'  'EccentricityOutAv'  'EdgeBetwCentr'  'EdgeOverlap'  'GlobalEfficiencyIn'  'GlobalEfficiencyInAv'  'GlobalEfficiencyOut'  'GlobalEfficiencyOutAv'  'KCore'  'KCorenessCentrality'  'MultiRC'  'MultiplexCP'  'MultiplexKCor'  'MultiplexKCorC'  'MultiplexPIn'  'MultiplexPOut'  'MultiplexRCDeg'  'OverlappingDegIn'  'OverlappingDegInAv'  'OverlappingDegOut'  'OverlappingDegOutAv'  'PathLengthIn'  'PathLengthInAv'  'PathLengthOut'  'PathLengthOutAv'  'RCDeg'  'RichClub'  'Richness'  'Transitivity'  'Triangles' };
+					prop_default = { 'AssortInIn'  'AssortInOut'  'AssortOutIn'  'AssortOutOut'  'BetweennessCentrality'  'Clustering'  'ClusteringAv'  'CorePeriphery'  'DegreeIn'  'DegreeInAv'  'DegreeOut'  'DegreeOutAv'  'Distance'  'EccentricityIn'  'EccentricityInAv'  'EccentricityOut'  'EccentricityOutAv'  'EdgeBetwCentr'  'EdgeOverlap'  'Flexibility'  'FlexibilityAv'  'GlobalEfficiencyIn'  'GlobalEfficiencyInAv'  'GlobalEfficiencyOut'  'GlobalEfficiencyOutAv'  'KCore'  'KCorenessCentrality'  'MultiRC'  'MultilayerCommunity'  'MultilayerM'  'MultiplexCP'  'MultiplexKCor'  'MultiplexKCorC'  'MultiplexPIn'  'MultiplexPOut'  'MultiplexRCDeg'  'OverlappingDegIn'  'OverlappingDegInAv'  'OverlappingDegOut'  'OverlappingDegOutAv'  'Participation'  'PathLengthIn'  'PathLengthInAv'  'PathLengthOut'  'PathLengthOutAv'  'Persistence'  'RCDeg'  'RichClub'  'Richness'  'Transitivity'  'Triangles' };
 				otherwise
 					prop_default = getPropDefault@Graph(prop);
 			end

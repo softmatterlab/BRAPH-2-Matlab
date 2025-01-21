@@ -15,7 +15,7 @@ classdef SettingsAxis < Settings
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the axis settings.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the axis settings.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the axis settings.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
 	%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
 	%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
@@ -117,6 +117,8 @@ classdef SettingsAxis < Settings
 	%
 	%
 	% See also uiaxes, SettingsAxisPP, PanelFig, GUIFig, check_graphics.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		AXISCOLOR = 15; %CET: Computational Efficiency Trick
@@ -173,7 +175,7 @@ classdef SettingsAxis < Settings
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the axis settings.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the axis settings.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the axis settings.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>PANEL</strong> 	PANEL (gui, item) is the panel to which the graphics object belongs.
 			%  <strong>10</strong> <strong>PROP</strong> 	PROP (gui, scalar) is the prop of the graphics handle(list).
 			%  <strong>11</strong> <strong>TAG</strong> 	TAG (gui, string) is the tag of the graphics handle(s).
@@ -194,6 +196,21 @@ classdef SettingsAxis < Settings
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the axis settings.
+			%
+			% BUILD = SettingsAxis.GETBUILD() returns the build of 'SettingsAxis'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = ST.GETBUILD() returns the build of the axis settings ST.
+			%  BUILD = Element.GETBUILD(ST) returns the build of 'ST'.
+			%  BUILD = Element.GETBUILD('SettingsAxis') returns the build of 'SettingsAxis'.
+			%
+			% Note that the Element.GETBUILD(ST) and Element.GETBUILD('SettingsAxis')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function st_class = getClass()
 			%GETCLASS returns the class of the axis settings.
 			%
@@ -520,7 +537,7 @@ classdef SettingsAxis < Settings
 			prop = SettingsAxis.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			settingsaxis_description_list = { 'ELCLASS (constant, string) is the class of the axis settings.'  'NAME (constant, string) is the name of the axis settings.'  'DESCRIPTION (constant, string) is the description of the axis settings.'  'TEMPLATE (parameter, item) is the template of the axis settings.'  'ID (data, string) is a few-letter code for the axis settings.'  'LABEL (metadata, string) is an extended label of the axis settings.'  'NOTES (metadata, string) are some specific notes about the axis settings.'  'TOSTRING (query, string) returns a string that represents the object.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'AXISCOLOR (figure, color) is the axis background color.'  'HOLD (figure, logical) determines whether hold is on or off.'  'GRID (figure, logical) determines whether the grid is shown.'  'AXIS (figure, logical) determines whether the axis is shown.'  'EQUAL (figure, logical) determines whether the axis are equal.'  'TIGHT (figure, logical) determines whether the axis are tight.'  'BOX (figure, logical) determines whether the axis are boxed.' };
+			settingsaxis_description_list = { 'ELCLASS (constant, string) is the class of the axis settings.'  'NAME (constant, string) is the name of the axis settings.'  'DESCRIPTION (constant, string) is the description of the axis settings.'  'TEMPLATE (parameter, item) is the template of the axis settings.'  'ID (data, string) is a few-letter code for the axis settings.'  'LABEL (metadata, string) is an extended label of the axis settings.'  'NOTES (metadata, string) are some specific notes about the axis settings.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'PANEL (gui, item) is the panel to which the graphics object belongs.'  'PROP (gui, scalar) is the prop of the graphics handle(list).'  'TAG (gui, string) is the tag of the graphics handle(s).'  'I (gui, scalar) is the index of the handle, used only by handlelists.'  'H (query, handle) is the graphics object handle.'  'SETUP (query, scalar) sets all figure props.'  'AXISCOLOR (figure, color) is the axis background color.'  'HOLD (figure, logical) determines whether hold is on or off.'  'GRID (figure, logical) determines whether the grid is shown.'  'AXIS (figure, logical) determines whether the axis is shown.'  'EQUAL (figure, logical) determines whether the axis are equal.'  'TIGHT (figure, logical) determines whether the axis are tight.'  'BOX (figure, logical) determines whether the axis are boxed.' };
 			prop_description = settingsaxis_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

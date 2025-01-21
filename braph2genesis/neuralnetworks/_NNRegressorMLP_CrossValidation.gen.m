@@ -1,5 +1,5 @@
 %% ¡header!
-NNRegressorMLP_CrossValidation < NNCrossValidation (nncv, neural network cross-validation) is a process for evaluating multi-layer perceptron regressors using cross-validation.
+NNRegressorMLP_CrossValidation < NNCrossValidation (nncv, neural network cross-validation for MLP regressors) is a process for evaluating multi-layer perceptron regressors using cross-validation.
 
 %%% ¡description!
 A cross validation for multi-layer perceptron regressors (NNRegressorMLP_CrossValidation) is a process that facilitates the evaluation of multi-layer perceptron regressors using cross-validation. 
@@ -10,6 +10,9 @@ To train all the neural networks for all folds, use: nncv.get('TRAIN')
 
 %%% ¡seealso!
 NNDataPoint, NNDataset, NNEvaluator
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -129,18 +132,6 @@ Average of Root Mean Squared Error
 
 %%% ¡prop!
 %%%% ¡id!
-NNRegressorMLP_CrossValidation.P
-%%%% ¡title!
-Permutation Times for Feature Importance
-
-%%% ¡prop!
-%%%% ¡id!
-NNRegressorMLP_CrossValidation.AV_FEATURE_IMPORTANCE
-%%%% ¡title!
-Average of Feature Importance
-
-%%% ¡prop!
-%%%% ¡id!
 NNRegressorMLP_CrossValidation.NOTES
 %%%% ¡title!
 Cross Validation NOTES
@@ -148,14 +139,14 @@ Cross Validation NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the cross-validation.
 %%%% ¡default!
 'NNRegressorMLP_CrossValidation'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the cross-validation.
 %%%% ¡default!
-'NNRegressorMLP_CrossValidation'
+'Neural Network Cross-Validation for Multi-layer Perceptron Regressors'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the cross-validation.
@@ -237,21 +228,13 @@ nn_list = nncv.get('NN_LIST');
 if ~isa(nncv.getr('NNEVALUATOR_TEMPLATE'), 'NoValue')
     nne_template = nncv.get('NNEVALUATOR_TEMPLATE');
 else
-    nne_template = NNRegressorMLP_Evaluator( ...
-        'P', nncv.get('P'));
+    nne_template = NNRegressorMLP_Evaluator();
 end
 
 value = cellfun(@(d, nn) NNRegressorMLP_Evaluator('TEMPLATE', nne_template, 'D', d, 'NN', nn), ...
     d_list, nn_list, 'UniformOutput', false);
 
 %% ¡props!
-
-%%% ¡prop!
-P (parameter, scalar) is the permutation number.
-%%%% ¡default!
-1e+2
-%%%% ¡check_prop!
-check = value > 0 && value == round(value);
 
 %%% ¡prop!
 AV_CORR (result, rvector) provides the metric of the correlation of coefficients.
@@ -324,41 +307,6 @@ else
 end
 
 %%% ¡prop!
-AV_FEATURE_IMPORTANCE (result, cell) averages the feature importances across k folds.
-%%%% ¡calculate!
-e_list = nncv.get('EVALUATOR_LIST');
-
-all_fi = cellfun(@(e) cell2mat(e.get('FEATURE_IMPORTANCE')), ...
-    e_list, 'UniformOutput', false);
-
-if isempty(cell2mat(all_fi))
-    value = {};
-else
-    average_fi = zeros(size(all_fi{1}));
-    for i = 1:numel(all_fi)
-        % Add the current cell contents to the averageCell
-        average_fi = average_fi + all_fi{i};
-    end
-    average_fi = average_fi / numel(all_fi);
-    value = {average_fi};
-end
-
-%%%% ¡gui!
-input_datasets = nncv.get('D');
-input_dataset = input_datasets{1}; % TODO: create a query to get an item from this dataset list
-dp_class = input_dataset.get('DP_CLASS');
-graph_dp_classes = {NNDataPoint_Graph_CLA().get('NAME'), NNDataPoint_Graph_REG().get('NAME')};
-measure_dp_classes = {NNDataPoint_Measure_CLA().get('NAME'), NNDataPoint_Measure_REG().get('NAME')};
-
-if any(strcmp(dp_class, graph_dp_classes)) % GRAPH input
-    pr = NNxMLP_xPP_FI_Graph('EL', nncv, 'D', input_dataset, 'PROP', NNRegressorMLP_CrossValidation.AV_FEATURE_IMPORTANCE, varargin{:});
-elseif any(strcmp(dp_class, measure_dp_classes))% MEASURE input
-    pr = NNxMLP_xPP_FI_Measure('EL', nncv, 'D', input_dataset, 'PROP', NNRegressorMLP_CrossValidation.AV_FEATURE_IMPORTANCE, varargin{:});
-else % DATA input
-    pr = NNxMLP_xPP_FI_Data('EL', nncv, 'D', input_dataset, 'PROP', NNRegressorMLP_CrossValidation.AV_FEATURE_IMPORTANCE, varargin{:});
-end
-
-%%% ¡prop!
 PFSP (gui, item) contains the panel figure of the scatter plot for regression model.
 %%%% ¡settings!
 'NNRegressorMLP_CrossValidationPF_Scatter'
@@ -383,7 +331,7 @@ evaluate a regressor cross-validation with the example data
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_REG % create example files
+    create_data_NN_REG_CON_XLS() % create example files
 end
 
 % Load BrainAtlas

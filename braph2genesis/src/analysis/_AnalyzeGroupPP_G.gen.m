@@ -8,6 +8,9 @@ It is intended to be used only with the property G of AnalyzeGroup.
 %%% ¡seealso!
 uitable, AnalyzeGroup, Graph, Measure
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -513,15 +516,13 @@ function cb_calculate(~, ~)
     
     wb = braph2waitbar(pr.get('WAITBAR'), 0, ['Calculating ' num2str(length(selected))  ' measures ...']);
 
-    for i = 1:1:length(m_list)
-        if ismember(i, selected)
-            measure = m_list{i};
+    for s = 1:1:length(selected)
+        measure = m_list{selected(s)};
 
-            braph2waitbar(wb, .1 + .9 * i / length(selected), ['Calculating measure ' int2str(i) ' (' measure ') of ' int2str(length(selected)) ' ...'])
+        braph2waitbar(wb, .1 + s / length(selected), ['Calculating measure ' int2str(s) ' (' measure ') of ' int2str(length(selected)) ' ...'])
 
-            if isa(g.get('MEASURE', measure).getr('M'), 'NoValue')
-                g.get('MEASURE', measure).memorize('M');
-            end
+        if isa(g.get('MEASURE', measure).getr('M'), 'NoValue')
+            g.get('MEASURE', measure).memorize('M');
         end
     end
     

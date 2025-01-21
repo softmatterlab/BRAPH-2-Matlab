@@ -36,7 +36,7 @@ classdef GUILayout < GUI
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the GUI layout.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the GUI layout.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the GUI layout.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
 	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
@@ -151,6 +151,8 @@ classdef GUILayout < GUI
 	%
 	%
 	% See also uifigure, GUI, Element.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		EL_CLASS = 30; %CET: Computational Efficiency Trick
@@ -197,7 +199,7 @@ classdef GUILayout < GUI
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the GUI layout.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the GUI layout.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the GUI layout.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
 			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
@@ -231,6 +233,21 @@ classdef GUILayout < GUI
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the GUI layout.
+			%
+			% BUILD = GUILayout.GETBUILD() returns the build of 'GUILayout'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = GUI.GETBUILD() returns the build of the GUI layout GUI.
+			%  BUILD = Element.GETBUILD(GUI) returns the build of 'GUI'.
+			%  BUILD = Element.GETBUILD('GUILayout') returns the build of 'GUILayout'.
+			%
+			% Note that the Element.GETBUILD(GUI) and Element.GETBUILD('GUILayout')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function gui_class = getClass()
 			%GETCLASS returns the class of the GUI layout.
 			%
@@ -557,7 +574,7 @@ classdef GUILayout < GUI
 			prop = GUILayout.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			guilayout_description_list = { 'ELCLASS (constant, string) is the class of the GUI layout.'  'NAME (constant, string) is the name of the GUI layout.'  'DESCRIPTION (constant, string) is the description of the GUI layout.'  'TEMPLATE (parameter, item) is the template of the GUI layout.'  'ID (data, string) is a few-letter code for the GUI layout.'  'LABEL (metadata, string) is an extended label of the GUI layout.'  'NOTES (metadata, string) are some specific notes about the GUI layout.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI layout.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar [set before DRAW].'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about [set before DRAW].'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar [set before DRAW].'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons [set before DRAW].'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates prop POSITION and panel PanelElement when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.'  'EL_CLASS (data, class) is the element class.'  'P (evanescent, handle) is the panel.'  'TABLE (evanescent, handle) is the table.'  'SAVE_BTN (evanescent, handle) is the save button.'  'CANCEL_BTN (evanescent, handle) is the edit button.' };
+			guilayout_description_list = { 'ELCLASS (constant, string) is the class of the GUI layout.'  'NAME (constant, string) is the name of the GUI layout.'  'DESCRIPTION (constant, string) is the description of the GUI layout.'  'TEMPLATE (parameter, item) is the template of the GUI layout.'  'ID (data, string) is a few-letter code for the GUI layout.'  'LABEL (metadata, string) is an extended label of the GUI layout.'  'NOTES (metadata, string) are some specific notes about the GUI layout.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI layout.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar [set before DRAW].'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about [set before DRAW].'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar [set before DRAW].'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons [set before DRAW].'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates prop POSITION and panel PanelElement when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.'  'EL_CLASS (data, class) is the element class.'  'P (evanescent, handle) is the panel.'  'TABLE (evanescent, handle) is the table.'  'SAVE_BTN (evanescent, handle) is the save button.'  'CANCEL_BTN (evanescent, handle) is the edit button.' };
 			prop_description = guilayout_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

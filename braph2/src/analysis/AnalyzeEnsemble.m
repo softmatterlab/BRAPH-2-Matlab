@@ -13,7 +13,7 @@ classdef AnalyzeEnsemble < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ensemble-based graph analysis.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ensemble-based graph analysis.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class.
 	%  <strong>11</strong> <strong>GRAPH_TEMPLATE</strong> 	GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
@@ -108,6 +108,8 @@ classdef AnalyzeEnsemble < ConcreteElement
 	%
 	%
 	% See also CompareEnsemble.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick
@@ -159,7 +161,7 @@ classdef AnalyzeEnsemble < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ensemble-based graph analysis.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ensemble-based graph analysis.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class.
 			%  <strong>11</strong> <strong>GRAPH_TEMPLATE</strong> 	GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
@@ -173,6 +175,21 @@ classdef AnalyzeEnsemble < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the ensemble-based graph analysis.
+			%
+			% BUILD = AnalyzeEnsemble.GETBUILD() returns the build of 'AnalyzeEnsemble'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the ensemble-based graph analysis A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeEnsemble') returns the build of 'AnalyzeEnsemble'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeEnsemble')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the ensemble-based graph analysis.
 			%
@@ -499,7 +516,7 @@ classdef AnalyzeEnsemble < ConcreteElement
 			prop = AnalyzeEnsemble.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			analyzeensemble_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the ensemble-based graph analysis.'  'DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis.'  'TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis.'  'ID (data, string) is a few-letter code for the ensemble-based graph analysis.'  'LABEL (metadata, string) is an extended label of the ensemble-based graph analysis.'  'NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class.'  'GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.'  'G_DICT (result, idict) is the graph ensemble obtained from this analysis.'  'ME_DICT (result, idict) contains the calculated measures of the graph ensemble.'  'MEASUREENSEMBLE (query, item) returns an ensemble-based measure.' };
+			analyzeensemble_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the ensemble-based graph analysis.'  'DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis.'  'TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis.'  'ID (data, string) is a few-letter code for the ensemble-based graph analysis.'  'LABEL (metadata, string) is an extended label of the ensemble-based graph analysis.'  'NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class.'  'GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.'  'G_DICT (result, idict) is the graph ensemble obtained from this analysis.'  'ME_DICT (result, idict) contains the calculated measures of the graph ensemble.'  'MEASUREENSEMBLE (query, item) returns an ensemble-based measure.' };
 			prop_description = analyzeensemble_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

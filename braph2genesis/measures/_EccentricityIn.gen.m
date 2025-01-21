@@ -5,6 +5,9 @@ EccentricityIn < Measure (m, in-eccentricity) is the graph In-Eccentricity.
 The In-Eccentricity (EccentricityIn) of a node is the maximal shortest in-path length 
 between a node and any other node within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -123,6 +126,7 @@ distance = Distance('G', g).get('M');
 eccentricityIn = cell(L, 1);
 eccentricity_rule = m.get('RULE');
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     switch lower(eccentricity_rule)
         case {'subgraphs'}
@@ -131,6 +135,7 @@ parfor li = 1:1:L
             eccentricityIn(li)  = {max(distance{li}, [], 1)};
     end
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = eccentricityIn;
 

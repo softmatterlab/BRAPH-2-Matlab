@@ -8,6 +8,9 @@ It is supposed to be used with the property Layer of ComparisonGroupBrainPF_NU, 
 %%% ¡seealso!
 uidropdown, GUI, ComparisonGroupBrainPF_NU, ComparisonGroupBrainPF_BU, ComparisonGroupBrainPF_GU
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

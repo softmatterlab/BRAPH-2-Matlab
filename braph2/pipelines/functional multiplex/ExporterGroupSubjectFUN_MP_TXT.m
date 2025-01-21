@@ -15,14 +15,14 @@ classdef ExporterGroupSubjectFUN_MP_TXT < Exporter
 	%  variables of interest, and each subsequent row the values for each subject.
 	%
 	% The list of ExporterGroupSubjectFUN_MP_TXT properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the FUN subject group exporter in TXT.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the FUN subject group exporter in TXT.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the FUN subject group exporter in TXT.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the FUN subject group exporter in TXT.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the FUN subject group exporter in TXT.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the FUN subject group exporter in TXT.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the FUN subject group exporter in TXT.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is a group of subjects with functional multiplex data.
 	%  <strong>11</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory name where to save the group of subjects with functional multiplex data.
@@ -116,6 +116,8 @@ classdef ExporterGroupSubjectFUN_MP_TXT < Exporter
 	%
 	%
 	% See also Group, SubjectFUN_MP, ImporterGroupSubjectFUN_MP_TXT.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		GR = 10; %CET: Computational Efficiency Trick
@@ -150,14 +152,14 @@ classdef ExporterGroupSubjectFUN_MP_TXT < Exporter
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of ExporterGroupSubjectFUN_MP_TXT properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the FUN subject group exporter in TXT.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the FUN subject group exporter in TXT.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the FUN subject group exporter in TXT.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the FUN subject group exporter in TXT.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the FUN subject group exporter in TXT.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the FUN subject group exporter in TXT.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the FUN subject group exporter in TXT.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is a group of subjects with functional multiplex data.
 			%  <strong>11</strong> <strong>DIRECTORY</strong> 	DIRECTORY (data, string) is the directory name where to save the group of subjects with functional multiplex data.
@@ -170,6 +172,21 @@ classdef ExporterGroupSubjectFUN_MP_TXT < Exporter
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the exporter of FUN MP subject group in TXT.
+			%
+			% BUILD = ExporterGroupSubjectFUN_MP_TXT.GETBUILD() returns the build of 'ExporterGroupSubjectFUN_MP_TXT'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = EX.GETBUILD() returns the build of the exporter of FUN MP subject group in TXT EX.
+			%  BUILD = Element.GETBUILD(EX) returns the build of 'EX'.
+			%  BUILD = Element.GETBUILD('ExporterGroupSubjectFUN_MP_TXT') returns the build of 'ExporterGroupSubjectFUN_MP_TXT'.
+			%
+			% Note that the Element.GETBUILD(EX) and Element.GETBUILD('ExporterGroupSubjectFUN_MP_TXT')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function ex_class = getClass()
 			%GETCLASS returns the class of the exporter of FUN MP subject group in TXT.
 			%
@@ -496,7 +513,7 @@ classdef ExporterGroupSubjectFUN_MP_TXT < Exporter
 			prop = ExporterGroupSubjectFUN_MP_TXT.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			exportergroupsubjectfun_mp_txt_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the FUN subject group exporter in TXT.'  'DESCRIPTION (constant, string) is the description of the FUN subject group exporter in TXT.'  'TEMPLATE (parameter, item) is the template of the FUN subject group exporter in TXT.'  'ID (data, string) is a few-letter code for the FUN subject group exporter in TXT.'  'LABEL (metadata, string) is an extended label of the FUN subject group exporter in TXT.'  'NOTES (metadata, string) are some specific notes about the FUN subject group exporter in TXT.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is a group of subjects with functional multiplex data.'  'DIRECTORY (data, string) is the directory name where to save the group of subjects with functional multiplex data.'  'PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with functional multiplex data.'  'SAVE (result, empty) saves the group of subjects with functional multiplex data in TXT files in the selected directory.' };
+			exportergroupsubjectfun_mp_txt_description_list = { 'ELCLASS (constant, string) is the class of the FUN subject group exporter in TXT.'  'NAME (constant, string) is the name of the FUN subject group exporter in TXT.'  'DESCRIPTION (constant, string) is the description of the FUN subject group exporter in TXT.'  'TEMPLATE (parameter, item) is the template of the FUN subject group exporter in TXT.'  'ID (data, string) is a few-letter code for the FUN subject group exporter in TXT.'  'LABEL (metadata, string) is an extended label of the FUN subject group exporter in TXT.'  'NOTES (metadata, string) are some specific notes about the FUN subject group exporter in TXT.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is a group of subjects with functional multiplex data.'  'DIRECTORY (data, string) is the directory name where to save the group of subjects with functional multiplex data.'  'PUT_DIR (query, item) opens a dialog box to set the directory where to save the group of subjects with functional multiplex data.'  'SAVE (result, empty) saves the group of subjects with functional multiplex data in TXT files in the selected directory.' };
 			prop_description = exportergroupsubjectfun_mp_txt_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -570,7 +587,7 @@ classdef ExporterGroupSubjectFUN_MP_TXT < Exporter
 				case 1 % ExporterGroupSubjectFUN_MP_TXT.ELCLASS
 					prop_default = 'ExporterGroupSubjectFUN_MP_TXT';
 				case 2 % ExporterGroupSubjectFUN_MP_TXT.NAME
-					prop_default = 'ExporterGroupSubjectFUN_MP_TXT';
+					prop_default = 'Multiplex Functional Subject Group TXT Exporter';
 				case 3 % ExporterGroupSubjectFUN_MP_TXT.DESCRIPTION
 					prop_default = 'ExporterGroupSubjectFUN_MP_TXT exports a group of subjects with functional multiplex data to a series of TXT file and their covariates age and sex (if existing) to another TXT file.';
 				case 4 % ExporterGroupSubjectFUN_MP_TXT.TEMPLATE

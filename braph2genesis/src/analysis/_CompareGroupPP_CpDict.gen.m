@@ -8,6 +8,9 @@ It is intended to be used only with the property CP_DICT of CompareGroup.
 %%% ¡seealso!
 uitable, CompareGroup, ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

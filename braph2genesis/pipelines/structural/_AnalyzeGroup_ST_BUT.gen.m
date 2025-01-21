@@ -7,6 +7,9 @@ AnalyzeGroup_ST_BUT uses structural data at fixed threshold and analyzes them us
 %%% ¡seealso!
 SubjectST, MultigraphBUT
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -66,14 +69,14 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the group-based graph analysis with structural data at fixed threshold.
 %%%% ¡default!
 'AnalyzeGroup_ST_BUT'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the group-based graph analysis with structural data at fixed threshold.
 %%%% ¡default!
-'AnalyzeGroup_ST_BUT'
+'Structural Binary Undirected at fixed Thresholds Analyze Group'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the group-based graph analysis with structural data at fixed threshold.

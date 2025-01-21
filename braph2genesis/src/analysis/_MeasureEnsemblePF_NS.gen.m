@@ -7,6 +7,9 @@ MeasureEnsemblePF_NS manages the basic functionalities to plot of a nodal superg
 %%% ¡seealso!
 MeasureEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -178,7 +181,7 @@ pr = MeasureEnsemblePF_NxPP_Node('EL', pf, 'PROP', MeasureEnsemblePF_NS.NODE);
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL] 
+[MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ME MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
@@ -188,6 +191,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':MeasureEnsemblePF_NS'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':MeasureEnsemblePF_NS'])

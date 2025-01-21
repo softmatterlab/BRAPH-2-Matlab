@@ -2,10 +2,13 @@
 MultiplexBD < Graph (g, multiplex binary directed graph) is a multiplex binary directed graph.
 
 %%% ¡description!
-In a multiplex binary directed (BD) graph, all layers have the same number 
+In a multiplex binary directed graph (MultiplexBD), all layers have the same number 
  of nodes with within-layer directed edges either 0 (absence of connection) 
  or 1 (existence of connection).
 There are connections between layers connecting the corresponding nodes.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -102,19 +105,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the multiplex binary directed graph.
 %%%% ¡default!
 'MultiplexBD'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex binary directed graph.
 %%%% ¡default!
-'MultiplexBD'
+'Multiplex Binary Directed'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex binary directed graph.
 %%%% ¡default!
-'In a multiplex binary directed (BD) graph, all layers have the same number of nodes with within-layer directed edges either 0 (absence of connection) or 1 (existence of connection). There are connections between layers connecting the corresponding nodes.'
+'In a multiplex binary directed graph (MultiplexBD), all layers have the same number of nodes with within-layer directed edges either 0 (absence of connection) or 1 (existence of connection). There are connections between layers connecting the corresponding nodes.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex binary directed graph.

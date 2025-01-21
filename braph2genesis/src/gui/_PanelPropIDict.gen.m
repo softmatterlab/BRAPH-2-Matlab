@@ -8,6 +8,9 @@ An Indexed-Dictionary Prop Panel (PanelPropIDict) plots the panel for a IDICT pr
 %%% ¡seealso!
 uibutton, GUI, PanelElement, GUIElement
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

@@ -12,7 +12,7 @@ classdef Modularity < CommunityStructure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Modularity.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Modularity.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Modularity.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -132,7 +132,7 @@ classdef Modularity < CommunityStructure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Modularity.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Modularity.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Modularity.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -153,6 +153,21 @@ classdef Modularity < CommunityStructure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the modularity.
+			%
+			% BUILD = Modularity.GETBUILD() returns the build of 'Modularity'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the modularity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('Modularity') returns the build of 'Modularity'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('Modularity')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the modularity.
 			%
@@ -479,7 +494,7 @@ classdef Modularity < CommunityStructure
 			prop = Modularity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			modularity_description_list = { 'ELCLASS (constant, string) is the class of the Modularity.'  'NAME (constant, string) is the name of the Modularity.'  'DESCRIPTION (constant, string) is the description of the Modularity.'  'TEMPLATE (parameter, item) is the template of the Modularity.'  'ID (data, string) is a few-letter code of the Modularity.'  'LABEL (metadata, string) is an extended label of the Modularity.'  'NOTES (metadata, string) are some specific notes about the Modularity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Modularity.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, option)'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'M0 (data, rvector) is the initial community affiliation vector.'  'LOUVAIN_OM (data, MATRIX) is the custom objective matrix (Louvain).'  'OM_TYPE (data, OPTION) is the objective-function type algorithm (Louvain).'  'QUALITY_FUNCTION (metadata, CELL)' };
+			modularity_description_list = { 'ELCLASS (constant, string) is the class of the Modularity.'  'NAME (constant, string) is the name of the Modularity.'  'DESCRIPTION (constant, string) is the description of the Modularity.'  'TEMPLATE (parameter, item) is the template of the Modularity.'  'ID (data, string) is a few-letter code of the Modularity.'  'LABEL (metadata, string) is an extended label of the Modularity.'  'NOTES (metadata, string) are some specific notes about the Modularity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Modularity.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, option)'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'M0 (data, rvector) is the initial community affiliation vector.'  'LOUVAIN_OM (data, MATRIX) is the custom objective matrix (Louvain).'  'OM_TYPE (data, OPTION) is the objective-function type algorithm (Louvain).'  'QUALITY_FUNCTION (metadata, CELL)' };
 			prop_description = modularity_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

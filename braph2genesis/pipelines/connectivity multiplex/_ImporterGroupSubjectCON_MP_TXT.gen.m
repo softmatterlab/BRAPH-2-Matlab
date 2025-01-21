@@ -18,17 +18,20 @@ The variables of interest are from another TXT file named "GROUP_ID.vois.txt"
 %%% ¡seealso!
 Group, SunbjectCON_MP, ExporterGroupSubjectCON_MP_TXT
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the CON MP subject group importer from TXT.
 %%%% ¡default!
 'ImporterGroupSubjectCON_MP_TXT'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the CON MP subject group importer from TXT.
 %%%% ¡default!
-'ImporterGroupSubjectCON_MP_TXT'
+'Multiplex Connectivity Subject Group TXT Importer'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the CON MP subject group importer from TXT.

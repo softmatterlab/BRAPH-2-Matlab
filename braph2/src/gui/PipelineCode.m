@@ -12,7 +12,7 @@ classdef PipelineCode < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline code line.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline code line.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline code line.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>TEXT_BEFORE_EXEC</strong> 	TEXT_BEFORE_EXEC (metadata, string) is the text before the code line execution.
 	%  <strong>10</strong> <strong>TEXT_AFTER_EXEC</strong> 	TEXT_AFTER_EXEC (metadata, string) is the text after the code line execution.
 	%  <strong>11</strong> <strong>MONIKER</strong> 	MONIKER (data, string) is the moniker of the calculated element.
@@ -106,6 +106,8 @@ classdef PipelineCode < ConcreteElement
 	%
 	%
 	% See also PipelinePP_PSDict, Pipeline, PipelineSection.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		TEXT_BEFORE_EXEC = 9; %CET: Computational Efficiency Trick
@@ -152,7 +154,7 @@ classdef PipelineCode < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the pipeline code line.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the pipeline code line.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the pipeline code line.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>TEXT_BEFORE_EXEC</strong> 	TEXT_BEFORE_EXEC (metadata, string) is the text before the code line execution.
 			%  <strong>10</strong> <strong>TEXT_AFTER_EXEC</strong> 	TEXT_AFTER_EXEC (metadata, string) is the text after the code line execution.
 			%  <strong>11</strong> <strong>MONIKER</strong> 	MONIKER (data, string) is the moniker of the calculated element.
@@ -165,6 +167,21 @@ classdef PipelineCode < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the pipeline code line.
+			%
+			% BUILD = PipelineCode.GETBUILD() returns the build of 'PipelineCode'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PC.GETBUILD() returns the build of the pipeline code line PC.
+			%  BUILD = Element.GETBUILD(PC) returns the build of 'PC'.
+			%  BUILD = Element.GETBUILD('PipelineCode') returns the build of 'PipelineCode'.
+			%
+			% Note that the Element.GETBUILD(PC) and Element.GETBUILD('PipelineCode')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pc_class = getClass()
 			%GETCLASS returns the class of the pipeline code line.
 			%
@@ -483,7 +500,7 @@ classdef PipelineCode < ConcreteElement
 			prop = PipelineCode.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pipelinecode_description_list = { 'ELCLASS (constant, string) is the class of the pipeline code line.'  'NAME (constant, string) is the name of the pipeline code line.'  'DESCRIPTION (constant, string) is the description of the pipeline code line.'  'TEMPLATE (parameter, item) is the template of the pipeline code line.'  'ID (data, string) is a few-letter code for the pipeline code line.'  'LABEL (metadata, string) is an extended label of the pipeline code line.'  'NOTES (metadata, string) are some specific notes about the pipeline code line.'  'TOSTRING (query, string) returns a string that represents the object.'  'TEXT_BEFORE_EXEC (metadata, string) is the text before the code line execution.'  'TEXT_AFTER_EXEC (metadata, string) is the text after the code line execution.'  'MONIKER (data, string) is the moniker of the calculated element.'  'CODE (data, string) is the code line to calculate the element.'  'EL (data, item) is the calculated element.' };
+			pipelinecode_description_list = { 'ELCLASS (constant, string) is the class of the pipeline code line.'  'NAME (constant, string) is the name of the pipeline code line.'  'DESCRIPTION (constant, string) is the description of the pipeline code line.'  'TEMPLATE (parameter, item) is the template of the pipeline code line.'  'ID (data, string) is a few-letter code for the pipeline code line.'  'LABEL (metadata, string) is an extended label of the pipeline code line.'  'NOTES (metadata, string) are some specific notes about the pipeline code line.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'TEXT_BEFORE_EXEC (metadata, string) is the text before the code line execution.'  'TEXT_AFTER_EXEC (metadata, string) is the text after the code line execution.'  'MONIKER (data, string) is the moniker of the calculated element.'  'CODE (data, string) is the code line to calculate the element.'  'EL (data, item) is the calculated element.' };
 			prop_description = pipelinecode_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

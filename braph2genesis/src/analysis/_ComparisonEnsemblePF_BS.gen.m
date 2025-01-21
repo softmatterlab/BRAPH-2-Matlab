@@ -7,6 +7,9 @@ ComparisonEnsemblePF_BS manages the basic functionalities to plot of a binodal s
 %%% ¡seealso!
 ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -208,7 +211,7 @@ pr = ComparisonEnsemblePF_BxPP_Nodes('EL', pf, 'PROP', ComparisonEnsemblePF_BS.N
 %% ¡tests!
 
 %%% ¡excluded_props!
-[ComparisonEnsemblePF_BS.PARENT ComparisonEnsemblePF_BS.H ComparisonEnsemblePF_BS.ST_POSITION ComparisonEnsemblePF_BS.ST_AXIS ComparisonEnsemblePF_BS.ST_AREA ComparisonEnsemblePF_BS.ST_LINE_DIFF ComparisonEnsemblePF_BS.ST_LINE_CIL ComparisonEnsemblePF_BS.ST_LINE_CIU ComparisonEnsemblePF_BS.ST_TITLE ComparisonEnsemblePF_BS.ST_XLABEL ComparisonEnsemblePF_BS.ST_YLABEL] 
+[ComparisonEnsemblePF_BS.PARENT ComparisonEnsemblePF_BS.H ComparisonEnsemblePF_BS.ST_POSITION ComparisonEnsemblePF_BS.ST_AXIS ComparisonEnsemblePF_BS.CP ComparisonEnsemblePF_BS.ST_AREA ComparisonEnsemblePF_BS.ST_LINE_DIFF ComparisonEnsemblePF_BS.ST_LINE_CIL ComparisonEnsemblePF_BS.ST_LINE_CIU ComparisonEnsemblePF_BS.ST_TITLE ComparisonEnsemblePF_BS.ST_XLABEL ComparisonEnsemblePF_BS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
@@ -218,6 +221,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':ComparisonEnsemblePF_BS'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':ComparisonEnsemblePF_BS'])

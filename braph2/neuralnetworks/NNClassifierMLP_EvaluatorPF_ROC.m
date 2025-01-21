@@ -1,21 +1,23 @@
 classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
-	%NNClassifierMLP_EvaluatorPF_ROC is the base element to plot an ensemble-based comparison.
+	%NNClassifierMLP_EvaluatorPF_ROC plots a panel of receiver operating characteristic curves.
 	% It is a subclass of <a href="matlab:help PanelFig">PanelFig</a>.
 	%
-	% NNClassifierMLP_EvaluatorPF_ROC manages the basic functionalities to plot of an ensemble-based comparison.
+	% The receiver operating characteristic panel for an evaluator of MLP classifier 
+	%  (NNClassifierMLP_EvaluatorPF_ROC) manages the functionalities to plot 
+	%  a panel of the receiver operating characteristic curves.
 	%
 	% The list of NNClassifierMLP_EvaluatorPF_ROC properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel of the ensemble-based comparison.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel ensemble-based comparison figure.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the figure comparison figure.
+	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the receiver operating characteristic figure.
 	%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 	%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 	%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -30,14 +32,14 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 	%  <strong>23</strong> <strong>H_AXES</strong> 	H_AXES (evanescent, handle) is the handle for the axes.
 	%  <strong>24</strong> <strong>ST_AXIS</strong> 	ST_AXIS (figure, item) determines the axis settings.
 	%  <strong>25</strong> <strong>LISTENER_ST_AXIS</strong> 	LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.
-	%  <strong>26</strong> <strong>NNE</strong> 	NNE (metadata, item) is the ensemble-based comparison.
+	%  <strong>26</strong> <strong>NNE</strong> 	NNE (metadata, item) is the neural network evaluator.
 	%  <strong>27</strong> <strong>CLASSNAMES</strong> 	CLASSNAMES (metadata, stringlist) is the class names.
-	%  <strong>28</strong> <strong>X_VALUES</strong> 	X_VALUES (metadata, matrix) is the ROC X value.
-	%  <strong>29</strong> <strong>Y_VALUES</strong> 	Y_VALUES (metadata, matrix) is the ROC Y value.
-	%  <strong>30</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.
-	%  <strong>31</strong> <strong>H_ROC</strong> 	H_ROC (evanescent, handlelist) is the set of handles for the prediction plots.
-	%  <strong>32</strong> <strong>ROC</strong> 	ROC (figure, logical) determines whether the prediction plot are shown.
-	%  <strong>33</strong> <strong>ROC_DICT</strong> 	ROC_DICT (figure, idict) contains the prediction plot for each target.
+	%  <strong>28</strong> <strong>X_VALUES</strong> 	X_VALUES (metadata, matrix) gets the x values for receiver operating characteristic curves.
+	%  <strong>29</strong> <strong>Y_VALUES</strong> 	Y_VALUES (metadata, matrix) gets the y values for receiver operating characteristic curves.
+	%  <strong>30</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the the receiver operating characteristic values and initializes the receiver operating characteristic figure.
+	%  <strong>31</strong> <strong>H_ROC</strong> 	H_ROC (evanescent, handlelist) is the set of handles for the ROC plots.
+	%  <strong>32</strong> <strong>ROC</strong> 	ROC (figure, logical) determines whether the ROC plots are shown.
+	%  <strong>33</strong> <strong>ROC_DICT</strong> 	ROC_DICT (figure, idict) contains the ROC plot for each class.
 	%  <strong>34</strong> <strong>H_TITLE</strong> 	H_TITLE (evanescent, handle) is the axis title.
 	%  <strong>35</strong> <strong>ST_TITLE</strong> 	ST_TITLE (figure, item) determines the title settings.
 	%  <strong>36</strong> <strong>H_XLABEL</strong> 	H_XLABEL (evanescent, handle) is the axis x-label.
@@ -63,33 +65,33 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 	%  unchecked - sets a property to NOT checked
 	%
 	% NNClassifierMLP_EvaluatorPF_ROC methods (display):
-	%  tostring - string with information about the panel ensemble-based comparison figure
-	%  disp - displays information about the panel ensemble-based comparison figure
-	%  tree - displays the tree of the panel ensemble-based comparison figure
+	%  tostring - string with information about the panel receiver operating characteristic figure
+	%  disp - displays information about the panel receiver operating characteristic figure
+	%  tree - displays the tree of the panel receiver operating characteristic figure
 	%
 	% NNClassifierMLP_EvaluatorPF_ROC methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two panel ensemble-based comparison figure are equal (values, locked)
+	%  isequal - determines whether two panel receiver operating characteristic figure are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the panel ensemble-based comparison figure
+	%  copy - copies the panel receiver operating characteristic figure
 	%
 	% NNClassifierMLP_EvaluatorPF_ROC methods (save/load, Static):
-	%  save - saves BRAPH2 panel ensemble-based comparison figure as b2 file
-	%  load - loads a BRAPH2 panel ensemble-based comparison figure from a b2 file
+	%  save - saves BRAPH2 panel receiver operating characteristic figure as b2 file
+	%  load - loads a BRAPH2 panel receiver operating characteristic figure from a b2 file
 	%
 	% NNClassifierMLP_EvaluatorPF_ROC method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the panel ensemble-based comparison figure
+	%  encodeJSON - returns a JSON string encoding the panel receiver operating characteristic figure
 	%
 	% NNClassifierMLP_EvaluatorPF_ROC method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the panel ensemble-based comparison figure
+	%   decodeJSON - returns a JSON string encoding the panel receiver operating characteristic figure
 	%
 	% NNClassifierMLP_EvaluatorPF_ROC methods (inspection, Static):
-	%  getClass - returns the class of the panel ensemble-based comparison figure
+	%  getClass - returns the class of the panel receiver operating characteristic figure
 	%  getSubclasses - returns all subclasses of NNClassifierMLP_EvaluatorPF_ROC
-	%  getProps - returns the property list of the panel ensemble-based comparison figure
-	%  getPropNumber - returns the property number of the panel ensemble-based comparison figure
+	%  getProps - returns the property list of the panel receiver operating characteristic figure
+	%  getPropNumber - returns the property number of the panel receiver operating characteristic figure
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -131,7 +133,9 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 	% To print full list of constants, click here <a href="matlab:metaclass = ?NNClassifierMLP_EvaluatorPF_ROC; properties = metaclass.PropertyList;for i = 1:1:length(properties), if properties(i).Constant, disp([properties(i).Name newline() tostring(properties(i).DefaultValue) newline()]), end, end">NNClassifierMLP_EvaluatorPF_ROC constants</a>.
 	%
 	%
-	% See also ComparisonEnsemble.
+	% See also NNClassifierMLP_Evaluator.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		H_AXES = 23; %CET: Computational Efficiency Trick
@@ -221,7 +225,7 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 	end
 	methods % constructor
 		function pf = NNClassifierMLP_EvaluatorPF_ROC(varargin)
-			%NNClassifierMLP_EvaluatorPF_ROC() creates a panel ensemble-based comparison figure.
+			%NNClassifierMLP_EvaluatorPF_ROC() creates a panel receiver operating characteristic figure.
 			%
 			% NNClassifierMLP_EvaluatorPF_ROC(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -231,17 +235,17 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNClassifierMLP_EvaluatorPF_ROC properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel of the ensemble-based comparison.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel ensemble-based comparison figure.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
-			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the figure comparison figure.
+			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the receiver operating characteristic figure.
 			%  <strong>12</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the panel has been drawn.
 			%  <strong>13</strong> <strong>PARENT</strong> 	PARENT (gui, item) is the panel parent.
 			%  <strong>14</strong> <strong>BKGCOLOR</strong> 	BKGCOLOR (figure, color) is the panel background color.
@@ -256,14 +260,14 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			%  <strong>23</strong> <strong>H_AXES</strong> 	H_AXES (evanescent, handle) is the handle for the axes.
 			%  <strong>24</strong> <strong>ST_AXIS</strong> 	ST_AXIS (figure, item) determines the axis settings.
 			%  <strong>25</strong> <strong>LISTENER_ST_AXIS</strong> 	LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.
-			%  <strong>26</strong> <strong>NNE</strong> 	NNE (metadata, item) is the ensemble-based comparison.
+			%  <strong>26</strong> <strong>NNE</strong> 	NNE (metadata, item) is the neural network evaluator.
 			%  <strong>27</strong> <strong>CLASSNAMES</strong> 	CLASSNAMES (metadata, stringlist) is the class names.
-			%  <strong>28</strong> <strong>X_VALUES</strong> 	X_VALUES (metadata, matrix) is the ROC X value.
-			%  <strong>29</strong> <strong>Y_VALUES</strong> 	Y_VALUES (metadata, matrix) is the ROC Y value.
-			%  <strong>30</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.
-			%  <strong>31</strong> <strong>H_ROC</strong> 	H_ROC (evanescent, handlelist) is the set of handles for the prediction plots.
-			%  <strong>32</strong> <strong>ROC</strong> 	ROC (figure, logical) determines whether the prediction plot are shown.
-			%  <strong>33</strong> <strong>ROC_DICT</strong> 	ROC_DICT (figure, idict) contains the prediction plot for each target.
+			%  <strong>28</strong> <strong>X_VALUES</strong> 	X_VALUES (metadata, matrix) gets the x values for receiver operating characteristic curves.
+			%  <strong>29</strong> <strong>Y_VALUES</strong> 	Y_VALUES (metadata, matrix) gets the y values for receiver operating characteristic curves.
+			%  <strong>30</strong> <strong>SETUP</strong> 	SETUP (query, empty) calculates the the receiver operating characteristic values and initializes the receiver operating characteristic figure.
+			%  <strong>31</strong> <strong>H_ROC</strong> 	H_ROC (evanescent, handlelist) is the set of handles for the ROC plots.
+			%  <strong>32</strong> <strong>ROC</strong> 	ROC (figure, logical) determines whether the ROC plots are shown.
+			%  <strong>33</strong> <strong>ROC_DICT</strong> 	ROC_DICT (figure, idict) contains the ROC plot for each class.
 			%  <strong>34</strong> <strong>H_TITLE</strong> 	H_TITLE (evanescent, handle) is the axis title.
 			%  <strong>35</strong> <strong>ST_TITLE</strong> 	ST_TITLE (figure, item) determines the title settings.
 			%  <strong>36</strong> <strong>H_XLABEL</strong> 	H_XLABEL (evanescent, handle) is the axis x-label.
@@ -277,13 +281,28 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the panel receiver operating characteristic figure.
+			%
+			% BUILD = NNClassifierMLP_EvaluatorPF_ROC.GETBUILD() returns the build of 'NNClassifierMLP_EvaluatorPF_ROC'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PF.GETBUILD() returns the build of the panel receiver operating characteristic figure PF.
+			%  BUILD = Element.GETBUILD(PF) returns the build of 'PF'.
+			%  BUILD = Element.GETBUILD('NNClassifierMLP_EvaluatorPF_ROC') returns the build of 'NNClassifierMLP_EvaluatorPF_ROC'.
+			%
+			% Note that the Element.GETBUILD(PF) and Element.GETBUILD('NNClassifierMLP_EvaluatorPF_ROC')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pf_class = getClass()
-			%GETCLASS returns the class of the panel ensemble-based comparison figure.
+			%GETCLASS returns the class of the panel receiver operating characteristic figure.
 			%
 			% CLASS = NNClassifierMLP_EvaluatorPF_ROC.GETCLASS() returns the class 'NNClassifierMLP_EvaluatorPF_ROC'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = PF.GETCLASS() returns the class of the panel ensemble-based comparison figure PF.
+			%  CLASS = PF.GETCLASS() returns the class of the panel receiver operating characteristic figure PF.
 			%  CLASS = Element.GETCLASS(PF) returns the class of 'PF'.
 			%  CLASS = Element.GETCLASS('NNClassifierMLP_EvaluatorPF_ROC') returns 'NNClassifierMLP_EvaluatorPF_ROC'.
 			%
@@ -293,12 +312,12 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			pf_class = 'NNClassifierMLP_EvaluatorPF_ROC';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the panel ensemble-based comparison figure.
+			%GETSUBCLASSES returns all subclasses of the panel receiver operating characteristic figure.
 			%
 			% LIST = NNClassifierMLP_EvaluatorPF_ROC.GETSUBCLASSES() returns all subclasses of 'NNClassifierMLP_EvaluatorPF_ROC'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = PF.GETSUBCLASSES() returns all subclasses of the panel ensemble-based comparison figure PF.
+			%  LIST = PF.GETSUBCLASSES() returns all subclasses of the panel receiver operating characteristic figure PF.
 			%  LIST = Element.GETSUBCLASSES(PF) returns all subclasses of 'PF'.
 			%  LIST = Element.GETSUBCLASSES('NNClassifierMLP_EvaluatorPF_ROC') returns all subclasses of 'NNClassifierMLP_EvaluatorPF_ROC'.
 			%
@@ -310,16 +329,16 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			subclass_list = { 'NNClassifierMLP_EvaluatorPF_ROC' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of panel ensemble-based comparison figure.
+			%GETPROPS returns the property list of panel receiver operating characteristic figure.
 			%
-			% PROPS = NNClassifierMLP_EvaluatorPF_ROC.GETPROPS() returns the property list of panel ensemble-based comparison figure
+			% PROPS = NNClassifierMLP_EvaluatorPF_ROC.GETPROPS() returns the property list of panel receiver operating characteristic figure
 			%  as a row vector.
 			%
 			% PROPS = NNClassifierMLP_EvaluatorPF_ROC.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = PF.GETPROPS([CATEGORY]) returns the property list of the panel ensemble-based comparison figure PF.
+			%  PROPS = PF.GETPROPS([CATEGORY]) returns the property list of the panel receiver operating characteristic figure PF.
 			%  PROPS = Element.GETPROPS(PF[, CATEGORY]) returns the property list of 'PF'.
 			%  PROPS = Element.GETPROPS('NNClassifierMLP_EvaluatorPF_ROC'[, CATEGORY]) returns the property list of 'NNClassifierMLP_EvaluatorPF_ROC'.
 			%
@@ -357,15 +376,15 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of panel ensemble-based comparison figure.
+			%GETPROPNUMBER returns the property number of panel receiver operating characteristic figure.
 			%
-			% N = NNClassifierMLP_EvaluatorPF_ROC.GETPROPNUMBER() returns the property number of panel ensemble-based comparison figure.
+			% N = NNClassifierMLP_EvaluatorPF_ROC.GETPROPNUMBER() returns the property number of panel receiver operating characteristic figure.
 			%
-			% N = NNClassifierMLP_EvaluatorPF_ROC.GETPROPNUMBER(CATEGORY) returns the property number of panel ensemble-based comparison figure
+			% N = NNClassifierMLP_EvaluatorPF_ROC.GETPROPNUMBER(CATEGORY) returns the property number of panel receiver operating characteristic figure
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = PF.GETPROPNUMBER([CATEGORY]) returns the property number of the panel ensemble-based comparison figure PF.
+			%  N = PF.GETPROPNUMBER([CATEGORY]) returns the property number of the panel receiver operating characteristic figure PF.
 			%  N = Element.GETPROPNUMBER(PF) returns the property number of 'PF'.
 			%  N = Element.GETPROPNUMBER('NNClassifierMLP_EvaluatorPF_ROC') returns the property number of 'NNClassifierMLP_EvaluatorPF_ROC'.
 			%
@@ -403,7 +422,7 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in panel ensemble-based comparison figure/error.
+			%EXISTSPROP checks whether property exists in panel receiver operating characteristic figure/error.
 			%
 			% CHECK = NNClassifierMLP_EvaluatorPF_ROC.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -441,7 +460,7 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in panel ensemble-based comparison figure/error.
+			%EXISTSTAG checks whether tag exists in panel receiver operating characteristic figure/error.
 			%
 			% CHECK = NNClassifierMLP_EvaluatorPF_ROC.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -607,7 +626,7 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			prop = NNClassifierMLP_EvaluatorPF_ROC.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nnclassifiermlp_evaluatorpf_roc_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the panel ensemble-based comparison figure.'  'DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.'  'TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.'  'ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.'  'LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.'  'NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure comparison figure.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure graph is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'NNE (metadata, item) is the ensemble-based comparison.'  'CLASSNAMES (metadata, stringlist) is the class names.'  'X_VALUES (metadata, matrix) is the ROC X value.'  'Y_VALUES (metadata, matrix) is the ROC Y value.'  'SETUP (query, empty) calculates the ensemble-based comparison value and stores it to be implemented in the subelements.'  'H_ROC (evanescent, handlelist) is the set of handles for the prediction plots.'  'ROC (figure, logical) determines whether the prediction plot are shown.'  'ROC_DICT (figure, idict) contains the prediction plot for each target.'  'H_TITLE (evanescent, handle) is the axis title.'  'ST_TITLE (figure, item) determines the title settings.'  'H_XLABEL (evanescent, handle) is the axis x-label.'  'ST_XLABEL (figure, item) determines the x-label settings.'  'H_YLABEL (evanescent, handle) is the axis y-label.'  'ST_YLABEL (figure, item) determines the y-label settings.' };
+			nnclassifiermlp_evaluatorpf_roc_description_list = { 'ELCLASS (constant, string) is the class of the panel of the ensemble-based comparison.'  'NAME (constant, string) is the name of the panel ensemble-based comparison figure.'  'DESCRIPTION (constant, string) is the description of the panel ensemble-based comparison figure.'  'TEMPLATE (parameter, item) is the template of the panel ensemble-based comparison figure.'  'ID (data, string) is a few-letter code for the panel ensemble-based comparison figure.'  'LABEL (metadata, string) is an extended label of the panel ensemble-based comparison figure.'  'NOTES (metadata, string) are some specific notes about the panel ensemble-based comparison figure.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the receiver operating characteristic figure.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure graph is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'NNE (metadata, item) is the neural network evaluator.'  'CLASSNAMES (metadata, stringlist) is the class names.'  'X_VALUES (metadata, matrix) gets the x values for receiver operating characteristic curves.'  'Y_VALUES (metadata, matrix) gets the y values for receiver operating characteristic curves.'  'SETUP (query, empty) calculates the the receiver operating characteristic values and initializes the receiver operating characteristic figure.'  'H_ROC (evanescent, handlelist) is the set of handles for the ROC plots.'  'ROC (figure, logical) determines whether the ROC plots are shown.'  'ROC_DICT (figure, idict) contains the ROC plot for each class.'  'H_TITLE (evanescent, handle) is the axis title.'  'ST_TITLE (figure, item) determines the title settings.'  'H_XLABEL (evanescent, handle) is the axis x-label.'  'ST_XLABEL (figure, item) determines the x-label settings.'  'H_YLABEL (evanescent, handle) is the axis y-label.'  'ST_YLABEL (figure, item) determines the y-label settings.' };
 			prop_description = nnclassifiermlp_evaluatorpf_roc_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -733,9 +752,9 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 				case 1 % NNClassifierMLP_EvaluatorPF_ROC.ELCLASS
 					prop_default = 'NNClassifierMLP_EvaluatorPF_ROC';
 				case 2 % NNClassifierMLP_EvaluatorPF_ROC.NAME
-					prop_default = 'NNClassifierMLP_EvaluatorPF_ROC';
+					prop_default = 'ROC Panel for an Evaluator of MLP Classifier';
 				case 3 % NNClassifierMLP_EvaluatorPF_ROC.DESCRIPTION
-					prop_default = 'NNClassifierMLP_EvaluatorPF_ROC manages the basic functionalities to plot of an ensemble-based comparison.';
+					prop_default = 'The receiver operating characteristic panel for an evaluator of MLP classifier (NNClassifierMLP_EvaluatorPF_ROC) manages the functionalities to plot a panel of the receiver operating characteristic curves.';
 				case 4 % NNClassifierMLP_EvaluatorPF_ROC.TEMPLATE
 					prop_default = Format.getFormatDefault(8, NNClassifierMLP_EvaluatorPF_ROC.getPropSettings(prop));
 				case 5 % NNClassifierMLP_EvaluatorPF_ROC.ID
@@ -953,12 +972,12 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 			
 			switch prop
 				case 27 % NNClassifierMLP_EvaluatorPF_ROC.CLASSNAMES
-					if isa(pf.getr('CLASSNAMES'), 'NoValue') && ~isa(pf.get('NNE').getr('NN'), 'NoValue')
+					if isa(pf.getr('CLASSNAMES'), 'NoValue') && ~isa(pf.get('NNE').get('NN').getr('MODEL'), 'NoValue')
 					    pf.set('CLASSNAMES', cellstr(pf.memorize('NNE').get('NN').get('MODEL').Layers(end).Classes));
 					end
 					
 				case 28 % NNClassifierMLP_EvaluatorPF_ROC.X_VALUES
-					if isa(pf.getr('X_VALUES'), 'NoValue') && ~isa(pf.get('NNE').getr('NN'), 'NoValue')
+					if isa(pf.getr('X_VALUES'), 'NoValue') && ~isa(pf.get('NNE').get('NN').getr('MODEL'), 'NoValue')
 					    class_names = pf.get('CLASSNAMES');
 					    predictions = cell2mat(pf.get('NNE').get('NN').get('PREDICT', pf.get('NNE').get('D')));
 					    ground_truth = categorical(pf.get('NNE').get('GROUND_TRUTH'));
@@ -971,7 +990,7 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 					end
 					
 				case 29 % NNClassifierMLP_EvaluatorPF_ROC.Y_VALUES
-					if isa(pf.getr('Y_VALUES'), 'NoValue') && ~isa(pf.get('NNE').getr('NN'), 'NoValue')
+					if isa(pf.getr('Y_VALUES'), 'NoValue') && ~isa(pf.get('NNE').get('NN').getr('MODEL'), 'NoValue')
 					    class_names = pf.get('CLASSNAMES');
 					    predictions = cell2mat(pf.get('NNE').get('NN').get('PREDICT', pf.get('NNE').get('D')));
 					    ground_truth = categorical(pf.get('NNE').get('GROUND_TRUTH'));

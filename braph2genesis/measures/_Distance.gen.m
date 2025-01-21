@@ -7,6 +7,9 @@ The Distance (Distance) of a graph is the shortest path between all pairs of nod
 For weighted graphs, the distance is calculated with the Dijkstra algorithm
  using the inverse weight as the distance associated to the edge.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

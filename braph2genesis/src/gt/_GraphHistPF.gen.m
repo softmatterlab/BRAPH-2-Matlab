@@ -7,6 +7,9 @@ A Panel Figure for Graph Histogram (GraphHistPF) manages the plot of the histogr
 %%% ¡seealso!
 Graph, GraphAdjPF
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

@@ -24,51 +24,61 @@ function braph2(gui, ewm)
 %  <a href="matlab:help neuralnetworks  ">neuralnetworks</a> - neural networks
 %  <a href="matlab:help pipelines       ">pipelines</a>      - pipelines
 %  <a href="matlab:help test            ">test</a>           - unit testing
+%  <a href="matlab:help sandbox         ">sandbox</a>        - sandbox
 %
 % See also BRAPH2GUI.
+
+    function add_dir(dir)
+        if exist(dir, 'dir')
+            addpath(dir)
+        end
+    end
 
 braph2_dir = fileparts(which('braph2'));
 addpath(braph2_dir)
 
 src_dir = [braph2_dir filesep 'src'];
-addpath(src_dir)
-addpath([src_dir filesep 'util'])
-addpath([src_dir filesep 'ds'])
-addpath([src_dir filesep 'ds' filesep 'examples'])
-addpath([src_dir filesep 'atlas'])
-addpath([src_dir filesep 'gt'])
-addpath([src_dir filesep 'cohort'])
-addpath([src_dir filesep 'analysis'])
-addpath([src_dir filesep 'nn'])
-addpath([src_dir filesep 'gui'])
-addpath([src_dir filesep 'gui' filesep 'examples'])
+add_dir(src_dir)
+add_dir([src_dir filesep 'util'])
+add_dir([src_dir filesep 'ds'])
+add_dir([src_dir filesep 'ds' filesep 'ds_examples'])
+add_dir([src_dir filesep 'atlas'])
+add_dir([src_dir filesep 'gt'])
+add_dir([src_dir filesep 'cohort'])
+add_dir([src_dir filesep 'analysis'])
+add_dir([src_dir filesep 'nn'])
+add_dir([src_dir filesep 'gui'])
+add_dir([src_dir filesep 'gui' filesep 'gui_examples'])
 
 brainsurfs_dir = [braph2_dir filesep 'brainsurfs'];
-addpath(brainsurfs_dir)
+add_dir(brainsurfs_dir)
 
 brainsurfs_dir = [braph2_dir filesep 'atlases'];
-addpath(brainsurfs_dir)
+add_dir(brainsurfs_dir)
 
 graphs_dir = [braph2_dir filesep 'graphs'];
-addpath(graphs_dir)
+add_dir(graphs_dir)
 
 measures_dir = [braph2_dir filesep 'measures'];
-addpath(measures_dir)
+add_dir(measures_dir)
 
 neuralnetworks_dir = [braph2_dir filesep 'neuralnetworks'];
-addpath(neuralnetworks_dir)
+add_dir(neuralnetworks_dir)
 
 test_dir = [braph2_dir filesep 'test'];
-addpath(test_dir)
+add_dir(test_dir)
 
 pipelines_dir = [braph2_dir filesep 'pipelines'];
-addpath(pipelines_dir)
+add_dir(pipelines_dir)
 pipelines_dir_list = dir(pipelines_dir); % get the folder contents
 pipelines_dir_list = pipelines_dir_list([pipelines_dir_list(:).isdir] == 1); % remove all files (isdir property is 0)
 pipelines_dir_list = pipelines_dir_list(~ismember({pipelines_dir_list(:).name}, {'.', '..'})); % remove '.' and '..'
 for i = 1:1:length(pipelines_dir_list)
-    addpath([pipelines_dir filesep pipelines_dir_list(i).name])
+    add_dir([pipelines_dir filesep pipelines_dir_list(i).name])
 end
+
+sandbox_dir = [braph2_dir filesep 'sandbox'];
+add_dir(sandbox_dir)
 
 if nargin < 2
     ewm = 'msgbox';

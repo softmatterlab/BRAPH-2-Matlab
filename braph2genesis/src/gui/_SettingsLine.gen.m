@@ -10,6 +10,9 @@ The handle must be a line.
 %%% ¡seealso!
 line, PanelFig, GUIFig, check_graphics
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

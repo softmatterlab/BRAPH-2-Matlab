@@ -15,17 +15,20 @@ The variables of interest (if existing) are saved in another XLSX file
 %%% ¡seealso!
 Group, SunbjectCON, ImporterGroupSubjectCON_XLS
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the CON subject group exporter in XLSX.
 %%%% ¡default!
 'ExporterGroupSubjectCON_XLS'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the CON subject group exporter in XLSX.
 %%%% ¡default!
-'ExporterGroupSubjectCON_XLS'
+'Connectivity Subject Group XLS Exporter'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the CON subject group exporter in XLSX.

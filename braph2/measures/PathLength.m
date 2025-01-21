@@ -13,7 +13,7 @@ classdef PathLength < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Path Length.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Path Length.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Path Length.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -134,7 +134,7 @@ classdef PathLength < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Path Length.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Path Length.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Path Length.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -150,6 +150,21 @@ classdef PathLength < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the pathlength.
+			%
+			% BUILD = PathLength.GETBUILD() returns the build of 'PathLength'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the pathlength M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('PathLength') returns the build of 'PathLength'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('PathLength')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the pathlength.
 			%
@@ -476,7 +491,7 @@ classdef PathLength < Measure
 			prop = PathLength.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			pathlength_description_list = { 'ELCLASS (constant, string) is the class of the Path Length.'  'NAME (constant, string) is the name of the Path Length.'  'DESCRIPTION (constant, string) is the description of the Path Length.'  'TEMPLATE (parameter, item) is the template of the Path Length.'  'ID (data, string) is a few-letter code of the Path Length.'  'LABEL (metadata, string) is an extended label of the Path Length.'  'NOTES (metadata, string) are some specific notes about the Path Length.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the Path Length.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, option) is the pathlength algorithm' };
+			pathlength_description_list = { 'ELCLASS (constant, string) is the class of the Path Length.'  'NAME (constant, string) is the name of the Path Length.'  'DESCRIPTION (constant, string) is the description of the Path Length.'  'TEMPLATE (parameter, item) is the template of the Path Length.'  'ID (data, string) is a few-letter code of the Path Length.'  'LABEL (metadata, string) is an extended label of the Path Length.'  'NOTES (metadata, string) are some specific notes about the Path Length.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the Path Length.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, option) is the pathlength algorithm' };
 			prop_description = pathlength_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -672,29 +687,33 @@ classdef PathLength < Measure
 					
 					distance = Distance('G', g).get('M');
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
-					    path_length_layer = zeros(N(1), 1);
+					    node_number_layer = N(li);
+					    path_length_layer = zeros(node_number_layer, 1);
 					    distance_layer = distance{li};
 					
 					    switch lower(path_length_rule)
 					        case {'subgraphs'}
-					            for u = 1:1:N
+					            for u = 1:1:node_number_layer
 					                Du = distance_layer(:, u);
 					                path_length_layer(u) = mean(Du(Du~=Inf & Du~=0));
 					            end
 					        case {'mean'}
-					            for u = 1:1:N
+					            for u = 1:1:node_number_layer
 					                Du = distance_layer(:, u);
 					                path_length_layer(u) = mean(Du(Du~=0));
 					            end
 					        otherwise  % 'harmonic' 'default'
-					            for u = 1:1:N
+					            for u = 1:1:node_number_layer
 					                Du = distance_layer(:, u);
 					                path_length_layer(u) = harmmean(Du(Du~=0));
 					            end
 					    end 
 					    path_length(li) = {path_length_layer}; % node Inf corresponds to isolated nodes
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+					
 					value = path_length;
 					
 					rng(rng_settings_)

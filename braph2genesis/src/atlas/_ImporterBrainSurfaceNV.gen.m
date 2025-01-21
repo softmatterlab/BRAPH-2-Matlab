@@ -7,6 +7,9 @@ A Brain Surface Importer from NV Files (ImporterBrainSurfaceNV) imports a brain 
 %%% ¡seealso!
 BrainSurface
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

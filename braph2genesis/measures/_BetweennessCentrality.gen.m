@@ -6,6 +6,9 @@ The Betweenness Centrality (BetweennessCentrality) of a graph is the fraction of
 graph that pass through a given node. Nodes with high values of betweenness 
 centrality participate in a large number of shortest paths.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

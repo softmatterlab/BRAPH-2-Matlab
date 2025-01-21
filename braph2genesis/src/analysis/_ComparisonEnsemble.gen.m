@@ -9,6 +9,9 @@ and the 95%% confidence interval.
 %%% ¡seealso!
 CompareEnsemble, AnalyzeEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -145,7 +148,8 @@ end
 g.memorize('A');
 measure = cp.get('MEASURE');
 
-pr = PanelPropCell('EL', cp, 'PROP', ComparisonEnsemble.DIFF, varargin{:});
+pr = PanelPropCellFDR('EL', cp, 'PROP', ComparisonEnsemble.DIFF,  ...
+    'TABLEQVALUE', cp.get('QVALUE'), 'TABLEFDR', true, varargin{:}); 
 
 if Element.getPropDefault(measure, 'SHAPE') == Measure.GLOBAL % __Measure.GLOBAL__
     pr.set( ...
@@ -666,6 +670,7 @@ diff_perms = cell(1, P);
 start = tic;
 seeds = c.memorize('PERM_SEEDS');
 for p = 1:20:P
+    warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
     parfor q = p:min(p+20, P)
         % [a1_perm, a2_perm] = c.getPerm(i, memorize);
         % 
@@ -693,6 +698,7 @@ for p = 1:20:P
         m2_perms{1, q} = ms2_av;
         diff_perms{1, q} = cellfun(@(x, y) y - x, m1_perms{1, q}, m2_perms{1, q}, 'UniformOutput', false);
     end
+    warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
     braph2waitbar(wb, p / P, ['Comparing group ' cp.get('MEASURE') '. Permutation ' num2str(p) ' of ' num2str(P) ' - ' int2str(toc(start)) '.' int2str(mod(toc(start), 1) * 10) 's ...'])
     if c.get('VERBOSE')

@@ -8,6 +8,9 @@ It is intended to be used only with the property M_DICT of Graph.
 %%% ¡seealso!
 uitable, Graph
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

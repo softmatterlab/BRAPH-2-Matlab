@@ -15,14 +15,14 @@ classdef ImporterGroupSubjectST_TXT < Importer
 	%  variables of interest, and each subsequent row the values for each subject.
 	%
 	% The list of ImporterGroupSubjectST_TXT properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ST subject group importer from TXT.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ST subject group importer from TXT.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ST subject group importer from TXT.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ST subject group importer from TXT.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ST subject group importer from TXT.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ST subject group importer from TXT.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ST subject group importer from TXT.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>FILE</strong> 	FILE (data, string) is the TXT file from where to load the ST subject group.
 	%  <strong>11</strong> <strong>GET_FILE</strong> 	GET_FILE (query, item) opens a dialog box to set the TXT file from where to load the ST subject group.
@@ -116,6 +116,8 @@ classdef ImporterGroupSubjectST_TXT < Importer
 	%
 	%
 	% See also Group, SubjectST, ExporterGroupSubjectST_TXT.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		FILE = 10; %CET: Computational Efficiency Trick
@@ -150,14 +152,14 @@ classdef ImporterGroupSubjectST_TXT < Importer
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of ImporterGroupSubjectST_TXT properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ST subject group importer from TXT.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ST subject group importer from TXT.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ST subject group importer from TXT.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ST subject group importer from TXT.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ST subject group importer from TXT.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ST subject group importer from TXT.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ST subject group importer from TXT.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>FILE</strong> 	FILE (data, string) is the TXT file from where to load the ST subject group.
 			%  <strong>11</strong> <strong>GET_FILE</strong> 	GET_FILE (query, item) opens a dialog box to set the TXT file from where to load the ST subject group.
@@ -170,6 +172,21 @@ classdef ImporterGroupSubjectST_TXT < Importer
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the importer of ST subject group from TXT.
+			%
+			% BUILD = ImporterGroupSubjectST_TXT.GETBUILD() returns the build of 'ImporterGroupSubjectST_TXT'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = IM.GETBUILD() returns the build of the importer of ST subject group from TXT IM.
+			%  BUILD = Element.GETBUILD(IM) returns the build of 'IM'.
+			%  BUILD = Element.GETBUILD('ImporterGroupSubjectST_TXT') returns the build of 'ImporterGroupSubjectST_TXT'.
+			%
+			% Note that the Element.GETBUILD(IM) and Element.GETBUILD('ImporterGroupSubjectST_TXT')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function im_class = getClass()
 			%GETCLASS returns the class of the importer of ST subject group from TXT.
 			%
@@ -496,7 +513,7 @@ classdef ImporterGroupSubjectST_TXT < Importer
 			prop = ImporterGroupSubjectST_TXT.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			importergroupsubjectst_txt_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the ST subject group importer from TXT.'  'DESCRIPTION (constant, string) is the description of the ST subject group importer from TXT.'  'TEMPLATE (parameter, item) is the template of the ST subject group importer from TXT.'  'ID (data, string) is a few-letter code for the ST subject group importer from TXT.'  'LABEL (metadata, string) is an extended label of the ST subject group importer from TXT.'  'NOTES (metadata, string) are some specific notes about the ST subject group importer from TXT.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'FILE (data, string) is the TXT file from where to load the ST subject group.'  'GET_FILE (query, item) opens a dialog box to set the TXT file from where to load the ST subject group.'  'BA (data, item) is a brain atlas.'  'GR (result, item) is a group of subjects with structural data.' };
+			importergroupsubjectst_txt_description_list = { 'ELCLASS (constant, string) is the class of the ST subject group importer from TXT.'  'NAME (constant, string) is the name of the ST subject group importer from TXT.'  'DESCRIPTION (constant, string) is the description of the ST subject group importer from TXT.'  'TEMPLATE (parameter, item) is the template of the ST subject group importer from TXT.'  'ID (data, string) is a few-letter code for the ST subject group importer from TXT.'  'LABEL (metadata, string) is an extended label of the ST subject group importer from TXT.'  'NOTES (metadata, string) are some specific notes about the ST subject group importer from TXT.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'FILE (data, string) is the TXT file from where to load the ST subject group.'  'GET_FILE (query, item) opens a dialog box to set the TXT file from where to load the ST subject group.'  'BA (data, item) is a brain atlas.'  'GR (result, item) is a group of subjects with structural data.' };
 			prop_description = importergroupsubjectst_txt_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -570,7 +587,7 @@ classdef ImporterGroupSubjectST_TXT < Importer
 				case 1 % ImporterGroupSubjectST_TXT.ELCLASS
 					prop_default = 'ImporterGroupSubjectST_TXT';
 				case 2 % ImporterGroupSubjectST_TXT.NAME
-					prop_default = 'ImporterGroupSubjectST_TXT';
+					prop_default = 'Structural Subject Group TXT Importer';
 				case 3 % ImporterGroupSubjectST_TXT.DESCRIPTION
 					prop_default = 'ImporterGroupSubjectST_TXT imports a group of subjects with structural data from an TXT file and their covariates from another TXT file.';
 				case 4 % ImporterGroupSubjectST_TXT.TEMPLATE

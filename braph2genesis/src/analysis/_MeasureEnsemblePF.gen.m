@@ -7,6 +7,9 @@ MeasureEnsemblePF manages the basic functionalities to plot of an ensemble-based
 %%% ¡seealso!
 MeasureEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

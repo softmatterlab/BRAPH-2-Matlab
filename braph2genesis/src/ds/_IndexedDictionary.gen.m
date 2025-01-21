@@ -9,6 +9,9 @@ An Indexed Dictionary (IndexedDictionary) provides the methods necessary
  category PARAMETER or DATA, and IT is an element of a class defined in the 
  constructor using the property IT_CLASS.
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -185,7 +188,7 @@ value = find(strcmp(key, idict.get('KEYS')));
 % error if idict does not contain the key
 
 %%% ¡prop! 
-INDEX_FROM_IT (query, scalar) returns the index of a item.
+INDEX_FROM_IT (query, scalar) returns the index of an item.
 %%%% ¡calculate!
 % INDEX = idict.get('INDEX_FROM_IT', IT) returns the index of the first
 % occurrence of item IT.
@@ -209,8 +212,8 @@ value = cellfun(@(it) it.get(it_key), idict.get('IT_LIST'), 'UniformOutput', fal
 %%% ¡prop!
 KEY (query, string) returns the key of an index or item.
 %%%% ¡calculate!
-% KEY = idict.get('KEY', POINTER) returns the key of POINTER (a index or
-%  item). If the POINTER is a item, it returns the first occurrence.
+% KEY = idict.get('KEY', POINTER) returns the key of POINTER (an index or
+%  item). If the POINTER is an item, it returns the first occurrence.
 if isempty(varargin)
     value = '';
     return
@@ -240,7 +243,7 @@ value = it_list{index}.get(idict.get('IT_KEY'));
 % key = value % error if index does not exist
 
 %%% ¡prop!
-KEY_FROM_IT (query, string) returns the key of a item.
+KEY_FROM_IT (query, string) returns the key of an item.
 %%%% ¡calculate!
 % KEY = get('KEY_FROM_IT', IT) returns the key of the first occurrence
 %  of item IT.
@@ -297,7 +300,7 @@ key = varargin{1};
 
 it_list = idict.get('IT_LIST');
 value = it_list{idict.get('INDEX_FROM_KEY', key)};
-% item = value % error if idict does not containt the key
+% item = value % error if idict does not contain the key
 
 %%% ¡prop!
 ADD (query, empty) adds an item and key to an indexed dictionary

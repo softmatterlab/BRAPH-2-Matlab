@@ -7,14 +7,14 @@ classdef NNEvaluator < ConcreteElement
 	% Its subclasses shall be specifically designed to cater to different evaluation cases such as a classification task, a regression task, or a data generation task.
 	%
 	% The list of NNEvaluator properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the evaluator of the neural network analysis.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the evaluator for the neural network analysis.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the evaluator for the neural network analysis.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the evaluator for the neural network analysis.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the evaluator for the neural network analysis.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the evaluator for the neural network analysis.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the evaluator for the neural network analysis.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>NN</strong> 	NN (data, item) contains a trained neural network model.
 	%  <strong>10</strong> <strong>D</strong> 	D (data, item) is the dataset to evaluate the neural network model.
 	%
@@ -105,6 +105,8 @@ classdef NNEvaluator < ConcreteElement
 	%
 	%
 	% See also NNDataPoint, NNDataset, NNBase.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		NN = 9; %CET: Computational Efficiency Trick
@@ -129,14 +131,14 @@ classdef NNEvaluator < ConcreteElement
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNEvaluator properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the evaluator of the neural network analysis.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the evaluator for the neural network analysis.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the evaluator for the neural network analysis.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the evaluator for the neural network analysis.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the evaluator for the neural network analysis.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the evaluator for the neural network analysis.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the evaluator for the neural network analysis.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>NN</strong> 	NN (data, item) contains a trained neural network model.
 			%  <strong>10</strong> <strong>D</strong> 	D (data, item) is the dataset to evaluate the neural network model.
 			%
@@ -146,6 +148,21 @@ classdef NNEvaluator < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the neural network evaluator.
+			%
+			% BUILD = NNEvaluator.GETBUILD() returns the build of 'NNEvaluator'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = NNE.GETBUILD() returns the build of the neural network evaluator NNE.
+			%  BUILD = Element.GETBUILD(NNE) returns the build of 'NNE'.
+			%  BUILD = Element.GETBUILD('NNEvaluator') returns the build of 'NNEvaluator'.
+			%
+			% Note that the Element.GETBUILD(NNE) and Element.GETBUILD('NNEvaluator')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function nne_class = getClass()
 			%GETCLASS returns the class of the neural network evaluator.
 			%
@@ -464,7 +481,7 @@ classdef NNEvaluator < ConcreteElement
 			prop = NNEvaluator.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nnevaluator_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the evaluator for the neural network analysis.'  'DESCRIPTION (constant, string) is the description of the evaluator for the neural network analysis.'  'TEMPLATE (parameter, item) is the template of the evaluator for the neural network analysis.'  'ID (data, string) is a few-letter code for the evaluator for the neural network analysis.'  'LABEL (metadata, string) is an extended label of the evaluator for the neural network analysis.'  'NOTES (metadata, string) are some specific notes about the evaluator for the neural network analysis.'  'TOSTRING (query, string) returns a string that represents the object.'  'NN (data, item) contains a trained neural network model.'  'D (data, item) is the dataset to evaluate the neural network model.' };
+			nnevaluator_description_list = { 'ELCLASS (constant, string) is the class of the evaluator of the neural network analysis.'  'NAME (constant, string) is the name of the evaluator for the neural network analysis.'  'DESCRIPTION (constant, string) is the description of the evaluator for the neural network analysis.'  'TEMPLATE (parameter, item) is the template of the evaluator for the neural network analysis.'  'ID (data, string) is a few-letter code for the evaluator for the neural network analysis.'  'LABEL (metadata, string) is an extended label of the evaluator for the neural network analysis.'  'NOTES (metadata, string) are some specific notes about the evaluator for the neural network analysis.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'NN (data, item) contains a trained neural network model.'  'D (data, item) is the dataset to evaluate the neural network model.' };
 			prop_description = nnevaluator_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -530,7 +547,7 @@ classdef NNEvaluator < ConcreteElement
 				case 1 % NNEvaluator.ELCLASS
 					prop_default = 'NNEvaluator';
 				case 2 % NNEvaluator.NAME
-					prop_default = 'NNEvaluator';
+					prop_default = 'Neural Network Evaluator';
 				case 3 % NNEvaluator.DESCRIPTION
 					prop_default = 'A neural network evaluator (NNEvaluator) evaluates the performance of a neural network model with a specific dataset. Instances of this class should not be created. Use one of its subclasses instead. Its subclasses shall be specifically designed to cater to different evaluation cases such as a classification task, a regression task, or a data generation task.';
 				case 4 % NNEvaluator.TEMPLATE

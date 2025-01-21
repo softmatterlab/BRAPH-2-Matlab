@@ -9,6 +9,9 @@ The handle must be a patch.
 %%% ¡seealso!
 patch, PanelFig, GUIFig
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

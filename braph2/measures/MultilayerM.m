@@ -13,7 +13,7 @@ classdef MultilayerM < MultilayerCommunity
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Multilayer Modularity.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Multilayer Modularity.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Multilayer Modularity.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -135,7 +135,7 @@ classdef MultilayerM < MultilayerCommunity
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Multilayer Modularity.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Multilayer Modularity.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Multilayer Modularity.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -158,6 +158,21 @@ classdef MultilayerM < MultilayerCommunity
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the multilayer modularity.
+			%
+			% BUILD = MultilayerM.GETBUILD() returns the build of 'MultilayerM'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the multilayer modularity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('MultilayerM') returns the build of 'MultilayerM'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('MultilayerM')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the multilayer modularity.
 			%
@@ -484,7 +499,7 @@ classdef MultilayerM < MultilayerCommunity
 			prop = MultilayerM.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			multilayerm_description_list = { 'ELCLASS (constant, string) is the class of the Multilayer Modularity.'  'NAME (constant, string) is the name of the Multilayer Modularity.'  'DESCRIPTION (constant, string) is the description of the Multilayer Modularity.'  'TEMPLATE (parameter, item) is the template of the Multilayer Modularity.'  'ID (data, string) is a few-letter code of the Multilayer Modularity.'  'LABEL (metadata, string) is an extended label of the Multilayer Modularity.'  'NOTES (metadata, string) are some specific notes about the Multilayer Modularity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Multilayer Modularity.'  'PFM (gui, item) contains the panel figure of the measure.'  'LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.'  'RANDORD (parameter, LOGICAL) is used to set randperm.'  'RANDMOVE (parameter, LOGICAL) is the move function.'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.'  'S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.'  'OM (data, MATRIX) is the multilayer modularity matrix.'  'QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.' };
+			multilayerm_description_list = { 'ELCLASS (constant, string) is the class of the Multilayer Modularity.'  'NAME (constant, string) is the name of the Multilayer Modularity.'  'DESCRIPTION (constant, string) is the description of the Multilayer Modularity.'  'TEMPLATE (parameter, item) is the template of the Multilayer Modularity.'  'ID (data, string) is a few-letter code of the Multilayer Modularity.'  'LABEL (metadata, string) is an extended label of the Multilayer Modularity.'  'NOTES (metadata, string) are some specific notes about the Multilayer Modularity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Multilayer Modularity.'  'PFM (gui, item) contains the panel figure of the measure.'  'LIMIT (parameter, SCALAR) is the maximum size of multilayer modularity matrix.'  'RANDORD (parameter, LOGICAL) is used to set randperm.'  'RANDMOVE (parameter, LOGICAL) is the move function.'  'GAMMA (parameter, SCALAR) is the resolution parameter.'  'OMEGA (parameter, SCALAR) is the inter-layer coupling parameter.'  'S0 (data, cvector) is the initial partition size of the multilayer modularity matrix.'  'OM (data, MATRIX) is the multilayer modularity matrix.'  'QUALITY_FUNCTION (data, MATRIX) is the multilayer modularity quality function.' };
 			prop_description = multilayerm_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -560,7 +575,7 @@ classdef MultilayerM < MultilayerCommunity
 				case 11 % MultilayerM.PARAMETRICITY
 					prop_default = 2;
 				case 12 % MultilayerM.COMPATIBLE_GRAPHS
-					prop_default = {'MultiplexWU' 'OrdMxWU' 'MultiplexBU' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};;
+					prop_default = {'MultiplexWU' 'MultiplexWD' 'OrdMxWU' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};;
 				otherwise
 					prop_default = getPropDefault@MultilayerCommunity(prop);
 			end

@@ -7,6 +7,9 @@ Subject with a functional matrix (e.g. obtained from fMRI).
 %%% ¡seealso!
 ImporterGroupSubjectFUN_TXT, ExporterGroupSubjectFUN_TXT, ImporterGroupSubjectFUN_XLS, ExporterGroupSubjectFUN_XLS
 
+%%% ¡build!
+1
+
 %% ¡gui!
 
 %%% ¡menu_import!
@@ -143,14 +146,14 @@ Subject NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the subject.
 %%%% ¡default!
 'SubjectFUN'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the subject.
 %%%% ¡default!
-'SubjectFUN'
+'Functional Subject'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the subject.

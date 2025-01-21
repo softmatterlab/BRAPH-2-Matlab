@@ -16,8 +16,8 @@ disp(['¡ target dir: ' target_dir])
 disp('¡! generator file read')
 
 %% Analysis
-[class_name, moniker] = analyze_header();
-    function [class_name, moniker] = analyze_header()
+[class_name, moniker, build] = analyze_header();
+    function [class_name, moniker, build] = analyze_header()
         header = getToken(txt, 'header');
         res = regexp(header, ...
             ['^\s*(?<class_name>\w*)\s*<\s*(?<superclass_name>\w*)' ...
@@ -27,6 +27,8 @@ disp('¡! generator file read')
              );
         class_name = res.class_name;
         moniker = res.moniker;
+
+        build = getToken(txt, 'header', 'build');
     end
 
 prop_number = Element.getPropNumber(class_name);
@@ -76,7 +78,21 @@ basic_tests{1} = test_inspection_methods();
                     ['\t\t' '''' class_name '().get(''''ELCLASS'''') should return ''''' class_name '''''.'')']
              'end'
              ' '
-             '% getClass'
+             '% getBuild()'
+            ['assert(' class_name '.getBuild() == ' build ' && ' class_name '.getBuild() > 0, ...']
+                ['\t' '[BRAPH2.STR '':' class_name ':'' BRAPH2.FAIL_TEST], ...']
+                ['\t' '''' class_name '.getBuild() should return the ' class_name ' build number.'')']
+            ['assert(' moniker '.getBuild() == ' build ' && ' moniker '.getBuild() > 0 , ...']
+                ['\t' '[BRAPH2.STR '':' class_name ':'' BRAPH2.FAIL_TEST], ...']
+                ['\t' '''' moniker '.getBuild() should return the ' class_name ' build number.'')']
+            ['assert(Element.getBuild(' moniker ') == ' build ' && Element.getBuild(' moniker ') > 0, ...']
+                ['\t' '[BRAPH2.STR '':' class_name ':'' BRAPH2.FAIL_TEST], ...']
+                ['\t' '''Element.getBuild(' moniker ') should return the ' class_name ' build number.'')']
+            ['assert(Element.getBuild('''  class_name ''') == '  build ' && Element.getBuild('''  class_name ''') > 0, ...']
+                ['\t' '[BRAPH2.STR '':' class_name ':'' BRAPH2.FAIL_TEST], ...']
+                ['\t' '''Element.getBuild(''''' class_name ''''') should return the ' class_name ' build number.'')']
+             ' '
+             '% getClass()'
             ['assert(strcmp(' class_name '.getClass(), ''' class_name '''), ...']
                 ['\t' '[BRAPH2.STR '':' class_name ':'' BRAPH2.FAIL_TEST], ...']
                 ['\t' '''' class_name '.getClass() should return ''''' class_name '''''.'')']

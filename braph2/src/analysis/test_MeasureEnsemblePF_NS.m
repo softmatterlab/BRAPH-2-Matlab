@@ -14,7 +14,21 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 			'MeasureEnsemblePF_NS().get(''ELCLASS'') should return ''MeasureEnsemblePF_NS''.')
 	end
 	 
-	% getClass
+	% getBuild()
+	assert(MeasureEnsemblePF_NS.getBuild() == 1 && MeasureEnsemblePF_NS.getBuild() > 0, ...
+		[BRAPH2.STR ':MeasureEnsemblePF_NS:' BRAPH2.FAIL_TEST], ...
+		'MeasureEnsemblePF_NS.getBuild() should return the MeasureEnsemblePF_NS build number.')
+	assert(pf.getBuild() == 1 && pf.getBuild() > 0 , ...
+		[BRAPH2.STR ':MeasureEnsemblePF_NS:' BRAPH2.FAIL_TEST], ...
+		'pf.getBuild() should return the MeasureEnsemblePF_NS build number.')
+	assert(Element.getBuild(pf) == 1 && Element.getBuild(pf) > 0, ...
+		[BRAPH2.STR ':MeasureEnsemblePF_NS:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(pf) should return the MeasureEnsemblePF_NS build number.')
+	assert(Element.getBuild('MeasureEnsemblePF_NS') == 1 && Element.getBuild('MeasureEnsemblePF_NS') > 0, ...
+		[BRAPH2.STR ':MeasureEnsemblePF_NS:' BRAPH2.FAIL_TEST], ...
+		'Element.getBuild(''MeasureEnsemblePF_NS'') should return the MeasureEnsemblePF_NS build number.')
+	 
+	% getClass()
 	assert(strcmp(MeasureEnsemblePF_NS.getClass(), 'MeasureEnsemblePF_NS'), ...
 		[BRAPH2.STR ':MeasureEnsemblePF_NS:' BRAPH2.FAIL_TEST], ...
 		'MeasureEnsemblePF_NS.getClass() should return ''MeasureEnsemblePF_NS''.')
@@ -492,7 +506,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:MeasureEnsemblePF_NS.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL])
+		if any(prop == [MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ME MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL])
 			continue
 		end
 	 
@@ -637,7 +651,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:MeasureEnsemblePF_NS.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL])
+		if any(prop == [MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ME MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL])
 			continue
 		end
 	 
@@ -740,7 +754,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 		for prop = 1:1:MeasureEnsemblePF_NS.getPropNumber()
 	 
 			% excluded props
-			if any(prop == [MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL])
+			if any(prop == [MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ME MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL])
 				continue
 			end
 	 
@@ -1533,7 +1547,7 @@ if rand() >= (1 - .01) * BRAPH2TEST.RANDOM
 	for prop = 1:1:MeasureEnsemblePF_NS.getPropNumber()
 	 
 		% excluded props
-		if any(prop == [MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL])
+		if any(prop == [MeasureEnsemblePF_NS.PARENT MeasureEnsemblePF_NS.H MeasureEnsemblePF_NS.ST_POSITION MeasureEnsemblePF_NS.ST_AXIS MeasureEnsemblePF_NS.ME MeasureEnsemblePF_NS.ST_AREA MeasureEnsemblePF_NS.ST_LINE_M MeasureEnsemblePF_NS.ST_TITLE MeasureEnsemblePF_NS.ST_XLABEL MeasureEnsemblePF_NS.ST_YLABEL])
 			continue
 		end
 	 
@@ -1718,7 +1732,7 @@ if rand() >= (1 - 1) * BRAPH2TEST.RANDOM
 	warning('off', [BRAPH2.STR ':MeasureEnsemblePF_NS'])
 	
 	warning('off', [BRAPH2.STR ':MeasureEnsemblePF_NS'])
-	assert(length(findall(0, 'type', 'figure')) == 1)
+	assert(length(findall(0, 'type', 'figure')) == 5)
 	delete(findall(0, 'type', 'figure'))
 	warning('on', [BRAPH2.STR ':MeasureEnsemblePF_NS'])
 	

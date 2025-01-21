@@ -7,6 +7,9 @@ MeasureEnsemblePF_BU manages the basic functionalities to plot of a binodal unil
 %%% ¡seealso!
 MeasureEnsemble
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

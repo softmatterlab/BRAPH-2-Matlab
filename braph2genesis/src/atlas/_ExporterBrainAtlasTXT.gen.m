@@ -7,6 +7,9 @@ A Brain Atlas Exporter in TXT Files (ExporterBrainAtlasTXT) exports a brain atla
 %%% ¡seealso!
 BrainAtlas, ImporterBrainAtlasTXT
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

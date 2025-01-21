@@ -7,6 +7,9 @@ A Pipeline is an analysis pipeline.
 %%% ¡seealso!
 PipelinePP_PSDict, PipelineSection, PipelineCode
 
+%%% ¡build!
+1
+
 %% ¡gui!
 
 %%% ¡menu_import!

@@ -33,7 +33,7 @@ classdef GUIFig < GUI
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the figure GUI.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the figure GUI.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the figure GUI.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
 	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
@@ -159,6 +159,8 @@ classdef GUIFig < GUI
 	%
 	%
 	% See also uifigure, PanelFig.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		PF = 30; %CET: Computational Efficiency Trick
@@ -260,7 +262,7 @@ classdef GUIFig < GUI
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the figure GUI.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the figure GUI.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the figure GUI.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
 			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
@@ -305,6 +307,21 @@ classdef GUIFig < GUI
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the figure GUI.
+			%
+			% BUILD = GUIFig.GETBUILD() returns the build of 'GUIFig'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = GUI.GETBUILD() returns the build of the figure GUI GUI.
+			%  BUILD = Element.GETBUILD(GUI) returns the build of 'GUI'.
+			%  BUILD = Element.GETBUILD('GUIFig') returns the build of 'GUIFig'.
+			%
+			% Note that the Element.GETBUILD(GUI) and Element.GETBUILD('GUIFig')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function gui_class = getClass()
 			%GETCLASS returns the class of the figure GUI.
 			%
@@ -631,7 +648,7 @@ classdef GUIFig < GUI
 			prop = GUIFig.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			guifig_description_list = { 'ELCLASS (constant, string) is the class of the figure GUI.'  'NAME (constant, string) is the name of the figure GUI.'  'DESCRIPTION (constant, string) is the description of the figure GUI.'  'TEMPLATE (parameter, item) is the template of the figure GUI.'  'ID (data, string) is a few-letter code for the figure GUI.'  'LABEL (metadata, string) is an extended label of the figure GUI.'  'NOTES (metadata, string) are some specific notes about the figure GUI.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar.'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about.'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the toolbar followed by the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar.'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons.'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates POSITION when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles and closes the dependent figures when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.'  'PF (data, item) is the panel figure.'  'FILE (metadata, string) is the B2 file where the element is saved.'  'TEXT_FILE (evanescent, handle) is the label where the file name is shown.'  'GUI_LAYOUT (data, item) is the handle to the figure to manage the layout.'  'GUI_SETTINGS (data, item) is the handle to the figure to manage the figure settings.'  'H_MENU_FILE (evanescent, handle) is the handle of the menu file.'  'MENU_FILE (gui, logical) determines whether to show the menu file.'  'H_MENU_PRINT (evanescent, handle) is the handle of the menu to print to image file.'  'MENU_PRINT (gui, logical) determines whether to show the menu to print to image file.'  'H_MENU_GUI_SETTINGS (evanescent, handle) is the handle of the menu settings.'  'MENU_GUI_SETTINGS (gui, logical) determines whether to show the menu settings.'  'H_MENU_PERSONALIZE (evanescent, handle) is the handle of the menu personalize.'  'MENU_PERSONALIZE (gui, logical) determines whether to show the menu personalize.'  'TOOL_FILE (gui, logical) determines whether to show the toolbar file buttons.'  'TOOL_PRINT (gui, logical) determines whether to show the toolbar print button.'  'TOOL_GUI_SETTINGS (gui, logical) determines whether to show the toolbar settings buttons.' };
+			guifig_description_list = { 'ELCLASS (constant, string) is the class of the figure GUI.'  'NAME (constant, string) is the name of the figure GUI.'  'DESCRIPTION (constant, string) is the description of the figure GUI.'  'TEMPLATE (parameter, item) is the template of the figure GUI.'  'ID (data, string) is a few-letter code for the figure GUI.'  'LABEL (metadata, string) is an extended label of the figure GUI.'  'NOTES (metadata, string) are some specific notes about the figure GUI.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar.'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about.'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the toolbar followed by the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar.'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons.'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates POSITION when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles and closes the dependent figures when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.'  'PF (data, item) is the panel figure.'  'FILE (metadata, string) is the B2 file where the element is saved.'  'TEXT_FILE (evanescent, handle) is the label where the file name is shown.'  'GUI_LAYOUT (data, item) is the handle to the figure to manage the layout.'  'GUI_SETTINGS (data, item) is the handle to the figure to manage the figure settings.'  'H_MENU_FILE (evanescent, handle) is the handle of the menu file.'  'MENU_FILE (gui, logical) determines whether to show the menu file.'  'H_MENU_PRINT (evanescent, handle) is the handle of the menu to print to image file.'  'MENU_PRINT (gui, logical) determines whether to show the menu to print to image file.'  'H_MENU_GUI_SETTINGS (evanescent, handle) is the handle of the menu settings.'  'MENU_GUI_SETTINGS (gui, logical) determines whether to show the menu settings.'  'H_MENU_PERSONALIZE (evanescent, handle) is the handle of the menu personalize.'  'MENU_PERSONALIZE (gui, logical) determines whether to show the menu personalize.'  'TOOL_FILE (gui, logical) determines whether to show the toolbar file buttons.'  'TOOL_PRINT (gui, logical) determines whether to show the toolbar print button.'  'TOOL_GUI_SETTINGS (gui, logical) determines whether to show the toolbar settings buttons.' };
 			prop_description = guifig_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

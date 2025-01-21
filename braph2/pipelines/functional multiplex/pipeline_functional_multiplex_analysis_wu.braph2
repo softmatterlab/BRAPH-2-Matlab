@@ -6,8 +6,8 @@
 % 2. It loads the functional data of one group of subjects from two directories (e.g., FUN_MP_Group_1 and FUN_MP_Group_2) containing XLS files of each subject.
 % 3. It analyzes the data using functional multiplex analysis (FUN_MP) based on weighted undirected graphs (WU).
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_a_mp_fun_wu/tut_a_mp_fun_wu.pdf
+% README: /tutorials/pipelines/tut_a_mp_fun_wu/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas XLS % Brain Atlas

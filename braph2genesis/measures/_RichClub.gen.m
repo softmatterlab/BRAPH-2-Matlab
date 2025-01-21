@@ -7,6 +7,9 @@ The Rich-Club coefficient (RichClub) of a node at level k is the fraction of
  maximum number of edges that such nodes might share within a 
  layer. k is set by the user, the default value is equal to 1.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -168,7 +171,7 @@ value = rich_club;
 
 %% ¡props!
 %%% ¡prop! 
-PARAMETRIC_VALUE (parameter, scalar) 
+PARAMETRIC_VALUE (parameter, scalar) is the threshold (k).
 %%%% ¡default!
 1
 

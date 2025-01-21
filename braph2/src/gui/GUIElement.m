@@ -33,7 +33,7 @@ classdef GUIElement < GUI
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the element GUI.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the element GUI.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the element GUI.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
 	%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
@@ -156,6 +156,8 @@ classdef GUIElement < GUI
 	%
 	%
 	% See also uifigure, ConcreteElement, PanelElement.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		PE = 30; %CET: Computational Efficiency Trick
@@ -242,7 +244,7 @@ classdef GUIElement < GUI
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the element GUI.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the element GUI.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the element GUI.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the contents of a GUI before showing it.
 			%  <strong>11</strong> <strong>DRAWN</strong> 	DRAWN (query, logical) returns whether the GUI has been drawn.
@@ -284,6 +286,21 @@ classdef GUIElement < GUI
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the element GUI.
+			%
+			% BUILD = GUIElement.GETBUILD() returns the build of 'GUIElement'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = GUI.GETBUILD() returns the build of the element GUI GUI.
+			%  BUILD = Element.GETBUILD(GUI) returns the build of 'GUI'.
+			%  BUILD = Element.GETBUILD('GUIElement') returns the build of 'GUIElement'.
+			%
+			% Note that the Element.GETBUILD(GUI) and Element.GETBUILD('GUIElement')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function gui_class = getClass()
 			%GETCLASS returns the class of the element GUI.
 			%
@@ -610,7 +627,7 @@ classdef GUIElement < GUI
 			prop = GUIElement.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			guielement_description_list = { 'ELCLASS (constant, string) is the class of the element GUI.'  'NAME (constant, string) is the name of the element GUI.'  'DESCRIPTION (constant, string) is the description of the element GUI.'  'TEMPLATE (parameter, item) is the template of the element GUI.'  'ID (data, string) is a few-letter code for the element GUI.'  'LABEL (metadata, string) is an extended label of the element GUI.'  'NOTES (metadata, string) are some specific notes about the element GUI.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar.'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about.'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the toolbar followed by the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar.'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons.'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates prop POSITION and panel PanelElement when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.'  'PE (data, item) is the panel element.'  'FILE (metadata, string) is the B2 file where the element is saved.'  'TEXT_FILE (evanescent, handle) is the label where the file name is shown.'  'LAYOUT (data, item) is the handle to the figure to manage layout.'  'H_MENU_FILE (evanescent, handle) is the handle of the menu file.'  'MENU_FILE (gui, logical) determines whether to show the menu file.'  'H_MENU_IMPORT (evanescent, handle) is the handle of the menu import.'  'MENU_IMPORT (gui, logical) determines whether to show the menu import.'  'H_MENU_EXPORT (evanescent, handle) is the handle of the menu export.'  'MENU_EXPORT (gui, logical) determines whether to show the menu export.'  'H_MENU_PERSONALIZE (evanescent, handle) is the handle of the menu personalize.'  'MENU_PERSONALIZE (gui, logical) determines whether to show the menu personalize.'  'TOOL_FILE (gui, logical) determines whether to show the toolbar file buttons.' };
+			guielement_description_list = { 'ELCLASS (constant, string) is the class of the element GUI.'  'NAME (constant, string) is the name of the element GUI.'  'DESCRIPTION (constant, string) is the description of the element GUI.'  'TEMPLATE (parameter, item) is the template of the element GUI.'  'ID (data, string) is a few-letter code for the element GUI.'  'LABEL (metadata, string) is an extended label of the element GUI.'  'NOTES (metadata, string) are some specific notes about the element GUI.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'DRAW (query, logical) draws the contents of a GUI before showing it.'  'DRAWN (query, logical) returns whether the GUI has been drawn.'  'TITLE (gui, string) is the name of the GUI.'  'POSITION (gui, rvector) is the normalized position of the GUI on the screen.'  'BKGCOLOR (gui, color) is the GUI background color.'  'H_MENUBAR (evanescent, handlelist) is the list of handles for the menus.'  'MENUBAR (gui, logical) determines whether to show the menubar.'  'H_MENU_ABOUT (evanescent, handle) is the handle of the menu about.'  'MENU_ABOUT (gui, logical) determines whether to show the menu about.'  'H_TOOLBAR (evanescent, handle) is the handle list of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the handle list of the toolbar followed by the tools from the first.'  'TOOLBAR (gui, logical) determines whether to show the toolbar.'  'TOOL_ABOUT (gui, logical) determines whether to show the toolbar about buttons.'  'CLOSEREQ (gui, logical) determines whether to confirm close.'  'H (evanescent, handle) is the figure handle.'  'RESIZE (query, logical) updates prop POSITION and panel PanelElement when figure size is changed.'  'SHOW (query, logical) shows the figure and its dependent figures.'  'HIDE (query, logical) hides the figure and its dependent figures.'  'DELETE (query, logical) resets the handles when the figure is deleted.'  'CLOSE (query, logical) closes the figure and its dependent figures.'  'PE (data, item) is the panel element.'  'FILE (metadata, string) is the B2 file where the element is saved.'  'TEXT_FILE (evanescent, handle) is the label where the file name is shown.'  'LAYOUT (data, item) is the handle to the figure to manage layout.'  'H_MENU_FILE (evanescent, handle) is the handle of the menu file.'  'MENU_FILE (gui, logical) determines whether to show the menu file.'  'H_MENU_IMPORT (evanescent, handle) is the handle of the menu import.'  'MENU_IMPORT (gui, logical) determines whether to show the menu import.'  'H_MENU_EXPORT (evanescent, handle) is the handle of the menu export.'  'MENU_EXPORT (gui, logical) determines whether to show the menu export.'  'H_MENU_PERSONALIZE (evanescent, handle) is the handle of the menu personalize.'  'MENU_PERSONALIZE (gui, logical) determines whether to show the menu personalize.'  'TOOL_FILE (gui, logical) determines whether to show the toolbar file buttons.' };
 			prop_description = guielement_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

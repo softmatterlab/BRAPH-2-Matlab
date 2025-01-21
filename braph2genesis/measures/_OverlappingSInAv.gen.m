@@ -5,6 +5,9 @@ OverlappingSInAv < OverlappingSIn (m, average overlapping in-strength) is the gr
 The Average Overlapping In-Strength (OverlappingSInAv) of a graph is the average of the sum of the 
  in-strengths of a node in all layers. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

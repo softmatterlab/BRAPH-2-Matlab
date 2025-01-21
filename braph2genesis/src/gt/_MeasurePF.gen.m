@@ -7,6 +7,9 @@ A Panel Figure for Measure (MeasurePF) manages the basic functionalities to plot
 %%% ¡seealso!
 Measure
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

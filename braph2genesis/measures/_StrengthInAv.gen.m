@@ -6,6 +6,9 @@ The Average In-Strength (StrengthInAv) of a graph is the mean of the sum of all 
 connected to a node within a layer, i.e., it is the sum of the columns of 
 the adjacency matrix. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -116,9 +119,11 @@ L = g.get('LAYERNUMBER');
 
 in_strength_av = cell(L, 1);
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     in_strength_av(li) = {mean(in_strength{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = in_strength_av;
 

@@ -1,3 +1,5 @@
-# BRAPH 2.0 — Pipeline for Comparison of Funtional Data using Binary Weighted Undirected graphs
+# Pipeline Functional Comparison WU
 
-This Page is not ready. You can find a similar one in [Functional BUD](../tut_a_fun_bud)
+[![Tutorial Pipeline Functional Comparison WU](https://img.shields.io/badge/PDF-Download-red?style=flat-square&logo=adobe-acrobat-reader)](tut_a_fun_wu.pdf)
+
+This tutorial is not ready. You can find a similar one here: [https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/pipelines/tut_a_fun_bud/tut_a_fun_bud.pdf](https://github.com/braph-software/BRAPH-2/blob/develop/tutorials/pipelines/tut_a_fun_bud/tut_a_fun_bud.pdf).

@@ -7,6 +7,9 @@ ComparisonGroupBrainPF_BU manages the basic functionalities to plot of a binodal
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

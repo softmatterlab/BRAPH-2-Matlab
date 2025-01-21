@@ -7,6 +7,9 @@ A Panel Figure for Nodal Superglobal Measure (MeasurePF_NS) manages the basic fu
 %%% ¡seealso!
 Measure
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -170,13 +173,17 @@ value = [];
 
 %%% ¡prop!
 NODE (figure, scalar) is the node number of the nodal measure.
+%%%% ¡default!
+1
+%%%% ¡postset!
+pf.get('SETUP');
 %%%% ¡gui!
 pr = MeasurePF_NxPP_Node('EL', pf, 'PROP', MeasurePF_NS.NODE);
 
 %% ¡tests!
 
 %%% ¡excluded_props!
-[MeasurePF_NS.PARENT MeasurePF_NS.H MeasurePF_NS.ST_POSITION MeasurePF_NS.ST_AXIS MeasurePF_NS.ST_AREA MeasurePF_NS.ST_LINE MeasurePF_NS.ST_TITLE MeasurePF_NS.ST_XLABEL MeasurePF_NS.ST_YLABEL] 
+[MeasurePF_NS.PARENT MeasurePF_NS.PARENT MeasurePF_NS.H MeasurePF_NS.ST_POSITION MeasurePF_NS.ST_AXIS MeasurePF_NS.ST_AREA MeasurePF_NS.M MeasurePF_NS.ST_LINE MeasurePF_NS.ST_TITLE MeasurePF_NS.ST_XLABEL MeasurePF_NS.ST_YLABEL] 
 
 %%% ¡warning_off!
 true
@@ -186,6 +193,6 @@ true
 Remove Figures
 %%%% ¡code!
 warning('off', [BRAPH2.STR ':MeasurePF_NS'])
-assert(length(findall(0, 'type', 'figure')) == 1)
+assert(length(findall(0, 'type', 'figure')) == 5)
 delete(findall(0, 'type', 'figure'))
 warning('on', [BRAPH2.STR ':MeasurePF_NS'])

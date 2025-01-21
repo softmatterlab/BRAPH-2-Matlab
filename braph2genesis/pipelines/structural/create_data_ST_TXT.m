@@ -50,7 +50,7 @@ if ~isfolder(data_dir)
     %     ' nodes, $K = $ ' num2str(K1) ', and $eta = $ ' num2str(beta1)], ...
     %     'Interpreter','latex')
     % axis equal
-    rng_settings_
+    
     A1 = full(adjacency(h1)); A1(1:length(A1)+1:numel(A1)) = 1; % Extract the adjacency matrix
     A1 = A1*transpose(A1); % this is needed to make the matrices positive definite
     % imshow(A1)

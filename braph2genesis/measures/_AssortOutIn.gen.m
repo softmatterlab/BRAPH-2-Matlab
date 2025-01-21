@@ -3,9 +3,12 @@ AssortOutIn < Measure (m, out-in-assortativity) is the graph Out-In-Assortativit
 
 %%% ¡description!
 The Out-In-Assortativity coefficient (AssortOutIn) of a graph is the correlation coefficient between 
-  the degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
+  the outward and inward degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
 The corresponding coefficient for directed and weighted networks is calculated by 
   using the weighted and directed variants of in-out-degree/in-out-strength.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -66,7 +69,7 @@ NAME (constant, string) is the name of the Out-In-Assortativity.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the Out-In-Assortativity.
 %%%% ¡default!
-'The Out-In-Assortativity coefficient (AssortOutIn) of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-out-degree/in-out-strength.'
+'The Out-In-Assortativity coefficient (AssortOutIn) of a graph is the correlation coefficient between the outward and inward degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of in-out-degree/in-out-strength.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the Out-In-Assortativity.
@@ -117,6 +120,8 @@ L = g.get('LAYERNUMBER');
 N = g.get('NODENUMBER');
 out_in_assortativity = cell(L, 1);
 connectivity_types = g.get('CONNECTIVITY_TYPE', L);  
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     Aii = A{li, li};
     connectivity_type = connectivity_types(li, li);
@@ -145,6 +150,7 @@ parfor li = 1:L
     assortativity_layer(isnan(assortativity_layer)) = 0;  % Should return zeros, not NaN
     out_in_assortativity(li) = {assortativity_layer};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = out_in_assortativity;
 

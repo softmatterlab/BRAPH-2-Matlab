@@ -7,6 +7,9 @@ ComparisonGroupPF manages the basic functionalities to plot of a group compariso
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

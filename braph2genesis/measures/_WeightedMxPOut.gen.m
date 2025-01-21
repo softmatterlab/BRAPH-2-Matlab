@@ -5,6 +5,9 @@ WeightedMxPOut < Measure (m, weighted out-participation) is the graph Weighted M
 The Weighted Multiplex Out-Participation (WeightedMxPOut) of a graph is the nodal homogeneity 
  of its number of outward neighbors across the layers. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

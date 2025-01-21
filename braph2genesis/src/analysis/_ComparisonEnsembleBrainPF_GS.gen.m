@@ -7,6 +7,9 @@ ComparisonEnsembleBrainPF_GS manages the basic functionalities to plot of a glob
 %%% ¡seealso!
 ComparisonEnsemble
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

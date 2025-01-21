@@ -13,7 +13,7 @@ classdef StrengthAv < Strength
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Strength.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Strength.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Strength.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -127,7 +127,7 @@ classdef StrengthAv < Strength
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Average Strength.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Average Strength.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Average Strength.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -142,6 +142,21 @@ classdef StrengthAv < Strength
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the average strength.
+			%
+			% BUILD = StrengthAv.GETBUILD() returns the build of 'StrengthAv'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the average strength M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('StrengthAv') returns the build of 'StrengthAv'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('StrengthAv')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the average strength.
 			%
@@ -468,7 +483,7 @@ classdef StrengthAv < Strength
 			prop = StrengthAv.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			strengthav_description_list = { 'ELCLASS (constant, string) is the class of the Average Strength.'  'NAME (constant, string) is the name of the Average Strength.'  'DESCRIPTION (constant, string) is the description of the Average Strength.'  'TEMPLATE (parameter, item) is the template of the Average Strength.'  'ID (data, string) is a few-letter code of the Average Strength.'  'LABEL (metadata, string) is an extended label of the Average Strength.'  'NOTES (metadata, string) are some specific notes about the Average Strength.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Strength.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			strengthav_description_list = { 'ELCLASS (constant, string) is the class of the Average Strength.'  'NAME (constant, string) is the name of the Average Strength.'  'DESCRIPTION (constant, string) is the description of the Average Strength.'  'TEMPLATE (parameter, item) is the template of the Average Strength.'  'ID (data, string) is a few-letter code of the Average Strength.'  'LABEL (metadata, string) is an extended label of the Average Strength.'  'NOTES (metadata, string) are some specific notes about the Average Strength.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Average Strength.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = strengthav_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -654,9 +669,12 @@ classdef StrengthAv < Strength
 					strength = calculateValue@Strength(m, prop);
 					
 					strength_av = cell(L, 1);
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    strength_av(li) = {mean(strength{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = strength_av;
 					

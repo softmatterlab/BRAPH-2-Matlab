@@ -8,6 +8,9 @@ It works for all categories.
 %%% ¡seealso!
 uieditfield, uiaxes, line, GUI, PanelElement
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

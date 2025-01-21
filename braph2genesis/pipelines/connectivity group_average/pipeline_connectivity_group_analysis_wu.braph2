@@ -6,8 +6,8 @@
 % 2. It loads the data of one group of subjects from two directories (e.g., GroupName1 and GroupName2) containing XLS files of each subject.
 % 3. It analyzes these data using a connectivity analysis (CON) based on a weighted undirected graph (WU) averaged by group (GA).
 
-% PDF: 
-% README: 
+% PDF: /tutorials/pipelines/tut_a_con_ga_wu/tut_a_con_ga_wu.pdf 
+% README: /tutorials/pipelines/tut_a_con_ga_wu/readme.md
 
 %% Brain Atlas
 ba = ImporterBrainAtlasXLS('WAITBAR', true).get('GET_FILE').get('BA'); % Load Brain Atlas from XLS % Brain Atlas

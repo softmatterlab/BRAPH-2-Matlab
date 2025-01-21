@@ -3,7 +3,7 @@ classdef AssortOutOut < Measure
 	% It is a subclass of <a href="matlab:help Measure">Measure</a>.
 	%
 	% The Out-Out-Assortativity coefficient (AssortOutOut) of a graph is the correlation coefficient between 
-	%   the degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
+	%   the outward degrees/strengths of all nodes on two opposite ends of an edge within a layer. 
 	% The corresponding coefficient for directed and weighted networks is calculated by using 
 	%   the weighted and directed variants of out-degree/out-strength.
 	%
@@ -15,7 +15,7 @@ classdef AssortOutOut < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Out-Out-Assortativity.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Out-Out-Assortativity.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Out-Out-Assortativity.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -129,7 +129,7 @@ classdef AssortOutOut < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Out-Out-Assortativity.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Out-Out-Assortativity.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Out-Out-Assortativity.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -144,6 +144,21 @@ classdef AssortOutOut < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the out-out-assortativity.
+			%
+			% BUILD = AssortOutOut.GETBUILD() returns the build of 'AssortOutOut'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the out-out-assortativity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('AssortOutOut') returns the build of 'AssortOutOut'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('AssortOutOut')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the out-out-assortativity.
 			%
@@ -470,7 +485,7 @@ classdef AssortOutOut < Measure
 			prop = AssortOutOut.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortoutout_description_list = { 'ELCLASS (constant, string) is the class of the Out-Out-Assortativity.'  'NAME (constant, string) is the name of the Out-Out-Assortativity.'  'DESCRIPTION (constant, string) is the description of the Out-Out-Assortativity.'  'TEMPLATE (parameter, item) is the template of the Out-Out-Assortativity.'  'ID (data, string) is a few-letter code of the Out-Out-Assortativity.'  'LABEL (metadata, string) is an extended label of the Out-Out-Assortativity.'  'NOTES (metadata, string) are some specific notes about the Out-Out-Assortativity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Out-Out-Assortativity.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			assortoutout_description_list = { 'ELCLASS (constant, string) is the class of the Out-Out-Assortativity.'  'NAME (constant, string) is the name of the Out-Out-Assortativity.'  'DESCRIPTION (constant, string) is the description of the Out-Out-Assortativity.'  'TEMPLATE (parameter, item) is the template of the Out-Out-Assortativity.'  'ID (data, string) is a few-letter code of the Out-Out-Assortativity.'  'LABEL (metadata, string) is an extended label of the Out-Out-Assortativity.'  'NOTES (metadata, string) are some specific notes about the Out-Out-Assortativity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Out-Out-Assortativity.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = assortoutout_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -530,7 +545,7 @@ classdef AssortOutOut < Measure
 				case 2 % AssortOutOut.NAME
 					prop_default = 'Out-Out-Assortativity';
 				case 3 % AssortOutOut.DESCRIPTION
-					prop_default = 'The Out-Out-Assortativity coefficient (AssortOutOut) of a graph is the correlation coefficient between the degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of out-degree/out-strength.';
+					prop_default = 'The Out-Out-Assortativity coefficient (AssortOutOut) of a graph is the correlation coefficient between the outward degrees/strengths of all nodes on two opposite ends of an edge within a layer. The corresponding coefficient for directed and weighted networks is calculated by using the weighted and directed variants of out-degree/out-strength.';
 				case 4 % AssortOutOut.TEMPLATE
 					prop_default = Format.getFormatDefault(8, AssortOutOut.getPropSettings(prop));
 				case 5 % AssortOutOut.ID
@@ -656,6 +671,8 @@ classdef AssortOutOut < Measure
 					N = g.get('NODENUMBER');
 					out_out_assortativity = cell(L, 1);
 					connectivity_types = g.get('CONNECTIVITY_TYPE', L);  
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:L
 					    Aii = A{li, li};
 					    connectivity_type = connectivity_types(li, li);
@@ -680,6 +697,7 @@ classdef AssortOutOut < Measure
 					    assortativity_layer(isnan(assortativity_layer)) = 0;  % Should return zeros, not NaN    
 					    out_out_assortativity(li) = {assortativity_layer};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = out_out_assortativity;
 					

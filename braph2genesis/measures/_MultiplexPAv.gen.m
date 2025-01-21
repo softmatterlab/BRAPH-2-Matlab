@@ -5,6 +5,9 @@ MultiplexPAv < MultiplexP (m, average multiplex participation) is the graph Aver
 The Average Multiplex Participation (MultiplexPAv) of a graph is the average homogeneity 
    of its number of neighbors across the layers. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

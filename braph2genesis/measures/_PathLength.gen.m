@@ -5,6 +5,9 @@ PathLength < Measure (m, pathlength) is the graph Path Length.
 The Path Length (PathLength) is the average shortest path length of one node to all 
  other nodes within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -125,29 +128,33 @@ path_length_rule = m.get('RULE');
 
 distance = Distance('G', g).get('M');
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
-    path_length_layer = zeros(N(1), 1);
+    node_number_layer = N(li);
+    path_length_layer = zeros(node_number_layer, 1);
     distance_layer = distance{li};
 
     switch lower(path_length_rule)
         case {'subgraphs'}
-            for u = 1:1:N
+            for u = 1:1:node_number_layer
                 Du = distance_layer(:, u);
                 path_length_layer(u) = mean(Du(Du~=Inf & Du~=0));
             end
         case {'mean'}
-            for u = 1:1:N
+            for u = 1:1:node_number_layer
                 Du = distance_layer(:, u);
                 path_length_layer(u) = mean(Du(Du~=0));
             end
         otherwise  % 'harmonic' 'default'
-            for u = 1:1:N
+            for u = 1:1:node_number_layer
                 Du = distance_layer(:, u);
                 path_length_layer(u) = harmmean(Du(Du~=0));
             end
     end 
     path_length(li) = {path_length_layer}; % node Inf corresponds to isolated nodes
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = path_length;
 
 %% ¡props!

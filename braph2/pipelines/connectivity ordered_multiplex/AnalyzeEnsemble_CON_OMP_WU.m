@@ -6,14 +6,14 @@ classdef AnalyzeEnsemble_CON_OMP_WU < AnalyzeEnsemble
 	% ordinal multiplex data using weighted undirected graphs.
 	%
 	% The list of AnalyzeEnsemble_CON_OMP_WU properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity ordinal multiplex data.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity ordinal multiplex data.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectCON_MP.
 	%  <strong>11</strong> <strong>GRAPH_TEMPLATE</strong> 	GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
@@ -108,6 +108,8 @@ classdef AnalyzeEnsemble_CON_OMP_WU < AnalyzeEnsemble
 	%
 	%
 	% See also SubjectCON_MP, OrdMxWU.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	methods % constructor
 		function a = AnalyzeEnsemble_CON_OMP_WU(varargin)
@@ -121,14 +123,14 @@ classdef AnalyzeEnsemble_CON_OMP_WU < AnalyzeEnsemble
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of AnalyzeEnsemble_CON_OMP_WU properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity ordinal multiplex data.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity ordinal multiplex data.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity ordinal multiplex data.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>GR</strong> 	GR (data, item) is the subject group, which also defines the subject class SubjectCON_MP.
 			%  <strong>11</strong> <strong>GRAPH_TEMPLATE</strong> 	GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.
@@ -142,6 +144,21 @@ classdef AnalyzeEnsemble_CON_OMP_WU < AnalyzeEnsemble
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the graph analysis with connectivity ordinal multiplex data.
+			%
+			% BUILD = AnalyzeEnsemble_CON_OMP_WU.GETBUILD() returns the build of 'AnalyzeEnsemble_CON_OMP_WU'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = A.GETBUILD() returns the build of the graph analysis with connectivity ordinal multiplex data A.
+			%  BUILD = Element.GETBUILD(A) returns the build of 'A'.
+			%  BUILD = Element.GETBUILD('AnalyzeEnsemble_CON_OMP_WU') returns the build of 'AnalyzeEnsemble_CON_OMP_WU'.
+			%
+			% Note that the Element.GETBUILD(A) and Element.GETBUILD('AnalyzeEnsemble_CON_OMP_WU')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function a_class = getClass()
 			%GETCLASS returns the class of the graph analysis with connectivity ordinal multiplex data.
 			%
@@ -468,7 +485,7 @@ classdef AnalyzeEnsemble_CON_OMP_WU < AnalyzeEnsemble
 			prop = AnalyzeEnsemble_CON_OMP_WU.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			analyzeensemble_con_omp_wu_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectCON_MP.'  'GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.'  'G_DICT (result, idict) is the graph (OrdMxWU) ensemble obtained from this analysis.'  'ME_DICT (result, idict) contains the calculated measures of the graph ensemble.'  'MEASUREENSEMBLE (query, item) returns an ensemble-based measure.' };
+			analyzeensemble_con_omp_wu_description_list = { 'ELCLASS (constant, string) is the class of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'NAME (constant, string) is the name of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'ID (data, string) is a few-letter code for the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'LABEL (metadata, string) is an extended label of the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis with connectivity ordinal multiplex data.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'GR (data, item) is the subject group, which also defines the subject class SubjectCON_MP.'  'GRAPH_TEMPLATE (parameter, item) is the graph template to set all graph and measure parameters.'  'G_DICT (result, idict) is the graph (OrdMxWU) ensemble obtained from this analysis.'  'ME_DICT (result, idict) contains the calculated measures of the graph ensemble.'  'MEASUREENSEMBLE (query, item) returns an ensemble-based measure.' };
 			prop_description = analyzeensemble_con_omp_wu_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -530,7 +547,7 @@ classdef AnalyzeEnsemble_CON_OMP_WU < AnalyzeEnsemble
 				case 1 % AnalyzeEnsemble_CON_OMP_WU.ELCLASS
 					prop_default = 'AnalyzeEnsemble_CON_OMP_WU';
 				case 2 % AnalyzeEnsemble_CON_OMP_WU.NAME
-					prop_default = 'AnalyzeEnsemble_CON_OMP_WU';
+					prop_default = 'Multiplex Ordered Connectivity Weighted Undirected';
 				case 3 % AnalyzeEnsemble_CON_OMP_WU.DESCRIPTION
 					prop_default = 'This graph analysis (AnalyzeEnsemble_CON_OMP_WU) analyzes connectivity ordinal multiplex data using weighted undirected graphs.';
 				case 4 % AnalyzeEnsemble_CON_OMP_WU.TEMPLATE

@@ -2,10 +2,13 @@
 MultiplexBUT < MultiplexWU (g, binary undirected multiplex with fixed thresholds) is a binary undirected multiplex with fixed thresholds.
 
 %%% ¡description!
-In a binary undirected multiplex with fixed thresholds (BUT), the layers are 
- those of binary undirected (BU) multiplex graphs derived from the same 
+In a binary undirected multiplex graph with fixed thresholds (MultiplexBUT), the layers are 
+ those of binary undirected multiplex graphs derived from the same 
  weighted supra-connectivity matrices binarized at different thresholds.
 The supra-connectivity matrix has a number of partitions equal to the number of thresholds.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -133,12 +136,12 @@ ELCLASS (constant, string) is the class of the binary undirected multiplex with 
 %%% ¡prop!
 NAME (constant, string) is the name of the binary undirected multiplex with fixed thresholds.
 %%%% ¡default!
-'MultiplexBUT'
+'Multiplex Binary Undirected at fixed Thresholds'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the binary undirected multiplex with fixed thresholds.
 %%%% ¡default!
-'In a binary undirected multiplex with fixed thresholds (BUT), the layers are those of binary undirected (BU) multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds.'
+'In a binary undirected multiplex graph with fixed thresholds (MultiplexBUT), the layers are those of binary undirected multiplex graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. The supra-connectivity matrix has a number of partitions equal to the number of thresholds.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the binary undirected multiplex with fixed thresholds.

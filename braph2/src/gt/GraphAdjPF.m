@@ -1,18 +1,18 @@
 classdef GraphAdjPF < PanelFig
-	%GraphAdjPF is a plot of a graph adjacency matrix.
+	%GraphAdjPF is a plot of the panel figure for the graph adjacency matrix.
 	% It is a subclass of <a href="matlab:help PanelFig">PanelFig</a>.
 	%
-	% A Panel Figure for Graph Adjacency Matrix (GraphAdjPF) manages the plot of an adjacency matrix.
+	% A Panel Figure for Graph Adjacency Matrix (GraphAdjPF) manages the plot of the panel figure for the adjacency matrix.
 	%
 	% The list of GraphAdjPF properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel figure for graph adjacency matrix.
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel figure for graph adjacency matrix (GraphAdjPF).
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel figure for graph adjacency matrix.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel figure for graph adjacency matrix.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel figure for graph adjacency matrix.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel figure for graph adjacency matrix.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel figure for graph adjacency matrix.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel figure for graph adjacency matrix.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 	%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
 	%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the figure graph adjacency matrix.
@@ -125,6 +125,8 @@ classdef GraphAdjPF < PanelFig
 	%
 	%
 	% See also Graph, GraphAdjPF.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		H_AXES = 23; %CET: Computational Efficiency Trick
@@ -189,14 +191,14 @@ classdef GraphAdjPF < PanelFig
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of GraphAdjPF properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel figure for graph adjacency matrix.
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the panel figure for graph adjacency matrix (GraphAdjPF).
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the panel figure for graph adjacency matrix.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the panel figure for graph adjacency matrix.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the panel figure for graph adjacency matrix.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the panel figure for graph adjacency matrix.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the panel figure for graph adjacency matrix.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the panel figure for graph adjacency matrix.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>WAITBAR</strong> 	WAITBAR (gui, logical) detemines whether to show the waitbar.
 			%  <strong>10</strong> <strong>H_WAITBAR</strong> 	H_WAITBAR (evanescent, handle) is the waitbar handle.
 			%  <strong>11</strong> <strong>DRAW</strong> 	DRAW (query, logical) draws the figure graph adjacency matrix.
@@ -228,6 +230,21 @@ classdef GraphAdjPF < PanelFig
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the panel figure for graph adjacency matrix.
+			%
+			% BUILD = GraphAdjPF.GETBUILD() returns the build of 'GraphAdjPF'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = PF.GETBUILD() returns the build of the panel figure for graph adjacency matrix PF.
+			%  BUILD = Element.GETBUILD(PF) returns the build of 'PF'.
+			%  BUILD = Element.GETBUILD('GraphAdjPF') returns the build of 'GraphAdjPF'.
+			%
+			% Note that the Element.GETBUILD(PF) and Element.GETBUILD('GraphAdjPF')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function pf_class = getClass()
 			%GETCLASS returns the class of the panel figure for graph adjacency matrix.
 			%
@@ -558,7 +575,7 @@ classdef GraphAdjPF < PanelFig
 			prop = GraphAdjPF.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			graphadjpf_description_list = { 'ELCLASS (constant, string) is the class of the panel figure for graph adjacency matrix.'  'NAME (constant, string) is the name of the panel figure for graph adjacency matrix.'  'DESCRIPTION (constant, string) is the description of the panel figure for graph adjacency matrix.'  'TEMPLATE (parameter, item) is the template of the panel figure for graph adjacency matrix.'  'ID (data, string) is a few-letter code for the panel figure for graph adjacency matrix.'  'LABEL (metadata, string) is an extended label of the panel figure for graph adjacency matrix.'  'NOTES (metadata, string) are some specific notes about the panel figure for graph adjacency matrix.'  'TOSTRING (query, string) returns a string that represents the object.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure graph adjacency matrix.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure graph is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'G (metadata, item) is the graph.'  'LAYERS (figure, rvector) determines the indices of the layers.'  'LAYERLOCK (metadata, logical) is whether the two layers are locked so that only the diagonal is shown.'  'COLORBAR (figure, logical) detemines whether to show the colorbar.'  'ST_AMBIENT (figure, item) determines the ambient settings.'  'SETUP (query, empty) calculates the adjacency matrix ans stores it.'  'H_ADJ (evanescent, handle) is the handle for weighted adjacency matrix.' };
+			graphadjpf_description_list = { 'ELCLASS (constant, string) is the class of the panel figure for graph adjacency matrix (GraphAdjPF).'  'NAME (constant, string) is the name of the panel figure for graph adjacency matrix.'  'DESCRIPTION (constant, string) is the description of the panel figure for graph adjacency matrix.'  'TEMPLATE (parameter, item) is the template of the panel figure for graph adjacency matrix.'  'ID (data, string) is a few-letter code for the panel figure for graph adjacency matrix.'  'LABEL (metadata, string) is an extended label of the panel figure for graph adjacency matrix.'  'NOTES (metadata, string) are some specific notes about the panel figure for graph adjacency matrix.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'WAITBAR (gui, logical) detemines whether to show the waitbar.'  'H_WAITBAR (evanescent, handle) is the waitbar handle.'  'DRAW (query, logical) draws the figure graph adjacency matrix.'  'DRAWN (query, logical) returns whether the panel has been drawn.'  'PARENT (gui, item) is the panel parent.'  'BKGCOLOR (figure, color) is the panel background color.'  'H (evanescent, handle) is the panel handle.'  'SHOW (query, logical) shows the figure containing the panel.'  'HIDE (query, logical) hides the figure containing the panel.'  'DELETE (query, logical) resets the handles when the panel figure graph is deleted.'  'CLOSE (query, logical) closes the figure containing the panel.'  'ST_POSITION (figure, item) determines the panel position.'  'H_TOOLBAR (evanescent, handle) returns the handle of the toolbar.'  'H_TOOLS (evanescent, handlelist) is the list of panel-specific tools from the first.'  'H_AXES (evanescent, handle) is the handle for the axes.'  'ST_AXIS (figure, item) determines the axis settings.'  'LISTENER_ST_AXIS (evanescent, handle) contains the listener to the axis settings to update the pushbuttons.'  'G (metadata, item) is the graph.'  'LAYERS (figure, rvector) determines the indices of the layers.'  'LAYERLOCK (metadata, logical) is whether the two layers are locked so that only the diagonal is shown.'  'COLORBAR (figure, logical) detemines whether to show the colorbar.'  'ST_AMBIENT (figure, item) determines the ambient settings.'  'SETUP (query, empty) calculates the adjacency matrix ans stores it.'  'H_ADJ (evanescent, handle) is the handle for weighted adjacency matrix.' };
 			prop_description = graphadjpf_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

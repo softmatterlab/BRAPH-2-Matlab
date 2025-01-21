@@ -12,7 +12,7 @@ classdef Radius < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Radius.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Radius.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Radius.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -133,7 +133,7 @@ classdef Radius < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Radius.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Radius.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Radius.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -149,6 +149,21 @@ classdef Radius < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the radius.
+			%
+			% BUILD = Radius.GETBUILD() returns the build of 'Radius'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the radius M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('Radius') returns the build of 'Radius'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('Radius')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the radius.
 			%
@@ -475,7 +490,7 @@ classdef Radius < Measure
 			prop = Radius.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			radius_description_list = { 'ELCLASS (constant, string) is the class of the Radius.'  'NAME (constant, string) is the name of the Radius.'  'DESCRIPTION (constant, string) is the description of the Radius.'  'TEMPLATE (parameter, item) is the template of the Radius.'  'ID (data, string) is a few-letter code of the Radius.'  'LABEL (metadata, string) is an extended label of the Radius.'  'NOTES (metadata, string) are some specific notes about the Radius.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Radius.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, OPTION) % calculation in a graph or its subgraph' };
+			radius_description_list = { 'ELCLASS (constant, string) is the class of the Radius.'  'NAME (constant, string) is the name of the Radius.'  'DESCRIPTION (constant, string) is the description of the Radius.'  'TEMPLATE (parameter, item) is the template of the Radius.'  'ID (data, string) is a few-letter code of the Radius.'  'LABEL (metadata, string) is an extended label of the Radius.'  'NOTES (metadata, string) are some specific notes about the Radius.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Radius.'  'PFM (gui, item) contains the panel figure of the measure.'  'RULE (parameter, OPTION) % calculation in a graph or its subgraph' };
 			prop_description = radius_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -667,9 +682,11 @@ classdef Radius < Measure
 					eccentricity = Eccentricity('G', g, 'RULE', m.get('RULE')).get('M');
 					radius = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    radius(li) = {min(eccentricity{li})};
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = radius;
 					

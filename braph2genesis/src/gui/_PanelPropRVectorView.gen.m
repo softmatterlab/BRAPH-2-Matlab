@@ -13,6 +13,9 @@ It works for all categories.
 %%% ¡seealso!
 GUI, PanelElement, view, uieditfield, uislider
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

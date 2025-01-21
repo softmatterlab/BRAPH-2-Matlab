@@ -6,6 +6,9 @@ The Average Degree (DegreeAv) of a graph is the average of all number of edges
 connected to a node within a layer. 
 Connection weights are ignored in calculations.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -60,7 +63,7 @@ ELCLASS (constant, string) is the class of the Average Degree.
 %%% ¡prop!
 NAME (constant, string) is the name of the Average Degree.
 %%%% ¡default!
-'DegreeAv'
+'Average Degree'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the Average Degree.
@@ -115,9 +118,12 @@ degree = calculateValue@Degree(m, prop);
 g = m.get('G');  % graph from measure class
 
 degree_av = cell(g.get('LAYERNUMBER'), 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:g.get('LAYERNUMBER')
     degree_av(li) = {mean(degree{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = degree_av;
 

@@ -5,6 +5,9 @@ EccentricityOutAv < EccentricityOut (m, average eccentricity) is the graph Avera
 The Average Out-Eccentricity (EccentricityOutAv) of a node is the sum of the nodal 
 out-eccentricities divided by their number within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -110,7 +113,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'GraphWD' 'GraphBD' 'MultiplexWD' 'MultiplexBD'};
+{'GraphWD' 'GraphBD' 'MultiplexWD' 'MultiplexBD' 'OrdMxWD'};
 
 %%% ¡prop!
 M (result, cell) is the Average Out-Eccentricity.
@@ -130,9 +133,11 @@ if L == 0
     return ;
 end
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     eccentricity_av(li) = {mean(eccentricity{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 
 value = eccentricity_av;

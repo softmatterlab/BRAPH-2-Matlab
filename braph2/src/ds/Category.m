@@ -7,22 +7,19 @@ classdef Category < handle
     %
     %  CONSTANT     Static constant equal for all instances of the element.
     %                It allows incoming callbacks.
-    %                It is cloned (implicitly).
     %
     %  METADATA     Metadata NOT used in the calculation of the results.
     %                It does not allow callbacks.
-    %                It is not cloned.
     %                It is not locked when a result is calculated.
     %
     %  PARAMETER    Parameter used to calculate the results of the element.
     %                It allows incoming and outgoing callbacks.
-    %                It can be cloned.
+    %                It is connected with a callback when using a template.
     %                It is locked when a result is calculated.
     %
     %  DATA         Data used to calculate the results of the element 
-    %                It ic NoValue when not set.
+    %                It is NoValue when not set.
     %                It allows incoming and outgoing callbacks.
-    %                It is not cloned.
     %                It is locked when a result is calculated.
     %
     %  RESULT       Result calculated by the element using parameters and data.
@@ -32,7 +29,7 @@ classdef Category < handle
     %
     %  QUERY        Query result calculated by the element.
     %                The calculation of a query does NOT lock the element.
-    %                It si NoValue when not calculated. 
+    %                It is NoValue when not calculated. 
     %                It does not allow callbacks.
     %
     %  EVANESCENT   Evanescent variable calculated at runtime (typically
@@ -42,12 +39,10 @@ classdef Category < handle
     %
     %  FIGURE       Parameter used to plot the results in a figure.
     %                It allows incoming and outgoing callbacks.
-    %                It is not cloned.
     %                It is not locked when a result is calculated.
     %               
     %  GUI          Parameter used by the graphical user interface (GUI).
     %                It allows incoming and outgoing callbacks.
-    %                It is not cloned.
     %                It is not locked when a result is calculated.
     %
     % Category properties (Constant):
@@ -111,22 +106,22 @@ classdef Category < handle
         CONSTANT = 1
         CONSTANT_TAG = 'c'
         CONSTANT_NAME = 'constant'
-        CONSTANT_DESCRIPTION = 'Static constant equal for all instances of the element (allows incoming and outgoing callbacks, implicitly cloned).'
+        CONSTANT_DESCRIPTION = 'Static constant equal for all instances of the element (allows incoming and outgoing callbacks).'
 
         METADATA = 2
         METADATA_TAG = 'm'
         METADATA_NAME = 'metadata'
-        METADATA_DESCRIPTION = 'Metadata NOT used in the calculation of the results (does not allow callbacks, not cloned).'
+        METADATA_DESCRIPTION = 'Metadata NOT used in the calculation of the results (does not allow callbacks).'
         
         PARAMETER = 3
         PARAMETER_TAG = 'p'
         PARAMETER_NAME = 'parameter'
-        PARAMETER_DESCRIPTION = 'Parameter used to calculate the results of the element (allows incoming and outgoing callbacks, cloned, locked when a result is calculated).'
+        PARAMETER_DESCRIPTION = 'Parameter used to calculate the results of the element (allows incoming and outgoing callbacks, templated, locked when a result is calculated).'
         
         DATA = 4
         DATA_TAG = 'd'
         DATA_NAME = 'data'
-        DATA_DESCRIPTION = 'Data used to calculate the results of the element (can be NoResult when not set, allows incoming and outgoing callbacks, not cloned, locked when a result is calculated).'
+        DATA_DESCRIPTION = 'Data used to calculate the results of the element (can be NoResult when not set, allows incoming and outgoing callbacks, locked when a result is calculated).'
 
         RESULT = 5
         RESULT_TAG = 'r'
@@ -146,12 +141,12 @@ classdef Category < handle
         FIGURE = 8
         FIGURE_TAG = 'f'
         FIGURE_NAME = 'figure'
-        FIGURE_DESCRIPTION = 'Parameter used to plot the results in a figure (allows incoming and outgoing callbacks, not cloned, not lockable).'
+        FIGURE_DESCRIPTION = 'Parameter used to plot the results in a figure (allows incoming and outgoing callbacks, not lockable).'
 
         GUI = 9
         GUI_TAG = 'g'
         GUI_NAME = 'gui'
-        GUI_DESCRIPTION = 'Parameter used by the graphical user interface (allows incoming and outgoing callbacks, not cloned, not lockable).'
+        GUI_DESCRIPTION = 'Parameter used by the graphical user interface (allows incoming and outgoing callbacks, not lockable).'
     end
     methods (Static)
         function categories = getCategories()
@@ -284,13 +279,13 @@ classdef Category < handle
 
             switch category
                 case 1 % Category.CONSTANT
-                    category_description = 'Static constant equal for all instances of the element (allows incoming and outgoing callbacks, implicitly cloned).';
+                    category_description = 'Static constant equal for all instances of the element (allows incoming and outgoing callbacks).';
                 case 2 % Category.METADATA
-                    category_description = 'Metadata NOT used in the calculation of the results (does not allow callbacks, not cloned).';
+                    category_description = 'Metadata NOT used in the calculation of the results (does not allow callbacks).';
                 case 3 % Category.PARAMETER
-                    category_description = 'Parameter used to calculate the results of the element (allows incoming and outgoing callbacks, cloned, locked when a result is calculated).';
+                    category_description = 'Parameter used to calculate the results of the element (allows incoming and outgoing callbacks, templated, locked when a result is calculated).';
                 case 4 % Category.DATA
-                    category_description = 'Data used to calculate the results of the element (can be NoResult when not set, allows incoming and outgoing callbacks, not cloned, locked when a result is calculated).';
+                    category_description = 'Data used to calculate the results of the element (can be NoResult when not set, allows incoming and outgoing callbacks, locked when a result is calculated).';
                 case 5 % Category.RESULT
                     category_description = 'Result calculated by the element using parameters and data; its calculation locks the element (can be NoResult when not calculated, does not allow callbacks).';
                 case 6 % Category.QUERY
@@ -298,9 +293,9 @@ classdef Category < handle
                 case 7 % Category.EVANESCENT
                     category_description = 'Evanescent variable calculated at runtime, typically employed for handles to GUI components (can be NoValue when not calculated, does not allow callbacks).';
                 case 8 % Category.FIGURE
-                    category_description = 'Parameter used to plot the results in a figure (allows incoming and outgoing callbacks, not cloned, not lockable).';
+                    category_description = 'Parameter used to plot the results in a figure (allows incoming and outgoing callbacks, not lockable).';
                 case 9 % Category.GUI
-                    category_description = 'Parameter used by the graphical user interface (allows incoming and outgoing callbacks, not cloned, not lockable).';
+                    category_description = 'Parameter used by the graphical user interface (allows incoming and outgoing callbacks, not lockable).';
                 otherwise
                     Category.existsCategory(category) % error because category does not exist
             end

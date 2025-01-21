@@ -8,6 +8,9 @@ connectivity data using binary undirected multigraphs with fixed thresholds.
 %%% ¡seealso!
 SubjectCON, MultigraphBUT
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -67,37 +70,37 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ensemble-based graph analysis using connectivity data of fixed threshold.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUT'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the ensenmble-based graph analysis using connectivity data of fixed threshold.
+NAME (constant, string) is the name of the ensemble-based graph analysis using connectivity data of fixed threshold.
 %%%% ¡default!
-'AnalyzeEnsemble_CON_BUT'
+'Connectivity Binary Undirected at fixed Thresholds Analyze Ensemble'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the ensenmble-based graph analysis using connectivity data of fixed threshold.
+DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis using connectivity data of fixed threshold.
 %%%% ¡default!
 'This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUT) analyzes connectivity data using binary undirected multigraphs with fixed thresholds.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the ensenmble-based graph analysis using connectivity data of fixed threshold.
+TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis using connectivity data of fixed threshold.
 %%%% ¡settings!
 'AnalyzeEnsemble_CON_BUT'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the ensenmble-based graph analysis using connectivity data of fixed threshold.
+ID (data, string) is a few-letter code for the ensemble-based graph analysis using connectivity data of fixed threshold.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUT ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the ensenmble-based graph analysis using connectivity data of fixed threshold.
+LABEL (metadata, string) is an extended label of the ensemble-based graph analysis using connectivity data of fixed threshold.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUT label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the ensenmble-based graph analysis using connectivity data of fixed threshold.
+NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis using connectivity data of fixed threshold.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUT notes'
 

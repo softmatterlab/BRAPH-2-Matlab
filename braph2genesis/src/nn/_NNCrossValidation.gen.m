@@ -2,7 +2,7 @@
 NNCrossValidation < ConcreteElement (nncv, neural network cross-validation) is a process for evaluating a neural network model using cross-validation.
 
 %%% ¡description!
-A cross validation (NNCrossValidation) is a process that facilitates the evaluation of neural network models using cross-validation. 
+A cross-validation (NNCrossValidation) is a process that facilitates the evaluation of neural network models using cross-validation. 
  It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. 
  This helps in assessing the generalization performance of the model and detecting overfitting.
 
@@ -10,6 +10,9 @@ To train all the neural networks for all folds, use: nncv.get('TRAIN')
 
 %%% ¡seealso!
 NNDataset, NNEvaluator, NNBase
+
+%%% ¡build!
+1
 
 %% ¡props_update!
 
@@ -21,12 +24,12 @@ ELCLASS (constant, string) is the class of the element to evaluate a neural netw
 %%% ¡prop!
 NAME (constant, string) is the name of the element to evaluate a neural network model using cross-validation.
 %%%% ¡default!
-'NNCrossValidation'
+'Neural Network Cross-Validation'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the element to evaluate a neural network model using cross-validation.
 %%%% ¡default!
-'A cross validation (NNCrossValidation) is a process that facilitates the evaluation of neural network models using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
+'A cross-validation (NNCrossValidation) is a process that facilitates the evaluation of neural network models using cross-validation. It involves splitting a dataset into multiple subsets (folds), training the model on some folds while validating on others, and then repeating the process for all combinations of folds. This helps in assessing the generalization performance of the model and detecting overfitting.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the element to evaluate a neural network model using cross-validation.
@@ -59,9 +62,6 @@ true
 KFOLDS (data, scalar) is the number of folds.
 %%%% ¡default!
 5
-%%%% ¡postset!
-kfolds = nncv.get('KFOLDS');
-nncv.set('SPLIT', repmat({1 / kfolds}, 1, kfolds));
 
 %%% ¡prop!
 SPLIT (data, cell) is a cell containing the ratio numbers or the vectors stating which datapoints belong to the splitted neural network datasets.
@@ -70,7 +70,8 @@ kfolds = nncv.get('KFOLDS');
 split = nncv.get('SPLIT');
 d = nncv.get('D');
 if isempty(split) && length(d) > 0 && d{1}.get('DP_DICT').get('LENGTH') > kfolds
-    nncv.set('SPLIT', repmat({1 / kfolds}, 1, kfolds));
+    split = repmat({1 / kfolds}, length(d), kfolds);
+    nncv.set('SPLIT', split);
 end
 
 %%% ¡prop!
@@ -94,8 +95,17 @@ DSP (result, itemlist) is a list of dataset splitter that splits the dataset per
 'NNDatasetSplit'
 %%%% ¡calculate!
 d_list = nncv.get('D');
-value = cellfun(@(d) NNDatasetSplit('D', d, 'SPLIT', nncv.get('SPLIT')), d_list, 'UniformOutput', false);
+split = nncv.get('SPLIT');
+if isempty(split)
+    split_per_dataset = {};
+else
+    for i = 1:length(d_list)
+        split_per_dataset{i} = split(i, :);
+    end
+end
 
+value = cellfun(@(d, s) NNDatasetSplit('D', d, 'SPLIT', s), d_list, split_per_dataset, 'UniformOutput', false);
+					
 %%% ¡prop!
 DCO (result, itemlist) is a list of dataset combiners that combines the datasets per fold.
 %%%% ¡settings!
@@ -199,7 +209,7 @@ SOLVER (parameter, option) is an option for the solver.
 {'adam' 'sgdm' 'rmsprop'}
 
 %%% ¡prop!
-VERBOSE (metadata, logical) is an indicator to display training progress information.
+VERBOSE (gui, logical) is an indicator to display training progress information.
 %%%% ¡default!
 false
 

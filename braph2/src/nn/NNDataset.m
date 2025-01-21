@@ -6,14 +6,14 @@ classdef NNDataset < ConcreteElement
 	% NNDataset can contain all the necessary inputs and targets.
 	%
 	% The list of NNDataset properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the dataset for neural network analysis.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the dataset for neural network analysis.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the dataset for neural network analysis.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the dataset for neural network analysis.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>DP_CLASS</strong> 	DP_CLASS (parameter, class) is the class of the data points
 	%  <strong>10</strong> <strong>DP_DICT</strong> 	DP_DICT (data, idict) is an indexed dictionary containing the data points.
 	%  <strong>11</strong> <strong>INPUTS</strong> 	INPUTS (result, cell) is a collection of the inputs from all data points.
@@ -106,6 +106,8 @@ classdef NNDataset < ConcreteElement
 	%
 	%
 	% See also NNDataPoint, NNDatasetCombine, NNDatasetSplit.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		DP_CLASS = 9; %CET: Computational Efficiency Trick
@@ -140,14 +142,14 @@ classdef NNDataset < ConcreteElement
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of NNDataset properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the dataset for neural network analysis.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the dataset for neural network analysis.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the dataset for neural network analysis.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the dataset for neural network analysis.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>DP_CLASS</strong> 	DP_CLASS (parameter, class) is the class of the data points
 			%  <strong>10</strong> <strong>DP_DICT</strong> 	DP_DICT (data, idict) is an indexed dictionary containing the data points.
 			%  <strong>11</strong> <strong>INPUTS</strong> 	INPUTS (result, cell) is a collection of the inputs from all data points.
@@ -159,6 +161,21 @@ classdef NNDataset < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the neural network data.
+			%
+			% BUILD = NNDataset.GETBUILD() returns the build of 'NNDataset'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = D.GETBUILD() returns the build of the neural network data D.
+			%  BUILD = Element.GETBUILD(D) returns the build of 'D'.
+			%  BUILD = Element.GETBUILD('NNDataset') returns the build of 'NNDataset'.
+			%
+			% Note that the Element.GETBUILD(D) and Element.GETBUILD('NNDataset')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function d_class = getClass()
 			%GETCLASS returns the class of the neural network data.
 			%
@@ -481,7 +498,7 @@ classdef NNDataset < ConcreteElement
 			prop = NNDataset.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			nndataset_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the dataset for neural network analysis.'  'DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.'  'TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.'  'ID (data, string) is a few-letter code for the dataset for neural network analysis.'  'LABEL (metadata, string) is an extended label of the dataset for neural network analysis.'  'NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.'  'TOSTRING (query, string) returns a string that represents the object.'  'DP_CLASS (parameter, class) is the class of the data points'  'DP_DICT (data, idict) is an indexed dictionary containing the data points.'  'INPUTS (result, cell) is a collection of the inputs from all data points.'  'TARGETS (result, cell) is a collection of the targets from all data points.' };
+			nndataset_description_list = { 'ELCLASS (constant, string) is the class of the dataset for neural network analysis.'  'NAME (constant, string) is the name of the dataset for neural network analysis.'  'DESCRIPTION (constant, string) is the description of the dataset for neural network analysis.'  'TEMPLATE (parameter, item) is the template of the dataset for neural network analysis.'  'ID (data, string) is a few-letter code for the dataset for neural network analysis.'  'LABEL (metadata, string) is an extended label of the dataset for neural network analysis.'  'NOTES (metadata, string) are some specific notes about the dataset for neural network analysis.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'DP_CLASS (parameter, class) is the class of the data points'  'DP_DICT (data, idict) is an indexed dictionary containing the data points.'  'INPUTS (result, cell) is a collection of the inputs from all data points.'  'TARGETS (result, cell) is a collection of the targets from all data points.' };
 			prop_description = nndataset_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -555,7 +572,7 @@ classdef NNDataset < ConcreteElement
 				case 1 % NNDataset.ELCLASS
 					prop_default = 'NNDataset';
 				case 2 % NNDataset.NAME
-					prop_default = 'NNDataset';
+					prop_default = 'Neural Network Dataset';
 				case 3 % NNDataset.DESCRIPTION
 					prop_default = 'A neural network dataset (NNDataset) represents a dataset containing datapoints whose class is defined by the DP_CLASS property. NNDataset can contain all the necessary inputs and targets.';
 				case 4 % NNDataset.TEMPLATE

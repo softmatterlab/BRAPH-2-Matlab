@@ -8,6 +8,9 @@ connectivity data using binary undirected multigraphs with fixed densities.
 %%% ¡seealso!
 SubjectCON, MultigraphBUD
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -67,37 +70,37 @@ Analysis NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the ensemble-based graph analysis using connectivity data of fixed density.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUD'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the ensenmble-based graph analysis using connectivity data of fixed density.
+NAME (constant, string) is the name of the ensemble-based graph analysis using connectivity data of fixed density.
 %%%% ¡default!
-'AnalyzeEnsemble_CON_BUD'
+'Connectivity Binary Undirected at fixed Density Analyze Ensemble'
 
 %%% ¡prop!
-DESCRIPTION (constant, string) is the description of the ensenmble-based graph analysis using connectivity data of fixed density.
+DESCRIPTION (constant, string) is the description of the ensemble-based graph analysis using connectivity data of fixed density.
 %%%% ¡default!
 'This ensemble-based graph analysis (AnalyzeEnsemble_CON_BUD) analyzes connectivity data using binary undirected multigraphs with fixed densities.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the ensenmble-based graph analysis using connectivity data of fixed density.
+TEMPLATE (parameter, item) is the template of the ensemble-based graph analysis using connectivity data of fixed density.
 %%%% ¡settings!
 'AnalyzeEnsemble_CON_BUD'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the ensenmble-based graph analysis using connectivity data of fixed density.
+ID (data, string) is a few-letter code for the ensemble-based graph analysis using connectivity data of fixed density.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUD ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the ensenmble-based graph analysis using connectivity data of fixed density.
+LABEL (metadata, string) is an extended label of the ensemble-based graph analysis using connectivity data of fixed density.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUD label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the ensenmble-based graph analysis using connectivity data of fixed density.
+NOTES (metadata, string) are some specific notes about the ensemble-based graph analysis using connectivity data of fixed density.
 %%%% ¡default!
 'AnalyzeEnsemble_CON_BUD notes'
 

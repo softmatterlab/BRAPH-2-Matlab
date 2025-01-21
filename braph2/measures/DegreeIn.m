@@ -13,7 +13,7 @@ classdef DegreeIn < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the In-Degree.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the In-Degree.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the In-Degree.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -127,7 +127,7 @@ classdef DegreeIn < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the In-Degree.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the In-Degree.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the In-Degree.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -142,6 +142,21 @@ classdef DegreeIn < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the in-degree.
+			%
+			% BUILD = DegreeIn.GETBUILD() returns the build of 'DegreeIn'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the in-degree M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('DegreeIn') returns the build of 'DegreeIn'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('DegreeIn')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the in-degree.
 			%
@@ -468,7 +483,7 @@ classdef DegreeIn < Measure
 			prop = DegreeIn.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			degreein_description_list = { 'ELCLASS (constant, string) is the class of the In-Degree.'  'NAME (constant, string) is the name of the In-Degree.'  'DESCRIPTION (constant, string) is the description of the In-Degree.'  'TEMPLATE (parameter, item) is the template of the In-Degree.'  'ID (data, string) is a few-letter code of the In-Degree.'  'LABEL (metadata, string) is an extended label of the In-Degree.'  'NOTES (metadata, string) are some specific notes about the In-Degree.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the In-Degree value.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			degreein_description_list = { 'ELCLASS (constant, string) is the class of the In-Degree.'  'NAME (constant, string) is the name of the In-Degree.'  'DESCRIPTION (constant, string) is the description of the In-Degree.'  'TEMPLATE (parameter, item) is the template of the In-Degree.'  'ID (data, string) is a few-letter code of the In-Degree.'  'LABEL (metadata, string) is an extended label of the In-Degree.'  'NOTES (metadata, string) are some specific notes about the In-Degree.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the In-Degree value.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = degreein_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -653,11 +668,13 @@ classdef DegreeIn < Measure
 					L = g.get('LAYERNUMBER');
 					in_degree = cell(L, 1);
 					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L
 					    Aii = A{li, li};
 					    Aii = binarize(Aii);  % binarizes the adjacency matrix
 					    in_degree(li) = {sum(Aii, 1)'};  % calculates the in-degree of a node for layer li
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = in_degree;
 					

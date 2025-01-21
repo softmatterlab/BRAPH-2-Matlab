@@ -6,6 +6,9 @@ The Triangles (Triangles) are calculated as the number of neighbors of a node th
  also neighbors of each other within a layer. In weighted graphs, the triangles are 
  calculated as the geometric mean of the weights of the edges forming the triangle.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

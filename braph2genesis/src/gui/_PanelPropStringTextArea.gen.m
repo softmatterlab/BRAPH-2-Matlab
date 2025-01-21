@@ -8,6 +8,9 @@ It works for all categories.
 %%% ¡seealso!
 uitextarea, GUI, PanelElement
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

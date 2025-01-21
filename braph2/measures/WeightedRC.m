@@ -3,9 +3,9 @@ classdef WeightedRC < Strength
 	% It is a subclass of <a href="matlab:help Strength">Strength</a>.
 	%
 	% The Weighted Rich-Club (WeightedRC) coefficient of a node at level s is the fraction of the 
-	%  edges weights that connect nodes of strength WRC_PARAMETER or higher out of the 
+	%  edges weights that connect nodes of strength s or higher out of the 
 	%  maximum number of edges weights that such nodes might share within a layer. 
-	%  WRC_PARAMETER is set by the user and it can be a vector containing all the 
+	%  Parameter s is set by the user and it can be a vector containing all the 
 	%  strength thresholds; the default value is equal to 1.
 	%
 	% The list of WeightedRC properties is:
@@ -16,15 +16,15 @@ classdef WeightedRC < Strength
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Weighted Rich-Club.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Weighted Rich-Club.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Weighted Rich-Club.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.PARAMETRIC.
 	%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 	%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 	%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Weighted Rich-Club.
 	%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-	%  <strong>16</strong> <strong>WRC_PARAMETER</strong> 	WRC_PARAMETER (parameter, RVECTOR) is the threshold.
+	%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) is the threshold (s).
 	%
 	% WeightedRC methods (constructor):
 	%  WeightedRC - constructor
@@ -113,10 +113,10 @@ classdef WeightedRC < Strength
 	%
 	
 	properties (Constant) % properties
-		WRC_PARAMETER = 16; %CET: Computational Efficiency Trick
-		WRC_PARAMETER_TAG = 'WRC_PARAMETER';
-		WRC_PARAMETER_CATEGORY = 3;
-		WRC_PARAMETER_FORMAT = 12;
+		PARAMETRIC_VALUE = 16; %CET: Computational Efficiency Trick
+		PARAMETRIC_VALUE_TAG = 'PARAMETRIC_VALUE';
+		PARAMETRIC_VALUE_CATEGORY = 3;
+		PARAMETRIC_VALUE_FORMAT = 12;
 	end
 	methods % constructor
 		function m = WeightedRC(varargin)
@@ -137,15 +137,15 @@ classdef WeightedRC < Strength
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Weighted Rich-Club.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Weighted Rich-Club.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Weighted Rich-Club.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.NODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
-			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
+			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.PARAMETRIC.
 			%  <strong>12</strong> <strong>COMPATIBLE_GRAPHS</strong> 	COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 			%  <strong>13</strong> <strong>G</strong> 	G (data, item) is the measure graph.
 			%  <strong>14</strong> <strong>M</strong> 	M (result, cell) is the Weighted Rich-Club.
 			%  <strong>15</strong> <strong>PFM</strong> 	PFM (gui, item) contains the panel figure of the measure.
-			%  <strong>16</strong> <strong>WRC_PARAMETER</strong> 	WRC_PARAMETER (parameter, RVECTOR) is the threshold.
+			%  <strong>16</strong> <strong>PARAMETRIC_VALUE</strong> 	PARAMETRIC_VALUE (parameter, RVECTOR) is the threshold (s).
 			%
 			% See also Category, Format.
 			
@@ -153,6 +153,21 @@ classdef WeightedRC < Strength
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the weighted rich-club.
+			%
+			% BUILD = WeightedRC.GETBUILD() returns the build of 'WeightedRC'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the weighted rich-club M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('WeightedRC') returns the build of 'WeightedRC'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('WeightedRC')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the weighted rich-club.
 			%
@@ -338,7 +353,7 @@ classdef WeightedRC < Strength
 			%
 			% See also getProps, existsTag.
 			
-			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'WRC_PARAMETER' })); %CET: Computational Efficiency Trick
+			check = any(strcmp(tag, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); %CET: Computational Efficiency Trick
 			
 			if nargout == 1
 				check_out = check;
@@ -371,7 +386,7 @@ classdef WeightedRC < Strength
 			%  getPropSettings, getPropDefault, checkProp.
 			
 			if ischar(pointer)
-				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'WRC_PARAMETER' })); % tag = pointer %CET: Computational Efficiency Trick
+				prop = find(strcmp(pointer, { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' })); % tag = pointer %CET: Computational Efficiency Trick
 			else % numeric
 				prop = pointer;
 			end
@@ -400,7 +415,7 @@ classdef WeightedRC < Strength
 				tag = pointer;
 			else % numeric
 				%CET: Computational Efficiency Trick
-				weightedrc_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'WRC_PARAMETER' };
+				weightedrc_tag_list = { 'ELCLASS'  'NAME'  'DESCRIPTION'  'TEMPLATE'  'ID'  'LABEL'  'NOTES'  'TOSTRING'  'SHAPE'  'SCOPE'  'PARAMETRICITY'  'COMPATIBLE_GRAPHS'  'G'  'M'  'PFM'  'PARAMETRIC_VALUE' };
 				tag = weightedrc_tag_list{pointer}; % prop = pointer
 			end
 		end
@@ -479,7 +494,7 @@ classdef WeightedRC < Strength
 			prop = WeightedRC.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			weightedrc_description_list = { 'ELCLASS (constant, string) is the class of the Weighted Rich-Club.'  'NAME (constant, string) is the name of the Weighted Rich-Club.'  'DESCRIPTION (constant, string) is the description of the Weighted Rich-Club.'  'TEMPLATE (parameter, item) is the template of the Weighted Rich-Club.'  'ID (data, string) is a few-letter code of the Weighted Rich-Club.'  'LABEL (metadata, string) is an extended label of the Weighted Rich-Club.'  'NOTES (metadata, string) are some specific notes about the Weighted Rich-Club.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Weighted Rich-Club.'  'PFM (gui, item) contains the panel figure of the measure.'  'WRC_PARAMETER (parameter, RVECTOR) is the threshold.' };
+			weightedrc_description_list = { 'ELCLASS (constant, string) is the class of the Weighted Rich-Club.'  'NAME (constant, string) is the name of the Weighted Rich-Club.'  'DESCRIPTION (constant, string) is the description of the Weighted Rich-Club.'  'TEMPLATE (parameter, item) is the template of the Weighted Rich-Club.'  'ID (data, string) is a few-letter code of the Weighted Rich-Club.'  'LABEL (metadata, string) is an extended label of the Weighted Rich-Club.'  'NOTES (metadata, string) are some specific notes about the Weighted Rich-Club.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.NODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.PARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the Weighted Rich-Club.'  'PFM (gui, item) contains the panel figure of the measure.'  'PARAMETRIC_VALUE (parameter, RVECTOR) is the threshold (s).' };
 			prop_description = weightedrc_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -505,7 +520,7 @@ classdef WeightedRC < Strength
 			prop = WeightedRC.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 16 % WeightedRC.WRC_PARAMETER
+				case 16 % WeightedRC.PARAMETRIC_VALUE
 					prop_settings = Format.getFormatSettings(12);
 				case 4 % WeightedRC.TEMPLATE
 					prop_settings = 'WeightedRC';
@@ -536,14 +551,14 @@ classdef WeightedRC < Strength
 			prop = WeightedRC.getPropProp(pointer);
 			
 			switch prop %CET: Computational Efficiency Trick
-				case 16 % WeightedRC.WRC_PARAMETER
+				case 16 % WeightedRC.PARAMETRIC_VALUE
 					prop_default = 1;
 				case 1 % WeightedRC.ELCLASS
 					prop_default = 'WeightedRC';
 				case 2 % WeightedRC.NAME
 					prop_default = 'Weighted Rich-Club';
 				case 3 % WeightedRC.DESCRIPTION
-					prop_default = 'The Weighted Rich-Club (WeightedRC) coefficient of a node at level s is the fraction of the edges weights that connect nodes of strength WRC_PARAMETER or higher out of the maximum number of edges weights that such nodes might share within a layer. WRC_PARAMETER is set by the user and it can be a vector containing all the strength thresholds; the default value is equal to 1.';
+					prop_default = 'The Weighted Rich-Club (WeightedRC) coefficient of a node at level s is the fraction of the edges weights that connect nodes of strength s or higher out of the maximum number of edges weights that such nodes might share within a layer. Parameter s is set by the user and it can be a vector containing all the strength thresholds; the default value is equal to 1.';
 				case 4 % WeightedRC.TEMPLATE
 					prop_default = Format.getFormatDefault(8, WeightedRC.getPropSettings(prop));
 				case 5 % WeightedRC.ID
@@ -557,7 +572,7 @@ classdef WeightedRC < Strength
 				case 10 % WeightedRC.SCOPE
 					prop_default = 1;
 				case 11 % WeightedRC.PARAMETRICITY
-					prop_default = 2;
+					prop_default = 1;
 				case 12 % WeightedRC.COMPATIBLE_GRAPHS
 					prop_default = {'GraphWU' 'MultiplexWU'};;
 				otherwise
@@ -624,7 +639,7 @@ classdef WeightedRC < Strength
 			prop = WeightedRC.getPropProp(pointer);
 			
 			switch prop
-				case 16 % WeightedRC.WRC_PARAMETER
+				case 16 % WeightedRC.PARAMETRIC_VALUE
 					check = Format.checkFormat(12, value, WeightedRC.getPropSettings(prop));
 				case 4 % WeightedRC.TEMPLATE
 					check = Format.checkFormat(8, value, WeightedRC.getPropSettings(prop));
@@ -671,7 +686,7 @@ classdef WeightedRC < Strength
 					
 					weighted_rich_club = cell(l, 1);
 					directionality_layer = g.get('DIRECTIONALITY_TYPE', l);
-					weighted_rich_club_threshold = m.get('WRC_PARAMETER');
+					weighted_rich_club_threshold = m.get('PARAMETRIC_VALUE');
 					assert(isnumeric(weighted_rich_club_threshold) == 1, ...
 					    ['BRAPH2' ':WeightedRichClub:' 'WrongInput'], ...
 					    ['WeightedRichClub threshold must be a positive number ' ...

@@ -5,6 +5,9 @@ EigenVectorCentrality < Measure (m, eigenvector centrality) is the graph Eigenve
 The Eigenvector Centrality (EigenVectorCentrality) of a node is the ith element in the eigenvector corresponding 
 to the largest eigenvalue of the largest eigenvalue of the graphs adjacency matrix.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -114,6 +117,8 @@ A = g.get('A'); % cell with adjacency matrix (for graph) or 2D-cell array (for m
 L = g.get('LAYERNUMBER');
 N = g.get('NODENUMBER');
 eigenvector_centrality = cell(L, 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     Aii = A{li, li};   
     
@@ -127,6 +132,8 @@ parfor li = 1:L
     ec = abs(V(:, idx));
     eigenvector_centrality(li) = {reshape(ec, length(ec), 1)};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = eigenvector_centrality; 
 
 %% ¡tests!

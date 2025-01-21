@@ -10,6 +10,9 @@ The target is obtained from the variables of interest of the subject.
 %%% ¡seealso!
 SubjectCON
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!
@@ -20,7 +23,7 @@ ELCLASS (constant, string) is the class of the % % % .
 %%% ¡prop!
 NAME (constant, string) is the name of a data point for regression with connectivity data.
 %%%% ¡default!
-'NNDataPoint_CON_REG'
+'Neural Network Connectivity Data Point Regression'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of a data point for regression with connectivity data.
@@ -74,110 +77,26 @@ TARGET_IDS (parameter, stringlist) is a list of variable-of-interest IDs to be u
 
 %%% ¡test!
 %%%% ¡name!
-Create example files for regression
+Example
 %%%% ¡code!
-data_dir = [fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS'];
-if ~isdir(data_dir)
-    mkdir(data_dir);
-
-    % Brain Atlas
-    im_ba = ImporterBrainAtlasXLS('FILE', 'desikan_atlas.xlsx');
-    ba = im_ba.get('BA');
-    ex_ba = ExporterBrainAtlasXLS( ...
-        'BA', ba, ...
-        'FILE', [data_dir filesep() 'atlas.xlsx'] ...
-        );
-    ex_ba.get('SAVE')
-    N = ba.get('BR_DICT').get('LENGTH');
-
-    % saves RNG
-    rng_settings_ = rng(); rng('default')
-
-    sex_options = {'Female' 'Male'};
-
-    % Group 
-    K = 2; % degree (mean node degree is 2K)
-    beta = 0.3; % Rewiring probability
-    gr_name = 'CON_Group_XLS';
-    gr_dir = [data_dir filesep() gr_name];
-    mkdir(gr_dir);
-    vois = [
-        {{'Subject ID'} {'Age'} {'Sex'}}
-        {{} {} cell2str(sex_options)}
-        ];
-    for i = 1:1:20 % subject number
-        sub_id = ['SubjectCON_' num2str(i)];
-        % create WS graphs with random beta
-        beta(i) = rand(1);
-        h = WattsStrogatz(N, K, beta(i)); % create WS graph
-        % figure(1) % Plot the two graphs to double-check
-        % plot(h1, 'NodeColor',[1 0 0], 'EdgeColor',[0 0 0], 'EdgeAlpha',0.1, 'Layout','circle');
-        % title(['Group 1: Graph with $N = $ ' num2str(N_nodes) ...
-        %     ' nodes, $K = $ ' num2str(K1) ', and $\beta = $ ' num2str(beta1)], ...
-        %     'Interpreter','latex')
-        % axis equal
-
-        A = full(adjacency(h)); A(1:length(A)+1:numel(A)) = 0; % extract the adjacency matrix
-        r = 0 + (0.5 - 0) * rand(size(A)); diffA = A - r; A(A ~= 0) = diffA(A ~= 0); % make the adjacency matrix weighted
-        A = max(A, transpose(A)); % make the adjacency matrix symmetric
-
-        writetable(array2table(A), [gr_dir filesep() sub_id '.xlsx'], 'WriteVariableNames', false)
-
-        % variables of interest
-        age_upperBound = 80;
-        age_lowerBound = 50;
-        age = age_lowerBound + beta(i)*(age_upperBound - age_lowerBound);
-        vois = [vois; {sub_id, age, sex_options(randi(2))}];
-    end
-    writetable(table(vois), [data_dir filesep() gr_name '.vois.xlsx'], 'WriteVariableNames', false)
-
-    % reset RNG
-    rng(rng_settings_)
-end
-%%% ¡test_functions!
-function h = WattsStrogatz(N, K, beta)
-% H = WattsStrogatz(N,K,beta) returns a Watts-Strogatz model graph with N
-% nodes, N*K edges, mean node degree 2*K, and rewiring probability beta.
-%
-% beta = 0 is a ring lattice, and beta = 1 is a random graph.
-
-% Connect each node to its K next and previous neighbors. This constructs
-% indices for a ring lattice.
-    s = repelem((1:N)', 1, K);
-    t = s + repmat(1:K, N, 1);
-    t = mod(t - 1, N) + 1;
-    
-    % Rewire the target node of each edge with probability beta
-    for source = 1:N
-        switchEdge = rand(K, 1) < beta;
-        
-        newTargets = rand(N, 1);
-        newTargets(source) = 0;
-        newTargets(s(t == source)) = 0;
-        newTargets(t(source, ~switchEdge)) = 0;
-        
-        [~, ind] = sort(newTargets, 'descend');
-        t(source, switchEdge) = ind(1:nnz(switchEdge));
-    end
-    
-    h = graph(s,t);
-end
+create_data_NN_REG_CON_TXT() % only creates files if the example folder doesn't already exist
+create_data_NN_REG_CON_XLS() % only creates files if the example folder doesn't already exist
 
 %%% ¡test! 
 %%%% ¡name!
 Create a NNDataset containg NNDataPoint_CON_REG with simulated data
 %%%% ¡code!
 % Load BrainAtlas
-im_ba = ImporterBrainAtlasXLS( ...
-    'FILE', [fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'], ...
+im_ba = ImporterBrainAtlasTXT( ...
+    'FILE', [fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON TXT' filesep 'atlas.txt'], ...
     'WAITBAR', true ...
     );
 
 ba = im_ba.get('BA');
 
 % Load Group of SubjectCON
-im_gr = ImporterGroupSubjectCON_XLS( ...
-    'DIRECTORY', [fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'CON_Group_XLS'], ...
+im_gr = ImporterGroupSubjectCON_TXT( ...
+    'DIRECTORY', [fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON TXT' filesep 'CON_Group_TXT'], ...
     'BA', ba, ...
     'WAITBAR', true ...
     );
@@ -233,7 +152,7 @@ Example training-test regression
 %%%% ¡code!
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_REG')) filesep 'Example data NN REG CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_REG % create example files
+    create_data_NN_REG_CON_XLS() % create example files
 end
 
 example_NN_CON_REG

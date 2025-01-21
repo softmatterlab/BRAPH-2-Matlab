@@ -11,6 +11,9 @@ BrainAtlas can be imported/exported to .txt, .xls and .json files.
 %%% ¡seealso!
 BrainRegion, BrainSurface, ImporterBrainAtlasXLS, ImporterBrainAtlasTXT, ExporterBrainAtlasXLS, ExporterBrainAtlasTXT
 
+%%% ¡build!
+1
+
 %% ¡gui!
 
 %%% ¡menu_import!

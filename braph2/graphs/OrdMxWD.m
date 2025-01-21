@@ -2,21 +2,21 @@ classdef OrdMxWD < Graph
 	%OrdMxWD is an ordinal multiplex weighted directed graph.
 	% It is a subclass of <a href="matlab:help Graph">Graph</a>.
 	%
-	% In an ordinal multiplex weighted directed (WD) graph, all layers have the same number 
+	% In an ordinal multiplex weighted directed graph (OrdMxWD), all layers have the same number 
 	%  of nodes with within-layer weighted directed edges, associated with a real 
 	%  number between 0 and 1 and indicating the strength of the connection.
 	% There are connections between layers connecting the corresponding nodes.
 	% The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.
 	%
 	% The list of OrdMxWD properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal multiplex weighted directed graph.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal multiplex weighted directed graph.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal multiplex weighted directed graph.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal multiplex weighted directed graph.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal multiplex weighted directed graph.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal multiplex weighted directed graph.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal multiplex weighted directed graph.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTIPLEX.
 	%  <strong>10</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.WEIGHTED * ones(layernumber).
 	%  <strong>11</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.DIRECTED * ones(layernumber).
@@ -31,7 +31,7 @@ classdef OrdMxWD < Graph
 	%  <strong>20</strong> <strong>PARTITIONLABELS</strong> 	PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.
 	%  <strong>21</strong> <strong>APARTITIONLABELS</strong> 	APARTITIONLABELS (query, stringlist) returns the partition labels for A.
 	%  <strong>22</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-	%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
+	%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the node labels for each layer.
 	%  <strong>24</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
 	%  <strong>25</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
 	%  <strong>26</strong> <strong>A</strong> 	A (result, cell) is the cell containing the multiplex weighted adjacency matrices of the multiplex weighted directed graph.
@@ -69,33 +69,33 @@ classdef OrdMxWD < Graph
 	%  unchecked - sets a property to NOT checked
 	%
 	% OrdMxWD methods (display):
-	%  tostring - string with information about the multiplex weighted directed graph
-	%  disp - displays information about the multiplex weighted directed graph
-	%  tree - displays the tree of the multiplex weighted directed graph
+	%  tostring - string with information about the ordinal multiplex weighted directed graph
+	%  disp - displays information about the ordinal multiplex weighted directed graph
+	%  tree - displays the tree of the ordinal multiplex weighted directed graph
 	%
 	% OrdMxWD methods (miscellanea):
 	%  getNoValue - returns a pointer to a persistent instance of NoValue
 	%               Use it as Element.getNoValue()
 	%  getCallback - returns the callback to a property
-	%  isequal - determines whether two multiplex weighted directed graph are equal (values, locked)
+	%  isequal - determines whether two ordinal multiplex weighted directed graph are equal (values, locked)
 	%  getElementList - returns a list with all subelements
-	%  copy - copies the multiplex weighted directed graph
+	%  copy - copies the ordinal multiplex weighted directed graph
 	%
 	% OrdMxWD methods (save/load, Static):
-	%  save - saves BRAPH2 multiplex weighted directed graph as b2 file
-	%  load - loads a BRAPH2 multiplex weighted directed graph from a b2 file
+	%  save - saves BRAPH2 ordinal multiplex weighted directed graph as b2 file
+	%  load - loads a BRAPH2 ordinal multiplex weighted directed graph from a b2 file
 	%
 	% OrdMxWD method (JSON encode):
-	%  encodeJSON - returns a JSON string encoding the multiplex weighted directed graph
+	%  encodeJSON - returns a JSON string encoding the ordinal multiplex weighted directed graph
 	%
 	% OrdMxWD method (JSON decode, Static):
-	%   decodeJSON - returns a JSON string encoding the multiplex weighted directed graph
+	%   decodeJSON - returns a JSON string encoding the ordinal multiplex weighted directed graph
 	%
 	% OrdMxWD methods (inspection, Static):
-	%  getClass - returns the class of the multiplex weighted directed graph
+	%  getClass - returns the class of the ordinal multiplex weighted directed graph
 	%  getSubclasses - returns all subclasses of OrdMxWD
-	%  getProps - returns the property list of the multiplex weighted directed graph
-	%  getPropNumber - returns the property number of the multiplex weighted directed graph
+	%  getProps - returns the property list of the ordinal multiplex weighted directed graph
+	%  getPropNumber - returns the property number of the ordinal multiplex weighted directed graph
 	%  existsProp - checks whether property exists/error
 	%  existsTag - checks whether tag exists/error
 	%  getPropProp - returns the property number of a property
@@ -170,7 +170,7 @@ classdef OrdMxWD < Graph
 	end
 	methods % constructor
 		function g = OrdMxWD(varargin)
-			%OrdMxWD() creates a multiplex weighted directed graph.
+			%OrdMxWD() creates a ordinal multiplex weighted directed graph.
 			%
 			% OrdMxWD(PROP, VALUE, ...) with property PROP initialized to VALUE.
 			%
@@ -180,14 +180,14 @@ classdef OrdMxWD < Graph
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of OrdMxWD properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the ordinal multiplex weighted directed graph.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the ordinal multiplex weighted directed graph.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the ordinal multiplex weighted directed graph.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the ordinal multiplex weighted directed graph.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the ordinal multiplex weighted directed graph.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the ordinal multiplex weighted directed graph.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the ordinal multiplex weighted directed graph.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>GRAPH_TYPE</strong> 	GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTIPLEX.
 			%  <strong>10</strong> <strong>CONNECTIVITY_TYPE</strong> 	CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.WEIGHTED * ones(layernumber).
 			%  <strong>11</strong> <strong>DIRECTIONALITY_TYPE</strong> 	DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.DIRECTED * ones(layernumber).
@@ -202,7 +202,7 @@ classdef OrdMxWD < Graph
 			%  <strong>20</strong> <strong>PARTITIONLABELS</strong> 	PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.
 			%  <strong>21</strong> <strong>APARTITIONLABELS</strong> 	APARTITIONLABELS (query, stringlist) returns the partition labels for A.
 			%  <strong>22</strong> <strong>NODELABELS</strong> 	NODELABELS (metadata, stringlist) are the node labels provided by the user.
-			%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the nodel labels for each layer.
+			%  <strong>23</strong> <strong>ANODELABELS</strong> 	ANODELABELS (query, stringlist) returns the node labels for each layer.
 			%  <strong>24</strong> <strong>RANDOMIZE</strong> 	RANDOMIZE (parameter, logical) determines whether to randomize the graph.
 			%  <strong>25</strong> <strong>RANDOM_SEED</strong> 	RANDOM_SEED (parameter, scalar) is the randomization seed.
 			%  <strong>26</strong> <strong>A</strong> 	A (result, cell) is the cell containing the multiplex weighted adjacency matrices of the multiplex weighted directed graph.
@@ -228,13 +228,28 @@ classdef OrdMxWD < Graph
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the ordinal multiplex weighted directed graph.
+			%
+			% BUILD = OrdMxWD.GETBUILD() returns the build of 'OrdMxWD'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = G.GETBUILD() returns the build of the ordinal multiplex weighted directed graph G.
+			%  BUILD = Element.GETBUILD(G) returns the build of 'G'.
+			%  BUILD = Element.GETBUILD('OrdMxWD') returns the build of 'OrdMxWD'.
+			%
+			% Note that the Element.GETBUILD(G) and Element.GETBUILD('OrdMxWD')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function g_class = getClass()
-			%GETCLASS returns the class of the multiplex weighted directed graph.
+			%GETCLASS returns the class of the ordinal multiplex weighted directed graph.
 			%
 			% CLASS = OrdMxWD.GETCLASS() returns the class 'OrdMxWD'.
 			%
 			% Alternative forms to call this method are:
-			%  CLASS = G.GETCLASS() returns the class of the multiplex weighted directed graph G.
+			%  CLASS = G.GETCLASS() returns the class of the ordinal multiplex weighted directed graph G.
 			%  CLASS = Element.GETCLASS(G) returns the class of 'G'.
 			%  CLASS = Element.GETCLASS('OrdMxWD') returns 'OrdMxWD'.
 			%
@@ -244,12 +259,12 @@ classdef OrdMxWD < Graph
 			g_class = 'OrdMxWD';
 		end
 		function subclass_list = getSubclasses()
-			%GETSUBCLASSES returns all subclasses of the multiplex weighted directed graph.
+			%GETSUBCLASSES returns all subclasses of the ordinal multiplex weighted directed graph.
 			%
 			% LIST = OrdMxWD.GETSUBCLASSES() returns all subclasses of 'OrdMxWD'.
 			%
 			% Alternative forms to call this method are:
-			%  LIST = G.GETSUBCLASSES() returns all subclasses of the multiplex weighted directed graph G.
+			%  LIST = G.GETSUBCLASSES() returns all subclasses of the ordinal multiplex weighted directed graph G.
 			%  LIST = Element.GETSUBCLASSES(G) returns all subclasses of 'G'.
 			%  LIST = Element.GETSUBCLASSES('OrdMxWD') returns all subclasses of 'OrdMxWD'.
 			%
@@ -261,16 +276,16 @@ classdef OrdMxWD < Graph
 			subclass_list = { 'OrdMxWD' }; %CET: Computational Efficiency Trick
 		end
 		function prop_list = getProps(category)
-			%GETPROPS returns the property list of multiplex weighted directed graph.
+			%GETPROPS returns the property list of ordinal multiplex weighted directed graph.
 			%
-			% PROPS = OrdMxWD.GETPROPS() returns the property list of multiplex weighted directed graph
+			% PROPS = OrdMxWD.GETPROPS() returns the property list of ordinal multiplex weighted directed graph
 			%  as a row vector.
 			%
 			% PROPS = OrdMxWD.GETPROPS(CATEGORY) returns the property list 
 			%  of category CATEGORY.
 			%
 			% Alternative forms to call this method are:
-			%  PROPS = G.GETPROPS([CATEGORY]) returns the property list of the multiplex weighted directed graph G.
+			%  PROPS = G.GETPROPS([CATEGORY]) returns the property list of the ordinal multiplex weighted directed graph G.
 			%  PROPS = Element.GETPROPS(G[, CATEGORY]) returns the property list of 'G'.
 			%  PROPS = Element.GETPROPS('OrdMxWD'[, CATEGORY]) returns the property list of 'OrdMxWD'.
 			%
@@ -306,15 +321,15 @@ classdef OrdMxWD < Graph
 			end
 		end
 		function prop_number = getPropNumber(varargin)
-			%GETPROPNUMBER returns the property number of multiplex weighted directed graph.
+			%GETPROPNUMBER returns the property number of ordinal multiplex weighted directed graph.
 			%
-			% N = OrdMxWD.GETPROPNUMBER() returns the property number of multiplex weighted directed graph.
+			% N = OrdMxWD.GETPROPNUMBER() returns the property number of ordinal multiplex weighted directed graph.
 			%
-			% N = OrdMxWD.GETPROPNUMBER(CATEGORY) returns the property number of multiplex weighted directed graph
+			% N = OrdMxWD.GETPROPNUMBER(CATEGORY) returns the property number of ordinal multiplex weighted directed graph
 			%  of category CATEGORY
 			%
 			% Alternative forms to call this method are:
-			%  N = G.GETPROPNUMBER([CATEGORY]) returns the property number of the multiplex weighted directed graph G.
+			%  N = G.GETPROPNUMBER([CATEGORY]) returns the property number of the ordinal multiplex weighted directed graph G.
 			%  N = Element.GETPROPNUMBER(G) returns the property number of 'G'.
 			%  N = Element.GETPROPNUMBER('OrdMxWD') returns the property number of 'OrdMxWD'.
 			%
@@ -350,7 +365,7 @@ classdef OrdMxWD < Graph
 			end
 		end
 		function check_out = existsProp(prop)
-			%EXISTSPROP checks whether property exists in multiplex weighted directed graph/error.
+			%EXISTSPROP checks whether property exists in ordinal multiplex weighted directed graph/error.
 			%
 			% CHECK = OrdMxWD.EXISTSPROP(PROP) checks whether the property PROP exists.
 			%
@@ -388,7 +403,7 @@ classdef OrdMxWD < Graph
 			end
 		end
 		function check_out = existsTag(tag)
-			%EXISTSTAG checks whether tag exists in multiplex weighted directed graph/error.
+			%EXISTSTAG checks whether tag exists in ordinal multiplex weighted directed graph/error.
 			%
 			% CHECK = OrdMxWD.EXISTSTAG(TAG) checks whether a property with tag TAG exists.
 			%
@@ -554,7 +569,7 @@ classdef OrdMxWD < Graph
 			prop = OrdMxWD.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			ordmxwd_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the ordinal multiplex weighted directed graph.'  'DESCRIPTION (constant, string) is the description of the ordinal multiplex weighted directed graph.'  'TEMPLATE (parameter, item) is the template of the ordinal multiplex weighted directed graph.'  'ID (data, string) is a few-letter code for the ordinal multiplex weighted directed graph.'  'LABEL (metadata, string) is an extended label of the ordinal multiplex weighted directed graph.'  'NOTES (metadata, string) are some specific notes about the ordinal multiplex weighted directed graph.'  'TOSTRING (query, string) returns a string that represents the object.'  'GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTIPLEX.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.WEIGHTED * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.DIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels for A.'  'PARTITIONTICKS (metadata, rvector) are the partition tick values.'  'APARTITIONTICKS (query, rvector) returns the partition tick values.'  'PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.'  'APARTITIONLABELS (query, stringlist) returns the partition labels for A.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the nodel labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell containing the multiplex weighted adjacency matrices of the multiplex weighted directed graph.'  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multiplex adjacency matrices on the diagonal.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.'  'RANDOMIZATION (query, cell) performs the randomization of a connectivity matrix.' };
+			ordmxwd_description_list = { 'ELCLASS (constant, string) is the class of the ordinal multiplex weighted directed graph.'  'NAME (constant, string) is the name of the ordinal multiplex weighted directed graph.'  'DESCRIPTION (constant, string) is the description of the ordinal multiplex weighted directed graph.'  'TEMPLATE (parameter, item) is the template of the ordinal multiplex weighted directed graph.'  'ID (data, string) is a few-letter code for the ordinal multiplex weighted directed graph.'  'LABEL (metadata, string) is an extended label of the ordinal multiplex weighted directed graph.'  'NOTES (metadata, string) are some specific notes about the ordinal multiplex weighted directed graph.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'GRAPH_TYPE (constant, scalar) returns the graph type Graph.ORDERED_MULTIPLEX.'  'CONNECTIVITY_TYPE (query, smatrix) returns the connectivity type Graph.WEIGHTED * ones(layernumber).'  'DIRECTIONALITY_TYPE (query, smatrix) returns the directionality type Graph.DIRECTED * ones(layernumber).'  'SELFCONNECTIVITY_TYPE (query, smatrix) returns the self-connectivity type Graph.NONSELFCONNECTED on the diagonal and Graph.SELFCONNECTED off diagonal.'  'NEGATIVITY_TYPE (query, smatrix) returns the negativity type Graph.NONNEGATIVE * ones(layernumber).'  'LAYERTICKS (metadata, rvector) are the layer tick values.'  'ALAYERTICKS (query, rvector) returns the layer tick values.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the layer labels for A.'  'PARTITIONTICKS (metadata, rvector) are the partition tick values.'  'APARTITIONTICKS (query, rvector) returns the partition tick values.'  'PARTITIONLABELS (metadata, stringlist) are the partition labels provided by the user.'  'APARTITIONLABELS (query, stringlist) returns the partition labels for A.'  'NODELABELS (metadata, stringlist) are the node labels provided by the user.'  'ANODELABELS (query, stringlist) returns the node labels for each layer.'  'RANDOMIZE (parameter, logical) determines whether to randomize the graph.'  'RANDOM_SEED (parameter, scalar) is the randomization seed.'  'A (result, cell) is the cell containing the multiplex weighted adjacency matrices of the multiplex weighted directed graph.'  'A_CHECK (query, logical) checks the format of the adjacency matrix.'  'NODENUMBER (result, rvector) returns the number of nodes in the graph; for non single layer graphs it returns an array with the number of nodes in each layer.'  'LAYERNUMBER (result, scalar) returns the number of layers in the graph.'  'PARTITIONS (result, rvector) returns the number of layers in the partitions of the graph.'  'M_DICT (result, idict) contains the calculated measures of the graph.'  'COMPATIBLE_MEASURES (constant, classlist) is the list of compatible measures.'  'MEASURE (query, item) returns a measure.'  'PFGA (gui, item) contains the panel figure of the graph adjacency matrix.'  'PFGH (gui, item) contains the panel figure of the graph histogram.'  'B (data, cell) is the input cell containing the multiplex adjacency matrices on the diagonal.'  'SEMIPOSITIVIZE_RULE (parameter, option) determines how to remove the negative edges.'  'STANDARDIZE_RULE (parameter, option) determines how to normalize the weights between 0 and 1.'  'ATTEMPTSPEREDGE (parameter, scalar) is the attempts to rewire each edge.'  'NUMBEROFWEIGHTS (parameter, scalar) specifies the number of weights sorted at the same time.'  'RANDOMIZATION (query, cell) performs the randomization of a connectivity matrix.' };
 			prop_description = ordmxwd_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -636,9 +651,9 @@ classdef OrdMxWD < Graph
 				case 1 % OrdMxWD.ELCLASS
 					prop_default = 'OrdMxWD';
 				case 2 % OrdMxWD.NAME
-					prop_default = 'OrdMxWD';
+					prop_default = 'Ordinal Multiplex Weighted Directed';
 				case 3 % OrdMxWD.DESCRIPTION
-					prop_default = 'In an ordinal multiplex weighted directed (WD) graph, all layers have the same number of nodes with within-layer weighted directed edges, associated with a real number between 0 and 1 and indicating the strength of the connection. There are connections between layers connecting the corresponding nodes.';
+					prop_default = 'In an ordinal multiplex weighted directed graph (OrdMxWD), all layers have the same number of nodes with within-layer weighted directed edges, associated with a real number between 0 and 1 and indicating the strength of the connection. There are connections between layers connecting the corresponding nodes.';
 				case 4 % OrdMxWD.TEMPLATE
 					prop_default = Format.getFormatDefault(8, OrdMxWD.getPropSettings(prop));
 				case 5 % OrdMxWD.ID
@@ -650,7 +665,7 @@ classdef OrdMxWD < Graph
 				case 9 % OrdMxWD.GRAPH_TYPE
 					prop_default = 3;
 				case 32 % OrdMxWD.COMPATIBLE_MEASURES
-					prop_default = { 'DegreeIn'  'DegreeInAv'  'DegreeOut'  'DegreeOutAv'  'Distance'  'EccentricityIn'  'EccentricityInAv'  'EccentricityOut'  'GlobalEfficiencyIn'  'GlobalEfficiencyInAv'  'GlobalEfficiencyOut'  'GlobalEfficiencyOutAv'  'OverlappingDegIn'  'OverlappingDegInAv'  'OverlappingDegOut'  'OverlappingDegOutAv'  'OverlappingSIn'  'OverlappingSInAv'  'OverlappingSOut'  'OverlappingSOutAv'  'StrengthIn'  'StrengthInAv'  'StrengthOut'  'StrengthOutAv'  'Triangles'  'WeightedEdgeOvlp'  'WeightedMxPIn'  'WeightedMxPOut' };
+					prop_default = { 'DegreeIn'  'DegreeInAv'  'DegreeOut'  'DegreeOutAv'  'Distance'  'EccentricityIn'  'EccentricityInAv'  'EccentricityOut'  'EccentricityOutAv'  'GlobalEfficiencyIn'  'GlobalEfficiencyInAv'  'GlobalEfficiencyOut'  'GlobalEfficiencyOutAv'  'OverlappingDegIn'  'OverlappingDegInAv'  'OverlappingDegOut'  'OverlappingDegOutAv'  'OverlappingSIn'  'OverlappingSInAv'  'OverlappingSOut'  'OverlappingSOutAv'  'StrengthIn'  'StrengthInAv'  'StrengthOut'  'StrengthOutAv'  'Triangles'  'WeightedEdgeOvlp'  'WeightedMxPIn'  'WeightedMxPOut' };
 				otherwise
 					prop_default = getPropDefault@Graph(prop);
 			end

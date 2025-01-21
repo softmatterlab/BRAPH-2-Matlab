@@ -7,6 +7,9 @@ ComparisonGroupPF_BB manages the basic functionalities to plot of a binodal bila
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

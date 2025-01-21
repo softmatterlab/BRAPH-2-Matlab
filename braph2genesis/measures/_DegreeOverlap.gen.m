@@ -5,6 +5,9 @@ DegreeOverlap < EdgeOverlap (m, degree overlap) is the graph Degree Overlap.
 The Degree Overlap (DegreeOverlap) is the number of edges connected to a node in all layers. 
 Connection weights are ignored in calculations.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

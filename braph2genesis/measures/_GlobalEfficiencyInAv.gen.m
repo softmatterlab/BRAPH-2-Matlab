@@ -4,6 +4,9 @@ GlobalEfficiencyInAv < GlobalEfficiencyIn (m, average in-global efficiency) is t
 %%% ¡description!
 The Average In-Global Efficiency (GlobalEfficiencyInAv) is the average inverse shortest in-path length within each layer. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -114,9 +117,13 @@ L = g.get('LAYERNUMBER');
 in_global_efficiency = calculateValue@GlobalEfficiencyIn(m, prop);
 
 in_global_efficiency_av = cell(L, 1);
+
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:1:L
     in_global_efficiency_av(li) = {mean(in_global_efficiency{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
+
 value = in_global_efficiency_av;
 
 %% ¡tests!

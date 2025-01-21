@@ -7,6 +7,9 @@ The Rich-Club Strength (RCS) of a node at level PARAMETRIC_VALUE is the sum of t
  PARAMETRIC_VALUE is set by the user and it can be a vector containing all the strength thresholds 
  the default value is equal to 1.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

@@ -13,7 +13,7 @@ classdef KCore < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the K-Core.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the K-Core.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the K-Core.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.BINODAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -134,7 +134,7 @@ classdef KCore < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the K-Core.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the K-Core.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the K-Core.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.BINODAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -150,6 +150,21 @@ classdef KCore < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the kcore.
+			%
+			% BUILD = KCore.GETBUILD() returns the build of 'KCore'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the kcore M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('KCore') returns the build of 'KCore'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('KCore')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the kcore.
 			%
@@ -476,7 +491,7 @@ classdef KCore < Measure
 			prop = KCore.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			kcore_description_list = { 'ELCLASS (constant, string) is the class of the K-Core.'  'NAME (constant, string) is the name of the K-Core.'  'DESCRIPTION (constant, string) is the description of the K-Core.'  'TEMPLATE (parameter, item) is the template of the K-Core.'  'ID (data, string) is a few-letter code of the K-Core.'  'LABEL (metadata, string) is an extended label of the K-Core.'  'NOTES (metadata, string) are some specific notes about the K-Core.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.BINODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the K-Core.'  'PFM (gui, item) contains the panel figure of the measure.'  'KCORETHRESHOLD (parameter, scalar) is the k-core threshold' };
+			kcore_description_list = { 'ELCLASS (constant, string) is the class of the K-Core.'  'NAME (constant, string) is the name of the K-Core.'  'DESCRIPTION (constant, string) is the description of the K-Core.'  'TEMPLATE (parameter, item) is the template of the K-Core.'  'ID (data, string) is a few-letter code of the K-Core.'  'LABEL (metadata, string) is an extended label of the K-Core.'  'NOTES (metadata, string) are some specific notes about the K-Core.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.BINODAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the K-Core.'  'PFM (gui, item) contains the panel figure of the measure.'  'KCORETHRESHOLD (parameter, scalar) is the k-core threshold' };
 			prop_description = kcore_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -670,6 +685,8 @@ classdef KCore < Measure
 					
 					k_core = cell(L, 1);
 					directionality_type =  g.get('DIRECTIONALITY_TYPE', L);
+					
+					warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					parfor li = 1:1:L    
 					    Aii = A{li, li};
 					    directionality_layer = directionality_type(li, li);   
@@ -697,6 +714,7 @@ classdef KCore < Measure
 					    end
 					    k_core(li) = {subAii};  % add k-core of layer li
 					end
+					warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 					
 					value = k_core;
 					

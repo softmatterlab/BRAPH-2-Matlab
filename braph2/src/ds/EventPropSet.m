@@ -20,7 +20,7 @@ classdef (ConstructOnLoad) EventPropSet < event.EventData
             %EVENTPROPSET() creates a data container for the PropSet event.
             %
             % EVENTPROPSET(EL, POINTER1, POINTER2, ... ) with element EL and the
-            %  POINTER1, POINTER2, ... to the propertires that have been set. 
+            %  POINTER1, POINTER2, ... to the properties that have been set. 
             %  Each POINTER1, POINTER2, ... can be either a TAG or a PROP.
             %
             % See also Element, event.

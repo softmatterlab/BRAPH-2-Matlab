@@ -7,6 +7,9 @@ ComparisonGroupBrainPF_NS manages the basic functionalities to plot of a nodal s
 %%% ¡seealso!
 ComparisonGroup
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

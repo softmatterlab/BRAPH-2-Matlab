@@ -5,6 +5,9 @@ WeightedMxP < Measure (m, weighted multiplex participation) is the graph Weighte
 The Weighted Multiplex Participation (WeightedMxP) of a graph is the nodal homogeneity 
  of its number of neighbors across the layers. 
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

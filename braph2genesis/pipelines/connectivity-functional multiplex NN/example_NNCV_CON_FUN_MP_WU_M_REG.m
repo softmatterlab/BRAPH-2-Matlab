@@ -71,8 +71,7 @@ d = NNDataset( ...
     );
 
 %% Create a regressor cross-validation
-nne_template = NNRegressorMLP_Evaluator('P', 2);
-nncv = NNRegressorMLP_CrossValidation('D', {d}, 'KFOLDS', 2, 'NNEVALUATOR_TEMPLATE', nne_template);
+nncv = NNRegressorMLP_CrossValidation('D', {d}, 'KFOLDS', 2);
 nncv.get('TRAIN');
 
 %% Evaluate the performance

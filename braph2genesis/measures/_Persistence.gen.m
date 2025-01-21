@@ -10,6 +10,9 @@ of the number of nodes that do not change community assignments, whereas
 in ordinal multilayer networks (e.g. temporal), it is the number of nodes 
 that do not change community assignments between consecutive layers.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -113,7 +116,7 @@ NAME (constant, string) is the name of the Persistence.
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the Persistence.
 %%%% ¡default!
-'The Persistence (Persistence) of a multilayer network is calculated as the normalized sum of the number of nodes that do not change community assignments. It varies between 0 and 1. In categorical multilayer networks, it is the sum over all pairs of layers of the number of nodes that do not change community assignments, whereas in ordinal multilayer networks (e. g. temporal), it is the number of nodes that do not change community assignments between consecutive layers.'
+'The Persistence (Persistence) of a multilayer network is calculated as the normalized sum of the number of nodes that do not change community assignments. It varies between 0 and 1. In categorical multilayer networks, it is the sum over all pairs of layers of the number of nodes that do not change community assignments, whereas in ordinal multilayer networks (e.g. temporal), it is the number of nodes that do not change community assignments between consecutive layers.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the Persistence.
@@ -153,7 +156,7 @@ Measure.NONPARAMETRIC
 %%% ¡prop!
 COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.
 %%%% ¡default!
-{'MultiplexWU' 'OrdMxWU' 'MultiplexBU' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};
+{'MultiplexWU' 'MultiplexWD' 'OrdMxWU' 'MultiplexBU' 'MultiplexBD' 'MultiplexBUT' 'MultiplexBUD' 'MultilayerBU' 'MultilayerWU' 'OrdMlWU'};
 
 %%% ¡prop!
 M (result, cell) is the categorical Persistence.

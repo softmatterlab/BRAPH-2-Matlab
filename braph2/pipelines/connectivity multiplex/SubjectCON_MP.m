@@ -5,14 +5,14 @@ classdef SubjectCON_MP < Subject
 	% Subject with L connectivity matrices (e.g. obtained from DTI).
 	%
 	% The list of SubjectCON_MP properties is:
-	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+	%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the subject.
 	%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
 	%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
 	%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
 	%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 	%  <strong>11</strong> <strong>L</strong> 	L (data, scalar) is the number of layers of subject data.
@@ -107,6 +107,8 @@ classdef SubjectCON_MP < Subject
 	%
 	%
 	% See also ImporterGroupSubjectCON_MP_TXT, ExporterGroupSubjectCON_MP_TXT, ImporterGroupSubjectCON_MP_XLS, ExporterGroupSubjectCON_MP_XLS.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		BA = 10; %CET: Computational Efficiency Trick
@@ -146,14 +148,14 @@ classdef SubjectCON_MP < Subject
 			%  them with either property numbers (PROP) or tags (TAG).
 			%
 			% The list of SubjectCON_MP properties is:
-			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the % % % .
+			%  <strong>1</strong> <strong>ELCLASS</strong> 	ELCLASS (constant, string) is the class of the subject.
 			%  <strong>2</strong> <strong>NAME</strong> 	NAME (constant, string) is the name of the subject.
 			%  <strong>3</strong> <strong>DESCRIPTION</strong> 	DESCRIPTION (constant, string) is the description of the subject.
 			%  <strong>4</strong> <strong>TEMPLATE</strong> 	TEMPLATE (parameter, item) is the template of the subject.
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the subject.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the subject.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the subject.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>VOI_DICT</strong> 	VOI_DICT (data, idict) contains the variables of interest of the subject.
 			%  <strong>10</strong> <strong>BA</strong> 	BA (data, item) is a brain atlas.
 			%  <strong>11</strong> <strong>L</strong> 	L (data, scalar) is the number of layers of subject data.
@@ -167,6 +169,21 @@ classdef SubjectCON_MP < Subject
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the subject with connectivity multiplex data.
+			%
+			% BUILD = SubjectCON_MP.GETBUILD() returns the build of 'SubjectCON_MP'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = SUB.GETBUILD() returns the build of the subject with connectivity multiplex data SUB.
+			%  BUILD = Element.GETBUILD(SUB) returns the build of 'SUB'.
+			%  BUILD = Element.GETBUILD('SubjectCON_MP') returns the build of 'SubjectCON_MP'.
+			%
+			% Note that the Element.GETBUILD(SUB) and Element.GETBUILD('SubjectCON_MP')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function sub_class = getClass()
 			%GETCLASS returns the class of the subject with connectivity multiplex data.
 			%
@@ -485,7 +502,7 @@ classdef SubjectCON_MP < Subject
 			prop = SubjectCON_MP.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			subjectcon_mp_description_list = { 'ELCLASS (constant, string) is the class of the % % % .'  'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'TOSTRING (query, string) returns a string that represents the object.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'L (data, scalar) is the number of layers of subject data.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the processed layer labels.'  'CON_MP (data, cell) is a cell containing L matrices corresponding connectivity matrices of each layer.' };
+			subjectcon_mp_description_list = { 'ELCLASS (constant, string) is the class of the subject.'  'NAME (constant, string) is the name of the subject.'  'DESCRIPTION (constant, string) is the description of the subject.'  'TEMPLATE (parameter, item) is the template of the subject.'  'ID (data, string) is a few-letter code for the subject.'  'LABEL (metadata, string) is an extended label of the subject.'  'NOTES (metadata, string) are some specific notes about the subject.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'VOI_DICT (data, idict) contains the variables of interest of the subject.'  'BA (data, item) is a brain atlas.'  'L (data, scalar) is the number of layers of subject data.'  'LAYERLABELS (metadata, stringlist) are the layer labels provided by the user.'  'ALAYERLABELS (query, stringlist) returns the processed layer labels.'  'CON_MP (data, cell) is a cell containing L matrices corresponding connectivity matrices of each layer.' };
 			prop_description = subjectcon_mp_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)
@@ -551,7 +568,7 @@ classdef SubjectCON_MP < Subject
 				case 10 % SubjectCON_MP.BA
 					prop_default = Format.getFormatDefault(8, SubjectCON_MP.getPropSettings(prop));
 				case 11 % SubjectCON_MP.L
-					prop_default = 2;
+					prop_default = Format.getFormatDefault(11, SubjectCON_MP.getPropSettings(prop));
 				case 12 % SubjectCON_MP.LAYERLABELS
 					prop_default = Format.getFormatDefault(3, SubjectCON_MP.getPropSettings(prop));
 				case 13 % SubjectCON_MP.ALAYERLABELS
@@ -561,7 +578,7 @@ classdef SubjectCON_MP < Subject
 				case 1 % SubjectCON_MP.ELCLASS
 					prop_default = 'SubjectCON_MP';
 				case 2 % SubjectCON_MP.NAME
-					prop_default = 'SubjectCON_MP';
+					prop_default = 'Multiplex Connectivity Subject';
 				case 3 % SubjectCON_MP.DESCRIPTION
 					prop_default = 'Subject with L connectivity matrices (e.g. obtained from DTI).';
 				case 5 % SubjectCON_MP.ID
@@ -705,18 +722,18 @@ classdef SubjectCON_MP < Subject
 					end
 					
 				case 12 % SubjectCON_MP.LAYERLABELS
-					if ~isa(sub.getr('L'), 'NoValue') && length(sub.get('LAYERLABELS')) == sub.get('L')
+					if ~isa(sub.getr('L'), 'NoValue') && length(sub.get('LAYERLABELS')) ~= sub.get('L')
 					    title = ['About Layer Labels'];
-					    
 					    message = {''
-					        ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use doubl slashes to avoid genesis problem
-					        ['{\color{gray}version ' '2.0.0.b2' '}']
+					        ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use double slashes to avoid genesis problem
+					        ['{\color{gray}version ' '2.0.0' '}']
 					        ['{\color{gray}build ' int2str(6) '}']
 					        ''
 					        'Please, select a valid number of Layer Labels.'
 					        ''
 					        ''};
 					    braph2msgbox(title, message)
+					    
 					    sub.set('LAYERLABELS', cat(1, strsplit(num2str(1:1:length(sub.get('CON_MP'))))))
 					end
 					

@@ -6,6 +6,9 @@ The Community Structure (CommunityStructure) of a graph is a subdivision of the 
 non-overlapping groups of nodes which maximizes the number of within group 
 edges, and minimizes the number of between group edges.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

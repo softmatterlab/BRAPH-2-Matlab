@@ -5,6 +5,9 @@ WeightedEdgeOvlp < Measure (m, weighted edge overlap) is the graph Weighted Edge
 The Weighted Edge Overlap (WeightedEdgeOvlp) of a graph is the average weight of an edge 
 across all layers.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!

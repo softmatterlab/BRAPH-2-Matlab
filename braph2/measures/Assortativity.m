@@ -16,7 +16,7 @@ classdef Assortativity < Measure
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Assortativity.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Assortativity.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Assortativity.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 	%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 	%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -130,7 +130,7 @@ classdef Assortativity < Measure
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code of the Assortativity.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the Assortativity.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the Assortativity.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SHAPE</strong> 	SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.
 			%  <strong>10</strong> <strong>SCOPE</strong> 	SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.
 			%  <strong>11</strong> <strong>PARAMETRICITY</strong> 	PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.
@@ -145,6 +145,21 @@ classdef Assortativity < Measure
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the assortativity.
+			%
+			% BUILD = Assortativity.GETBUILD() returns the build of 'Assortativity'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = M.GETBUILD() returns the build of the assortativity M.
+			%  BUILD = Element.GETBUILD(M) returns the build of 'M'.
+			%  BUILD = Element.GETBUILD('Assortativity') returns the build of 'Assortativity'.
+			%
+			% Note that the Element.GETBUILD(M) and Element.GETBUILD('Assortativity')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function m_class = getClass()
 			%GETCLASS returns the class of the assortativity.
 			%
@@ -471,7 +486,7 @@ classdef Assortativity < Measure
 			prop = Assortativity.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			assortativity_description_list = { 'ELCLASS (constant, string) is the class of the Assortativity.'  'NAME (constant, string) is the name of the Assortativity.'  'DESCRIPTION (constant, string) is the description of the Assortativity.'  'TEMPLATE (parameter, item) is the template of the Assortativity.'  'ID (data, string) is a few-letter code of the Assortativity.'  'LABEL (metadata, string) is an extended label of the Assortativity.'  'NOTES (metadata, string) are some specific notes about the Assortativity.'  'TOSTRING (query, string) returns a string that represents the object.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the assortativity value.'  'PFM (gui, item) contains the panel figure of the measure.' };
+			assortativity_description_list = { 'ELCLASS (constant, string) is the class of the Assortativity.'  'NAME (constant, string) is the name of the Assortativity.'  'DESCRIPTION (constant, string) is the description of the Assortativity.'  'TEMPLATE (parameter, item) is the template of the Assortativity.'  'ID (data, string) is a few-letter code of the Assortativity.'  'LABEL (metadata, string) is an extended label of the Assortativity.'  'NOTES (metadata, string) are some specific notes about the Assortativity.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SHAPE (constant, scalar) is the measure shape Measure.GLOBAL.'  'SCOPE (constant, scalar) is the measure scope Measure.UNILAYER.'  'PARAMETRICITY (constant, scalar) is the parametricity of the measure Measure.NONPARAMETRIC.'  'COMPATIBLE_GRAPHS (constant, classlist) is the list of compatible graphs.'  'G (data, item) is the measure graph.'  'M (result, cell) is the cell containing the assortativity value.'  'PFM (gui, item) contains the panel figure of the measure.' };
 			prop_description = assortativity_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

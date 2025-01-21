@@ -2,11 +2,16 @@
 NNClassifierMLP < NNBase (nn, multi-layer perceptron classifier) comprises a multi-layer perceptron classifier model and a given dataset.
 
 %%% ¡description!
-A neural network multi-layer perceptron classifier (NNClassifierMLP) comprises a multi-layer perceptron classifier model and a given dataset.
-NNClassifierMLP trains the multi-layer perceptron classifier with a formatted inputs ("CB", channel and batch) derived from the given dataset.
+A neural network multi-layer perceptron classifier (NNClassifierMLP) comprises
+ a multi-layer perceptron classifier model and a given dataset.
+NNClassifierMLP trains the multi-layer perceptron classifier with a formatted 
+ inputs ("CB", channel and batch) derived from the given dataset.
 
 %%% ¡seealso!
 NNDataPoint_CON_CLA, NNClassifier_Evaluator
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -91,14 +96,14 @@ Neural Networks NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the neural network multi-layer perceptron classifier.
 %%%% ¡default!
 'NNClassifierMLP'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the neural network multi-layer perceptron classifier.
 %%%% ¡default!
-'NNClassifierMLP'
+'Neural Network Multi-layer Perceptron Classifier'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the neural network multi-layer perceptron classifier.
@@ -136,7 +141,6 @@ NNDataset('DP_CLASS', 'NNDataPoint_CON_CLA')
 DP_CLASSES (parameter, classlist) is the list of compatible data points.
 %%%% ¡default!
 {'NNDataPoint_CON_CLA' 'NNDataPoint_CON_FUN_MP_CLA' 'NNDataPoint_FUN_CLA' 'NNDataPoint_ST_CLA' 'NNDataPoint_ST_MM_CLA' 'NNDataPoint_Graph_CLA' 'NNDataPoint_Measure_CLA'}
-
 
 %%% ¡prop!
 INPUTS (query, cell) constructs the data in the CB (channel-batch) format.
@@ -184,14 +188,15 @@ if isempty(varargin)
 end
 d = varargin{1};
 
-target_ids = nn.get('TARGET_IDS', d);
-value = onehotencode(categorical(target_ids), 2);
+targets = cellfun(@(target) cell2mat(target),  d.get('TARGETS'), 'UniformOutput', false);
+targets = categorical(cell2mat(targets))';
+value = onehotencode(targets, 2, "ClassNames", flip(string(unique(targets))));
 
 %%% ¡prop!
 MODEL (result, net) is a trained neural network model.
 %%%% ¡calculate!
 inputs = cell2mat(nn.get('INPUTS', nn.get('D')));
-targets = nn.get('TARGET_IDS', nn.get('D'));
+targets = nn.get('TARGET_CLASSES', nn.get('D'));
 if isempty(inputs) || isempty(targets)
     value = network();
 else
@@ -231,22 +236,22 @@ end
 %% ¡props!
 
 %%% ¡prop!
-TARGET_IDS (query, stringlist) constructs the target IDs which represent the class of each data point.
+TARGET_CLASSES (query, stringlist) constructs the target classes which represent the class of each data point.
 %%%% ¡calculate!
-% targets = nn.get('TARGET_IDS', D) returns a cell array with the
-%  targets for all data points in dataset D.
+% target_classes = nn.get('TARGET_CLASSES', D) returns a cell array with the
+%  target classes for all data points in dataset D.
 if isempty(varargin)
     value = {''};
     return
 end
 d = varargin{1};
-targets = d.get('TARGETS');
-if isempty(targets)
+dp_dict = d.get('DP_DICT');
+if dp_dict.get('LENGTH') == 0
     value = {''};
 else
     nn_targets = [];
-    for i = 1:1:length(targets)
-        target = targets{i};
+    for i = 1:1:dp_dict.get('LENGTH')
+        target = dp_dict.get('IT', i).get('TARGET_CLASS');
         nn_targets = [nn_targets; target];
     end
     value = nn_targets;
@@ -301,8 +306,11 @@ original_loss = crossentropy(net.predict(inputs), targets);
 wb = braph2waitbar(nn.get('WAITBAR'), 0, ['Feature importance permutation ...']);
 
 start = tic;
+
 for i = 1:1:P
     rng(seeds(i), 'twister')
+
+    warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
     parfor j = 1:1:number_features
         scrambled_inputs = inputs;
         permuted_value = squeeze(normrnd(mean(inputs(:, j)), std(inputs(:, j)), squeeze(size(inputs(:, j))))) + squeeze(randn(size(inputs(:, j)))) + mean(inputs(:, j));
@@ -310,6 +318,7 @@ for i = 1:1:P
         scrambled_loss = crossentropy(net.predict(scrambled_inputs), targets);
         feature_importance(j) = scrambled_loss;
     end
+    warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
     feature_importance_all_permutations{i} = feature_importance / original_loss;
 
@@ -335,7 +344,7 @@ train the classifier with example data
 
 % ensure the example data is generated
 if ~isfile([fileparts(which('NNDataPoint_CON_CLA')) filesep 'Example data NN CLA CON XLS' filesep 'atlas.xlsx'])
-    test_NNDataPoint_CON_CLA % create example files
+    create_data_NN_CLA_CON_XLS() % create example files
 end
 
 % Load BrainAtlas
@@ -368,7 +377,7 @@ gr2 = im_gr2.get('GR');
 it_list1 = cellfun(@(x) NNDataPoint_CON_CLA( ...
     'ID', x.get('ID'), ...
     'SUB', x, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     gr1.get('SUB_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 
@@ -376,7 +385,7 @@ it_list1 = cellfun(@(x) NNDataPoint_CON_CLA( ...
 it_list2 = cellfun(@(x) NNDataPoint_CON_CLA( ...
     'ID', x.get('ID'), ...
     'SUB', x, ...
-    'TARGET_IDS', {group_folder_name}), ...
+    'TARGET_CLASS', {group_folder_name}), ...
     gr2.get('SUB_DICT').get('IT_LIST'), ...
     'UniformOutput', false);
 

@@ -2,11 +2,14 @@
 MultiplexWU < Graph (g, multiplex weighted undirected graph) is a multiplex weighted undirected graph.
 
 %%% ¡description!
-In a multiplex weighted undirected (WU) graph, all layers have the same number 
+In a multiplex weighted undirected graph (MultiplexWU), all layers have the same number 
  of nodes with within-layer weighted undirected edges, associated with a real 
  number between 0 and 1 and indicating the strength of the connection.
 The connectivity matrices are symmetric.
 There are connections between layers connecting the corresponding nodes.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -121,19 +124,19 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the % % % .
+ELCLASS (constant, string) is the class of the multiplex weighted undirected graph.
 %%%% ¡default!
 'MultiplexWU'
 
 %%% ¡prop!
 NAME (constant, string) is the name of the multiplex weighted undirected graph.
 %%%% ¡default!
-'MultiplexWU'
+'Multiplex Weighted Undirected'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the multiplex weighted undirected graph.
 %%%% ¡default!
-'In a multiplex weighted undirected (WU) graph, all layers have the same number of nodes with within-layer weighted undirected edges, associated with a real number between 0 and 1 and indicating the strength of the connection. The connectivity matrices are symmetric. There are connections between layers connecting the corresponding nodes.'
+'In a multiplex weighted undirected graph (MultiplexWU), all layers have the same number of nodes with within-layer weighted undirected edges, associated with a real number between 0 and 1 and indicating the strength of the connection. The connectivity matrices are symmetric. There are connections between layers connecting the corresponding nodes.'
 
 %%% ¡prop!
 TEMPLATE (parameter, item) is the template of the multiplex weighted undirected graph.

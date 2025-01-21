@@ -11,6 +11,9 @@ It can be personalized with the following property:
 %%% ¡seealso!
 uitextarea, GUI, PanelElement
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

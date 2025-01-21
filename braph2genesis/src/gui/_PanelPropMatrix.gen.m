@@ -14,6 +14,9 @@ It can be personalized with the following props:
 %%% ¡seealso!
 uitable, GUI, PanelElement
 
+%%% ¡build!
+1
+
 %% ¡props_update!
 
 %%% ¡prop!

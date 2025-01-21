@@ -4,6 +4,9 @@ EccentricityAv < Eccentricity (m, average eccentricity) is the graph Average Ecc
 %%% ¡description!
 The Average Eccentricity (EccentricityAv) of a graph is the sum of the nodal eccentricities divided by their number within a layer.
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
@@ -122,9 +125,11 @@ eccentricity = calculateValue@Eccentricity(m, prop);
 
 eccentricity_av = cell(L, 1);
 
+warning('off', 'MATLAB:remoteparfor:ParforWorkerAborted')
 parfor li = 1:L
     eccentricity_av(li) = {mean(eccentricity{li})};
 end
+warning('on', 'MATLAB:remoteparfor:ParforWorkerAborted')
 
 value = eccentricity_av;
 

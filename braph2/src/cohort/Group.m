@@ -15,7 +15,7 @@ classdef Group < ConcreteElement
 	%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group of subjects.
 	%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group of subjects.
 	%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group of subjects.
-	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+	%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 	%  <strong>9</strong> <strong>SUB_CLASS</strong> 	SUB_CLASS (parameter, class) is the class of the subjects of the group.
 	%  <strong>10</strong> <strong>SUB_DICT</strong> 	SUB_DICT (data, idict) is an indexed dictionary containing the subjects of the group.
 	%  <strong>11</strong> <strong>VOIS</strong> 	VOIS (result, cell) contains the variables of interest, including {kind, categories, values}.
@@ -108,6 +108,8 @@ classdef Group < ConcreteElement
 	%
 	%
 	% See also Subject, IndexedDictionary.
+	%
+	% BUILD BRAPH2 6 class_name 1
 	
 	properties (Constant) % properties
 		SUB_CLASS = 9; %CET: Computational Efficiency Trick
@@ -149,7 +151,7 @@ classdef Group < ConcreteElement
 			%  <strong>5</strong> <strong>ID</strong> 	ID (data, string) is a few-letter code for the group of subjects.
 			%  <strong>6</strong> <strong>LABEL</strong> 	LABEL (metadata, string) is an extended label of the group of subjects.
 			%  <strong>7</strong> <strong>NOTES</strong> 	NOTES (metadata, string) are some specific notes about the group of subjects.
-			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the object.
+			%  <strong>8</strong> <strong>TOSTRING</strong> 	TOSTRING (query, string) returns a string that represents the concrete element.
 			%  <strong>9</strong> <strong>SUB_CLASS</strong> 	SUB_CLASS (parameter, class) is the class of the subjects of the group.
 			%  <strong>10</strong> <strong>SUB_DICT</strong> 	SUB_DICT (data, idict) is an indexed dictionary containing the subjects of the group.
 			%  <strong>11</strong> <strong>VOIS</strong> 	VOIS (result, cell) contains the variables of interest, including {kind, categories, values}.
@@ -161,6 +163,21 @@ classdef Group < ConcreteElement
 		end
 	end
 	methods (Static) % inspection
+		function build = getBuild()
+			%GETBUILD returns the build of the group of subjects.
+			%
+			% BUILD = Group.GETBUILD() returns the build of 'Group'.
+			%
+			% Alternative forms to call this method are:
+			%  BUILD = GR.GETBUILD() returns the build of the group of subjects GR.
+			%  BUILD = Element.GETBUILD(GR) returns the build of 'GR'.
+			%  BUILD = Element.GETBUILD('Group') returns the build of 'Group'.
+			%
+			% Note that the Element.GETBUILD(GR) and Element.GETBUILD('Group')
+			%  are less computationally efficient.
+			
+			build = 1;
+		end
 		function gr_class = getClass()
 			%GETCLASS returns the class of the group of subjects.
 			%
@@ -483,7 +500,7 @@ classdef Group < ConcreteElement
 			prop = Group.getPropProp(pointer);
 			
 			%CET: Computational Efficiency Trick
-			group_description_list = { 'ELCLASS (constant, string) is the class of the group of subjects.'  'NAME (constant, string) is the name of the group of subjects.'  'DESCRIPTION (constant, string) is the description of the group of subjects.'  'TEMPLATE (parameter, item) is the template of the group of subjects.'  'ID (data, string) is a few-letter code for the group of subjects.'  'LABEL (metadata, string) is an extended label of the group of subjects.'  'NOTES (metadata, string) are some specific notes about the group of subjects.'  'TOSTRING (query, string) returns a string that represents the object.'  'SUB_CLASS (parameter, class) is the class of the subjects of the group.'  'SUB_DICT (data, idict) is an indexed dictionary containing the subjects of the group.'  'VOIS (result, cell) contains the variables of interest, including {kind, categories, values}.'  'COVARIATES (result, matrix) contains the values of the covariates with the categorical ones one-hot encoded.' };
+			group_description_list = { 'ELCLASS (constant, string) is the class of the group of subjects.'  'NAME (constant, string) is the name of the group of subjects.'  'DESCRIPTION (constant, string) is the description of the group of subjects.'  'TEMPLATE (parameter, item) is the template of the group of subjects.'  'ID (data, string) is a few-letter code for the group of subjects.'  'LABEL (metadata, string) is an extended label of the group of subjects.'  'NOTES (metadata, string) are some specific notes about the group of subjects.'  'TOSTRING (query, string) returns a string that represents the concrete element.'  'SUB_CLASS (parameter, class) is the class of the subjects of the group.'  'SUB_DICT (data, idict) is an indexed dictionary containing the subjects of the group.'  'VOIS (result, cell) contains the variables of interest, including {kind, categories, values}.'  'COVARIATES (result, matrix) contains the values of the covariates with the categorical ones one-hot encoded.' };
 			prop_description = group_description_list{prop};
 		end
 		function prop_settings = getPropSettings(pointer)

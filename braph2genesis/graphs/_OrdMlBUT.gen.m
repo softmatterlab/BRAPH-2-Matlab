@@ -1,17 +1,20 @@
 %% ¡header!
-OrdMlBUT < OrdMlWU (g, binary undirected multilayer with fixed thresholds) is an ordinal multilayer binary undirected with fixed thresholds.
+OrdMlBUT < OrdMlWU (g, ordinal multilayer binary undirected graph with fixed thresholds) is an ordinal multilayer binary undirected graph with fixed thresholds.
 
 %%% ¡description!
-In an ordinal binary undirected multilayer with fixed thresholds (BUT) graph, layers 
- consist of binary undirected (BU) multilayer graphs derived from the same 
+In an ordinal multilayer binary undirected graph with fixed thresholds (OrdMlBUT), layers 
+ consist of binary undirected multilayer graphs derived from the same 
  weighted supra-connectivity matrices binarized at different thresholds. Layers 
- within the binary undirected (BU) multilayer graphs could have different number of nodes 
+ within the binary undirected multilayer graphs could have different number of nodes 
  with within-layer binary undirected edges. Edges can be either 0 (absence of connection) 
  or 1 (existence of connection).
 The supra-connectivity matrix has a number of partitions equal to the number of thresholds.
 The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected.
 On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized.
 On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.
+
+%%% ¡build!
+1
 
 %% ¡layout!
 
@@ -132,37 +135,37 @@ Graph NOTES
 %% ¡props_update!
 
 %%% ¡prop!
-ELCLASS (constant, string) is the class of the binary undirected ordinal multilayer with fixed thresholds.
+ELCLASS (constant, string) is the class of the ordinal multilayer binary undirected graph with fixed thresholds.
 %%%% ¡default!
 'OrdMlBUT'
 
 %%% ¡prop!
-NAME (constant, string) is the name of the binary undirected ordinal multilayer with fixed thresholds.
+NAME (constant, string) is the name of the ordinal multilayer binary undirected graph with fixed thresholds.
 %%%% ¡default!
-'OrdMlBUT'
+'Ordinal Multilayer Binary Undirected Graph at Fixed Thresholds'
 
 %%% ¡prop!
 DESCRIPTION (constant, string) is the description of the binary undirected multilayer with fixed thresholds.
 %%%% ¡default!
-'In an ordinal binary undirected multilayer with fixed thresholds (BUT) graph, layers consist of binary undirected (BU) multilayer graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. Layers within the binary undirected (BU) multilayer graphs could have different number of nodes with within-layer binary undirected edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). The supra-connectivity matrix has a number of partitions equal to the number of thresholds. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
+'In an ordinal multilayer binary undirected graph with fixed thresholds (OrdMlBUT), layers consist of binary undirected multilayer graphs derived from the same weighted supra-connectivity matrices binarized at different thresholds. Layers within the binary undirected multilayer graphs could have different number of nodes with within-layer binary undirected edges. Edges can be either 0 (absence of connection) or 1 (existence of connection). The supra-connectivity matrix has a number of partitions equal to the number of thresholds. The layers are connected in an ordinal fashion, i.e., only consecutive layers are connected. On the diagonal of the supra adjacency matrix, matrices are symmetrized, dediagonalized, semipositivized, and binarized. On the off-diagonal of the supra adjacency matrix, matrices are semipositivized and binarized.'
 
 %%% ¡prop!
-TEMPLATE (parameter, item) is the template of the binary undirected ordinal multilayer with fixed thresholds.
+TEMPLATE (parameter, item) is the template of the ordinal multilayer binary undirected graph with fixed thresholds.
 %%%% ¡settings!
 'OrdMlBUT'
 
 %%% ¡prop!
-ID (data, string) is a few-letter code for the binary undirected ordinal multilayer with fixed thresholds.
+ID (data, string) is a few-letter code for the ordinal multilayer binary undirected graph with fixed thresholds.
 %%%% ¡default!
 'OrdMlBUT ID'
 
 %%% ¡prop!
-LABEL (metadata, string) is an extended label of the binary undirected ordinal multilayer with fixed thresholds.
+LABEL (metadata, string) is an extended label of the ordinal multilayer binary undirected graph with fixed thresholds.
 %%%% ¡default!
 'OrdMlBUT label'
 
 %%% ¡prop!
-NOTES (metadata, string) are some specific notes about the binary undirected ordinal multilayer with fixed thresholds.
+NOTES (metadata, string) are some specific notes about the ordinal multilayer binary undirected graph with fixed thresholds.
 %%%% ¡default!
 'OrdMlBUT notes'
 

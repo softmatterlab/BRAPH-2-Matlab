@@ -3,7 +3,7 @@
 \usepackage{tcolorbox}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title[Comparison of Connectivity-Functional Multiplex Data using WU]{Pipeline for Comparison of Connectivity-Functional Multiplex Data using Weighted Undirected graphs}
+\title[Comparison of Connectivity-Functional Multiplex Data using WU]{Pipeline for Comparison of Connectivity-Functional Multiplex Data using Weighted Undirected Graphs}
 
 \begin{document}
 
@@ -11,33 +11,31 @@
 
 \begin{abstract}
 \noindent
-This tutorial shows how to perform a network analysis using \emph{connectivity-functional multiplex data} (see tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_con_fun_mp}{Group of Subjects with Connectivity-Functional Multiplex Data}), where both connectivity and functional data are available per subject, as in diffusion weighted imaging and activation signals for each brain region derived from functional MRI, MEG, or EEG. Step by step, this pipeline guides you to compare the data from two groups of subjects.  With this tutorial, you will be able to extract and plot differences between two groups. You will also be able to generate publication-quality figures.
+This tutorial shows how to perform a network analysis using \emph{connectivity-functional multiplex data} (see tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con_fun_mp}{Group of Subjects with Connectivity-Functional Multiplex Data}), where both connectivity and functional data are available per subject, as in diffusion weighted imaging and activation signals for each brain region derived from functional MRI, MEG, or EEG. Step by step, this pipeline guides you to compare the data from two groups of subjects.  With this tutorial, you will be able to extract and plot differences between two groups. You will also be able to generate publication-quality figures.
 \end{abstract}
 
 \fig{marginfigure}
 	{fig:01}
-	{
-	\includegraphics{fig01_01.jpg}
-	\includegraphics{fig01_02.jpg}
-	\includegraphics{fig01_03.jpg}
-	}
+	{\includegraphics{fig01.png}}
 	{Figure examples}
 	{
-	Examples of displays of \fn{Multiplex Core-Periphery} with connectivity-functional multiplex data obtained using BRAPH 2.
+	Examples of displays of \fn{Multiplex Core-Periphery} with connectivity-functional multiplex data obtained using BRAPH~2.
 	}
-	
+
+%! FIG1 400px !%
+
 \tableofcontents
 
 \clearpage
 \section{Generate Example Data}
 
 You can generate the example data by typing in the command line the instruction in \Coderef{cd:generate}.
-%
+
 \begin{lstlisting}[
 	label=cd:generate,
 	caption={
 		{\bf Command to generate example data.}
-		Command to generate the example data for connectivity and functional multiplex analyses. They will be placed in the folder \fn{./braph2/pipelines/connectivity-functional multiplex/Example data CON\_FUN\_MP XLS}, and include the brain atlas \fn{atlas.xlsx}, two folders (one for the connectivity data and the other for the functional data) with two folders with the subject files (\fn{CON\_Group1\_XLS} and \fn{CON\_Group2\_XLS} for the connectivity data, and \fn{FUN\_Group1\_XLS} and \fn{FUN\_Group2\_XLS} for the functional data), and the associated covariates files (\fn{CON\_Group1\_XLS.vois} and \fn{CON\_Group2\_XLS.vois} at the connectivity data, and \fn{FUN\_Group1\_XLS.vois} and \fn{FUN\_Group2\_XLS.vois} at the functional data). The details about the format of these files can be found in the tutorials \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba}{Brain Atlas}, \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_con_fun_mp}{Group of Subjects with Connectivity-Functional Multiplex Data}.
+		Command to generate the example data for connectivity and functional multiplex analyses. They will be placed in the folder \fn{./braph2/pipelines/connectivity-functional multiplex/Example data CON\_FUN\_MP XLS}, and include the brain atlas \fn{atlas.xlsx}, two folders (one for the connectivity data and the other for the functional data) with two folders with the subject files (\fn{CON\_Group1\_XLS} and \fn{CON\_Group2\_XLS} for the connectivity data, and \fn{FUN\_Group1\_XLS} and \fn{FUN\_Group2\_XLS} for the functional data), and the associated covariates files (\fn{CON\_Group1\_XLS.vois.xlsx} and \fn{CON\_Group2\_XLS.vois.xlsx} at the connectivity data, and \fn{FUN\_Group1\_XLS.vois.xlsx} and \fn{FUN\_Group2\_XLS.vois.xlsx} at the functional data). The details about the format of these files can be found in the tutorials \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{Brain Atlas} and \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con_fun_mp}{Group of Subjects with Connectivity-Functional Multiplex Data}.
 	}
 ]
 create_data_CON_FUN_MP_XLS()
@@ -45,23 +43,31 @@ create_data_CON_FUN_MP_XLS()
 
 \section{Open the GUI}
 
-The general GUI of BRAPH 2.0 can be opened by typing \code{braph2} in MatLab's terminal. This GUI allows you to select a pipeline, in this case, \emph{Pipeline Connectivity-Functional Multiplex Comparison WU}, as shown in \Figref{fig:02}.
+The general GUI of BRAPH~2 can be opened by typing \code{braph2} in MatLab's terminal. This GUI allows you to select a pipeline, in this case, \emph{Pipeline Connectivity-Functional Multiplex Comparison WU}, as shown in \Figref{fig:02}.
 
 \fig{figure}
 	{fig:02}
+	{\includegraphics{fig02.jpg}}
+	{BRAPH~2 main GUI}
 	{
-	\includegraphics{fig02.jpg}
+	BRAPH~2 main GUI with the pipeline \emph{Pipeline Connectivity-Functional Multiplex Comparison WU} selected.
 	}
-	{BRAPH 2 main GUI}
+
+%! FIG2 !%
+
+\fig{marginfigure}
+	{fig:03}
+	{\includegraphics{fig03.jpg}}
+	{Pipeline steps}
 	{
-	BRAPH 2 main GUI with the pipeline \emph{Pipeline Connectivity-Functional Multiplex Comparison WU} selected.
+	These are the steps of the pipeline. Only the first step is active when the pipeline is first opened. Subsequent steps will become active sequentially.
 	}
 
 \begin{tcolorbox}[
 	title=Pipeline launch from command line
 ]
-To open the GUI and upload the connectivity-functional multiplex comparison pipeline, you can also do it from the command line by typing the commands in \Coderef{cd:launch}.
-%
+To open the GUI and upload the connectivity-functional multiplex comparison pipeline, you can also use the command line by typing the commands in \Coderef{cd:launch}.
+
 \begin{lstlisting}[
 	label=cd:launch,
 	caption={
@@ -74,74 +80,74 @@ im = ImporterPipelineBRAPH2( ...
 	);
 pip = im.get('PIP');
 
-gui = GUIElement('PE', pip, 'WAITBAR', true); gui.get('DRAW')
+gui = GUIElement('PE', pip, 'WAITBAR', true)
+gui.get('DRAW')
 gui.get('SHOW')
 \end{lstlisting}
 \end{tcolorbox}
 
-Once the pipeline is uploaded, you can see a GUI that contains different steps to: upload a brain atlas, upload the connectivity and functional multiplex data of two groups, analyze them, and finally, compare the groups (\Figref{fig:03}). 
+Once the pipeline is uploaded, you can see a GUI that contains different steps to: upload a brain atlas, upload the connectivity and functional multiplex data of two groups, analyze them, and finally, compare the groups (\Figref{fig:03}).
 
-\fig{marginfigure}
-	{fig:03}
-	{
-	\includegraphics{fig03.jpg}
-	}
-	{Pipeline steps}
-	{
-	These are the steps of the pipeline. Only the first step is active when the pipeline is first opened. Subsequent steps will become active sequentially.
-	}
+%! FIG3 400px !%
 
 \clearpage
+
 \section{Step 1: Load the Brain Atlas}
 
-\Figref{fig:04} shows how to upload and plot the brain atlas that you used to extract the \emph{connectivity-functional multiplex data} for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_ba}{Brain Atlas}.
+\Figref{fig:04} shows how to upload and plot the brain atlas that you used to extract the data for your analysis. For more information on where to find different atlases or how to change plotting settings on the brain surface, check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_ba}{Brain Atlas}.
 
 \fig{figure*}
 	{fig:04}
-	{
-	\includegraphics{fig04.jpg}
-	}
+	{\includegraphics{fig04.jpg}}
 	{Uploading the Brain Atlas}
 	{
 	Steps to upload the brain atlas:
 	{\bf a} Click on \fn{Load Atlas} from the pipeline GUI.
-	{\bf b} Navigate to the BRAPH~2.0 folder \fn{pipelines\_connectivity-functional multiplex\_Example data CON\_FUN\_MP XLS}, and select the atlas file, in this example the \fn{atlas.xlsx}.  
+	{\bf b} Navigate to the BRAPH~2 folder \fn{pipelines\_connectivity-functional multiplex\_Example data CON\_FUN\_MP XLS}, and select the atlas file, in this example the \fn{atlas.xlsx}.  
 	{\bf c} You can visualize the brain atlas by pressing \fn{Plot Brain Atlas}. 
 	}
  
-\clearpage
-\section{Step 2: Load the Groups Data}
+ %! FIG4 !%
 
-After you loaded the brain atlas, you can upload the \emph{connectivity data} for each group and later the \emph{functional data} for each group, as shown in \Figref{fig:05}. A new interface will be shown containing the data for the group you just selected. You can open each subject’s data by selecting the subject, right click, and select “Open selection” (for more information check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/general/tut_gr_con_fun_mp}{Group of Subjects with Connectivity-Functional Multiplex Data}).
+\clearpage
+
+\section{Steps 2-4: Load the Groups Data}
+
+After you have loaded the brain atlas, you can upload the \emph{connectivity data} for each group and later the \emph{functional data} for each group, as shown in \Figref{fig:05}. A new interface will be shown containing the data for the group you just selected. You can open each subject’s data by selecting the subject, right click, and select “Open selection” (for more information check the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/data/tut_gr_con_fun_mp}{Group of Subjects with Connectivity-Functional Multiplex Data}).
 
 \fig{figure}
 	{fig:05}
-	{
-	\includegraphics{fig05.jpg}
-	}
+	{\includegraphics{fig05.jpg}}
 	{Loading and visualizing the group data}
 	{
 	{\bf a} From the pipeline GUI, click on \fn{Load Group CON 1 from XLS} and \fn{Load Group CON 2 from XLS} to load the connectivity data of both groups.
-   	{\bf b} Navigate to the BRAPH~2.0 folder \fn{pipelines}, \fn{connectivity-functional multiplex}, \fn{Example data CON\_FUN\_MP XLS}, \fn{connectivity}, and select the group folder that you want to upload. 
+   	{\bf b} Navigate to the BRAPH~2 folder \fn{pipelines}, \fn{connectivity-functional multiplex}, \fn{Example data CON\_FUN\_MP XLS}, \fn{connectivity}, and select the group folder that you want to upload. 
         {\bf c} Once the connectivity data is uploaded, click on \fn{Load Group FUN 1 from XLS} and \fn{Load Group FUN 2 from XLS} to load the functional data of both groups.
-   	{\bf d} Navigate to the BRAPH~2.0 folder \fn{pipelines}, \fn{connectivity-functional multiplex}, \fn{Example data CON\_FUN\_MP XLS}, \fn{functional}, and select the group folder that you want to upload. 
+   	{\bf d} Navigate to the BRAPH~2 folder \fn{pipelines}, \fn{connectivity-functional multiplex}, \fn{Example data CON\_FUN\_MP XLS}, \fn{functional}, and select the group folder that you want to upload. 
    	{\bf e} After uploading the data for both modalities, click on \fn{Combine Groups 1} and \fn{Combine Groups 2} to create groups with connectivity-functional multiplex subjects, and it will open a window for group 1 {\bf f} from which we can open a subject’s connectivity-functional
 multiplex data and metadata {\bf g}.
 	}
+
+ %! FIG5 !%
  
 \clearpage
-\section{Step 3: Analyzing the Data of Group 1}
+
+\section{Step 5: Analyzing the Data of Group 1}
 
 Once you have loaded the data for both groups, you can begin analyzing the data for the first group by clicking on \fn{Analyze Group 1} (\Figref{fig:06}a). 
 This will open a new interface called \fn{Analyze Ensemble}, which allows you to calculate and visualize graph measures for the first group. 
 Before these network measures are calculated, it is important to ensure the following things: 
-\begin{enumerate}
-	\item The analysis parameters are set correctly (e.g., the thresholds).
-	\item The graph parameters are set correctly.
-	\item The measures are configured with the parameters you desire (note that not all measures have parameters).
-\end{enumerate}
+\begin{itemize}
 
-Importantly, the parameters you select at the beginning will remain fixed for the rest of the pipeline (including the analysis of the second group and the comparison between groups). We will now guide you through the process of preparing these parameters for both measures and graphs. It is important to keep in mind that the default parameters should work well for most cases.
+\item The analysis parameters are set correctly (e.g., the thresholds).
+
+\item The graph parameters are set correctly.
+
+\item The measures are configured with the parameters you desire (note that not all measures have parameters).
+
+\end{itemize}
+
+Importantly, the parameters you select at the beginning will remain fixed for the rest of the pipeline to ensure consistency (including the analysis of the second group and the comparison between groups). We will now guide you through the process of preparing these parameters for both measures and graphs. It is important to keep in mind that the default parameters should work well for most cases.
 
 \subsection{Setting Analysis Parameters}
 
@@ -153,15 +159,15 @@ Finally, in the \code{NEGATIVE WEIGHTS RULE}, you should decide if you want to s
 
 \fig{figure}
 	{fig:06}
-	{
-	\includegraphics{fig06.jpg}
-	}
+	{\includegraphics{fig06.jpg}}
 	{Configuring analysis parameters}
 	{
 	{\bf a} To initiate the analysis of data for group 1, click on \fn{Analyze Group 1}.
  	{\bf b} In this section you can configure the analysis parameters.
  	{\bf c} By clicking on the section \code{GRAPH \& MEASURE PARAMETERS}, you open {\bf d} a new interface that permits you to configure the graph parameters.
 	}
+
+ %! FIG6 !%
  
 \subsection{Setting Graph Parameters}
 
@@ -171,13 +177,21 @@ Adjusting these thresholds allows you to explore varying levels of brain connect
 
 The available parameters are:
 \begin{itemize}
-	\item \code{SYMMETRIZATION RULE} determines how to symmetrize the matrix.
-	\item \code{NEGATIVE EDGE RULE} determines how to remove the negative edges.
-	\item \code{NORMALIZATION RULE} determines how to normalize the weights between 0 and 1.
-	\item \code{THRESHOLDS} determines the thresholds. \emph{This cannot be set here. It is set in the previous step.}
-	\item \code{RANDOMIZE ON/OFF} determines whether to randomize the graph. \emph{Typically not used}
-	\item \code{RANDOM SEED} is the randomization seed. \emph{Typically not used}
-	\item \code{RANDOMIZATION ATTEMPTS PER EDGE} is the attempts to rewire each edge. \emph{Typically not used}
+
+\item \code{SYMMETRIZATION RULE} determines how to symmetrize the matrix.
+
+\item \code{NEGATIVE EDGE RULE} determines how to remove the negative edges.
+
+\item \code{NORMALIZATION RULE} determines how to normalize the weights between 0 and 1.
+
+\item \code{THRESHOLDS} determines the thresholds. \emph{This cannot be set here. It is set in the previous step.}
+
+\item \code{RANDOMIZE ON/OFF} determines whether to randomize the graph. \emph{Typically not used}
+
+\item \code{RANDOM SEED} is the randomization seed. \emph{Typically not used}
+
+\item \code{RANDOMIZATION ATTEMPTS PER EDGE} is the attempts to rewire each edge. \emph{Typically not used}
+
 \end{itemize}
 
 \subsection{Setting Measure Parameters}
@@ -188,9 +202,7 @@ This will open the measure window, allowing you to specify the rules or paramete
 
 \fig{figure*}
 	{fig:07}
-	{
-	\includegraphics{fig07.jpg}
-	}
+	{\includegraphics{fig07.jpg}}
 	{Configuring Measure Parameters}
 	{
         {\bf a} Press \code{GRAPH TEMPLATE} and
@@ -199,17 +211,18 @@ This will open the measure window, allowing you to specify the rules or paramete
 	{\bf c} The measure window that opens allows you to define the parameters for the \code{Multiplex Core-Periphery} measure. We leave it with default values.
     {\bf d} Description of the \code{Multiplex Core-Periphery} measure's rule.
 	}
-
+ 
+%! FIG7 !%
+ 
 \clearpage
+
 \subsection{Calculate Measures}
  
 After configuring the parameters, you can proceed to calculate specific graph measures (\Figref{fig:08}). To do this, return to the \fn{Analyze Ensemble} interface (\Figref{fig:08}a-b) and scroll down to locate the \fn{Group-averaged MEASURES} panel. By clicking the 'C' button, you will see a table displaying all measures.
 
 \fig{figure*}
 	{fig:08}
-	{
-	\includegraphics{fig08.jpg}
-	}
+	{\includegraphics{fig08.jpg}}
 	{Analyzing the Group Data}
 	{
 	{\bf a} Locate the \code{Group-averaged MEASURES} panel and click the \code{C} button to see all available measures. Choose the \code{Multiplex Core-Periphery} measure, right-click it, and select \code{Calculate Selected Measures} to perform the calculation.
@@ -219,6 +232,8 @@ After configuring the parameters, you can proceed to calculate specific graph me
  	{\bf f} Explore different views such as the \code{Axial dorsal} button in the brain surface toolbar.
 	}
 
+ %! FIG8 !%
+ 
 As an example, let us select the \code{Multiplex Core-Periphery} measure. Right-click at the top of the table and choose \code{Calculate Selected Measures} (\Figref{fig:08}a). Once the calculation is complete, you will notice a \code{C} appearing in front of the \code{Multiplex Core-Periphery} row, indicating that this measure has been calculated.
 
 If you wish to visualize the results, right-click on the top of the table and select \code{Plot Selected Measures on Brain} within the Analyze Ensemble interface (\Figref{fig:08}b). This will open a brain surface with the \fn{Multiplex Core-Periphery} plotted on it.
@@ -227,42 +242,43 @@ Within the toolbar of the brain surface interface, by clicking on the \code{Sett
 For instance, within the settings menu (\Figref{fig:08}d), you can change the brain color face to be more transparent (\Figref{fig:08}e). Within the settings menu, you can customize the visualization of the plots and save them for reference.
 Additionally, in the toolbar of the brain surface interface, you can change the view by clicking on the \code{Axial dorsal} button (\Figref{fig:08}f). 
 
-Finally, when you right-click in the \code{Group-averaged MEASURES} panel, you will find other options to explore, such as \code{Plot Selected Measures} (which generates a line plot for the selected measure at different thresholds and/or different nodes) and \code{Data Selected Measure} (providing the calculated values of the selected measures). These options can also be saved for further analyses outside BRAPH 2.0.
+Finally, when you right-click in the \code{Group-averaged MEASURES} panel, you will find other options to explore, such as \code{Plot Selected Measures} (which generates a line plot for the selected measure at different thresholds and/or different nodes) and \code{Data Selected Measure} (providing the calculated values of the selected measures). These options can also be saved for further analyses outside BRAPH~2.
 
-\section{Step 4: Analyzing the Data of Group 2}
+\section{Step 6: Analyzing the Data of Group 2}
 
 After completing the analysis of the first group, you can analyze the second group by simply clicking on \code{Analyze Group 2} (\Figref{fig:09}a). You will notice that in the new GUI (\Figref{fig:09}b-e), the parameters you previously selected for the first group are already preselected and fixed for this analysis. 
 
 \fig{figure*}
 	{fig:09}
-	{
-	\includegraphics{fig09.jpg}
-	}
+	{\includegraphics{fig09.jpg}}
 	{Parameters blocked in the Analysis of Group 2}
 	{
 	{\bf a} Click on \fn{Analysis 2} in the pipeline's GUI. 
 	{\bf b} In this new window, you can see that the analysis parameters are blocked.
 	{\bf c} In \fn{GRAPH TEMPLATE} window, you can see that the graph parameters and the rule for measures {\bf d-e} such as the \fn{Multiplex Core-Periphery} are blocked, since they should be the same as the ones set in the analysis of group 1. Finally, you can reset the analysis parameters for Group 1 by clicking on the checkbox marked with a 'C' next to the settings of Group 1 {\bf a}.
 	}
-	
-If you want to change some of the parameters you previously selected, you can reset the analysis parameters by clicking on the cancel button marked with a \code{C} (\Figref{fig:09}a) near the analysis of the first group.
+
+ %! FIG9 !%
+ 	
+If you want to change some of the parameters you previously selected, you can reset the analysis parameters by clicking on the cancel button marked with a \code{D} (\Figref{fig:09}a) near the analysis of the first group.
  
 \clearpage
-\section{Step 5: Comparing Groups}
+
+\section{Step 7: Comparing Groups}
 
 After exploring the network measures for each group, you can proceed to their statistical comparison by clicking on \code{Compare Groups} (\Figref{fig:10}a).
 
 \fig{figure}
 	{fig:10}
-	{
-	\includegraphics{fig10.jpg}
-	}
+	{\includegraphics{fig10.jpg}}
 	{Compare the groups}
 	{
 	{\bf a} Click on \code{Compare Groups} in the pipeline's GUI.
 	{\bf b} In this new window, you can select to turn ON/OFF the wait bar and verbose functions, you can change the number of permutations, and whether to perform a longitudinal group comparison. We set the number of permutations to 10 for this tutorial {\bf c}. Finally, you can calculate the comparisons of some graph measures between groups and show their results by clicking on \code{Data Selected Comparisons} {\bf d}.
 	}
-	
+
+ %! FIG10 !%
+ 
 In the new window, you have several options to configure the analysis. First, you can choose whether to enable a progress bar and verbose functions while the analysis is running, which can help you monitor the progress of the analysis. You can also specify how many permutations you want to use to assess differences between groups (\Figref{fig:10}b).
 
 If your groups are not independent and represent the same subjects assessed in different points in time, you can select the longitudinal comparison option. This option will permute the values within each subject, considering their temporal relationship (\Figref{fig:10}b).
@@ -277,9 +293,7 @@ To obtain the results from the comparisons, select the measures in the \code{COM
 
  \fig{figure*}
 	{fig:11}
-	{
-	\includegraphics{fig11.jpg}
-	}
+	{\includegraphics{fig11.jpg}}
 	{Visualize the group comparison results on a brain surface}
 	{
 	{\bf a} Click on \fn{Brain Graph Selected Comparison} in the Comparisons panel.
@@ -287,6 +301,8 @@ To obtain the results from the comparisons, select the measures in the \code{COM
 {\bf c} You can customize this visualization using the settings menu.
 	}
 
+ %! FIG11 !%
+ 
 If you wish to visualize the results, right-click at the top of the table and select \code{Brain Graph Selected Comparison} within the Compare Ensemble interface (\Figref{fig:11}a). This action will open a brain surface displaying the difference between these two groups in terms of the \fn{Overlapping Strength} data or any other nodal measure you have calculated.
 
 Within the brain surface interface's toolbar, you have various options to explore. For example, by clicking on the “Settings Panel Figure” button (\Figref{fig:11}b) you can fine-tune different visualization settings.

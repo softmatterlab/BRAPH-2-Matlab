@@ -7,6 +7,9 @@ A Panel Figure for Graph Adjacency Matrix (GraphAdjPF) manages the plot of the p
 %%% ¡seealso!
 Graph, GraphAdjPF
 
+%%% ¡build!
+1
+
 %% ¡layout!
 
 %%% ¡prop!
