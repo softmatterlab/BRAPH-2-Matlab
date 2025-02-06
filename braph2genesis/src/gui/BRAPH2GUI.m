@@ -475,7 +475,7 @@ h_button = uibutton( ...
 % pipelines
 pipelines = get_pipelines();
     function pipelines = get_pipelines()
-        braph2_dir = fileparts(fileparts(fileparts(which(mfilename))));
+        braph2_dir = fileparts(which(BRAPH2.LAUNCHER));
         pipelines_contents = dir(fullfile(braph2_dir, 'pipelines'));  % get the folder contents
         pipelines_dir_list = pipelines_contents([pipelines_contents(:).isdir] == 1);  % remove all files (isdir property is 0)
         pipelines_dir_list = pipelines_dir_list(~ismember({pipelines_dir_list(:).name}, {'.', '..'}));  % remove '.' and '..'

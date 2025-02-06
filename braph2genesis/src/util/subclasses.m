@@ -27,7 +27,7 @@ if nargin < 3 || isempty(search_subdirectories)  % by default it does not search
 end
 
 if nargin < 2 || isempty(directory) % if no directory, searches all BRAPH2
-    directory = fileparts(which('braph2'));  % retrieves the base directory of BRAPH
+    directory = fileparts(which(BRAPH2.LAUNCHER));  % retrieves the base directory of BRAPH
     search_subdirectories = true;
 end
 

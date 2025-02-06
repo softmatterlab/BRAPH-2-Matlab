@@ -44,7 +44,7 @@ seed = randi(intmax('uint32'));
 rng(seed, 'twister')
 
 %% Identifies test directories
-braph2_dir = fileparts(fileparts(which(mfilename)));
+braph2_dir = fileparts(fileparts(which(BRAPH2.LAUNCHER)));
 
 directories_to_test = { ...
     [braph2_dir filesep 'src' filesep 'util'] ...
@@ -63,7 +63,7 @@ directories_to_test = { ...
 	[braph2_dir filesep 'sandbox'] ...
     };
 
-pipelines_dir = [fileparts(which('braph2')) filesep 'pipelines'];
+pipelines_dir = [braph2_dir filesep 'pipelines'];
 
 pipelines_dir_list = dir(pipelines_dir); % get the folder contents
 pipelines_dir_list = pipelines_dir_list([pipelines_dir_list(:).isdir] == 1); % remove all files (isdir property is 0)

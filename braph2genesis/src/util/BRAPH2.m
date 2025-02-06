@@ -6,6 +6,7 @@ classdef BRAPH2
     %  NAME             - BRAPH2 full name
     %  STR              - BRAPH2 short string
     %  DISTRIBUTION     - BRAPH2 distribution
+    %  LAUNCHER         - BRAPH2 launcher
     %  VERSION          - BRAPH2 version
     %  BUILD            - BRAPH2 build number
     %  RELEASE          - BRAPH2 release date
@@ -72,6 +73,7 @@ classdef BRAPH2
         NAME = 'BRAPH 2.0' % BRAPH2 full name
         STR = 'BRAPH2' % BRAPH2 short string
         DISTRIBUTION = 'Standard' % BRAPH2 distribution
+        LAUNCHER = 'braph2' % BRAPH2 launcher
         VERSION = '2.0.0' % BRAPH2 version % % % ON RELEASE: Ensure correct VERSION
         BUILD = 6 % BRAPH2 build number % % % ON RELEASE: Ensure correct BUILD
         RELEASE = '2025-01-12' % BRAPH2 release date % % % ON RELEASE: Ensure correct RELEASE date

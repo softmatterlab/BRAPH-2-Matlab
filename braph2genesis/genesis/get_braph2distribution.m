@@ -1,5 +1,5 @@
-function get_braph2distribution(inputSource, ref, ver, rollcall, compiledFolderName, distrName, filesToDelete)
-%BRAPH2GENESIS_FOR_DISTR generates a BRAPH 2 distribution for selected pipeline(s).
+function get_braph2distribution(inputSource, ref, ver, rollcall, launcher, distrName, filesToDelete)
+%GET_BRAPH2DISTRIBUTION generates a BRAPH 2 distribution for selected pipeline(s).
 %
 % This function can take:
 %   (1) A text file containing the input variables (e.g., 'config.txt')
@@ -13,10 +13,10 @@ function get_braph2distribution(inputSource, ref, ver, rollcall, compiledFolderN
 %   ref = 'tags'; % 'tags' for stable versions, 'heads' for branches like 'develop'
 %   ver = '2.0.0';
 %   rollcall = {...}; % Your rollcall structure
-%   compiledFolderName = 'braph2memorycapacity';
+%   launcher = 'braph2memorycapacity';
 %   distrName = 'Memory Capacity';
 %   filesToDelete = {...}; % List of files to delete
-%   braph2genesis_for_distr(pipelineFolders, ref, ver, rollcall, compiledFolderName, distrName, filesToDelete);
+%   get_braph2distribution(pipelineFolders, ref, ver, rollcall, compiledFolderName, distrName, filesToDelete);
 
     %% Check if input is a text file, read variables from it
     if ischar(inputSource) && exist(inputSource, 'file')
@@ -59,14 +59,14 @@ function get_braph2distribution(inputSource, ref, ver, rollcall, compiledFolderN
     end
     
     % Default output folder name
-    if ~exist('compiledFolderName','var') || isempty(compiledFolderName)
+    if ~exist('compiledFolderName','var') || isempty(launcher)
         pipelineNameOnly = 'distr';
-        compiledFolderName = ['braph2' pipelineNameOnly];
+        launcher = ['braph2' pipelineNameOnly];
     end
     
     % Define necessary directories 
     braph2genesisDir = [parentDir filesep 'braph2genesis'];  
-    braph2DistrDir = [parentDir filesep compiledFolderName]; 
+    braph2DistrDir = [parentDir filesep launcher]; 
 
     %% Download BRAPH 2 genesis if needed
     if ~exist(braph2genesisDir, 'dir')
@@ -136,11 +136,11 @@ function get_braph2distribution(inputSource, ref, ver, rollcall, compiledFolderN
         % Distribution-specific customization
         braph2constant_file = [braph2DistrDir filesep 'src' filesep 'util' filesep 'BRAPH2.m'];
         ModifyBRAPH2Constant(braph2constant_file, braph2constant_file, 'DISTRIBUTION', distrName)
-        % ModifyBRAPH2Constant(braph2constant_file, braph2constant_file, 'NAME', ['BRAPH 2 ' distrName])
+        ModifyBRAPH2Constant(braph2constant_file, braph2constant_file, 'LAUNCHER', launcher)
         
-        braph2_entryFile = [braph2DistrDir filesep 'braph2.m'];
-        braph2distr_entryFile = [braph2DistrDir filesep compiledFolderName '.m'];
-        movefile(braph2_entryFile, braph2distr_entryFile);
+        braph2_launcher = [braph2DistrDir filesep 'braph2.m'];
+        braph2distr_launcher = [braph2DistrDir filesep launcher '.m'];
+        movefile(braph2_launcher, braph2distr_launcher);
 
         % Remove specified files
         deleteSpecifiedFiles(filesToDelete);
@@ -150,14 +150,14 @@ function get_braph2distribution(inputSource, ref, ver, rollcall, compiledFolderN
         
         timeEnd = toc(timeStart);
         
-        fprintf('BRAPH 2 (%s) is now fully compiled and ready to be used.\n', compiledFolderName);
+        fprintf('BRAPH 2 (%s) is now fully compiled and ready to be used.\n', launcher);
         fprintf('Compilation took %.2fs\n', timeEnd);
         
         % test BRAPH 2 Distribution
         test_braph2;
 
         % Launch BRAPH 2 Distribution
-        eval([braph2DistrDir filesep compiledFolderName]);
+        launcher
     end
 end
 
