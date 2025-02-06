@@ -59,7 +59,7 @@ function get_braph2distribution(inputSource, ref, ver, rollcall, launcher, distr
     end
     
     % Default output folder name
-    if ~exist('compiledFolderName','var') || isempty(launcher)
+    if ~exist('launcher', 'var') || isempty(launcher)
         pipelineNameOnly = 'distr';
         launcher = ['braph2' pipelineNameOnly];
     end
@@ -157,7 +157,7 @@ function get_braph2distribution(inputSource, ref, ver, rollcall, launcher, distr
         test_braph2;
 
         % Launch BRAPH 2 Distribution
-        launcher
+        run(BRAPH2.LAUNCHER)
     end
 end
 
