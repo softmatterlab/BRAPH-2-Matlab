@@ -44,7 +44,7 @@ seed = randi(intmax('uint32'));
 rng(seed, 'twister')
 
 %% Identifies test directories
-braph2_dir = fileparts(fileparts(which(BRAPH2.LAUNCHER)));
+braph2_dir = fileparts(which(BRAPH2.LAUNCHER));
 
 directories_to_test = { ...
     [braph2_dir filesep 'src' filesep 'util'] ...
