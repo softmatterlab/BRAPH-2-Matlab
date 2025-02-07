@@ -29,6 +29,9 @@ clc
 %% Read the genesis config file
 if nargin > 0
     run(genesis_config_file)
+    directory = fileparts(genesis_config_file);
+else
+    directory = fileparts(mfilename());
 end
 
 clearvars -except genesis_config_file distribution_name ...
@@ -53,8 +56,6 @@ end
 if ~exist('files_to_delete', 'var')
     files_to_delete = {};
 end
-
-directory = fileparts(genesis_config_file);
 
 launcher = ['braph2' distribution_moniker];
 
