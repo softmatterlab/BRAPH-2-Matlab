@@ -70,7 +70,7 @@ classdef BRAPH2
     %  installed        - returns whether an addon is installed/error
     
     properties (Constant) % BRAPH2 ID Card
-        NAME = 'BRAPH 2.0' % BRAPH2 full name
+        NAME = 'BRAPH 2' % BRAPH2 full name
         STR = 'BRAPH2' % BRAPH2 short string
         DISTRIBUTION = 'Standard' % BRAPH2 distribution
         LAUNCHER = 'braph2' % BRAPH2 launcher
