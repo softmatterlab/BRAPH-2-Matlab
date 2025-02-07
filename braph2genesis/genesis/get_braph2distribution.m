@@ -2,34 +2,26 @@ function get_braph2distribution(inputSource, ref, ver, rollcall, launcher, distr
 %GET_BRAPH2DISTRIBUTION generates a BRAPH 2 distribution for selected pipeline(s).
 %
 % This function can take:
-%   (1) A text file containing the input variables (e.g., 'config.txt')
-%   (2) Direct MATLAB variables (pipelineFolders, ref, ver, rollcall, compiledFolderName).
+%   (1) A m file defining the input variables (e.g., 'genesis_config.m')
+%   (2) Direct MATLAB variables (pipelineFolders, ref, ver, rollcall, launcher, distrName, filesToDelete).
 %
 % Example usage with a configuration file:
-%   braph2genesis_for_distr('config.txt');
+%   GET_BRAPH2DISTRIBUTION('braph2genesis/pipelines/hello world/genesis_config.m');
 %
 % Example usage with direct inputs:
-%   pipelineFolders = 'memorycapacity';
-%   ref = 'tags'; % 'tags' for stable versions, 'heads' for branches like 'develop'
+%   pipelineFolders = 'helloword';
+%   ref = 'tags'; % 'tags' for stable versions, 'heads' for branches
 %   ver = '2.0.0';
 %   rollcall = {...}; % Your rollcall structure
-%   launcher = 'braph2memorycapacity';
-%   distrName = 'Memory Capacity';
+%   launcher = 'braph2helloworld';
+%   distrName = 'Hello, World!';
 %   filesToDelete = {...}; % List of files to delete
-%   get_braph2distribution(pipelineFolders, ref, ver, rollcall, compiledFolderName, distrName, filesToDelete);
+%   get_braph2distribution(pipelineFolders, ref, ver, rollcall, launcher, distrName, filesToDelete);
 
     %% Check if input is a text file, read variables from it
     if ischar(inputSource) && exist(inputSource, 'file')
         run(inputSource)
         parentDir = fileparts(inputSource);
-        % % % vars = readConfigFile(inputSource);
-        % % % distrName = vars.distrName;
-        % % % pipelineFolders = vars.pipelineFolders;
-        % % % ref = vars.ref;
-        % % % ver = vars.ver;
-        % % % rollcall = vars.rollcall;
-        % % % compiledFolderName = vars.compiledFolderName;
-        % % % filesToDelete = vars.filesToDelete;
     else
         % If not a file, assume it's direct variable input
         pipelineFolders = inputSource;
