@@ -43,7 +43,7 @@ if nargin < 3 || isempty(run_number)
 end
 
 if nargin < 2 || isempty(source_dir)
-    source_dir = fileparts(which('braph2genesis'));
+    source_dir = [fileparts(which('braph2genesis')) fp 'braph2genesis'];
 end
 
 if nargin < 1 || isempty(target_dir)
