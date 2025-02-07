@@ -56,34 +56,7 @@ end
 
 launcher = ['braph2' distribution_moniker];
 
-%% Download BRAPH 2 genesis, if needed
-repo = 'BRAPH-2';
-prefix_branch = strsplit(braph2_version, '/');
-prefix = prefix_branch{1};
-branch = prefix_branch{2};
-
-% Download zip file with BRAPH2
-disp(['Downloading ' repo ' (' prefix '/' branch ') ...']);
-url = ['https://github.com/braph-software/BRAPH-2/archive/refs/' prefix '/' branch '.zip'];
-zipfile = [repo '-' prefix '-' branch '.zip'];
-websave(zipfile, url);
-
-% Unzip BRAPH2
-disp(['Unzipping ' zipfile ' ...']);
-tmp_directory = [repo '-' branch];
-unzip(zipfile);
-
-% Extract BRAPH2GENESIS
-disp('Copying BRAPH2GENESIS ...');
-copyfile(fullfile(tmp_directory, 'braph2genesis'), 'braph2genesis');
-
-% Clean BRAPH2 directoy and zip file
-disp('Cleaning up ...');
-rmdir(tmp_directory, 's');
-delete(zipfile);
-
 %% Print headers
-clc
 if ispc
     fprintf([ ...
         '\n' ...
@@ -110,6 +83,34 @@ else
         ]);
 end
 
+%% Download BRAPH 2 genesis, if needed
+repo = 'BRAPH-2';
+prefix_branch = strsplit(braph2_version, '/');
+prefix = prefix_branch{1};
+branch = prefix_branch{2};
+
+% Download zip file with BRAPH2
+disp(['Downloading ' repo ' (' prefix '/' branch ') ...']);
+url = ['https://github.com/braph-software/BRAPH-2/archive/refs/' prefix '/' branch '.zip'];
+zipfile = [repo '-' prefix '-' branch '.zip'];
+websave(zipfile, url);
+
+% Unzip BRAPH2
+disp(['Unzipping ' zipfile ' ...']);
+tmp_directory = [repo '-' branch];
+unzip(zipfile);
+
+% Extract BRAPH2GENESIS
+disp('Copying BRAPH2GENESIS ...');
+copyfile(fullfile(tmp_directory, 'braph2genesis'), 'braph2genesis');
+
+% Clean BRAPH2 directoy and zip file
+disp('Cleaning up ...');
+rmdir(tmp_directory, 's');
+delete(zipfile);
+
+disp(' ')
+
 %% Copy pipeline folders into braph2genesis/pipelines
 for i = 1:1:numel(pipeline_folders)
     pipeline_folder = pipeline_folders{i};
@@ -118,6 +119,7 @@ for i = 1:1:numel(pipeline_folders)
     fprintf(['Copying pipeline "' pipeline_folder '" to "' target_folder '"\n']);
     copyfile(pipeline_folder, target_folder);
 end
+
 disp(' ')
 
 %% Display rollcall elements
@@ -128,7 +130,11 @@ for i = 1:rollcall_per_line:length(rollcall)
     cellfun(@(x) fprintf([x repmat(' ', 1, offset - length(x))]), rollcall(i:min(i + rollcall_per_line - 1, length(rollcall))))
     fprintf('\n')
 end
+
 disp(' ')
+
+%% Modify BRAPH2 constants
+
 
 %% Compile BRAPH2
 addpath([fileparts(which('braph2genesis')) filesep() 'braph2genesis' filesep 'genesis'])
@@ -161,8 +167,19 @@ if ~exist(target_dir, 'dir')
     disp(['BRAPH 2 ' distribution_name ' is now fully compiled and ready to be used.'])
     disp(['Its compilation has taken ' int2str(time_end) '.' int2str(mod(time_end, 1) * 10) 's'])
     disp('')
-    
-    braph2(false)
-
-    test_braph2
 end
+
+%% Change name of BRAPH2 launcher
+% % % TODO
+
+%% Remove files to be deleted
+% % % TODO
+
+%% Erase 
+% % % TODO
+
+%% Launch BRAPH2 distribution
+eval(['braph2' distribution '(false)'])
+
+%% Test compiled BRAPH2 distribution
+test_braph2
