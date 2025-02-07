@@ -84,6 +84,22 @@ else
 end
 
 %% Download BRAPH 2 genesis, if needed
+if exist('braph2genesis', 'dir')
+    if input([ ...
+        'The target braph2genesis directory already exists:\n' ...
+        'It will be erased with all its content.\n' ...
+        'Proceed anyways? (y/n)\n'
+        ], 's') == 'y'
+    
+        backup_warning_state = warning('off', 'MATLAB:RMDIR:RemovedFromPath');
+        rmdir('braph2genesis', 's')
+        warning(backup_warning_state)
+    else
+        disp('Compilation interrupted.')
+        return
+    end
+end
+
 repo = 'BRAPH-2';
 prefix_branch = strsplit(braph2_version, '/');
 prefix = prefix_branch{1};
@@ -153,6 +169,7 @@ if exist(target_dir, 'dir')
         warning(backup_warning_state)
     else
         disp('Compilation interrupted.')
+        return
     end
 end
 if ~exist(target_dir, 'dir') 
