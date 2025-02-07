@@ -15,6 +15,10 @@ function braph2genesis(genesis_config_file)
 %  <a href="matlab:help pipelines       ">pipelines</a>      - BRAPH2 pipelines
 %  <a href="matlab:help test            ">test</a>           - BRAPH2 unit testing
 
+%% Check that no currently active BRAPH2 installation
+% % % TODO - check that braph2 or any of its components are not in the path.
+
+
 %% Read the genesis config file
 if nargin > 0
     eval(genesis_config_file)
@@ -45,16 +49,33 @@ end
 
 launcher = ['braph2' distribution_moniker];
 
+%% Download BRAPH 2 genesis, if needed
+repo = 'BRAPH-2';
+prefix_branch = strsplit(braph2_version, '/');
+prefix = prefix_branch{1};
+branch = prefix_branch{2};
 
+% Download zip file with BRAPH2
+disp(['Downloading ' repo ' (' prefix '/' branch ') ...']);
+url = ['https://github.com/braph-software/BRAPH-2/archive/refs/' prefix '/' branch '.zip'];
+zipfile = [repo '-' prefix '-' branch '.zip'];
+websave(zipfile, url);
 
+% Unzip BRAPH2
+disp(['Unzipping ' zipfile ' ...']);
+tmp_directory = [repo '-' branch];
+unzip(zipfile);
 
+% Extract BRAPH2GENESIS
+disp('Copying BRAPH2GENESIS ...');
+copyfile(fullfile(tmp_directory, 'braph2genesis'), 'braph2genesis');
 
+% Clean BRAPH2 directoy and zip file
+disp('Cleaning up ...');
+rmdir(tmp_directory, 's');
+delete(zipfile);
 
-
-
-return
-
-%% 
+%% Print headers
 if ispc
     fprintf([ ...
         '\n' ...
@@ -63,6 +84,8 @@ if ispc
         '<strong>@@@@   @@@@   @@@@@  @@@@   @@@@@     ####   #  #     Ø  ØØ ØØØ  Ø Ø Ø ØØØ   ØØØ   Ø   ØØØ \n</strong>' ...
         '<strong>@   @  @  @   @   @  @      @   @     #      #  #     Ø   Ø Ø    Ø  ØØ Ø        Ø  Ø      Ø\n</strong>' ...
         '<strong>@@@@   @   @  @   @  @      @   @     #### # ####     ØØØØØ ØØØØ Ø   Ø ØØØØ ØØØØ   Ø  ØØØØ \n</strong>' ...
+        '\n' ...
+        '                                                       ' distribution_name '\n' ...
         '\n' ...
         ]);
 else
@@ -74,9 +97,24 @@ else
         ' █   █  █  █   █   █  █      █   █     ▓      ▓  ▓     ▒   ▒ ▒    ▒  ▒▒ ▒        ▒  ▒      ▒\n' ...
         ' ████   █   █  █   █  █      █   █     ▓▓▓▓ ▓ ▓▓▓▓     ▒▒▒▒▒ ▒▒▒▒ ▒   ▒ ▒▒▒▒ ▒▒▒▒   ▒  ▒▒▒▒ \n' ...
         '\n' ...
+        '                                                       ' distribution_name '\n' ...
+        '\n' ...
         ]);
 end
 
+
+
+
+
+
+
+
+
+
+
+return
+
+%% 
 addpath(fileparts(which('braph2genesis')))
 addpath([fileparts(which('braph2genesis')) filesep 'genesis'])
 
