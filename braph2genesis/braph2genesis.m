@@ -28,7 +28,7 @@ clc
 
 %% Read the genesis config file
 if nargin > 0
-    eval(genesis_config_file)  % % % Change this to an actual file
+    run(genesis_config_file)
 end
 
 clearvars -except genesis_config_file distribution_name ...
@@ -53,6 +53,8 @@ end
 if ~exist('files_to_delete', 'var')
     files_to_delete = {};
 end
+
+directory = fileparts(genesis_config_file);
 
 launcher = ['braph2' distribution_moniker];
 
@@ -84,15 +86,16 @@ else
 end
 
 %% Download BRAPH 2 genesis, if needed
-if exist('braph2genesis', 'dir')
+braph2genesis_directory = [directory filesep() 'braph2genesis'];
+if exist(braph2genesis_directory, 'dir')
     if input([ ...
-        'The target braph2genesis directory already exists:\n' ...
+        'The braph2genesis directory already exists:\n' ...
         'It will be erased with all its content.\n' ...
         'Proceed anyways? (y/n)\n'
         ], 's') == 'y'
     
         backup_warning_state = warning('off', 'MATLAB:RMDIR:RemovedFromPath');
-        rmdir('braph2genesis', 's')
+        rmdir(braph2genesis_directory, 's')
         warning(backup_warning_state)
     else
         disp('Compilation interrupted.')
@@ -108,13 +111,13 @@ branch = prefix_branch{2};
 % Download zip file with BRAPH2
 disp(['Downloading ' repo ' (' prefix '/' branch ') ...']);
 url = ['https://github.com/braph-software/BRAPH-2/archive/refs/' prefix '/' branch '.zip'];
-zipfile = [repo '-' prefix '-' branch '.zip'];
+zipfile = [directory filesep() repo '-' prefix '-' branch '.zip'];
 websave(zipfile, url);
 
 % Unzip BRAPH2
 disp(['Unzipping ' zipfile ' ...']);
-tmp_directory = [repo '-' branch];
-unzip(zipfile);
+tmp_directory = [directory filesep() repo '-' branch];
+unzip(zipfile, tmp_directory);
 
 % Extract BRAPH2GENESIS
 disp('Copying BRAPH2GENESIS ...');
@@ -130,7 +133,7 @@ disp(' ')
 %% Copy pipeline folders into braph2genesis/pipelines
 for i = 1:1:numel(pipeline_folders)
     pipeline_folder = pipeline_folders{i};
-    target_folder = fullfile('braph2genesis', 'pipelines', pipeline_folder);
+    target_folder = fullfile(braph2genesis_directory, 'pipelines', pipeline_folder);
 
     fprintf(['Copying pipeline "' pipeline_folder '" to "' target_folder '"\n']);
     copyfile(pipeline_folder, target_folder);
@@ -153,9 +156,9 @@ disp(' ')
 
 
 %% Compile BRAPH2
-addpath([fileparts(which('braph2genesis')) filesep() 'braph2genesis' filesep 'genesis'])
+addpath([directory filesep 'genesis'])
 
-target_dir = [fileparts(which('braph2genesis')) filesep 'braph2' distribution_moniker];
+target_dir = [directory filesep 'braph2' distribution_moniker];
 if exist(target_dir, 'dir') 
     if input([ ...
         'The target directory already exists:\n' ...
