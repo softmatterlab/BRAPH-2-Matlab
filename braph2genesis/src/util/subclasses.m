@@ -18,7 +18,7 @@ function subclass_list = subclasses(class_name, directory, search_subdirectories
 %
 % See also SUPERCLASSES.
 
-if nargin < 4 % by default it does not add the class to the list of subclasses
+if nargin < 4  % by default it does not add the class to the list of subclasses
     add_class_name = false;
 end
 
@@ -26,7 +26,7 @@ if nargin < 3 || isempty(search_subdirectories)  % by default it does not search
     search_subdirectories = false;
 end
 
-if nargin < 2 || isempty(directory) % if no directory, searches all BRAPH2
+if nargin < 2 || isempty(directory)  % if no directory, searches all BRAPH2
     directory = fileparts(which(BRAPH2.LAUNCHER));  % retrieves the base directory of BRAPH
     search_subdirectories = true;
 end

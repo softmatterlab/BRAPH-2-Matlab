@@ -34,7 +34,7 @@ function braph2(gui, ewm)
         end
     end
 
-braph2_dir = fileparts(which(mfilename));
+braph2_dir = fileparts(which(mfilename()));
 addpath(braph2_dir)
 
 src_dir = [braph2_dir filesep 'src'];
