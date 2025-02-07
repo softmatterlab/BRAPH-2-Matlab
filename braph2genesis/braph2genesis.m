@@ -28,7 +28,7 @@ clc
 
 %% Read the genesis config file
 if nargin > 0
-    eval(genesis_config_file)
+    eval(genesis_config_file)  % % % Change this to an actual file
 end
 
 clearvars -except genesis_config_file distribution_name ...
