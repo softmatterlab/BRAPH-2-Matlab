@@ -57,30 +57,30 @@ end
 launcher = ['braph2' distribution_moniker];
 
 %% Download BRAPH 2 genesis, if needed
-% repo = 'BRAPH-2';
-% prefix_branch = strsplit(braph2_version, '/');
-% prefix = prefix_branch{1};
-% branch = prefix_branch{2};
-% 
-% % Download zip file with BRAPH2
-% disp(['Downloading ' repo ' (' prefix '/' branch ') ...']);
-% url = ['https://github.com/braph-software/BRAPH-2/archive/refs/' prefix '/' branch '.zip'];
-% zipfile = [repo '-' prefix '-' branch '.zip'];
-% websave(zipfile, url);
-% 
-% % Unzip BRAPH2
-% disp(['Unzipping ' zipfile ' ...']);
-% tmp_directory = [repo '-' branch];
-% unzip(zipfile);
-% 
-% % Extract BRAPH2GENESIS
-% disp('Copying BRAPH2GENESIS ...');
-% copyfile(fullfile(tmp_directory, 'braph2genesis'), 'braph2genesis');
-% 
-% % Clean BRAPH2 directoy and zip file
-% disp('Cleaning up ...');
-% rmdir(tmp_directory, 's');
-% delete(zipfile);
+repo = 'BRAPH-2';
+prefix_branch = strsplit(braph2_version, '/');
+prefix = prefix_branch{1};
+branch = prefix_branch{2};
+
+% Download zip file with BRAPH2
+disp(['Downloading ' repo ' (' prefix '/' branch ') ...']);
+url = ['https://github.com/braph-software/BRAPH-2/archive/refs/' prefix '/' branch '.zip'];
+zipfile = [repo '-' prefix '-' branch '.zip'];
+websave(zipfile, url);
+
+% Unzip BRAPH2
+disp(['Unzipping ' zipfile ' ...']);
+tmp_directory = [repo '-' branch];
+unzip(zipfile);
+
+% Extract BRAPH2GENESIS
+disp('Copying BRAPH2GENESIS ...');
+copyfile(fullfile(tmp_directory, 'braph2genesis'), 'braph2genesis');
+
+% Clean BRAPH2 directoy and zip file
+disp('Cleaning up ...');
+rmdir(tmp_directory, 's');
+delete(zipfile);
 
 %% Print headers
 clc
@@ -121,7 +121,7 @@ end
 disp(' ')
 
 %% Display rollcall elements
-fprintf(['Rollcal elements:\n']);
+fprintf('Rollcal elements:\n');
 rollcall_per_line = 5;
 offset = max(cellfun(@(x) length(x), rollcall)) + 2;
 for i = 1:rollcall_per_line:length(rollcall)
@@ -133,7 +133,7 @@ disp(' ')
 %% Compile BRAPH2
 addpath([fileparts(which('braph2genesis')) filesep() 'braph2genesis' filesep 'genesis'])
 
-target_dir = [fileparts(fileparts(which('braph2genesis'))) filesep 'braph2' distribution_moniker];
+target_dir = [fileparts(which('braph2genesis')) filesep 'braph2' distribution_moniker];
 if exist(target_dir, 'dir') 
     if input([ ...
         'The target directory already exists:\n' ...
