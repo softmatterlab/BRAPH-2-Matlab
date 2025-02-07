@@ -1,6 +1,6 @@
 ![BRAPH 2](braph2banner.png)
 
-# BRAPH 2 — Multimodal and AI-Powered Brain Connectivity Analysis
+# BRAPH 2 — **F**lexible, **O**pen-source, **R**eproducible, **C**ommunity-Oriented, **E**asy-to-use Framework for Network Analysis in Neurosciences
 
 [![BRAPH 2](https://img.shields.io/badge/Bluesky-BRAPH%202-blue?style=social&logo=bluesky&url=https%3A%2F%2Fbraph2software.bsky.social)](https://braph2software.bsky.social)
 [![BRAPH 2](https://img.shields.io/twitter/url?label=BRAPH%202&style=social&url=https%3A%2F%2Ftwitter.com%2Fbraph2software)](https://twitter.com/braph2software)
@@ -11,15 +11,30 @@
 
 <br />
 
-BRAPH 2 is an open-source MATLAB-based software that provides advanced capabilities for brain connectivity analysis. It offers a comprehensive range of features, including conventional graph theory, multilayer graphs, and deep learning techniques. With its user-friendly interface and extensive analysis pipelines, researchers can explore the complex organization of the human brain using multimodal neuroimaging data, going beyond the limitations of traditional approaches.
+BRAPH 2 is a flexible, open-source software built on MATLAB, designed to support community-driven and reproducible network analysis. It offers a comprehensive range of features, including complex statistical analyses and deep learning techniques. With its **Genesis** compiler, users can develop tailored distributions creating new custom pipelines, enhancing flexibility, scalability, and reproducibility across various research fields.
+![fig1_FORCE_bz](https://github.com/user-attachments/assets/e27d8ef3-6759-4d7d-9116-2973df77e1d1)
+> 
+> **Genesis advantages to compile a new custom BRAPH 2 distribution** To create a custom BRAPH 2 distribution with specialized analysis pipelines, users prepare a configuration file (genesis_config.txt) along with custom elements, pipeline scripts, and optional tutorial files. The Genesis module then integrates these with BRAPH 2’s core components through a structured compilation process, including directory setup, file integration, element compilation, GUI layout generation, and unit test creation. The final output is a customized, no-code GUI distribution, offering a flexible, open-source, reproducible, community-driven, and user-friendly framework for network analysis in neuroscience.
+
+
+## Standard BRAPH 2 Distribution
+
+BRAPH 2 was originally designed to facilitate the analysis of brain connectivity using various neuroimaging modalities and cutting-edge techniques.The Standard BRAPH 2 Distribution enables researchers to assess brain organization with multimodal data and advanced tools such as deep learning. With its user-friendly interface and extensive analysis pipelines, researchers can explore the complex organization of the human brain using multimodal neuroimaging data, going beyond the limitations of traditional approaches. It provides an extensive set of analysis pipelines accessible through a graphical user interface (GUI) and through sample scripts, allowing users to perform ready-to-use analyses or develop customized pipelines for their specific needs.
 
 ![Advances in brain connectivity analysis](braph2overview.png)
 > 
-> **Advances in brain connectivity analysis.** Brain connectivity analysis is rapidly evolving thanks to the widespread availability of increasing computational power and large-scale, high-resolution, multimodal neuroimaging datasets. BRAPH 2 provides a complete set of tools to analyze these data with conventional graph theory (single-layer graphs), multiplex and multilayer graphs, and deep learning (from dense neural networks to graph convolutional neural networks), as well as a flexible, easily expandable software architecture. BRAPH 2 uses parallel computing to allow users to run scripts on servers or clusters with both central processing units (CPUs) and graphical processing units (GPUs).
+> **Advances in brain connectivity analysis.** Brain connectivity analysis is rapidly evolving thanks to the widespread availability of increasing computational power and large-scale, high-resolution, multimodal neuroimaging datasets. The Standard BRAPH 2 Distribution provides a complete set of tools to analyze these data with conventional graph theory (single-layer graphs), multiplex and multilayer graphs, and deep learning (from dense neural networks to graph convolutional neural networks), as well as a flexible, easily expandable software architecture. BRAPH 2 uses parallel computing to allow users to run scripts on servers or clusters with both central processing units (CPUs) and graphical processing units (GPUs).
 
-## Welcome to BRAPH 2
+### Use Cases & Analysis Pipelines
 
-BRAPH 2 is designed to facilitate the analysis of brain connectivity using various neuroimaging modalities and cutting-edge techniques. It enables researchers to assess brain organization with multimodal data and advanced tools such as deep learning. BRAPH 2 provides an extensive set of analysis pipelines accessible through a graphical user interface (GUI) and through sample scripts, allowing users to perform ready-to-use analyses or develop customized pipelines for their specific needs.
+The Standard BRAPH 2 Distribution provides a wide range of analysis pipelines that can be used for various use cases in brain connectivity analysis. For detailed information about these analysis pipelines, including their functionalities and step-by-step instructions, refer to the [BRAPH 2 Pipeline Tutorials](tutorials/pipelines). Here are some possible use cases of BRAPH 2:
+
+1. **Conventional Single-Layer Analyses**: The Standard BRAPH 2 Distribution offers pipelines to analyze single-layer graphs derived from different kinds of neuroimaging data. These pipelines involve loading the brain atlas, loading the subject data, constructing the graph, calculating graph measures of interest, and comparing groups. Single-layer analyses can be performed on connectivity data, functional data, and structural data.
+
+3. **Multilayer Analyses**: The Standard BRAPH 2 Distribution supports the analysis of multilayer graphs, which capture the connectivity patterns across multiple layers or modalities. The multilayer analysis pipelines involve similar steps as single-layer analyses but operate on multilayer graphs. This allows researchers to explore the relationships between different layers or modalities of brain connectivity.
+
+4. **Deep Learning Analyses**: The Standard BRAPH 2 Distribution enables the analysis of brain connectivity data using deep learning techniques. The deep learning pipelines involve loading the brain atlas, loading the subject data, constructing the input for deep learning models, splitting the dataset, training the models, and evaluating the model performance. Deep learning analyses can be applied to connectivity data, functional data, and structural data and graphs.
+
 
 ### Installation
 
@@ -44,7 +59,7 @@ To install BRAPH 2, follow these steps:
 
 10. Explore the [BRAPH 2 Tutorials](tutorials).
 
-### Compatibility with MatLab Releases and Operative Systems
+## Compatibility with MatLab Releases and Operative Systems
 A &check; indicates that we have unit-tested the current release BRAPH 2 on the indicated Matlab release and operative system.
 
 | Matlab Version        | Mac     | Win    | Linux   |
@@ -56,17 +71,7 @@ A &check; indicates that we have unit-tested the current release BRAPH 2 on the 
 | R2024a                | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2538706423)       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2521610430)      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2513852545)       |
 | R2024b                | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2523698722)       | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2516894348)      | [&check;](https://github.com/braph-software/BRAPH-2/issues/1753#issuecomment-2523698722)       |
 
-### Use Cases & Analysis Pipelines
-
-BRAPH 2 provides a wide range of analysis pipelines that can be used for various use cases in brain connectivity analysis. For detailed information about these analysis pipelines, including their functionalities and step-by-step instructions, refer to the [BRAPH 2 Pipeline Tutorials](tutorials/pipelines). Here are some possible use cases of BRAPH 2:
-
-1. **Conventional Single-Layer Analyses**: BRAPH 2 offers pipelines to analyze single-layer graphs derived from different kinds of neuroimaging data. These pipelines involve loading the brain atlas, loading the subject data, constructing the graph, calculating graph measures of interest, and comparing groups. Single-layer analyses can be performed on connectivity data, functional data, and structural data.
-
-2. **Multilayer Analyses**: BRAPH 2 supports the analysis of multilayer graphs, which capture the connectivity patterns across multiple layers or modalities. The multilayer analysis pipelines involve similar steps as single-layer analyses but operate on multilayer graphs. This allows researchers to explore the relationships between different layers or modalities of brain connectivity.
-
-3. **Deep Learning Analyses**: BRAPH 2 enables the analysis of brain connectivity data using deep learning techniques. The deep learning pipelines involve loading the brain atlas, loading the subject data, constructing the input for deep learning models, splitting the dataset, training the models, and evaluating the model performance. Deep learning analyses can be applied to connectivity data, functional data, and structural data and graphs.
-
-### For Developers
+## For Developers
 
 BRAPH 2 is designed to be an open community-driven project, and the code is freely available on this GitHub repository at [BRAPH 2 Releases](../../releases). Developers can contribute to BRAPH 2 at various levels of complexity, ranging from editing existing pipelines and adapting example scripts to implementing entirely new features. For the details on how to do this, refer to the [BRAPH 2 Developer Tutorials](tutorials/developers).
 
