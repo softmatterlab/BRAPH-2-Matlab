@@ -221,7 +221,7 @@ fid = fopen(braph2constants_file, 'r'); file_content = textscan(fid, '%s', 'Deli
 file_content = file_content{1}; 
 
 % Define properties the new values to modify
-properties = {'DISTRIBUTION', 'LAUNCHER'}; new_values = {'Hello, World!', launcher};
+properties = {'DISTRIBUTION', 'LAUNCHER'}; new_values = {distribution_name, launcher};
 
 % Modify the file content
 for i = 1:length(file_content)
