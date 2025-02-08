@@ -1,8 +1,47 @@
 function braph2genesis(genesis_config_file)
-% BRAPH2GENESIS generates and tests BRAPH2.
+% BRAPH2GENESIS generates and tests a BRAPH 2 distribution.
+%
+% BRAPH2GENESIS(GENESIS_CONFIG_FILE) reads the configuration file 
+%  GENESIS_CONFIG_FILE and compiles a customized BRAPH 2 distribution 
+%  with user-defined elements alongside built-in components.
+%
+% BRAPH2GENESIS() generates the standard BRAPH 2 distribution without modifications.
+%
+% The configuration file GENESIS_CONFIG_FILE defines the distribution parameters:
+%
+%  <strong>%%% distribution_name</strong>
+%   A string specifying the name of the distribution (e.g., 'Hello, World!').
+%  <strong>%%% distribution_moniker</strong>
+%   A short identifier used in launcher functions and filenames (e.g., 'helloworld').
+%  <strong>%%% pipeline_folders</strong>
+%   A cell array listing folders containing user-prepared pipelines.
+%  <strong>%%% braph2_version</strong>
+%   A string specifying the BRAPH2 version to fetch from Github (e.g., 'tags/2.0.0' or 'heads/develop').
+%  <strong>%%% rollcall</strong>
+%   A cell array defining which standard elements to include or exclude.
+%  <strong>%%% files_to_delete</strong>
+%   A cell array specifying files to remove after compilation.
+%
+% If GENESIS_CONFIG_FILE is not provided, the function generates the 
+%  standard BRAPH2 distribution with all built-in components.
+%
+% Example usage:
+%  braph2genesis() % Generates the standard BRAPH2 distribution.
+%  braph2genesis('braph2helloworld_config.m') % Generates a custom distribution named "Hello, World!"
+%
+% Running:
+%  braph2genesis('config_hello.m')
+%  will generate a customized BRAPH 2 distribution including user-defined 
+%  pipelines while filtering elements as per the rollcall.
+%
+% For an example distribution, see the "Hello, World!" BRAPH 2 distribution:
+%  <a href="https://github.com/braph-software/hello-world">https://github.com/braph-software/hello-world</a>
+%  Running braph2genesis('braph2helloworld_config.m')
+%   will generate a customized BRAPH 2 distribution including user-defined 
+%   pipelines while filtering elements as per the rollcall.
 % 
-% The various subfolders contain the files necessary to generate the 
-%  various parts of BRAPH2.
+% The various subfolders of a standard BRAPH 2 distribution contain the files necessary to generate the 
+%  various parts of BRAPH 2.
 %
 % BRAPH2GENESIS standard packages:
 %  <a href="matlab:help genesis         ">genesis</a>        - code to generate BRAPH2
@@ -15,26 +54,24 @@ function braph2genesis(genesis_config_file)
 %  <a href="matlab:help pipelines       ">pipelines</a>      - BRAPH2 pipelines
 %  <a href="matlab:help test            ">test</a>           - BRAPH2 unit testing
 
-% % % TODO - document
-
 %% Clean up enviroment
 delete(findall(0, 'type', 'figure'))
 close all
 clearvars -except genesis_config_file 
 clc
 
-%% Check that no currently active BRAPH2 installation
-% % % TODO - check that braph2 or any of its components are not in the path.
-
 %% Read the genesis config file
 if nargin > 0
     run(genesis_config_file)
     directory = fileparts(genesis_config_file);
 else
-    directory = fileparts(mfilename());
+    directory = fileparts(mfilename);
+end
+if isempty(directory)
+    directory = '.'; % reflecting the current level of the working directory
 end
 
-clearvars -except genesis_config_file distribution_name ...
+clearvars -except directory genesis_config_file distribution_name ...
     distribution_moniker pipeline_folders braph2_version ...
     rollcall files_to_delete
 
@@ -58,6 +95,20 @@ if ~exist('files_to_delete', 'var')
 end
 
 launcher = ['braph2' distribution_moniker];
+
+%% Verify there is no BRAPH2 installation in the MATLAB search path
+folder_names = {'braph2', launcher}; % List of folder names to check
+path_dirs = strsplit(path, pathsep);
+
+found = cellfun(@(f) find(contains(path_dirs, [filesep f filesep]), 1, 'first'), folder_names, 'UniformOutput', false);
+found = [folder_names(~cellfun(@isempty, found)); path_dirs([found{:}])];
+
+if ~isempty(found)
+    fprintf('The following folders already exist in the MATLAB search path:\n');
+    fprintf('- %s (found in: %s)\n', found{:});
+    disp('Compilation interrupted.');
+    return
+end
 
 %% Print headers
 if ispc
@@ -88,46 +139,48 @@ end
 
 %% Download BRAPH 2 genesis, if needed
 braph2genesis_directory = [directory filesep() 'braph2genesis'];
+flag_erase_braph2genesis_dir = true; % a flag for deciding whether to erase braph2genesis at the end
 if exist(braph2genesis_directory, 'dir')
     if input([ ...
         'The braph2genesis directory already exists:\n' ...
-        'It will be erased with all its content.\n' ...
-        'Proceed anyways? (y/n)\n'
+        'Press ‘y’ to erase it, or\n' ...
+        'press ‘n’ to proceed with the existing one.\n'
         ], 's') == 'y'
-    
+
         backup_warning_state = warning('off', 'MATLAB:RMDIR:RemovedFromPath');
         rmdir(braph2genesis_directory, 's')
         warning(backup_warning_state)
     else
-        disp('Compilation interrupted.')
-        return
+        flag_erase_braph2genesis_dir = false; % to keep the existing braph2genesis directory
     end
 end
 
-repo = 'BRAPH-2';
-prefix_branch = strsplit(braph2_version, '/');
-prefix = prefix_branch{1};
-branch = prefix_branch{2};
+if ~exist(braph2genesis_directory, 'dir')
+    repo = 'BRAPH-2';
+    prefix_branch = strsplit(braph2_version, '/');
+    prefix = prefix_branch{1};
+    branch = prefix_branch{2};
 
-% Download zip file with BRAPH2
-disp(['Downloading ' repo ' (' prefix '/' branch ') ...']);
-url = ['https://github.com/braph-software/BRAPH-2/archive/refs/' prefix '/' branch '.zip'];
-zipfile = [directory filesep() repo '-' prefix '-' branch '.zip'];
-websave(zipfile, url);
+    % Download zip file with BRAPH2
+    disp(['Downloading ' repo ' (' prefix '/' branch ') ...']);
+    url = ['https://github.com/braph-software/BRAPH-2/archive/refs/' prefix '/' branch '.zip'];
+    zipfile = [directory filesep() repo '-' prefix '-' branch '.zip'];
+    websave(zipfile, url);
 
-% Unzip BRAPH2
-disp(['Unzipping ' zipfile ' ...']);
-tmp_directory = [directory filesep() repo '-' branch];
-unzip(zipfile, tmp_directory);
+    % Unzip BRAPH2
+    disp(['Unzipping ' zipfile ' ...']);
+    tmp_directory = [directory filesep() repo '-' branch];
+    unzip(zipfile, directory);
 
-% Extract BRAPH2GENESIS
-disp('Copying BRAPH2GENESIS ...');
-copyfile(fullfile(tmp_directory, 'braph2genesis'), 'braph2genesis');
+    % Extract BRAPH2GENESIS
+    disp('Copying BRAPH2GENESIS ...');
+    copyfile(fullfile(tmp_directory, 'braph2genesis'), braph2genesis_directory);
 
-% Clean BRAPH2 directoy and zip file
-disp('Cleaning up ...');
-rmdir(tmp_directory, 's');
-delete(zipfile);
+    % Clean BRAPH2 directoy and zip file
+    disp('Cleaning up ...');
+    rmdir(tmp_directory, 's');
+    delete(zipfile);
+end
 
 disp(' ')
 
@@ -137,7 +190,7 @@ for i = 1:1:numel(pipeline_folders)
     target_folder = fullfile(braph2genesis_directory, 'pipelines', pipeline_folder);
 
     fprintf(['Copying pipeline "' pipeline_folder '" to "' target_folder '"\n']);
-    copyfile(pipeline_folder, target_folder);
+    copyfile([directory filesep() pipeline_folder], target_folder);
 end
 
 disp(' ')
@@ -153,13 +206,41 @@ end
 
 disp(' ')
 
-%% Modify BRAPH2 constants
+%% Change name of BRAPH2 launcher
+braph2distr_launcher = [braph2genesis_directory filesep() '_braph2' filesep() launcher '.m'];
+braph2_launcher = [braph2genesis_directory filesep() '_braph2' filesep() 'braph2.m'];
+if ~exist(braph2distr_launcher, 'file')
+    movefile(braph2_launcher, braph2distr_launcher);
+end
 
+%% Modify BRAPH2 constants
+braph2constants_file = fullfile(braph2genesis_directory, 'src', 'util', 'BRAPH2.m'); % Define the file path
+
+% Read file content
+fid = fopen(braph2constants_file, 'r'); file_content = textscan(fid, '%s', 'Delimiter', '\n', 'Whitespace', ''); fclose(fid);
+file_content = file_content{1}; 
+
+% Define properties the new values to modify
+properties = {'DISTRIBUTION', 'LAUNCHER'}; new_values = {'Hello, World!', launcher};
+
+% Modify the file content
+for i = 1:length(file_content)
+    for j = 1:numel(properties)
+        if contains(file_content{i}, [properties{j}, ' =']) && startsWith(strtrim(file_content{i}), properties{j})
+            file_content{i} = sprintf('        %s = ''%s'';', properties{j}, new_values{j});
+        end
+    end
+end
+
+% Write back the modified content
+fid = fopen(braph2constants_file, 'w');
+fprintf(fid, '%s\n', file_content{:});
+fclose(fid);
 
 %% Compile BRAPH2
-addpath([directory filesep 'genesis'])
+addpath([braph2genesis_directory filesep() 'genesis'])
 
-target_dir = [directory filesep 'braph2' distribution_moniker];
+target_dir = [directory filesep() 'braph2' distribution_moniker];
 if exist(target_dir, 'dir') 
     if input([ ...
         'The target directory already exists:\n' ...
@@ -167,11 +248,12 @@ if exist(target_dir, 'dir')
         'It will be erased with all its content.\n' ...
         'Proceed anyways? (y/n)\n'
         ], 's') == 'y'
-    
+
         backup_warning_state = warning('off', 'MATLAB:RMDIR:RemovedFromPath');
         rmdir(target_dir, 's')
         warning(backup_warning_state)
     else
+        rmpath([braph2genesis_directory filesep() 'genesis'])
         disp('Compilation interrupted.')
         return
     end
@@ -179,7 +261,8 @@ end
 if ~exist(target_dir, 'dir') 
     time_start = tic;
 
-    [target_dir, source_dir] = genesis(target_dir, [], 2, rollcall); %#ok<ASGLU> 
+    [target_dir, source_dir] = genesis(target_dir, braph2genesis_directory, 2, rollcall); %#ok<ASGLU> 
+    %[target_dir, source_dir] = genesis(target_dir, [], 2); %#ok<ASGLU> 
 
     addpath(target_dir)
 
@@ -189,18 +272,28 @@ if ~exist(target_dir, 'dir')
     disp(['Its compilation has taken ' int2str(time_end) '.' int2str(mod(time_end, 1) * 10) 's'])
     disp('')
 end
-
-%% Change name of BRAPH2 launcher
-% % % TODO
+rmpath([braph2genesis_directory filesep() 'genesis'])
 
 %% Remove files to be deleted
-% % % TODO
+for i = 1:numel(files_to_delete)
+    file_to_delete = files_to_delete{i};
+    if exist(file_to_delete, 'file')
+        delete(file_to_delete);
+        fprintf('Deleted: %s\n', file_to_delete);
+    else
+        warning('File not found: %s', file_to_delete);
+    end
+end
 
-%% Erase 
-% % % TODO
+disp(' ')
+
+%% Erase braph2genesis dir
+if flag_erase_braph2genesis_dir
+    rmdir(braph2genesis_directory, 's');
+end
 
 %% Launch BRAPH2 distribution
-eval(['braph2' distribution '(false)'])
+eval([launcher '(false)'])
 
 %% Test compiled BRAPH2 distribution
 test_braph2
