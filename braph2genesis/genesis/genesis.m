@@ -491,7 +491,7 @@ for run = 1:1:run_number
     
     % LOAD BRAPH2
     addpath(target_dir)
-    eval([BRAPH2.LAUNCHER '(false, "warning")']);
+    eval([extractBefore(launcher_file, '.m') '(false, "warning")']);
 
     disp('¡! loaded BRAPH2')
     disp(' ')
