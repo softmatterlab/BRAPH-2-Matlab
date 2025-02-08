@@ -211,8 +211,9 @@ disp('¡! created dir structure - SANDBOX')
 disp(' ')
 
 %% COPY READY FILES
-% braph2.m and license.rtf
-copyfile([source_dir fp '_braph2' fp 'braph2.m'], [target_dir fp 'braph2.m'])
+% launcher file and license.rtf
+launcher_file = dir(fullfile(source_dir, ['_braph2' fp 'braph2*.m']));
+copyfile([source_dir fp '_braph2' fp launcher_file], [target_dir fp launcher_file])
 copyfile([source_dir fp 'braph2license.rtf'], [target_dir fp 'braph2license.rtf'])
 disp('¡! copied ready files - braph2')
 disp(' ')
