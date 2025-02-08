@@ -9,36 +9,27 @@ function braph2genesis(genesis_config_file)
 %
 % The configuration file GENESIS_CONFIG_FILE defines the distribution parameters:
 %
-%  <strong>%%% distribution_name</strong>
+%  <strong>distribution_name</strong>
 %   A string specifying the name of the distribution (e.g., 'Hello, World!').
-%  <strong>%%% distribution_moniker</strong>
+%  <strong>distribution_moniker</strong>
 %   A short identifier used in launcher functions and filenames (e.g., 'helloworld').
-%  <strong>%%% pipeline_folders</strong>
+%  <strong>pipeline_folders</strong>
 %   A cell array listing folders containing user-prepared pipelines.
-%  <strong>%%% braph2_version</strong>
+%  <strong>braph2_version</strong>
 %   A string specifying the BRAPH2 version to fetch from Github (e.g., 'tags/2.0.0' or 'heads/develop').
-%  <strong>%%% rollcall</strong>
+%  <strong>rollcall</strong>
 %   A cell array defining which standard elements to include or exclude.
-%  <strong>%%% files_to_delete</strong>
+%  <strong>files_to_delete</strong>
 %   A cell array specifying files to remove after compilation.
 %
 % If GENESIS_CONFIG_FILE is not provided, the function generates the 
-%  standard BRAPH2 distribution with all built-in components.
+%  standard BRAPH2 distribution with all built-in elements.
 %
 % Example usage:
 %  braph2genesis() % Generates the standard BRAPH2 distribution.
-%  braph2genesis('braph2helloworld_config.m') % Generates a custom distribution named "Hello, World!"
-%
-% Running:
-%  braph2genesis('config_hello.m')
-%  will generate a customized BRAPH 2 distribution including user-defined 
-%  pipelines while filtering elements as per the rollcall.
-%
-% For an example distribution, see the "Hello, World!" BRAPH 2 distribution:
-%  <a href="https://github.com/braph-software/hello-world">https://github.com/braph-software/hello-world</a>
-%  Running braph2genesis('braph2helloworld_config.m')
-%   will generate a customized BRAPH 2 distribution including user-defined 
-%   pipelines while filtering elements as per the rollcall.
+%  braph2genesis('braph2helloworld_config.m') % Generates a custom
+%  distribution named "Hello, World!", see the repository
+%   <a href="https://github.com/braph-software/hello-world">https://github.com/braph-software/hello-world</a>
 % 
 % The various subfolders of a standard BRAPH 2 distribution contain the files necessary to generate the 
 %  various parts of BRAPH 2.
