@@ -212,7 +212,7 @@ disp(' ')
 
 %% COPY READY FILES
 % launcher file and license.rtf
-launcher_file = dir(fullfile(source_dir, ['_braph2' fp 'braph2*.m']));
+launcher_file = dir(fullfile(source_dir, ['_braph2' fp 'braph2*.m'])).name;
 copyfile([source_dir fp '_braph2' fp launcher_file], [target_dir fp launcher_file])
 copyfile([source_dir fp 'braph2license.rtf'], [target_dir fp 'braph2license.rtf'])
 disp('¡! copied ready files - braph2')
@@ -491,7 +491,7 @@ for run = 1:1:run_number
     
     % LOAD BRAPH2
     addpath(target_dir)
-    braph2(false, 'warning')
+    eval([launcher_file "(false, 'warning')"]);
 
     disp('¡! loaded BRAPH2')
     disp(' ')
