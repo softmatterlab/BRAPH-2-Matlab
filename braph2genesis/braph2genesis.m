@@ -91,7 +91,8 @@ launcher = ['braph2' distribution_moniker];
 folder_names = {'braph2', launcher}; % List of folder names to check
 path_dirs = strsplit(path, pathsep);
 
-found = cellfun(@(f) find(contains(path_dirs, [filesep f filesep]), 1, 'first'), folder_names, 'UniformOutput', false);
+% Find folders that match but ignore 'braph2genesis'
+found = cellfun(@(f) find(contains(path_dirs, f, 'IgnoreCase', true) & ~contains(path_dirs, 'braph2genesis', 'IgnoreCase', true), 1, 'first'), folder_names, 'UniformOutput', false);
 found = [folder_names(~cellfun(@isempty, found)); path_dirs([found{:}])];
 
 if ~isempty(found)
