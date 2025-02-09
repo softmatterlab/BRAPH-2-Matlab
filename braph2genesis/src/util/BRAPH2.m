@@ -72,7 +72,7 @@ classdef BRAPH2
     properties (Constant) % BRAPH2 ID Card
         NAME = 'BRAPH 2' % BRAPH2 full name
         STR = 'BRAPH2' % BRAPH2 short string
-        DISTRIBUTION = 'Standard' % BRAPH2 distribution
+        DISTRIBUTION = 'Standard Distribution' % BRAPH2 distribution
         LAUNCHER = 'braph2' % BRAPH2 launcher
         VERSION = '2.0.0' % BRAPH2 version % % % ON RELEASE: Ensure correct VERSION
         BUILD = 6 % BRAPH2 build number % % % ON RELEASE: Ensure correct BUILD

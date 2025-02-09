@@ -1,6 +1,6 @@
 %% Pipeline Hello World
 
-% This pipeline script demonstrates a ‘Hello World’ example of the BRAPH 2 distribution.
+% This pipeline script demonstrates a ‘Hello World’ example of the BRAPH 2 Hello World distribution.
 % 1. It defines the first string, with a default value of ‘Hello’.
 % 2. It defines the second string, with a default value of ‘World’.
 % 3. It combines both strings, resulting in the default output ‘Hello World’.
