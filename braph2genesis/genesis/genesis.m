@@ -43,7 +43,7 @@ if nargin < 3 || isempty(run_number)
 end
 
 if nargin < 2 || isempty(source_dir)
-    source_dir = [fileparts(which('braph2genesis')) fp 'braph2genesis'];
+    source_dir = [fileparts(which('braph2genesis'))];
 end
 
 if nargin < 1 || isempty(target_dir)
@@ -211,8 +211,9 @@ disp('¡! created dir structure - SANDBOX')
 disp(' ')
 
 %% COPY READY FILES
-% braph2.m and license.rtf
-copyfile([source_dir fp '_braph2' fp 'braph2.m'], [target_dir fp 'braph2.m'])
+% launcher file and license.rtf
+launcher_file = dir(fullfile(source_dir, ['_braph2' fp 'braph2*.m'])).name;
+copyfile([source_dir fp '_braph2' fp launcher_file], [target_dir fp launcher_file])
 copyfile([source_dir fp 'braph2license.rtf'], [target_dir fp 'braph2license.rtf'])
 disp('¡! copied ready files - braph2')
 disp(' ')
@@ -490,7 +491,7 @@ for run = 1:1:run_number
     
     % LOAD BRAPH2
     addpath(target_dir)
-    braph2(false, 'warning')
+    eval([extractBefore(launcher_file, '.m') '(false, "warning")']);
 
     disp('¡! loaded BRAPH2')
     disp(' ')

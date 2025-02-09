@@ -1,7 +1,7 @@
 distribution_name = 'BRAPH2 with Rollcall';
-distribution_moniker = 'braph2_with_rollcall';
+distribution_moniker = 'with_rollcall';
 pipeline_folders = {};
-braph2_version = 'heads/develop';
+braph2_version = 'heads/ywc-genesis-function';
 
 %% Add here all included and excluded folders and elements
 % '-folder'                 the folder and its elements will be excluded
@@ -15,7 +15,6 @@ braph2_version = 'heads/develop';
 %                           if the folder and its elements are included
 % (by default, the folders are included as '+folder*')
 rollcall = { ...
-{ ...
     '+util*', '-_Exporter.gen.m', '+_Importer.gen.m', ...
     '+ds*', '-ds_examples', ...
     '-atlas', ...
