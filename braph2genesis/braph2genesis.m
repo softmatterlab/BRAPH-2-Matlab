@@ -1,40 +1,8 @@
 function braph2genesis(genesis_config_file)
 % BRAPH2GENESIS generates and tests a BRAPH 2 distribution.
 %
-% BRAPH2GENESIS(GENESIS_CONFIG_FILE) reads the configuration file 
-%  GENESIS_CONFIG_FILE and compiles a customized BRAPH 2 distribution 
-%  with user-defined elements alongside built-in components.
-%
-% BRAPH2GENESIS() generates the standard BRAPH 2 distribution without modifications.
-%
-% The configuration file GENESIS_CONFIG_FILE defines the distribution parameters:
-%
-%  <strong>distribution_name</strong>
-%   A string specifying the name of the distribution (e.g., 'Hello, World!').
-%  <strong>distribution_moniker</strong>
-%   A short identifier used in launcher functions and filenames (e.g., 'helloworld').
-%  <strong>pipeline_folders</strong>
-%   A cell array listing folders containing user-prepared pipelines.
-%  <strong>braph2_version</strong>
-%   A string specifying the BRAPH2 version to fetch from Github (e.g., 'tags/2.0.0' or 'heads/develop').
-%  <strong>rollcall</strong>
-%   A cell array defining which standard elements to include or exclude.
-%  <strong>files_to_delete</strong>
-%   A cell array specifying files to remove after compilation.
-%
-% If GENESIS_CONFIG_FILE is not provided, the function generates the 
-%  standard BRAPH2 distribution with all built-in elements.
-%
-% Example usage:
-%  braph2genesis() % Generates the standard BRAPH2 distribution.
-%  braph2genesis('braph2helloworld_config.m') % Generates a custom
-%  distribution named "Hello, World!", see the repository
-%   <a href="https://github.com/braph-software/hello-world">https://github.com/braph-software/hello-world</a>
-% 
-% The various subfolders of a standard BRAPH 2 distribution contain the files necessary to generate the 
-%  various parts of BRAPH 2.
-%
-% BRAPH2GENESIS standard packages:
+% BRAPH2GENESIS() compiles the standard BRAPH 2 distribution, which
+%  includes these standard packages:
 %  <a href="matlab:help genesis         ">genesis</a>        - code to generate BRAPH2
 %  <a href="matlab:help braph2          ">braph2</a>         - BRAPH2 loader
 %  <a href="matlab:help src             ">src</a>            - BRAPH2 core
@@ -44,6 +12,53 @@ function braph2genesis(genesis_config_file)
 %  <a href="matlab:help neuralnetworks  ">neuralnetworks</a> - BRAPH2 neural networks
 %  <a href="matlab:help pipelines       ">pipelines</a>      - BRAPH2 pipelines
 %  <a href="matlab:help test            ">test</a>           - BRAPH2 unit testing
+%
+%
+% BRAPH2GENESIS(GENESIS_CONFIG_FILE) reads the configuration file 
+%  GENESIS_CONFIG_FILE and compiles a customized BRAPH 2 distribution 
+%  with user-defined elements alongside built-in components.
+%
+% The configuration file GENESIS_CONFIG_FILE is a MatLab script (*.m file)
+%  with the following variables (other variables will be ingnored):
+%
+%  <strong>distribution_name</strong>
+%   A string specifying the name of the distribution
+%   (e.g., 'Hello, World!').
+%  <strong>distribution_moniker</strong>
+%   A short identifier used in launcher functions and filenames. It should
+%   only contain letters, numbers, and underscores.
+%   (e.g., 'helloworld').
+%  <strong>pipeline_folders</strong>
+%   A cell array listing folders containing user-prepared pipelines.
+%  <strong>braph2_version</strong>
+%   A string specifying the BRAPH2 version to fetch from Github
+%   (e.g., 'tags/2.0.1' or 'heads/develop').
+%   The build number should be 7 or larger (version 2.0.1 or subsequent).
+%  <strong>rollcall</strong>
+%   A cell array defining which standard elements to include or exclude.
+%
+%   Add here all included and excluded folders and elements
+%   '-folder'                 the folder and its elements will be excluded
+%
+%  '+folder'                 the folder is included, but not its elements
+%    '+_ElementName.gen.m'   the element is included,
+%                            if the folder is included
+%
+%  '+folder*'                the folder and its elements are included
+%    '-_ElementName.gen.m'   the element is excluded,
+%                            if the folder and its elements are included
+%  (by default, the folders are included as '+folder*')
+%   
+%  <strong>files_to_delete</strong>
+%   A cell array specifying files to remove after compilation.
+%
+% If GENESIS_CONFIG_FILE is not provided, the function generates the 
+%  standard BRAPH2 distribution with all built-in elements.
+%
+% Example usage:
+%  braph2genesis('braph2helloworld_config.m') 
+% This command generates a custom distribution named "Hello, World!",
+%  see the GitHub repository <a href="https://github.com/braph-software/hello-world">https://github.com/braph-software/hello-world</a>
 
 %% Clean up enviroment
 delete(findall(0, 'type', 'figure'))
@@ -175,6 +190,9 @@ if ~exist(braph2genesis_directory, 'dir')
 end
 
 disp(' ')
+
+%% Check that build number >= 7 (version 2.0.1 or subsequent).
+% TODO
 
 %% Copy pipeline folders into braph2genesis/pipelines
 for i = 1:1:numel(pipeline_folders)
