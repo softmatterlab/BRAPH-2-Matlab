@@ -145,7 +145,7 @@ classdef NNxMLP_FeatureImportanceBrainSurfacePF_BU < NNxMLP_FeatureImportanceBra
 	%
 	% See also NNxMLP_FeatureImportanceBrainSurface, NNxMLP_FeatureImportanceBrainSurfacePF.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function pf = NNxMLP_FeatureImportanceBrainSurfacePF_BU(varargin)

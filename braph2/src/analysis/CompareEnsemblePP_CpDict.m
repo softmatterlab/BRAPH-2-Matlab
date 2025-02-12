@@ -135,7 +135,7 @@ classdef CompareEnsemblePP_CpDict < PanelProp
 	%
 	% See also uitable, CompareEnsemble, ComparisonEnsemble.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		TABLE_HEIGHT = 36; %CET: Computational Efficiency Trick

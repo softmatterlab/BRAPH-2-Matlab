@@ -127,7 +127,7 @@ classdef Measure < ConcreteElement
 	%
 	% See also Graph.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % constants
 		% Measure shape

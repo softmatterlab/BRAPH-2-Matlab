@@ -132,7 +132,7 @@ classdef ComparisonEnsemblePF_BxPP_Nodes < PanelProp
 	%
 	% See also uidropdown, GUI, ComparisonEnsemblePF_BU, ComparisonEnsemblePF_BS, ComparisonEnsemblePF_BB.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		DROPDOWN_NODE1 = 36; %CET: Computational Efficiency Trick

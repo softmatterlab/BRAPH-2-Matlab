@@ -141,7 +141,7 @@ classdef ComparisonGroupPF_BU < ComparisonGroupPF
 	%
 	% See also ComparisonGroup.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		NODES = 46; %CET: Computational Efficiency Trick

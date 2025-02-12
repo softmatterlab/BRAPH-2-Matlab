@@ -133,7 +133,7 @@ classdef BrainSurfacePF < PanelFig
 	%
 	% See also BrainSurface.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % constants
 		% fixed 3d view
@@ -673,7 +673,7 @@ classdef BrainSurfacePF < PanelFig
 				case 26 % BrainSurfacePF.LISTENER_ST_AXIS
 					prop_settings = Format.getFormatSettings(18);
 				case 27 % BrainSurfacePF.SURFFILE
-					prop_settings = {dir([fileparts(which('braph2')) filesep() 'brainsurfs' filesep() '*.nv']).name};
+					prop_settings = {dir([fileparts(which(BRAPH2.LAUNCHER)) filesep() 'brainsurfs' filesep() '*.nv']).name};
 				case 28 % BrainSurfacePF.SURF
 					prop_settings = 'BrainSurface';
 				case 29 % BrainSurfacePF.H_BRAIN

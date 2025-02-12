@@ -110,7 +110,7 @@ classdef AnalyzeEnsemble_CON_BUT < AnalyzeEnsemble
 	%
 	% See also SubjectCON, MultigraphBUT.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		THRESHOLDS = 15; %CET: Computational Efficiency Trick

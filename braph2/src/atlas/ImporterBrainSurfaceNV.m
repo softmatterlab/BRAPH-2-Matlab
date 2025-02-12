@@ -106,7 +106,7 @@ classdef ImporterBrainSurfaceNV < Importer
 	%
 	% See also BrainSurface.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		FILE = 10; %CET: Computational Efficiency Trick
@@ -700,7 +700,7 @@ classdef ImporterBrainSurfaceNV < Importer
 					% analyzes file
 					file = im.get('FILE');
 					if ~isfile(file)
-					    file = [fileparts(which('braph2')) filesep 'brainsurfs' filesep file];
+					    file = [fileparts(which(BRAPH2.LAUNCHER)) filesep 'brainsurfs' filesep file];
 					end
 					
 					if isfile(file)

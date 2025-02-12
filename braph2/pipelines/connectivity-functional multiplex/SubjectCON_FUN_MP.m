@@ -107,7 +107,7 @@ classdef SubjectCON_FUN_MP < Subject
 	%
 	% See also CombineGroups_CON_FUN_MP, SeparateGroups_CON_FUN_MP.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		BA = 10; %CET: Computational Efficiency Trick

@@ -161,7 +161,7 @@ classdef PanelPropCellFDR < PanelProp
 	%
 	% See also uitable, uislider, GUI, PanelElement.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		XSLIDERSHOW = 36; %CET: Computational Efficiency Trick

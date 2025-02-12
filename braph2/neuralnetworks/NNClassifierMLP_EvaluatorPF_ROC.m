@@ -135,7 +135,7 @@ classdef NNClassifierMLP_EvaluatorPF_ROC < PanelFig
 	%
 	% See also NNClassifierMLP_Evaluator.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		H_AXES = 23; %CET: Computational Efficiency Trick
