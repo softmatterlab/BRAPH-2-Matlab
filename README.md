@@ -76,7 +76,7 @@ BRAPH 2 is designed to be an open community-driven project, and the code is free
 
 ## Contribute to BRAPH 2
 
-BRAPH 2 is an open-source project, and contributions from the community are highly encouraged. Whether you want to report a bug, suggest a new feature, contribute code improvements, or create your tailored distribution, your involvement is valuable and will help make BRAPH 2 even better.
+BRAPH 2 is an open-source project, and contributions from the community are highly encouraged. Whether you want to report a bug, suggest a new feature, create your tailored distribution, or contribute code improvements, your involvement is valuable and will help make BRAPH 2 even better.
 
 ### Bug Reports and Feature Requests
 
