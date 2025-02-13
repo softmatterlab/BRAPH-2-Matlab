@@ -14,12 +14,11 @@
 BRAPH 2 is a MATLAB-based framework for network analysis in neuroscience and beyond. Its hallmark is **Genesis**, a compiler that lets you create custom BRAPH 2 distributions by integrating new methods or specialized pipelines while retaining its **standard distribution**’s capabilities—multilayer graphs, advanced statistics, and deep learning. This flexible architecture fosters community-driven innovation, scalability, and reproducibility across diverse research fields.
 ![fig1_FORCE_bz](https://github.com/user-attachments/assets/e27d8ef3-6759-4d7d-9116-2973df77e1d1)
 > 
-> **Genesis advantages to compile a new custom BRAPH 2 distribution** To create a custom BRAPH 2 distribution with new methods or specialized analysis pipelines, users prepare a configuration file (genesis_config.txt) along with custom elements, pipeline scripts, and optional tutorial files. The Genesis module then integrates these with BRAPH 2’s core components through a structured compilation process, including directory setup, file integration, element compilation, GUI layout generation, and unit test creation. The final output is a customized, no-code GUI distribution, offering a flexible, open-source, reproducible, community-driven, and user-friendly framework for network analysis in neuroscience. A practical example can be found in the tutorial for creating a BRAPH 2 Hello, World! Distribution.
-
+> **Genesis advantages to compile a new custom BRAPH 2 distribution** To create a custom BRAPH 2 distribution with new methods or specialized analysis pipelines, users prepare a configuration file (genesis_config.txt) along with custom elements, pipeline scripts, and optional tutorial files. The Genesis module then integrates these with BRAPH 2’s core components through a structured compilation process, including directory setup, file integration, element compilation, GUI layout generation, and unit test creation. The final output is a customized, no-code GUI distribution, offering a flexible, open-source, reproducible, community-driven, and user-friendly framework for network analysis in neuroscience. A practical example can be found in the [BRAPH 2 Genesis Tutorials](tutorials/developers) for creating a BRAPH 2 Hello, World! Distribution.
 
 ## Standard BRAPH 2 Distribution
 
-BRAPH 2 ships with the **Standard Distribution**—provided in this very repository—which offers advanced tools for multilayer brain connectivity analysis and deep learning across various neuroimaging modalities. Through a user-friendly GUI and several ready-to-use pipelines, researchers can delve deeper into the complexities of the human brain beyond traditional approaches. Users can also adapt or expand these pipelines via sample scripts, making the standard distribution both powerful and flexible. Detailed installation steps and tutorials follow below.
+BRAPH 2 ships with the **standard distribution**—provided in this very repository—which offers advanced tools for multilayer brain connectivity analysis and deep learning across various neuroimaging modalities. Through a user-friendly GUI and several ready-to-use pipelines, researchers can delve deeper into the complexities of the human brain beyond traditional approaches. Users can also adapt or expand these pipelines via sample scripts, making the **standard distribution** both powerful and flexible. Detailed installation steps and tutorials follow below.
 
 ![Advances in brain connectivity analysis](braph2overview.png)
 > 
@@ -27,7 +26,7 @@ BRAPH 2 ships with the **Standard Distribution**—provided in this very reposit
 
 ### Use Cases & Analysis Pipelines
 
-The **Standard BRAPH 2 Distribution** provides a wide range of analysis pipelines that can be used for various use cases in brain connectivity analysis. For detailed information about these analysis pipelines, including their functionalities and step-by-step instructions, refer to the [BRAPH 2 Pipeline Tutorials](tutorials/pipelines). Here are some possible use cases in the standard distribution:
+The **Standard BRAPH 2 Distribution** provides a wide range of analysis pipelines that can be used for various use cases in brain connectivity analysis. For detailed information about these analysis pipelines, including their functionalities and step-by-step instructions, refer to the [BRAPH 2 Pipeline Tutorials](tutorials/pipelines). Here are some possible use cases in the **standard distribution**:
 
 1. **Conventional Single-Layer Analyses**: The Standard BRAPH 2 Distribution offers pipelines to analyze single-layer graphs derived from different kinds of neuroimaging data. These pipelines involve loading the brain atlas, loading the subject data, constructing the graph, calculating graph measures of interest, and comparing groups. Single-layer analyses can be performed on connectivity data, functional data, and structural data.
 
@@ -38,7 +37,7 @@ The **Standard BRAPH 2 Distribution** provides a wide range of analysis pipeline
 
 ### Installation
 
-To install standard BRAPH 2 distribution, follow these steps:
+To install the **Standard BRAPH 2 Distribution**, follow these steps:
 
 1. Ensure that you have **MATLAB R2022a or a later version** installed on your system. BRAPH 2 is compatible with the versions of MATLAB for Microsoft Windows, MacOS, and Linux operating systems.
 
@@ -73,18 +72,18 @@ A &check; indicates that we have unit-tested the current release BRAPH 2 on the 
 
 ## For Developers
 
-BRAPH 2 is designed to be an open community-driven project, and the code is freely available on this GitHub repository at BRAPH 2 Releases. Developers can contribute to BRAPH 2 at various levels of complexity, ranging from editing existing pipelines and adapting example scripts to implementing entirely new features. For the details on how to do this, refer to the BRAPH 2 Developer Tutorials.
+BRAPH 2 is designed to be an open community-driven project, and the code is freely available on this GitHub repository at BRAPH 2 Releases. Developers can contribute to BRAPH 2 at various levels of complexity, ranging from editing existing pipelines and adapting example scripts to implementing entirely new features. For the details on how to do this, refer to the [BRAPH 2 Developer Tutorials](tutorials/developers).
 
 ## Contribute to BRAPH 2
 
-BRAPH 2 is an open-source project, and contributions from the community are highly encouraged. Whether you want to report a bug, suggest a new feature, contribute code improvements, or create your own distribution, your involvement is valuable and will help make BRAPH 2 even better.
+BRAPH 2 is an open-source project, and contributions from the community are highly encouraged. Whether you want to report a bug, suggest a new feature, contribute code improvements, or create your tailored distribution, your involvement is valuable and will help make BRAPH 2 even better.
 
 ### Bug Reports and Feature Requests
 
 If you encounter any issues or have ideas for new features, please submit detailed information for bug reports using the [Bug Report](../../issues/new?template=bug_report.md) template and clear descriptions for feature requests using the [Feature Request](../../issues/new?template=feature_request.md) template.
 
 ### Create Your Tailored Distribution
-Leverage BRAPH 2’s **Genesis** system to build custom distributions tailored to your specific research needs, by including the built-in elements you need—omitting unnecessary parts—into a self-contained distribution suited for your research. For detailed instructions, refer to the BRAPH 2 Genesis Tutorials.
+Leverage BRAPH 2’s **Genesis** system to build custom distributions tailored to your specific research needs by selecting only the built-in elements you require—omitting anything unnecessary—and incorporating your own new elements into a self-contained package. For detailed instructions, refer to the [BRAPH 2 Genesis Tutorials](tutorials/developers).
 
 ### Code Contributions
 
