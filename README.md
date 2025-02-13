@@ -84,7 +84,7 @@ BRAPH 2 is an open-source project, and contributions from the community are high
 If you encounter any issues or have ideas for new features, please submit detailed information for bug reports using the [Bug Report](../../issues/new?template=bug_report.md) template and clear descriptions for feature requests using the [Feature Request](../../issues/new?template=feature_request.md) template.
 
 ### Create Your Tailored Distribution
-BRAPH 2's **Genesis** system enables you to customize your own BRAPH 2 distributions with tailored to your specific research needs, by packaging any built-in elements with user-defined elements into a self-contained distribution. For the details on how to do this, refer to the [BRAPH 2 Genesis Tutorials](tutorials/developers).
+Leverage BRAPH 2’s **Genesis** system to build custom distributions tailored to your specific research needs, by including the built-in elements you need—omitting unnecessary parts—into a self-contained distribution suited for your research. For detailed instructions, refer to the BRAPH 2 Genesis Tutorials.
 
 ### Code Contributions
 
