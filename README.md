@@ -90,7 +90,7 @@ Leverage BRAPH 2’s **Genesis** system to build custom distributions tailored t
 Existing tailored BRAPH 2 distributions:
 
 - **[Hello, World!](https://github.com/c-yuwei/HelloWorld)**: A minimal BRAPH 2 distribution demonstrating the capabilities of Genesis in generating standalone, unit-tested, and GUI-ready BRAPH 2 distributions.
-- **[Memory Capacity](https://github.com/braph-software/MemoryCapacity)**: A BRAPH 2 distribution applying the reservoir computing framework to compute global and nodal memory capacity. It has been used to produce results in the manuscript _“Computational Memory Capacity Predicts Aging and Cognitive Decline”_ by Mijalkov et al. (2025).
+- **[Memory Capacity](https://github.com/braph-software/MemoryCapacity)**: A BRAPH 2 distribution applying the reservoir computing approach to compute global and nodal memory capacity. It has been used to produce results in the manuscript _“Computational Memory Capacity Predicts Aging and Cognitive Decline”_ by Mijalkov et al. (2025).
 - 
 ### Code Contributions
 
