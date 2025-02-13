@@ -19,8 +19,7 @@ BRAPH 2 is a MATLAB-based framework for network analysis in neuroscience and bey
 
 ## Standard BRAPH 2 Distribution
 
-BRAPH 2 ships with the **Standard Distribution** featuring ready-to-use pipelines for multilayer brain connectivity analysis and deep learning techniques with various neuroimaging modalities.
-With its user-friendly interface and extensive analysis pipelines, researchers can explore the complex organization of the human brain using multimodal neuroimaging data, going beyond the limitations of traditional approaches. It provides an extensive set of analysis pipelines accessible through a graphical user interface (GUI) and through sample scripts, allowing users to perform ready-to-use analyses or develop customized pipelines for their specific needs.
+BRAPH 2 ships with the **Standard Distribution**—provided in this very repository—which offers advanced tools for multilayer brain connectivity analysis and deep learning across various neuroimaging modalities. Through a user-friendly GUI and several ready-to-use pipelines, researchers can delve deeper into the complexities of the human brain beyond traditional approaches. Users can also adapt or expand these pipelines via sample scripts, making the standard distribution both powerful and flexible. Detailed installation steps and tutorials follow below.
 
 ![Advances in brain connectivity analysis](braph2overview.png)
 > 
