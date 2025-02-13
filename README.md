@@ -1,6 +1,6 @@
 ![BRAPH 2](braph2banner.png)
 
-# BRAPH 2 — **F**lexible, **O**pen-source, **R**eproducible, **C**ommunity-Oriented, **E**asy-to-use Framework for Network Analysis in Neurosciences
+# BRAPH 2 — **F**lexible, **O**pen-source, **R**eproducible, **C**ommunity-Oriented, **E**asy-to-use Framework for Network Analysis in Neuroscience
 
 [![BRAPH 2](https://img.shields.io/badge/Bluesky-BRAPH%202-blue?style=social&logo=bluesky&url=https%3A%2F%2Fbraph2software.bsky.social)](https://braph2software.bsky.social)
 [![BRAPH 2](https://img.shields.io/twitter/url?label=BRAPH%202&style=social&url=https%3A%2F%2Ftwitter.com%2Fbraph2software)](https://twitter.com/braph2software)
@@ -11,7 +11,9 @@
 
 <br />
 
-BRAPH 2 is a MATLAB-based framework for network analysis in neuroscience and beyond. Its hallmark is **Genesis**, a compiler that lets you create custom BRAPH 2 distributions by integrating new methods or specialized pipelines while retaining its **standard distribution**’s capabilities—multilayer graphs, advanced statistics, and deep learning. This flexible architecture fosters community-driven innovation, scalability, and reproducibility across diverse research fields.
+BRAPH 2 is a MATLAB-based framework for network analysis in neuroscience. Its **standard distribution** offers advanced multilayer graph analysis, deep learning, and statistical tools.
+The hallmark of BRAPH 2 is **Genesis**, a compiler that lets you create **tailored distributions** by integrating your own methods or specialized pipelines alongside these built-in capabilities. This flexible architecture fosters community-driven innovation, scalability, and reproducibility across diverse research fields.
+
 ![fig1_FORCE_bz](https://github.com/user-attachments/assets/e27d8ef3-6759-4d7d-9116-2973df77e1d1)
 > 
 > **Genesis advantages to compile a new custom BRAPH 2 distribution** To create a custom BRAPH 2 distribution with new methods or specialized analysis pipelines, users prepare a configuration file (genesis_config.txt) along with custom elements, pipeline scripts, and optional tutorial files. The Genesis module then integrates these with BRAPH 2’s core components through a structured compilation process, including directory setup, file integration, element compilation, GUI layout generation, and unit test creation. The final output is a customized, no-code GUI distribution, offering a flexible, open-source, reproducible, community-driven, and user-friendly framework for network analysis in neuroscience. A practical example can be found in the [BRAPH 2 Genesis Tutorials](tutorials/developers) for creating a BRAPH 2 Hello, World! Distribution.
