@@ -27,7 +27,7 @@ BRAPH 2 ships with the **Standard Distribution**—provided in this very reposit
 
 ### Use Cases & Analysis Pipelines
 
-The Standard BRAPH 2 Distribution provides a wide range of analysis pipelines that can be used for various use cases in brain connectivity analysis. For detailed information about these analysis pipelines, including their functionalities and step-by-step instructions, refer to the [BRAPH 2 Pipeline Tutorials](tutorials/pipelines). Here are some possible use cases of BRAPH 2:
+The **Standard BRAPH 2 Distribution** provides a wide range of analysis pipelines that can be used for various use cases in brain connectivity analysis. For detailed information about these analysis pipelines, including their functionalities and step-by-step instructions, refer to the [BRAPH 2 Pipeline Tutorials](tutorials/pipelines). Here are some possible use cases in the standard distribution:
 
 1. **Conventional Single-Layer Analyses**: The Standard BRAPH 2 Distribution offers pipelines to analyze single-layer graphs derived from different kinds of neuroimaging data. These pipelines involve loading the brain atlas, loading the subject data, constructing the graph, calculating graph measures of interest, and comparing groups. Single-layer analyses can be performed on connectivity data, functional data, and structural data.
 
@@ -73,16 +73,18 @@ A &check; indicates that we have unit-tested the current release BRAPH 2 on the 
 
 ## For Developers
 
-BRAPH 2 is designed to be an open community-driven project, and the code is freely available on this GitHub repository at [BRAPH 2 Releases](../../releases). 
-Its **Genesis** system enables developers to build, customize, and share their own tailored BRAPH 2 distributions at various levels of complexity, ranging from editing existing pipelines and adapting example scripts to implementing entirely new features. For the details on how to do this, refer to the [BRAPH 2 Developer Tutorials](tutorials/developers).
+BRAPH 2 is designed to be an open community-driven project, and the code is freely available on this GitHub repository at BRAPH 2 Releases. Developers can contribute to BRAPH 2 at various levels of complexity, ranging from editing existing pipelines and adapting example scripts to implementing entirely new features. For the details on how to do this, refer to the BRAPH 2 Developer Tutorials.
 
 ## Contribute to BRAPH 2
 
-BRAPH 2 is an open-source project, and contributions from the community are highly encouraged. Whether you want to report a bug, suggest a new feature, or contribute code improvements, your involvement is valuable and will help make BRAPH 2 even better.
+BRAPH 2 is an open-source project, and contributions from the community are highly encouraged. Whether you want to report a bug, suggest a new feature, contribute code improvements, or create your own distribution, your involvement is valuable and will help make BRAPH 2 even better.
 
 ### Bug Reports and Feature Requests
 
 If you encounter any issues or have ideas for new features, please submit detailed information for bug reports using the [Bug Report](../../issues/new?template=bug_report.md) template and clear descriptions for feature requests using the [Feature Request](../../issues/new?template=feature_request.md) template.
+
+### Create Your Tailored Distribution
+BRAPH 2's **Genesis** system enables you to customize your own BRAPH 2 distributions with tailored to your specific research needs, by packaging any built-in elements with user-defined elements into a self-contained distribution. For the details on how to do this, refer to the [BRAPH 2 Genesis Tutorials](tutorials/developers).
 
 ### Code Contributions
 
