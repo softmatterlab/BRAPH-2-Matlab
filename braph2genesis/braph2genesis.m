@@ -68,14 +68,8 @@ clc
 
 %% Read the genesis config file
 if nargin > 0
-    if isfile(genesis_config_file)
-        run(genesis_config_file)
-        directory = fileparts(genesis_config_file);
-    else
-        fprintf('The input file ''%s'' does not exist. \n', genesis_config_file);
-        disp('Compilation interrupted.');
-        return
-    end
+    run(genesis_config_file)
+    directory = fileparts(genesis_config_file);
 else
     directory = fileparts(mfilename);
 end
@@ -198,38 +192,7 @@ end
 disp(' ')
 
 %% Check that build number >= 7 (version 2.0.1 or subsequent).
-addpath([braph2genesis_directory filesep() 'src' filesep() 'util']); % temporarily add path for genesis util dir
-genesis_full_path = what(braph2genesis_directory).path; expected_BRAPH2_path = [genesis_full_path filesep() 'src' filesep() 'util' filesep() 'BRAPH2.m'];
-
-if isequal(which('BRAPH2'), expected_BRAPH2_path)
-    build_number = BRAPH2.BUILD; % e.g., 7 or 8
-    version_str = BRAPH2.VERSION; % e.g., '2.0.1'
-    ver_parts = regexp(version_str, '\.', 'split'); % e.g., {2}, {0}, {1}, split it into major, minor, and patch
-    
-    % check build number
-    if build_number < 7 % the build number should be greater or equal to 7
-        fprintf('BRAPH2 build number is %d, but must be >= 7.\n', build_number);
-        fprintf('Compilation interrupted.\n');
-        rmpath(fullfile(braph2genesis_directory, 'src', 'util'));
-        return
-    end
-    
-    % check version
-    if (numel(ver_parts) < 3 || ... % the version format should be x.y.z
-        str2num(ver_parts{1}) < 2) % the major version should be greater or equal to 2
-        fprintf('BRAPH2 version is %s, but must be >= 2.0.1.\n', version_str);
-        fprintf('Compilation interrupted.\n');
-        rmpath(fullfile(braph2genesis_directory, 'src', 'util'));
-        return
-    end
-else
-    fprintf('Another braph2genesis/braph2 folder already exists in the MATLAB search path:\n');
-    fprintf('- %s (found in: %s)\n', which('BRAPH2'));
-    disp('Compilation interrupted.');
-    rmpath([braph2genesis_directory filesep() 'src' filesep() 'util']); % remove genesis util dir from search path
-    return
-end
-rmpath([braph2genesis_directory filesep() 'src' filesep() 'util']); % remove genesis util dir from search path
+% TODO
 
 %% Copy pipeline folders into braph2genesis/pipelines
 for i = 1:1:numel(pipeline_folders)
@@ -309,6 +272,7 @@ if ~exist(target_dir, 'dir')
     time_start = tic;
 
     [target_dir, source_dir] = genesis(target_dir, braph2genesis_directory, 2, rollcall); %#ok<ASGLU> 
+    %[target_dir, source_dir] = genesis(target_dir, [], 2); %#ok<ASGLU> 
 
     addpath(target_dir)
 
@@ -322,7 +286,7 @@ rmpath([braph2genesis_directory filesep() 'genesis'])
 
 %% Remove files to be deleted
 for i = 1:numel(files_to_delete)
-    file_to_delete = [target_dir filesep() files_to_delete{i}];
+    file_to_delete = files_to_delete{i};
     if exist(file_to_delete, 'file')
         delete(file_to_delete);
         fprintf('Deleted: %s\n', file_to_delete);
