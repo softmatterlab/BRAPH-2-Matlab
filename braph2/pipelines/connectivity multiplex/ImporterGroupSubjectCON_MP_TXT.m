@@ -118,7 +118,7 @@ classdef ImporterGroupSubjectCON_MP_TXT < Importer
 	%
 	% See also Group, SunbjectCON_MP, ExporterGroupSubjectCON_MP_TXT.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		DIRECTORY = 10; %CET: Computational Efficiency Trick

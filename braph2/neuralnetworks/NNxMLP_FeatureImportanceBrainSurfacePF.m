@@ -145,7 +145,7 @@ classdef NNxMLP_FeatureImportanceBrainSurfacePF < BrainAtlasPF
 	%
 	% See also NNxMLP_FeatureImportanceBrainSurface.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		FI = 46; %CET: Computational Efficiency Trick

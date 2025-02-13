@@ -136,7 +136,7 @@ classdef PipelinePP_Notes < PanelPropStringTextArea
 	%
 	% See also uitextarea, uicontextmenu, Pipeline.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		CONTEXTMENU = 38; %CET: Computational Efficiency Trick
@@ -866,11 +866,11 @@ classdef PipelinePP_Notes < PanelPropStringTextArea
 			    pip = pr.get('EL');
 			
 			    if ismac()
-			        system(['open -a Preview ' fileparts(fileparts(which('braph2'))) pip.get('PDF')]);
+			        system(['open -a Preview ' fileparts(fileparts(BRAPH2.LAUNCHER)) pip.get('PDF')]);
 			    elseif isunix()
-			        system(['xdg-open "' fileparts(fileparts(which('braph2'))) regexprep(pip.get('PDF'), '/', '\') '"']);
+			        system(['xdg-open "' fileparts(fileparts(BRAPH2.LAUNCHER)) regexprep(pip.get('PDF'), '/', '\') '"']);
 			    elseif ispc()
-			        system(['start "" "' fileparts(fileparts(which('braph2'))) pip.get('PDF') '"']);
+			        system(['start "" "' fileparts(fileparts(BRAPH2.LAUNCHER)) pip.get('PDF') '"']);
 			    end
 			end
 			function cb_pip_edit(~, ~)

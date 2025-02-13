@@ -108,7 +108,7 @@ classdef AnalyzeEnsemble_CON_WD < AnalyzeEnsemble
 	%
 	% See also SubjectCON, GraphWD.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function a = AnalyzeEnsemble_CON_WD(varargin)

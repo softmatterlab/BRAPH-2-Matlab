@@ -139,7 +139,7 @@ classdef SettingsAxisPP < SettingsPP
 	%
 	% See also SettingsPosition, uicheckbox, uipushbutton.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		ENABLE = 36; %CET: Computational Efficiency Trick

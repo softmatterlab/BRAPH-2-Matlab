@@ -106,7 +106,7 @@ classdef AnalyzeGroup < ConcreteElement
 	%
 	% See also CompareGroup.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick

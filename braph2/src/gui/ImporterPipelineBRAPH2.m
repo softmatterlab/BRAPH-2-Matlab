@@ -107,7 +107,7 @@ classdef ImporterPipelineBRAPH2 < Importer
 	%
 	% See also Importer, Pipeline, ExporterPipelineBRAPH2.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		FILE = 10; %CET: Computational Efficiency Trick
@@ -701,7 +701,7 @@ classdef ImporterPipelineBRAPH2 < Importer
 					% analyzes file
 					file = im.get('FILE');
 					if ~isfile(file)
-					    file = [fileparts(which('braph2')) filesep 'src' filesep 'gui' filesep 'gui_examples' filesep file];
+					    file = [fileparts(which(BRAPH2.LAUNCHER)) filesep 'src' filesep 'gui' filesep 'gui_examples' filesep file];
 					end
 					
 					if isfile(file)

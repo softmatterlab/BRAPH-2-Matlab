@@ -122,7 +122,7 @@ classdef NNxMLP_FeatureImportanceAcrossMeasures_CV < NNxMLP_FeatureImportance_CV
 	%
 	% See also NNxMLP_FeatureImportance_CV, NNClassifierMLP_CrossValidation, NNRegressorMLP_CrossValidation.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function nnficv = NNxMLP_FeatureImportanceAcrossMeasures_CV(varargin)

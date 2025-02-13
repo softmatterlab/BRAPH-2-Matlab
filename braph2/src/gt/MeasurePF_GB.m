@@ -133,7 +133,7 @@ classdef MeasurePF_GB < MeasurePF
 	%
 	% See also Measure.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function pf = MeasurePF_GB(varargin)

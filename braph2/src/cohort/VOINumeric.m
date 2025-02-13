@@ -103,7 +103,7 @@ classdef VOINumeric < VOI
 	%
 	% See also VOICategoric.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function voi = VOINumeric(varargin)

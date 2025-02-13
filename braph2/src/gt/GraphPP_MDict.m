@@ -136,7 +136,7 @@ classdef GraphPP_MDict < PanelProp
 	%
 	% See also uitable, Graph.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		TABLE_HEIGHT = 36; %CET: Computational Efficiency Trick

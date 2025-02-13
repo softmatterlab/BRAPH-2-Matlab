@@ -114,7 +114,7 @@ classdef SettingsSurface < Settings
 	%
 	% See also patch, surface, SettingsSurfacePP, PanelFig, GUIFig, check_graphics.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		EDGECOLOR = 15; %CET: Computational Efficiency Trick

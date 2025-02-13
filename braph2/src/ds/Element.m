@@ -112,7 +112,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
     % See also Category, Format, NoValue, Callback, ConcreteElement,
     %  IndexedDictionary, handle, matlab.mixin.Copyable.
     %
-    % BUILD BRAPH2 6 Element 6
+    % BUILD BRAPH2 7 Element 7
    
 	properties (Access=private)
         % props is a private struct containing the element properties whose
@@ -162,7 +162,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
         function build = getBuild(el)
             %GETBUILD returns the build of the element.
             %
-            % BUILD = Element.GETBUILD() returns the €6€ = 6.
+            % BUILD = Element.GETBUILD() returns the €7€ = 7.
             %
             % Alternative forms to call this method are:
             %  BUILD = EL.GETBUILD() returns the build of EL.
@@ -174,7 +174,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
 
             % calls from Element
             if nargin == 0
-                build = 6;
+                build = 7;
                 return
             end
             
@@ -1876,7 +1876,7 @@ classdef Element < Category & Format & matlab.mixin.Copyable
                 drawnow()
 
                 el = el.copy();
-                build = 6;
+                build = 7;
                 matlab_version = ver('MATLAB').Version;
                 matlab_version_details = ver();
                 build_log = load('build_log.mat', '-mat');  % % % double-check

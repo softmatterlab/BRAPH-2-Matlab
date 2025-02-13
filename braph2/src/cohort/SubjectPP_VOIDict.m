@@ -137,7 +137,7 @@ classdef SubjectPP_VOIDict < PanelProp
 	%
 	% See also Subject, uieditfield, uidropdown.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		HEIGHT_MIN = 36; %CET: Computational Efficiency Trick
