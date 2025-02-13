@@ -2,7 +2,7 @@
 \usepackage{../braph2_dev}
 %\geometry{showframe} % display margins for debugging page layout
 
-\title{Create a New BRAPH 2 Distribution: Hello, World! }
+\title{Create a New BRAPH~2 Distribution: Hello, World! }
 
 \author[The BRAPH~2 Developers]{The BRAPH~2 Developers}
 
@@ -22,7 +22,7 @@ In this developer tutorial, you will learn how to create a new distribution of B
 \clearpage
 \section{Create New Distribution Folder}
 
-First, we need to create a new folder where we will have all the new scripts referring to this new distribution. For the example explained in this tutorial we will name this new folder \fn{helloworld}. Furthermore, we need to download the genesis compiler from the Standard BRAPH~2 Distribution. This compiler is a matlab file \href{https://github.com/braph-software/BRAPH-2/tree/develop/braph2genesis/braph2genesis.m}{braph2genesis.m})  located in the Standard BRAPH 2 Github Repository. We will place this file outside the new created folder \fn{helloworld} as shown in \Figref{fig:elements}.
+First, we need to create a new folder that will contain all the new scripts referring to this new distribution. For the example explained in this tutorial the name of this new folder will be \fn{helloworld}. Furthermore, the genesis compiler from the Standard BRAPH~2 Distribution needs to be downloaded. This compiler is a Matlab file \href{https://github.com/braph-software/BRAPH-2/tree/develop/braph2genesis/braph2genesis.m}{braph2genesis.m})  located in the Standard BRAPH~2 Github Repository. This file needs to be placed outside the new created folder \fn{helloworld} as shown in \Figref{fig:elements}.
 
 \fig{figure}
 {fig:elements}
@@ -36,25 +36,21 @@ First, we need to create a new folder where we will have all the new scripts ref
 
 \section{Create New Elements}
 
-BRAPH 2 is a compiled object-oriented programming software. Its
-objects are elements, which contain a set of properties of various categories
-and formats, as described in detail in the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_intro}{General Developer Tutorial for BRAPH 2}). All objects are derived from a base object
-called \code{Element} and written in a simplified pseudocode \fn{*.gen.m}) that is compiled into the actual elements (files \fn{*.m}) by the command \code{braph2genesis}.
-Even though it is possible to create instances of \code{Element}, it does not have any props and typically one uses its subclasses. Its three direct subclasses are \code{NoValue}, \code{Callback}, and \code{ConcreteElement}. The details of each subclass can be found in tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_intro}{General Developer Tutorial for BRAPH 2}). 
+BRAPH~2 is a compiled object-oriented programming software. Its
+objects are elements, which contain a set of properties of various categories and formats, as described in detail in the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_intro}{General Developer Tutorial for BRAPH~2}). All objects are derived from a base object called \code{Element} and written in a simplified pseudocode \fn{*.gen.m}) that is compiled into the actual elements (files \fn{*.m}) by the command \code{braph2genesis}.
+Even though it is possible to create instances of \code{Element}, it does not have any props and typically one uses its subclasses. Its three direct subclasses are \code{NoValue}, \code{Callback}, and \code{ConcreteElement}. The details of each subclass can be found in tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_intro}{General Developer Tutorial for BRAPH~2}). 
 
-In this tutorial it is used  the subclass  \code{ConcreteElement} that provides the infrastructure
-necessary for all concrete elements, like strings.
+In this tutorial it is used the subclass  \code{ConcreteElement} that provides the infrastructure necessary for all concrete elements, like strings.
 Thus, following these rules the following two new objects need to be created and placed inside the previously created folder \fn{helloworld} as shown in \Figref{fig:elements}.:
 \begin{itemize}
 	\item {\code{\bf \_StringUnit.gen.m}}: contains a user-defined string. 
 	\item {\code{\bf \_StringCombine.gen.m}}: combines the strings from two string units.
 \end{itemize}
 
-The new generator files will have the same structure:  \code{¡header!} , \code{¡layout!}, \emph{¡props} (properties), \emph{ ¡props\_update!} (update the properties of the \code{ConcreteElement}) and \code{¡tests!} (to add unit tests). header! is required (and the token ¡build!),
-while the rest is optional.
+The new generator files will have the same structure:  \code{¡header!} , \code{¡layout!}, \emph{¡props} (properties), \emph{ ¡props\_update!} (update the properties of the \code{ConcreteElement}) and \code{¡tests!} (to add unit tests). While header! the token ¡build! are required,
+the rest is optional.
 
 \subsection{\_StringUnit.gen.m}
-
 
 
 \begin{lstlisting}[
@@ -189,7 +185,7 @@ while the rest is optional.
 
 \subsection{\_StringCombine.gen.m}
 
-We will create the \code{StringCombine} generator file the same way as we did with \code{StringUnit}.
+The \code{\_StringCombine.gen.m} generator file is created the same way as \code{\_StringUnit.gen.m}.
 
 \begin{lstlisting}[
 	label=cd:m:StringCombine:header,
@@ -349,7 +345,7 @@ We will create the \code{StringCombine} generator file the same way as we did wi
 \clearpage
 \section{Create New Pipeline}
 
-Once we have created our new elements we create a pipeline that takes the created elements and runs the desired functionality, which in this case is combining the two strings "Hello" and "World" and combine them into "Hello, World!".
+Once the new elements are created, a pipeline that takes the created elements and runs the desired functionality is needed. In this case the pipeline will combine two strings (e.g."Hello") and (e.g."World") and combine them  (e.g."Hello, World!").
 
 
 \begin{lstlisting}[
@@ -369,10 +365,10 @@ Once we have created our new elements we create a pipeline that takes the create
 	% PDF: 
 	% README: 
 	
-	%% String 1
+	%% String 1 ¥\circled{1}\circlednote{1}{By default 'Hello' and 'World' can be set. The user will be able to modify the string as desired}¥
 	su1 = StringUnit('S', 'Hello'); % Define the First String % First String
 	
-	%% String 2
+	%% String 2 ¥\circled{1}¥
 	su2 = StringUnit('S', 'World'); % Define the Second String % Second String
 	
 	%% Combine Strings
@@ -478,9 +474,9 @@ To run the software, you simply just need to run \Coderef{cd:compile} and a new 
 \fig{figure}
 {fig:gui}
 {\centerline{\includegraphics{fig02.jpg}}}
-{New BRAPH~2 "Hello, World!" Distribution.}
+{New BRAPH~2 "Hello, World!" distribution.}
 {
-	This is the newly created GUI for the "Hello, World!" Distribution
+	This is the newly created GUI for the BRAPH~2 "Hello, World!" distribution
 }
 
 %! FIG2 !%
