@@ -12,15 +12,16 @@
 
 \begin{abstract}
 \noindent
-The software architecture of BRAPH~2 provides a clear structure for developers to understand and extend its functionalities. Developers can easily create new distributions with their own pipelines. 
-By recompiling BRAPH~2, the new pipelines and their functionalities are integrated in a new distribution with its own graphical user interface.
-In this developer tutorial, you will learn how to create a new distribution of BRAPH~2 that contains a simple pipeline where the user enters q first string (e.g., “Hello”) and a second string (e.g., “World”), and the pipeline combines them into a single string (“Hello World!”).
+The software architecture of BRAPH~2 provides a clear structure for developers to understand and extend its functionalities. 
+Developers can easily create new distributions with their own pipelines. 
+By recompiling BRAPH~2, the new pipelines and their functionalities are integrated into a new distribution with its own graphical user interface.
+In this developer tutorial, you will learn how to create a new distribution of BRAPH~2 that contains a simple pipeline where the user enters a first string (e.g., “Hello”) and a second string (e.g., “World”), and the pipeline combines them into a single string (“Hello World”).
 \end{abstract}
 
 \tableofcontents
 
 \clearpage
-\section{Create New Distribution Folder}
+\section{Create a New Distribution Folder}
 
 First, we need to create a new folder that will contain all the new scripts referring to this new distribution. For the example explained in this tutorial the name of this new folder will be \fn{helloworld}. Furthermore, the genesis compiler from the Standard BRAPH~2 Distribution needs to be downloaded. This compiler is a Matlab file \href{https://github.com/braph-software/BRAPH-2/tree/develop/braph2genesis/braph2genesis.m}{braph2genesis.m})  located in the Standard BRAPH~2 Github Repository. This file needs to be placed outside the new created folder \fn{helloworld} as shown in \Figref{fig:elements}.
 
@@ -86,7 +87,7 @@ the rest is optional.
 	}
 	]
 	
-	%% ¡layout! 	¥\circled{1}\circlednote{1}{creates a new layout in the graphical user interface allowing the user to introduce a string}¥
+	%% ¡layout! 	¥\circled{1}\circlednote{1}{creates a new layout in the graphical user interface allowing the user to introduce a string.}¥
 	
 	%%% ¡prop!
 	%%%% ¡id!
@@ -338,7 +339,7 @@ The \code{\_StringCombine.gen.m} generator file is created the same way as \code
 	assert(isequal(sc.get('S_COMBINED'), [defined_string1 ' ' defined_string2]), ...
 	[BRAPH2.STR ':StringCombine:' BRAPH2.FAIL_TEST], ...
 	'StringCombine does not combine the defined strings properly.' ...
-	) ¥\circled{1}\circlednote{1}{we verify that the new element \code{StringCombine} succesfully combines the strings which are specified with \code{sU1} and \code{sU2}}¥
+	) ¥\circled{1}\circlednote{1}{we verify that the new element \code{StringCombine} succesfully combines the strings which are specified with \code{sU1} and \code{sU2}.}¥
 	
 \end{lstlisting}
 
@@ -365,7 +366,7 @@ Once the new elements are created, a pipeline that takes the created elements an
 	% PDF: 
 	% README: 
 	
-	%% String 1 ¥\circled{1}\circlednote{1}{By default 'Hello' and 'World' can be set. The user will be able to modify the string as desired}¥
+	%% String 1 ¥\circled{1}\circlednote{1}{By default 'Hello' and 'World' can be set. The user will be able to modify the string as desired.}¥
 	su1 = StringUnit('S', 'Hello'); % Define the First String % First String
 	
 	%% String 2 ¥\circled{1}¥
@@ -388,7 +389,7 @@ A configuration file is needed to build a new distribution.
 		We need to create a new file (e.g., \fn{braph2helloworld\_config.m}) with all the configuration details.
 	}
 	]
-	distribution_name = 'Hello, World!'; ¥\circled{1}\circlednote{1}{specifies the name of the new distribution. This name will appear in the main window of the new distribution GUI}¥
+	distribution_name = 'Hello, World!'; ¥\circled{1}\circlednote{1}{specifies the name of the new distribution. This name will appear in the main window of the new distribution GUI.}¥
 	distribution_moniker = 'helloworld'; ¥\circled{2}\circlednote{2}{short identifier used in launcher functions and filenames. It should only contain letters, numbers, and underscores.}¥
 	pipeline_folders = {
 		'helloworld', ...
@@ -434,7 +435,7 @@ A configuration file is needed to build a new distribution.
 	files_to_delete = { ...
 		['src' filesep 'gui' filesep 'test_GUIFig.m'], ...
 		['src' filesep 'gui' filesep 'test_PanelFig.m'], ...
-	};¥\circled{6}\circlednote{6}{specifies files to remove after compilation}¥
+	};¥\circled{6}\circlednote{6}{specifies files to remove after compilation.}¥
 \end{lstlisting}
 
 \clearpage
@@ -476,7 +477,7 @@ To run the software, you simply just need to run \Coderef{cd:compile} and a new 
 {\centerline{\includegraphics{fig02.jpg}}}
 {New BRAPH~2 "Hello, World!" distribution.}
 {
-	This is the newly created GUI for the BRAPH~2 "Hello, World!" distribution
+	This is the newly created GUI for the BRAPH~2 "Hello, World!" distribution.
 }
 
 %! FIG2 !%
@@ -506,7 +507,7 @@ There is an already created \href{https://github.com/braph-software/MemoryCapaci
 {\centerline{\includegraphics{fig04.jpg}}}
 {Memory Capacity Distribution}
 {
-	Interface of the BRAPH~2 Memory Capacity Distribution
+	Interface of the BRAPH~2 Memory Capacity Distribution.
 }
 %! FIG4 !%
 
