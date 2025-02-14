@@ -54,7 +54,7 @@ BRAPH 2's object-oriented programming architecture also simplifies the process o
 
 - **Figure Panels**: New figure panels can be added to BRAPH 2 by extending the `GUIFig` element. The [Developer Tutorial to Implement a New Figure Panel](dev_panelfig) explains the process of implementing custom figures.
 
-## Creating tailored BRAPH 2 Distributions
+## Creating Tailored BRAPH 2 Distributions
 
 BRAPH 2’s compiler (`genesis`) enables the creation of custom distributions tailored to your specific research needs. It seamlessly integrates newly added elements alongside selected built-in components from the standard distribution, producing a self-contained, unit-tested, and GUI-ready package. Here are some example distributions that demonstrate how you can build your own tailored BRAPH 2 distribution:
 
