@@ -16,7 +16,7 @@ The hallmark of BRAPH 2 is **Genesis**, a compiler that lets you create **tailor
 
 ![fig1_FORCE_bz](https://github.com/user-attachments/assets/e27d8ef3-6759-4d7d-9116-2973df77e1d1)
 > 
-> **Genesis advantages to compile a new custom BRAPH 2 distribution** To create a custom BRAPH 2 distribution with new methods or specialized analysis pipelines, users prepare a configuration file (genesis_config.txt) along with custom elements, pipeline scripts, and optional tutorial files. The Genesis module then integrates these with BRAPH 2’s core components through a structured compilation process, including directory setup, file integration, element compilation, GUI layout generation, and unit test creation. The final output is a customized, no-code GUI distribution, offering a flexible, open-source, reproducible, community-driven, and user-friendly framework for network analysis in neuroscience. A practical example can be found in the [BRAPH 2 Genesis Tutorials](tutorials/developers) for creating a BRAPH 2 Hello, World! Distribution.
+> **Genesis advantages to compile a new custom BRAPH 2 distribution** To create a custom BRAPH 2 distribution with new methods or specialized analysis pipelines, users prepare a configuration file (genesis_config.txt) along with custom elements, pipeline scripts, and optional tutorial files. The Genesis module then integrates these with BRAPH 2’s core components through a structured compilation process, including directory setup, file integration, element compilation, GUI layout generation, and unit test creation. The final output is a customized, no-code GUI distribution, offering a flexible, open-source, reproducible, community-driven, and user-friendly framework for network analysis in neuroscience. A practical example can be found in the [BRAPH 2 Genesis Tutorials](tutorials/developers/dev_distribution) for creating a BRAPH 2 Hello, World! Distribution.
 
 ## Standard BRAPH 2 Distribution
 
@@ -85,7 +85,7 @@ BRAPH 2 is an open-source project, and contributions from the community are high
 If you encounter any issues or have ideas for new features, please submit detailed information for bug reports using the [Bug Report](../../issues/new?template=bug_report.md) template and clear descriptions for feature requests using the [Feature Request](../../issues/new?template=feature_request.md) template.
 
 ### Create Your Tailored Distribution
-Leverage BRAPH 2’s **Genesis** system to build custom distributions tailored to your specific research needs by selecting only the built-in elements you require—omitting anything unnecessary—and incorporating your own new elements into a self-contained package. For detailed instructions, refer to the [BRAPH 2 Genesis Tutorials](tutorials/developers).
+Leverage BRAPH 2’s **Genesis** system to build custom distributions tailored to your specific research needs by selecting only the built-in elements you require—omitting anything unnecessary—and incorporating your own new elements into a self-contained package. For detailed instructions, refer to the [BRAPH 2 Genesis Tutorials](tutorials/developers/dev_distribution).
 
 Existing tailored BRAPH 2 distributions:
 
