@@ -8,7 +8,7 @@ The software architecture of BRAPH 2 provides a clear structure for developers t
 > **BRAPH 2 software architecture.**
 Directory structure of BRAPH 2 GENESIS (left) and BRAPH 2 (right).
 All objects are derived from a base object called `Element` and written in a simplified pseudocode (files *.gen.m) that is compiled into the actual elements (files *.m) by the command `braph2genesis` (some examples of these elements are shown).
-The compiled code can be launched by the command `braph2`.
+The compiled code can be launched by the command `braph2` for the standard distribution.
 The core of BRAPH 2 (gray shaded area) includes the compiler (`genesis`), the essential source code (`src`), and the essential functionalities for the GUI (`gui`, yellow-shaded area).
 The users can easily add new brain surfaces (`brainsurfs`), atlases (`atlases`), example scripts and GUI pipelines (in the corresponding folder under `pipelines`).
 Furthermore, the users can add new elements such as new graphs (e.g., `GraphWU` in `graphs`), measures (e.g., `Strength` in `measures`), data types (e.g., `SubjectCON` in `pipelines/connectivity`), data importers (e.g., `ImporterGroupSubjectCON_XLS` in `pipelines/connectivity`), data exporters (e.g., `ExporterGroupSubjectCON_XLS` in `pipelines/connectivity`), and analyses (e.g., `AnalyzeEnsemble_CON_WU` in `pipelines/connectivity`) by writing new elements and recompiling the whole code: the new elements and their functionalities will be immediately available also in the GUI.
@@ -54,4 +54,12 @@ BRAPH 2's object-oriented programming architecture also simplifies the process o
 
 - **Figure Panels**: New figure panels can be added to BRAPH 2 by extending the `GUIFig` element. The [Developer Tutorial to Implement a New Figure Panel](dev_panelfig) explains the process of implementing custom figures.
 
-These tutorials provide step-by-step instructions and examples to guide developers in expanding BRAPH 2 with new functionalities and graphical elements. We encourage developers to contribute to the growth and improvement of BRAPH 2 by introducing new elements, measures, and analyses. Feel free to share your implementations, ask questions, and engage with the BRAPH 2 community through the [BRAPH forum](http://braph.org/forums) and [GitHub page](https://github.com/softmatterlab/BRAPH-2-Matlab).
+## Creating Tailored BRAPH 2 Distributions
+
+BRAPH 2’s compiler (`genesis`) enables the creation of custom distributions tailored to your specific research needs. It seamlessly integrates newly added elements alongside selected built-in components from the standard distribution, producing a self-contained, unit-tested, and GUI-ready package. Here are some example distributions that demonstrate how you can build your own tailored BRAPH 2 distribution:
+
+- **Hello, World!**: A minimal BRAPH 2 distribution showcasing the capabilities of `genesis` in generating standalone, unit-tested, and GUI-ready BRAPH 2 distributions. The [Developer Tutorial to Create a New BRAPH 2 Distribution: Hello, World! ](dev_distribution) provides a step-by-step guide to building a new BRAPH 2 distribution, with a [Github repository](https://github.com/c-yuwei/HelloWorld) available as a demonstration.
+
+- **Memory Capacity**: A BRAPH 2 distribution applying the reservoir computing approach to compute global and nodal memory capacity. Its [Github repository](https://github.com/braph-software/MemoryCapacity) has been used to produce results for the manuscript _“Computational Memory Capacity Predicts Aging and Cognitive Decline”_ by Mijalkov et al. (2025).
+
+These tutorials provide step-by-step instructions and examples to guide developers in expanding BRAPH 2 with new functionalities and graphical elements. We encourage developers to contribute to the growth and improvement of BRAPH 2 by introducing new elements, measures, analyses, and distributions. Feel free to share your implementations, ask questions, and engage with the BRAPH 2 community through the [BRAPH forum](https://github.com/braph-software/BRAPH-2/discussions) and [GitHub page](https://github.com/braph-software).
