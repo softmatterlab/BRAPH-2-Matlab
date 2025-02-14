@@ -58,7 +58,7 @@ BRAPH 2's object-oriented programming architecture also simplifies the process o
 
 BRAPH 2’s compiler (`genesis`) enables the creation of custom distributions tailored to your specific research needs. It seamlessly integrates newly added elements alongside selected built-in components from the standard distribution, producing a self-contained, unit-tested, and GUI-ready package. Here are some example distributions that demonstrate how you can build your own tailored BRAPH 2 distribution:
 
-- **Hello, World!**: A minimal BRAPH 2 distribution showcasing the capabilities of `genesis` in generating standalone, unit-tested, and GUI-ready BRAPH 2 distributions. The [Developer Tutorial to Create a New BRAPH~2 Distribution: Hello, World! ](dev_distribution) provides a step-by-step guide to building a new BRAPH 2 distribution, with a [Github repository](https://github.com/c-yuwei/HelloWorld) available as a demonstration.
+- **Hello, World!**: A minimal BRAPH 2 distribution showcasing the capabilities of `genesis` in generating standalone, unit-tested, and GUI-ready BRAPH 2 distributions. The [Developer Tutorial to Create a New BRAPH 2 Distribution: Hello, World! ](dev_distribution) provides a step-by-step guide to building a new BRAPH 2 distribution, with a [Github repository](https://github.com/c-yuwei/HelloWorld) available as a demonstration.
 
 - **Memory Capacity**: A BRAPH 2 distribution applying the reservoir computing approach to compute global and nodal memory capacity. Its [Github repository](https://github.com/braph-software/MemoryCapacity) has been used to produce results for the manuscript _“Computational Memory Capacity Predicts Aging and Cognitive Decline”_ by Mijalkov et al. (2025).
 
