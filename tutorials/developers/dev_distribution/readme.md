@@ -25,7 +25,7 @@ In this developer tutorial, you will learn how to create a new distribution of B
 >
 > [Run Example "Hello, World!"](#Run-Example-"Hello-World")
 >
-> [Existing BRAPH 2 Distributions](#Existing-BRAPH-2-Distributions)
+> [Example of Existing BRAPH 2 Distribution](#Example-of-Existing-BRAPH-2-Distribution)
 >
 
 
@@ -375,7 +375,7 @@ A configuration file is needed to build a new distribution.
 >     pipeline_folders = {
 >         'helloworld' ...
 >     }; ③
->     braph2_version = 'heads/ywc-lite-genesis';  ④
+>     braph2_version = 'heads/develop';  ④
 >     
 >     % Add here all included and excluded folders and elements
 >     % '-folder'                 the folder and its elements will be excluded
@@ -446,22 +446,28 @@ To compile the software, you simply just need to run Code 13.
 > ````
 > 
 
-If the compilation ended successfully, the following log message should appear:
-
+If the compilation ended successfully, the following log message should appear:\\
 `***All good!***`
 
-A new "braph2helloworld" folder would have been generated which can then be used as explained in Section~\ref{sec:example}.
 
-%%% YU-WEI: Add file structure of the compiled version
+A new "braph2helloworld" folder would have been generated (Figure 2) which can then be used as explained in the following section.
 
-WARNING: To ensure a successful compilation, the folder "braph2helloworld" (if already created) should be erased and all of its dependencies should be removed from the MATLAB path. This folder will be regenerated after a successful compilation.
+
+
+
+<img src="fig02.jpg" alt="File structure of the compiled version">
+
+> **Figure 2. File structure of the compiled version**
+> All files needed to run the new "Hello, World!" BRAPH 2 Distribution.
+
+
+WARNING: To ensure a successful compilation, the folder \newline "braph2helloworld" (if already created) should be erased and all of its dependencies should be removed from the MATLAB path. This folder will be regenerated after a successful compilation.
 
 
 <a id="Run-Example-"Hello-World""></a>
 ## Run Example "Hello, World!"  [⬆](#Table-of-Contents)
-\label{sec:example}
 
-To run the software, you simply just need to run Code 13 and a new GUI will appear as shown in Figure 2.
+To run the software, you simply need to run Code 13 and a new GUI will appear as shown in Figure 3.
 
 
 > **Code 14.** **Execute BRAPH 2 compiler.**
@@ -473,42 +479,62 @@ To run the software, you simply just need to run Code 13 and a new GUI will appe
 
 
 
+<img src="fig03.jpg" alt="New BRAPH 2 "Hello, World!" distribution">
 
-<img src="fig02.jpg" alt="New BRAPH 2 "Hello, World!" distribution.">
-
-> **Figure 2. New BRAPH 2 "Hello, World!" distribution.**
+> **Figure 3. New BRAPH 2 "Hello, World!" distribution**
 > This is the newly created GUI for the BRAPH 2 "Hello, World!" distribution.
 
 
 
-
-<img src="fig03.jpg" alt="Running "Hello, World!" Example.">
-
-> **Figure 3. Running "Hello, World!" Example.**
-> Steps to run the example case:
-> 	**a** Click on "Define the First String" from the pipeline GUI. A new GUI window will open **a**. Here you can introduce whatever string ("Hello" by default).
-> 	**2** Click on "Second String" from the pipeline GUI. A new GUI window will open **b**. Here you can introduce whatever string ("World" by default).
-> 	**c** Click on "Combine Strings" to obtain the combination of the two previously defined strings A new GUI window will open **b**. Here you need to press  "C" to obtained the combined strings.
-
-
-<a id="Existing-BRAPH-2-Distributions"></a>
-## Existing BRAPH 2 Distributions  [⬆](#Table-of-Contents)
-
-There is an already created [BRAPH 2 Memory Capacity Distribution](https://github.com/braph-software/MemoryCapacity)), see Figure 4, that implemented a pipeline to perform a *reservoir computing* analysis using *connectivity data*. Check the tutorial [Pipeline for Analysis and Comparison of Memory Capacity using Weighted Undirected Graph
-](https://github.com/braph-software/MemoryCapacity/tree/develop/tutorials/tut_mc_wu) that shows how to calculate the global and regional memory capacity (Figure 5) for each subject and compare between groups of subjects. This pipeline has been used to derive the results in the manuscript: “Computational memory capacity predicts aging and cognitive decline” by Mijalkov et al. (2025).
+For this tutorial, only one pipeline ("Pipeline Hello World")  has been created. To run the pipeline, first you need to open the pipeline (Figure 4) and then follow the steps specified in the pipeline (Figure 5, Figure 6, Figure 7).
 
 
 
-<img src="fig04.jpg" alt="Memory Capacity Distribution">
+<img src="fig04.jpg" alt="Open "Hello, World!" Pipeline">
 
-> **Figure 4. Memory Capacity Distribution**
+> **Figure 4. Open "Hello, World!" Pipeline**
+> Click on "Open Pipeline Hello World..." and a new GUI window will appear with the steps to run the selected pipeline.
+
+
+
+<img src="fig05.jpg" alt="Define the first string">
+
+> **Figure 5. Define the first string**
+> Click on "Define the First String" from the pipeline GUI. A new GUI window will open. Here you can introduce whatever string ("Hello" by default)
+
+
+
+<img src="fig06.jpg" alt="Define the second string">
+
+> **Figure 6. Define the second string**
+> Click on "Second String" from the pipeline GUI. A new GUI window will open. Here you can introduce whatever string ("World" by default).
+
+
+
+<img src="fig07.jpg" alt="Combine strings">
+
+> **Figure 7. Combine strings**
+> Click on "Combine Strings" to obtain the combination of the two previously defined strings A new GUI window will open. Here you need to press  "C" to obtain the combined strings.
+
+
+<a id="Example-of-Existing-BRAPH-2-Distribution"></a>
+## Example of Existing BRAPH 2 Distribution  [⬆](#Table-of-Contents)
+
+There is an already created [BRAPH 2 Memory Capacity Distribution](https://github.com/braph-software/MemoryCapacity)), see Figure 8, that implemented a pipeline to perform a *reservoir computing* analysis using *connectivity data*. Check the tutorial [Pipeline for Analysis and Comparison of Memory Capacity using Weighted Undirected Graph
+](https://github.com/braph-software/MemoryCapacity/tree/develop/tutorials/tut_mc_wu) that shows how to calculate the global and regional memory capacity (Figure 9) for each subject and compare between groups of subjects. This pipeline has been used to derive the results in the manuscript: “Computational memory capacity predicts aging and cognitive decline” by Mijalkov et al. (2025).
+
+
+
+<img src="fig08.jpg" alt="Memory Capacity Distribution">
+
+> **Figure 8. Memory Capacity Distribution**
 > Interface of the BRAPH 2 Memory Capacity Distribution.
 
 
 
-<img src="fig05.jpg" alt="Nodal Memory Capacity">
+<img src="fig09.jpg" alt="Nodal Memory Capacity">
 
-> **Figure 5. Nodal Memory Capacity**
+> **Figure 9. Nodal Memory Capacity**
 > **a** Calculated Nodal Memory capacity in a group of subjects.
 > 	**c** The value of the difference between two groups, the p-values (1-tailed and 2-tailed), as well as the confidence intervals. 
 > 	**c** Comparison results, with positive values in red and negative values in blue on the brain surface.
