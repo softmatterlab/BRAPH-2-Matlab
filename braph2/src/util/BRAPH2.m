@@ -76,7 +76,7 @@ classdef BRAPH2
         LAUNCHER = 'braph2';
         VERSION = '2.0.1' % BRAPH2 version % % % ON RELEASE: Ensure correct VERSION
         BUILD = 7 % BRAPH2 build number % % % ON RELEASE: Ensure correct BUILD
-        RELEASE = '2025-02-16' % BRAPH2 release date % % % ON RELEASE: Ensure correct RELEASE date
+        RELEASE = '2025-02-18' % BRAPH2 release date % % % ON RELEASE: Ensure correct RELEASE date
         AUTHORS = 'Giovanni Volpe, Emiliano Gomez Ruiz, Anna Canal Garcia, Yu-Wei Chang, Mite Mijalkov, Joana Braga Pereira, Ehsan Kakaei, Eric Westman, et al.'
         COPYRIGHT = ['Copyright 2014-' datestr(now,'yyyy')]
         WEB = 'braph.org' % BRAPH2 website
