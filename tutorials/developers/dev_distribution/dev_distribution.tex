@@ -380,7 +380,7 @@ A configuration file is needed to build a new distribution.
 	pipeline_folders = {
 		'helloworld' ...
 	};¥\circled{3}\circlednote{3}{ defines the folders that contain the newly created pipelines we want to include in our new distribution. This is a cell array of strings.}¥
-	braph2_version = 'heads/ywc-lite-genesis'; ¥\circled{4}\circlednote{4}{defines the version of BRAPH~2 (e.g., 'tags/2.0.1' or 'heads/develop') to fetch from Github to create the new distribution. The build number should be 7 or larger (version 2.0.1 or subsequent).}¥
+	braph2_version = 'heads/develop'; ¥\circled{4}\circlednote{4}{defines the version of BRAPH~2 (e.g., 'tags/2.0.1' or 'heads/develop') to fetch from Github to create the new distribution. The build number should be 7 or larger (version 2.0.1 or subsequent).}¥
 	
 	% Add here all included and excluded folders and elements
 	% '-folder'                 the folder and its elements will be excluded
@@ -442,11 +442,22 @@ To compile the software, you simply just need to run \Coderef{cd:compile}.
 If the compilation ended successfully, the following log message should appear:\\
 \code{***All good!***}
 
-A new \fn{braph2helloworld} folder would have been generated which can then be used as explained in the following section.
 
-TODO: Add figure with file structure of the compiled version
+A new \fn{braph2helloworld} folder would have been generated (\Figref{fig:compiledfolder}) which can then be used as explained in the following section.
 
-WARNING: To ensure a successful compilation, the folder \fn{braph2helloworld} (if already created) should be erased and all of its dependencies should be removed from the MATLAB path. This folder will be regenerated after a successful compilation.
+
+\fig{marginfigure}
+{fig:compiledfolder}
+{\includegraphics{fig02.jpg}}
+{File structure of the compiled version}
+{
+	All files needed to run the new "Hello, World!" BRAPH~2 Distribution.
+}
+
+%! FIG2 !%
+
+
+WARNING: To ensure a successful compilation, the folder \newline \fn{braph2helloworld} (if already created) should be erased and all of its dependencies should be removed from the MATLAB path. This folder will be regenerated after a successful compilation.
 
 \clearpage
 \section{Run Example "Hello, World!"}
@@ -463,31 +474,59 @@ To run the software, you simply need to run \Coderef{cd:compile} and a new GUI w
 	braph2helloworld
 \end{lstlisting}
 
-
 \fig{figure}
 	{fig:gui}
-	{\includegraphics{fig02.jpg}}
+	{\includegraphics{fig03.jpg}}
 	{New BRAPH~2 "Hello, World!" distribution}
 	{
 	This is the newly created GUI for the BRAPH~2 "Hello, World!" distribution.
 	}
 
-%! FIG2 !%
+%! FIG3 !%
 
-TODO: Add series of figures showing the analysis pipeline. I think it can be good to have screenshots showing the various windows gradually appearing.
+\clearpage
+
+For this tutorial, only one pipeline (\fn{Pipeline Hello World})  has been created. To run the pipeline, first you need to open the pipeline (\Figref{fig:runexample1}) and then follow the steps specified in the pipeline (\Figref{fig:runexample2}, \Figref{fig:runexample3}, \Figref{fig:runexample4}).
 
 \fig{figure}
-	{fig:runexample}
-	{\includegraphics{fig03.jpg}}
-	{Running "Hello, World!" Example}
+	{fig:runexample1}
+	{\includegraphics{fig04.jpg}}
+	{Open "Hello, World!" Pipeline}
 	{
-	Steps to run the example case:
-	{\bf a} Click on \fn{Define the First String} from the pipeline GUI. A new GUI window will open {\bf a}. Here you can introduce whatever string ("Hello" by default).
-	{\bf 2} Click on \fn{Second String} from the pipeline GUI. A new GUI window will open {\bf b}. Here you can introduce whatever string ("World" by default).
-	{\bf c} Click on \fn{Combine Strings} to obtain the combination of the two previously defined strings A new GUI window will open {\bf b}. Here you need to press  \fn{C} to obtained the combined strings. 
-	}
+	Click on \fn{Open Pipeline Hello World...} and a new GUI window will appear with the steps to run the selected pipeline.
+}
 
-%! FIG3 !%
+%! FIG4 !%
+
+\fig{figure}
+{fig:runexample2}
+{\includegraphics{fig05.jpg}}
+{Define the first string}
+{
+	Click on \fn{Define the First String} from the pipeline GUI. A new GUI window will open. Here you can introduce whatever string ("Hello" by default)
+}
+
+%! FIG5 !%
+
+\fig{figure}
+{fig:runexample3}
+{\includegraphics{fig06.jpg}}
+{Define the second string}
+{
+	Click on \fn{Second String} from the pipeline GUI. A new GUI window will open. Here you can introduce whatever string ("World" by default).
+}
+
+%! FIG6 !%
+
+\fig{figure}
+{fig:runexample4}
+{\includegraphics{fig07.jpg}}
+{Combine strings}
+{
+	Click on \fn{Combine Strings} to obtain the combination of the two previously defined strings A new GUI window will open. Here you need to press  \fn{C} to obtain the combined strings.
+}
+
+%! FIG7 !%
 
 \clearpage
 \section{Example of Existing BRAPH~2 Distribution}
@@ -497,17 +536,17 @@ There is an already created \href{https://github.com/braph-software/MemoryCapaci
 
 \fig{figure}
 	{fig:mc}
-	{\includegraphics{fig04.jpg}}
+	{\includegraphics{fig08.jpg}}
 	{Memory Capacity Distribution}
 	{
 	Interface of the BRAPH~2 Memory Capacity Distribution.
 	}
 
-%! FIG4 !%
+%! FIG8 !%
 
 \fig{figure}
 	{fig:mccomparison}
-	{\includegraphics{fig05.jpg}}
+	{\includegraphics{fig09.jpg}}
 	{Nodal Memory Capacity}
 	{
 	{\bf a} Calculated Nodal Memory capacity in a group of subjects.
@@ -515,6 +554,6 @@ There is an already created \href{https://github.com/braph-software/MemoryCapaci
 	{\bf c} Comparison results, with positive values in red and negative values in blue on the brain surface.
 	}
 
-%! FIG5 !%
+%! FIG9 !%
 
 \end{document}
