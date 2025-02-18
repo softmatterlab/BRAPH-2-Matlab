@@ -152,7 +152,7 @@ classdef GUILayout < GUI
 	%
 	% See also uifigure, GUI, Element.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		EL_CLASS = 30; %CET: Computational Efficiency Trick

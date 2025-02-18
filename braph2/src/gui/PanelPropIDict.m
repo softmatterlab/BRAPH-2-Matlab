@@ -134,7 +134,7 @@ classdef PanelPropIDict < PanelProp
 	%
 	% See also uibutton, GUI, PanelElement, GUIElement.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		BUTTON_TEXT = 36; %CET: Computational Efficiency Trick

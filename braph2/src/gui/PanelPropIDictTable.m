@@ -164,7 +164,7 @@ classdef PanelPropIDictTable < PanelProp
 	%
 	% See also uitable, GUI, PanelPropIDict, PanelElement, GUIElement.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % constants
 		SELECTOR = -1 % code for the selector column.

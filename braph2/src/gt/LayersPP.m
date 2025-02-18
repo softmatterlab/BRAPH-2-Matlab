@@ -136,7 +136,7 @@ classdef LayersPP < PanelProp
 	%
 	% See also uitable, GraphHistPF, GraphAdjPF.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		G_PROP = 36; %CET: Computational Efficiency Trick

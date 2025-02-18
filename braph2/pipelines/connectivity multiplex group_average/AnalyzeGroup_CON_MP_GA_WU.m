@@ -107,7 +107,7 @@ classdef AnalyzeGroup_CON_MP_GA_WU < AnalyzeGroup
 	%
 	% See also SubjectCON_MP, MultiplexWU.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function a = AnalyzeGroup_CON_MP_GA_WU(varargin)

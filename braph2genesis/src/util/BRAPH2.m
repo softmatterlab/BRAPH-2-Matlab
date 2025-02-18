@@ -5,6 +5,8 @@ classdef BRAPH2
     % Properties (Constant) - BRAPH2 ID Card:
     %  NAME             - BRAPH2 full name
     %  STR              - BRAPH2 short string
+    %  DISTRIBUTION     - BRAPH2 distribution
+    %  LAUNCHER         - BRAPH2 launcher
     %  VERSION          - BRAPH2 version
     %  BUILD            - BRAPH2 build number
     %  RELEASE          - BRAPH2 release date
@@ -68,11 +70,13 @@ classdef BRAPH2
     %  installed        - returns whether an addon is installed/error
     
     properties (Constant) % BRAPH2 ID Card
-        NAME = 'BRAPH 2.0' % BRAPH2 full name
+        NAME = 'BRAPH 2' % BRAPH2 full name
         STR = 'BRAPH2' % BRAPH2 short string
-        VERSION = '2.0.0' % BRAPH2 version % % % ON RELEASE: Ensure correct VERSION
-        BUILD = 6 % BRAPH2 build number % % % ON RELEASE: Ensure correct BUILD
-        RELEASE = '2025-01-12' % BRAPH2 release date % % % ON RELEASE: Ensure correct RELEASE date
+        DISTRIBUTION = 'Standard Distribution' % BRAPH2 distribution
+        LAUNCHER = 'braph2' % BRAPH2 launcher
+        VERSION = '2.0.1' % BRAPH2 version % % % ON RELEASE: Ensure correct VERSION
+        BUILD = 7 % BRAPH2 build number % % % ON RELEASE: Ensure correct BUILD
+        RELEASE = '2025-02-18' % BRAPH2 release date % % % ON RELEASE: Ensure correct RELEASE date
         AUTHORS = 'Giovanni Volpe, Emiliano Gomez Ruiz, Anna Canal Garcia, Yu-Wei Chang, Mite Mijalkov, Joana Braga Pereira, Ehsan Kakaei, Eric Westman, et al.'
         COPYRIGHT = ['Copyright 2014-' datestr(now,'yyyy')]
         WEB = 'braph.org' % BRAPH2 website

@@ -122,7 +122,7 @@ classdef NNxMLP_FeatureImportance_CV < ConcreteElement
 	%
 	% See also NNxMLP_FeatureImportanceAcrossMeasures_CV, NNClassifierMLP_CrossValidation, NNRegressorMLP_CrossValidation.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		NNCV = 9; %CET: Computational Efficiency Trick

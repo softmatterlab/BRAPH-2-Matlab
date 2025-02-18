@@ -98,3 +98,4 @@ generate_readme(['developers' filesep 'dev_panelprop' filesep 'dev_panelprop.tex
 generate_readme(['developers' filesep 'dev_panelfig' filesep 'dev_panelfig.tex'])
 generate_readme(['developers' filesep 'dev_analysis_ensemble' filesep 'dev_analysis_ensemble.tex'])
 generate_readme(['developers' filesep 'dev_analysis_group' filesep 'dev_analysis_group.tex'])
+generate_readme(['developers' filesep 'dev_distribution' filesep 'dev_distribution.tex'])

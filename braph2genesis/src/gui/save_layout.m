@@ -18,7 +18,7 @@ assert( ...
     'must be equal to the element (' Element.getClass(el) ') number of properties (' int2str(Element.getPropNumber(el)) ').'] ...
     )
 
-layout_filename = [fileparts(which('braph2.m')) filesep 'src' filesep 'gui' filesep 'layouts' filesep Element.getClass(el) '.layout'];
+layout_filename = [fileparts(which(BRAPH2.LAUNCHER)) filesep 'src' filesep 'gui' filesep 'layouts' filesep Element.getClass(el) '.layout'];
 
 % % % save(layout_filename, '-mat', 'order', 'title') %TBE
 data = cell(length(title) * 2, 1);

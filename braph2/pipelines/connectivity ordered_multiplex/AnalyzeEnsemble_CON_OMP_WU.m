@@ -109,7 +109,7 @@ classdef AnalyzeEnsemble_CON_OMP_WU < AnalyzeEnsemble
 	%
 	% See also SubjectCON_MP, OrdMxWU.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function a = AnalyzeEnsemble_CON_OMP_WU(varargin)

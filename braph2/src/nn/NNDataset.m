@@ -107,7 +107,7 @@ classdef NNDataset < ConcreteElement
 	%
 	% See also NNDataPoint, NNDatasetCombine, NNDatasetSplit.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		DP_CLASS = 9; %CET: Computational Efficiency Trick

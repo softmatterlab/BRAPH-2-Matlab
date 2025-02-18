@@ -130,7 +130,7 @@ classdef NNxMLP_FeatureImportanceBrainSurface < NNxMLP_FeatureImportance
 	%
 	% See also NNxMLP_FeatureImportance, NNxMLP_FeatureImportanceAcrossMeasures.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		BA = 32; %CET: Computational Efficiency Trick

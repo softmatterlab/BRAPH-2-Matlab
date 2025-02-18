@@ -108,7 +108,7 @@ classdef SubjectST_MP < Subject
 	%
 	% See also ImporterGroupSubjectST_MP_TXT, ExporterGroupSubjectST_MP_TXT, ImporterGroupSubjectST_MP_XLS, ExporterGroupSubjectST_MP_XLS.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		BA = 10; %CET: Computational Efficiency Trick
@@ -726,8 +726,8 @@ classdef SubjectST_MP < Subject
 					    title = ['About Layer Labels'];
 					    message = {''
 					        ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use double slashes to avoid genesis problem
-					        ['{\color{gray}version ' '2.0.0' '}']
-					        ['{\color{gray}build ' int2str(6) '}']
+					        ['{\color{gray}version ' '2.0.1' '}']
+					        ['{\color{gray}build ' int2str(7) '}']
 					        ''
 					        'Please, select a valid number of Layer Labels.'
 					        ''

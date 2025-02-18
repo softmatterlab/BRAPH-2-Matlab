@@ -131,7 +131,7 @@ classdef MeasureEnsembleBrainPF_xSPP_Layer < PanelProp
 	%
 	% See also uidropdown, GUI, ComparisonGroupPF_NU, ComparisonGroupPF_NS, ComparisonGroupPF_NB.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		DROPDOWN = 36; %CET: Computational Efficiency Trick

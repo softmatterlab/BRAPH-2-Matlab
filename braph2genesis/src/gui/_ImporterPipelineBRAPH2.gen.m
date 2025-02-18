@@ -80,7 +80,7 @@ pip = Pipeline();
 % analyzes file
 file = im.get('FILE');
 if ~isfile(file)
-    file = [fileparts(which('braph2')) filesep 'src' filesep 'gui' filesep 'gui_examples' filesep file];
+    file = [fileparts(which(BRAPH2.LAUNCHER)) filesep 'src' filesep 'gui' filesep 'gui_examples' filesep file];
 end
 
 if isfile(file)

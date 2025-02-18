@@ -109,7 +109,7 @@ classdef AnalyzeGroup_ST_MP_BUD < AnalyzeGroup
 	%
 	% See also SubjectST_MP, MultiplexBUD.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		CORRELATION_RULE = 12; %CET: Computational Efficiency Trick

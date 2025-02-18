@@ -110,7 +110,7 @@ classdef CombineGroups_CON_FUN_MP < ConcreteElement
 	%
 	% See also SubjectCON_FUN_MP, SubjectCON, SubjectFUN, SeparateGroups_CON_FUN.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		WAITBAR = 9; %CET: Computational Efficiency Trick

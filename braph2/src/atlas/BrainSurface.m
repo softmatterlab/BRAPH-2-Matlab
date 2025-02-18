@@ -109,7 +109,7 @@ classdef BrainSurface < ConcreteElement
 	%
 	% See also BrainAtlas, BrainRegion, BrainSurfacePF.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		VERTEX_NUMBER = 9; %CET: Computational Efficiency Trick

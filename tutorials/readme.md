@@ -26,4 +26,6 @@ The [Tutorial to Adapt a Pipeline Script](developers#adapting-a-pipeline-script)
 
 The [Tutorial to Edit Example Scripts](developers#editing-an-example-script) teaches you how to gain more control over the analysis workflow by editing the example scripts provided with BRAPH 2.
 
-The [Tutorials to Expand BRAPH 2 Functionalities](developers#expanding-braph-20-with-new-functionalities) permits you to take full advantage of BRAPH 2's object-oriented programming to extend its capabilities. It cover the implementation of new graphs, measures, subjects, group-based and ensemble-based analyses, as well as deep learning functionalities.
+The [Tutorials to Expand BRAPH 2 Functionalities](developers#expanding-braph-20-with-new-functionalities) permit you to take full advantage of BRAPH 2's object-oriented programming to extend its capabilities. They cover the implementation of new graphs, measures, subjects, group-based and ensemble-based analyses, as well as deep learning functionalities.
+
+The [Tutorial to Create Tailored BRAPH 2 Distributions](developers#create-tailored-braph-2-distributions) shows you how to use BRAPH 2’s genesis system to build custom distributions tailored to your specific research needs, incorporating your own approaches alongside selected built-in functionalities from the standard distribution into a self-contained package.

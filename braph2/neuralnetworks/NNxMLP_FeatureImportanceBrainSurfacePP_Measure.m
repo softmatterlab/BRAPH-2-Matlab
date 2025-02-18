@@ -143,7 +143,7 @@ classdef NNxMLP_FeatureImportanceBrainSurfacePP_Measure < PanelProp
 	%
 	% See also NNxMLP_FeatureImportanceBrainSurface, NNxMLP_FeatureImportanceBrainSurfacePP_Graph, NNxMLP_FeatureImportanceBrainSurfacePP_Data.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		D = 36; %CET: Computational Efficiency Trick

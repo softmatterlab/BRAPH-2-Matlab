@@ -107,7 +107,7 @@ classdef PipelineCode < ConcreteElement
 	%
 	% See also PipelinePP_PSDict, Pipeline, PipelineSection.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		TEXT_BEFORE_EXEC = 9; %CET: Computational Efficiency Trick

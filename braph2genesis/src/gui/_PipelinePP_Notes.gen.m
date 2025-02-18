@@ -202,11 +202,11 @@ function cb_tut_pdf(~, ~)
     pip = pr.get('EL');
 
     if ismac()
-        system(['open -a Preview ' fileparts(fileparts(which('braph2'))) pip.get('PDF')]);
+        system(['open -a Preview ' fileparts(fileparts(BRAPH2.LAUNCHER)) pip.get('PDF')]);
     elseif isunix()
-        system(['xdg-open "' fileparts(fileparts(which('braph2'))) regexprep(pip.get('PDF'), '/', '\\') '"']);
+        system(['xdg-open "' fileparts(fileparts(BRAPH2.LAUNCHER)) regexprep(pip.get('PDF'), '/', '\\') '"']);
     elseif ispc()
-        system(['start "" "' fileparts(fileparts(which('braph2'))) pip.get('PDF') '"']);
+        system(['start "" "' fileparts(fileparts(BRAPH2.LAUNCHER)) pip.get('PDF') '"']);
     end
 end
 function cb_pip_edit(~, ~)

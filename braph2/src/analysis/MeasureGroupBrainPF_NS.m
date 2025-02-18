@@ -148,7 +148,7 @@ classdef MeasureGroupBrainPF_NS < MeasureGroupBrainPF
 	%
 	% See also BrainAtlas, BrainSurface, BrainAtlasPF.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		LAYER = 48; %CET: Computational Efficiency Trick
