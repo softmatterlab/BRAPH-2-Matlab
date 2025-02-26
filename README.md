@@ -3,7 +3,6 @@
 # BRAPH 2 — **F**lexible, **O**pen-source, **R**eproducible, **C**ommunity-Oriented, **E**asy-to-use Framework for Network Analysis in Neurosciences
 
 [![BRAPH 2](https://img.shields.io/badge/Bluesky-BRAPH%202-blue?style=social&logo=bluesky&url=https%3A%2F%2Fbraph2software.bsky.social)](https://braph2software.bsky.social)
-[![BRAPH 2](https://img.shields.io/twitter/url?label=BRAPH%202&style=social&url=https%3A%2F%2Ftwitter.com%2Fbraph2software)](https://twitter.com/braph2software)
 [![cite us](https://img.shields.io/badge/DOI-10.1371%2Fjournal.pone.0178798-blue)](https://doi.org/10.1371/journal.pone.0178798)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/braph-software/BRAPH-2)](https://github.com/braph-software/BRAPH-2/releases)
 [![Zenodo](https://img.shields.io/badge/Zenodo-BRAPH%202%20releases-blue?logo=zenodo)](https://zenodo.org/account/settings/github/repository/braph-software/BRAPH-2)
