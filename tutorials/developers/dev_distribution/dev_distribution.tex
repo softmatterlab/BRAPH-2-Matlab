@@ -1,0 +1,559 @@
+\documentclass{tufte-handout}
+\usepackage{../braph2_dev}
+%\geometry{showframe} % display margins for debugging page layout
+
+\title{Create a New BRAPH~2 Distribution: Hello, World! }
+
+\author[The BRAPH~2 Developers]{The BRAPH~2 Developers}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+The software architecture of BRAPH~2 provides a clear structure for developers to understand and extend its functionalities. 
+Developers can easily create new distributions with their own pipelines. 
+By recompiling BRAPH~2, the new pipelines and their functionalities are integrated into a new distribution with its own graphical user interface.
+In this developer tutorial, you will learn how to create a new distribution of BRAPH~2 that contains a simple pipeline where the user enters a first string (e.g., “Hello”) and a second string (e.g., “World”), and the pipeline combines them into a single string (“Hello World”).
+\end{abstract}
+
+\tableofcontents
+
+\clearpage
+\section{Create a New Distribution Folder}
+
+First, we need to create a new folder that will contain all the new scripts referring to this new distribution. For the example explained in this tutorial the name of this new folder will be \fn{helloworld}. Furthermore, the genesis compiler from the Standard BRAPH~2 Distribution needs to be downloaded. This compiler is a Matlab file \href{https://github.com/braph-software/BRAPH-2/tree/develop/braph2genesis/braph2genesis.m}{braph2genesis.m})  located in the Standard BRAPH~2 Github Repository. This file needs to be placed outside the newly created folder \fn{helloworld} as shown in \Figref{fig:elements}.
+
+\fig{marginfigure}
+	{fig:elements}
+	{\includegraphics{fig01.jpg}}
+	{Folder tree}
+	{
+		All files needed to create the new "Hello, World!" BRAPH~2 Distribution.
+	}
+
+%! FIG1 !%
+
+\section{Create New Elements}
+
+BRAPH~2 is a compiled object-oriented programming software. Its
+objects are elements, which contain a set of properties of various categories and formats, as described in detail in the tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_intro}{General Developer Tutorial for BRAPH~2}. All objects are derived from a base object called \code{Element} and written in a simplified pseudocode (files \fn{*.gen.m}) that is compiled into the actual elements (files \fn{*.m}) by the command \code{braph2genesis}.
+Even though it is possible to create instances of \code{Element}, it does not have any props and typically one uses its subclasses. Its three direct subclasses are \code{NoValue}, \code{Callback}, and \code{ConcreteElement}. The details of each subclass can be found in tutorial \href{https://github.com/braph-software/BRAPH-2/tree/develop/tutorials/developers/dev_intro}{General Developer Tutorial for BRAPH~2}. 
+
+In this tutorial, we will use the subclass  \code{ConcreteElement} that provides the infrastructure necessary for all concrete elements, like strings.
+Thus, following these rules the following two new objects need to be created and placed inside the previously created folder \fn{helloworld} as shown in \Figref{fig:elements}.:
+\begin{itemize}
+	\item {\code{\bf \_StringUnit.gen.m}}: contains a user-defined string. 
+	\item {\code{\bf \_StringCombine.gen.m}}: combines the strings from two string units.
+\end{itemize}
+
+The new generator files will have the same structure:  \code{¡header!} , \code{¡layout!}, \code{¡props} (properties), \code{ ¡props\_update!} (update the properties of the \code{ConcreteElement}) and \code{¡tests!} (to add unit tests). While the \code{¡header!} the token \code{¡build!} are required,
+the rest is optional.
+
+\clearpage
+
+\subsection{\_StringUnit.gen.m}
+
+\begin{lstlisting}[
+	label=cd:m:StringUnit:header,
+	caption={
+		{\bf StringUnit element header.}
+		The \code{header} section of the generator code in \fn{\_StringUnit.gen.m} provides the general information about the \code{StringUnit} element.
+	}
+	]
+	%% ¡header!
+	StringUnit < ConcreteElement (s, string) contains a user-defined string. ¥\circled{1}\circlednote{1}{ defines \code{StringUnit} as a subclass of \code{ConcreteElement}. The moniker will be \code{s}.}¥
+
+	%%% ¡description!
+	A String Unit (StringUnit) contains a user-defined string. 
+	This element is created for distribution demonstration purpose.
+
+	%%% ¡seealso!
+	StringCombine, PanelPropString
+	
+	%%% ¡build!
+	1
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[
+	label=cd:m:StringUnit:layout,
+	caption={
+		{\bf StringUnit layout.}
+		The \code{layout} section of the generator code in \fn{\_StringUnit.gen.m} provides the information about the layout that we want to crete for the \code{StringUnit} element.
+	}
+	]
+	%% ¡layout! ¥\circled{1}\circlednote{1}{ creates a new layout in the graphical user interface allowing the user to introduce a string.}¥
+	
+	%%% ¡prop!
+	%%%% ¡id!
+	StringUnit.S
+	%%%% ¡title!
+	Specified String
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label={cd:m:StringUnit:props_update},
+	caption={
+		{\bf StringUnit element props update.}
+		The \code{props\_update} section of the generator code in \fn{\_StringUnit.gen.m} updates the properties of the \code{ConcreteElement} element. 
+	}
+	]
+	%% ¡props_update!
+	
+	%%% ¡prop!
+	ELCLASS (constant, string) is the class of the string unit.
+	%%%% ¡default!
+	'StringUnit'
+	
+	%%% ¡prop!
+	NAME (constant, string) is the name of the string unit.
+	%%%% ¡default!
+	'String Unit'
+	
+	%%% ¡prop!
+	DESCRIPTION (constant, string) is the description of the string unit.
+	%%%% ¡default!
+	'A String Unit (StringUnit) contains a user-defined string. This element is created for distribution demonstration purpose.'
+	
+	%%% ¡prop!
+	TEMPLATE (parameter, item) is the template of the string unit.
+	%%%% ¡settings!
+	'StringUnit'
+	
+	%%% ¡prop!
+	ID (data, string) is a few-letter code for the string unit.
+	%%%% ¡default!
+	'StringUnit ID'
+	
+	%%% ¡prop!
+	LABEL (metadata, string) is an extended label of the string unit.
+	%%%% ¡default!
+	'StringUnit label'
+	
+	%%% ¡prop!
+	NOTES (metadata, string) are some specific notes about the string unit.
+	%%%% ¡default!
+	'StringUnit notes'
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label={cd:m:StringUnit:props},
+	caption={
+		{\bf StringUnit element props.}
+		The \code{props} section of generator code in \fn{\_StringUnit.gen.m} defines the properties to be used in \fn{StringUnit}.
+	}
+	]
+	%% ¡props!
+	
+	%%% ¡prop! 
+	S (data, string) is the user-defined string.
+	%%%% ¡default!
+	'Hello'
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label={cd:m:StringUnit:tests},
+	caption={
+		{\bf StringUnit element tests.}
+		The \code{tests} section of generator code in \fn{\_StringUnit.gen.m}
+	}
+	]
+	%% ¡tests!
+	
+	%%% ¡test!
+	%%%% ¡name!
+	test
+	%%%% ¡code!
+	defined_string = 'test';
+	su = StringUnit('S', defined_string);
+	
+	assert(isequal(su.get('S'), defined_string), ...
+	[BRAPH2.STR ':StringUnit:' BRAPH2.FAIL_TEST], ...
+	'StringUnit does not store the defined string properly.' ...
+	)
+\end{lstlisting}
+
+\clearpage
+
+\subsection{\_StringCombine.gen.m}
+
+The \code{\_StringCombine.gen.m} generator file is created the same way as \code{\_StringUnit.gen.m}.
+
+\begin{lstlisting}[
+	label=cd:m:StringCombine:header,
+	caption={
+		{\bf StringCombine element header.}
+		The \code{header} section of the generator code in \fn{\_StringCombine.gen.m} provides the general information about the \code{StringCombine} element.
+	}
+	]
+	%% ¡header!
+	StringCombine < ConcreteElement (sc, string combine) combines the string from two string units. ¥\circled{1}\circlednote{1}{ defines \code{StringCombine} as a subclass of \code{ConcreteElement}. The moniker will be \code{sc}.}¥
+	
+	%%% ¡description!
+	A String Combine (StringCombine) combines the strings from two string units.
+	This element is created for distribution demonstration purpose.
+	
+	%%% ¡seealso!
+	StringUnit, PanelPropString
+	
+	%%% ¡build!
+	1
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label=cd:m:StringCombine:layout,
+	caption={
+		{\bf StringCombine layout.}
+		The \code{layout} section of the generator code in \fn{\_StringCombine.gen.m} provides the information about the layout that we want to crete for the \code{StringCombine} element.
+	}
+	]
+	%% ¡layout!
+	
+	%%% ¡prop!
+	%%%% ¡id!
+	StringCombine.SU1
+	%%%% ¡title!
+	The First String
+	
+	%%% ¡prop!
+	%%%% ¡id!
+	StringCombine.SU2
+	%%%% ¡title!
+	The Second String
+	
+	%%% ¡prop!
+	%%%% ¡id!
+	StringCombine.S_COMBINED
+	%%%% ¡title!
+	Combined Strings
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label={cd:m:StringCombine:props_update},
+	caption={
+		{\bf StringCombine element props update.}
+		The \code{props\_update} section of the generator code in \fn{\_StringCombinet.gen.m} updates the properties of the \code{ConcreteElement} element. 
+	}
+	]
+	%% ¡props_update!
+	
+	%%% ¡prop!
+	ELCLASS (constant, string) is the class of the string combine.
+	%%%% ¡default!
+	'StringCombine'
+	
+	%%% ¡prop!
+	NAME (constant, string) is the name of the string combine.
+	%%%% ¡default!
+	'String Combine'
+	
+	%%% ¡prop!
+	DESCRIPTION (constant, string) is the description of the string combine.
+	%%%% ¡default!
+	'A String Combine (StringCombine) combines the strings from two string units. This element is created for distribution demonstration purpose.'
+	
+	%%% ¡prop!
+	TEMPLATE (parameter, item) is the template of the string combine.
+	%%%% ¡settings!
+	'StringCombine'
+	
+	%%% ¡prop!
+	ID (data, string) is a few-letter code for the string combine.
+	%%%% ¡default!
+	'StringCombine ID'
+	
+	%%% ¡prop!
+	LABEL (metadata, string) is an extended label of the string combine.
+	%%%% ¡default!
+	'StringCombine label'
+	
+	%%% ¡prop!
+	NOTES (metadata, string) are some specific notes about the string combine.
+	%%%% ¡default!
+	'StringCombine notes'
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label={cd:m:StringCombine:props},
+	caption={
+		{\bf StringCombine element props.}
+		The \code{props} section of generator code in \fn{\_StringCombine.gen.m} defines the properties to be used in \fn{StringCombine}.
+	}
+	]
+	%% ¡props!
+	
+	%%% ¡prop!
+	SU1 (data, item) is the first string unit.
+	%%%% ¡settings!
+	'StringUnit'
+	
+	%%% ¡prop!
+	SU2 (data, item) is the second string unit.
+	%%%% ¡settings!
+	'StringUnit'
+	
+	%%% ¡prop!
+	S_COMBINED (result, string) is the combined strings.
+	%%%% ¡calculate!
+	value = [sc.get('SU1').get('S') ' ' sc.get('SU2').get('S')]; ¥\circled{1}\circlednote{1}{ combines the strings which are specified with \code{SU1} and \code{SU2} from a \code{StringUnit} element.}¥
+\end{lstlisting}
+
+\begin{lstlisting}[
+	label={cd:m:StringCombine:tests},
+	caption={
+		{\bf StringCombine element tests.}
+		The \code{tests} section of generator code in \fn{\_StringCombine.gen.m}
+	}
+	]
+	%% ¡tests!
+	
+	%%% ¡test!
+	%%%% ¡name!
+	test
+	%%%% ¡code!
+	defined_string1 = 'test1';
+	su1 = StringUnit('S', defined_string1);
+	
+	defined_string2 = 'test2';
+	su2 = StringUnit('S', defined_string2);
+	
+	sc = StringCombine('SU1', su1, 'SU2', su2);
+	
+	assert(isequal(sc.get('S_COMBINED'), [defined_string1 ' ' defined_string2]), ...
+	[BRAPH2.STR ':StringCombine:' BRAPH2.FAIL_TEST], ...
+	'StringCombine does not combine the defined strings properly.' ...
+	) ¥\circled{1}\circlednote{1}{ we verify that the new element \code{StringCombine} succesfully combines the strings which are specified with \code{sU1} and \code{sU2}.}¥
+\end{lstlisting}
+
+\clearpage
+
+\section{Create New Pipeline}
+
+Once the new elements are created, a pipeline that takes the created elements and runs the desired functionality is needed. In this case the pipeline will let the user choose two strings (e.g., "Hello") and (e.g., "World"), and combine them (e.g., "Hello, World!").
+
+
+\begin{lstlisting}[
+	label={cd:m:pipeline:helloworld},
+	caption={
+		{\bf Pipeline \emph{Hello, World!}}
+		We need to create a new file (e.g., \fn{pipeline\_hello\_world.braph2}) that includes the following code to create a new pipeline for the "Hello, World!" example.
+	}
+	]
+	%% Pipeline Hello World
+
+	% This pipeline script demonstrates a 'Hello World' example of the BRAPH 2 Hello World distribution.
+	% 1. It defines the first string, with a default value of 'Hello'.
+	% 2. It defines the second string, with a default value of 'World'.
+	% 3. It combines both strings, resulting in the default output 'Hello World'.
+	
+	% PDF: 
+	% README: 
+	
+	%% String 1 ¥\circled{1}\twocirclednotes{1}{2}{ By default 'Hello' and 'World' can be set. The user will be able to modify the string as desired.}¥
+	su1 = StringUnit('S', 'Hello'); % Define the First String % First String
+	
+	%% String 2 ¥\circled{2}¥
+	su2 = StringUnit('S', 'World'); % Define the Second String % Second String
+	
+	%% Combine Strings
+	sc = StringCombine('SU1', su1, 'SU2', su2); % Combine Strings % First String + Second String
+\end{lstlisting}
+
+\clearpage
+\section{Create Configuration File}
+
+A configuration file is needed to build a new distribution.
+
+
+\begin{lstlisting}[
+	label={cd:m:config:helloworld},
+	caption={
+		{\bf Configuration file}
+		We need to create a new file (e.g., \fn{braph2helloworld\_config.m}) with all the configuration details.
+	}
+	]
+	distribution_name = 'Hello, World!'; ¥\circled{1}\circlednote{1}{ specifies the name of the new distribution. This name will appear in the main window of the new distribution GUI.}¥
+	distribution_moniker = 'helloworld'; ¥\circled{2}\circlednote{2}{ short identifier used in launcher functions and filenames. It should only contain letters, numbers, and underscores.}¥
+	pipeline_folders = {
+		'helloworld' ...
+	};¥\circled{3}\circlednote{3}{ defines the folders that contain the newly created pipelines we want to include in our new distribution. This is a cell array of strings.}¥
+	braph2_version = 'heads/develop'; ¥\circled{4}\circlednote{4}{defines the version of BRAPH~2 (e.g., 'tags/2.0.1' or 'heads/develop') to fetch from Github to create the new distribution. The build number should be 7 or larger (version 2.0.1 or subsequent).}¥
+	
+	% Add here all included and excluded folders and elements
+	% '-folder'                 the folder and its elements will be excluded
+	%
+	% '+folder'                 the folder is included, but not its elements
+	%   '+_ElementName.gen.m'   the element is included,
+	%                           if the folder is included
+	%
+	% '+folder*'                the folder and its elements are included
+	%   '-_ElementName.gen.m'   the element is excluded,
+	%                           if the folder and its elements are included
+	% (by default, the folders are included as '+folder*')
+	rollcall = { ...
+		'+util', '+_Exporter.gen.m', '+_Importer.gen.m', ...
+		'+ds*', '-ds_examples', ...
+		'-analysis', ...
+		'-atlas', ...
+		'-gt', ...
+		'-cohort', ...
+		'-nn', ...
+		'+gui', '+_ExporterPipelineBRAPH2.gen.m', '+_GUI.gen.m', '+_GUIElement.gen.m', ...
+		'+_GUIFig.gen.m', '+_GUILayout.gen.m', '+_ImporterPipelineBRAPH2.gen.m', ...
+		'+_Panel.gen.m', '+_PanelElement.gen.m', '+_PanelFig.gen.m', '+_PanelProp.gen.m', ...
+		'+_PanelPropItem.gen.m', '+_PanelPropString.gen.m', '+_Pipeline.gen.m', '+_PipelineCode.gen.m', ...
+		'+_PipelinePP_Notes.gen.m', '+_PipelinePP_PSDict.gen.m', '+_PipelineSection.gen.m', ...
+		'+_PanelPropStringTextArea.gen.m', ...
+		'-brainsurfs', ...
+		'-atlases', ...
+		'-graphs', ...
+		'-measures', ...
+		'-neuralnetworks', ...
+		'+pipelines', ...
+		'+helloworld*', '+hellouniverse*', ...
+		'+test*', ...
+		'-sandbox' ...
+	}; ¥\circled{5}\circlednote{5}{ defines which folders an elements from the Standard BRAPH~2 distribution we want to maintain in our new distribution. With this definition we avoid compiling elements that are not necessary and and that involve long compilation times.}¥
+	
+	files_to_delete = { ...
+		['src' filesep 'gui' filesep 'test_GUIFig.m'], ...
+		['src' filesep 'gui' filesep 'test_PanelFig.m'], ...
+	};¥\circled{6}\circlednote{6}{ specifies files to be removed after compilation.}¥
+\end{lstlisting}
+
+\clearpage
+\section{Compile New Distribution}
+
+To compile the software, you simply just need to run \Coderef{cd:compile}.
+
+\begin{lstlisting}[
+	label=cd:compile,
+	caption={
+		{\bf Execute BRAPH~2 compiler.}
+		To compile the newly created (or new version) distribution software you need to call the BRAPH~2 genesis compiler specifying the configuration file with the details of the new distribution.
+	}
+	]
+ 	braph2genesis('braph2helloworld_config.m')
+\end{lstlisting}
+
+If the compilation ended successfully, the following log message should appear:\\
+\code{***All good!***}
+
+
+A new \fn{braph2helloworld} folder would have been generated (\Figref{fig:compiledfolder}) which can then be used as explained in the following section.
+
+
+\fig{marginfigure}
+{fig:compiledfolder}
+{\includegraphics{fig02.jpg}}
+{File structure of the compiled version}
+{
+	All files needed to run the new "Hello, World!" BRAPH~2 Distribution.
+}
+
+%! FIG2 !%
+
+
+WARNING: To ensure a successful compilation, the folder \newline \fn{braph2helloworld} (if already created) should be erased and all of its dependencies should be removed from the MATLAB path. This folder will be regenerated after a successful compilation.
+
+\clearpage
+\section{Run Example "Hello, World!"}
+
+To run the software, you simply need to run \Coderef{cd:compile} and a new GUI will appear as shown in \Figref{fig:gui}.
+
+\begin{lstlisting}[
+	label=cd:compile,
+	caption={
+		{\bf Execute BRAPH~2 compiler.}
+		To run the newly created (or new version) distribution software you need to call the newly created launcher file.
+	}
+	]
+	braph2helloworld
+\end{lstlisting}
+
+\fig{figure}
+	{fig:gui}
+	{\includegraphics{fig03.jpg}}
+	{New BRAPH~2 "Hello, World!" distribution}
+	{
+	This is the newly created GUI for the BRAPH~2 "Hello, World!" distribution.
+	}
+
+%! FIG3 !%
+
+\clearpage
+
+For this tutorial, only one pipeline (\fn{Pipeline Hello World})  has been created. To run the pipeline, first you need to open the pipeline (\Figref{fig:runexample1}) and then follow the steps specified in the pipeline (\Figref{fig:runexample2}, \Figref{fig:runexample3}, \Figref{fig:runexample4}).
+
+\fig{figure}
+	{fig:runexample1}
+	{\includegraphics{fig04.jpg}}
+	{Open "Hello, World!" Pipeline}
+	{
+	Click on \fn{Open Pipeline Hello World...} and a new GUI window will appear with the steps to run the selected pipeline.
+}
+
+%! FIG4 !%
+
+\fig{figure}
+{fig:runexample2}
+{\includegraphics{fig05.jpg}}
+{Define the first string}
+{
+	Click on \fn{Define the First String} from the pipeline GUI. A new GUI window will open. Here you can introduce whatever string ("Hello" by default)
+}
+
+%! FIG5 !%
+
+\fig{figure}
+{fig:runexample3}
+{\includegraphics{fig06.jpg}}
+{Define the second string}
+{
+	Click on \fn{Second String} from the pipeline GUI. A new GUI window will open. Here you can introduce whatever string ("World" by default).
+}
+
+%! FIG6 !%
+
+\fig{figure}
+{fig:runexample4}
+{\includegraphics{fig07.jpg}}
+{Combine strings}
+{
+	Click on \fn{Combine Strings} to obtain the combination of the two previously defined strings A new GUI window will open. Here you need to press  \fn{C} to obtain the combined strings.
+}
+
+%! FIG7 !%
+
+\clearpage
+\section{Example of Existing BRAPH~2 Distribution}
+
+There is an already created \href{https://github.com/braph-software/MemoryCapacity}{BRAPH~2 Memory Capacity Distribution}), see \Figref{fig:mc}, that implemented a pipeline to perform a \emph{reservoir computing} analysis using \emph{connectivity data}. Check the tutorial \href{https://github.com/braph-software/MemoryCapacity/tree/develop/tutorials/tut_mc_wu}{Pipeline for Analysis and Comparison of Memory Capacity using Weighted Undirected Graph
+} that shows how to calculate the global and regional memory capacity (\Figref{fig:mccomparison}) for each subject and compare between groups of subjects. This pipeline has been used to derive the results in the manuscript: “Computational memory capacity predicts aging and cognitive decline” by Mijalkov et al. (2025).
+
+\fig{figure}
+	{fig:mc}
+	{\includegraphics{fig08.jpg}}
+	{Memory Capacity Distribution}
+	{
+	Interface of the BRAPH~2 Memory Capacity Distribution.
+	}
+
+%! FIG8 !%
+
+\fig{figure}
+	{fig:mccomparison}
+	{\includegraphics{fig09.jpg}}
+	{Nodal Memory Capacity}
+	{
+	{\bf a} Calculated Nodal Memory capacity in a group of subjects.
+	{\bf c} The value of the difference between two groups, the p-values (1-tailed and 2-tailed), as well as the confidence intervals. 
+	{\bf c} Comparison results, with positive values in red and negative values in blue on the brain surface.
+	}
+
+%! FIG9 !%
+
+\end{document}

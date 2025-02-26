@@ -118,7 +118,7 @@ classdef SettingsAxis < Settings
 	%
 	% See also uiaxes, SettingsAxisPP, PanelFig, GUIFig, check_graphics.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		AXISCOLOR = 15; %CET: Computational Efficiency Trick

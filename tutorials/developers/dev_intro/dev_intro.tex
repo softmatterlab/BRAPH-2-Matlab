@@ -614,17 +614,21 @@ We will now see how to implement a few concrete elements.
 \begin{tcolorbox}[
 	title=Light compilation of BRAPH~2
 ]
-To speed up the compilation of BRAPH~2 when trying these examples, it is possible to perform a light version of the compilation using the script \code{braph2genesis\_with\_rollcall}, which permits one to exclude/include specific folders or elements, as shown in \Coderef{cd:rollcall}.
+To speed up the compilation of BRAPH~2 when trying these examples, it is possible to perform a light version of the compilation using the script \code{braph2rollcall\_config.m} by running \code{braph2genesis('braph2rollcall\_config.m')}, which permits one to exclude/include specific folders or elements, as shown in \Coderef{cd:rollcall}.
 
 \begin{lstlisting}[
 	label=cd:rollcall,
 	caption={
 		{\bf BRAPH~2 genesis with rollcall.}
-		Using \code{braph2genesis\_with\_rollcall} (which is found in the folder \fn{sandbox}), it is possible to exclude some folders and elements, which are defined in the variable \code{rollcall}.
+		Using \code{braph2rollcall\_config.m} (which is found in the folder \fn{sandbox}), it is possible to exclude some folders and elements, which are defined in the variable \code{rollcall}.
 		You can place your elements in the folder \fn{sandbox}.
 	}
 ]
-¤...¤
+distribution_name = 'BRAPH2 with Rollcall';
+distribution_moniker = 'with_rollcall';
+pipeline_folders = {};
+braph2_version = 'heads/develop';
+
 %% Add here all included and excluded folders and elements
 % '-folder'                 the folder and its elements will be excluded
 %
@@ -654,13 +658,15 @@ rollcall = { ...
     '+test*', ...
     '+sandbox*' ...
     };
-¤...¤
+    
+files_to_delete = { ...
+    };
 \end{lstlisting}
 
 This same approach (appropriately altering the included/excluded folders and elements) can also be used to reduce the compilation time when developing new functionalities.
 
 Importantly, the directory \fn{braph2genesis} must be in the MatLab file path and the directory \fn{braph2} must not be in the MatLab file path.
-The compiled BRAPH~2 is saved in \fn{brap2\_with\_rollcall}, which is ignored by GIT.
+The compiled BRAPH~2 is saved in \fn{brap2with\_rollcall}, which is ignored by GIT.
 \end{tcolorbox}
 \end{fullwidth}
 

@@ -169,7 +169,7 @@ classdef PanelProp < Panel
 	%
 	% See also uipanel, uilabel, uibutton, GUI, GUIElement, PanelElement.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		X_DRAW = 20; %CET: Computational Efficiency Trick

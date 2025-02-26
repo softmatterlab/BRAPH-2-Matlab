@@ -101,7 +101,7 @@ classdef (Sealed=true) NoValue < Element
 	%
 	% See also ConcreteElement.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function nv = NoValue(varargin)

@@ -655,14 +655,18 @@ We will now see how to implement a few concrete elements.
 
 
 > **Light compilation of BRAPH 2**
-> To speed up the compilation of BRAPH 2 when trying these examples, it is possible to perform a light version of the compilation using the script `braph2genesis_with_rollcall`, which permits one to exclude/include specific folders or elements, as shown in Code 11.
+> To speed up the compilation of BRAPH 2 when trying these examples, it is possible to perform a light version of the compilation using the script `braph2rollcall_config.m` by running `braph2genesis('braph2rollcall_config.m')`, which permits one to exclude/include specific folders or elements, as shown in Code 11.
 > 
 > 
 > > **Code 11.** **BRAPH 2 genesis with rollcall.**
-> > 		Using `braph2genesis_with_rollcall` (which is found in the folder "sandbox"), it is possible to exclude some folders and elements, which are defined in the variable `rollcall`.
+> > 		Using `braph2rollcall_config.m` (which is found in the folder "sandbox"), it is possible to exclude some folders and elements, which are defined in the variable `rollcall`.
 > > 		You can place your elements in the folder "sandbox".
 > > ````matlab
-> > . . . . .
+> > distribution_name = 'BRAPH2 with Rollcall';
+> > distribution_moniker = 'with_rollcall';
+> > pipeline_folders = {};
+> > braph2_version = 'heads/develop';
+> > 
 > > %% Add here all included and excluded folders and elements
 > > % '-folder'                 the folder and its elements will be excluded
 > > %
@@ -692,14 +696,16 @@ We will now see how to implement a few concrete elements.
 > >     '+test*', ...
 > >     '+sandbox*' ...
 > >     };
-> > . . . . .
+> >     
+> > files_to_delete = { ...
+> >     };
 > > ````
 > > 
 > 
 > This same approach (appropriately altering the included/excluded folders and elements) can also be used to reduce the compilation time when developing new functionalities.
 > 
 > Importantly, the directory "braph2genesis" must be in the MatLab file path and the directory "braph2" must not be in the MatLab file path.
-> The compiled BRAPH 2 is saved in "brap2_with_rollcall", which is ignored by GIT.
+> The compiled BRAPH 2 is saved in "brap2with_rollcall", which is ignored by GIT.
 
 
 <a id="A-Simple-Calculator"></a>

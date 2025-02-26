@@ -141,7 +141,7 @@ classdef ComparisonEnsemblePF_NU < ComparisonEnsemblePF
 	%
 	% See also ComparisonEnsemble.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		NODE = 46; %CET: Computational Efficiency Trick

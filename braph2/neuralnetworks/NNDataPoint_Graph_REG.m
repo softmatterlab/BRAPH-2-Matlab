@@ -110,7 +110,7 @@ classdef NNDataPoint_Graph_REG < NNDataPoint
 	%
 	% See also NNDataPoint_Graph_CLA, NNDataPoint_Measure_REG, NNDataPoint_Measure_CLA.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		G = 11; %CET: Computational Efficiency Trick

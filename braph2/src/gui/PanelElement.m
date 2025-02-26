@@ -148,7 +148,7 @@ classdef PanelElement < Panel
 	%
 	% See also uigridlayout, GUI, GUIElement, PanelProp.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		EL = 20; %CET: Computational Efficiency Trick

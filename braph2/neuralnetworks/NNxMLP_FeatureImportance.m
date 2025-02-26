@@ -129,7 +129,7 @@ classdef NNxMLP_FeatureImportance < ConcreteElement
 	%
 	% See also NNDataset, NNDataPointMLP_Shuffled, NNRegressorMLP, NNClassifierMLP, NNxMLP_FeatureImportanceAcrossMeasures.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		D = 9; %CET: Computational Efficiency Trick

@@ -420,7 +420,7 @@ end
 %%% ¡prop!
 SURFFILE (figure, option) is the name of the file of the brain surface to be plotted.
 %%%% ¡settings!
-{dir([fileparts(which('braph2')) filesep() 'brainsurfs' filesep() '*.nv']).name}
+{dir([fileparts(which(BRAPH2.LAUNCHER)) filesep() 'brainsurfs' filesep() '*.nv']).name}
 %%%% ¡default!
 'human_ICBM152.nv'
 %%%% ¡postset!

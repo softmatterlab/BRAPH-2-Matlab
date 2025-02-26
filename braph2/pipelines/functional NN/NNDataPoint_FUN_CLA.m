@@ -109,7 +109,7 @@ classdef NNDataPoint_FUN_CLA < NNDataPoint
 	%
 	% See also SubjectFUN.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		SUB = 11; %CET: Computational Efficiency Trick

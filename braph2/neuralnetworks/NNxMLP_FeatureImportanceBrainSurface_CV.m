@@ -123,7 +123,7 @@ classdef NNxMLP_FeatureImportanceBrainSurface_CV < NNxMLP_FeatureImportance_CV
 	%
 	% See also NNEvaluator, NNDataPoint_Graph_CLA, NNDataPoint_Measure_REG, NNDataPoint_CON_CLA, NNDataPoint_ST_CLA.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		BA = 25; %CET: Computational Efficiency Trick

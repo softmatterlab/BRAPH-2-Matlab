@@ -107,7 +107,7 @@ classdef ExporterPipelineBRAPH2 < Exporter
 	%
 	% See also Exporter, Pipeline, ImporterPipelineBRAPH2.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		PIP = 10; %CET: Computational Efficiency Trick

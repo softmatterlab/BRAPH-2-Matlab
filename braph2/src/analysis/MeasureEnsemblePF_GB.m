@@ -133,7 +133,7 @@ classdef MeasureEnsemblePF_GB < MeasureEnsemblePF
 	%
 	% See also MeasureEnsemble.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	methods % constructor
 		function pf = MeasureEnsemblePF_GB(varargin)

@@ -110,7 +110,7 @@ classdef AnalyzeEnsemble_CON_BUD < AnalyzeEnsemble
 	%
 	% See also SubjectCON, MultigraphBUD.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		DENSITIES = 15; %CET: Computational Efficiency Trick

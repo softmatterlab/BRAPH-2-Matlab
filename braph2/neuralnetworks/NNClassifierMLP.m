@@ -123,7 +123,7 @@ classdef NNClassifierMLP < NNBase
 	%
 	% See also NNDataPoint_CON_CLA, NNClassifier_Evaluator.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		TARGET_CLASSES = 22; %CET: Computational Efficiency Trick

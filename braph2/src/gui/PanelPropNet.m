@@ -133,7 +133,7 @@ classdef PanelPropNet < PanelProp
 	%
 	% See also uibutton, GUI, PanelElement, PanelProp.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		BUTTON_TEXT = 36; %CET: Computational Efficiency Trick
@@ -841,8 +841,8 @@ classdef PanelPropNet < PanelProp
 			        
 			        message = {''
 			            ['{\bf\color{orange}' 'BRAPH2' '}'] % note to use double slashes to avoid genesis problem
-			            ['{\color{gray}version ' '2.0.0' '}']
-			            ['{\color{gray}build ' int2str(6) '}']
+			            ['{\color{gray}version ' '2.0.1' '}']
+			            ['{\color{gray}build ' int2str(7) '}']
 			            ''
 			            'The network visualization window'
 			            'cannot be closed automatically.'

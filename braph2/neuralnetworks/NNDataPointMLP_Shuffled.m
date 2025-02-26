@@ -106,7 +106,7 @@ classdef NNDataPointMLP_Shuffled < NNDataPoint
 	%
 	% See also NNDataPoint, NNDataset.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		SHUFFLED_INPUT = 11; %CET: Computational Efficiency Trick

@@ -108,7 +108,7 @@ classdef ConcreteElement < Element
 	%
 	% See also NoValue, Callback.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		ELCLASS = 1; %CET: Computational Efficiency Trick

@@ -116,7 +116,7 @@ classdef SettingsAmbient < Settings
 	%
 	% See also uiaxes, SettingsAmbientPP, PanelFig, GUIFig, check_graphics.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		LIGHTING = 15; %CET: Computational Efficiency Trick

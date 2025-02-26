@@ -128,7 +128,7 @@ classdef NNxMLP_FeatureImportanceAcrossMeasures < NNxMLP_FeatureImportance
 	%
 	% See also NNxMLP_FeatureImportance, NNDataPoint_Measure_CLA, NNDataPoint_Measure_REG.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		INPUT_MASK = 32; %CET: Computational Efficiency Trick

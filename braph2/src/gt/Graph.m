@@ -145,7 +145,7 @@ classdef Graph < ConcreteElement
 	%
 	% See also Measure.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % constants
 		% Graph types

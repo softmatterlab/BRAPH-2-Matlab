@@ -131,7 +131,7 @@ classdef NNClassifierMLP_CrossValidation < NNCrossValidation
 	%
 	% See also NNDataPoint, NNDataset, NNEvaluator.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		AV_AUC = 30; %CET: Computational Efficiency Trick

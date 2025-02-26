@@ -86,7 +86,7 @@ ba = BrainAtlas();
 % analyzes file
 file = im.get('FILE');
 if ~isfile(file)
-    file = [fileparts(which('braph2')) filesep 'atlases' filesep file];
+    file = [fileparts(which(BRAPH2.LAUNCHER)) filesep 'atlases' filesep file];
 end
 
 if isfile(file)

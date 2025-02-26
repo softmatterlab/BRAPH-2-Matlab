@@ -115,7 +115,7 @@ classdef AnalyzeEnsemble_FUN_MP_BUT < AnalyzeEnsemble
 	%
 	% See also SubjectFUN_MP, MultiplexBUT.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		REPETITION = 15; %CET: Computational Efficiency Trick

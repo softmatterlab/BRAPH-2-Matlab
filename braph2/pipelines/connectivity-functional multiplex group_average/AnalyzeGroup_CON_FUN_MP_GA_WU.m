@@ -113,7 +113,7 @@ classdef AnalyzeGroup_CON_FUN_MP_GA_WU < AnalyzeGroup
 	%
 	% See also SubjectCON_FUN_MP, MultiplexWU.
 	%
-	% BUILD BRAPH2 6 class_name 1
+	% BUILD BRAPH2 7 class_name 1
 	
 	properties (Constant) % properties
 		REPETITION = 12; %CET: Computational Efficiency Trick
